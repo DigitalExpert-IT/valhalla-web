@@ -7,4 +7,5 @@ export const WS_ENDPOINTS = {
 export const RPC_ENDPOINTS = {
   "0x38": "https://bsc-dataseed1.ninicoin.io",
   "0x61": "https://data-seed-prebsc-1-s3.binance.org:8545/",
+  "0x539": "http://localhost:8545",
 };

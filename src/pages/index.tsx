@@ -1,9 +1,10 @@
-import { Container, Text } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { ConnectWalletButton } from "components";
 
 export default function Home() {
   return (
     <Container>
-      <Text>hello</Text>
+      <ConnectWalletButton />
     </Container>
   );
 }

@@ -2,6 +2,7 @@ import { useMount } from "react-use";
 import { getWallet } from "lib/contractFactory";
 import create from "zustand";
 import { BigNumber } from "ethers";
+import { createInitiator } from "utils";
 
 interface IStore {
   address: string;
@@ -17,7 +18,7 @@ const useStore = create<IStore>(() => ({
 
 const { setState } = useStore;
 
-const init = async () => {
+const init = createInitiator(async () => {
   const wallet = await getWallet();
   const [address] = await wallet.listAccounts();
   setState({ address, isConnected: !!address });
@@ -26,7 +27,7 @@ const init = async () => {
     const balance = await wallet.getBalance(address);
     setState({ balance });
   });
-};
+});
 
 export const useWallet = () => {
   const store = useStore();

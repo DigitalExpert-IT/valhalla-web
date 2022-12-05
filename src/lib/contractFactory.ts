@@ -60,7 +60,12 @@ export const getValhallaContract = async () => {
   const provider = await getMainProvider();
   const contract = await getFromCache<Valhalla>(
     "valhallaContract",
-    async () => new ethers.Contract("", valhallaJson.abi, provider)
+    async () =>
+      new ethers.Contract(
+        "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",
+        valhallaJson.abi,
+        provider
+      )
   );
   return contract;
 };
@@ -71,7 +76,7 @@ export const getValhallaSignerContract = async () => {
     "valhallaSignerContract",
     async () =>
       new ethers.Contract(
-        "0x0946CD0F32E6242C0ebba3Bbe17162D11d75274E",
+        "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",
         valhallaJson.abi,
         wallet.getSigner()
       )

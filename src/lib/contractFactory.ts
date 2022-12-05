@@ -1,12 +1,12 @@
-declare module globalThis {
-  var providerCache: Record<string, any>;
-}
-
 import detectEthereumProvider from "@metamask/detect-provider";
 import { RPC_ENDPOINTS } from "constant/endpoint";
 import { ethers } from "ethers";
 import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Valhalla.json";
 import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+
+declare module globalThis {
+  var providerCache: Record<string, any>;
+}
 
 const CURRENT_CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || "0x61";
 const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID as "0x61"];

@@ -17,10 +17,8 @@ const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID as "0x61"];
  * @param fn async function to initiate provider if not in cache
  * @returns provider
  */
-const getFromCache = async <T>(
-  key: string,
-  fn: () => Promise<any>
-): Promise<T> => {
+const getFromCache = async <T>(fn: () => Promise<any>): Promise<T> => {
+  const key = fn.toString();
   if (!globalThis.providerCache) globalThis.providerCache = {};
   if (!globalThis.providerCache[key]) {
     globalThis.providerCache[key] = await fn();
@@ -32,7 +30,6 @@ const getFromCache = async <T>(
 export const getWallet = async () => {
   const ethProvider = await detectEthereumProvider();
   const wallet = await getFromCache<ethers.providers.Web3Provider>(
-    "wallet",
     async () => new ethers.providers.Web3Provider(ethProvider!)
   );
 
@@ -51,7 +48,6 @@ export const getWallet = async () => {
 
 export const getMainProvider = async () => {
   return await getFromCache<ethers.providers.JsonRpcProvider>(
-    "mainProvider",
     async () => new ethers.providers.JsonRpcProvider(ENDPOINT)
   );
 };
@@ -59,7 +55,6 @@ export const getMainProvider = async () => {
 export const getValhallaContract = async () => {
   const provider = await getMainProvider();
   const contract = await getFromCache<Valhalla>(
-    "valhallaContract",
     async () =>
       new ethers.Contract(
         "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",
@@ -73,7 +68,6 @@ export const getValhallaContract = async () => {
 export const getValhallaSignerContract = async () => {
   const wallet = await getWallet();
   const contract = await getFromCache<Valhalla>(
-    "valhallaSignerContract",
     async () =>
       new ethers.Contract(
         "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",

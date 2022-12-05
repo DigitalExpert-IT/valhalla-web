@@ -8,7 +8,9 @@ import { getErrorMessage } from "utils/error";
  * the error will be automatically displayed as toast
  * @param fn async function
  */
-export const useAsyncCall = <T, A extends any[]>(fn: (...args: A) => T) => {
+export const useAsyncCall = <T, A extends any[]>(
+  fn: (...args: A) => Promise<T>
+) => {
   const [state, setState] = useState<{
     isLoading: boolean;
     data: null | T;
@@ -24,6 +26,7 @@ export const useAsyncCall = <T, A extends any[]>(fn: (...args: A) => T) => {
       setState((prev) => ({ ...prev, isLoading: true }));
       const data = await fn(...args);
       setState((prev) => ({ ...prev, data }));
+      return data as T;
     } catch (error) {
       const formattedErrorMessage = getErrorMessage(error);
       toast({ status: "error", description: formattedErrorMessage });
@@ -34,6 +37,7 @@ export const useAsyncCall = <T, A extends any[]>(fn: (...args: A) => T) => {
     } finally {
       setState((prev) => ({ ...prev, isLoading: false }));
     }
+    return {} as T;
   };
 
   return { ...state, exec };

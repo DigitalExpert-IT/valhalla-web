@@ -3,8 +3,6 @@ import {
   getNFTSignerContract,
   getWallet,
 } from "lib/contractFactory";
-import { createInitiator } from "utils";
-import { useMount } from "react-use";
 import create from "zustand/react";
 import { useWallet } from "./useWallet";
 import { useEffect } from "react";
@@ -20,35 +18,33 @@ interface INFT {
 interface IStore {
   nfts: INFT[];
   totalValueMap: number;
+  initialize: boolean;
 }
 
 const useStore = create<IStore>(() => ({
   nfts: [],
   totalValueMap: 0,
+  initialize: false,
 }));
 
 const { setState } = useStore;
 
-const init = createInitiator(async () => {
-  const nft = await getNFTContract();
-});
-
-export const useNFT = async () => {
+export const useNFT = () => {
   const { isConnected, address } = useWallet();
   const store = useStore();
-  const nft = await getNFTContract();
-  const nftWithSigner = await getNFTSignerContract();
 
   useEffect(() => {
-    if (isConnected) {
-      loadMyNFT();
-    }
-  }, [isConnected, address]);
-  useMount(() => {
+    const init = async () => {
+      if (isConnected && !store.initialize) {
+        await loadMyNFT();
+        setState({ initialize: true });
+      }
+    };
     init();
-  });
+  }, [isConnected, address]);
 
   const loadMyNFT = async () => {
+    const nft = await getNFTContract();
     const balanceNFT = await nft.balanceOf(address);
     const tokenIds = await Promise.all(
       Array(+balanceNFT)
@@ -57,24 +53,38 @@ export const useNFT = async () => {
           return nft.tokenOfOwnerByIndex(address, idx);
         })
     );
+
     const nfts = await Promise.all(
       tokenIds.map((token) => {
         return nft.tokenToCardMap(token);
       })
     );
-    setState({ nfts });
+
+    setState({
+      nfts: nfts.map((nft) => {
+        return {
+          cardId: +nft.cardId,
+          percentage: +nft.percentage,
+          lastFarmedAt: nft.lastFarmedAt.toString(),
+          mintedAt: nft.mintedAt.toString(),
+          mintingPrice: +nft.mintingPrice,
+        };
+      }),
+    });
   };
 
   const getFarmValue = async (tokenId: number) => {
+    const nft = await getNFTContract();
     const farmValue = await nft.getFarmValue(tokenId);
     return farmValue;
   };
 
   const buyNFT = async (tokenId: number) => {
+    const nftWithSigner = await getNFTSignerContract();
     const tx = await nftWithSigner.buy(tokenId);
     const receipt = await tx.wait();
     return receipt;
   };
 
-  return { buyNFT, getFarmValue, ...store };
+  return { buyNFT, getFarmValue, loadMyNFT, ...store };
 };

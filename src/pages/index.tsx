@@ -1,5 +1,6 @@
-import { Container, Button } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ConnectWalletButton } from "components";
+import { Main } from "components/layout";
 import { useValhalla, useAsyncCall } from "hooks";
 
 export default function Home() {
@@ -11,9 +12,9 @@ export default function Home() {
   };
 
   return (
-    <Container>
+    <Main>
       <ConnectWalletButton />
       <Button onClick={handleRegistration}>Register</Button>
-    </Container>
+    </Main>
   );
 }

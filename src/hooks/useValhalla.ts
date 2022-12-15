@@ -87,9 +87,9 @@ const init = createInitiator(async () => {
 export const useValhalla = () => {
   const store = useStore();
 
-  useMount(() => {
-    init();
-  });
+  // useMount(() => {
+  //   init();
+  // });
 
   const register = async (referrer: string) => {
     const valhalla = await getValhallaSignerContract();

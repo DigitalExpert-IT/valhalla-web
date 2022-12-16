@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, Flex, Spacer} from '@chakra-ui/react'
-import { Globes, TextHeader } from 'components/molecules/';
+import { Globes, TextHeader } from 'components/';
 
 
 export const Header = () => {

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Highlight, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Highlight, Text } from '@chakra-ui/react'
 import React from 'react'
 
 export const TextHeader = () => {
@@ -13,6 +13,24 @@ export const TextHeader = () => {
         <Text>
           Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application. Every application and utility will be build upon decentralized network marketing referral  contract. Get royalty from referral sales up to 100 levels.
         </Text>
+        <Box my={4}>
+          <Button 
+            borderRadius={'full'} 
+            bg={'purple.600'}
+            px={8}
+            mx={4}
+          >
+            Register
+          </Button>
+          <Button 
+            borderRadius={'full'} 
+            bgGradient='linear(to-r, pink.500, purple.500, blue.400)'
+            px={8}
+            mx={4}
+          >
+            Telegram
+          </Button>
+        </Box>
       </Box>
     </Flex>
   )

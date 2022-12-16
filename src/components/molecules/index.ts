@@ -1,2 +1,2 @@
-export * from "./Globes"
+export * from "./globe"
 export * from "./TextHeader"

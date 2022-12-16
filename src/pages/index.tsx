@@ -1,6 +1,6 @@
-import { Container, Button, Box, Wrap, Grid, Heading } from "@chakra-ui/react";
+import { Container, Button, Box, Heading } from "@chakra-ui/react";
 import { ConnectWalletButton } from "components";
-import { WorldRankBonusCard } from "components/WorldRankBonusCard";
+import { WorldRankBonusList } from "components/landingPage/WorldRankBonusList";
 import { useValhalla, useAsyncCall } from "hooks";
 
 export default function Home() {
@@ -16,14 +16,17 @@ export default function Home() {
       <ConnectWalletButton />
       <Button onClick={handleRegistration}>Register</Button>
       <Box>
-        <Heading background={"linear-gradient(90.75deg, #09F0EC 11.6%, #45ED61 87.18%)"} bgClip={"text"} textAlign={"center"} py={"4rem"}>WORLD RANK GNT BONUS</Heading>
-        <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-          <WorldRankBonusCard/>
-          <WorldRankBonusCard/>
-          <WorldRankBonusCard/>
-          <WorldRankBonusCard/>
-          <WorldRankBonusCard/>
-        </Grid>
+        <Heading
+          background={
+            "linear-gradient(90.75deg, #09F0EC 11.6%, #45ED61 87.18%)"
+          }
+          bgClip={"text"}
+          textAlign={"center"}
+          py={"4rem"}
+        >
+          WORLD RANK GNT BONUS
+        </Heading>
+        <WorldRankBonusList />
       </Box>
     </Container>
   );

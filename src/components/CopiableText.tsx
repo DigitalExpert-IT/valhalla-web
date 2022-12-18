@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { Text, TextProps, Tooltip, useClipboard } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { useEffect } from "react"
+import { Text, TextProps, Tooltip, useClipboard } from "@chakra-ui/react"
+import { useTranslation } from "react-i18next"
 
 type Props = TextProps & {
-  value: string;
-};
+  value: string
+}
 
 export const CopiableText = (props: Props) => {
-  const { value, children, ...rest } = props;
-  const { onCopy, setValue, hasCopied } = useClipboard(value);
-  const { t } = useTranslation();
+  const { value, children, ...rest } = props
+  const { onCopy, setValue, hasCopied } = useClipboard(value)
+  const { t } = useTranslation()
 
   useEffect(() => {
-    setValue(value);
-  }, [value]);
+    setValue(value)
+  }, [value])
 
-  const label = hasCopied ? t("common.copied") : t("common.copy");
+  const label = hasCopied ? t("common.copied") : t("common.copy")
 
   return (
     <Tooltip label={label} placement="top" closeOnClick={false}>
@@ -31,5 +31,5 @@ export const CopiableText = (props: Props) => {
         {children}
       </Text>
     </Tooltip>
-  );
-};
+  )
+}

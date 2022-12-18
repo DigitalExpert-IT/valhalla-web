@@ -1,5 +1,6 @@
-import React from "react";
-import { INav } from "constant/NavItem";
+import React from "react"
+import { INav } from "constant/NavItem"
+import { ConnectButton } from "./ConnectButton"
 import {
   Drawer,
   DrawerBody,
@@ -12,16 +13,16 @@ import {
   Text,
   Button,
   Heading,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
 
 interface MobileDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  dataNav: INav[];
+  isOpen: boolean
+  onClose: () => void
+  dataNav: INav[]
 }
 
-export const MobileDrawer: React.FC<MobileDrawerProps> = (props) => {
-  const { isOpen, onClose, dataNav } = props;
+export const MobileDrawer: React.FC<MobileDrawerProps> = props => {
+  const { isOpen, onClose, dataNav } = props
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
@@ -39,12 +40,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = (props) => {
           py="0.5rem"
           mb="1rem"
         >
-          <Button size="sm" variant="Vregister" w="8rem">
-            Register
-          </Button>
-          <Button size="sm" variant="connectWallet" w="8rem">
-            Connect wallet
-          </Button>
+          {/* add buttonProps for custom button */}
+          <ConnectButton buttonprops={{ size: "sm" }} w="8rem" />
         </Stack>
         <DrawerBody>
           <Stack>
@@ -66,5 +63,5 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = (props) => {
         </DrawerBody>
       </DrawerContent>
     </Drawer>
-  );
-};
+  )
+}

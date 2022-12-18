@@ -1,7 +1,7 @@
-import React from "react";
-import { NavItem } from "constant/NavItem";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { MobileDrawer } from "./MobileDrawer";
+import React from "react"
+import { NavItem } from "constant/NavItem"
+import { HamburgerIcon } from "@chakra-ui/icons"
+import { MobileDrawer } from "./MobileDrawer"
 import {
   Box,
   Flex,
@@ -11,10 +11,11 @@ import {
   Button,
   useDisclosure,
   IconButton,
-} from "@chakra-ui/react";
+} from "@chakra-ui/react"
+import { ConnectButton } from "./ConnectButton"
 
 export const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box>
@@ -62,19 +63,10 @@ export const Navbar = () => {
             justify="right"
             display={{ base: "none", md: "none", lg: "flex" }}
           >
-            <Box w={{ base: "30%", md: "9rem" }}>
-              <Button variant="Vregister" w="100%">
-                <Text fontSize="sm">Register</Text>
-              </Button>
-            </Box>
-            <Box w={{ base: "30%", md: "9rem" }}>
-              <Button variant="connectWallet" w="100%">
-                <Text fontSize="sm">Connect Wallet</Text>
-              </Button>
-            </Box>
+            <ConnectButton w={{ base: "30%", md: "9rem" }} />
           </Flex>
         </Flex>
       </Box>
     </Box>
-  );
-};
+  )
+}

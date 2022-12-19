@@ -39,8 +39,12 @@ export const FormInput = <T extends FieldValues, TName extends FieldPath<T>>(
         defaultValue={props.defaultValue}
         rules={props.rules}
         name={props.name}
-        render={({ field }) => (
-          <Input {...field} placeholder={props.placeholder ?? ""} />
+        render={({ field: { value, ...rest } }) => (
+          <Input
+            {...rest}
+            value={value ?? ""}
+            placeholder={props.placeholder ?? ""}
+          />
         )}
       />
       {props.helperText ? (

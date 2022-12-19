@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Stack } from "@chakra-ui/react";
+import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
 import { useAsyncCall, useValhalla } from "hooks";
-import { FormInput } from "components";
+import { FormInput, ModalDiscalimer } from "components";
 import { validateRequired, validateAddress } from "utils";
 
 type FormType = {
@@ -17,13 +18,16 @@ export const FormRegister = () => {
   const { control, setValue, handleSubmit } = useForm<FormType>();
   const { t } = useTranslation();
   const router = useRouter();
+  const disclaimerModal = useModal(ModalDiscalimer);
 
   useEffect(() => {
     setValue("referrer", router.query.referrer as string);
   }, [router.query.referrer]);
 
   const onSubmit = handleSubmit(data => {
-    register.exec(data.referrer);
+    disclaimerModal.show().then(() => {
+      register.exec(data.referrer);
+    });
   });
 
   return (

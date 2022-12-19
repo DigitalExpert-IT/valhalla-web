@@ -21,7 +21,7 @@ export const theme = {
   config,
 };
 
-export type theme = typeof theme;
+export type Theme = typeof theme;
 
 export * from "./theme.types";
 export * from "./utils/is-chakra-theme";

@@ -1,4 +1,4 @@
-interface IErrorType {
+export interface IErrorType {
   argument: string;
   code: string;
   reason: string;

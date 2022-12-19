@@ -6,25 +6,27 @@ import {
 import create from "zustand/react";
 import { useWallet } from "./useWallet";
 import { useEffect } from "react";
+import { BigNumber } from "ethers";
+import { toBn } from "evm-bn";
 
 interface INFT {
-  cardId: number;
-  percentage: number;
-  lastFarmedAt: string;
-  mintedAt: string;
-  mintingPrice: number;
+  cardId: BigNumber;
+  percentage: BigNumber;
+  lastFarmedAt: BigNumber;
+  mintedAt: BigNumber;
+  mintingPrice: BigNumber;
 }
 
 interface IStore {
   nfts: INFT[];
-  totalValueMap: number;
-  initialize: boolean;
+  totalValueMap: BigNumber;
+  isLoading: boolean;
 }
 
 const useStore = create<IStore>(() => ({
   nfts: [],
-  totalValueMap: 0,
-  initialize: false,
+  totalValueMap: toBn("0"),
+  isLoading: false,
 }));
 
 const { setState } = useStore;
@@ -34,20 +36,16 @@ export const useNFT = () => {
   const store = useStore();
 
   useEffect(() => {
-    const init = async () => {
-      if (isConnected && !store.initialize) {
-        await loadMyNFT();
-        setState({ initialize: true });
-      }
-    };
-    init();
+    loadMyNFT();
   }, [isConnected, address]);
 
   const loadMyNFT = async () => {
+    if (store.isLoading) return;
+    setState({ isLoading: true });
     const nft = await getNFTContract();
     const balanceNFT = await nft.balanceOf(address);
     const tokenIds = await Promise.all(
-      Array(+balanceNFT)
+      Array(balanceNFT.toNumber())
         .fill(null)
         .map((_, idx) => {
           return nft.tokenOfOwnerByIndex(address, idx);
@@ -63,13 +61,14 @@ export const useNFT = () => {
     setState({
       nfts: nfts.map((nft) => {
         return {
-          cardId: +nft.cardId,
-          percentage: +nft.percentage,
-          lastFarmedAt: nft.lastFarmedAt.toString(),
-          mintedAt: nft.mintedAt.toString(),
-          mintingPrice: +nft.mintingPrice,
+          cardId: nft.cardId,
+          percentage: nft.percentage,
+          lastFarmedAt: nft.lastFarmedAt,
+          mintedAt: nft.mintedAt,
+          mintingPrice: nft.mintingPrice,
         };
       }),
+      isLoading: false,
     });
   };
 
@@ -79,12 +78,12 @@ export const useNFT = () => {
     return farmValue;
   };
 
-  const buyNFT = async (tokenId: number) => {
+  const buy = async (tokenId: number) => {
     const nftWithSigner = await getNFTSignerContract();
     const tx = await nftWithSigner.buy(tokenId);
     const receipt = await tx.wait();
     return receipt;
   };
 
-  return { buyNFT, getFarmValue, loadMyNFT, ...store };
+  return { buy, getFarmValue, loadMyNFT, ...store };
 };

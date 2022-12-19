@@ -1,4 +1,8 @@
-import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system";
+import {
+  defineStyle,
+  defineStyleConfig,
+  cssVar,
+} from "@chakra-ui/styled-system";
 import { mode, transparentize } from "@chakra-ui/theme-tools";
 import { runIfFn } from "../utils/run-if-fn";
 
@@ -21,6 +25,27 @@ const baseStyle = defineStyle({
       bg: "initial",
     },
   },
+});
+
+const $fg = cssVar("button-color");
+
+const variantGradient = defineStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+  return {
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+    color: $fg.reference,
+    _active: {
+      bgGradient: `linear(to-r, ${c1}.600, ${c2}.600)`,
+    },
+    _hover: {
+      bgGradient: `linear(to-r, ${c1}.400, ${c2}.400)`,
+    },
+  };
 });
 
 const variantGhost = defineStyle(props => {
@@ -162,6 +187,7 @@ const variants = {
   outline: variantOutline,
   solid: variantSolid,
   link: variantLink,
+  gradient: variantGradient,
   unstyled: variantUnstyled,
 };
 

@@ -1,15 +1,18 @@
-import { Container, Button, Box, Heading } from "@chakra-ui/react";
-import { ConnectWalletButton } from "components";
-import { WorldRankBonusList } from "components/landingPage/WorldRankBonusList";
-import { useValhalla, useAsyncCall } from "hooks";
+import { Container, Button, Box, Heading } from "@chakra-ui/react"
+import { ConnectWalletButton } from "components"
+import { WorldRankBonusList } from "components/landingPage/WorldRankBonusList"
+import { useValhalla, useAsyncCall } from "hooks"
+import { useTranslation } from "react-i18next"
 
 export default function Home() {
-  const { register } = useValhalla();
-  const registerFn = useAsyncCall(register);
+  const { register } = useValhalla()
+  const registerFn = useAsyncCall(register)
 
   const handleRegistration = () => {
-    registerFn.exec("0x0");
-  };
+    registerFn.exec("0x0")
+  }
+
+  const { t } = useTranslation()
 
   return (
     <Container maxW={"container.lg"}>
@@ -24,10 +27,10 @@ export default function Home() {
           textAlign={"center"}
           py={"4rem"}
         >
-          WORLD RANK GNT BONUS
+          {t("common.worldRankBonusGnet")}
         </Heading>
         <WorldRankBonusList />
       </Box>
     </Container>
-  );
+  )
 }

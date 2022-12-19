@@ -1,6 +1,7 @@
 import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react"
+import { useTranslation } from "react-i18next"
 
-interface WorldRankBonusCardProps {
+interface CardWorldRankBonusProps {
   img: string
   title: {
     text: string
@@ -11,11 +12,14 @@ interface WorldRankBonusCardProps {
   worldRankNFTBonus: number
 }
 
-export const WorldRankBonusCard = (props: WorldRankBonusCardProps) => {
+export const CardWorldRankBonus = (props: CardWorldRankBonusProps) => {
+  
+  const { t } = useTranslation();
   const { img, title, worldRankBonusGNT, levelDownline, worldRankNFTBonus } =
     props
+
   return (
-    <Box p={"1rem"} backgroundColor={"brand.800"} borderRadius={"20px"}>
+    <Box p={"1rem"} backgroundColor={"brand.800"} borderRadius={"xl"}>
       <Flex w={"full"}>
         <Stack w={"40%"} m={"1rem"} align={"center"}>
           <Image
@@ -37,7 +41,7 @@ export const WorldRankBonusCard = (props: WorldRankBonusCardProps) => {
         <Stack spacing={4} alignSelf={"center"}>
           <Box mt={"10px"}>
             <Text fontWeight={"700"} color={"brand.400"}>
-              World Rank Bonus GNT
+              {t("card.worldRankBonus.worldRankBonusGnet")}
             </Text>
             <Text
               fontWeight={"600"}
@@ -51,7 +55,7 @@ export const WorldRankBonusCard = (props: WorldRankBonusCardProps) => {
           </Box>
           <Box mt={"10px"}>
             <Text fontWeight={"700"} color={"brand.400"}>
-              10 Level Downline
+            {t("card.worldRankBonus.levelDownline")}
             </Text>
             <Text
               fontWeight={"600"}
@@ -65,7 +69,7 @@ export const WorldRankBonusCard = (props: WorldRankBonusCardProps) => {
           </Box>
           <Box mt={"10px"}>
             <Text fontWeight={"700"} color={"brand.400"}>
-              World Rank NFT Bonus
+            {t("card.worldRankBonus.worldRankNFTBonus")}
             </Text>
             <Text
               fontWeight={"600"}

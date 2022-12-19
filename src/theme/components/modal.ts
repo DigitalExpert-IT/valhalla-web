@@ -32,7 +32,7 @@ const baseStyleDialog = defineStyle(props => {
 
   return {
     borderRadius: "md",
-    bg: mode("white", "gray.700")(props),
+    bg: mode("white", "brand.800")(props),
     color: "inherit",
     my: "16",
     zIndex: "modal",
@@ -43,9 +43,10 @@ const baseStyleDialog = defineStyle(props => {
 
 const baseStyleHeader = defineStyle({
   px: "6",
-  py: "4",
+  py: "6",
   fontSize: "xl",
   fontWeight: "semibold",
+  textAlign: "center",
 });
 
 const baseStyleCloseButton = defineStyle({
@@ -57,7 +58,7 @@ const baseStyleCloseButton = defineStyle({
 const baseStyleBody = defineStyle(props => {
   const { scrollBehavior } = props;
   return {
-    px: "6",
+    px: "8",
     py: "2",
     flex: "1",
     overflow: scrollBehavior === "inside" ? "auto" : undefined,
@@ -66,7 +67,11 @@ const baseStyleBody = defineStyle(props => {
 
 const baseStyleFooter = defineStyle({
   px: "6",
-  py: "4",
+  py: "6",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 const baseStyle = definePartsStyle(props => ({

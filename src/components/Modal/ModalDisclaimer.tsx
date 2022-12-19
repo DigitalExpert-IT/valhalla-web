@@ -36,24 +36,48 @@ export const ModalDiscalimer = NiceModal.create<Props>(() => {
   };
 
   return (
-    <Modal isOpen={modal.visible} onClose={modal.hide}>
+    <Modal
+      size={{ base: "sm", sm: "xl" }}
+      isOpen={modal.visible}
+      onClose={modal.hide}
+    >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{t("modal.disclaimer.title")}</ModalHeader>
+        <ModalHeader>
+          <Text variant="gradient" colorScheme="purple:pink">
+            {t("modal.disclaimer.title")}
+          </Text>
+        </ModalHeader>
         <ModalBody>
           <Flex flexDirection="column">
-            <Box flex="1">
+            <Box
+              borderStyle="solid"
+              borderColor="gray.600"
+              p="6"
+              borderRadius="lg"
+              borderWidth="thin"
+              overflowY="scroll"
+              flex="1"
+            >
               <Text>{t("modal.disclaimer.content")}</Text>
             </Box>
             <Box pt="4">
-              <Checkbox isChecked={isAccepted} onChange={handleToggle}>
+              <Checkbox
+                colorScheme="green"
+                isChecked={isAccepted}
+                onChange={handleToggle}
+              >
                 {t("common.agreeAndAccept")}
               </Checkbox>
             </Box>
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Button isDisabled={!isAccepted} onClick={handleAccept}>
+          <Button
+            colorScheme="green"
+            isDisabled={!isAccepted}
+            onClick={handleAccept}
+          >
             {t("common.accept")}
           </Button>
         </ModalFooter>

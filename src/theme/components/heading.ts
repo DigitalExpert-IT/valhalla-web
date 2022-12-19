@@ -5,6 +5,15 @@ const baseStyle = defineStyle({
   fontWeight: "bold",
 });
 
+const variantGradient = defineStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+  return {
+    bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+    bgClip: "text",
+  };
+});
+
 const sizes = {
   "4xl": defineStyle({
     fontSize: ["6xl", null, "7xl"],
@@ -40,9 +49,14 @@ const sizes = {
   }),
 };
 
+const variants = {
+  gradient: variantGradient,
+};
+
 export const headingTheme = defineStyleConfig({
   baseStyle,
   sizes,
+  variants,
   defaultProps: {
     size: "xl",
   },

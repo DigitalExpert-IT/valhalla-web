@@ -120,9 +120,9 @@ const variantFilled = definePartsStyle(props => {
     field: {
       border: "2px solid",
       borderColor: "transparent",
-      bg: mode("gray.100", "whiteAlpha.50")(props),
+      bg: mode("gray.100", "gray.800")(props),
       _hover: {
-        bg: mode("gray.200", "whiteAlpha.100")(props),
+        bg: mode("gray.200", "gray.900")(props),
       },
       _readOnly: {
         boxShadow: "none !important",
@@ -132,7 +132,7 @@ const variantFilled = definePartsStyle(props => {
         borderColor: getColor(theme, ec),
       },
       _focusVisible: {
-        bg: "transparent",
+        bg: mode("transparent", "gray.900")(props),
         borderColor: getColor(theme, fc),
       },
     },
@@ -204,6 +204,6 @@ export const inputTheme = defineMultiStyleConfig({
   variants,
   defaultProps: {
     size: "md",
-    variant: "outline",
+    variant: "filled",
   },
 });

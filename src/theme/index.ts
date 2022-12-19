@@ -8,8 +8,8 @@ const direction: ThemeDirection = "ltr";
 
 const config: ThemeConfig = {
   useSystemColorMode: false,
-  initialColorMode: "light",
-  cssVarPrefix: "chakra",
+  initialColorMode: "dark",
+  cssVarPrefix: "valhalla",
 };
 
 export const theme = {

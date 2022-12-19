@@ -50,6 +50,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@chakra-ui/shared-utils": "^2.0.3",
+    "@chakra-ui/styled-system": "^2.5.0",
+    "@chakra-ui/theme-tools": "^2.0.14",
     "@types/lodash": "^4.14.191",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

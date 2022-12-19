@@ -3,7 +3,10 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.20.5
   '@chakra-ui/react': ^2.4.2
+  '@chakra-ui/shared-utils': ^2.0.3
+  '@chakra-ui/styled-system': ^2.5.0
   '@chakra-ui/system': ^2.3.5
+  '@chakra-ui/theme-tools': ^2.0.14
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
   '@metamask/detect-provider': ^2.0.0
@@ -63,6 +66,9 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.20.5
+  '@chakra-ui/shared-utils': 2.0.3
+  '@chakra-ui/styled-system': 2.5.0
+  '@chakra-ui/theme-tools': 2.0.14_egcizgpwtsioofm7hx34ab4iqi
   '@types/lodash': 4.14.191
   eslint-config-prettier: 8.5.0_eslint@8.28.0
   eslint-plugin-prettier: 4.2.1_qq4qrlmv7psaeddaptzfbe7nlq
@@ -314,7 +320,6 @@ packages:
 
   /@chakra-ui/anatomy/2.1.0:
     resolution: {integrity: sha512-E3jMPGqKuGTbt7mKtc8g/MOOenw2c4wqRC1vOypyFgmC8wsewdY+DJJNENF3atXAK7p5VMBKQfZ7ipNlHnDAwA==}
-    dev: false
 
   /@chakra-ui/avatar/2.2.1_xivvz2l3eyrkvszadds3phcwaq:
     resolution: {integrity: sha512-sgiogfLM8vas8QJTt7AJI4XxNXYdViCWj+xYJwyOwUN93dWKImqqx3O2ihCXoXTIqQWg1rcEgoJ5CxCg6rQaQQ==}
@@ -1060,7 +1065,6 @@ packages:
 
   /@chakra-ui/shared-utils/2.0.3:
     resolution: {integrity: sha512-pCU+SUGdXzjAuUiUT8mriekL3tJVfNdwSTIaNeip7k/SWDzivrKGMwAFBxd3XVTDevtVusndkO4GJuQ3yILzDg==}
-    dev: false
 
   /@chakra-ui/skeleton/2.0.18_xivvz2l3eyrkvszadds3phcwaq:
     resolution: {integrity: sha512-qjcD8BgVx4kL8Lmb8EvmmDGM2ICl6CqhVE2LShJrgG7PDM6Rt6rYM617kqLurLYZjbJUiwgf9VXWifS0IpT31Q==}
@@ -1128,7 +1132,6 @@ packages:
     dependencies:
       csstype: 3.1.1
       lodash.mergewith: 4.6.2
-    dev: false
 
   /@chakra-ui/switch/2.0.17_jzj5dmmsrdkqrhn6px23axld2u:
     resolution: {integrity: sha512-BQabfC6qYi5xBJvEFPzKq0yl6fTtTNNEHTid5r7h0PWcCnAiHwQJTpQRpxp+AjK569LMLtTXReTZvNBrzEwOrA==}
@@ -1239,7 +1242,6 @@ packages:
       '@chakra-ui/anatomy': 2.1.0
       '@chakra-ui/styled-system': 2.5.0
       color2k: 2.0.0
-    dev: false
 
   /@chakra-ui/theme-tools/2.0.14_wydxv7ulravhb2h4fp66dsrywe:
     resolution: {integrity: sha512-lVcDmq5pyU0QbsIFKjt/iVUFDap7di2QHvPvGChA1YSjtg1PtuUi+BxEXWzp3Nfgw/N4rMvlBs+S0ynJypdwbg==}
@@ -2523,7 +2525,6 @@ packages:
 
   /color2k/2.0.0:
     resolution: {integrity: sha512-DWX9eXOC4fbJNiuvdH4QSHvvfLWyFo9TuFp7V9OzdsbPAdrWAuYc8qvFP2bIQ/LKh4LrAVnJ6vhiQYPvAHdtTg==}
-    dev: false
 
   /colorette/2.0.19:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
@@ -2596,7 +2597,6 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-    dev: false
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -3789,7 +3789,6 @@ packages:
 
   /lodash.mergewith/4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
-    dev: false
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}

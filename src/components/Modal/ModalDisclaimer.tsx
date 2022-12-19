@@ -36,7 +36,11 @@ export const ModalDiscalimer = NiceModal.create<Props>(() => {
   };
 
   return (
-    <Modal size="xl" isOpen={modal.visible} onClose={modal.hide}>
+    <Modal
+      size={{ base: "sm", sm: "xl" }}
+      isOpen={modal.visible}
+      onClose={modal.hide}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>

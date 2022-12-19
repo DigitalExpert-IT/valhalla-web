@@ -37,10 +37,16 @@ export const ButtonConnectWallet = (props: Props) => {
 
   return (
     <Stack direction="row">
-      <Button onClick={handleNavigate}>{t("wallet.register")}</Button>
-      <Button variant="gradient" colorScheme="orange:pink" onClick={connect}>
-        {t("wallet.connect")}
-      </Button>
+      <Box w="9rem">
+        <Button onClick={handleNavigate} w="100%">
+          {t("wallet.register")}
+        </Button>
+      </Box>
+      <Box>
+        <Button variant="gradient" colorScheme="orange:pink" onClick={connect}>
+          {t("wallet.connect")}
+        </Button>
+      </Box>
     </Stack>
   );
 };

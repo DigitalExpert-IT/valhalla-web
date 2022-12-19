@@ -39,6 +39,7 @@ import { tabsTheme } from "./tabs";
 import { tagTheme } from "./tag";
 import { textareaTheme } from "./textarea";
 import { tooltipTheme } from "./tooltip";
+import { textTheme } from "./text";
 
 export { accordionTheme as Accordion } from "./accordion";
 export { alertTheme as Alert } from "./alert";
@@ -82,6 +83,7 @@ export { textareaTheme as Textarea } from "./textarea";
 export { tooltipTheme as Tooltip } from "./tooltip";
 
 export const components = {
+  Text: textTheme,
   Accordion: accordionTheme,
   Alert: alertTheme,
   Avatar: avatarTheme,
@@ -123,4 +125,4 @@ export const components = {
   Textarea: textareaTheme,
   Tooltip: tooltipTheme,
   Card: cardTheme,
-};
+} as const;

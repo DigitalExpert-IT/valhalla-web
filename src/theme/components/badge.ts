@@ -6,15 +6,29 @@ import {
 import { transparentize } from "@chakra-ui/theme-tools";
 
 const baseStyle = defineStyle({
-  px: 1,
   textTransform: "uppercase",
-  fontSize: "xs",
-  borderRadius: "sm",
+  fontSize: "sm",
+  px: 4,
+  py: 1,
+  borderRadius: "md",
   fontWeight: "bold",
 });
 
 const $bg = cssVar("badge-bg");
 const $fg = cssVar("badge-color");
+
+const variantGradient = defineStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+  return {
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+    color: $fg.reference,
+  };
+});
 
 const variantSolid = defineStyle(props => {
   const { colorScheme: c, theme } = props;
@@ -63,13 +77,14 @@ const variants = {
   solid: variantSolid,
   subtle: variantSubtle,
   outline: variantOutline,
+  gradient: variantGradient,
 };
 
 export const badgeTheme = defineStyleConfig({
   baseStyle,
   variants,
   defaultProps: {
-    variant: "subtle",
-    colorScheme: "gray",
+    variant: "gradient",
+    colorScheme: "purple",
   },
 });

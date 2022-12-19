@@ -22,7 +22,7 @@ type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
 > & {
   label?: string | null;
   placeholder?: string | null;
-  helperText?: string;
+  helperText?: string | null;
 };
 
 export const FormInput = <T extends FieldValues, TName extends FieldPath<T>>(

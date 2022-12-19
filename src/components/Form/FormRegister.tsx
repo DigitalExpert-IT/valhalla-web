@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, Stack, Badge, Box } from "@chakra-ui/react";
 import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
-import { useAsyncCall, useValhalla } from "hooks";
+import { useAsyncCall, useValhalla, useWallet } from "hooks";
+import { shortenAddress } from "utils";
 import { FormInput, ModalDiscalimer } from "components";
 import { validateRequired, validateAddress } from "utils";
 
@@ -17,6 +18,7 @@ export const FormRegister = () => {
   const register = useAsyncCall(valhalla.register);
   const { control, setValue, handleSubmit } = useForm<FormType>();
   const { t } = useTranslation();
+  const wallet = useWallet();
   const router = useRouter();
   const disclaimerModal = useModal(ModalDiscalimer);
 
@@ -31,10 +33,14 @@ export const FormRegister = () => {
   });
 
   return (
-    <Stack as="form" onSubmit={onSubmit}>
+    <Stack spacing="6" as="form" onSubmit={onSubmit}>
+      <Box>
+        <Badge>{shortenAddress(wallet.address)}</Badge>
+      </Box>
       <FormInput
         control={control}
         name="referrer"
+        helperText={t("form.helperText.referrer")}
         label={t("form.label.referrer")}
         placeholder={t("form.placeholder.referrer")}
         rules={{

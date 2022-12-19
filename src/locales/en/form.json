@@ -4,5 +4,8 @@
   },
   "label": {
     "referrer": "Referrer"
+  },
+  "helperText": {
+    "referrer": "Please enter correct wallet address"
   }
 }

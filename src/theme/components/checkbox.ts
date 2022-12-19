@@ -21,7 +21,7 @@ const baseStyleControl = defineStyle(props => {
     transitionProperty: "box-shadow",
     transitionDuration: "normal",
     border: "2px solid",
-    borderRadius: "sm",
+    borderRadius: "full",
     borderColor: "inherit",
     color: "white",
 

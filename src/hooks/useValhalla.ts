@@ -1,34 +1,34 @@
-import { useMount } from "react-use";
+import { useMount } from "react-use"
 import {
   getWallet,
   getValhallaSignerContract,
   getValhallaContract,
-} from "lib/contractFactory";
-import create from "zustand";
-import { toBn } from "evm-bn";
-import { createInitiator } from "utils";
-import { BigNumber } from "ethers";
+} from "lib/contractFactory"
+import create from "zustand"
+import { toBn } from "evm-bn"
+import { createInitiator } from "utils"
+import { BigNumber } from "ethers"
 
 type Pool = {
-  claimable: BigNumber;
-  value_left: BigNumber;
-};
+  claimable: BigNumber
+  value_left: BigNumber
+}
 
 type Account = {
-  isRegistered: boolean;
-  rank: number;
-  downlineCount: number;
-  referrer: string;
-  rankUpdatedAt: BigNumber;
-  rankRewardClaimedAt: BigNumber;
-};
+  isRegistered: boolean
+  rank: number
+  downlineCount: number
+  referrer: string
+  rankUpdatedAt: BigNumber
+  rankRewardClaimedAt: BigNumber
+}
 
 interface IStore {
-  account: Account;
-  personalReward: BigNumber;
-  globalPool: Pool;
-  ipoPool: Pool;
-  reservedPool: Pool;
+  account: Account
+  personalReward: BigNumber
+  globalPool: Pool
+  ipoPool: Pool
+  reservedPool: Pool
 }
 
 const useStore = create<IStore>(() => ({
@@ -53,18 +53,18 @@ const useStore = create<IStore>(() => ({
     claimable: BigNumber.from("0"),
     value_left: BigNumber.from("0"),
   },
-}));
+}))
 
-const { setState } = useStore;
+const { setState } = useStore
 
 /**
  * function that executed on every Registration event happens
  */
 const registrationHandler = async () => {
   try {
-    const wallet = await getWallet();
-    const [address] = await wallet.listAccounts();
-    const valhalla = await getValhallaContract();
+    const wallet = await getWallet()
+    const [address] = await wallet.listAccounts()
+    const valhalla = await getValhallaContract()
     const [account, personalReward, globalPool, ipoPool, reservedPool] =
       await Promise.all([
         valhalla.accountMap(address),
@@ -72,31 +72,31 @@ const registrationHandler = async () => {
         valhalla.getGlobalPool(),
         valhalla.getIpoPool(),
         valhalla.getReservedPool(),
-      ]);
-    setState({ account, personalReward, globalPool, ipoPool, reservedPool });
+      ])
+    setState({ account, personalReward, globalPool, ipoPool, reservedPool })
   } catch (error) {}
-};
+}
 
 const init = createInitiator(async () => {
-  const valhalla = await getValhallaContract();
-  await registrationHandler();
+  const valhalla = await getValhallaContract()
+  await registrationHandler()
 
-  valhalla.on("Registration", registrationHandler);
-});
+  valhalla.on("Registration", registrationHandler)
+})
 
 export const useValhalla = () => {
-  const store = useStore();
+  const store = useStore()
 
   // useMount(() => {
   //   init();
   // });
 
   const register = async (referrer: string) => {
-    const valhalla = await getValhallaSignerContract();
-    const tx = await valhalla.register(referrer, { value: toBn("0.3") });
-    const receipt = await tx.wait();
-    return receipt;
-  };
+    const valhalla = await getValhallaSignerContract()
+    const tx = await valhalla.register(referrer, { value: toBn("0.3") })
+    const receipt = await tx.wait()
+    return receipt
+  }
 
-  return { register, ...store };
-};
+  return { register, ...store }
+}

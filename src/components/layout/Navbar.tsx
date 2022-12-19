@@ -2,6 +2,7 @@ import React from "react"
 import { NavItem } from "constant/NavItem"
 import { HamburgerIcon } from "@chakra-ui/icons"
 import { MobileDrawer } from "./MobileDrawer"
+import { NavMenu } from "./NavMenu"
 import {
   Box,
   Flex,
@@ -44,7 +45,8 @@ export const Navbar = () => {
             align="center"
             flex={1}
           >
-            {NavItem.map((item, idx) => (
+            <NavMenu datanav={NavItem} />
+            {/* {NavItem.map((item, idx) => (
               <Box key={idx}>
                 <Text
                   textTransform="capitalize"
@@ -54,7 +56,7 @@ export const Navbar = () => {
                   {item.name}
                 </Text>
               </Box>
-            ))}
+            ))} */}
           </Stack>
           <Flex
             alignItems="center"
@@ -63,6 +65,7 @@ export const Navbar = () => {
             justify="right"
             display={{ base: "none", md: "none", lg: "flex" }}
           >
+            {/* Add buttonProps for custom button */}
             <ConnectButton w={{ base: "30%", md: "9rem" }} />
           </Flex>
         </Flex>

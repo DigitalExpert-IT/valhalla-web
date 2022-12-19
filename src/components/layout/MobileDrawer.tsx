@@ -40,7 +40,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = props => {
           py="0.5rem"
           mb="1rem"
         >
-          {/* add buttonProps for custom button */}
+          {/* Add buttonProps for custom button */}
           <ConnectButton buttonprops={{ size: "sm" }} w="8rem" />
         </Stack>
         <DrawerBody>

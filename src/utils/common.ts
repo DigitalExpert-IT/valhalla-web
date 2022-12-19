@@ -1,18 +1,18 @@
-import { debounce } from "lodash";
+import { debounce } from "lodash"
 
 declare module globalThis {
-  var __initializerMap: Record<string, boolean>;
+  var __initializerMap: Record<string, boolean>
 }
 
 export const createInitiator = (fn: (...args: any[]) => any) => {
-  if (!globalThis.__initializerMap) globalThis.__initializerMap = {};
+  if (!globalThis.__initializerMap) globalThis.__initializerMap = {}
 
-  const key = fn.toString();
+  const key = fn.toString()
 
   return debounce((...args: any[]) => {
-    if (globalThis.__initializerMap[key]) return;
+    if (globalThis.__initializerMap[key]) return
 
-    globalThis.__initializerMap[key] = true;
-    return fn(...args);
-  }, 100);
-};
+    globalThis.__initializerMap[key] = true
+    return fn(...args)
+  }, 100)
+}

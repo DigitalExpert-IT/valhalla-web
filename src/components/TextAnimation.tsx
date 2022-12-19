@@ -32,7 +32,7 @@ export const TextAnimation = (props: Props) => {
 
     const control = animate(from, numeredChildren, {
       duration,
-      onUpdate: (value) => {
+      onUpdate: value => {
         textRef.current!.innerText = formatter(value);
       },
     });

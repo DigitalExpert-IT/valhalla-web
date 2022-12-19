@@ -1,12 +1,12 @@
-import { tagAnatomy as parts } from "@chakra-ui/anatomy"
+import { tagAnatomy as parts } from "@chakra-ui/anatomy";
 import {
   createMultiStyleConfigHelpers,
   defineStyle,
-} from "@chakra-ui/styled-system"
-import { badgeTheme } from "./badge"
+} from "@chakra-ui/styled-system";
+import { badgeTheme } from "./badge";
 
 const { defineMultiStyleConfig, definePartsStyle } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts.keys);
 
 const baseStyleContainer = defineStyle({
   fontWeight: "medium",
@@ -16,12 +16,12 @@ const baseStyleContainer = defineStyle({
   _focusVisible: {
     boxShadow: "outline",
   },
-})
+});
 
 const baseStyleLabel = defineStyle({
   lineHeight: 1.2,
   overflow: "visible",
-})
+});
 
 const baseStyleCloseButton = defineStyle({
   fontSize: "lg",
@@ -46,13 +46,13 @@ const baseStyleCloseButton = defineStyle({
   _active: {
     opacity: 1,
   },
-})
+});
 
 const baseStyle = definePartsStyle({
   container: baseStyleContainer,
   label: baseStyleLabel,
   closeButton: baseStyleCloseButton,
-})
+});
 
 const sizes = {
   sm: definePartsStyle({
@@ -83,19 +83,19 @@ const sizes = {
       px: "3",
     },
   }),
-}
+};
 
 const variants = {
-  subtle: definePartsStyle((props) => ({
+  subtle: definePartsStyle(props => ({
     container: badgeTheme.variants?.subtle(props),
   })),
-  solid: definePartsStyle((props) => ({
+  solid: definePartsStyle(props => ({
     container: badgeTheme.variants?.solid(props),
   })),
-  outline: definePartsStyle((props) => ({
+  outline: definePartsStyle(props => ({
     container: badgeTheme.variants?.outline(props),
   })),
-}
+};
 
 export const tagTheme = defineMultiStyleConfig({
   variants,
@@ -106,4 +106,4 @@ export const tagTheme = defineMultiStyleConfig({
     variant: "subtle",
     colorScheme: "gray",
   },
-})
+});

@@ -23,19 +23,19 @@ export const useAsyncCall = <T, A extends any[]>(
 
   const exec = async (...args: A) => {
     try {
-      setState((prev) => ({ ...prev, isLoading: true }));
+      setState(prev => ({ ...prev, isLoading: true }));
       const data = await fn(...args);
-      setState((prev) => ({ ...prev, data }));
+      setState(prev => ({ ...prev, data }));
       return data as T;
     } catch (error) {
       const formattedErrorMessage = getErrorMessage(error);
       toast({ status: "error", description: formattedErrorMessage });
-      setState((prev) => ({
+      setState(prev => ({
         ...prev,
         errorMessage: formattedErrorMessage,
       }));
     } finally {
-      setState((prev) => ({ ...prev, isLoading: false }));
+      setState(prev => ({ ...prev, isLoading: false }));
     }
     return {} as T;
   };

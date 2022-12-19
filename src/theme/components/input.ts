@@ -1,12 +1,12 @@
-import { inputAnatomy as parts } from "@chakra-ui/anatomy"
+import { inputAnatomy as parts } from "@chakra-ui/anatomy";
 import {
   createMultiStyleConfigHelpers,
   defineStyle,
-} from "@chakra-ui/styled-system"
-import { getColor, mode } from "@chakra-ui/theme-tools"
+} from "@chakra-ui/styled-system";
+import { getColor, mode } from "@chakra-ui/theme-tools";
 
 const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(parts.keys)
+  createMultiStyleConfigHelpers(parts.keys);
 
 const baseStyle = definePartsStyle({
   field: {
@@ -22,7 +22,7 @@ const baseStyle = definePartsStyle({
       cursor: "not-allowed",
     },
   },
-})
+});
 
 const size = {
   lg: defineStyle({
@@ -49,7 +49,7 @@ const size = {
     h: "6",
     borderRadius: "sm",
   }),
-}
+};
 
 const sizes = {
   lg: definePartsStyle({
@@ -68,19 +68,19 @@ const sizes = {
     field: size.xs,
     addon: size.xs,
   }),
-}
+};
 
 function getDefaults(props: Record<string, any>) {
-  const { focusBorderColor: fc, errorBorderColor: ec } = props
+  const { focusBorderColor: fc, errorBorderColor: ec } = props;
   return {
     focusBorderColor: fc || mode("blue.500", "blue.300")(props),
     errorBorderColor: ec || mode("red.500", "red.300")(props),
-  }
+  };
 }
 
-const variantOutline = definePartsStyle((props) => {
-  const { theme } = props
-  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props)
+const variantOutline = definePartsStyle(props => {
+  const { theme } = props;
+  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props);
 
   return {
     field: {
@@ -109,12 +109,12 @@ const variantOutline = definePartsStyle((props) => {
       borderColor: mode("inherit", "whiteAlpha.50")(props),
       bg: mode("gray.100", "whiteAlpha.300")(props),
     },
-  }
-})
+  };
+});
 
-const variantFilled = definePartsStyle((props) => {
-  const { theme } = props
-  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props)
+const variantFilled = definePartsStyle(props => {
+  const { theme } = props;
+  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props);
 
   return {
     field: {
@@ -141,12 +141,12 @@ const variantFilled = definePartsStyle((props) => {
       borderColor: "transparent",
       bg: mode("gray.100", "whiteAlpha.50")(props),
     },
-  }
-})
+  };
+});
 
-const variantFlushed = definePartsStyle((props) => {
-  const { theme } = props
-  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props)
+const variantFlushed = definePartsStyle(props => {
+  const { theme } = props;
+  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props);
 
   return {
     field: {
@@ -175,8 +175,8 @@ const variantFlushed = definePartsStyle((props) => {
       px: "0",
       bg: "transparent",
     },
-  }
-})
+  };
+});
 
 const variantUnstyled = definePartsStyle({
   field: {
@@ -189,14 +189,14 @@ const variantUnstyled = definePartsStyle({
     px: "0",
     height: "auto",
   },
-})
+});
 
 const variants = {
   outline: variantOutline,
   filled: variantFilled,
   flushed: variantFlushed,
   unstyled: variantUnstyled,
-}
+};
 
 export const inputTheme = defineMultiStyleConfig({
   baseStyle,
@@ -206,4 +206,4 @@ export const inputTheme = defineMultiStyleConfig({
     size: "md",
     variant: "outline",
   },
-})
+});

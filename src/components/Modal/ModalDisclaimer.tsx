@@ -27,8 +27,8 @@ export const ModalDiscalimer = NiceModal.create<Props>(() => {
   };
 
   useEffect(() => {
-    if (!modal.show) setAccepted(false);
-  }, [modal.show]);
+    if (!modal.visible) setAccepted(false);
+  }, [modal.visible]);
 
   const handleAccept = () => {
     modal.resolve();

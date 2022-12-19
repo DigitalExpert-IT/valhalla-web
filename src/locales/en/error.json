@@ -1,6 +1,6 @@
 {
   "required": "{{field}} is required!",
   "address": "{{address}} is invalid address!",
-  "isRegistered":"{{address}} Address already registered",
+  "alreadyRegistered":"{{address}} Address already registered",
   "registrationFee":"Unmatch Registration Fee"
 }

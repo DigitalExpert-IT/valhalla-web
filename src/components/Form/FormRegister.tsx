@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, Stack, Badge, Box } from "@chakra-ui/react";
+import { Button, Stack, Badge, Box, useToast } from "@chakra-ui/react";
 import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
 import { useAsyncCall, useValhalla, useWallet } from "hooks";
@@ -18,6 +18,7 @@ export const FormRegister = () => {
   const register = useAsyncCall(valhalla.register);
   const { control, setValue, handleSubmit } = useForm<FormType>();
   const { t } = useTranslation();
+  const toast = useToast();
   const wallet = useWallet();
   const router = useRouter();
   const disclaimerModal = useModal(ModalDiscalimer);
@@ -27,8 +28,12 @@ export const FormRegister = () => {
   }, [router.query.referrer]);
 
   const onSubmit = handleSubmit(data => {
-    disclaimerModal.show().then(() => {
-      register.exec(data.referrer);
+    disclaimerModal.show().then(async () => {
+      await register.exec(data.referrer);
+      toast({
+        status: "success",
+        description: t("form.message.registrationSuccess"),
+      });
     });
   });
 

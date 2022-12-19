@@ -5,6 +5,9 @@
   "label": {
     "referrer": "Referrer"
   },
+  "message": {
+    "registrationSuccess": "Registration Success!"
+  },
   "helperText": {
     "referrer": "Please enter correct wallet address"
   }

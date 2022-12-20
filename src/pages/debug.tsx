@@ -11,7 +11,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 import { ConnectWalletButton } from "components";
-import { useValhalla, useAsyncCall } from "hooks";
+import { useValhalla, useAsyncCall, useWallet } from "hooks";
 import { prettyBn } from "utils";
 
 export default function Home() {
@@ -24,6 +24,7 @@ export default function Home() {
     claimReward,
     claimRankReward,
   } = useValhalla();
+  const { balance } = useWallet();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
 
@@ -32,7 +33,9 @@ export default function Home() {
       <Stack spacing="16">
         <ConnectWalletButton />
         <Box>
-          <Heading size="lg">Pool</Heading>
+          <Heading size="md" mb="6">
+            Pool
+          </Heading>
           <Table>
             <Tbody>
               <Tr>
@@ -51,9 +54,16 @@ export default function Home() {
           </Table>
         </Box>
         <Box>
-          <Heading size="lg">Profile</Heading>
+          <Heading size="md" mb="6">
+            Profile
+          </Heading>
           <Table>
             <Tbody>
+              <Tr>
+                <Th>Balance</Th>
+                <Td>{prettyBn(balance)}</Td>
+                <Td></Td>
+              </Tr>
               <Tr>
                 <Th>Reward</Th>
                 <Td>{prettyBn(personalReward)}</Td>

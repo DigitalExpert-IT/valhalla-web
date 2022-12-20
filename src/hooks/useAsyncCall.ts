@@ -32,8 +32,9 @@ export const useAsyncCall = <T, A extends any[]>(
       toast({ status: "error", description: formattedErrorMessage });
       setState(prev => ({
         ...prev,
-        errorMessage: formattedErrorMessage,
+        errorMessage: formattedErrorMessage!,
       }));
+      throw error;
     } finally {
       setState(prev => ({ ...prev, isLoading: false }));
     }

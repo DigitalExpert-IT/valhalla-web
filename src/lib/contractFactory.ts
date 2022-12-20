@@ -3,12 +3,13 @@ import { RPC_ENDPOINTS } from "constant/endpoint";
 import { ethers } from "ethers";
 import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Valhalla.json";
 import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+import { VALHALLA_CONTRACT } from "constant/address";
 
 declare module globalThis {
   var providerCache: Record<string, any>;
 }
 
-const CURRENT_CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || "0x61";
+const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x61") as "0x61";
 const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID as "0x61"];
 
 /**
@@ -57,7 +58,7 @@ export const getValhallaContract = async () => {
   const contract = await getFromCache(
     async () =>
       new ethers.Contract(
-        "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",
+        VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
         valhallaJson.abi,
         provider
       ) as Valhalla
@@ -70,7 +71,7 @@ export const getValhallaSignerContract = async () => {
   const contract = await getFromCache(
     async () =>
       new ethers.Contract(
-        "0x029acFdDb74F1894b10a1D9b8fDc942d60c1622b",
+        VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
         valhallaJson.abi,
         wallet.getSigner()
       ) as Valhalla

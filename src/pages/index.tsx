@@ -1,5 +1,5 @@
 import { Container, Button } from "@chakra-ui/react";
-import { ConnectWalletButton } from "components";
+import { ConnectWalletButton, CardPool } from "components";
 import { useValhalla, useAsyncCall } from "hooks";
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
     <Container>
       <ConnectWalletButton />
       <Button onClick={handleRegistration}>Register</Button>
+      <CardPool />
     </Container>
   );
 }

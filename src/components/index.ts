@@ -4,4 +4,3 @@ export * from "./TextAnimation";
 export * from "./FormUtils";
 export * from "./Form";
 export * from "./Modal";
-export * from "./Card";

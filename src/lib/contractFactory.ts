@@ -9,7 +9,8 @@ declare module globalThis {
   var providerCache: Record<string, any>;
 }
 
-const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x61") as "0x61";
+export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
+  "0x61") as "0x61";
 const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID as "0x61"];
 
 /**
@@ -33,16 +34,6 @@ export const getWallet = async () => {
   const wallet = await getFromCache(
     async () => new ethers.providers.Web3Provider(ethProvider!)
   );
-
-  // whenever the chain from metamask changed
-  // just hard reload the web to reset all state
-  wallet.on("chainChanged", () => {
-    window.location.reload();
-  });
-
-  wallet.on("accountsChanged", () => {
-    window.location.reload();
-  });
 
   return wallet;
 };

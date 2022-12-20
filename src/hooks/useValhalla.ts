@@ -107,8 +107,7 @@ const fetchAccount = async () => {
 
 const init = createInitiator(async () => {
   const valhalla = await getValhallaContract();
-  await fetchPool();
-  await fetchAccount();
+  await Promise.all([fetchPool(), fetchAccount()]);
 
   valhalla.on("ClaimReward", fetchAccount);
   valhalla.on("ClaimRankReward", () => {

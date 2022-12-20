@@ -2,5 +2,8 @@
   "required": "{{field}} is required!",
   "address": "{{address}} is invalid address!",
   "alreadyRegistered":"{{address}} Address already registered",
-  "registrationFee":"Unmatch Registration Fee"
+  "registrationFee":"Unmatch Registration Fee",
+  "code":{
+    "ACTION_REJECTED":"User Reject Transaction . . . !"
+  }
 }

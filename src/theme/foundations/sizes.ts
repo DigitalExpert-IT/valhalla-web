@@ -4,6 +4,8 @@ const largeSizes = {
   max: "max-content",
   min: "min-content",
   full: "100%",
+  "5xs": "9rem",
+  "4xs": "12rem",
   "3xs": "14rem",
   "2xs": "16rem",
   xs: "20rem",

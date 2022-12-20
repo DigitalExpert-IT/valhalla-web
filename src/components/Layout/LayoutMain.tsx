@@ -6,7 +6,7 @@ interface MainProps {
   children: React.ReactNode;
 }
 
-export const Main: React.FC<MainProps> = ({ children }) => {
+export const LayoutMain: React.FC<MainProps> = ({ children }) => {
   return (
     <>
       <Navbar />

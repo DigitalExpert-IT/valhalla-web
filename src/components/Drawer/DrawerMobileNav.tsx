@@ -1,6 +1,8 @@
 import React from "react";
-import { INav } from "constant/NavItem";
+import { INavigation } from "constant/navigation";
 import { ButtonConnectWallet } from "components";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import {
   Drawer,
   DrawerBody,
@@ -9,7 +11,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Stack,
-  Box,
   Text,
   Heading,
 } from "@chakra-ui/react";
@@ -17,11 +18,13 @@ import {
 interface MobileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  dataNav: INav[];
+  dataNav: INavigation[];
 }
 
-export const MobileDrawer: React.FC<MobileDrawerProps> = props => {
+export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   const { isOpen, onClose, dataNav } = props;
+  const { t } = useTranslation();
+  const navMenu: any = t("common.menu", { returnObjects: true });
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
@@ -33,30 +36,26 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = props => {
         <Stack
           bg="brand.900"
           direction="row"
-          spacing="10px"
-          w="100%"
+          w="full"
           justify="center"
-          py="0.5rem"
-          mb="1rem"
+          p="2"
+          my="5"
         >
-          {/* Add buttonProps for custom button */}
           <ButtonConnectWallet />
         </Stack>
         <DrawerBody>
-          <Stack>
+          <Stack spacing="5">
             {dataNav.map((item, idx) => (
-              <Box key={idx}>
+              <Link href={item.href} key={idx}>
                 <Text
                   fontWeight="bold"
                   textTransform="uppercase"
-                  _hover={{
-                    bgGradient: "linear(90deg, #FE926D 2.42%, #FF2D61 100%)",
-                    bgClip: "text",
-                  }}
+                  variant="hoverGradient"
+                  colorScheme="orange:pink"
                 >
-                  {item.name}
+                  {navMenu[idx]}
                 </Text>
-              </Box>
+              </Link>
             ))}
           </Stack>
         </DrawerBody>

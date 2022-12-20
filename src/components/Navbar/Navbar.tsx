@@ -1,8 +1,7 @@
 import React from "react";
-import { NavItem } from "constant/NavItem";
+import { Navigation } from "constant/navigation";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { MobileDrawer, ButtonConnectWallet } from "components";
-import { NavMenu } from "./NavMenu";
+import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
 import {
   Box,
   Flex,
@@ -17,10 +16,14 @@ export const Navbar = () => {
 
   return (
     <Box>
-      <Box bg="brand.700" w="100%" color="white" position="fixed" zIndex={1}>
+      <Box bg="brand.700" w="full" color="white" position="fixed" zIndex={1}>
         <Flex h="16" alignItems="center" px="1rem" justify="space-around">
           <Stack direction="row" align="center" flex={1}>
-            <MobileDrawer dataNav={NavItem} isOpen={isOpen} onClose={onClose} />
+            <DrawerMobileNav
+              dataNav={Navigation}
+              isOpen={isOpen}
+              onClose={onClose}
+            />
             <IconButton
               size="lg"
               variant="ghost"
@@ -42,18 +45,7 @@ export const Navbar = () => {
             align="center"
             flex={1}
           >
-            <NavMenu datanav={NavItem} />
-            {/* {NavItem.map((item, idx) => (
-              <Box key={idx}>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="bold"
-                  fontSize="xl"
-                >
-                  {item.name}
-                </Text>
-              </Box>
-            ))} */}
+            <NavbarMenu datanav={Navigation} />
           </Stack>
           <Flex
             alignItems="center"

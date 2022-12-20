@@ -1,9 +1,9 @@
-export interface INav {
+export interface INavigation {
   name: string;
   href: string;
 }
 
-export const NavItem: Array<INav> = [
+export const Navigation: Array<INavigation> = [
   {
     name: "home",
     href: "/",

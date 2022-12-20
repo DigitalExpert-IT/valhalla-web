@@ -1,4 +1,6 @@
 {
+  "menu": ["home", "swap", "features", "project"],
+  "connectWallet": "Connect Wallet",
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",

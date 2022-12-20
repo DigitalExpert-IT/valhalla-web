@@ -1,18 +1,10 @@
 import { Heading } from "@chakra-ui/react";
-import { Main } from "components";
-import { useValhalla, useAsyncCall } from "hooks";
+import { LayoutMain } from "components";
 
 export default function Home() {
-  const { register } = useValhalla();
-  const registerFn = useAsyncCall(register);
-
-  const handleRegistration = () => {
-    registerFn.exec("0x0");
-  };
-
   return (
-    <Main>
+    <LayoutMain>
       <Heading>Hello</Heading>
-    </Main>
+    </LayoutMain>
   );
 }

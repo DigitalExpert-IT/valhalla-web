@@ -7,7 +7,7 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-import { TextAnimation } from "components";
+import { TextAnimation, ButtonConnectWrapper } from "components";
 import { IOwnedNFT, useAsyncCall, useNFT } from "hooks";
 import { prettyBn } from "utils";
 import { fromBn } from "evm-bn";
@@ -74,16 +74,18 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
           >
             {farmValue}
           </TextAnimation>
-          <Button
-            mt="4"
-            size="sm"
-            w="full"
-            colorScheme="orange"
-            onClick={handleFarm}
-            isLoading={farmAsync.isLoading}
-          >
-            Farm
-          </Button>
+          <ButtonConnectWrapper mt="4" size="sm" w="full" colorScheme="orange">
+            <Button
+              mt="4"
+              size="sm"
+              w="full"
+              colorScheme="orange"
+              onClick={handleFarm}
+              isLoading={farmAsync.isLoading}
+            >
+              Farm
+            </Button>
+          </ButtonConnectWrapper>
         </Box>
       </CardBody>
     </Card>

@@ -37,9 +37,7 @@ const getFromCache = async <T>(fn: () => Promise<T>): Promise<T> => {
 
 export const getWallet = async () => {
   const ethProvider = await detectEthereumProvider();
-  const wallet = await getFromCache(
-    async () => new ethers.providers.Web3Provider(ethProvider!)
-  );
+  const wallet = new ethers.providers.Web3Provider(ethProvider!);
 
   return wallet;
 };

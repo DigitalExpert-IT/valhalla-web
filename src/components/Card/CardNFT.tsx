@@ -6,6 +6,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import { ButtonConnectWrapper } from "components";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { prettyBn } from "utils";
 
@@ -24,15 +25,17 @@ export const CardNFT = (props: INFTCard) => {
         <Text>Price: {prettyBn(price, 9)}</Text>
       </CardBody>
       <CardFooter>
-        <Button
-          w="full"
-          size="sm"
-          colorScheme="blue"
-          isLoading={buyAsync.isLoading}
-          onClick={handleBuy}
-        >
-          Buy
-        </Button>
+        <ButtonConnectWrapper w="full" size="sm" colorScheme="blue">
+          <Button
+            w="full"
+            size="sm"
+            colorScheme="blue"
+            isLoading={buyAsync.isLoading}
+            onClick={handleBuy}
+          >
+            Buy
+          </Button>
+        </ButtonConnectWrapper>
       </CardFooter>
     </Card>
   );

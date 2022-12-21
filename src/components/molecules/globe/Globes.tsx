@@ -4,6 +4,7 @@ import arcsData from "./data";
 import places from "./places";
 import { Box, Grid } from '@chakra-ui/react';
 import { useWindowSize } from 'react-use';
+import globeImg from './globe_dark3.jpg'
 
 export const Globes = () => {
   const size = useWindowSize();
@@ -23,32 +24,40 @@ export const Globes = () => {
       justifyItems={'center'}
     >
       <Globe
-        width={gRespont()}
-        height={gRespont()}
+        width={500}
+        height={500}
+        showGraticules={true}
+        htmlTransitionDuration={100}
         backgroundColor="rgba(0,0,0,0)"
-        globeImageUrl={"https://unpkg.com/three-globe@2.24.10/example/img/earth-night.jpg"}
+        globeImageUrl={globeImg.src}
         arcsData={arcsData}
         arcColor={'color'}
         arcDashLength={() => 1}
         arcDashGap={() => 4}
-        arcDashAnimateTime={() => Math.random() * 400 + 500}
-        // arcCurveResolution={4000}
+        arcDashAnimateTime={() => Math.random() * 300 * 500}
         // labels
         // labelsData={places}
-        // labelLat={(d) => d.lat}
-        // labelLng={(d) => d.lng}
-        // labelText={(d) => d.name}
-        // labelSize={(d) => 0.5 + d.size}
-        // labelDotRadius={(d) => 0.5 + d.size}
+        // labelLat="lat"
+        // labelLng="lng"
+        // labelText="name"
+        // labelSize="size"
+        // labelDotRadius={(d:any) => 0.5 + d.size}
         // labelColor={() => "rgba(255, 165, 0, 0.75)"}
         // labelResolution={2}
         // bars
-        hexBinPointsData={places}
-        hexBinPointWeight="size"
-        hexAltitude={(d) => d.sumWeight - 0.1 + 0.05}
-        hexBinResolution={4}
-        hexBinMerge={true}
-        enablePointerInteraction={false}
+        // hexBinPointsData={places}
+        // hexBinPointWeight="size"
+        // hexAltitude={(d) => d.sumWeight - 0.1 + 0.05}
+        // hexBinResolution={4}
+        // hexBinMerge={true}
+        // enablePointerInteraction={false}
+
+        pointsData={places}
+        pointLat="lat"
+        pointLng="lng"
+        pointRadius={0.2}
+        pointAltitude={0.0005} //high
+        pointColor="color"
       />
     </Grid>
   )

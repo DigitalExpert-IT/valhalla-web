@@ -29,11 +29,13 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
-      await register.exec(data.referrer);
-      toast({
-        status: "success",
-        description: t("form.message.registrationSuccess"),
-      });
+      try {
+        await register.exec(data.referrer);
+        toast({
+          status: "success",
+          description: t("form.message.registrationSuccess"),
+        });
+      } catch (error) {}
     });
   });
 

@@ -16,8 +16,8 @@ declare module globalThis {
 }
 
 export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
-  "0x61") as "0x61";
-const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID as "0x61"];
+  "0x89") as "0x89";
+const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID];
 
 /**
  * function to get provider asyncronously and memoize it

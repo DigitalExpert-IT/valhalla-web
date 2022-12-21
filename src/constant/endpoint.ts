@@ -5,7 +5,8 @@ export const WS_ENDPOINTS = {
 };
 
 export const RPC_ENDPOINTS = {
-  "0x38": "https://bsc-dataseed1.ninicoin.io",
-  "0x61": "https://data-seed-prebsc-1-s3.binance.org:8545/",
+  "0x89": "https://polygon-rpc.com",
+  "0x13881":
+    "https://matic.getblock.io/c93b3096-bc13-4daf-8c73-b5ac0c1c8855/testnet/",
   "0x539": "http://localhost:8545",
 };

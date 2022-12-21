@@ -17,7 +17,7 @@ export const CardNFT = (props: INFTCard) => {
   };
 
   return (
-    <Card w="full">
+    <Card w="full" variant="gradient" colorScheme="blue">
       <CardHeader>Farming {props.id.add(1).toNumber()}</CardHeader>
       <CardBody>
         <Text>Price: {prettyBn(props.price, 9)}</Text>

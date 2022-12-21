@@ -1,4 +1,4 @@
-import { Button, Box, Text, Flex, ThemeTypings } from "@chakra-ui/react";
+import { Button, Box, Flex, ThemeTypings } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { useWallet } from "hooks";
@@ -12,7 +12,7 @@ type Props = {
 export const ConnectWalletButton = (props: Props) => {
   const { colorScheme = "gray" } = props;
   const { t } = useTranslation();
-  const { address, connect, isConnected, balance } = useWallet();
+  const { address, connect, isConnected } = useWallet();
 
   if (isConnected) {
     return (

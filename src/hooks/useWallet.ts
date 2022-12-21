@@ -10,7 +10,6 @@ import { network } from "constant/network";
 
 interface IStore {
   address: string;
-  balance: BigNumber;
   isConnected: boolean;
 }
 
@@ -32,12 +31,7 @@ const resetAccount = async () => {
       isConnected:
         !!address &&
         compareChain(globalThis.ethereum.chainId, CURRENT_CHAIN_ID),
-      balance: initialState.balance,
     });
-    if (address) {
-      const balance = await wallet.getBalance(address);
-      setState({ balance });
-    }
   } catch (error) {}
 };
 
@@ -50,11 +44,6 @@ const init = createInitiator(async () => {
       isConnected:
         !!address &&
         compareChain(globalThis.ethereum.chainId, CURRENT_CHAIN_ID),
-    });
-
-    wallet.on("block", async () => {
-      const balance = await wallet.getBalance(address);
-      setState({ balance });
     });
 
     const metamask = await detectEthereumProvider();

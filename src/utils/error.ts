@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 export interface IErrorType {
   argument: string;
   code: string;
@@ -18,8 +20,13 @@ const format = (message?: string | null) => {
 };
 
 export const getErrorMessage = (error: IErrorType) => {
-  if (error?.reason) return format(error.reason);
-  if (error?.data?.message) return format(error.data.message);
-  if (error?.message) return format(error.message);
-  return "Unkown Error";
+  const errorTemp = `error.errorCode.${error.code}`;
+  const errorCode = t(errorTemp);
+  if (errorTemp === errorCode) {
+    if (error?.reason) return format(error.reason);
+    if (error?.data?.message) return format(error.data.message);
+    if (error?.message) return format(error.message);
+    return "Unkown Error";
+  }
+  return errorCode;
 };

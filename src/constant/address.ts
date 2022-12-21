@@ -1,17 +1,17 @@
 export const VALHALLA_CONTRACT = {
   "0x38": "",
   "0x61": "",
-  "0x539": "0xF2F950e010377b0215cDDD800DcDEF1132FFfF86",
+  "0x539": "0x14BDa218B82F6d7BB7B2DE305D8bd0ac184CCb0A",
 };
 
 export const NFT_CONTRACT = {
   "0x38": "",
   "0x61": "",
-  "0x539": "0xc7Dc121aa4bf6bbc0d9C6C4c32578a241cc42078",
+  "0x539": "0x40E153934415BAD80AC8b51E21072e1CEe42A835",
 };
 
 export const GNET_CONTRACT = {
   "0x38": "",
   "0x61": "",
-  "0x539": "0xf46BdF0a20ffE71c702C08d53a16c5B1F61fD85A",
+  "0x539": "0x4f10F21aF01a1F99cC7af3eCaA5DF120AdafA409",
 };

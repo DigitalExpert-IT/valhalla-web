@@ -2,8 +2,14 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { RPC_ENDPOINTS } from "constant/endpoint";
 import { ethers } from "ethers";
 import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Valhalla.json";
-import { Valhalla } from "@warmbyte/valhalla/typechain-types";
-import { VALHALLA_CONTRACT } from "constant/address";
+import nftJson from "@warmbyte/valhalla/artifacts/contracts/NFT.sol/NFT.json";
+import gnetJson from "@warmbyte/valhalla/artifacts/contracts/GNET.sol/GNET.json";
+import {
+  VALHALLA_CONTRACT,
+  NFT_CONTRACT,
+  GNET_CONTRACT,
+} from "constant/address";
+import { Valhalla, NFT, GNET } from "@warmbyte/valhalla/typechain-types";
 
 declare module globalThis {
   var providerCache: Record<string, any>;
@@ -66,6 +72,58 @@ export const getValhallaSignerContract = async () => {
         valhallaJson.abi,
         wallet.getSigner()
       ) as Valhalla
+  );
+  return contract;
+};
+
+export const getNFTContract = async () => {
+  const provider = await getMainProvider();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        NFT_CONTRACT[CURRENT_CHAIN_ID],
+        nftJson.abi,
+        provider
+      ) as NFT
+  );
+  return contract;
+};
+
+export const getNFTSignerContract = async () => {
+  const wallet = await getWallet();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        NFT_CONTRACT[CURRENT_CHAIN_ID],
+        nftJson.abi,
+        wallet.getSigner()
+      ) as NFT
+  );
+  return contract;
+};
+
+export const getGNETContract = async () => {
+  const provider = await getMainProvider();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        GNET_CONTRACT[CURRENT_CHAIN_ID],
+        gnetJson.abi,
+        provider
+      ) as GNET
+  );
+  return contract;
+};
+
+export const getGNETSignerContract = async () => {
+  const wallet = await getWallet();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        GNET_CONTRACT[CURRENT_CHAIN_ID],
+        gnetJson.abi,
+        wallet.getSigner()
+      ) as GNET
   );
   return contract;
 };

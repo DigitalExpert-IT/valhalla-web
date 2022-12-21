@@ -7,16 +7,24 @@ import { useWindowSize } from 'react-use';
 import globeImg from './globe_dark3.jpg'
 
 export const Globes = () => {
-  const size = useWindowSize();
-  const Globe = dynamic(import("react-globe.gl"), { ssr: false });
+  // const size = useWindowSize();
+  // const Globe = dynamic(import("react-globe.gl"), { ssr: false });
+  let Globe = () => null;
+  if (typeof window !== 'undefined') Globe = require('react-globe.gl').default;
+  const globeElement = React.useRef();
+  const [size, setSize] = React.useState([0, 0]);
 
-  const gRespont = () => {
-    if (size.width > 768) {
-      return 500
-    }
-    return 200
-  }
+  React.useEffect(() => {
+    // Auto-rotate
+    globeElement.current.controls().autoRotate = true;
+    globeElement.current.controls().autoRotateSpeed = 2;
+    globeElement.current.controls().enableZoom = false;
+  }, []);
 
+  React.useLayoutEffect(() => {
+    setSize([window.innerWidth, window.innerHeight * 1.5]);
+  }, []);
+  
   return (
     <Grid 
       w={'full'} 
@@ -24,9 +32,11 @@ export const Globes = () => {
       justifyItems={'center'}
     >
       <Globe
+        ref={globeElement}
         width={500}
         height={500}
         showGraticules={true}
+        showAtmosphere={false}
         htmlTransitionDuration={100}
         backgroundColor="rgba(0,0,0,0)"
         globeImageUrl={globeImg.src}
@@ -34,7 +44,7 @@ export const Globes = () => {
         arcColor={'color'}
         arcDashLength={() => 1}
         arcDashGap={() => 4}
-        arcDashAnimateTime={() => Math.random() * 300 * 500}
+        arcDashAnimateTime={() => Math.random() * 100 * 500}
         // labels
         // labelsData={places}
         // labelLat="lat"

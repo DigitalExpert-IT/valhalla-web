@@ -6,7 +6,7 @@ import { Globes, TextHeader } from 'components/';
 export const Header = () => {
 
   return (
-    <Box bg={'#21005D'}>
+    <Box>
       <Flex 
         flexDirection={{base: 'column', lg: 'row'}}
         px={8}

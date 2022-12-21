@@ -23,7 +23,13 @@ export const CardNFT = (props: INFTCard) => {
         <Text>Price: {prettyBn(props.price, 9)}</Text>
       </CardBody>
       <CardFooter>
-        <Button isLoading={buyAsync.isLoading} onClick={handleBuy}>
+        <Button
+          w="full"
+          size="sm"
+          colorScheme="blue"
+          isLoading={buyAsync.isLoading}
+          onClick={handleBuy}
+        >
           Buy
         </Button>
       </CardFooter>

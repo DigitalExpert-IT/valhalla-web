@@ -1,12 +1,13 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Text,
   Button,
+  Box,
 } from "@chakra-ui/react";
+import { TextAnimation } from "components";
 import { IOwnedNFT, useAsyncCall, useNFT } from "hooks";
 import { prettyBn } from "utils";
 import { fromBn } from "evm-bn";
@@ -58,16 +59,32 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
     <Card w="full" variant="gradient" colorScheme="orange:blue">
       <CardHeader>NFT #{props.id.toNumber()}</CardHeader>
       <CardBody>
-        <Text>Card ID: {props.cardId.toNumber()}</Text>
-        <Text>Percentage {props.percentage.toNumber() / 10}</Text>
-        <Text>Minting Price: {prettyBn(props.mintingPrice, 9)}</Text>
-        <Text>{farmValue}</Text>
+        <Box flex="1">
+          <Text>Card ID: {props.cardId.toNumber()}</Text>
+          <Text>Percentage {props.percentage.toNumber() / 10}</Text>
+          <Text>Minting Price: {prettyBn(props.mintingPrice, 9)}</Text>
+        </Box>
+        <Box mt="6">
+          <TextAnimation
+            colorScheme="gray:red"
+            variant="gradient"
+            fontSize="xl"
+            fontWeight="bold"
+          >
+            {farmValue}
+          </TextAnimation>
+          <Button
+            mt="4"
+            size="sm"
+            w="full"
+            colorScheme="orange"
+            onClick={handleFarm}
+            isLoading={farmAsync.isLoading}
+          >
+            Farm
+          </Button>
+        </Box>
       </CardBody>
-      <CardFooter>
-        <Button onClick={handleFarm} isLoading={farmAsync.isLoading}>
-          Farm
-        </Button>
-      </CardFooter>
     </Card>
   );
 };

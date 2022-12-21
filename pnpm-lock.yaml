@@ -16,7 +16,7 @@ specifiers:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.7.0
+  '@warmbyte/valhalla': 1.8.0
   eslint: 8.28.0
   eslint-config-next: 13.0.6
   eslint-config-prettier: ^8.5.0
@@ -26,6 +26,7 @@ specifiers:
   framer-motion: ^7.6.18
   husky: ^8.0.2
   i18next: ^22.0.6
+  immer: ^9.0.16
   lint-staged: ^13.1.0
   lodash: ^4.17.21
   next: 13.0.6
@@ -50,13 +51,14 @@ dependencies:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.7.0
+  '@warmbyte/valhalla': 1.8.0
   eslint: 8.28.0
   eslint-config-next: 13.0.6_hsf322ms6xhhd4b5ne6lb74y4a
   ethers: 5.7.2
   evm-bn: 1.1.2
   framer-motion: 7.6.18_biqbaboplfbrettd7655fr4n2y
   i18next: 22.0.6
+  immer: 9.0.16
   lodash: 4.17.21
   next: 13.0.6_672uxklweod7ene3nqtsh262ca
   react: 18.2.0
@@ -66,7 +68,7 @@ dependencies:
   react-jazzicon: 1.0.4_biqbaboplfbrettd7655fr4n2y
   react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
   typescript: 4.9.3
-  zustand: 4.1.4_react@18.2.0
+  zustand: 4.1.4_immer@9.0.16+react@18.2.0
 
 devDependencies:
   '@babel/core': 7.20.5
@@ -2234,8 +2236,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: false
 
-  /@warmbyte/valhalla/1.7.0:
-    resolution: {integrity: sha512-MrTNX81+diAEMn8khHq0C82MHUSZnp+tXzK1ULZbj2eBq2NBcTBSFhD/YGM0Wz2LeEFsD1g0u5K4Di6g/EeebQ==}
+  /@warmbyte/valhalla/1.8.0:
+    resolution: {integrity: sha512-Z9AAbDMFUEs5N2C9Az5frYTroMwFZ149YGMch6VAMavIJ0qQynAgY8PdQb3mirwPUsHMhVdkCmhL6wbPNIXH0g==}
     dependencies:
       '@openzeppelin/contracts': 4.8.0
       '@openzeppelin/contracts-upgradeable': 4.8.0
@@ -3490,6 +3492,10 @@ packages:
   /ignore/5.2.1:
     resolution: {integrity: sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==}
     engines: {node: '>= 4'}
+
+  /immer/9.0.16:
+    resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
+    dev: false
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -4970,7 +4976,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  /zustand/4.1.4_react@18.2.0:
+  /zustand/4.1.4_immer@9.0.16+react@18.2.0:
     resolution: {integrity: sha512-k2jVOlWo8p4R83mQ+/uyB8ILPO2PCJOf+QVjcL+1PbMCk1w5OoPYpAIxy9zd93FSfmJqoH6lGdwzzjwqJIRU5A==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -4982,6 +4988,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 9.0.16
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false

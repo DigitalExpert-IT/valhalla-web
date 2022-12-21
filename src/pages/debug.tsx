@@ -9,10 +9,12 @@ import {
   Tr,
   Th,
   Td,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
-import { ConnectWalletButton } from "components";
+import { ConnectWalletButton, CardNFT, CardOwnedNFT } from "components";
 import { rankMap } from "constant/rank";
-import { useValhalla, useAsyncCall, useWallet } from "hooks";
+import { useValhalla, useAsyncCall, useWallet, useNFT } from "hooks";
 import { prettyBn } from "utils";
 
 export default function Home() {
@@ -26,12 +28,13 @@ export default function Home() {
     claimRankReward,
     account,
   } = useValhalla();
+  const { nftList, cardList } = useNFT();
   const { balance } = useWallet();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
 
   return (
-    <Container maxW="3xl" pt="16">
+    <Container maxW="6xl" py="16">
       <Stack spacing="16">
         <ConnectWalletButton />
         <Box>
@@ -109,6 +112,30 @@ export default function Home() {
               </Tr>
             </Tbody>
           </Table>
+        </Box>
+        <Box>
+          <Heading size="md" mb="6">
+            NFT
+          </Heading>
+          <Wrap>
+            {cardList.map(card => (
+              <WrapItem w="calc(16.6% - 10px)" key={card.id.toNumber()}>
+                <CardNFT {...card} />
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Box>
+        <Box>
+          <Heading size="md" mb="6">
+            OWNED NFT
+          </Heading>
+          <Wrap>
+            {nftList.map((card, idx) => (
+              <WrapItem w="calc(20% - 10px)" key={idx}>
+                <CardOwnedNFT {...card} />
+              </WrapItem>
+            ))}
+          </Wrap>
         </Box>
       </Stack>
     </Container>

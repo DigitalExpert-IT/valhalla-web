@@ -47,7 +47,7 @@ export const TextAnimation = (props: Props) => {
     <Text {...rest}>
       {head}
       <Text as="span" ref={textRef}>
-        children
+        {children}
       </Text>
     </Text>
   );

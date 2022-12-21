@@ -1,4 +1,11 @@
 {
   "required": "{{field}} is required!",
-  "address": "{{address}} is invalid address!"
+  "address": "{{address}} is invalid address!",
+  "alreadyRegistered":"{{address}} Address already registered",
+  "registrationFee":"Unmatch Registration Fee",
+  "errorCode":{
+    "ACTION_REJECTED":"User Reject Transaction . . . !",
+    "INVALID_ARGUMENT":"resolver or addr is not configured for ENS name",
+    "-32603":"Referrer should be registered !"
+  }
 }

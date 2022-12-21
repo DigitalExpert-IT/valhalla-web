@@ -40,7 +40,7 @@ const initialState = {
     rank: 0,
     downlineCount: BigNumber.from("0"),
     directDownlineCount: BigNumber.from("0"),
-    referrer: "0x0",
+    referrer: "",
     rankUpdatedAt: BigNumber.from("0"),
     rankRewardClaimedAt: BigNumber.from("0"),
   },

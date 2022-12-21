@@ -34,6 +34,10 @@ const resetAccount = async () => {
         compareChain(globalThis.ethereum.chainId, CURRENT_CHAIN_ID),
       balance: initialState.balance,
     });
+    if (address) {
+      const balance = await wallet.getBalance(address);
+      setState({ balance });
+    }
   } catch (error) {}
 };
 

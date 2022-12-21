@@ -11,6 +11,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 import { ConnectWalletButton } from "components";
+import { rankMap } from "constant/rank";
 import { useValhalla, useAsyncCall, useWallet } from "hooks";
 import { prettyBn } from "utils";
 
@@ -23,6 +24,7 @@ export default function Home() {
     reservedPool,
     claimReward,
     claimRankReward,
+    account,
   } = useValhalla();
   const { balance } = useWallet();
   const claimRewardAsync = useAsyncCall(claimReward);
@@ -59,6 +61,21 @@ export default function Home() {
           </Heading>
           <Table>
             <Tbody>
+              <Tr>
+                <Th>Upline</Th>
+                <Td>{account.referrer}</Td>
+                <Td></Td>
+              </Tr>
+              <Tr>
+                <Th>Rank</Th>
+                <Td>{rankMap[account.rank]}</Td>
+                <Td></Td>
+              </Tr>
+              <Tr>
+                <Th>Downline</Th>
+                <Td>Direct: {account.directDownlineCount.toNumber()}</Td>
+                <Td>Total: {account.downlineCount.toNumber()}</Td>
+              </Tr>
               <Tr>
                 <Th>Balance</Th>
                 <Td>{prettyBn(balance)}</Td>

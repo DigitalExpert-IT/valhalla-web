@@ -2,6 +2,7 @@ import { cardAnatomy as parts } from "@chakra-ui/anatomy";
 import {
   createMultiStyleConfigHelpers,
   cssVar,
+  defineStyle,
 } from "@chakra-ui/styled-system";
 
 const { definePartsStyle, defineMultiStyleConfig } =
@@ -49,6 +50,56 @@ const sizes = {
   }),
 };
 
+const variantGradient = defineStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+  return definePartsStyle({
+    container: {
+      bg: `${c1}.800`,
+      position: "relative",
+      overflow: "hidden",
+      _after: {
+        content: "''",
+        position: "absolute",
+        width: "150%",
+        height: "150%",
+        borderRadius: "full",
+        top: "-80%",
+        right: "-90%",
+        zIndex: 2,
+        opacity: 0.6,
+        filter: "blur(25px)",
+        bgGradient: `radial(${c2}.800, transparent)`,
+      },
+      _before: {
+        content: "''",
+        position: "absolute",
+        width: "40%",
+        height: "40%",
+        borderRadius: "full",
+        bottom: "-10%",
+        left: "-10%",
+        zIndex: 2,
+        opacity: 0.6,
+        filter: "blur(20px)",
+        bgGradient: `radial(${c2}.800, transparent)`,
+      },
+    },
+    body: {
+      position: "relative",
+      zIndex: 3,
+    },
+    header: {
+      position: "relative",
+      zIndex: 3,
+    },
+    footer: {
+      position: "relative",
+      zIndex: 3,
+    },
+  });
+});
+
 const variants = {
   elevated: definePartsStyle({
     container: {
@@ -74,6 +125,7 @@ const variants = {
     header: { padding: 0 },
     footer: { padding: 0 },
   },
+  gradient: variantGradient,
 };
 
 export const cardTheme = defineMultiStyleConfig({
@@ -83,5 +135,6 @@ export const cardTheme = defineMultiStyleConfig({
   defaultProps: {
     variant: "elevated",
     size: "md",
+    colorScheme: "brand",
   },
 });

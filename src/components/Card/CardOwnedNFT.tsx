@@ -55,7 +55,7 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
   };
 
   return (
-    <Card w="full">
+    <Card w="full" variant="gradient" colorScheme="orange:blue">
       <CardHeader>NFT #{props.id.toNumber()}</CardHeader>
       <CardBody>
         <Text>Card ID: {props.cardId.toNumber()}</Text>

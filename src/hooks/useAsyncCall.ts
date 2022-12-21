@@ -38,7 +38,6 @@ export const useAsyncCall = <T, A extends any[]>(
     } finally {
       setState(prev => ({ ...prev, isLoading: false }));
     }
-    return {} as T;
   };
 
   return { ...state, exec };

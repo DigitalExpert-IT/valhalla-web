@@ -29,7 +29,6 @@ export default function Home() {
     account,
   } = useValhalla();
   const { nftList, cardList } = useNFT();
-  const { balance } = useWallet();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
 
@@ -78,11 +77,6 @@ export default function Home() {
                 <Th>Downline</Th>
                 <Td>Direct: {account.directDownlineCount.toNumber()}</Td>
                 <Td>Total: {account.downlineCount.toNumber()}</Td>
-              </Tr>
-              <Tr>
-                <Th>Balance</Th>
-                <Td>{prettyBn(balance)}</Td>
-                <Td></Td>
               </Tr>
               <Tr>
                 <Th>Reward</Th>

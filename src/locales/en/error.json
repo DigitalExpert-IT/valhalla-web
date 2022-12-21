@@ -5,6 +5,7 @@
   "registrationFee":"Unmatch Registration Fee",
   "errorCode":{
     "ACTION_REJECTED":"User Reject Transaction . . . !",
-    "INVALID_ARGUMENT":"resolver or addr is not configured for ENS name"
+    "INVALID_ARGUMENT":"resolver or addr is not configured for ENS name",
+    "-32603":"Referrer should be registered !"
   }
 }

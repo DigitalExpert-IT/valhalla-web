@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
-import { getErrorMessage, IErrorType } from "utils/error";
+import { getErrorMessage } from "utils/error";
 
 /**
  * this hooks will simplify the integration between
@@ -27,7 +27,7 @@ export const useAsyncCall = <T, A extends any[]>(
       const data = await fn(...args);
       setState(prev => ({ ...prev, data }));
       return data as T;
-    } catch (error: IErrorType | any) {
+    } catch (error: any) {
       const formattedErrorMessage = getErrorMessage(error);
       toast({ status: "error", description: formattedErrorMessage });
       setState(prev => ({

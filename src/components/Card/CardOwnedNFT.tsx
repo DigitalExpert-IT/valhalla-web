@@ -14,6 +14,7 @@ import { fromBn } from "evm-bn";
 import { BigNumber } from "ethers";
 
 export const CardOwnedNFT = (props: IOwnedNFT) => {
+  const { id, mintingPrice, cardId, percentage, lastFarmedAt } = props;
   const intervalRef = useRef<any>();
   const lastFarmedAtRef = useRef<BigNumber>(props.lastFarmedAt);
   const [farmValue, setFarmValue] = useState("0");
@@ -33,8 +34,8 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
   };
 
   useEffect(() => {
-    lastFarmedAtRef.current = props.lastFarmedAt;
-  }, [props.lastFarmedAt.toString()]);
+    lastFarmedAtRef.current = lastFarmedAt;
+  }, [lastFarmedAt.toString()]);
 
   useEffect(() => {
     if (intervalRef.current) return;
@@ -52,17 +53,17 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
   }, []);
 
   const handleFarm = () => {
-    farmAsync.exec(props.id);
+    farmAsync.exec(id);
   };
 
   return (
     <Card w="full" variant="gradient" colorScheme="orange:blue">
-      <CardHeader>NFT #{props.id.toNumber()}</CardHeader>
+      <CardHeader>NFT #{id.toNumber()}</CardHeader>
       <CardBody>
         <Box flex="1">
-          <Text>Card ID: {props.cardId.toNumber()}</Text>
-          <Text>Percentage {props.percentage.toNumber() / 10}</Text>
-          <Text>Minting Price: {prettyBn(props.mintingPrice, 9)}</Text>
+          <Text>Card ID: {cardId.toNumber()}</Text>
+          <Text>Percentage {percentage.toNumber() / 10}</Text>
+          <Text>Minting Price: {prettyBn(mintingPrice, 9)}</Text>
         </Box>
         <Box mt="6">
           <TextAnimation

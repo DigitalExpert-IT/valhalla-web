@@ -10,6 +10,7 @@ import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { prettyBn } from "utils";
 
 export const CardNFT = (props: INFTCard) => {
+  const { id, price } = props;
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
   const handleBuy = () => {
@@ -18,9 +19,9 @@ export const CardNFT = (props: INFTCard) => {
 
   return (
     <Card w="full" variant="gradient" colorScheme="blue">
-      <CardHeader>Farming {props.id.add(1).toNumber()}</CardHeader>
+      <CardHeader>Farming {id.add(1).toNumber()}</CardHeader>
       <CardBody>
-        <Text>Price: {prettyBn(props.price, 9)}</Text>
+        <Text>Price: {prettyBn(price, 9)}</Text>
       </CardBody>
       <CardFooter>
         <Button

@@ -10,5 +10,6 @@
   "copied": "Copied!",
   "register": "Register",
   "accept": "Accept",
-  "agreeAndAccept": "I Agree & Accept"
+  "agreeAndAccept": "I Agree & Accept",
+  "transactionSuccess": "Transaction Success"
 }

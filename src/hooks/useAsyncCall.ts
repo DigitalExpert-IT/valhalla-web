@@ -17,7 +17,6 @@ export const useAsyncCall = <T, A extends any[]>(
   const [state, setState] = useState<{
     isLoading: boolean;
     data: null | T;
-    errorMessage?: string | undefined | null;
   }>({
     isLoading: false,
     data: null as T,
@@ -35,10 +34,6 @@ export const useAsyncCall = <T, A extends any[]>(
     } catch (error: any) {
       const formattedErrorMessage = getErrorMessage(error);
       toast({ status: "error", description: formattedErrorMessage });
-      setState(prev => ({
-        ...prev,
-        errorMessage: formattedErrorMessage!,
-      }));
     } finally {
       setState(prev => ({ ...prev, isLoading: false }));
     }

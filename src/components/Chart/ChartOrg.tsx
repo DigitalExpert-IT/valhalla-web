@@ -9,7 +9,6 @@ import {
 } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
 import { OrgChart as D3OrgChart, Connection } from "d3-org-chart";
-import { useValhalla, useAsyncCall } from "hooks";
 import { useQuery } from "@tanstack/react-query";
 
 type Props = BoxProps & {
@@ -95,12 +94,6 @@ export const OrgChart = (props: Props) => {
 
 const NodeContent = (props: { address: string }) => {
   const { address } = props;
-  const { getAccountMetadata } = useValhalla();
-  const accountMetadataAsync = useAsyncCall(getAccountMetadata);
-
-  useEffect(() => {
-    accountMetadataAsync.exec(address);
-  }, [address]);
 
   return (
     <div
@@ -119,7 +112,7 @@ const NodeContent = (props: { address: string }) => {
           fontWeight: "bold",
         }}
       >
-        {props.address}
+        {address}
       </p>
     </div>
   );

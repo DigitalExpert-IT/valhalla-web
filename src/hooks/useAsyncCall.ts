@@ -1,15 +1,18 @@
-import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 import { getErrorMessage } from "utils/error";
+import { DefaultTFuncReturn, t } from "i18next";
 
 /**
  * this hooks will simplify the integration between
  * async function call with react loading, data, and error state
  * the error will be automatically displayed as toast
  * @param fn async function
+ * @param successMessage success message that will be showed using toast
  */
 export const useAsyncCall = <T, A extends any[]>(
-  fn: (...args: A) => Promise<T>
+  fn: (...args: A) => Promise<T>,
+  successMessage?: string | null | DefaultTFuncReturn
 ) => {
   const [state, setState] = useState<{
     isLoading: boolean;
@@ -19,6 +22,7 @@ export const useAsyncCall = <T, A extends any[]>(
     isLoading: false,
     data: null as T,
   });
+  successMessage = successMessage ?? (t("common.transactionSuccess") as string);
   const toast = useToast();
 
   const exec = async (...args: A) => {
@@ -26,6 +30,7 @@ export const useAsyncCall = <T, A extends any[]>(
       setState(prev => ({ ...prev, isLoading: true }));
       const data = await fn(...args);
       setState(prev => ({ ...prev, data }));
+      toast({ status: "success", description: successMessage });
       return data as T;
     } catch (error: any) {
       const formattedErrorMessage = getErrorMessage(error);
@@ -34,10 +39,10 @@ export const useAsyncCall = <T, A extends any[]>(
         ...prev,
         errorMessage: formattedErrorMessage!,
       }));
-      throw error;
     } finally {
       setState(prev => ({ ...prev, isLoading: false }));
     }
+    return {} as T;
   };
 
   return { ...state, exec };

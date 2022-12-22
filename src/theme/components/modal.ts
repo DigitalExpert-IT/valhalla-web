@@ -32,7 +32,7 @@ const baseStyleDialog = defineStyle(props => {
 
   return {
     borderRadius: "md",
-    bg: mode("white", "brand.800")(props),
+    bg: mode("white", "#171923")(props),
     color: "inherit",
     my: "16",
     zIndex: "modal",

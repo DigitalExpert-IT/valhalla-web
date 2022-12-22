@@ -1,4 +1,4 @@
-import { Container, Heading, Text } from "@chakra-ui/react";
+import { Container, Heading, Text, Card, CardBody } from "@chakra-ui/react";
 import { FormRegister } from "components";
 import { Trans } from "react-i18next";
 
@@ -15,16 +15,19 @@ const Register = () => {
           }}
         />
       </Heading>
-      <Container
+      <Card
+        variant="gradient"
+        colorScheme="purple:pink"
+        mx="auto"
         mt="12"
-        borderRadius="lg"
-        py="16"
-        px={{ base: "4", sm: "16" }}
-        maxW="2xl"
-        bg="purple.800"
+        py="8"
+        px={{ base: "4", sm: "8" }}
+        maxW="xl"
       >
-        <FormRegister />
-      </Container>
+        <CardBody>
+          <FormRegister />
+        </CardBody>
+      </Card>
     </Container>
   );
 };

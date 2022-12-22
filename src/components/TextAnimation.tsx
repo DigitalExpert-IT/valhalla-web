@@ -1,8 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { animate } from "framer-motion";
 import { Text, TextProps } from "@chakra-ui/react";
 
 type Props = TextProps & {
+  children: string;
   duration?: number;
   formatter?: (val: number) => string;
 };
@@ -16,16 +17,18 @@ export const TextAnimation = (props: Props) => {
     formatter = defaultFormatter,
     ...rest
   } = props;
+  const [head, setHead] = useState("");
   const textRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (!textRef.current) return;
-    // ignore non numeric children
-    const numeredChildren = Number(children);
-    if (isNaN(numeredChildren)) {
-      if (typeof children === "string") textRef.current.innerText = children;
-      return;
+    const split = children.split(/\./);
+    if (split.length === 2) {
+      setHead(`${split[0]}.`);
+    } else {
+      setHead("");
     }
+    const numeredChildren = Number(split?.[1] ? split?.[1] : split?.[0]);
 
     const currentNumber = Number(textRef.current.innerText);
     const from = isNaN(currentNumber) ? 0 : currentNumber;
@@ -41,8 +44,11 @@ export const TextAnimation = (props: Props) => {
   }, [children, duration]);
 
   return (
-    <Text ref={textRef} {...rest}>
-      {typeof children !== "string" ? children : null}
+    <Text {...rest}>
+      {head}
+      <Text as="span" ref={textRef}>
+        {children}
+      </Text>
     </Text>
   );
 };

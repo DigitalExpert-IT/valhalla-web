@@ -5,3 +5,6 @@ export const shortenAddress = (address: string) => {
   const tail = upper.slice(38);
   return `${head}...${tail}`;
 };
+
+export const compareAddress = (addressA: string, addressB: string) =>
+  addressA.toLowerCase() === addressB.toLowerCase();

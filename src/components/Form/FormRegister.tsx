@@ -6,7 +6,7 @@ import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
 import { useAsyncCall, useValhalla, useWallet } from "hooks";
 import { shortenAddress } from "utils";
-import { FormInput, ModalDiscalimer } from "components";
+import { FormInput, ModalDiscalimer, ButtonConnectWrapper } from "components";
 import { validateRequired, validateAddress } from "utils";
 
 type FormType = {
@@ -53,9 +53,11 @@ export const FormRegister = () => {
           validate: validateAddress,
         }}
       />
-      <Button isLoading={register.isLoading} type="submit">
-        {t("common.register")}
-      </Button>
+      <ButtonConnectWrapper type="submit">
+        <Button isLoading={register.isLoading} type="submit">
+          {t("common.register")}
+        </Button>
+      </ButtonConnectWrapper>
     </Stack>
   );
 };

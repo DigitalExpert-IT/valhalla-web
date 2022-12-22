@@ -142,7 +142,8 @@ export const useValhalla = () => {
 
   const register = async (referrer: string) => {
     const valhalla = await getValhallaSignerContract();
-    const tx = await valhalla.register(referrer, { value: toBn("100") });
+    const registrationFee = await valhalla.getRegistrationFee();
+    const tx = await valhalla.register(referrer, { value: registrationFee });
     const receipt = await tx.wait();
     return receipt;
   };

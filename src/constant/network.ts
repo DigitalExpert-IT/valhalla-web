@@ -44,4 +44,14 @@ export const network: Record<string, EthereumChainParameter> = {
     },
     rpcUrls: ["http://localhost:8545"],
   },
+  "0x29a": {
+    chainId: "0x29a",
+    chainName: "Devnet",
+    nativeCurrency: {
+      name: "DTH",
+      symbol: "DTH",
+      decimals: 18,
+    },
+    rpcUrls: ["http://139.162.6.146:8001"],
+  },
 };

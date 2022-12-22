@@ -9,9 +9,11 @@ const baseStyle = defineStyle({
   textTransform: "uppercase",
   fontSize: "sm",
   px: 4,
-  py: 1,
-  borderRadius: "md",
+  pt: 2,
+  pb: 1,
+  borderRadius: "lg",
   fontWeight: "bold",
+  fontFamily: "mono",
 });
 
 const $bg = cssVar("badge-bg");

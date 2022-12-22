@@ -28,7 +28,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent bgColor="brand.800">
+      <DrawerContent bgColor="gray.800">
         <DrawerCloseButton />
         <DrawerHeader>
           <Heading variant="gradient" colorScheme="yellow:pink">
@@ -54,7 +54,11 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             ))}
           </Stack>
         </DrawerBody>
-        <DrawerFooter borderTopWidth={2} justifyContent="left">
+        <DrawerFooter
+          borderTopWidth={2}
+          justifyContent="left"
+          borderColor="brand.700"
+        >
           <Stack spacing="4" direction="row">
             <SvgTwitter />
             <SvgTelegram />

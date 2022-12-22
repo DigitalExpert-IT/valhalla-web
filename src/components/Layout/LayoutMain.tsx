@@ -10,7 +10,7 @@ export const LayoutMain: React.FC<MainProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Container maxW="container.xl">
+      <Container maxW="container.xl" pt="5">
         <Text pt="5rem">Hello valhalla</Text>
         {children}
       </Container>

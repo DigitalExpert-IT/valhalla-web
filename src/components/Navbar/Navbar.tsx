@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigation } from "constant/navigation";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
 import {
@@ -11,6 +10,7 @@ import {
   useDisclosure,
   IconButton,
   useMediaQuery,
+  Container,
 } from "@chakra-ui/react";
 
 export const Navbar = () => {
@@ -19,56 +19,57 @@ export const Navbar = () => {
 
   return (
     <Box>
-      <Box bg="brand.700" w="full" color="white" position="fixed" zIndex={1}>
-        <Flex h="16" alignItems="center" px="4" justify="space-around">
-          <Stack
-            direction="row"
-            align="center"
-            flex={1}
-            justify="space-between"
-          >
-            <DrawerMobileNav
-              dataNav={Navigation}
-              isOpen={isOpen}
-              onClose={onClose}
-            />
-            <IconButton
-              variant="ghost"
-              fontSize="xl"
-              icon={<GiHamburgerMenu />}
-              aria-label="open-menu"
-              display={{ md: "flex", lg: "none" }}
-              onClick={isOpen ? onClose : onOpen}
-            />
-            <Heading
-              variant="gradient"
-              colorScheme="yellow:pink"
-              fontWeight="bold"
-              size={{ base: "xl", md: "lg" }}
+      <Box bg="gray.900" w="full" color="white" position="fixed" zIndex={1}>
+        <Container maxW="container.xl">
+          <Flex alignItems="center" justify="space-around" my="6">
+            <Stack
+              direction="row"
+              align="center"
+              flex={1}
+              justify="space-between"
             >
-              {isLargethan800 ? "Global Network" : "GN"}
-            </Heading>
-          </Stack>
-          <Stack
-            direction="row"
-            spacing="5"
-            display={{ base: "none", md: "none", lg: "flex" }}
-            justify="center"
-            align="center"
-            flex={1}
-          >
-            <NavbarMenu datanav={Navigation} />
-          </Stack>
-          <Flex
-            alignItems="center"
-            gap={2}
-            flex={1}
-            justify="right"
-            display={{ base: "none", md: "none", lg: "flex" }}
-          >
-            <ButtonConnectWallet />
+              <DrawerMobileNav
+                dataNav={Navigation}
+                isOpen={isOpen}
+                onClose={onClose}
+              />
+              <IconButton
+                variant="ghost"
+                fontSize="xl"
+                icon={<GiHamburgerMenu />}
+                aria-label="open-menu"
+                display={{ md: "flex", lg: "none" }}
+                onClick={isOpen ? onClose : onOpen}
+              />
+              <Heading
+                color="brand.400"
+                fontWeight="bold"
+                size={{ base: "xl", md: "lg" }}
+              >
+                {isLargethan800 ? "Global Network" : "GN"}
+              </Heading>
+            </Stack>
+            <Stack
+              direction="row"
+              spacing="5"
+              display={{ base: "none", md: "none", lg: "flex" }}
+              justify="center"
+              align="center"
+              flex={1}
+            >
+              <NavbarMenu datanav={Navigation} />
+            </Stack>
+            <Flex
+              alignItems="center"
+              gap={2}
+              flex={1}
+              justify="right"
+              display={{ base: "none", md: "none", lg: "flex" }}
+            >
+              <ButtonConnectWallet />
+            </Flex>
           </Flex>
-        </Flex>
+        </Container>
       </Box>
     </Box>
   );

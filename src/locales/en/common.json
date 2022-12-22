@@ -1,4 +1,11 @@
 {
+  "navigation": {
+    "home": "Home",
+    "swap": "Swap",
+    "features": "Features",
+    "projects": "Projects"
+  },
+  "connectWallet": "Connect Wallet",
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",

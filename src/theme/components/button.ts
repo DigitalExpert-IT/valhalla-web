@@ -1,4 +1,8 @@
-import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system";
+import {
+  defineStyle,
+  defineStyleConfig,
+  cssVar,
+} from "@chakra-ui/styled-system";
 import { mode, transparentize } from "@chakra-ui/theme-tools";
 import { runIfFn } from "../utils/run-if-fn";
 
@@ -21,6 +25,67 @@ const baseStyle = defineStyle({
       bg: "initial",
     },
   },
+});
+
+const $fg = cssVar("button-color");
+
+const variantGradient = defineStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+  return {
+    [$fg.variable]: `colors.white`,
+    _dark: {
+      [$fg.variable]: `colors.whiteAlpha.800`,
+    },
+    bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+    color: $fg.reference,
+    _active: {
+      bgGradient: `linear(to-r, ${c1}.600, ${c2}.600)`,
+    },
+    _hover: {
+      bgGradient: `linear(to-r, ${c1}.400, ${c2}.400)`,
+    },
+  };
+});
+
+const variantConnectWallet = defineStyle(props => {
+  const { colorScheme: c } = props;
+
+  if (c === "gray") {
+    const bg = mode(`gray.100`, `whiteAlpha.200`)(props);
+
+    return {
+      bg,
+      _hover: {
+        bg: mode(`gray.200`, `whiteAlpha.300`)(props),
+        _disabled: {
+          bg,
+        },
+      },
+      _active: { bg: mode(`gray.300`, `whiteAlpha.400`)(props) },
+    };
+  }
+
+  const {
+    bg = `${c}.400`,
+    color = "white",
+    hoverBg = `${c}.600`,
+    activeBg = `${c}.700`,
+  } = accessibleColorMap[c] ?? {};
+
+  const background = mode(bg, `${c}.400`)(props);
+
+  return {
+    bg: background,
+    color: mode(color, `gray.200`)(props),
+    _hover: {
+      bg: mode(hoverBg, `${c}.300`)(props),
+      _disabled: {
+        bg: background,
+      },
+    },
+    _active: { bg: mode(activeBg, `${c}.400`)(props) },
+  };
 });
 
 const variantGhost = defineStyle(props => {
@@ -162,6 +227,8 @@ const variants = {
   outline: variantOutline,
   solid: variantSolid,
   link: variantLink,
+  gradient: variantGradient,
+  connectwallet: variantConnectWallet,
   unstyled: variantUnstyled,
 };
 

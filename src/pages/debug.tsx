@@ -12,9 +12,9 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { ConnectWalletButton, CardNFT, CardOwnedNFT } from "components";
+import { ButtonConnectWallet, CardNFT, CardOwnedNFT } from "components";
 import { rankMap } from "constant/rank";
-import { useValhalla, useAsyncCall, useWallet, useNFT } from "hooks";
+import { useValhalla, useAsyncCall, useNFT } from "hooks";
 import { prettyBn } from "utils";
 
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <Container maxW="6xl" py="16">
       <Stack spacing="16">
-        <ConnectWalletButton />
+        <ButtonConnectWallet />
         <Box>
           <Heading size="md" mb="6">
             Pool

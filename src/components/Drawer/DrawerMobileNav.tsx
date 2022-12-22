@@ -31,9 +31,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
       <DrawerContent bgColor="gray.800">
         <DrawerCloseButton />
         <DrawerHeader>
-          <Heading variant="gradient" colorScheme="yellow:pink">
-            GN
-          </Heading>
+          <Heading color="brand.400">GN</Heading>
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">
           <ButtonConnectWallet />

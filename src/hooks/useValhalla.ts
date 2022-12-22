@@ -4,7 +4,6 @@ import {
   getValhallaContract,
 } from "lib/contractFactory";
 import create from "zustand";
-import { toBn } from "evm-bn";
 import { createInitiator } from "utils";
 import { BigNumber } from "ethers";
 import { useWallet, useWalletStore } from "hooks";
@@ -140,6 +139,12 @@ export const useValhalla = () => {
     fetchAccount();
   }, [wallet.address]);
 
+  const getAccountMetadata = async (address: string) => {
+    const valhalla = await getValhallaContract();
+    const metadata = await valhalla.accountMap(address);
+    return metadata;
+  };
+
   const register = async (referrer: string) => {
     const valhalla = await getValhallaSignerContract();
     const registrationFee = await valhalla.getRegistrationFee();
@@ -162,5 +167,11 @@ export const useValhalla = () => {
     return receipt;
   };
 
-  return { ...store, register, claimReward, claimRankReward };
+  return {
+    ...store,
+    register,
+    claimReward,
+    claimRankReward,
+    getAccountMetadata,
+  };
 };

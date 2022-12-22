@@ -1,6 +1,6 @@
 import React from "react";
 import { INavigation } from "constant/navigation";
-import { ButtonConnectWallet } from "components";
+import { ButtonConnectWallet, SvgTwitter, SvgTelegram } from "components";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import {
@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   Heading,
+  DrawerFooter,
 } from "@chakra-ui/react";
 
 interface MobileDrawerProps {
@@ -24,23 +25,17 @@ interface MobileDrawerProps {
 export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   const { isOpen, onClose, dataNav } = props;
   const { t } = useTranslation();
-  const navMenu: any = t("common.menu", { returnObjects: true });
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent bgColor="brand.800">
         <DrawerCloseButton />
         <DrawerHeader>
-          <Heading>Global Network</Heading>
+          <Heading variant="gradient" colorScheme="yellow:pink">
+            GN
+          </Heading>
         </DrawerHeader>
-        <Stack
-          bg="brand.900"
-          direction="row"
-          w="full"
-          justify="center"
-          p="2"
-          my="5"
-        >
+        <Stack direction="row" w="full" justify="center" p="2" my="5">
           <ButtonConnectWallet />
         </Stack>
         <DrawerBody>
@@ -53,12 +48,18 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   variant="hoverGradient"
                   colorScheme="orange:pink"
                 >
-                  {navMenu[idx]}
+                  {t(`common.navigation.${item.name}`)}
                 </Text>
               </Link>
             ))}
           </Stack>
         </DrawerBody>
+        <DrawerFooter borderTopWidth={2} justifyContent="left">
+          <Stack spacing="4" direction="row">
+            <SvgTwitter />
+            <SvgTelegram />
+          </Stack>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

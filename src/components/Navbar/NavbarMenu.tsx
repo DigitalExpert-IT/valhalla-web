@@ -11,19 +11,12 @@ interface NavItemProps {
 export const NavbarMenu: React.FC<NavItemProps> = props => {
   const { datanav } = props;
   const { t } = useTranslation();
-  const navMenu: any = t("common.menu", { returnObjects: true });
   return (
     <>
       {datanav.map((item, idx) => (
         <Link href={item.href} key={idx}>
-          <Text
-            variant="hoverGradient"
-            colorScheme="orange:pink"
-            textTransform="capitalize"
-            fontWeight="bold"
-            fontSize="xl"
-          >
-            {navMenu[idx]}
+          <Text textTransform="capitalize" fontWeight="bold" fontSize="xl">
+            {t(`common.navigation.${item.name}`)}
           </Text>
         </Link>
       ))}

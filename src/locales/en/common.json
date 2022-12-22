@@ -1,5 +1,10 @@
 {
-  "menu": ["home", "swap", "features", "project"],
+  "navigation": {
+    "home": "Home",
+    "swap": "Swap",
+    "features": "Features",
+    "projects": "Projects"
+  },
   "connectWallet": "Connect Wallet",
   "copy": "Copy",
   "copied": "Copied!",

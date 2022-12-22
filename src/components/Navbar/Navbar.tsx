@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigation } from "constant/navigation";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
 import {
   Box,
@@ -9,32 +10,43 @@ import {
   Heading,
   useDisclosure,
   IconButton,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
 
   return (
     <Box>
       <Box bg="brand.700" w="full" color="white" position="fixed" zIndex={1}>
-        <Flex h="16" alignItems="center" px="1rem" justify="space-around">
-          <Stack direction="row" align="center" flex={1}>
+        <Flex h="16" alignItems="center" px="4" justify="space-around">
+          <Stack
+            direction="row"
+            align="center"
+            flex={1}
+            justify="space-between"
+          >
             <DrawerMobileNav
               dataNav={Navigation}
               isOpen={isOpen}
               onClose={onClose}
             />
             <IconButton
-              size="lg"
               variant="ghost"
-              color="white"
-              icon={<HamburgerIcon />}
+              fontSize="xl"
+              icon={<GiHamburgerMenu />}
               aria-label="open-menu"
               display={{ md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Heading fontWeight="bold" size="lg">
-              Global Network
+            <Heading
+              variant="gradient"
+              colorScheme="yellow:pink"
+              fontWeight="bold"
+              size={{ base: "xl", md: "lg" }}
+            >
+              {isLargethan800 ? "Global Network" : "GN"}
             </Heading>
           </Stack>
           <Stack

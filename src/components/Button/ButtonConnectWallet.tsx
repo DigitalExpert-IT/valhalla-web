@@ -1,4 +1,4 @@
-import { Button, Box, ThemeTypings, Stack } from "@chakra-ui/react";
+import { Button, Box, Stack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { useWallet } from "hooks";
@@ -18,13 +18,18 @@ export const ButtonConnectWallet = () => {
   if (isConnected) {
     return (
       <>
-        <Button onClick={handleNavigate} w="5xs">
+        <Button
+          variant="connectwallet"
+          colorScheme="valhalla"
+          onClick={handleNavigate}
+          w="5xs"
+        >
           {t("common.register")}
         </Button>
 
         <Button
-          variant="gradient"
-          colorScheme="orange:pink"
+          variant="connectwallet"
+          colorScheme="valhalla"
           alignContent="center"
         >
           <Stack direction="row" spacing="2" align="center">
@@ -43,12 +48,21 @@ export const ButtonConnectWallet = () => {
   return (
     <Stack direction="row">
       <Box w="5xs">
-        <Button onClick={handleNavigate} w="full">
+        <Button
+          variant="connectwallet"
+          colorScheme="valhalla"
+          onClick={handleNavigate}
+          w="full"
+        >
           {t("common.register")}
         </Button>
       </Box>
       <Box w="5xs">
-        <Button variant="gradient" colorScheme="orange:pink" onClick={connect}>
+        <Button
+          variant="connectwallet"
+          colorScheme="valhalla"
+          onClick={connect}
+        >
           {t("common.connectWallet")}
         </Button>
       </Box>

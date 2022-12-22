@@ -21,7 +21,6 @@ export const useAsyncCall = <T, A extends any[]>(
     isLoading: false,
     data: null as T,
   });
-  successMessage = successMessage ?? (t("common.transactionSuccess") as string);
   const toast = useToast();
 
   const exec = async (...args: A) => {
@@ -29,7 +28,8 @@ export const useAsyncCall = <T, A extends any[]>(
       setState(prev => ({ ...prev, isLoading: true }));
       const data = await fn(...args);
       setState(prev => ({ ...prev, data }));
-      toast({ status: "success", description: successMessage });
+      if (successMessage)
+        toast({ status: "success", description: successMessage });
       return data as T;
     } catch (error: any) {
       const formattedErrorMessage = getErrorMessage(error);

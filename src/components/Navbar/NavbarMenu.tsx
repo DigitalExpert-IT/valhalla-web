@@ -5,17 +5,17 @@ import { Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 interface NavItemProps {
-  datanav: INavigation[];
+  data: INavigation[];
 }
 
 export const NavbarMenu: React.FC<NavItemProps> = props => {
-  const { datanav } = props;
+  const { data } = props;
   const { t } = useTranslation();
   return (
     <>
-      {datanav.map((item, idx) => (
+      {data.map((item, idx) => (
         <Link href={item.href} key={idx}>
-          <Text textTransform="capitalize" fontWeight="bold" fontSize="xl">
+          <Text textTransform="capitalize" fontWeight="bold">
             {t(`common.navigation.${item.name}`)}
           </Text>
         </Link>

@@ -48,46 +48,6 @@ const variantGradient = defineStyle(props => {
   };
 });
 
-const variantConnectWallet = defineStyle(props => {
-  const { colorScheme: c } = props;
-
-  if (c === "gray") {
-    const bg = mode(`gray.100`, `whiteAlpha.200`)(props);
-
-    return {
-      bg,
-      _hover: {
-        bg: mode(`gray.200`, `whiteAlpha.300`)(props),
-        _disabled: {
-          bg,
-        },
-      },
-      _active: { bg: mode(`gray.300`, `whiteAlpha.400`)(props) },
-    };
-  }
-
-  const {
-    bg = `${c}.400`,
-    color = "white",
-    hoverBg = `${c}.600`,
-    activeBg = `${c}.700`,
-  } = accessibleColorMap[c] ?? {};
-
-  const background = mode(bg, `${c}.400`)(props);
-
-  return {
-    bg: background,
-    color: mode(color, `gray.200`)(props),
-    _hover: {
-      bg: mode(hoverBg, `${c}.300`)(props),
-      _disabled: {
-        bg: background,
-      },
-    },
-    _active: { bg: mode(activeBg, `${c}.400`)(props) },
-  };
-});
-
 const variantGhost = defineStyle(props => {
   const { colorScheme: c, theme } = props;
 
@@ -228,7 +188,6 @@ const variants = {
   solid: variantSolid,
   link: variantLink,
   gradient: variantGradient,
-  connectwallet: variantConnectWallet,
   unstyled: variantUnstyled,
 };
 

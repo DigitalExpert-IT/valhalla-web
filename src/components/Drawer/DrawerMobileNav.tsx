@@ -19,11 +19,11 @@ import {
 interface MobileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  dataNav: INavigation[];
+  data: INavigation[];
 }
 
 export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
-  const { isOpen, onClose, dataNav } = props;
+  const { isOpen, onClose, data } = props;
   const { t } = useTranslation();
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -38,7 +38,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         </Stack>
         <DrawerBody>
           <Stack spacing="5">
-            {dataNav.map((item, idx) => (
+            {data.map((item, idx) => (
               <Link href={item.href} key={idx}>
                 <Text
                   fontWeight="bold"

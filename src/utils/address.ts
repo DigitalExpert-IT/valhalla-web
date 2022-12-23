@@ -8,4 +8,4 @@ export const shortenAddress = (address: string) => {
 };
 
 export const compareAddress = (addressA: string, addressB: string) =>
-  addressA.toLowerCase() === addressB.toLowerCase();
+  addressA?.toLowerCase() === addressB?.toLowerCase();

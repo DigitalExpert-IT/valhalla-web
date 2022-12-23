@@ -20,7 +20,7 @@ export const ButtonConnectWrapper = (props: Props) => {
       isLoading={connectAsync.isLoading}
       onClick={connectAsync.exec}
     >
-      {t("wallet.connect")}
+      {t("common.connectWallet")}
     </Button>
   );
 };

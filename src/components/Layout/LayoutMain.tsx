@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Container } from "@chakra-ui/react";
+import { Container, Box } from "@chakra-ui/react";
 import { Navbar } from "components";
 
 interface MainProps {
@@ -8,12 +8,9 @@ interface MainProps {
 
 export const LayoutMain: React.FC<MainProps> = ({ children }) => {
   return (
-    <>
+    <Box pb="16">
       <Navbar />
-      <Container maxW="container.xl" pt="5">
-        <Text pt="5rem">Hello valhalla</Text>
-        {children}
-      </Container>
-    </>
+      <Container maxW="container.xl">{children}</Container>
+    </Box>
   );
 };

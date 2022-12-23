@@ -3,7 +3,7 @@ export interface INavigation {
   href: string;
 }
 
-export const Navigation: Array<INavigation> = [
+export const navigation: Array<INavigation> = [
   {
     name: "home",
     href: "/",

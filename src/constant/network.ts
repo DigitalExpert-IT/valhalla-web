@@ -52,6 +52,6 @@ export const network: Record<string, EthereumChainParameter> = {
       symbol: "DTH",
       decimals: 18,
     },
-    rpcUrls: ["http://139.162.6.146:8001"],
+    rpcUrls: ["https://valhalacoin.cloud"],
   },
 };

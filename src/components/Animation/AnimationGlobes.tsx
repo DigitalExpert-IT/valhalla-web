@@ -18,7 +18,6 @@ export const AnimationGlobes: React.FC = () => {
   let Globe: any = () => null;
   if (typeof window !== "undefined") Globe = require("react-globe.gl").default;
   const globeElement = React.useRef<IControls | undefined>();
-  const [size, setSize] = React.useState([0, 0]);
 
   React.useEffect(() => {
     // Auto-rotate
@@ -30,13 +29,8 @@ export const AnimationGlobes: React.FC = () => {
     }
   }, []);
 
-  React.useLayoutEffect(() => {
-    setSize([window.innerWidth, window.innerHeight * 1.5]);
-  }, []);
-
-
   return (
-    <Box position={"absolute"} right={-100} top={0} zIndex={1}>
+    <Box>
       <Globe
         ref={globeElement}
         width={1000}

@@ -11,7 +11,7 @@ export const LayoutMain: React.FC<MainProps> = ({ children }) => {
   return (
     <Box>
       <Navbar />
-      <Container minH="43vh" maxW="container.xl">
+      <Container minH="55vh" maxW="container.xl" mb="32">
         {children}
       </Container>
       <LayoutFooter />

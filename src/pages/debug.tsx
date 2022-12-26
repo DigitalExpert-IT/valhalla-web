@@ -1,5 +1,5 @@
 import {
-  Container,
+  Text,
   Stack,
   Box,
   Heading,
@@ -23,12 +23,11 @@ export default function Home() {
     rankReward,
     globalPool,
     ipoPool,
-    reservedPool,
     claimReward,
     claimRankReward,
     account,
   } = useValhalla();
-  const { nftList, cardList } = useNFT();
+  const nft = useNFT();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
 
@@ -43,15 +42,18 @@ export default function Home() {
             <Tbody>
               <Tr>
                 <Th>Global Pool</Th>
-                <Td>{prettyBn(globalPool.claimable)}</Td>
+                <Td>
+                  <Box>
+                    <Text>{prettyBn(globalPool.claimable)} Matic</Text>
+                    <Text>{prettyBn(nft.globalPool.claimable, 9)} GNET</Text>
+                  </Box>
+                </Td>
               </Tr>
               <Tr>
                 <Th>IPO Pool</Th>
-                <Td>{prettyBn(ipoPool.claimable)}</Td>
-              </Tr>
-              <Tr>
-                <Th>Reserved Pool</Th>
-                <Td>{prettyBn(reservedPool.claimable)}</Td>
+                <Td>
+                  <Text>{prettyBn(ipoPool.claimable)} Matic</Text>
+                </Td>
               </Tr>
             </Tbody>
           </Table>
@@ -79,15 +81,22 @@ export default function Home() {
               </Tr>
               <Tr>
                 <Th>Reward</Th>
-                <Td>{prettyBn(personalReward)}</Td>
                 <Td>
-                  <Button
-                    onClick={claimRewardAsync.exec}
-                    isLoading={claimRewardAsync.isLoading}
-                    size="sm"
-                  >
-                    Claim
-                  </Button>
+                  <Box>
+                    <Text>{prettyBn(personalReward)}</Text>
+                    <Text>{prettyBn(nft.personalReward)} GNET</Text>
+                  </Box>
+                </Td>
+                <Td>
+                  <Box>
+                    <Button
+                      onClick={claimRewardAsync.exec}
+                      isLoading={claimRewardAsync.isLoading}
+                      size="sm"
+                    >
+                      Claim
+                    </Button>
+                  </Box>
                 </Td>
               </Tr>
               <Tr>
@@ -111,7 +120,7 @@ export default function Home() {
             NFT
           </Heading>
           <Wrap>
-            {cardList.map(card => (
+            {nft.cardList.map(card => (
               <WrapItem
                 w={{ base: "calc(50% - 10px)", lg: "calc(16.6% - 10px)" }}
                 key={card.id.toNumber()}
@@ -126,7 +135,7 @@ export default function Home() {
             OWNED NFT
           </Heading>
           <Wrap>
-            {nftList.map((card, idx) => (
+            {nft.nftList.map((card, idx) => (
               <WrapItem
                 w={{ base: "calc(50% - 10px)", lg: "calc(20% - 10px)" }}
                 key={idx}

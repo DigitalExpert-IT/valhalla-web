@@ -27,22 +27,41 @@ export interface INFTCard {
   halfingPercentage: BigNumber;
 }
 
+type Pool = {
+  claimable: BigNumber;
+  valueLeft: BigNumber;
+};
+
 interface IStore {
+  isLoading: boolean;
   nftList: IOwnedNFT[];
   cardList: INFTCard[];
   balance: BigNumber;
   totalValueMap: BigNumber;
-  isLoading: boolean;
+  personalReward: BigNumber;
+  rankReward: BigNumber;
+  globalPool: Pool;
+  ipoPool: Pool;
 }
 
 const CARD_IDS = [0, 1, 2, 3, 4, 5];
 
 const initialState = {
+  isLoading: false,
   nftList: [],
   cardList: [],
   balance: BigNumber.from("0"),
   totalValueMap: BigNumber.from("0"),
-  isLoading: false,
+  personalReward: BigNumber.from("0"),
+  rankReward: BigNumber.from("0"),
+  globalPool: {
+    claimable: BigNumber.from("0"),
+    valueLeft: BigNumber.from("0"),
+  },
+  ipoPool: {
+    claimable: BigNumber.from("0"),
+    valueLeft: BigNumber.from("0"),
+  },
 };
 
 export const useNftStore = create<IStore>(() => initialState);
@@ -60,7 +79,36 @@ const loadCardList = async () => {
   setState({ cardList });
 };
 
+/**
+ * fetch Pool data
+ */
+const fetchPool = async () => {
+  try {
+    const nft = await getNFTContract();
+    const [globalPool, ipoPool] = await Promise.all([
+      nft.getGlobalPool(),
+      nft.getIpoPool(),
+    ]);
+    setState({ globalPool, ipoPool });
+  } catch (error) {}
+};
+
+const fetchAccount = async () => {
+  try {
+    const address = useWalletStore.getState().address;
+    if (!address) return;
+    const nft = await getNFTContract();
+    const [personalReward, rankReward] = await Promise.all([
+      nft.rewardMap(address),
+      nft.getMyRankReward(),
+    ]);
+    setState({ personalReward, rankReward });
+  } catch (error) {}
+};
+
 const onBuy = async (params: [string, BigNumber]) => {
+  fetchPool();
+  fetchAccount();
   const nft = await getNFTContract();
   const [address, tokenId] = params;
   if (compareAddress(address, useWalletStore.getState().address)) {
@@ -74,14 +122,43 @@ const onBuy = async (params: [string, BigNumber]) => {
 
 const init = createInitiator(async () => {
   const nft = await getNFTContract();
+  fetchPool();
   loadCardList();
-  nft.on("Buy", (...params) => {
+  nft.on("Buy", (...params: any[]) => {
     onBuy(params as any);
   });
 });
 
+const fetchTokenList = async () => {
+  const address = useWalletStore.getState().address;
+  if (!address) return;
+  const nft = await getNFTContract();
+  const balance = await nft.balanceOf(address);
+  const tokenIds = await Promise.all(
+    Array(balance.toNumber())
+      .fill(null)
+      .map((_, idx) => {
+        return nft.tokenOfOwnerByIndex(address, idx);
+      })
+  );
+
+  const nfts = await Promise.all(
+    tokenIds.reverse().map(async tokenId => {
+      const ownedNft = await nft.ownedTokenMap(tokenId);
+      return { ...ownedNft, id: tokenId };
+    })
+  );
+
+  setState({
+    nftList: nfts.map(nft => nft),
+    balance: balance,
+  });
+};
+
 const resetAccount = () => {
   setState({
+    personalReward: initialState.personalReward,
+    rankReward: initialState.rankReward,
     balance: initialState.balance,
     nftList: initialState.nftList,
     totalValueMap: initialState.totalValueMap,
@@ -98,35 +175,12 @@ export const useNFT = () => {
 
   useEffect(() => {
     if (isConnected) {
-      load();
+      fetchTokenList();
+      fetchAccount();
     } else {
       resetAccount();
     }
   }, [isConnected, address]);
-
-  const load = async () => {
-    const nft = await getNFTContract();
-    const balance = await nft.balanceOf(address);
-    const tokenIds = await Promise.all(
-      Array(balance.toNumber())
-        .fill(null)
-        .map((_, idx) => {
-          return nft.tokenOfOwnerByIndex(address, idx);
-        })
-    );
-
-    const nfts = await Promise.all(
-      tokenIds.reverse().map(async tokenId => {
-        const ownedNft = await nft.ownedTokenMap(tokenId);
-        return { ...ownedNft, id: tokenId };
-      })
-    );
-
-    setState({
-      nftList: nfts.map(nft => nft),
-      balance: balance,
-    });
-  };
 
   const buy = async (tokenId: BigNumberish) => {
     const gnetSigner = await getGNETSignerContract();
@@ -172,5 +226,5 @@ export const useNFT = () => {
     return receipt;
   };
 
-  return { buy, load, farm, ...store };
+  return { ...store, buy, farm };
 };

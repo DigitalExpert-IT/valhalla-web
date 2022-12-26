@@ -30,7 +30,6 @@ interface IStore {
   rankReward: BigNumber;
   globalPool: Pool;
   ipoPool: Pool;
-  reservedPool: Pool;
 }
 
 const initialState = {
@@ -50,10 +49,6 @@ const initialState = {
     valueLeft: BigNumber.from("0"),
   },
   ipoPool: {
-    claimable: BigNumber.from("0"),
-    valueLeft: BigNumber.from("0"),
-  },
-  reservedPool: {
     claimable: BigNumber.from("0"),
     valueLeft: BigNumber.from("0"),
   },
@@ -77,12 +72,11 @@ const resetAccount = () => {
 const fetchPool = async () => {
   try {
     const valhalla = await getValhallaContract();
-    const [globalPool, ipoPool, reservedPool] = await Promise.all([
+    const [globalPool, ipoPool] = await Promise.all([
       valhalla.getGlobalPool(),
       valhalla.getIpoPool(),
-      valhalla.getReservedPool(),
     ]);
-    setState({ globalPool, ipoPool, reservedPool });
+    setState({ globalPool, ipoPool });
   } catch (error) {}
 };
 

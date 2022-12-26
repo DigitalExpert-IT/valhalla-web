@@ -53,5 +53,6 @@ export const network: Record<string, EthereumChainParameter> = {
       decimals: 18,
     },
     rpcUrls: ["https://valhalacoin.cloud"],
+    blockExplorerUrls: ["https://explorer.valhalacoin.cloud/"],
   },
 };

@@ -9,9 +9,11 @@ interface MainProps {
 
 export const LayoutMain: React.FC<MainProps> = ({ children }) => {
   return (
-    <Box pb="16">
+    <Box>
       <Navbar />
-      <Container maxW="container.xl">{children}</Container>
+      <Container minH="90vh" maxW="container.xl">
+        {children}
+      </Container>
       <LayoutFooter />
     </Box>
   );

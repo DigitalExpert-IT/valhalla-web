@@ -5,12 +5,16 @@
     "features": "Features",
     "projects": "Projects"
   },
+  "footer": {
+    "description": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application.",
+    "listedOn": "Listen On",
+    "social": "Social"
+  },
   "connectWallet": "Connect Wallet",
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",
   "accept": "Accept",
   "agreeAndAccept": "I Agree & Accept",
-  "transactionSuccess": "Transaction Success",
-  "footerDescription": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application."
+  "transactionSuccess": "Transaction Success"
 }

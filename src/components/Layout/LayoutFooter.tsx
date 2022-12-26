@@ -8,7 +8,7 @@ export const LayoutFooter = () => {
   const { t } = useTranslation();
 
   return (
-    <Box as="footer" bg="gray.900" position="absolute" bottom="0" w="full">
+    <Box as="footer" bg="gray.800" w="full">
       <Container maxW="container.xl">
         <Stack
           as="footer"
@@ -21,16 +21,16 @@ export const LayoutFooter = () => {
             <Heading variant="gradient" colorScheme="orange:pink">
               GN
             </Heading>
-            <Text mt="5">{t("common.footerDescription")}</Text>
+            <Text mt="5">{t("common.footer.description")}</Text>
           </Box>
           <Box>
             <Text fontWeight="bold" fontSize="lg">
-              Listed on
+              {t("common.footer.listedOn")}
             </Text>
           </Box>
           <Box>
             <Text fontWeight="bold" fontSize="lg">
-              Social
+              {t("common.footer.social")}
             </Text>
             <Stack spacing={1} mt={4}>
               {SOCIAL.map((item, idx) => (

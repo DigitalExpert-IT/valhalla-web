@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React from "react";
 import arcsData from "../../constant/globe/arcsData";
 import places from "../../constant/globe/places";
 import { Box } from "@chakra-ui/react";
@@ -28,15 +28,6 @@ interface IObject {
 interface IControls {
   controls(): IObject
 }
-
-// interface IClobeAnimation {
-//   current: IControls
-// }
-
-// interface MyComponentProps {
-//   ref: MutableRefObject<IControls | undefined>;
-//   // ref: () => null;
-// }
 
 export const AnimationGlobes: React.FC = () => {
   let Globe: any = () => null;

@@ -132,3 +132,16 @@ export const getGlobalExchageContract = async () => {
   );
   return contract;
 };
+
+export const getGlobalExchangeSignerContract = async () => {
+  const wallet = await getWallet();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        "",
+        globalExchangeJson.abi,
+        wallet.getSigner()
+      ) as GlobalExchange
+  );
+  return contract;
+};

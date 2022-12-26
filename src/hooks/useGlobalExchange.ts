@@ -8,19 +8,17 @@ import { useEffect } from "react";
 import { BigNumber } from "ethers";
 import { Decimal } from "@prisma/client/runtime";
 
+interface ICurencySpec {
+  name: string;
+  decimals: BigNumber;
+  price: BigNumber;
+  address: string;
+  totalPool: BigNumber;
+}
+
 interface ICurency {
-  gnet: {
-    name: string;
-    decimals: BigNumber;
-    price: BigNumber;
-    address: string;
-  };
-  usdt: {
-    name: string;
-    decimals: BigNumber;
-    price: BigNumber;
-    address: string;
-  };
+  gnet: ICurencySpec;
+  usdt: ICurencySpec;
 }
 
 interface IStore {
@@ -34,12 +32,14 @@ const initialState: IStore = {
       decimals: BigNumber.from(0),
       price: BigNumber.from(0),
       address: "",
+      totalPool: BigNumber.from(0),
     },
     usdt: {
       name: "",
       decimals: BigNumber.from(0),
       price: BigNumber.from(0),
       address: "",
+      totalPool: BigNumber.from(0),
     },
   },
 };

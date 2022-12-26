@@ -3889,8 +3889,8 @@ packages:
       once: 1.4.0
       path-is-absolute: 1.0.1
 
-  /global-swap/1.2.0_ethers@5.7.2:
-    resolution: {integrity: sha512-ZeYEO2bsrRjkXAYAdE0hQOuoFVKQQcJ3edru+KphpnpQ/PUdiWAKX2VCBje/9TTGdSvrsD+59ZfZTTbWi1F78w==}
+  /global-swap/1.3.0_ethers@5.7.2:
+    resolution: {integrity: sha512-/ZWHw/v8dJVr7QYhPTfW1TL5RaTQBIBeJGTdVZyZxzek3/5vNkay5pLvA3Sb6cMrRaSo2UrMkv05zA3lnPkWbA==}
     dependencies:
       '@openzeppelin/contracts': 4.8.0
       '@openzeppelin/contracts-upgradeable': 4.8.0

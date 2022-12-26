@@ -6,12 +6,13 @@ import {
 import { createInitiator } from "utils";
 import { useEffect } from "react";
 import { BigNumber } from "ethers";
-import { Decimal } from "@prisma/client/runtime";
 
 interface ICurencySpec {
-  name: string;
-  decimals: BigNumber;
-  price: BigNumber;
+  exchange: {
+    name: string;
+    decimals: BigNumber;
+    price: BigNumber;
+  };
   address: string;
   totalPool: BigNumber;
 }
@@ -28,16 +29,20 @@ interface IStore {
 const initialState: IStore = {
   currency: {
     gnet: {
-      name: "",
-      decimals: BigNumber.from(0),
-      price: BigNumber.from(0),
+      exchange: {
+        name: "",
+        decimals: BigNumber.from(0),
+        price: BigNumber.from(0),
+      },
       address: "",
       totalPool: BigNumber.from(0),
     },
     usdt: {
-      name: "",
-      decimals: BigNumber.from(0),
-      price: BigNumber.from(0),
+      exchange: {
+        name: "",
+        decimals: BigNumber.from(0),
+        price: BigNumber.from(0),
+      },
       address: "",
       totalPool: BigNumber.from(0),
     },
@@ -50,23 +55,32 @@ const { setState } = useStore;
 
 const init = createInitiator(async () => {
   const contract = await getGlobalExchageContract();
-  const gnet = await contract.nftn();
-  const usdt = await contract.usdt();
+  const gnetAddress = await contract.nftn();
+  const usdtAddress = await contract.usdt();
+  const ratioGnet = await contract.getRatioFromAddress(gnetAddress);
+  const ratioUsdt = await contract.getRatioFromAddress(usdtAddress);
+  const poolGnet = await contract.getPoolBalance(gnetAddress);
+  const poolUsdt = await contract.getPoolBalance(usdtAddress);
+
   setState({
     currency: {
       gnet: {
-        name: "GNET",
-        decimals: BigNumber.from(9),
-        price: BigNumber.from(1),
-        address: gnet,
-        totalPool: BigNumber.from(0),
+        exchange: {
+          name: ratioGnet.symbol,
+          decimals: ratioGnet.decimal,
+          price: ratioGnet.price,
+        },
+        address: gnetAddress,
+        totalPool: poolGnet,
       },
       usdt: {
-        name: "GNET",
-        decimals: BigNumber.from(9),
-        price: BigNumber.from(1),
-        address: usdt,
-        totalPool: BigNumber.from(0),
+        exchange: {
+          name: ratioUsdt.symbol,
+          decimals: ratioUsdt.decimal,
+          price: ratioUsdt.price,
+        },
+        address: usdtAddress,
+        totalPool: poolUsdt,
       },
     },
   });
@@ -78,6 +92,13 @@ export const useGlobalExchange = () => {
   useEffect(() => {
     init();
   }, []);
+
+  /**
+   *
+   * @param currency ERC20 Address want to swap
+   * @param quantity number quantity
+   * @returns contract receipt
+   */
 
   const swapToken = async (currency: string, quantity: number) => {
     const contract = await getGlobalExchangeSignerContract();

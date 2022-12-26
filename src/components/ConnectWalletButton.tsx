@@ -27,7 +27,7 @@ export const ConnectWalletButton = (props: Props) => {
           <Jazzicon diameter={30} seed={jsNumberForAddress(address)} />
         </Box>
         <Box>
-          <CopiableText display="block" value={address}>
+          <CopiableText fontFamily="mono" display="block" value={address}>
             {shortenAddress(address)}
           </CopiableText>
         </Box>

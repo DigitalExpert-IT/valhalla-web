@@ -6,14 +6,14 @@ import {
   CardBody,
   Box,
 } from "@chakra-ui/react";
-import { FormRegister } from "components";
+import { FormRegister, LayoutMain } from "components";
 import { Trans } from "react-i18next";
 
 const Register = () => {
   return (
-    <Container maxW="4xl">
+    <LayoutMain>
       <Box as="header" textAlign="center" px={{ base: "8", lg: "4" }}>
-        <Heading mt={{ base: "24", sm: "36" }} as="h1" textAlign="center">
+        <Heading pt={{ base: "24", sm: "36" }} as="h1" textAlign="center">
           <Trans
             i18nKey="pages.register.title"
             components={{
@@ -45,7 +45,7 @@ const Register = () => {
           <FormRegister />
         </CardBody>
       </Card>
-    </Container>
+    </LayoutMain>
   );
 };
 

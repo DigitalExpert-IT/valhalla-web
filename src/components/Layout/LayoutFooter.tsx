@@ -1,25 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { ISocial } from "constant/navigation";
-import {
-  Container,
-  Box,
-  Text,
-  Heading,
-  Stack,
-  Icon,
-  Image,
-} from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import { SOCIAL } from "constant/navigation";
+import { Container, Box, Text, Heading, Stack, Icon } from "@chakra-ui/react";
 
-interface LayoutFooterProps {
-  logo: string;
-  description: string;
-  withImage: boolean;
-  social: ISocial[];
-}
+export const LayoutFooter = () => {
+  const { t } = useTranslation();
 
-export const LayoutFooter: React.FC<LayoutFooterProps> = props => {
-  const { logo, description, social, withImage } = props;
   return (
     <Box as="footer" bg="gray.900" position="absolute" bottom="0" w="full">
       <Container maxW="container.xl">
@@ -31,14 +18,10 @@ export const LayoutFooter: React.FC<LayoutFooterProps> = props => {
           pt="10"
         >
           <Box>
-            {withImage ? (
-              <Image src={logo} alt="logo-image" w={30} h={30} />
-            ) : (
-              <Heading variant="gradient" colorScheme="orange:pink">
-                {logo}
-              </Heading>
-            )}
-            <Text mt="5">{description}</Text>
+            <Heading variant="gradient" colorScheme="orange:pink">
+              GN
+            </Heading>
+            <Text mt="5">{t("common.footerDescription")}</Text>
           </Box>
           <Box>
             <Text fontWeight="bold" fontSize="lg">
@@ -50,9 +33,9 @@ export const LayoutFooter: React.FC<LayoutFooterProps> = props => {
               Social
             </Text>
             <Stack spacing={1} mt={4}>
-              {social.map((item, idx) => (
+              {SOCIAL.map((item, idx) => (
                 <Link href={item.href} key={idx}>
-                  <Text>{item.name}</Text>
+                  <Text textTransform="capitalize">{item.name}</Text>
                 </Link>
               ))}
             </Stack>
@@ -70,11 +53,12 @@ export const LayoutFooter: React.FC<LayoutFooterProps> = props => {
           >
             <Box>
               <Text fontSize="sm">
-                © 2023 Aset Masa Depan, All right reserved
+                &#169; {new Date().getFullYear()} PT.Aset Masa Depan, All right
+                reserved
               </Text>
             </Box>
             <Stack direction="row">
-              {social.map((item, idx) => (
+              {SOCIAL.map((item, idx) => (
                 <Link href={item.href} key={idx}>
                   <Icon as={item.icon} h={5} w={5} />
                 </Link>

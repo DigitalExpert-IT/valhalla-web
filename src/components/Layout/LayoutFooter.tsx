@@ -8,7 +8,7 @@ export const LayoutFooter = () => {
   const { t } = useTranslation();
 
   return (
-    <Box as="footer" bg="gray.800" w="full">
+    <Box as="footer" bg="gray.800" w="full" mt="32">
       <Container maxW="container.xl">
         <Stack
           as="footer"

@@ -3,7 +3,7 @@ import { animate } from "framer-motion";
 import { Text, TextProps } from "@chakra-ui/react";
 
 type Props = TextProps & {
-  children: string;
+  children: string | number;
   duration?: number;
   formatter?: (val: number) => string;
 };
@@ -22,7 +22,7 @@ export const TextAnimation = (props: Props) => {
 
   useEffect(() => {
     if (!textRef.current) return;
-    const split = children.split(/\./);
+    const split = ("" + children).split(/\./);
     if (split.length === 2) {
       setHead(`${split[0]}.`);
     } else {
@@ -46,9 +46,7 @@ export const TextAnimation = (props: Props) => {
   return (
     <Text {...rest}>
       {head}
-      <Text as="span" ref={textRef}>
-        {children}
-      </Text>
+      <Text as="span" ref={textRef} />
     </Text>
   );
 };

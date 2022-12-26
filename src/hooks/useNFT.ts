@@ -18,6 +18,7 @@ export interface IOwnedNFT {
   lastFarmedAt: BigNumber;
   mintedAt: BigNumber;
   mintingPrice: BigNumber;
+  tokenUri: string;
 }
 
 export interface INFTCard {
@@ -113,9 +114,10 @@ const onBuy = async (params: [string, BigNumber]) => {
   const [address, tokenId] = params;
   if (compareAddress(address, useWalletStore.getState().address)) {
     const ownedToken = await nft.ownedTokenMap(tokenId);
+    const tokenUri = await nft.tokenURI(tokenId);
     setState(prev => ({
       balance: prev.balance.add(1),
-      nftList: [{ ...ownedToken, id: tokenId }, ...prev.nftList],
+      nftList: [{ ...ownedToken, id: tokenId, tokenUri }, ...prev.nftList],
     }));
   }
 };
@@ -145,7 +147,8 @@ const fetchTokenList = async () => {
   const nfts = await Promise.all(
     tokenIds.reverse().map(async tokenId => {
       const ownedNft = await nft.ownedTokenMap(tokenId);
-      return { ...ownedNft, id: tokenId };
+      const tokenUri = await nft.tokenURI(tokenId);
+      return { ...ownedNft, id: tokenId, tokenUri };
     })
   );
 

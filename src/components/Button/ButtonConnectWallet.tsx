@@ -18,7 +18,7 @@ export const ButtonConnectWallet = () => {
 
   if (isConnected) {
     return (
-      <Stack spacing="4" direction="row">
+      <Stack spacing="4" direction="row" align="center">
         <Button
           px="6"
           size="sm"

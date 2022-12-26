@@ -1,7 +1,7 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import arcsData from "../../constant/globe/arcsData";
 import places from "../../constant/globe/places";
-import { Box } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/react";
 
 interface IGlobeEl {
   camera: () => void,
@@ -19,21 +19,38 @@ interface IGlobeEl {
   toGlobeCoords: () => void,
 }
 
-interface IClobeAnimation {
-  globeElement: { current: () => void | IGlobeEl },
+interface IObject {
+  autoRotate: boolean,
+  autoRotateSpeed: number,
+  enableZoom: boolean
 }
 
-export const AnimationGlobes: React.FC<IClobeAnimation> = () => {
-  let Globe = () => null;
+interface IControls {
+  controls(): IObject
+}
+
+// interface IClobeAnimation {
+//   current: IControls
+// }
+
+// interface MyComponentProps {
+//   ref: MutableRefObject<IControls | undefined>;
+//   // ref: () => null;
+// }
+
+export const AnimationGlobes: React.FC = () => {
+  let Globe: any = () => null;
   if (typeof window !== "undefined") Globe = require("react-globe.gl").default;
-  const globeElement = React.useRef<IGlobeEl>();
+  const globeElement = React.useRef<IControls | undefined>();
   const [size, setSize] = React.useState([0, 0]);
 
   React.useEffect(() => {
     // Auto-rotate
-    globeElement.current.controls().autoRotate = true;
-    globeElement.current.controls().autoRotateSpeed = 0.5;
-    globeElement.current.controls().enableZoom = false;
+    if (globeElement.current) {
+      globeElement.current.controls().autoRotate = true;
+      globeElement.current.controls().autoRotateSpeed = 0.5;
+      globeElement.current.controls().enableZoom = false;
+    }
   }, []);
 
   React.useLayoutEffect(() => {

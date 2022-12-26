@@ -1,5 +1,5 @@
 import React from "react";
-import { navigation } from "constant/navigation";
+import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
 import {
@@ -28,7 +28,7 @@ export const Navbar = () => {
             justify="space-between"
           >
             <DrawerMobileNav
-              data={navigation}
+              data={NAVIGATION}
               isOpen={isOpen}
               onClose={onClose}
             />
@@ -57,7 +57,7 @@ export const Navbar = () => {
             align="center"
             flex={1}
           >
-            <NavbarMenu data={navigation} />
+            <NavbarMenu data={NAVIGATION} />
           </Stack>
           <Flex
             alignItems="center"

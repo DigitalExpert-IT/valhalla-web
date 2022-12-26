@@ -2,6 +2,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { RPC_ENDPOINTS } from "constant/endpoint";
 import { ethers } from "ethers";
 import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Valhalla.json";
+import globalExchangeJson from "global-swap/artifacts/contracts/globalExchange.sol/GlobalExchange.json";
 import nftJson from "@warmbyte/valhalla/artifacts/contracts/NFT.sol/NFT.json";
 import gnetJson from "@warmbyte/valhalla/artifacts/contracts/GNET.sol/GNET.json";
 import {
@@ -10,6 +11,7 @@ import {
   GNET_CONTRACT,
 } from "constant/address";
 import { Valhalla, NFT, GNET } from "@warmbyte/valhalla/typechain-types";
+import { GlobalExchange } from "global-swap/typechain-types";
 
 declare module globalThis {
   var providerCache: Record<string, any>;
@@ -114,6 +116,19 @@ export const getGNETSignerContract = async () => {
         gnetJson.abi,
         wallet.getSigner()
       ) as GNET
+  );
+  return contract;
+};
+
+export const getGlobalExchageContract = async () => {
+  const provider = await getMainProvider();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        "",
+        globalExchangeJson.abi,
+        provider
+      ) as GlobalExchange
   );
   return contract;
 };

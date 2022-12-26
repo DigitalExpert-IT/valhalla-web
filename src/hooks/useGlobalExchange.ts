@@ -59,12 +59,14 @@ const init = createInitiator(async () => {
         decimals: BigNumber.from(9),
         price: BigNumber.from(1),
         address: gnet,
+        totalPool: BigNumber.from(0),
       },
       usdt: {
         name: "GNET",
         decimals: BigNumber.from(9),
         price: BigNumber.from(1),
         address: usdt,
+        totalPool: BigNumber.from(0),
       },
     },
   });

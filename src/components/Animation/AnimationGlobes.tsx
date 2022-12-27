@@ -14,10 +14,15 @@ interface IControls {
   controls(): IObject
 }
 
+interface ICurrent {
+  current: IControls | any
+}
+
 export const AnimationGlobes: React.FC = () => {
   let Globe: any = () => null;
   if (typeof window !== "undefined") Globe = require("react-globe.gl").default;
-  const globeElement = React.useRef<IControls | undefined>();
+  const globeElement: ICurrent = React.useRef();
+
 
   React.useEffect(() => {
     // Auto-rotate

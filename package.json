@@ -20,7 +20,6 @@
     "@fontsource/roboto": "^4.5.8",
     "@metamask/detect-provider": "^2.0.0",
     "@prisma/client": "^4.8.0",
-    "@react-three/drei": "^9.48.1",
     "@react-three/fiber": "^8.9.1",
     "@tanstack/react-query": "^4.20.4",
     "@types/node": "18.11.10",

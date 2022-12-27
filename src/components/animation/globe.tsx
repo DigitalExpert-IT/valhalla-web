@@ -1,7 +1,6 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas, MeshProps, useFrame, useLoader } from "@react-three/fiber";
 import { Mesh, TextureLoader } from "three";
-// import { OrbitControls } from "@react-three/drei";
 
 interface GlobeMesProps extends MeshProps {}
 
@@ -28,7 +27,6 @@ export const Globe = () => {
         <ambientLight intensity={0.8} />
         <pointLight position={[10, 10, 10]} />
         <GlobeMesh />
-        {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
       </Suspense>
     </Canvas>
   );

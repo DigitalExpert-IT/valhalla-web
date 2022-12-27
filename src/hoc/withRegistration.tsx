@@ -9,21 +9,22 @@ import {
   Button,
   Spinner,
 } from "@chakra-ui/react";
-import { useValhalla } from "hooks";
+import { useValhalla, useWallet } from "hooks";
 import { useTranslation } from "react-i18next";
 
 export const withRegistration = (Component: () => JSX.Element | null) => {
   const RegistrationWrapper = () => {
     const valhalla = useValhalla();
+    const wallet = useWallet();
     const [isReady, setReady] = useState(valhalla.initialized);
 
     useEffect(() => {
-      if (valhalla.initialized) {
+      if (valhalla.initialized && wallet.isConnected) {
         setTimeout(() => {
           setReady(true);
         }, 300);
       }
-    }, [valhalla.initialized]);
+    }, [valhalla.initialized, wallet.isConnected]);
 
     if (!isReady)
       return (

@@ -10,6 +10,7 @@ import {
   NFT_CONTRACT,
   GNET_CONTRACT,
   GLOBEXC_CONTRACT,
+  USDT_CONTRACT,
 } from "constant/address";
 import { Valhalla, NFT, GNET } from "@warmbyte/valhalla/typechain-types";
 import { GlobalExchange } from "global-swap/typechain-types";
@@ -143,6 +144,32 @@ export const getGlobalExchangeSignerContract = async () => {
         globalExchangeJson.abi,
         wallet.getSigner()
       ) as GlobalExchange
+  );
+  return contract;
+};
+
+export const getUSDTContract = async () => {
+  const provider = await getMainProvider();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        USDT_CONTRACT[CURRENT_CHAIN_ID],
+        gnetJson.abi,
+        provider
+      ) as GNET
+  );
+  return contract;
+};
+
+export const getUSDTSignerContract = async () => {
+  const wallet = await getWallet();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        USDT_CONTRACT[CURRENT_CHAIN_ID],
+        gnetJson.abi,
+        wallet
+      ) as GNET
   );
   return contract;
 };

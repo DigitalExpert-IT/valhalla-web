@@ -6,3 +6,4 @@ export * from "./validation";
 export * from "./network";
 export * from "./hash";
 export * from "./string";
+export * from "./hoc";

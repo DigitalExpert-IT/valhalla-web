@@ -1,5 +1,7 @@
 import { LayoutMain } from "components";
 
-export default function Home() {
+const Home = () => {
   return <LayoutMain>{null}</LayoutMain>;
-}
+};
+
+export default Home;

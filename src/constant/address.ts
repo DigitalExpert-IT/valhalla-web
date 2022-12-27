@@ -20,9 +20,11 @@ export const GNET_CONTRACT = {
 };
 
 export const GLOBEXC_CONTRACT = {
+  "0x89": "",
   "0x29a": "0xC4c9F6411858F2254E2Eb368A3519AB5042C9E5E",
 };
 
 export const USDT_CONTRACT = {
+  "0x89": "",
   "0x29a": "0xd3bdad3f9e4eD17153163DC4C04E9cDCe0D64eBB",
 };

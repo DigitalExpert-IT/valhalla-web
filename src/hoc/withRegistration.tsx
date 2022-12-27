@@ -57,12 +57,7 @@ const RegistrationRequired = () => {
       maxW="3xl"
       h="100vh"
     >
-      <Image
-        mb="6"
-        w="64"
-        src="/assets/illustration/join.svg"
-        alt="Signal Searching"
-      />
+      <Image mb="6" w="64" src="/assets/illustration/join.svg" alt="Join" />
       <Box textAlign="center">
         <Heading>{t("hoc.registration.title")}</Heading>
         <Text>{t("hoc.registration.description")}</Text>

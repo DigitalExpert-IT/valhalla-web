@@ -1,5 +1,17 @@
-import { LayoutMain } from "components";
+import { Box, Heading } from "@chakra-ui/react";
+import { LayoutMain, WidgetTimeLine } from "components";
+import { useTranslation } from "react-i18next";
+import { ROADMAP } from "constant/roadmap";
 
 export default function Home() {
-  return <LayoutMain>{null}</LayoutMain>;
+  const { t } = useTranslation();
+
+  return (
+    <LayoutMain>
+      <Box textAlign="center">
+        <Heading>{t("pages.home.roadmapSection")}</Heading>
+      </Box>
+      <WidgetTimeLine data={ROADMAP} />
+    </LayoutMain>
+  );
 }

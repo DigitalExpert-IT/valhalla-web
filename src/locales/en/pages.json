@@ -2,5 +2,30 @@
   "register": {
     "title": "Let's Register to <strong>Global Network</strong>",
     "subtitle": "No 1 <strong>Decentralized</strong> Web3 Network Marketing Platform"
+  },
+  "home": {
+    "roadmapSection": "Roadmap",
+    "roadmap": [
+      {
+        "headline": "Concept 1",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      },
+      {
+        "headline": "Concept 2",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      },
+      {
+        "headline": "Concept 3",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      },
+      {
+        "headline": "Concept 4",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      },
+      {
+        "headline": "Concept 5",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    ]
   }
 }

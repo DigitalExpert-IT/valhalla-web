@@ -1,7 +1,7 @@
 import { Canvas, MeshProps, useFrame, useLoader } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Mesh, TextureLoader } from "three";
-// import { OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 
 interface GlobeMesProps extends MeshProps {}
 
@@ -10,7 +10,7 @@ const GlobeMesh: React.FC<GlobeMesProps> = props => {
   const colorMap = useLoader(TextureLoader, "globe/globe.jpg");
   useFrame((_, delta) => {
     if (!ref.current) return;
-    return (ref.current.rotation.y += 0.01);
+    ref.current.rotation.y += 0.01;
   });
 
   return (
@@ -28,7 +28,7 @@ export const Globe = () => {
         <ambientLight intensity={0.8} />
         <pointLight position={[10, 10, 10]} />
         <GlobeMesh />
-        {/* <OrbitControls /> */}
+        <OrbitControls enableZoom={false} enableRotate={false} />
       </Suspense>
     </Canvas>
   );

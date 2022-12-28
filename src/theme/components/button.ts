@@ -208,7 +208,7 @@ const sizes = {
     h: "10",
     minW: "10",
     fontSize: "md",
-    px: "4",
+    px: "8",
   }),
   sm: defineStyle({
     h: "8",

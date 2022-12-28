@@ -121,8 +121,11 @@ const variantFilled = definePartsStyle(props => {
       border: "2px solid",
       borderColor: "transparent",
       bg: mode("gray.100", "gray.800")(props),
+      borderWidth: "thin",
+      borderStyle: "solid",
       _hover: {
-        bg: mode("gray.200", "gray.900")(props),
+        bg: mode("gray.200", "gray.800")(props),
+        borderColor: "whiteAlpha.500",
       },
       _readOnly: {
         boxShadow: "none !important",

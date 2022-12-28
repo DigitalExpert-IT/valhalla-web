@@ -7,5 +7,15 @@
     "title": "Install Metamask",
     "content": "This site require you to install Metamask",
     "action": "Install Metamask"
+  },
+  "bindTelegram": {
+    "title": "Connect Telegram",
+    "label": {
+      "username": "Telegram Username",
+      "connect": "Connect Telegram"
+    },
+    "placeholder": {
+      "username": "@username"
+    }
   }
 }

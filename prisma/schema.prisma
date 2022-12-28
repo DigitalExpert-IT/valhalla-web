@@ -3,14 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model User {
-  id          Int    @id @default(autoincrement())
-  address     String @unique
-  upline      String
-  blockNumber Int    @default(0)
+  id               Int     @id @default(autoincrement())
+  address          String  @unique
+  telegramUsername String? @unique
+  upline           String
+  blockNumber      Int     @default(0)
+
+  @@index([telegramUsername])
+  @@index([address])
 }

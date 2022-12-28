@@ -30,26 +30,30 @@ export const SectionHeader = () => {
   });
 
   const createSignature = async () => {
-    const { data } = await telegramInvite.refetch();
-    if (!data) return;
-    if (!valhalla.account.isRegistered) {
-      window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
-      return;
-    }
+    try {
+      const { data } = await telegramInvite.refetch();
+      if (!data) return;
+      if (!valhalla.account.isRegistered) {
+        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+        return;
+      }
 
-    if (data.type === "redirect") {
-      window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
-      return;
-    }
+      if (data.type === "redirect") {
+        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+        return;
+      }
 
-    if (data.type === "request_bind") {
-      const username = (await bindTelegramModal.show()) as string;
-      const wallet = await getWallet();
-      const signer = wallet.getSigner();
-      const signature = await signer.signMessage(
-        getTelegramBindingSignatureMessage(username)
-      );
-      await telegramInviteMutate.mutateAsync({ signature, username });
+      if (data.type === "request_bind") {
+        const username = (await bindTelegramModal.show()) as string;
+        const wallet = await getWallet();
+        const signer = wallet.getSigner();
+        const signature = await signer.signMessage(
+          getTelegramBindingSignatureMessage(username)
+        );
+        await telegramInviteMutate.mutateAsync({ signature, username });
+        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+      }
+    } catch (error) {
       window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
     }
   };

@@ -9,3 +9,5 @@ export * from "./Drawer";
 export * from "./Layout";
 export * from "./Svg";
 export * from "./Card";
+export * from "./Image";
+export * from "./Widget";

@@ -12,6 +12,7 @@ const { defineMultiStyleConfig, definePartsStyle } =
 const baseStyleOverlay = defineStyle({
   bg: "blackAlpha.600",
   zIndex: "modal",
+  backdropFilter: "blur(10px)",
 });
 
 const baseStyleDialogContainer = defineStyle(props => {

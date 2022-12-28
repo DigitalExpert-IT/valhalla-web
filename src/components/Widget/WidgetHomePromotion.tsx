@@ -1,12 +1,4 @@
-import {
-  Box,
-  Card,
-  Heading,
-  Image,
-  SimpleGrid,
-  SimpleGridProps,
-  Text,
-} from "@chakra-ui/react";
+import { Box, SimpleGrid, SimpleGridProps } from "@chakra-ui/react";
 import { CardHomePromotion } from "components/Card";
 import React from "react";
 

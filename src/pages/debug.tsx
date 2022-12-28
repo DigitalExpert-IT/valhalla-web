@@ -15,9 +15,10 @@ import {
 import { LayoutMain, CardNFT, CardOwnedNFT } from "components";
 import { rankMap } from "constant/rank";
 import { useValhalla, useAsyncCall, useNFT } from "hooks";
-import { prettyBn, shortenAddress } from "utils";
+import { prettyBn, shortenAddress, composeHoc } from "utils";
+import { withConnection, withRegistration } from "hoc";
 
-export default function Home() {
+const Debug = () => {
   const {
     personalReward,
     rankReward,
@@ -135,10 +136,10 @@ export default function Home() {
             OWNED NFT
           </Heading>
           <Wrap>
-            {nft.nftList.map((card, idx) => (
+            {nft.nftList.map(card => (
               <WrapItem
                 w={{ base: "calc(50% - 10px)", lg: "calc(20% - 10px)" }}
-                key={idx}
+                key={card.id.toNumber()}
               >
                 <CardOwnedNFT {...card} />
               </WrapItem>
@@ -148,4 +149,6 @@ export default function Home() {
       </Stack>
     </LayoutMain>
   );
-}
+};
+
+export default composeHoc(withRegistration, withConnection)(Debug);

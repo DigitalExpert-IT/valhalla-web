@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import { ChakraProvider, useColorMode } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Head from "next/head";
 import theme from "theme";
 import NiceModal from "@ebay/nice-modal-react";
 import axios from "axios";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "locales";
+import { PROJECT_NAME } from "constant/siteConfig";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -42,5 +44,14 @@ const Main = ({ Component, pageProps }: AppProps) => {
     }
   }, [colorMode]);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <title>{PROJECT_NAME}</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 };

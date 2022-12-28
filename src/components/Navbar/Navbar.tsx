@@ -2,6 +2,8 @@ import React from "react";
 import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
+import { PROJECT_NAME, PROJECT_SHORT_NAME } from "constant/siteConfig";
+import Link from "next/link";
 import {
   Box,
   Flex,
@@ -40,14 +42,16 @@ export const Navbar = () => {
               display={{ md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Heading
-              variant="gradient"
-              colorScheme="orange:pink"
-              fontWeight="bold"
-              fontSize="2xl"
-            >
-              {isLargethan800 ? "Global Network" : "GN"}
-            </Heading>
+            <Link href="/">
+              <Heading
+                variant="gradient"
+                colorScheme="orange:pink"
+                fontWeight="bold"
+                fontSize="2xl"
+              >
+                {isLargethan800 ? PROJECT_NAME : PROJECT_SHORT_NAME}
+              </Heading>
+            </Link>
           </Stack>
           <Stack
             direction="row"

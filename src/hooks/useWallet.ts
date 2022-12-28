@@ -1,25 +1,28 @@
 import detectEthereumProvider from "@metamask/detect-provider";
+import { subscribeWithSelector } from "zustand/middleware";
 import create from "zustand";
 import { useModal } from "@ebay/nice-modal-react";
 import { useMount } from "react-use";
 import { CURRENT_CHAIN_ID, getWallet } from "lib/contractFactory";
-import { BigNumber } from "ethers";
 import { compareChain, createInitiator } from "utils";
 import { ModalInstallMetamask } from "components";
 import { network } from "constant/network";
 
 interface IStore {
+  initialized: boolean;
   address: string;
   isConnected: boolean;
 }
 
 const initialState = {
+  initialized: false,
   address: "0x0",
-  balance: BigNumber.from(0),
   isConnected: false,
 };
 
-export const useWalletStore = create<IStore>(() => initialState);
+export const useWalletStore = create(
+  subscribeWithSelector<IStore>(() => initialState)
+);
 const { setState } = useWalletStore;
 
 const resetAccount = async () => {
@@ -51,7 +54,10 @@ const init = createInitiator(async () => {
       metamask.on("accountsChanged", resetAccount);
       metamask.on("chainChanged", resetAccount);
     }
-  } catch (error) {}
+  } catch (error) {
+  } finally {
+    setState({ initialized: true });
+  }
 });
 
 /**

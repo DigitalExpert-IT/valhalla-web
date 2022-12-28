@@ -107,7 +107,7 @@ const fetchAccount = async () => {
   } catch (error) {}
 };
 
-const onBuy = async (params: [string, BigNumber]) => {
+const onBuy = async (...params: [string, BigNumber]) => {
   fetchPool();
   fetchAccount();
   const nft = await getNFTContract();
@@ -121,15 +121,6 @@ const onBuy = async (params: [string, BigNumber]) => {
     }));
   }
 };
-
-const init = createInitiator(async () => {
-  const nft = await getNFTContract();
-  fetchPool();
-  loadCardList();
-  nft.on("Buy", (...params: any[]) => {
-    onBuy(params as any);
-  });
-});
 
 const fetchTokenList = async () => {
   const address = useWalletStore.getState().address;
@@ -168,22 +159,33 @@ const resetAccount = () => {
   });
 };
 
+const init = createInitiator(async () => {
+  const nft = await getNFTContract();
+  fetchPool();
+  loadCardList();
+  nft.on("Buy", onBuy);
+
+  useWalletStore.subscribe(
+    state => state.isConnected,
+    isConnected => {
+      if (isConnected) {
+        fetchTokenList();
+        fetchAccount();
+      } else {
+        resetAccount();
+      }
+    },
+    { fireImmediately: true }
+  );
+});
+
 export const useNFT = () => {
-  const { isConnected, address } = useWallet();
+  const { address } = useWallet();
   const store = useNftStore();
 
   useEffect(() => {
     init();
   });
-
-  useEffect(() => {
-    if (isConnected) {
-      fetchTokenList();
-      fetchAccount();
-    } else {
-      resetAccount();
-    }
-  }, [isConnected, address]);
 
   const buy = async (tokenId: BigNumberish) => {
     const gnetSigner = await getGNETSignerContract();

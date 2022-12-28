@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { SOCIAL } from "constant/navigation";
 import { Container, Box, Text, Heading, Stack, Icon } from "@chakra-ui/react";
+import { PROJECT_SHORT_NAME } from "constant/siteConfig";
 
 export const LayoutFooter = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ export const LayoutFooter = () => {
         >
           <Box>
             <Heading variant="gradient" colorScheme="orange:pink">
-              GN
+              {PROJECT_SHORT_NAME}
             </Heading>
             <Text mt="5">{t("common.footer.description")}</Text>
           </Box>
@@ -57,9 +58,9 @@ export const LayoutFooter = () => {
                 reserved
               </Text>
             </Box>
-            <Stack direction="row">
+            <Stack spacing="4" direction="row">
               {SOCIAL.map((item, idx) => (
-                <Link href={item.href} key={idx}>
+                <Link href={item.href} key={idx} target="_blank">
                   <Icon as={item.icon} h={5} w={5} />
                 </Link>
               ))}

@@ -39,6 +39,12 @@ const variantGradient = defineStyle(props => {
     },
     bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
     color: $fg.reference,
+    _loading: {
+      bgGradient: `linear(to-r, ${c1}.800, ${c2}.900)`,
+    },
+    _disabled: {
+      bgGradient: `linear(to-r, ${c1}.800, ${c2}.900)`,
+    },
     _active: {
       bgGradient: `linear(to-r, ${c1}.600, ${c2}.600)`,
     },
@@ -202,7 +208,7 @@ const sizes = {
     h: "10",
     minW: "10",
     fontSize: "md",
-    px: "4",
+    px: "8",
   }),
   sm: defineStyle({
     h: "8",

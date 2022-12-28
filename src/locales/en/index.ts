@@ -4,6 +4,7 @@ import form from "./form.json";
 import error from "./error.json";
 import modal from "./modal.json";
 import pages from "./pages.json";
+import hoc from "./hoc.json";
 
 const en = {
   common,
@@ -11,6 +12,7 @@ const en = {
   error,
   modal,
   pages,
+  hoc,
 };
 
 export default en;

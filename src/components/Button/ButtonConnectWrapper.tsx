@@ -3,7 +3,7 @@ import { useWallet, useAsyncCall } from "hooks";
 import { useTranslation } from "react-i18next";
 
 type Props = ButtonProps & {
-  children: React.ReactElement;
+  children?: React.ReactElement;
 };
 
 export const ButtonConnectWrapper = (props: Props) => {
@@ -12,7 +12,7 @@ export const ButtonConnectWrapper = (props: Props) => {
   const { t } = useTranslation();
   const connectAsync = useAsyncCall(connect);
 
-  if (isConnected) return props.children;
+  if (isConnected) return props.children ?? null;
 
   return (
     <Button

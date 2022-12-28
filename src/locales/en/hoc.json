@@ -1,0 +1,10 @@
+{
+  "connection": {
+    "title": "Please Connect Wallet",
+    "description": "You need to connect wallet to access this page"
+  },
+  "registration": {
+    "title": "Registration Required",
+    "description": "You need to be registered to access this page"
+  }
+}

@@ -6,8 +6,7 @@ import {
 import create from "zustand";
 import { createInitiator } from "utils";
 import { BigNumber } from "ethers";
-import { useWallet, useWalletStore } from "hooks";
-import { useEffect } from "react";
+import { useWalletStore } from "hooks";
 
 type Pool = {
   claimable: BigNumber;
@@ -25,6 +24,7 @@ type Account = {
 };
 
 interface IStore {
+  initialized: boolean;
   account: Account;
   personalReward: BigNumber;
   rankReward: BigNumber;
@@ -33,6 +33,7 @@ interface IStore {
 }
 
 const initialState = {
+  initialized: false,
   account: {
     isRegistered: false,
     rank: 0,
@@ -99,39 +100,47 @@ const fetchAccount = async () => {
 };
 
 const init = createInitiator(async () => {
-  const valhalla = await getValhallaContract();
-  await Promise.all([fetchPool(), fetchAccount()]);
+  try {
+    const valhalla = await getValhallaContract();
+    await Promise.all([fetchPool(), fetchAccount()]);
 
-  valhalla.on("ClaimReward", fetchAccount);
-  valhalla.on("ClaimRankReward", () => {
-    Promise.all([fetchPool(), fetchAccount()]);
-  });
-  valhalla.on("Registration", () => {
-    Promise.all([fetchPool(), fetchAccount()]);
-  });
+    valhalla.on("ClaimReward", fetchAccount);
+    valhalla.on("ClaimRankReward", () => {
+      Promise.all([fetchPool(), fetchAccount()]);
+    });
+    valhalla.on("Registration", () => {
+      Promise.all([fetchPool(), fetchAccount()]);
+    });
+
+    useWalletStore.subscribe(
+      state => state.isConnected,
+      isConnected => {
+        if (!isConnected) {
+          resetAccount();
+        }
+      },
+      { fireImmediately: true }
+    );
+
+    useWalletStore.subscribe(
+      state => state.address,
+      () => {
+        fetchAccount();
+      },
+      { fireImmediately: true }
+    );
+  } catch (error) {
+  } finally {
+    setState({ initialized: true });
+  }
 });
 
 export const useValhalla = () => {
   const store = useStore();
-  const wallet = useWallet();
 
   useMount(() => {
     init();
   });
-
-  /**
-   * reset account related data to initial state
-   * if wallet disconnected
-   */
-  useEffect(() => {
-    if (!wallet.isConnected) {
-      resetAccount();
-    }
-  }, [wallet.isConnected]);
-
-  useEffect(() => {
-    fetchAccount();
-  }, [wallet.address]);
 
   const getAccountMetadata = async (address: string) => {
     const valhalla = await getValhallaContract();

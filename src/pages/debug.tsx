@@ -136,10 +136,10 @@ const Debug = () => {
             OWNED NFT
           </Heading>
           <Wrap>
-            {nft.nftList.map((card, idx) => (
+            {nft.nftList.map(card => (
               <WrapItem
                 w={{ base: "calc(50% - 10px)", lg: "calc(20% - 10px)" }}
-                key={idx}
+                key={card.id.toNumber()}
               >
                 <CardOwnedNFT {...card} />
               </WrapItem>

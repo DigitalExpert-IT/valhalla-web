@@ -1,11 +1,13 @@
 import { Heading, Text, Box, HStack, Button } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useValhalla } from "hooks";
 import { WidgetMainHeader } from "components";
 import { HEADER_IMAGE_DATA } from "constant/pages/home";
 
 export const SectionHeader = () => {
   const { t } = useTranslation();
+  const valhalla = useValhalla();
 
   return (
     <WidgetMainHeader
@@ -29,9 +31,11 @@ export const SectionHeader = () => {
           <Trans i18nKey="pages.home.header.subtitle" />
         </Text>
         <HStack justify={{ base: "center", lg: "start" }} mt="6" spacing="4">
-          <Link href="/register">
-            <Button colorScheme="brand">{t("common.register")}</Button>
-          </Link>
+          {valhalla.account.isRegistered ? null : (
+            <Link href="/register">
+              <Button colorScheme="brand">{t("common.register")}</Button>
+            </Link>
+          )}
           <Button colorScheme="brand">{t("common.telegram")}</Button>
         </HStack>
       </Box>

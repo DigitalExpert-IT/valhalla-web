@@ -1,7 +1,7 @@
 import { Button, Box, Stack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
-import { useWallet, useAsyncCall } from "hooks";
+import { useWallet, useAsyncCall, useValhalla } from "hooks";
 import { CopiableText } from "components";
 import { shortenAddress } from "utils";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ export const ButtonConnectWallet = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { address, connect, isConnected } = useWallet();
+  const valhalla = useValhalla();
   const connectAsync = useAsyncCall(connect);
 
   const handleNavigate = () => {
@@ -19,15 +20,17 @@ export const ButtonConnectWallet = () => {
   if (isConnected) {
     return (
       <Stack spacing="4" direction="row" align="center">
-        <Button
-          px="6"
-          size="sm"
-          variant="outline"
-          colorScheme="brand"
-          onClick={handleNavigate}
-        >
-          {t("common.register")}
-        </Button>
+        {valhalla.account.isRegistered ? null : (
+          <Button
+            px="6"
+            size="sm"
+            variant="outline"
+            colorScheme="brand"
+            onClick={handleNavigate}
+          >
+            {t("common.register")}
+          </Button>
+        )}
 
         <Stack direction="row" spacing="2" align="center">
           <Box mt="1">
@@ -43,18 +46,20 @@ export const ButtonConnectWallet = () => {
 
   return (
     <Stack direction="row">
-      <Box>
-        <Button
-          px="6"
-          size="sm"
-          variant="outline"
-          colorScheme="brand"
-          onClick={handleNavigate}
-          w="full"
-        >
-          {t("common.register")}
-        </Button>
-      </Box>
+      {valhalla.account.isRegistered ? null : (
+        <Box>
+          <Button
+            px="6"
+            size="sm"
+            variant="outline"
+            colorScheme="brand"
+            onClick={handleNavigate}
+            w="full"
+          >
+            {t("common.register")}
+          </Button>
+        </Box>
+      )}
       <Box>
         <Button
           px="6"

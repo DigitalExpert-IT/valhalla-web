@@ -1,10 +1,11 @@
 import { LayoutMain } from "components";
-import { SectionHeader } from "components/pages/Home";
+import { SectionPromotion, SectionHeader } from "components/pages/Home";
 
 export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionPromotion />
     </LayoutMain>
   );
 }

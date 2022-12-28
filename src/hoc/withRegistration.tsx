@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  Heading,
-  Container,
-  Box,
-  Text,
-  Image,
-  Button,
-  Spinner,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useValhalla, useWallet } from "hooks";
+import { LayoutIllustration, LayoutLoading } from "components";
 import { useTranslation } from "react-i18next";
 
 export const withRegistration = (Component: () => JSX.Element | null) => {
@@ -26,16 +19,7 @@ export const withRegistration = (Component: () => JSX.Element | null) => {
       }
     }, [valhalla.initialized, wallet.isConnected]);
 
-    if (!isReady)
-      return (
-        <Spinner
-          position="fixed"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          size="xl"
-        />
-      );
+    if (!isReady) return <LayoutLoading />;
     if (!valhalla.account.isRegistered) {
       return <RegistrationRequired />;
     }
@@ -50,24 +34,16 @@ const RegistrationRequired = () => {
   const { t } = useTranslation();
 
   return (
-    <Container
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      maxW="3xl"
-      h="100vh"
+    <LayoutIllustration
+      illustrationUri="/assets/illustration/join.svg"
+      title={t("hoc.registration.title")}
+      description={t("hoc.registration.description")}
     >
-      <Image mb="6" w="64" src="/assets/illustration/join.svg" alt="Join" />
-      <Box textAlign="center">
-        <Heading>{t("hoc.registration.title")}</Heading>
-        <Text>{t("hoc.registration.description")}</Text>
-        <Link href="/register">
-          <Button variant="gradient" mt="3">
-            {t("common.register")}
-          </Button>
-        </Link>
-      </Box>
-    </Container>
+      <Link href="/register">
+        <Button variant="gradient" mt="3">
+          {t("common.register")}
+        </Button>
+      </Link>
+    </LayoutIllustration>
   );
 };

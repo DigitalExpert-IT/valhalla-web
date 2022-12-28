@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <LayoutMain>
-    <SectionHeader />
+      <SectionHeader />
       <Box textAlign="center">
         <Heading>{t("pages.home.roadmapSection")}</Heading>
       </Box>

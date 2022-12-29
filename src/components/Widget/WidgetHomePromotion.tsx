@@ -17,7 +17,7 @@ export const WidgetHomePromotion = (props: CardProps) => {
 
   return (
     <SimpleGrid
-      columns={{ base: 1, sm: 2, lg: 4 }}
+      columns={{ base: 1, xs: 2, lg: 4 }}
       spacing={10}
       mx={"auto"}
       maxW={{ base: "xl", lg: "full" }}

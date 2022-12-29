@@ -36,6 +36,14 @@ export const AnimationGlobe: React.FC = (props: Props) => {
         .pointAltitude(0.0005)
         .pointColor("color");
 
+      const resizeObserver = new ResizeObserver(() => {
+        if (!boxRef.current) return;
+        globe.height(boxRef.current.clientHeight);
+        globe.width(boxRef.current.clientWidth);
+      });
+
+      resizeObserver.observe(boxRef.current);
+
       const controls = globe.controls();
       controls.autoRotate = true;
       controls.autoRotateSpeed = 2;

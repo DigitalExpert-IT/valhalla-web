@@ -11,3 +11,5 @@ export * from "./Svg";
 export * from "./Card";
 export * from "./Image";
 export * from "./Widget";
+export * from "./Animation";
+export * from "./pages/Home";

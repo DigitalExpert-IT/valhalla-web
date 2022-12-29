@@ -1,7 +1,11 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { LayoutMain, WidgetTimeLine } from "components";
-import { SectionHeader } from "components/pages/Home";
 import { useTranslation } from "react-i18next";
+import {
+  LayoutMain,
+  WidgetTimeLine,
+  SectionFeaturedPopulation,
+  SectionHeader,
+} from "components";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -15,6 +19,7 @@ export default function Home() {
         </Box>
         <WidgetTimeLine />
       </Box>
+      <SectionFeaturedPopulation />
     </LayoutMain>
   );
 }

@@ -12,7 +12,7 @@ const storeRootAddressList = async () => {
     let upline = "0x0";
     for (const address of rootAdressList) {
       const existingUser = await prisma.user.findUnique({
-        where: { address: address },
+        where: { address: lowerCase(address) },
       });
       if (!existingUser) {
         await prisma.user.create({

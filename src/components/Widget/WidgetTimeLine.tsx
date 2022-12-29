@@ -16,7 +16,7 @@ export const WidgetTimeLine: React.FC<WidgetTimeLineProps> = props => {
 
   const { data } = props;
   return (
-    <Box display="flex" h="xl" overflowX="hidden">
+    <Box display="flex" h="xl" overflowX="auto">
       {data.map((item, idx) =>
         idx % 2 ? (
           <WidgetTimelineItem

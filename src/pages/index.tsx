@@ -10,10 +10,12 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <Box textAlign="center">
-        <Heading>{t("pages.home.roadmapSection")}</Heading>
+      <Box my="20">
+        <Box textAlign="center">
+          <Heading>{t("pages.home.roadmapSection")}</Heading>
+        </Box>
+        <WidgetTimeLine data={ROADMAP} />
       </Box>
-      <WidgetTimeLine data={ROADMAP} />
     </LayoutMain>
   );
 }

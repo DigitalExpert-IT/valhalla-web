@@ -1,14 +1,14 @@
-import { LayoutMain, AnimationGlobe } from "components";
-import { SectionHeader } from "components/pages/Home";
-import { AspectRatio } from "@chakra-ui/react";
+import { LayoutMain } from "components";
+import {
+  SectionHeader,
+  SectionFeaturedPopulation,
+} from "components/pages/Home";
 
 export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <AspectRatio w="2xl" ratio={1}>
-        <AnimationGlobe />
-      </AspectRatio>
+      <SectionFeaturedPopulation />
     </LayoutMain>
   );
 }

@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 
 export const SectionFeaturedPopulation = () => {
   return (
-    <Flex position="relative" py="32" direction="row" alignItems="center">
+    <Flex position="relative" py="40" direction="row" alignItems="center">
       <Box flex="1" position="relative" zIndex="3">
         <Heading mb="6">
           <Trans

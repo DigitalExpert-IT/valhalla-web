@@ -60,7 +60,7 @@ const initCrawler = async () => {
     for (const registrationEvent of registrationEventList) {
       const [user, referrer] = registrationEvent.args;
 
-      const existingUser = await prisma.user.findUnique({
+      const existingUser = await prisma.user.findFirst({
         where: { address: user },
       });
       if (!existingUser) {
@@ -75,7 +75,7 @@ const initCrawler = async () => {
     }
 
     valhalla.on("Registration", async (user, referrer, { blockNumber }) => {
-      const existingUser = await prisma.user.findUnique({
+      const existingUser = await prisma.user.findFirst({
         where: { address: user },
       });
       if (!existingUser) {

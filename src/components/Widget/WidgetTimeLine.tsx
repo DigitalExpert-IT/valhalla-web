@@ -1,31 +1,37 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { IRoadmap } from "constant/roadmap";
 import { WidgetTimelineItem } from "./WidgetTimlineItem";
 import { Box, Text } from "@chakra-ui/react";
 
-interface WidgetTimeLineProps {
-  data: IRoadmap[];
+export interface IRoadmap {
+  name: string;
+  headline: string;
+  description: string;
+  shades: string;
 }
 
-export const WidgetTimeLine: React.FC<WidgetTimeLineProps> = props => {
+// interface WidgetTimeLineProps {
+//   data: IRoadmap[];
+// }
+
+export const WidgetTimeLine = () => {
   const { t } = useTranslation();
+
   const roadmaps = t<any, any>("pages.home.roadmap", {
     returnObjects: true,
   });
 
-  const { data } = props;
   return (
     <Box display="flex" h="xl" overflowX="auto">
-      {data.map((item, idx) =>
+      {roadmaps.map((item: any, idx: number) =>
         idx % 2 ? (
           <WidgetTimelineItem
             key={idx}
+            boxprops={{ top: "10%", height: "3xs" }}
             name={item.name}
             shades={item.shades}
-            boxprops={{ top: "10%", height: "3xs" }}
-            headline={roadmaps[idx].headline}
-            description={roadmaps[idx].description}
+            headline={item.headline}
+            description={item.description}
           >
             <Box
               position="absolute"
@@ -42,8 +48,8 @@ export const WidgetTimeLine: React.FC<WidgetTimeLineProps> = props => {
             key={idx}
             name={item.name}
             shades={item.shades}
-            headline={roadmaps[idx].headline}
-            description={roadmaps[idx].description}
+            headline={item.headline}
+            description={item.description}
           >
             <Box
               position="absolute"

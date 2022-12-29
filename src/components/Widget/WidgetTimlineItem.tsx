@@ -1,9 +1,16 @@
 import React from "react";
-import { IRoadmap } from "constant/roadmap";
 import { Box, Flex, Text, FlexProps, BoxProps } from "@chakra-ui/react";
 
+export interface IRoadmap {
+  name: string;
+  headline: string;
+  description: string;
+  shades: string;
+}
 interface WidgetTimeline extends FlexProps, IRoadmap {
   boxprops?: BoxProps;
+  headline: string;
+  description: string;
   children: React.ReactNode;
 }
 

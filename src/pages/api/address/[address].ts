@@ -7,7 +7,13 @@ const prisma = new PrismaClient();
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
   let result: User[] = [
-    { id: "root" as any, address, upline: "", blockNumber: 0 },
+    {
+      id: "root" as any,
+      address,
+      upline: "",
+      blockNumber: 0,
+      telegramUsername: "",
+    },
   ];
   let upperList = [address];
   for (let i = 0; i < 100; i++) {

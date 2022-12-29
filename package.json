@@ -24,7 +24,7 @@
     "@types/node": "18.11.10",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
-    "@warmbyte/valhalla": "1.11.1",
+    "@warmbyte/valhalla": "1.11.7",
     "axios": "^1.2.1",
     "d3-org-chart": "^2.6.0",
     "eslint": "8.28.0",
@@ -32,6 +32,7 @@
     "ethers": "^5.7.2",
     "evm-bn": "^1.1.2",
     "framer-motion": "^7.6.18",
+    "globe.gl": "^2.26.11",
     "i18next": "^22.0.6",
     "immer": "^9.0.16",
     "keccak": "^3.0.2",
@@ -45,6 +46,8 @@
     "react-icons": "^4.7.1",
     "react-jazzicon": "^1.0.4",
     "react-use": "^17.4.0",
+    "telegraf": "^4.11.2",
+    "three": "^0.148.0",
     "zustand": "^4.1.4"
   },
   "husky": {

@@ -25,9 +25,7 @@ const storeRootAddressList = async () => {
       }
       upline = lowerCase(address);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 const initCrawler = async () => {
@@ -88,9 +86,7 @@ const initCrawler = async () => {
         });
       }
     });
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 const handler: NextApiHandler = async (_, res) => {

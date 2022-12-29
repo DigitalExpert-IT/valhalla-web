@@ -4,7 +4,7 @@ import { NextApiHandler } from "next";
 import { PrismaClient } from "@prisma/client";
 import { getValhallaContract } from "lib/contractFactory";
 import { utils } from "ethers";
-import { getTelegramBindingSignatureMessage } from "utils";
+import { getTelegramBindingSignatureMessage, lowerCase } from "utils";
 
 const prisma = new PrismaClient();
 let bot = {} as Telegraf<Context<Update>>;
@@ -33,7 +33,7 @@ const init = async () => {
 
 const handler: NextApiHandler = async (req, res) => {
   init();
-  const address = (req.query.address as string)?.toLowerCase();
+  const address = lowerCase(req.query.address as string);
   const { username, signature } = req.body;
   const valhalla = await getValhallaContract();
   let user = await prisma.user.findFirst({ where: { address } });
@@ -46,12 +46,12 @@ const handler: NextApiHandler = async (req, res) => {
       },
       create: {
         address,
-        upline: accountMap.referrer,
+        upline: lowerCase(accountMap.referrer),
         blockNumber: 0,
       },
       update: {
         address,
-        upline: accountMap.referrer,
+        upline: lowerCase(accountMap.referrer),
         blockNumber: 0,
       },
     });

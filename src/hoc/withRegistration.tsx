@@ -12,12 +12,16 @@ export const withRegistration = (Component: () => JSX.Element | null) => {
     const [isReady, setReady] = useState(valhalla.initialized);
 
     useEffect(() => {
-      if (valhalla.initialized && wallet.isConnected) {
+      if (
+        wallet.isConnected &&
+        valhalla.initialized &&
+        valhalla.account.referrer !== ""
+      ) {
         setTimeout(() => {
           setReady(true);
-        }, 300);
+        }, 500);
       }
-    }, [valhalla.initialized, wallet.isConnected]);
+    }, [valhalla, wallet]);
 
     if (!isReady) return <LayoutLoading />;
     if (!valhalla.account.isRegistered) {

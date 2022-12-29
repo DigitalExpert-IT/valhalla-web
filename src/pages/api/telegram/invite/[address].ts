@@ -63,8 +63,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   switch (req.method) {
     case "GET": {
-      res.json({ type: "request_bind" });
-      break;
+      return res.json({ type: "request_bind" });
     }
     case "POST": {
       if (!signature || !username) {
@@ -75,7 +74,7 @@ const handler: NextApiHandler = async (req, res) => {
         signature
       );
       if (verifiedAddress !== address) {
-        res.status(401).json({ message: "Invalid Signature" });
+        return res.status(401).json({ message: "Invalid Signature" });
       }
       await prisma.user.update({
         where: {
@@ -83,8 +82,7 @@ const handler: NextApiHandler = async (req, res) => {
         },
         data: { telegramUsername: username.replace(/^\@/, "") },
       });
-      res.json({ message: "Binding Success" });
-      break;
+      return res.json({ message: "Binding Success" });
     }
     default: {
       res.status(501).send("NOT IMPLEMENTED");

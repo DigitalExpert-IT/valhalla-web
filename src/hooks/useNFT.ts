@@ -177,6 +177,14 @@ const init = createInitiator(async () => {
     },
     { fireImmediately: true }
   );
+
+  useWalletStore.subscribe(
+    state => state.address,
+    () => {
+      resetAccount();
+    },
+    { fireImmediately: true }
+  );
 });
 
 export const useNFT = () => {

@@ -19,6 +19,8 @@ export const AnimationGlobe: React.FC = (props: Props) => {
         .globeImageUrl("/globe/globe_dark.jpg")
         .pointsData(POINTS_DATA)
         .arcsData(ARGS_DATA)
+        .pointsMerge(true)
+        .hexBinMerge(true)
         .width(boxRef.current.clientWidth)
         .height(boxRef.current.clientHeight)
         .backgroundColor("rgba(0, 0, 0, 0)")
@@ -41,6 +43,10 @@ export const AnimationGlobe: React.FC = (props: Props) => {
     };
 
     init();
+
+    return () => {
+      globe._destructor && globe._destructor();
+    };
   });
 
   return <Box ref={boxRef} overflow="hidden" w="full" {...props} />;

@@ -40,7 +40,6 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
         top: "49%",
         left: "20",
         zIndex: "1",
-        boxShadow: `${props.shades} 0px 0px 10px 4px`,
       }}
       {...props}
     >

@@ -27,7 +27,24 @@ export const WidgetTimeLine = () => {
         idx % 2 ? (
           <WidgetTimelineItem
             key={idx}
-            boxprops={{ top: "10%", height: "3xs" }}
+            boxprops={{
+              top: "10%",
+              height: "3xs",
+              _before: {
+                content: "''",
+                position: "absolute",
+                width: "5",
+                height: "5",
+                bg: item.shades,
+                opacity: "0.3",
+                borderRadius: "100%",
+                border: "4px solid",
+                borderColor: item.shades,
+                top: "calc(100% - 4px)",
+                left: "calc(-4% + -1px)",
+                zIndex: "1",
+              },
+            }}
             name={item.name}
             shades={item.shades}
             headline={item.headline}
@@ -44,7 +61,23 @@ export const WidgetTimeLine = () => {
           </WidgetTimelineItem>
         ) : (
           <WidgetTimelineItem
-            boxprops={{ pt: "70" }}
+            boxprops={{
+              pt: "70",
+              _before: {
+                content: "''",
+                position: "absolute",
+                width: "5",
+                height: "5",
+                bg: item.shades,
+                opacity: "0.3",
+                borderRadius: "100%",
+                border: "4px solid",
+                borderColor: item.shades,
+                top: "-4%",
+                left: "calc(-4% + -1px)",
+                zIndex: "1",
+              },
+            }}
             key={idx}
             name={item.name}
             shades={item.shades}

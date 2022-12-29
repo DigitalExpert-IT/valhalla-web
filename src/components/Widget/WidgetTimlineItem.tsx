@@ -31,14 +31,14 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
       _after={{
         content: "''",
         position: "absolute",
-        width: "3",
-        height: "3",
+        width: "4",
+        height: "4",
         bg: props.shades,
         borderRadius: "100%",
         border: "4px solid",
         borderColor: props.shades,
         top: "49%",
-        left: "20",
+        left: "35%",
         zIndex: "1",
       }}
       {...props}

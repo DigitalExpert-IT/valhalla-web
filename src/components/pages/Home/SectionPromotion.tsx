@@ -6,8 +6,8 @@ import { PROMOTION_IMAGE_DATA } from "constant/pages/home";
 
 export const SectionPromotion = () => {
   return (
-    <Box my={8}>
-      <Box py={8} px={4}>
+    <Box my={8} px={4}>
+      <Box py={8}>
         <Heading textAlign={"center"} my={8}>
           <Trans
             i18nKey="pages.home.promotion.title"

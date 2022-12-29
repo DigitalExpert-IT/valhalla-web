@@ -61,7 +61,7 @@ const initCrawler = async () => {
       const [user, referrer] = registrationEvent.args;
 
       const existingUser = await prisma.user.findFirst({
-        where: { address: user },
+        where: { address: lowerCase(user) },
       });
       if (!existingUser) {
         await prisma.user.create({
@@ -76,7 +76,7 @@ const initCrawler = async () => {
 
     valhalla.on("Registration", async (user, referrer, { blockNumber }) => {
       const existingUser = await prisma.user.findFirst({
-        where: { address: user },
+        where: { address: lowerCase(user) },
       });
       if (!existingUser) {
         await prisma.user.create({

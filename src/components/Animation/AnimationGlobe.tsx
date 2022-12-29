@@ -12,7 +12,6 @@ export const AnimationGlobe: React.FC = (props: Props) => {
   useEffect(() => {
     const init = async () => {
       if (!boxRef.current) return;
-      if (globe._destructor !== undefined) return;
       const Globe = (await import("globe.gl")).default;
       globe = Globe();
 

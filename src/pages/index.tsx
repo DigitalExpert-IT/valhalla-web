@@ -13,13 +13,11 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <Box my="20">
-        <Box textAlign="center" textTransform="uppercase">
-          <Heading>{t("pages.home.roadmapSection")}</Heading>
-        </Box>
-        <WidgetTimeLine />
-      </Box>
       <SectionFeaturedPopulation />
+      <Box textAlign="center" textTransform="uppercase">
+        <Heading>{t("pages.home.roadmapSection")}</Heading>
+      </Box>
+      <WidgetTimeLine />
     </LayoutMain>
   );
 }

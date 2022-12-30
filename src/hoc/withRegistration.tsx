@@ -19,7 +19,7 @@ export const withRegistration = (Component: () => JSX.Element | null) => {
       ) {
         setTimeout(() => {
           setReady(true);
-        }, 500);
+        }, 300);
       }
     }, [valhalla, wallet]);
 

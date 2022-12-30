@@ -1,11 +1,4 @@
-import {
-  Container,
-  Heading,
-  Text,
-  Card,
-  CardBody,
-  Box,
-} from "@chakra-ui/react";
+import { Heading, Text, Card, CardBody, Box } from "@chakra-ui/react";
 import { FormRegister, LayoutMain } from "components";
 import { Trans } from "react-i18next";
 

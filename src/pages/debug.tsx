@@ -93,7 +93,7 @@ const Debug = () => {
                 <Td>
                   <Box>
                     <Text>{prettyBn(personalReward)} MATIC</Text>
-                    <Text>{prettyBn(nft.personalReward)} GNET</Text>
+                    <Text>{prettyBn(nft.personalReward, 9)} GNET</Text>
                   </Box>
                 </Td>
                 <Td>

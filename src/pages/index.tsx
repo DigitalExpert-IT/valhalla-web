@@ -14,7 +14,7 @@ export default function Home() {
     <LayoutMain>
       <SectionHeader />
       <Box my="20">
-        <Box textAlign="center">
+        <Box textAlign="center" textTransform="uppercase">
           <Heading>{t("pages.home.roadmapSection")}</Heading>
         </Box>
         <WidgetTimeLine />

@@ -10,10 +10,6 @@ export interface IRoadmap {
   shades: string;
 }
 
-// interface WidgetTimeLineProps {
-//   data: IRoadmap[];
-// }
-
 export const WidgetTimeLine = () => {
   const { t } = useTranslation();
 

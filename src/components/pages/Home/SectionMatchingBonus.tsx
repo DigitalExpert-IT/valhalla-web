@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Image, Box, Heading, Text } from "@chakra-ui/react";
+import { Flex, Image, Box, Heading, Text, Stack } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 
 export const SectionMatchingBonus = () => {
@@ -9,24 +9,26 @@ export const SectionMatchingBonus = () => {
     <Flex
       align="center"
       justify="center"
-      my="10"
       flexDir={{ base: "column", md: "row" }}
+      mb="20"
     >
-      <Box flex={1}>
+      <Box w={{ base: "100%", md: "60%" }}>
         <Image
           src="/matching-bonus.svg"
           alt="matching-image"
           objectFit="cover"
         />
       </Box>
-      <Box
+      <Stack
         flex={1}
         display="flex"
         flexDir="column"
         justifyContent="center"
-        p="10"
+        spacing="3"
+        align="center"
+        textAlign={{ base: "justify", md: "justify" }}
       >
-        <Heading size="2xl">
+        <Heading size={{ base: "2xl", md: "3xl" }}>
           <Trans
             i18nKey="pages.home.matchingBonus.title"
             components={{
@@ -36,11 +38,11 @@ export const SectionMatchingBonus = () => {
             }}
           />
         </Heading>
-        <Heading my="5" textTransform="capitalize">
+        <Heading textTransform="capitalize">
           {t("pages.home.matchingBonus.subtitle")}
         </Heading>
         <Text fontSize="lg">{t("pages.home.matchingBonus.description")}</Text>
-      </Box>
+      </Stack>
     </Flex>
   );
 };

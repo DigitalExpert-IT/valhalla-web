@@ -25,7 +25,7 @@ export const SectionMatchingBonus = () => {
         flexDir="column"
         justifyContent="center"
         spacing="3"
-        align="center"
+        align={{ base: "center", md: "unset" }}
         textAlign={{ base: "justify", md: "justify" }}
       >
         <Heading size={{ base: "2xl", md: "3xl" }}>

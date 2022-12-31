@@ -174,6 +174,13 @@ const init = createInitiator(async () => {
   nft.on("Buy", onBuy);
   valhalla.on("RankRewardOpened", fetchPool);
   valhalla.on("RankRewardClosed", fetchPool);
+  valhalla.on("ClaimReward", fetchAccount);
+  valhalla.on("ClaimRankReward", () => {
+    Promise.all([fetchPool(), fetchAccount()]);
+  });
+  valhalla.on("Registration", () => {
+    Promise.all([fetchPool(), fetchAccount()]);
+  });
 
   useWalletStore.subscribe(
     state => state.address,

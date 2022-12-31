@@ -63,15 +63,11 @@ export const getValhallaContract = async () => {
 
 export const getValhallaSignerContract = async () => {
   const wallet = await getWallet();
-  const contract = await getFromCache(
-    async () =>
-      new ethers.Contract(
-        VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
-        valhallaJson.abi,
-        wallet.getSigner()
-      ) as Valhalla
-  );
-  return contract;
+  return new ethers.Contract(
+    VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
+    valhallaJson.abi,
+    wallet.getSigner()
+  ) as Valhalla;
 };
 
 export const getNFTContract = async () => {
@@ -89,15 +85,11 @@ export const getNFTContract = async () => {
 
 export const getNFTSignerContract = async () => {
   const wallet = await getWallet();
-  const contract = await getFromCache(
-    async () =>
-      new ethers.Contract(
-        NFT_CONTRACT[CURRENT_CHAIN_ID],
-        nftJson.abi,
-        wallet.getSigner()
-      ) as NFT
-  );
-  return contract;
+  return new ethers.Contract(
+    NFT_CONTRACT[CURRENT_CHAIN_ID],
+    nftJson.abi,
+    wallet.getSigner()
+  ) as NFT;
 };
 
 export const getGNETContract = async () => {

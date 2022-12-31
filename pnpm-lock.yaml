@@ -23,7 +23,7 @@ specifiers:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.11.7
+  '@warmbyte/valhalla': 1.12.0
   axios: ^1.2.1
   d3-org-chart: ^2.6.0
   eslint: 8.28.0
@@ -70,7 +70,7 @@ dependencies:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.11.7
+  '@warmbyte/valhalla': 1.12.0
   axios: 1.2.1
   d3-org-chart: 2.6.0
   eslint: 8.28.0
@@ -2354,8 +2354,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: false
 
-  /@warmbyte/valhalla/1.11.7:
-    resolution: {integrity: sha512-e/VCZMdoesy+AR1fXAGoli4jM+2iuD2nhztUn605Mv5avKGA2xeOCb2LDtTTGRjslUuGcPbWgM5A3nYle6wE0Q==}
+  /@warmbyte/valhalla/1.12.0:
+    resolution: {integrity: sha512-uREschHpafAws7aqc9dmOwxqMKwFacT5zqoPHS0nt6J6ql6C4+v9HYd6pPhppu4bYYgE1XijwCCSTj3yANp23A==}
     dependencies:
       '@openzeppelin/contracts': 4.8.0
       '@openzeppelin/contracts-upgradeable': 4.8.0

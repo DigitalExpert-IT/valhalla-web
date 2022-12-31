@@ -17,6 +17,7 @@ import { rankMap } from "constant/rank";
 import { useValhalla, useAsyncCall, useNFT } from "hooks";
 import { prettyBn, shortenAddress, composeHoc } from "utils";
 import { withConnection, withRegistration } from "hoc";
+import { fromBn } from "evm-bn";
 
 const Debug = () => {
   const {
@@ -31,6 +32,7 @@ const Debug = () => {
   const nft = useNFT();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
 
   return (
     <LayoutMain>
@@ -54,6 +56,12 @@ const Debug = () => {
                 <Th>IPO Pool</Th>
                 <Td>
                   <Text>{prettyBn(ipoPool.claimable)} Matic</Text>
+                </Td>
+              </Tr>
+              <Tr>
+                <Th>Genesis Pool</Th>
+                <Td>
+                  <Text>{fromBn(nft.genesisPool.claimable, 9)} GNET</Text>
                 </Td>
               </Tr>
             </Tbody>
@@ -84,8 +92,8 @@ const Debug = () => {
                 <Th>Reward</Th>
                 <Td>
                   <Box>
-                    <Text>{prettyBn(personalReward)}</Text>
-                    <Text>{prettyBn(nft.personalReward)} GNET</Text>
+                    <Text>{prettyBn(personalReward)} MATIC</Text>
+                    <Text>{prettyBn(nft.personalReward, 9)} GNET</Text>
                   </Box>
                 </Td>
                 <Td>
@@ -96,6 +104,13 @@ const Debug = () => {
                       size="sm"
                     >
                       Claim
+                    </Button>
+                    <Button
+                      onClick={claimRewardGnetAsync.exec}
+                      isLoading={claimRewardGnetAsync.isLoading}
+                      size="sm"
+                    >
+                      Claim GNET
                     </Button>
                   </Box>
                 </Td>

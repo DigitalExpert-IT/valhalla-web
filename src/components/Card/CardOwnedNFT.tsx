@@ -34,7 +34,7 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
       .mul(rewardPerSec);
     const cappedFarmValue = +Number(fromBn(_farmValue, 9)).toFixed(3);
     if (farmValue < cappedFarmValue) {
-      setFarmValue(cappedFarmValue);
+      setFarmValue(prev => (prev > cappedFarmValue ? prev : cappedFarmValue));
     }
   };
 
@@ -43,10 +43,11 @@ export const CardOwnedNFT = (props: IOwnedNFT) => {
   }, [lastFarmedAt.toString()]);
 
   useEffect(() => {
-    if (intervalRef.current) return;
-    if (!intervalRef.current) {
-      intervalRef.current = setInterval(calculateFarmValue, 500);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = undefined;
     }
+    intervalRef.current = setInterval(calculateFarmValue, 500);
     calculateFarmValue();
 
     return () => {

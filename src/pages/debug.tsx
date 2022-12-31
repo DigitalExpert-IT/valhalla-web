@@ -27,12 +27,14 @@ const Debug = () => {
     ipoPool,
     claimReward,
     claimRankReward,
+    isRankRewardClaimable,
     account,
   } = useValhalla();
   const nft = useNFT();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
   const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
+  const claimNftRankRewardAsync = useAsyncCall(nft.claimRankReward);
 
   return (
     <LayoutMain>
@@ -47,8 +49,18 @@ const Debug = () => {
                 <Th>Global Pool</Th>
                 <Td>
                   <Box>
-                    <Text>{prettyBn(globalPool.claimable)} Matic</Text>
-                    <Text>{prettyBn(nft.globalPool.claimable, 9)} GNET</Text>
+                    <Text>
+                      {isRankRewardClaimable
+                        ? prettyBn(globalPool.valueLeft)
+                        : prettyBn(globalPool.claimable)}{" "}
+                      Matic
+                    </Text>
+                    <Text>
+                      {isRankRewardClaimable
+                        ? prettyBn(nft.globalPool.valueLeft, 9)
+                        : prettyBn(nft.globalPool.claimable, 9)}{" "}
+                      GNET
+                    </Text>
                   </Box>
                 </Td>
               </Tr>
@@ -117,7 +129,12 @@ const Debug = () => {
               </Tr>
               <Tr>
                 <Th>Rank Reward</Th>
-                <Td>{prettyBn(rankReward)}</Td>
+                <Td>
+                  <Box>
+                    <Text>{prettyBn(rankReward)} MATIC</Text>
+                    <Text>{prettyBn(nft.rankReward, 9)} GNET</Text>
+                  </Box>
+                </Td>
                 <Td>
                   <Button
                     onClick={claimRankRewardAsync.exec}
@@ -125,6 +142,13 @@ const Debug = () => {
                     size="sm"
                   >
                     Claim
+                  </Button>
+                  <Button
+                    onClick={claimNftRankRewardAsync.exec}
+                    isLoading={claimNftRankRewardAsync.isLoading}
+                    size="sm"
+                  >
+                    Claim GNET
                   </Button>
                 </Td>
               </Tr>

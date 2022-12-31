@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { BigNumber, BigNumberish } from "ethers";
 import produce from "immer";
 import { compareAddress, createInitiator } from "utils";
+import { getValhallaContract } from "../lib/contractFactory";
 
 export interface IOwnedNFT {
   id: BigNumber;
@@ -104,7 +105,7 @@ const fetchAccount = async () => {
   try {
     const address = useWalletStore.getState().address;
     if (!address) return;
-    const nft = await getNFTContract();
+    const nft = await getNFTSignerContract();
     const [personalReward, rankReward] = await Promise.all([
       nft.rewardMap(address),
       nft.getMyRankReward(),
@@ -167,27 +168,19 @@ const resetAccount = () => {
 
 const init = createInitiator(async () => {
   const nft = await getNFTContract();
+  const valhalla = await getValhallaContract();
   fetchPool();
   loadCardList();
   nft.on("Buy", onBuy);
-
-  useWalletStore.subscribe(
-    state => state.isConnected,
-    isConnected => {
-      if (isConnected) {
-        fetchTokenList();
-        fetchAccount();
-      } else {
-        resetAccount();
-      }
-    },
-    { fireImmediately: true }
-  );
+  valhalla.on("RankRewardOpened", fetchPool);
+  valhalla.on("RankRewardClosed", fetchPool);
 
   useWalletStore.subscribe(
     state => state.address,
     () => {
       resetAccount();
+      fetchTokenList();
+      fetchAccount();
     },
     { fireImmediately: true }
   );

@@ -14,9 +14,7 @@ export const withConnection = (Component: () => JSX.Element | null) => {
 
     useEffect(() => {
       if (wallet.initialized) {
-        setTimeout(() => {
-          setReady(true);
-        }, 300);
+        setReady(true);
       }
     }, [wallet.initialized]);
 

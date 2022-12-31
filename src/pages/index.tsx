@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <SectionMatchingBonus />
       <SectionFeaturedPopulation />
+      <SectionMatchingBonus />
       <Box textAlign="center" textTransform="uppercase">
         <Heading>{t("pages.home.roadmapSection")}</Heading>
       </Box>

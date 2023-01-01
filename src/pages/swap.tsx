@@ -1,38 +1,9 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
-import { LayoutMain } from "components";
-import { useSwap } from "hooks";
-import { useForm } from "react-hook-form";
+import { FormSwap, LayoutMain } from "components";
 
 const Swap = () => {
-  const swap = useSwap();
-  console.log(swap);
-  const { register, handleSubmit } = useForm();
-  const onSwap = (e: any) => {
-    console.log("quantity", e.quantity);
-  };
   return (
     <LayoutMain>
-      <Stack as={"form"} onSubmit={handleSubmit(onSwap)}>
-        <FormControl>
-          <FormLabel>Swap Token</FormLabel>
-          <Input placeholder="quantity...!!" {...register("quantity")}></Input>
-        </FormControl>
-        <Box display="flex" justifyContent={"center"}>
-          <Button>S</Button>
-        </Box>
-        <FormControl>
-          <FormLabel>Swap Token</FormLabel>
-          <Input placeholder="quantity...!!" {...register("quantity")}></Input>
-        </FormControl>
-        <Button type="submit">Swap</Button>
-      </Stack>
+      <FormSwap />
     </LayoutMain>
   );
 };

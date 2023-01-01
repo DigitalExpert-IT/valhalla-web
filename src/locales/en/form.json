@@ -1,6 +1,7 @@
 {
   "placeholder": {
-    "referrer": "Referrer Address"
+    "referrer": "Referrer Address",
+    "quantity": "Quantity"
   },
   "label": {
     "referrer": "Referral Code"

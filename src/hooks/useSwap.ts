@@ -1,14 +1,16 @@
 import create from "zustand";
-import {
-  getGlobalExchageContract,
-  getGlobalExchangeSignerContract,
-} from "lib/contractFactory";
 import { createInitiator } from "utils";
 import { useEffect } from "react";
 import { BigNumber } from "ethers";
+import {
+  getUSDTContract,
+  getGNETContract,
+  getSwapContract,
+  getSwapSignerContract,
+} from "lib/contractFactory";
 
 interface ICurencySpec {
-  exchange: {
+  pair: {
     name: string;
     decimals: BigNumber;
     price: BigNumber;
@@ -29,7 +31,7 @@ interface IStore {
 const initialState: IStore = {
   currency: {
     gnet: {
-      exchange: {
+      pair: {
         name: "",
         decimals: BigNumber.from(0),
         price: BigNumber.from(0),
@@ -38,7 +40,7 @@ const initialState: IStore = {
       totalPool: BigNumber.from(0),
     },
     usdt: {
-      exchange: {
+      pair: {
         name: "",
         decimals: BigNumber.from(0),
         price: BigNumber.from(0),
@@ -54,39 +56,44 @@ export const useStore = create(() => initialState);
 const { setState } = useStore;
 
 const init = createInitiator(async () => {
-  const contract = await getGlobalExchageContract();
-  const gnetAddress = await contract.nftn();
-  const usdtAddress = await contract.usdt();
-  const ratioGnet = await contract.getRatioFromAddress(gnetAddress);
-  const ratioUsdt = await contract.getRatioFromAddress(usdtAddress);
-  const poolGnet = await contract.getPoolBalance(gnetAddress);
-  const poolUsdt = await contract.getPoolBalance(usdtAddress);
+  const swap = await getSwapContract();
+  const usdt = await getUSDTContract();
+  const gnet = await getGNETContract();
+  const gnetAddress = await swap.nftn();
+  const usdtAddress = await swap.usdt();
+
+  const [gnetRatio, usdtRatio, gnetPool, usdtPool] = await Promise.all([
+    swap.getRatioFromAddress(gnetAddress),
+    swap.getRatioFromAddress(usdtAddress),
+    gnet.balanceOf(swap.address),
+    usdt.balanceOf(swap.address),
+  ]);
 
   setState({
     currency: {
       gnet: {
-        exchange: {
-          name: ratioGnet.symbol,
-          decimals: ratioGnet.decimal,
-          price: ratioGnet.price,
+        pair: {
+          name: gnetRatio.symbol,
+          decimals: gnetRatio.decimal,
+          price: gnetRatio.price,
         },
         address: gnetAddress,
-        totalPool: poolGnet,
+        totalPool: gnetPool,
       },
       usdt: {
-        exchange: {
-          name: ratioUsdt.symbol,
-          decimals: ratioUsdt.decimal,
-          price: ratioUsdt.price,
+        pair: {
+          name: usdtRatio.symbol,
+          decimals: usdtRatio.decimal,
+          price: usdtRatio.price,
         },
         address: usdtAddress,
-        totalPool: poolUsdt,
+        totalPool: usdtPool,
       },
     },
   });
 });
 
-export const useGlobalExchange = () => {
+export const useSwap = () => {
   const store = useStore();
 
   useEffect(() => {
@@ -99,12 +106,11 @@ export const useGlobalExchange = () => {
    * @param quantity number quantity
    * @returns contract receipt
    */
-
   const swapToken = async (currency: string, quantity: number) => {
-    const contract = await getGlobalExchangeSignerContract();
-    const swap = await contract.swapToken(currency, quantity);
-    const tx = await swap.wait();
-    return tx;
+    const swap = await getSwapSignerContract();
+    const tx = await swap.swapToken(currency, quantity);
+    const receipt = await tx.wait();
+    return receipt;
   };
 
   return { ...store, swapToken };

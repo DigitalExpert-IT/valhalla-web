@@ -19,7 +19,7 @@ export const GNET_CONTRACT = {
   "0x29a": "0x1E7055383B885E5d6F21aa2209afb8Be5b3938C0",
 };
 
-export const GLOBEXC_CONTRACT = {
+export const SWAP_CONTRACT = {
   "0x89": "",
   "0x29a": "0xC4c9F6411858F2254E2Eb368A3519AB5042C9E5E",
 };

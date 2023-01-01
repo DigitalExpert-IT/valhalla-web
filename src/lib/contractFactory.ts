@@ -5,14 +5,15 @@ import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Va
 import globalExchangeJson from "global-swap/artifacts/contracts/globalExchange.sol/GlobalExchange.json";
 import nftJson from "@warmbyte/valhalla/artifacts/contracts/NFT.sol/NFT.json";
 import gnetJson from "@warmbyte/valhalla/artifacts/contracts/GNET.sol/GNET.json";
+import erc20Json from "@warmbyte/valhalla/artifacts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json";
 import {
   VALHALLA_CONTRACT,
   NFT_CONTRACT,
   GNET_CONTRACT,
-  GLOBEXC_CONTRACT,
+  SWAP_CONTRACT,
   USDT_CONTRACT,
 } from "constant/address";
-import { Valhalla, NFT, GNET } from "@warmbyte/valhalla/typechain-types";
+import { Valhalla, NFT, GNET, ERC20 } from "@warmbyte/valhalla/typechain-types";
 import { GlobalExchange } from "global-swap/typechain-types";
 
 declare module globalThis {
@@ -122,12 +123,12 @@ export const getGNETSignerContract = async () => {
   return contract;
 };
 
-export const getGlobalExchageContract = async () => {
+export const getSwapContract = async () => {
   const provider = await getMainProvider();
   const contract = await getFromCache(
     async () =>
       new ethers.Contract(
-        GLOBEXC_CONTRACT[CURRENT_CHAIN_ID],
+        SWAP_CONTRACT[CURRENT_CHAIN_ID],
         globalExchangeJson.abi,
         provider
       ) as GlobalExchange
@@ -135,12 +136,12 @@ export const getGlobalExchageContract = async () => {
   return contract;
 };
 
-export const getGlobalExchangeSignerContract = async () => {
+export const getSwapSignerContract = async () => {
   const wallet = await getWallet();
   const contract = await getFromCache(
     async () =>
       new ethers.Contract(
-        GLOBEXC_CONTRACT[CURRENT_CHAIN_ID],
+        SWAP_CONTRACT[CURRENT_CHAIN_ID],
         globalExchangeJson.abi,
         wallet.getSigner()
       ) as GlobalExchange
@@ -148,28 +149,26 @@ export const getGlobalExchangeSignerContract = async () => {
   return contract;
 };
 
-export const getUSDTContract = async () => {
+export const getERC20Contract = async (address: string) => {
   const provider = await getMainProvider();
-  const contract = await getFromCache(
-    async () =>
-      new ethers.Contract(
-        USDT_CONTRACT[CURRENT_CHAIN_ID],
-        gnetJson.abi,
-        provider
-      ) as GNET
+  return new ethers.Contract(address, erc20Json.abi, provider) as ERC20;
+};
+
+export const getERC20SignerContract = async (address: string) => {
+  const wallet = await getWallet();
+  return new ethers.Contract(address, erc20Json.abi, wallet) as ERC20;
+};
+
+export const getUSDTContract = async () => {
+  const contract = await getFromCache(async () =>
+    getERC20Contract(USDT_CONTRACT[CURRENT_CHAIN_ID])
   );
   return contract;
 };
 
 export const getUSDTSignerContract = async () => {
-  const wallet = await getWallet();
-  const contract = await getFromCache(
-    async () =>
-      new ethers.Contract(
-        USDT_CONTRACT[CURRENT_CHAIN_ID],
-        gnetJson.abi,
-        wallet
-      ) as GNET
+  const contract = await getFromCache(async () =>
+    getERC20SignerContract(USDT_CONTRACT[CURRENT_CHAIN_ID])
   );
   return contract;
 };

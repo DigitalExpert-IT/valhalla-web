@@ -7,11 +7,12 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { LayoutMain } from "components";
-import { useGlobalExchange } from "hooks";
+import { useSwap } from "hooks";
 import { useForm } from "react-hook-form";
 
 const Swap = () => {
-  const { currency, swapToken } = useGlobalExchange();
+  const swap = useSwap();
+  console.log(swap);
   const { register, handleSubmit } = useForm();
   const onSwap = (e: any) => {
     console.log("quantity", e.quantity);

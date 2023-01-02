@@ -63,7 +63,7 @@ export const FormSwap = () => {
           label={t("form.label.quantity")}
           name="quantity"
           rules={{
-            required: validateRequired(t("form.label.swap")),
+            required: validateRequired(t("form.label.quantity")),
           }}
           placeholder={t("form.placeholder.quantity")}
         ></FormInput>

@@ -23,7 +23,7 @@ type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
   label?: string | null;
   placeholder?: string | null;
   helperText?: string | null;
-  option: { value: string; child: string }[];
+  option: { value: string; label: string }[];
   onChange?: ChangeEventHandler<HTMLSelectElement> | undefined;
 };
 
@@ -41,15 +41,16 @@ export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
         defaultValue={props.defaultValue}
         rules={props.rules}
         name={props.name}
-        render={({ field: { value, ...rest } }) => (
+        render={({ field: { ...rest } }) => (
           <Select
             {...rest}
-            defaultValue={value ?? ""}
             placeholder={props.placeholder ?? ""}
             onChange={props.onChange}
           >
-            {props.option.map(e => (
-              <option value={e.value}>{e.child}</option>
+            {props.option.map((e, i) => (
+              <option value={e.value} key={i}>
+                {e.label}
+              </option>
             ))}
           </Select>
         )}

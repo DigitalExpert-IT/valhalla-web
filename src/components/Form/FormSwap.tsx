@@ -20,7 +20,7 @@ export const FormSwap = () => {
   const [selectCurrency, setSelecCurrency] = useState<string | undefined>();
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
+    console.log(data.tokenSelect);
   });
 
   const normalizeCurrencies = useMemo(() => {
@@ -29,13 +29,12 @@ export const FormSwap = () => {
       return {
         ...c,
         value: c.pair.name,
-        child: USDTPair ? "GNET / USDT" : "USDT / GNET",
+        label: USDTPair ? "GNET / USDT" : "USDT / GNET",
       };
     });
   }, [currency]);
 
   useEffect(() => {}, []);
-
   return (
     <Stack as="form" onSubmit={onSubmit}>
       <Stack direction={"row"} alignItems="center">

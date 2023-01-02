@@ -4,8 +4,8 @@ import {
   FormErrorMessage,
   FormHelperText,
   Select,
+  SelectProps,
 } from "@chakra-ui/react";
-import { ChangeEventHandler } from "react";
 import {
   Controller,
   ControllerProps,
@@ -24,7 +24,7 @@ type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
   placeholder?: string | null;
   helperText?: string | null;
   option: { value: string; label: string }[];
-  onChange?: ChangeEventHandler<HTMLSelectElement> | undefined;
+  selectProps?: SelectProps;
 };
 
 export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
@@ -45,7 +45,7 @@ export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
           <Select
             {...rest}
             placeholder={props.placeholder ?? ""}
-            onChange={props.onChange}
+            {...props.selectProps}
           >
             {props.option.map((e, i) => (
               <option value={e.value} key={i}>

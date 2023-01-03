@@ -129,8 +129,13 @@ export const useSwap = () => {
       };
     }
 
-    if (allowance.lt(totalPrice)) {
-      await gnetSigner.approve(SWAP_CONTRACT[CURRENT_CHAIN_ID], totalPrice);
+    if (allowance.lt(totalPrice.mul(100))) {
+      const tx = await gnetSigner.approve(
+        SWAP_CONTRACT[CURRENT_CHAIN_ID],
+        totalPrice
+      );
+      const receipt = await tx.wait();
+      return receipt;
     }
   };
 
@@ -152,29 +157,40 @@ export const useSwap = () => {
       };
     }
     if (allowance.lt(totalPrice)) {
-      await usdtSigner.approve(SWAP_CONTRACT[CURRENT_CHAIN_ID], totalPrice);
+      const tx = await usdtSigner.approve(
+        SWAP_CONTRACT[CURRENT_CHAIN_ID],
+        totalPrice
+      );
+      const receipt = await tx.wait();
+      return receipt;
     }
   };
 
   const swapToken = async (data: { currency: string; quantity: number }) => {
-    const isGnet = data.currency === "GNET";
+    const payWithGNET = data.currency === "GNET";
     const swapContract = await getSwapSignerContract();
-    if (isGnet) {
-      await approveGnet(data.quantity);
+    if (payWithGNET) {
+      // in this logic, u swap your GNET with USDT
+      const approveUSDT = await approveUsdt(data.quantity);
+      if (approveUSDT?.status === 1) {
+        const tx = await swapContract.swapToken(
+          store.currency.gnet.address,
+          data.quantity
+        );
+        const receipt = await tx.wait();
+        return receipt;
+      }
+    }
+    // deafult swap yout USDT with GNET
+    const approveGNET = await approveGnet(data.quantity);
+    if (approveGNET?.status === 1) {
       const tx = await swapContract.swapToken(
-        store.currency.gnet.address,
+        store.currency.usdt.address,
         data.quantity
       );
       const receipt = await tx.wait();
       return receipt;
     }
-    await approveUsdt(data.quantity);
-    const tx = await swapContract.swapToken(
-      store.currency.usdt.address,
-      data.quantity
-    );
-    const receipt = await tx.wait();
-    return receipt;
   };
 
   return { ...store, swapToken };

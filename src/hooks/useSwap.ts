@@ -118,7 +118,7 @@ export const useSwap = () => {
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
-    if (balance.lt(totalPrice)) {
+    if (balance.lt(totalPrice.add(tax))) {
       throw {
         code: "NotEnoughBalance",
       };
@@ -141,9 +141,7 @@ export const useSwap = () => {
   };
 
   const approveUsdt = async (quantity: number) => {
-    const usdtSigner = await getERC20SignerContract(
-      store.currency.usdt.address
-    );
+    const usdtSigner = await getUSDTSignerContract();
     const usdt = await getUSDTContract();
     const balance = await usdt.balanceOf(address);
     const pricePerGnet = store.currency.gnet.pair.price;
@@ -153,7 +151,7 @@ export const useSwap = () => {
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
-    if (balance.lt(totalPrice)) {
+    if (balance.lt(totalPrice.add(tax))) {
       throw {
         code: "NotEnoughBalance",
       };

@@ -156,7 +156,11 @@ export const getERC20Contract = async (address: string) => {
 
 export const getERC20SignerContract = async (address: string) => {
   const wallet = await getWallet();
-  return new ethers.Contract(address, erc20Json.abi, wallet) as ERC20;
+  return new ethers.Contract(
+    address,
+    erc20Json.abi,
+    wallet.getSigner()
+  ) as ERC20;
 };
 
 export const getUSDTContract = async () => {

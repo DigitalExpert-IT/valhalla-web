@@ -1,14 +1,14 @@
 import { Card, Image, Box, Text } from "@chakra-ui/react";
 import React from "react";
 
-export const CardHomePromotion = props => {
+export const CardHomeFeatures = props => {
   const { uri, title, subtitle } = props;
 
   return (
     <Card
       variant="gradient"
       colorScheme="purple:whiteAlpha"
-      py={8}
+      py={10}
       px={6}
       maxW={"xs"}
       mx={"auto"}

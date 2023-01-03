@@ -1,3 +1,3 @@
 export * from "./SectionHeader";
-export * from "./SectionPromotion";
+export * from "./SectionFeatures";
 export * from "./SectionFeaturedPopulation";

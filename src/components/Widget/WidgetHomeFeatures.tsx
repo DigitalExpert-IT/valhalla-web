@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, SimpleGridProps } from "@chakra-ui/react";
-import { CardHomePromotion } from "components/Card";
+import { CardHomeFeatures } from "components/Card";
 import React from "react";
 
 type CardData = {
@@ -12,7 +12,7 @@ type CardProps = SimpleGridProps & {
   cardData: CardData[];
 };
 
-export const WidgetHomePromotion = (props: CardProps) => {
+export const WidgetHomeFeatures = (props: CardProps) => {
   const { cardData } = props;
 
   return (
@@ -24,7 +24,7 @@ export const WidgetHomePromotion = (props: CardProps) => {
     >
       {cardData.map((data, idx) => (
         <Box key={idx}>
-          <CardHomePromotion
+          <CardHomeFeatures
             uri={data.uri}
             title={data.title}
             subtitle={data.subtitle}

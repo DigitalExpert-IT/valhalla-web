@@ -1,2 +1,2 @@
 export * from "./WidgetMainHeader";
-export * from "./WidgetHomePromotion";
+export * from "./WidgetHomeFeatures";

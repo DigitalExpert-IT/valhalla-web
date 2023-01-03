@@ -59,5 +59,8 @@
       "startRankReward": "Start Rank Reward",
       "stopRankReward": "Stop Rank Reward"
     }
+  },
+  "profile": {
+    "header": "MY ACCOUNT"
   }
 }

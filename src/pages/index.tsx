@@ -5,22 +5,11 @@ import {
   SectionHeader,
   SectionMatchingBonus,
   SectionTeam,
+  SectionPartnership,
 } from "components";
+import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
 import { Box, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-
-const teamData = [
-  {
-    name: "Yosa Agung Hindarto",
-    image: "https://i.pravatar.cc/150?img=13",
-    division: "Enggineer",
-  },
-  {
-    name: "Abdul Manan",
-    image: "https://i.pravatar.cc/150?img=61",
-    division: "Enggineer",
-  },
-];
 
 export default function Home() {
   const { t } = useTranslation();
@@ -40,7 +29,13 @@ export default function Home() {
         <Heading textTransform="uppercase">
           {t("pages.home.teamSection")}
         </Heading>
-        <SectionTeam data={teamData} />
+        <SectionTeam data={OURTEAM} />
+      </Box>
+      <Box textAlign="center" py="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.partnershipSection")}
+        </Heading>
+        <SectionPartnership data={PARTNERSHIP} />
       </Box>
     </LayoutMain>
   );

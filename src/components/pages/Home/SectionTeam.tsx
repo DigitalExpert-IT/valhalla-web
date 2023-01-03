@@ -23,10 +23,10 @@ export const SectionTeam: React.FC<SectionTeamProps> = props => {
     >
       {data.map((item, idx) => (
         <Stack
-          bgGradient="linear-gradient(260.74deg, rgba(103, 80, 164, 0.4) 20.19%, rgba(157, 138, 235, 0.4) 55.73%, rgba(107, 91, 231, 0.4) 83.97%)"
+          bg="purple.800"
           key={idx}
-          h="2xs"
-          w="3xs"
+          h="xs"
+          w="2xs"
           rounded="xl"
           align="center"
           position="relative"
@@ -34,10 +34,15 @@ export const SectionTeam: React.FC<SectionTeamProps> = props => {
           <Box position="absolute" textAlign="center" top="-10">
             <Avatar size="2xl" name="Segun Adebayo" src={item.image} />
             <Box my="10">
-              <Text fontSize="lg" fontWeight="bold">
+              <Text fontSize="xl" fontWeight="bold">
                 {item.name}
               </Text>
-              <Text color="purple.300" mt="10">
+              <Text
+                fontSize="lg"
+                color="purple.300"
+                mt="10"
+                textTransform="capitalize"
+              >
                 {item.division}
               </Text>
             </Box>

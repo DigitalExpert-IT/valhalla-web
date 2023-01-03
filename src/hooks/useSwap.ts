@@ -112,6 +112,7 @@ export const useSwap = () => {
     const gnet = await getGNETContract();
     const balance = await gnet.balanceOf(address);
     const pricePerUsdt = store.currency.usdt.pair.price;
+    const tax = pricePerUsdt.mul(5).div(1000);
     const totalPrice = pricePerUsdt.mul(quantity);
     const allowance = await gnet.allowance(
       address,
@@ -129,10 +130,10 @@ export const useSwap = () => {
       };
     }
 
-    if (allowance.lt(totalPrice.mul(100))) {
+    if (allowance.lt(totalPrice.add(tax))) {
       const tx = await gnetSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        totalPrice
+        totalPrice.add(tax)
       );
       const receipt = await tx.wait();
       return receipt;
@@ -147,6 +148,7 @@ export const useSwap = () => {
     const balance = await usdt.balanceOf(address);
     const pricePerGnet = store.currency.gnet.pair.price;
     const totalPrice = pricePerGnet.mul(quantity);
+    const tax = totalPrice.mul(5).div(1000);
     const allowance = await usdt.allowance(
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
@@ -156,10 +158,10 @@ export const useSwap = () => {
         code: "NotEnoughBalance",
       };
     }
-    if (allowance.lt(totalPrice)) {
+    if (allowance.lt(totalPrice.add(tax))) {
       const tx = await usdtSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        totalPrice
+        totalPrice.add(tax)
       );
       const receipt = await tx.wait();
       return receipt;
@@ -171,19 +173,7 @@ export const useSwap = () => {
     const swapContract = await getSwapSignerContract();
     if (payWithGNET) {
       // in this logic, u swap your GNET with USDT
-      const approveUSDT = await approveUsdt(data.quantity);
-      if (approveUSDT?.status === 1) {
-        const tx = await swapContract.swapToken(
-          store.currency.gnet.address,
-          data.quantity
-        );
-        const receipt = await tx.wait();
-        return receipt;
-      }
-    }
-    // deafult swap yout USDT with GNET
-    const approveGNET = await approveGnet(data.quantity);
-    if (approveGNET?.status === 1) {
+      await approveGnet(data.quantity);
       const tx = await swapContract.swapToken(
         store.currency.usdt.address,
         data.quantity
@@ -191,6 +181,14 @@ export const useSwap = () => {
       const receipt = await tx.wait();
       return receipt;
     }
+    // deafult swap yout USDT with GNET
+    await approveUsdt(data.quantity);
+    const tx = await swapContract.swapToken(
+      store.currency.gnet.address,
+      data.quantity
+    );
+    const receipt = await tx.wait();
+    return receipt;
   };
 
   return { ...store, swapToken };

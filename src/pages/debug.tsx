@@ -17,6 +17,7 @@ import { rankMap } from "constant/rank";
 import { useValhalla, useAsyncCall, useNFT } from "hooks";
 import { prettyBn, shortenAddress, composeHoc } from "utils";
 import { withConnection, withRegistration } from "hoc";
+import { fromBn } from "evm-bn";
 
 const Debug = () => {
   const {
@@ -26,11 +27,14 @@ const Debug = () => {
     ipoPool,
     claimReward,
     claimRankReward,
+    isRankRewardClaimable,
     account,
   } = useValhalla();
   const nft = useNFT();
   const claimRewardAsync = useAsyncCall(claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
+  const claimNftRankRewardAsync = useAsyncCall(nft.claimRankReward);
 
   return (
     <LayoutMain>
@@ -45,8 +49,18 @@ const Debug = () => {
                 <Th>Global Pool</Th>
                 <Td>
                   <Box>
-                    <Text>{prettyBn(globalPool.claimable)} Matic</Text>
-                    <Text>{prettyBn(nft.globalPool.claimable, 9)} GNET</Text>
+                    <Text>
+                      {isRankRewardClaimable
+                        ? prettyBn(globalPool.valueLeft)
+                        : prettyBn(globalPool.claimable)}{" "}
+                      Matic
+                    </Text>
+                    <Text>
+                      {isRankRewardClaimable
+                        ? prettyBn(nft.globalPool.valueLeft, 9)
+                        : prettyBn(nft.globalPool.claimable, 9)}{" "}
+                      GNET
+                    </Text>
                   </Box>
                 </Td>
               </Tr>
@@ -54,6 +68,12 @@ const Debug = () => {
                 <Th>IPO Pool</Th>
                 <Td>
                   <Text>{prettyBn(ipoPool.claimable)} Matic</Text>
+                </Td>
+              </Tr>
+              <Tr>
+                <Th>Genesis Pool</Th>
+                <Td>
+                  <Text>{fromBn(nft.genesisPool.claimable, 9)} GNET</Text>
                 </Td>
               </Tr>
             </Tbody>
@@ -84,8 +104,8 @@ const Debug = () => {
                 <Th>Reward</Th>
                 <Td>
                   <Box>
-                    <Text>{prettyBn(personalReward)}</Text>
-                    <Text>{prettyBn(nft.personalReward)} GNET</Text>
+                    <Text>{prettyBn(personalReward)} MATIC</Text>
+                    <Text>{prettyBn(nft.personalReward, 9)} GNET</Text>
                   </Box>
                 </Td>
                 <Td>
@@ -97,12 +117,24 @@ const Debug = () => {
                     >
                       Claim
                     </Button>
+                    <Button
+                      onClick={claimRewardGnetAsync.exec}
+                      isLoading={claimRewardGnetAsync.isLoading}
+                      size="sm"
+                    >
+                      Claim GNET
+                    </Button>
                   </Box>
                 </Td>
               </Tr>
               <Tr>
                 <Th>Rank Reward</Th>
-                <Td>{prettyBn(rankReward)}</Td>
+                <Td>
+                  <Box>
+                    <Text>{prettyBn(rankReward)} MATIC</Text>
+                    <Text>{prettyBn(nft.rankReward, 9)} GNET</Text>
+                  </Box>
+                </Td>
                 <Td>
                   <Button
                     onClick={claimRankRewardAsync.exec}
@@ -110,6 +142,13 @@ const Debug = () => {
                     size="sm"
                   >
                     Claim
+                  </Button>
+                  <Button
+                    onClick={claimNftRankRewardAsync.exec}
+                    isLoading={claimNftRankRewardAsync.isLoading}
+                    size="sm"
+                  >
+                    Claim GNET
                   </Button>
                 </Td>
               </Tr>

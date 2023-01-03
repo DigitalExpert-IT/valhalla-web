@@ -32,7 +32,7 @@ export const TextAnimation = (props: Props) => {
 
     const currentNumber = Number(textRef.current.innerText);
     const from = isNaN(currentNumber) ? 0 : currentNumber;
-
+    if (from > numeredChildren) return;
     const control = animate(from, numeredChildren, {
       duration,
       onUpdate: value => {

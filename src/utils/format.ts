@@ -1,7 +1,10 @@
 import { BigNumberish, utils } from "ethers/lib/ethers";
 
 const toFixed = (num: number, symbol = "") => {
-  const formatted = num.toFixed(2).replace(/\.00$/, "");
+  const formatted = num
+    .toFixed(3)
+    .replace(/\.000$/, "")
+    .replace(/00$/, "");
   return `${formatted}${symbol}`;
 };
 

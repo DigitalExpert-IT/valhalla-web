@@ -12,7 +12,7 @@ const storeRootAddressList = async () => {
     let upline = "0x0";
     for (const address of rootAdressList) {
       const existingUser = await prisma.user.findUnique({
-        where: { address: address },
+        where: { address: lowerCase(address) },
       });
       if (!existingUser) {
         await prisma.user.create({
@@ -29,62 +29,64 @@ const storeRootAddressList = async () => {
 };
 
 const initCrawler = async () => {
-  const provider = await getMainProvider();
-  const valhalla = await getValhallaContract();
+  try {
+    const provider = await getMainProvider();
+    const valhalla = await getValhallaContract();
 
-  if (valhalla.listenerCount("Registration") > 0) return;
+    if (valhalla.listenerCount("Registration") > 0) return;
 
-  await storeRootAddressList();
-  const latestUser = await prisma.user.findFirst({
-    orderBy: {
-      blockNumber: "desc",
-    },
-  });
-  const contractDeploymentBlock = await valhalla.deployedAtBlock();
-  const startingBlock =
-    latestUser?.blockNumber ?? contractDeploymentBlock.toNumber();
-  const latestBlock = await provider.getBlockNumber();
-
-  const registrationEventList = await valhalla.queryFilter(
-    {
-      address: valhalla.address,
-      topics: [REGISTRATION_TOPIC],
-    },
-    startingBlock,
-    latestBlock
-  );
-
-  for (const registrationEvent of registrationEventList) {
-    const [user, referrer] = registrationEvent.args;
-
-    const existingUser = await prisma.user.findUnique({
-      where: { address: user },
+    await storeRootAddressList();
+    const latestUser = await prisma.user.findFirst({
+      orderBy: {
+        blockNumber: "desc",
+      },
     });
-    if (!existingUser) {
-      await prisma.user.create({
-        data: {
-          address: lowerCase(user),
-          upline: lowerCase(referrer),
-          blockNumber: Number(registrationEvent.blockNumber),
-        },
-      });
-    }
-  }
+    const contractDeploymentBlock = await valhalla.deployedAtBlock();
+    const startingBlock =
+      latestUser?.blockNumber ?? contractDeploymentBlock.toNumber();
+    const latestBlock = await provider.getBlockNumber();
 
-  valhalla.on("Registration", async (user, referrer, { blockNumber }) => {
-    const existingUser = await prisma.user.findUnique({
-      where: { address: user },
-    });
-    if (!existingUser) {
-      await prisma.user.create({
-        data: {
-          address: lowerCase(user),
-          upline: lowerCase(referrer),
-          blockNumber: Number(blockNumber),
-        },
+    const registrationEventList = await valhalla.queryFilter(
+      {
+        address: valhalla.address,
+        topics: [REGISTRATION_TOPIC],
+      },
+      startingBlock,
+      latestBlock
+    );
+
+    for (const registrationEvent of registrationEventList) {
+      const [user, referrer] = registrationEvent.args;
+
+      const existingUser = await prisma.user.findFirst({
+        where: { address: lowerCase(user) },
       });
+      if (!existingUser) {
+        await prisma.user.create({
+          data: {
+            address: lowerCase(user),
+            upline: lowerCase(referrer),
+            blockNumber: Number(registrationEvent.blockNumber),
+          },
+        });
+      }
     }
-  });
+
+    valhalla.on("Registration", async (user, referrer, { blockNumber }) => {
+      const existingUser = await prisma.user.findFirst({
+        where: { address: lowerCase(user) },
+      });
+      if (!existingUser) {
+        await prisma.user.create({
+          data: {
+            address: lowerCase(user),
+            upline: lowerCase(referrer),
+            blockNumber: Number(blockNumber),
+          },
+        });
+      }
+    });
+  } catch (error) {}
 };
 
 const handler: NextApiHandler = async (_, res) => {

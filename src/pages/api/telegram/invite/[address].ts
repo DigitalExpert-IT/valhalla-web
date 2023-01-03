@@ -4,7 +4,7 @@ import { NextApiHandler } from "next";
 import { PrismaClient } from "@prisma/client";
 import { getValhallaContract } from "lib/contractFactory";
 import { utils } from "ethers";
-import { getTelegramBindingSignatureMessage } from "utils";
+import { getTelegramBindingSignatureMessage, lowerCase } from "utils";
 
 const prisma = new PrismaClient();
 let bot = {} as Telegraf<Context<Update>>;
@@ -33,7 +33,7 @@ const init = async () => {
 
 const handler: NextApiHandler = async (req, res) => {
   init();
-  const address = (req.query.address as string)?.toLowerCase();
+  const address = lowerCase(req.query.address as string);
   const { username, signature } = req.body;
   const valhalla = await getValhallaContract();
   let user = await prisma.user.findFirst({ where: { address } });
@@ -46,12 +46,12 @@ const handler: NextApiHandler = async (req, res) => {
       },
       create: {
         address,
-        upline: accountMap.referrer,
+        upline: lowerCase(accountMap.referrer),
         blockNumber: 0,
       },
       update: {
         address,
-        upline: accountMap.referrer,
+        upline: lowerCase(accountMap.referrer),
         blockNumber: 0,
       },
     });
@@ -63,8 +63,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   switch (req.method) {
     case "GET": {
-      res.json({ type: "request_bind" });
-      break;
+      return res.json({ type: "request_bind" });
     }
     case "POST": {
       if (!signature || !username) {
@@ -75,7 +74,7 @@ const handler: NextApiHandler = async (req, res) => {
         signature
       );
       if (verifiedAddress !== address) {
-        res.status(401).json({ message: "Invalid Signature" });
+        return res.status(401).json({ message: "Invalid Signature" });
       }
       await prisma.user.update({
         where: {
@@ -83,8 +82,7 @@ const handler: NextApiHandler = async (req, res) => {
         },
         data: { telegramUsername: username.replace(/^\@/, "") },
       });
-      res.json({ message: "Binding Success" });
-      break;
+      return res.json({ message: "Binding Success" });
     }
     default: {
       res.status(501).send("NOT IMPLEMENTED");

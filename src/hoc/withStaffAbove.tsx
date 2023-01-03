@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 import { useValhalla, useWallet } from "hooks";
 import { LayoutIllustration, LayoutLoading } from "components";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
-export const withRegistration = (Component: () => JSX.Element | null) => {
+export const withStaffAbove = (Component: () => JSX.Element | null) => {
   const RegistrationWrapper = () => {
     const valhalla = useValhalla();
     const wallet = useWallet();
@@ -17,8 +17,8 @@ export const withRegistration = (Component: () => JSX.Element | null) => {
     }, [valhalla, wallet]);
 
     if (!isReady) return <LayoutLoading />;
-    if (!valhalla.account.isRegistered) {
-      return <RegistrationRequired />;
+    if (!valhalla.isAdmin && !valhalla.isStaff) {
+      return <StaffRequired />;
     }
 
     return <Component />;
@@ -27,20 +27,19 @@ export const withRegistration = (Component: () => JSX.Element | null) => {
   return RegistrationWrapper;
 };
 
-const RegistrationRequired = () => {
+const StaffRequired = () => {
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <LayoutIllustration
-      illustrationUri="/assets/illustration/join.svg"
-      title={t("hoc.registration.title")}
-      description={t("hoc.registration.description")}
+      illustrationUri="/assets/illustration/security-on.svg"
+      title={t("hoc.staffAbove.title")}
+      description={t("hoc.staffAbove.description")}
     >
-      <Link href="/register">
-        <Button variant="gradient" mt="3">
-          {t("common.register")}
-        </Button>
-      </Link>
+      <Button variant="gradient" mt="3" onClick={router.back}>
+        {t("common.back")}
+      </Button>
     </LayoutIllustration>
   );
 };

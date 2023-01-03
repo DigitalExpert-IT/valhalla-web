@@ -1,4 +1,4 @@
-import { useMount } from "react-use";
+import { useEffect } from "react";
 import {
   getValhallaSignerContract,
   getValhallaContract,
@@ -6,7 +6,7 @@ import {
 import create from "zustand";
 import { createInitiator } from "utils";
 import { BigNumber } from "ethers";
-import { useWalletStore } from "hooks";
+import { useWallet, useWalletStore } from "hooks";
 
 type Pool = {
   claimable: BigNumber;
@@ -25,6 +25,10 @@ type Account = {
 
 interface IStore {
   initialized: boolean;
+  isAdmin: boolean;
+  isStaff: boolean;
+  isRankRewardClaimable: boolean;
+  rankRewardClaimableAt: BigNumber;
   account: Account;
   personalReward: BigNumber;
   rankReward: BigNumber;
@@ -34,6 +38,10 @@ interface IStore {
 
 const initialState = {
   initialized: false,
+  isAdmin: false,
+  isStaff: false,
+  isRankRewardClaimable: false,
+  rankRewardClaimableAt: BigNumber.from("0"),
   account: {
     isRegistered: false,
     rank: 0,
@@ -73,11 +81,19 @@ const resetAccount = () => {
 const fetchPool = async () => {
   try {
     const valhalla = await getValhallaContract();
-    const [globalPool, ipoPool] = await Promise.all([
-      valhalla.getGlobalPool(),
-      valhalla.getIpoPool(),
-    ]);
-    setState({ globalPool, ipoPool });
+    const [globalPool, ipoPool, isRankRewardClaimable, rankRewardClaimableAt] =
+      await Promise.all([
+        valhalla.getGlobalPool(),
+        valhalla.getIpoPool(),
+        valhalla.isRankRewardClaimable(),
+        valhalla.rankRewardClaimableAt(),
+      ]);
+    setState({
+      globalPool,
+      ipoPool,
+      isRankRewardClaimable,
+      rankRewardClaimableAt,
+    });
   } catch (error) {}
 };
 
@@ -86,16 +102,22 @@ const fetchPool = async () => {
  */
 const fetchAccount = async () => {
   try {
-    resetAccount();
     const walletStore = useWalletStore.getState();
     if (!walletStore.isConnected) return;
-    const valhalla = await getValhallaContract();
-    const [account, personalReward, rankReward] = await Promise.all([
-      valhalla.accountMap(walletStore.address),
-      valhalla.rewardMap(walletStore.address),
-      valhalla.getMyRankReward(),
+    const valhalla = await getValhallaSignerContract();
+    const [account, personalReward, rankReward, adminRole, staffRole] =
+      await Promise.all([
+        valhalla.accountMap(walletStore.address),
+        valhalla.rewardMap(walletStore.address),
+        valhalla.getMyRankReward(),
+        valhalla.DEFAULT_ADMIN_ROLE(),
+        valhalla.STAFF_ROLE(),
+      ]);
+    const [isAdmin, isStaff] = await Promise.all([
+      valhalla.hasRole(adminRole, walletStore.address),
+      valhalla.hasRole(staffRole, walletStore.address),
     ]);
-    setState({ account, personalReward, rankReward });
+    setState({ account, personalReward, rankReward, isAdmin, isStaff });
   } catch (error) {}
 };
 
@@ -111,6 +133,8 @@ const init = createInitiator(async () => {
     valhalla.on("Registration", () => {
       Promise.all([fetchPool(), fetchAccount()]);
     });
+    valhalla.on("RankRewardOpened", fetchPool);
+    valhalla.on("RankRewardClosed", fetchPool);
 
     useWalletStore.subscribe(
       state => state.isConnected,
@@ -137,10 +161,11 @@ const init = createInitiator(async () => {
 
 export const useValhalla = () => {
   const store = useStore();
+  const wallet = useWallet();
 
-  useMount(() => {
-    init();
-  });
+  useEffect(() => {
+    if (wallet.initialized) init();
+  }, [wallet.initialized]);
 
   const getAccountMetadata = async (address: string) => {
     const valhalla = await getValhallaContract();
@@ -170,11 +195,27 @@ export const useValhalla = () => {
     return receipt;
   };
 
+  const startClaimingRankReward = async () => {
+    const valhalla = await getValhallaSignerContract();
+    const tx = await valhalla.startClaimingRankReward();
+    const receipt = await tx.wait();
+    return receipt;
+  };
+
+  const stopClaimingRankReward = async () => {
+    const valhalla = await getValhallaSignerContract();
+    const tx = await valhalla.stopClaimingRankReward();
+    const receipt = await tx.wait();
+    return receipt;
+  };
+
   return {
     ...store,
     register,
     claimReward,
     claimRankReward,
     getAccountMetadata,
+    startClaimingRankReward,
+    stopClaimingRankReward,
   };
 };

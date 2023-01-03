@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { BigNumber, BigNumberish } from "ethers";
 import produce from "immer";
 import { compareAddress, createInitiator } from "utils";
+import { getValhallaContract } from "../lib/contractFactory";
 
 export interface IOwnedNFT {
   id: BigNumber;
@@ -43,6 +44,7 @@ interface IStore {
   rankReward: BigNumber;
   globalPool: Pool;
   ipoPool: Pool;
+  genesisPool: Pool;
 }
 
 const CARD_IDS = [0, 1, 2, 3, 4, 5];
@@ -60,6 +62,10 @@ const initialState = {
     valueLeft: BigNumber.from("0"),
   },
   ipoPool: {
+    claimable: BigNumber.from("0"),
+    valueLeft: BigNumber.from("0"),
+  },
+  genesisPool: {
     claimable: BigNumber.from("0"),
     valueLeft: BigNumber.from("0"),
   },
@@ -86,11 +92,12 @@ const loadCardList = async () => {
 const fetchPool = async () => {
   try {
     const nft = await getNFTContract();
-    const [globalPool, ipoPool] = await Promise.all([
+    const [globalPool, ipoPool, genesisPool] = await Promise.all([
       nft.getGlobalPool(),
       nft.getIpoPool(),
+      nft.getGenesisPool(),
     ]);
-    setState({ globalPool, ipoPool });
+    setState({ globalPool, ipoPool, genesisPool });
   } catch (error) {}
 };
 
@@ -98,7 +105,7 @@ const fetchAccount = async () => {
   try {
     const address = useWalletStore.getState().address;
     if (!address) return;
-    const nft = await getNFTContract();
+    const nft = await getNFTSignerContract();
     const [personalReward, rankReward] = await Promise.all([
       nft.rewardMap(address),
       nft.getMyRankReward(),
@@ -161,19 +168,26 @@ const resetAccount = () => {
 
 const init = createInitiator(async () => {
   const nft = await getNFTContract();
+  const valhalla = await getValhallaContract();
   fetchPool();
   loadCardList();
   nft.on("Buy", onBuy);
+  valhalla.on("RankRewardOpened", fetchPool);
+  valhalla.on("RankRewardClosed", fetchPool);
+  valhalla.on("ClaimReward", fetchAccount);
+  valhalla.on("ClaimRankReward", () => {
+    Promise.all([fetchPool(), fetchAccount()]);
+  });
+  valhalla.on("Registration", () => {
+    Promise.all([fetchPool(), fetchAccount()]);
+  });
 
   useWalletStore.subscribe(
-    state => state.isConnected,
-    isConnected => {
-      if (isConnected) {
-        fetchTokenList();
-        fetchAccount();
-      } else {
-        resetAccount();
-      }
+    state => state.address,
+    () => {
+      resetAccount();
+      fetchTokenList();
+      fetchAccount();
     },
     { fireImmediately: true }
   );
@@ -231,5 +245,19 @@ export const useNFT = () => {
     return receipt;
   };
 
-  return { ...store, buy, farm };
+  const claimReward = async () => {
+    const nft = await getNFTSignerContract();
+    const tx = await nft.claimReward();
+    const receipt = await tx.wait();
+    return receipt;
+  };
+
+  const claimRankReward = async () => {
+    const nft = await getNFTSignerContract();
+    const tx = await nft.claimRankReward();
+    const receipt = await tx.wait();
+    return receipt;
+  };
+
+  return { ...store, buy, farm, claimReward, claimRankReward };
 };

@@ -14,7 +14,7 @@ export const CardHomeFeatures = props => {
       mx={"auto"}
       h={"full"}
     >
-      <Image objectFit="cover" src={uri} alt={title} w={24} />
+      <Image src={uri} alt={title} h={20} maxW={"max"} />
       <Box mt={6}>
         <Text
           mb={4}

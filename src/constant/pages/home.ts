@@ -9,22 +9,22 @@ export const HEADER_IMAGE_DATA = [
 
 export const PROMOTION_IMAGE_DATA = [
   {
-    uri: "/images/imgHomePromotion1.png",
+    uri: "/images/imgHomeFeatures1.png",
     title: t("common.homePromotion.fullTransparency.title"),
     subtitle: t("common.homePromotion.fullTransparency.subtitle")
   },
   {
-    uri: "/images/imgHomePromotion2.png",
+    uri: "/images/imgHomeFeatures2.png",
     title: t("common.homePromotion.fullAutomation.title"),
     subtitle: t("common.homePromotion.fullAutomation.subtitle")
   },
   {
-    uri: "/images/imgHomePromotion3.png",
+    uri: "/images/imgHomeFeatures3.png",
     title: t("common.homePromotion.smartContract.title"),
     subtitle: t("common.homePromotion.smartContract.subtitle")
   },
   {
-    uri: "/images/imgHomePromotion4.png",
+    uri: "/images/imgHomeFeatures4.png",
     title: t("common.homePromotion.decentralized.title"),
     subtitle: t("common.homePromotion.decentralized.subtitle")
   },

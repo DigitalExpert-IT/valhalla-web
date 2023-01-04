@@ -19,8 +19,12 @@
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",
+  "referrer": "Referrer",
   "accept": "Accept",
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
-  "transactionSuccess": "Transaction Success"
+  "transactionSuccess": "Transaction Success",
+  "networkMembers": "Network Members",
+  "directReferrals": "Direct Referrals",
+  "telegramOnlyMember": "Telegram Only Member"
 }

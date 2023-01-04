@@ -1,11 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import { CardProfile } from "components/Card";
 import React from "react";
 
 export const SectionProfile = () => {
   return (
-    <Flex justifyContent={"center"} alignItems={"center"}>
+    <SimpleGrid columns={2} spacing={10}>
       <CardProfile />
-    </Flex>
+    </SimpleGrid>
   );
 };

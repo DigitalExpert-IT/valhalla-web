@@ -21,7 +21,7 @@ import { SiTelegram } from "react-icons/si";
 export const CardProfile = () => {
   const { address, connect, isConnected } = useWallet();
   return (
-    <Card variant={"gradient"} colorScheme={"purple:pink"} p={20}>
+    <Card variant={"gradient"} colorScheme={"purple:pink"} rounded="xl" p={20}>
       <Box>
         <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} />
       </Box>

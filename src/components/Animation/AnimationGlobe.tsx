@@ -46,7 +46,7 @@ export const AnimationGlobe: React.FC = (props: Props) => {
 
       const controls = globe.controls();
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 2;
+      controls.autoRotateSpeed = -2;
       controls.enableZoom = false;
     };
 

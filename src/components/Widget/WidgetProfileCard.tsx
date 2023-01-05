@@ -1,5 +1,5 @@
-import { Box, Flex, FlexProps } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Flex, FlexProps } from "@chakra-ui/react";
+import React from "react";
 
 type Props = FlexProps & {
   value?: string;
@@ -19,5 +19,5 @@ export const WidgetProfileCard = (props: Props) => {
         {children}
       </Flex>
     </>
-  )
-}
+  );
+};

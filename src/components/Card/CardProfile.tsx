@@ -25,7 +25,7 @@ export const CardProfile = () => {
       <Box>
         <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} />
       </Box>
-      <Box mt={8}>
+      <Box mt={8} zIndex={"overlay"}>
         <CopiableText
           fontFamily="mono"
           display="inline-flex"

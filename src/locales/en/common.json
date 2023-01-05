@@ -27,5 +27,10 @@
   "transactionSuccess": "Transaction Success",
   "networkMembers": "Network Members",
   "directReferrals": "Direct Referrals",
-  "telegramOnlyMember": "Telegram Only Member"
+  "telegramOnlyMember": "Telegram Only Member",
+  "globalBonus": "Global Bonus",
+  "referralBonus": "Referral Bonus",
+  "rankReward": "Rank Reward",
+  "matic": "MATIC"
+
 }

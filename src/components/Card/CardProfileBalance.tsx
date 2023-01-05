@@ -27,7 +27,7 @@ export const CardProfileBalance = (props: TCard) => {
       <Text fontSize={"xl"}>
         <Trans i18nKey="common.balance" />
       </Text>
-      <Box minW={"md"} w={"max"} mt={4}>
+      <Box mt={4}>
         {cardData.map((row, idx) => (
           <Flex
             alignItems={"center"}

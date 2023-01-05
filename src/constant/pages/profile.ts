@@ -14,19 +14,22 @@ export const PROFILE_BALANCE = [
 
 export const PROFILE_WIDGET = [
   {
-    start: ["Global Bonus"],
-    end: [100000000000000, "MATIC"],
+    start: [t("common.globalBonus")],
+    end: [100000000000000, t("common.matic")],
   },
   {
-    start: ["Referral Bonus", "1000000000000000000000000000 MATIC"],
+    start: [
+      t("common.referralBonus"),
+      "1000000000000000000000000000 " + t("common.matic"),
+    ],
     end: "claim",
   },
   {
-    start: ["Rank Reward", "0 MATIC"],
+    start: [t("common.rankReward"), `0 ${t("common.matic")}`],
     end: "claim",
   },
   {
-    start: ["Global Bonus"],
-    end: [33, "MATIC"],
+    start: [t("common.globalBonus")],
+    end: [33, t("common.matic")],
   },
 ];

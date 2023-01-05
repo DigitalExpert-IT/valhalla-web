@@ -5,6 +5,7 @@
   "registrationFee": "Unmatch Registration Fee",
   "errorCode": {
     "ACTION_REJECTED": "User Reject Transaction!",
-    "NotEnoughBalance": "Not Enough Balance"
+    "NotEnoughBalance": "Not Enough Balance",
+    "NotEnoughPool": "Not Enough Pool"
   }
 }

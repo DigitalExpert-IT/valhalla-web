@@ -22,5 +22,6 @@
   "accept": "Accept",
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
-  "transactionSuccess": "Transaction Success"
+  "transactionSuccess": "Transaction Success",
+  "swap": "Swap"
 }

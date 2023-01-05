@@ -18,3 +18,13 @@ export const GNET_CONTRACT = {
   "0x539": "0x4781BfD05cb69665da90d0DfeBfdA503651A7E81",
   "0x29a": "0x1E7055383B885E5d6F21aa2209afb8Be5b3938C0",
 };
+
+export const SWAP_CONTRACT = {
+  "0x89": "",
+  "0x29a": "0x06831106F66222dCd4A6A581c6c34c458d14a532",
+};
+
+export const USDT_CONTRACT = {
+  "0x89": "",
+  "0x29a": "0x02cc4A386b70cccd02b415117273e5988B0E708a",
+};

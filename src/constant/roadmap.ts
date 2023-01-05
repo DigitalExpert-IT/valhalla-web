@@ -1,3 +1,4 @@
+import { t } from "i18next";
 export interface IRoadmap {
   name: string;
   shades: string;

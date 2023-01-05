@@ -43,9 +43,9 @@ export const SectionFeaturedPopulation = () => {
         w={{ base: "200vw", md: "100vw", lg: "auto" }}
         opacity={{ base: ".8", lg: "auto" }}
         pointerEvents={{ base: "none", lg: "all" }}
-        flex="1.5"
+        flex="2"
       >
-        <AspectRatio w="full" ratio={1}>
+        <AspectRatio w="full" ratio={{ base: 1, md: 0.8 }}>
           <AnimationGlobe />
         </AspectRatio>
       </Box>

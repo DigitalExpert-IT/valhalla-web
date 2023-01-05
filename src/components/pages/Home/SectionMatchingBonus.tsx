@@ -10,7 +10,6 @@ export const SectionMatchingBonus = () => {
       align="center"
       justify="center"
       flexDir={{ base: "column", md: "row" }}
-      mb="20"
     >
       <Box w={{ base: "100%", md: "60%" }}>
         <Image

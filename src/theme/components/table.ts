@@ -107,9 +107,66 @@ const variantStripe = definePartsStyle(props => {
   };
 });
 
+const variantValhalla = definePartsStyle(props => {
+  const { colorScheme: c } = props;
+
+  return {
+    table: {
+      borderCollapse: "separate",
+      borderSpacing: "0 15px",
+    },
+    th: {
+      color: mode("gray.600", "gray.400")(props),
+      borderBottom: "1px",
+      borderColor: "gray.900",
+      pb: 10,
+      ...numericStyles,
+    },
+    td: {
+      height: "100px",
+      background: mode(`${c}.100`, `${c}.900`)(props),
+      "&:last-child": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.900`)(props),
+        borderTopRightRadius: "15px",
+        borderBottomRightRadius: "15px",
+      },
+      "&:first-child": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.900`)(props),
+        borderTopLeftRadius: "15px",
+        borderBottomLeftRadius: "15px",
+      },
+      ...numericStyles,
+    },
+    tbody: {
+      td: {
+        "&:last-child": {
+          td: {
+            border: "1px",
+            borderColor: "white",
+            borderRadius: "20px",
+          },
+        },
+      },
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
 const variants = {
   simple: variantSimple,
   striped: variantStripe,
+  valhalla: variantValhalla,
   unstyled: defineStyle({}),
 };
 

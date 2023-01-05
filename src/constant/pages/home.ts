@@ -38,3 +38,67 @@ export const PARTNERSHIP = [
     image: "/assets/partnership/partner4.png",
   },
 ];
+
+export interface IRankBonus {
+  image: string;
+  rank: string;
+  bonus: string;
+  requirement: number;
+}
+
+export const RANKBONUS = [
+  {
+    image: "/assets/rank/common.svg",
+    rank: "no rank",
+    bonus: "0",
+    requirement: 100,
+  },
+  {
+    image: "/assets/rank/common.svg",
+    rank: "common",
+    bonus: "5%",
+    requirement: 100,
+  },
+  {
+    image: "/assets/rank/rare.svg",
+    rank: "rare",
+    bonus: "13%",
+    requirement: 400,
+  },
+  {
+    image: "/assets/rank/super-rare.svg",
+    rank: "super rare",
+    bonus: "16%",
+    requirement: 1600,
+  },
+  {
+    image: "/assets/rank/epic.svg",
+    rank: "epic",
+    bonus: "19%",
+    requirement: 6400,
+  },
+  {
+    image: "/assets/rank/legend.svg",
+    rank: "legend",
+    bonus: "22%",
+    requirement: 16000,
+  },
+  {
+    image: "/assets/rank/super-legend.svg",
+    rank: "super legend",
+    bonus: "25%",
+    requirement: 64000,
+  },
+  {
+    image: "",
+    rank: "Total",
+    bonus: "100%",
+    requirement: 0,
+  },
+  {
+    image: "",
+    rank: "TAX All Claim",
+    bonus: "100%",
+    requirement: 0,
+  },
+];

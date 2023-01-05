@@ -1,18 +1,8 @@
-import {
-  Box,
-  Card,
-  Flex,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-  useClipboard,
-} from "@chakra-ui/react";
+import { Box, Card, Flex, Image, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { WidgetProfileCard } from "components/Widget";
 import { PROFILE_MEMBER } from "constant/pages/profile";
 import { useWallet, useAsyncCall, useValhalla } from "hooks";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
@@ -20,8 +10,27 @@ import { SiTelegram } from "react-icons/si";
 
 export const CardProfile = () => {
   const { address, connect, isConnected } = useWallet();
+
+  // const [width, setWidth] = useState(0);
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setWidth(window.innerWidth)
+  //   }
+  //   window.addEventListener("resize", handleResize)
+  //   handleResize()
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize)
+  //   }
+  // }, [setWidth])
+
   return (
-    <Card variant={"gradient"} colorScheme={"purple:pink"} rounded="xl" p={20}>
+    <Card
+      variant={"gradient"}
+      colorScheme={"purple:pink"}
+      rounded="xl"
+      py={20}
+      px={{ base: 4, md: 20 }}
+    >
       <Box>
         <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} />
       </Box>
@@ -33,14 +42,14 @@ export const CardProfile = () => {
           gap={2}
           value={address}
         >
-          {address} <IoCopyOutline />
+          {address.toUpperCase()} <IoCopyOutline />
         </CopiableText>
         <Box py={4}>
           <Text color={"purple.500"}>
             <Trans i18nKey="common.referrer" />
           </Text>
           <Text color={"purple.500"} pt={4}>
-            {address}
+            {address.toUpperCase()}
           </Text>
           <SimpleGrid columns={1} spacing={4} my={8}>
             {PROFILE_MEMBER.map((item, idx) => (
@@ -51,11 +60,10 @@ export const CardProfile = () => {
                 borderRadius={"md"}
                 py={4}
                 px={6}
+                fontSize={{ md: "lg" }}
               >
-                <Text fontSize={"lg"} fontWeight={"bold"}>
-                  {item.label}
-                </Text>
-                <Text fontSize={"lg"} fontWeight={"bold"}>
+                <Text fontWeight={"bold"}>{item.label}</Text>
+                <Text fontWeight={"bold"}>
                   {item.value == "telegram" ? <SiTelegram /> : item.value}
                 </Text>
               </Flex>

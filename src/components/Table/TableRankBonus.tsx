@@ -1,6 +1,7 @@
 import React from "react";
 import { IRankBonus, RANKBONUS } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
+import { Trans } from "react-i18next";
 import { TableData } from "./TableData";
 import { Box, Image, Heading, Text } from "@chakra-ui/react";
 
@@ -43,7 +44,14 @@ const columns = [
 export const TableRankBonus = () => {
   return (
     <Box textAlign="center" mb={20}>
-      <Heading mb={20}>Rank Bonus</Heading>
+      <Heading mb={20}>
+        <Trans
+          i18nKey="pages.home.globalrankbonus"
+          components={{
+            strong: <Text as="span" color="brand.500" />,
+          }}
+        />
+      </Heading>
       <TableData columns={columns} variant="valhalla" data={RANKBONUS} />
     </Box>
   );

@@ -1,28 +1,31 @@
-import { Box, Card, Flex, Image, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Box, Card, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
 import { PROFILE_MEMBER } from "constant/pages/profile";
-import { useWallet, useAsyncCall, useValhalla } from "hooks";
-import React, { useEffect, useState } from "react";
+import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
+import React, { useEffect, useRef, useState } from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
 import { SiTelegram } from "react-icons/si";
+import { t } from "i18next";
 
 export const CardProfile = () => {
-  const { address, connect, isConnected } = useWallet();
+  const { address, connect, initialized, isConnected } = useWallet();
 
-  // const [width, setWidth] = useState(0);
-  // useEffect(() => {
-  //   function handleResize() {
-  //     setWidth(window.innerWidth)
-  //   }
-  //   window.addEventListener("resize", handleResize)
-  //   handleResize()
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize)
-  //   }
-  // }, [setWidth])
-
+  const [widthMob, setWidthMob] = useState(false);
+  useEffect(() => {
+    function handleResize() {
+      let windowSet =
+        window.innerWidth < 500 ||
+        (window.innerWidth > 992 && window.innerWidth < 1160);
+      setWidthMob(windowSet);
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setWidthMob]);
   return (
     <Card
       variant={"gradient"}
@@ -42,14 +45,15 @@ export const CardProfile = () => {
           gap={2}
           value={address}
         >
-          {address.toUpperCase()} <IoCopyOutline />
+          {widthMob ? shortenAddress(address) : address.toUpperCase()}{" "}
+          <IoCopyOutline />
         </CopiableText>
         <Box py={4}>
           <Text color={"purple.500"}>
             <Trans i18nKey="common.referrer" />
           </Text>
           <Text color={"purple.500"} pt={4}>
-            {address.toUpperCase()}
+            {widthMob ? shortenAddress(address) : address.toUpperCase()}
           </Text>
           <SimpleGrid columns={1} spacing={4} my={8}>
             {PROFILE_MEMBER.map((item, idx) => (

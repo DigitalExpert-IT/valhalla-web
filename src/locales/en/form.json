@@ -1,14 +1,20 @@
 {
   "placeholder": {
-    "referrer": "Referrer Address"
+    "referrer": "Referrer Address",
+    "quantity": "Quantity",
+    "selectCurrency": "Select Currency"
   },
   "label": {
-    "referrer": "Referral Code"
+    "referrer": "Referral Code",
+    "swap": "Swap Token",
+    "quantity": "Quantity"
   },
   "message": {
-    "registrationSuccess": "Registration Success!"
+    "registrationSuccess": "Registration Success!",
+    "swapSucces": "Succes Swap"
   },
   "helperText": {
-    "referrer": "Please enter correct wallet address"
+    "referrer": "Please enter correct wallet address",
+    "quantity": "please enter Quantity"
   }
 }

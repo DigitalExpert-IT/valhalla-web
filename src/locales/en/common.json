@@ -23,22 +23,5 @@
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
   "transactionSuccess": "Transaction Success",
-  "homePromotion": {
-    "fullTransparency":{
-      "title": "Full Transparency",
-      "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
-    },
-    "fullAutomation":{
-      "title": "Full Automation",
-      "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
-    },
-    "smartContract":{
-      "title": "Smart Contract",
-      "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
-    },
-    "decentralized":{
-      "title": "Decentralized",
-      "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
-    }
-  }
+  "swap": "Swap"
 }

@@ -9,11 +9,11 @@ export const SectionFeatures = () => {
     <Box my={8} px={4}>
       <Box py={8}>
         <Heading textAlign={"center"} my={8}>
-          <Trans i18nKey="pages.home.promotion.title" />
+          <Trans i18nKey="pages.home.feature.title" />
         </Heading>
         <Text textAlign={"justify"}>
           <Trans
-            i18nKey="pages.home.promotion.subtitle"
+            i18nKey="pages.home.feature.subtitle"
             components={{
               span: <Text as="span" color="secondary.500" />,
             }}

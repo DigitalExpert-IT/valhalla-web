@@ -70,16 +70,7 @@ export const TableData = <Data extends object>({
                 const meta: any = cell.column.columnDef.meta;
                 return (
                   <Td key={cell.id} isNumeric={meta?.isNumeric}>
-                    <Text
-                      fontWeight="bold"
-                      fontSize="md"
-                      textTransform="capitalize"
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </Text>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Td>
                 );
               })}

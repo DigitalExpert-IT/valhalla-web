@@ -44,61 +44,71 @@ export interface IRankBonus {
   rank: string;
   bonus: string;
   requirement: number;
+  color: string;
 }
 
 export const RANKBONUS = [
   {
-    image: "/assets/rank/common.svg",
+    image: "/assets/rank/norank2.svg",
     rank: "no rank",
     bonus: "0",
     requirement: 100,
+    color: "white",
   },
   {
     image: "/assets/rank/common.svg",
     rank: "common",
     bonus: "5%",
     requirement: 100,
+    color: "#A8742F",
   },
   {
     image: "/assets/rank/rare.svg",
     rank: "rare",
     bonus: "13%",
     requirement: 400,
+    color: "#666768",
   },
   {
     image: "/assets/rank/super-rare.svg",
     rank: "super rare",
     bonus: "16%",
     requirement: 1600,
+    color: "#2A7FB8",
   },
   {
     image: "/assets/rank/epic.svg",
     rank: "epic",
     bonus: "19%",
     requirement: 6400,
+    color: "#E7570F",
   },
   {
     image: "/assets/rank/legend.svg",
     rank: "legend",
     bonus: "22%",
     requirement: 16000,
+    color: "#E0475A",
   },
   {
     image: "/assets/rank/super-legend.svg",
     rank: "super legend",
     bonus: "25%",
     requirement: 64000,
+    color: "#BE7DD8",
   },
   {
     image: "",
     rank: "Total",
     bonus: "100%",
     requirement: 0,
+    color: "",
   },
   {
     image: "",
     rank: "TAX All Claim",
     bonus: "100%",
     requirement: 0,
+    color: "white",
   },
 ];

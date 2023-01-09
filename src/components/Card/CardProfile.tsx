@@ -11,6 +11,7 @@ import { t } from "i18next";
 
 export const CardProfile = () => {
   const { address, connect, initialized, isConnected } = useWallet();
+  const { account } = useValhalla();
 
   const [widthMob, setWidthMob] = useState(false);
   useEffect(() => {
@@ -53,25 +54,56 @@ export const CardProfile = () => {
             <Trans i18nKey="common.referrer" />
           </Text>
           <Text color={"purple.500"} pt={4}>
-            {widthMob ? shortenAddress(address) : address.toUpperCase()}
+            {widthMob
+              ? shortenAddress(account.referrer)
+              : account.referrer.toUpperCase()}
           </Text>
           <SimpleGrid columns={1} spacing={4} my={8}>
-            {PROFILE_MEMBER.map((item, idx) => (
-              <Flex
-                key={idx}
-                justifyContent={"space-between"}
-                bg={"brand.800"}
-                borderRadius={"md"}
-                py={4}
-                px={6}
-                fontSize={{ md: "lg" }}
-              >
-                <Text fontWeight={"bold"}>{item.label}</Text>
-                <Text fontWeight={"bold"}>
-                  {item.value == "telegram" ? <SiTelegram /> : item.value}
-                </Text>
-              </Flex>
-            ))}
+            <Flex
+              justifyContent={"space-between"}
+              bg={"brand.800"}
+              borderRadius={"md"}
+              py={4}
+              px={6}
+              fontSize={{ md: "lg" }}
+            >
+              <Text fontWeight={"bold"}>
+                <Trans i18nKey="common.networkMembers" />
+              </Text>
+              <Text fontWeight={"bold"}>
+                {account.downlineCount.toNumber()}
+              </Text>
+            </Flex>
+            <Flex
+              justifyContent={"space-between"}
+              bg={"brand.800"}
+              borderRadius={"md"}
+              py={4}
+              px={6}
+              fontSize={{ md: "lg" }}
+            >
+              <Text fontWeight={"bold"}>
+                <Trans i18nKey="common.directReferrals" />
+              </Text>
+              <Text fontWeight={"bold"}>
+                {account.directDownlineCount.toNumber()}
+              </Text>
+            </Flex>
+            <Flex
+              justifyContent={"space-between"}
+              bg={"brand.800"}
+              borderRadius={"md"}
+              py={4}
+              px={6}
+              fontSize={{ md: "lg" }}
+            >
+              <Text fontWeight={"bold"}>
+                <Trans i18nKey="common.telegramOnlyMember" />
+              </Text>
+              <Text fontWeight={"bold"}>
+                <SiTelegram />
+              </Text>
+            </Flex>
           </SimpleGrid>
         </Box>
       </Box>

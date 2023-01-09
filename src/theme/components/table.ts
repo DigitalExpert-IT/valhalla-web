@@ -202,7 +202,7 @@ const variantGradient = definePartsStyle(props => {
     tbody: {
       tr: {
         bgGradient: `linear(to-r, ${c1}.900, ${c2}.400)`,
-        "&:nth-of-type(odd)": {
+        "&:nth-of-type(even)": {
           "th, td, tr": {
             bgGradient: `linear(to-r, ${c1}.900, ${c2}.400)`,
             borderColor: mode(`${c}.100`, `${c}.900`)(props),

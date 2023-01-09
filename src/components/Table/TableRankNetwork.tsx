@@ -46,7 +46,7 @@ export const TableRankNetwork = () => {
         <Trans
           i18nKey="pages.home.rankNetwork"
           components={{
-            strong: <Text as="span" color="brand.700" />,
+            strong: <Text as="span" color="brand.500" />,
           }}
         />
       </Heading>

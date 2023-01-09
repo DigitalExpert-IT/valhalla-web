@@ -10,6 +10,8 @@ import {
   SectionTeam,
   SectionPartnership,
   TableRankBonus,
+  TableRankNetwork,
+  TableTokenomic,
 } from "components";
 
 export default function Home() {
@@ -19,6 +21,8 @@ export default function Home() {
     <LayoutMain>
       <SectionHeader />
       <SectionFeaturedPopulation />
+      <TableRankNetwork />
+      <TableRankBonus />
       <SectionMatchingBonus />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">
@@ -26,7 +30,7 @@ export default function Home() {
         </Heading>
         <WidgetTimeLine />
       </Box>
-      <TableRankBonus />
+      <TableTokenomic />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">
           {t("pages.home.teamSection")}

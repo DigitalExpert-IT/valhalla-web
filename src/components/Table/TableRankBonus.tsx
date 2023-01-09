@@ -11,15 +11,23 @@ const columns = [
   columnHelper.accessor("image", {
     cell: info =>
       info.getValue() ? (
-        <Image src={info.getValue()} alt="rank-image" w={20} h={20} />
+        <Image
+          src={info.getValue()}
+          alt="rank-image"
+          w={20}
+          h={20}
+          minH={10}
+          minW={10}
+        />
       ) : null,
     header: "",
   }),
+
   columnHelper.accessor("rank", {
     cell: info => (
       <Text
         fontWeight="bold"
-        fontSize="md"
+        fontSize="lg"
         textTransform="capitalize"
         color={info.cell.row.original.color}
       >
@@ -28,12 +36,22 @@ const columns = [
     ),
     header: "Rank",
   }),
+
   columnHelper.accessor("bonus", {
-    cell: info => info.getValue(),
+    cell: info => (
+      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+        {info.getValue()}
+      </Text>
+    ),
     header: "Bonus GNET",
   }),
+
   columnHelper.accessor("requirement", {
-    cell: info => info.getValue(),
+    cell: info => (
+      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+        {info.getValue()}
+      </Text>
+    ),
     header: "15 level requirement",
     meta: {
       isNumeric: false,

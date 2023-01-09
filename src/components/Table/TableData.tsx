@@ -12,13 +12,15 @@ import {
 type TableDataProps<Data extends object> = {
   data: Data[];
   columns: ColumnDef<Data, any>[];
-  variant: string;
+  variant?: string;
+  colorScheme?: string;
 };
 
 export const TableData = <Data extends object>({
   data,
   columns,
   variant,
+  colorScheme,
 }: TableDataProps<Data>) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
@@ -36,7 +38,7 @@ export const TableData = <Data extends object>({
     <Box overflowX="auto" w="100%">
       <Table
         variant={variant ?? "simple"}
-        colorScheme="valhalla"
+        colorScheme={colorScheme ?? "valhalla"}
         size="sm"
         w="100%"
       >

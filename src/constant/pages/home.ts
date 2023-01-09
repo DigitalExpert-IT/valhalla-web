@@ -47,6 +47,76 @@ export interface IRankBonus {
   color: string;
 }
 
+export interface IRankNetwork {
+  levelBonus: string;
+  percent: string;
+  value: number;
+}
+
+export interface ITokenomics {
+  totalSupply: string;
+  percent: string;
+  value: string;
+}
+
+export const RANKNETWORK = [
+  {
+    levelBonus: "level 1-2",
+    percent: "10%",
+    value: 6.7,
+  },
+  {
+    levelBonus: "level 3",
+    percent: "6%",
+    value: 4.02,
+  },
+  {
+    levelBonus: "level 4",
+    percent: "5%",
+    value: 3.35,
+  },
+  {
+    levelBonus: "level 5-6",
+    percent: "4%",
+    value: 2.68,
+  },
+  {
+    levelBonus: "level 7-8",
+    percent: "3%",
+    value: 2.01,
+  },
+  {
+    levelBonus: "level 9-11",
+    percent: "2%",
+    value: 1.34,
+  },
+  {
+    levelBonus: "level 12-15",
+    percent: "1%",
+    value: 0.67,
+  },
+  {
+    levelBonus: "Reserve",
+    percent: "3%",
+    value: 2.01,
+  },
+  {
+    levelBonus: "Global Omzet",
+    percent: "17%",
+    value: 11.39,
+  },
+  {
+    levelBonus: "Fee Receiver",
+    percent: "25%",
+    value: 16.75,
+  },
+  {
+    levelBonus: "Total",
+    percent: "100%",
+    value: 67,
+  },
+];
+
 export const RANKBONUS = [
   {
     image: "/assets/rank/norank2.svg",
@@ -110,5 +180,17 @@ export const RANKBONUS = [
     bonus: "100%",
     requirement: 0,
     color: "white",
+  },
+];
+
+export const TOKENOMICS = [
+  { totalSupply: "reserves", percent: "10%", value: "10.000.000" },
+  { totalSupply: "network swap", percent: "65%", value: "65.000.000" },
+  { totalSupply: "team", percent: "10%", value: "10.000.000" },
+  { totalSupply: "marketing", percent: "10%", value: "10.000.000" },
+  {
+    totalSupply: "Ecosystem Development Fund",
+    percent: "5%",
+    value: "5.000.000",
   },
 ];

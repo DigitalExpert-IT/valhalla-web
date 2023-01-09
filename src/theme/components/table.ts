@@ -125,15 +125,147 @@ const variantValhalla = definePartsStyle(props => {
     td: {
       height: "100px",
       background: mode(`${c}.100`, `${c}.900`)(props),
-      "&:last-child": {
+      "&:last-of-type": {
         border: "1px",
         borderColor: mode(`${c}.100`, `${c}.900`)(props),
         borderTopRightRadius: "15px",
         borderBottomRightRadius: "15px",
       },
-      "&:first-child": {
+      "&:first-of-type": {
         border: "1px",
+        p: "10px",
         borderColor: mode(`${c}.100`, `${c}.900`)(props),
+        borderTopLeftRadius: "15px",
+        borderBottomLeftRadius: "15px",
+      },
+      ...numericStyles,
+    },
+    tbody: {
+      td: {
+        "&:last-child": {
+          td: {
+            border: "1px",
+            borderColor: "white",
+            borderRadius: "20px",
+          },
+        },
+      },
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
+const variantGradient = definePartsStyle(props => {
+  const { colorScheme: c } = props;
+  const [c1, c2 = "pink"] = c.split(/\:/);
+
+  return {
+    table: {
+      borderCollapse: "separate",
+      borderSpacing: "0 15px",
+    },
+    th: {
+      color: mode("gray.600", "gray.400")(props),
+      borderBottom: "1px",
+      borderColor: "gray.900",
+      pb: 10,
+      ...numericStyles,
+    },
+    td: {
+      height: "80px",
+      background: mode(`${c}.100`, `${c}.700`)(props),
+      "&:last-of-type": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.700`)(props),
+        borderTopRightRadius: "15px",
+        borderBottomRightRadius: "15px",
+      },
+      "&:first-of-type": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.700`)(props),
+        borderTopLeftRadius: "15px",
+        borderBottomLeftRadius: "15px",
+      },
+      ...numericStyles,
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tbody: {
+      tr: {
+        "&:nth-of-type(odd)": {
+          "th, td, tr": {
+            bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+            borderBottomWidth: "1px",
+            borderColor: mode(`${c}.100`, `${c}.900`)(props),
+          },
+          td: {
+            background: mode(`${c}.100`, `${c}.900`)(props),
+          },
+        },
+      },
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
+const variantBasic = definePartsStyle(props => {
+  const { colorScheme: c } = props;
+
+  return {
+    table: {
+      borderCollapse: "separate",
+      borderSpacing: "0 15px",
+    },
+    th: {
+      height: "80px",
+      background: mode(`${c}.100`, `${c}.400`)(props),
+      border: "1px",
+      borderColor: mode(`${c}.100`, `${c}.400`)(props),
+      align: "center",
+      "&:last-of-type": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.400`)(props),
+        borderTopRightRadius: "15px",
+        borderBottomRightRadius: "15px",
+      },
+      "&:first-of-type": {
+        border: "1px",
+        borderColor: mode(`${c}.100`, `${c}.400`)(props),
+        borderTopLeftRadius: "15px",
+        borderBottomLeftRadius: "15px",
+      },
+      ...numericStyles,
+    },
+    td: {
+      height: "80px",
+      background: "transparent",
+      borderTop: "1px",
+      borderBottom: "1px",
+      "&:last-of-type": {
+        border: "1px",
+        borderLeftColor: "transparent",
+        borderTopRightRadius: "15px",
+        borderBottomRightRadius: "15px",
+      },
+      "&:first-of-type": {
+        border: "1px",
+        borderRightColor: "transparent",
         borderTopLeftRadius: "15px",
         borderBottomLeftRadius: "15px",
       },
@@ -167,6 +299,8 @@ const variants = {
   simple: variantSimple,
   striped: variantStripe,
   valhalla: variantValhalla,
+  gradient: variantGradient,
+  basic: variantBasic,
   unstyled: defineStyle({}),
 };
 

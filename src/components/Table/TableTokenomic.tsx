@@ -39,7 +39,7 @@ export const TableTokenomic = () => {
     <Box textAlign="center" mb={20}>
       <Heading mb={20}>
         <Trans
-          i18nKey="pages.home.rankNetwork"
+          i18nKey="pages.home.tokenomics"
           components={{
             strong: <Text as="span" color="brand.500" />,
           }}

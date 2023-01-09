@@ -7,13 +7,6 @@ type Props = {
   subtitle: string;
 };
 
-// type TCollaps = CollapseProps & {
-//   fontSize: {
-//     xs: string;
-//     xl: string;
-//   }
-// }
-
 export const CardHomeFeatures = (props: Props) => {
   const { uri, title, subtitle } = props;
   const [isVisible, setIsVisible] = useState(false);

@@ -182,16 +182,15 @@ const variantGradient = definePartsStyle(props => {
     },
     td: {
       height: "80px",
-      background: mode(`${c}.100`, `${c}.700`)(props),
       "&:last-of-type": {
         border: "1px",
-        borderColor: mode(`${c}.100`, `${c}.700`)(props),
+        borderColor: "transparent",
         borderTopRightRadius: "15px",
         borderBottomRightRadius: "15px",
       },
       "&:first-of-type": {
         border: "1px",
-        borderColor: mode(`${c}.100`, `${c}.700`)(props),
+        borderColor: "transparent",
         borderTopLeftRadius: "15px",
         borderBottomLeftRadius: "15px",
       },
@@ -202,14 +201,14 @@ const variantGradient = definePartsStyle(props => {
     },
     tbody: {
       tr: {
+        bgGradient: `linear(to-r, ${c1}.900, ${c2}.400)`,
         "&:nth-of-type(odd)": {
           "th, td, tr": {
-            bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
-            borderBottomWidth: "1px",
+            bgGradient: `linear(to-r, ${c1}.900, ${c2}.400)`,
             borderColor: mode(`${c}.100`, `${c}.900`)(props),
           },
           td: {
-            background: mode(`${c}.100`, `${c}.900`)(props),
+            background: mode(`${c1}.100`, `${c1}.900`)(props),
           },
         },
       },

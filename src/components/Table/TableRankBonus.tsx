@@ -37,22 +37,40 @@ const columns = [
     header: "Rank",
   }),
 
-  columnHelper.accessor("bonus", {
+  columnHelper.accessor("pool", {
     cell: info => (
       <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
         {info.getValue()}
       </Text>
     ),
-    header: "Bonus GNET",
+    header: "Pool GNET",
   }),
 
-  columnHelper.accessor("requirement", {
+  columnHelper.accessor("level", {
     cell: info => (
       <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
         {info.getValue()}
       </Text>
     ),
-    header: "15 level requirement",
+    header: "Level",
+  }),
+
+  columnHelper.accessor("claim", {
+    cell: info => (
+      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+        {info.getValue()}
+      </Text>
+    ),
+    header: "Claim Req",
+  }),
+
+  columnHelper.accessor("maxBuy", {
+    cell: info => (
+      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+        {info.getValue()}
+      </Text>
+    ),
+    header: "Max Buy NFT",
     meta: {
       isNumeric: false,
     },

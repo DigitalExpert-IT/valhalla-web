@@ -14,7 +14,7 @@ const columns = [
         fontWeight="bold"
         fontSize="lg"
         textTransform="capitalize"
-        color="brand.500"
+        color="brand.400"
       >
         {info.getValue()}
       </Text>
@@ -54,7 +54,7 @@ export const TableRankNetwork = () => {
         data={RANKNETWORK}
         columns={columns}
         variant="gradient"
-        colorScheme="valhalla"
+        colorScheme="valhalla:brand"
       />
     </Box>
   );

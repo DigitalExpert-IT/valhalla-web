@@ -42,8 +42,10 @@ export const PARTNERSHIP = [
 export interface IRankBonus {
   image: string;
   rank: string;
-  bonus: string;
-  requirement: number;
+  pool: string;
+  level: string;
+  claim: string;
+  maxBuy: number;
   color: string;
 }
 
@@ -117,68 +119,86 @@ export const RANKNETWORK = [
   },
 ];
 
-export const RANKBONUS = [
+export const RANKBONUS: Array<IRankBonus> = [
   {
     image: "/assets/rank/norank2.svg",
     rank: "no rank",
-    bonus: "0",
-    requirement: 100,
+    pool: "",
+    level: "",
+    claim: "",
+    maxBuy: 100000,
     color: "white",
   },
   {
     image: "/assets/rank/common.svg",
     rank: "common",
-    bonus: "5%",
-    requirement: 100,
+    pool: "5%",
+    level: "10 level",
+    claim: "25000 NFT Value",
+    maxBuy: 100000,
     color: "#A8742F",
   },
   {
     image: "/assets/rank/rare.svg",
     rank: "rare",
-    bonus: "13%",
-    requirement: 400,
+    pool: "13%",
+    level: "20 level",
+    claim: "100000 NFT Value",
+    maxBuy: 500000,
     color: "#666768",
   },
   {
     image: "/assets/rank/super-rare.svg",
     rank: "super rare",
-    bonus: "16%",
-    requirement: 1600,
+    pool: "16%",
+    level: "40 level",
+    claim: "500000 NFT Value",
+    maxBuy: 2500000,
     color: "#2A7FB8",
   },
   {
     image: "/assets/rank/epic.svg",
     rank: "epic",
-    bonus: "19%",
-    requirement: 6400,
+    pool: "19%",
+    level: "60 level",
+    claim: "2500000 NFT Value",
+    maxBuy: 10000000,
     color: "#E7570F",
   },
   {
     image: "/assets/rank/legend.svg",
     rank: "legend",
-    bonus: "22%",
-    requirement: 16000,
+    pool: "22%",
+    level: "80 level",
+    claim: "10000000 NFT Value",
+    maxBuy: 50000000,
     color: "#E0475A",
   },
   {
     image: "/assets/rank/super-legend.svg",
     rank: "super legend",
-    bonus: "25%",
-    requirement: 64000,
+    pool: "25%",
+    level: "100 level",
+    claim: "50000000 NFT Value",
+    maxBuy: 250000000,
     color: "#BE7DD8",
   },
   {
     image: "",
     rank: "Total",
-    bonus: "100%",
-    requirement: 0,
+    pool: "100%",
+    level: "",
+    claim: "",
+    maxBuy: 0,
     color: "",
   },
   {
     image: "",
     rank: "TAX All Claim",
-    bonus: "100%",
-    requirement: 0,
+    pool: "10%",
+    level: "",
+    claim: "",
+    maxBuy: 0,
     color: "white",
   },
 ];

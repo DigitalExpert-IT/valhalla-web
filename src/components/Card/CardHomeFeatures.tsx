@@ -1,7 +1,20 @@
 import { Card, Image, Box, Text, Collapse, Fade, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-export const CardHomeFeatures = props => {
+type Props = {
+  uri: string;
+  title: string;
+  subtitle: string;
+};
+
+// type TCollaps = CollapseProps & {
+//   fontSize: {
+//     xs: string;
+//     xl: string;
+//   }
+// }
+
+export const CardHomeFeatures = (props: Props) => {
   const { uri, title, subtitle } = props;
   const [isVisible, setIsVisible] = useState(false);
 
@@ -57,14 +70,8 @@ export const CardHomeFeatures = props => {
         >
           {title}
         </Text>
-        <Collapse
-          animateOpacity
-          in={isVisible}
-          fontSize={{ xs: "sm", xl: "md" }}
-          style={{ zIndex: 10 }}
-          direction="bottom"
-        >
-          {subtitle}
+        <Collapse animateOpacity in={isVisible} style={{ zIndex: 10 }}>
+          <Text fontSize={{ xs: "sm", xl: "md" }}>{subtitle}</Text>
         </Collapse>
       </Flex>
     </Card>

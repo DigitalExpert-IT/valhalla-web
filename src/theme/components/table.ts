@@ -183,14 +183,10 @@ const variantGradient = definePartsStyle(props => {
     td: {
       height: "80px",
       "&:last-of-type": {
-        border: "1px",
-        borderColor: "transparent",
         borderTopRightRadius: "15px",
         borderBottomRightRadius: "15px",
       },
       "&:first-of-type": {
-        border: "1px",
-        borderColor: "transparent",
         borderTopLeftRadius: "15px",
         borderBottomLeftRadius: "15px",
       },

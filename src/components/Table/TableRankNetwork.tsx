@@ -4,6 +4,7 @@ import { IRankNetwork, RANKNETWORK } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
+import { t } from "i18next";
 
 const columnHelper = createColumnHelper<IRankNetwork>();
 
@@ -19,7 +20,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Level Bonus",
+    header: t("common.levelBonus") ?? "",
   }),
   columnHelper.accessor("percent", {
     cell: info => (
@@ -27,7 +28,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Percent",
+    header: t("common.percent") ?? "",
   }),
   columnHelper.accessor("value", {
     cell: info => (
@@ -35,7 +36,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Value",
+    header: t("common.value") ?? "",
   }),
 ];
 

@@ -4,6 +4,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
 import { Box, Image, Heading, Text } from "@chakra-ui/react";
+import { t } from "i18next";
 
 const columnHelper = createColumnHelper<IRankBonus>();
 
@@ -34,7 +35,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Rank",
+    header: t("common.rank") ?? "",
   }),
 
   columnHelper.accessor("pool", {
@@ -43,7 +44,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Pool GNET",
+    header: t("common.poolGNET") ?? "",
   }),
 
   columnHelper.accessor("level", {
@@ -52,7 +53,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Level",
+    header: t("common.level") ?? "",
   }),
 
   columnHelper.accessor("claim", {
@@ -61,7 +62,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Claim Req",
+    header: t("common.claimreq") ?? "",
   }),
 
   columnHelper.accessor("maxBuy", {
@@ -70,7 +71,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "Max Buy NFT",
+    header: t("common.maxBuyNFT") ?? "",
     meta: {
       isNumeric: false,
     },

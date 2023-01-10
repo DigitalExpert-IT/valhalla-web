@@ -38,7 +38,7 @@ const SectionProfile = () => {
             end={"claim"}
           />
           <WidgetProfileChile
-            start={[t("common.globalBonus")]}
+            start={[t("common.PrivateSaleNewToken")]}
             end={[prettyBn(ipoPool.claimable), t("common.matic")]}
           />
         </Box>

@@ -61,5 +61,8 @@
       "startRankReward": "Start Rank Reward",
       "stopRankReward": "Stop Rank Reward"
     }
+  },
+  "shareToEarn" : {
+    "title" : "Share To Earn"
   }
 }

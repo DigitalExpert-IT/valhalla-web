@@ -3,7 +3,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 import { ITokenomics, TOKENOMICS } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
-import { TableData } from "./TableData";
+import { TableData } from "components/TableUtils";
 
 const columnHelper = createColumnHelper<ITokenomics>();
 
@@ -48,8 +48,7 @@ export const TableTokenomic = () => {
       <TableData
         data={TOKENOMICS}
         columns={columns}
-        variant="basic"
-        colorScheme="brand"
+        tableCustom={{ variant: "basic", colorScheme: "brand" }}
       />
     </Box>
   );

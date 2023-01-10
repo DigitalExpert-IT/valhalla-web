@@ -3,7 +3,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 import { IRankNetwork, RANKNETWORK } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
-import { TableData } from "./TableData";
+import { TableData } from "components/TableUtils";
 
 const columnHelper = createColumnHelper<IRankNetwork>();
 
@@ -53,8 +53,7 @@ export const TableRankNetwork = () => {
       <TableData
         data={RANKNETWORK}
         columns={columns}
-        variant="gradient"
-        colorScheme="valhalla:brand"
+        tableCustom={{ variant: "gradient", colorScheme: "valhalla:brand" }}
       />
     </Box>
   );

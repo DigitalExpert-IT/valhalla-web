@@ -2,7 +2,7 @@ import React from "react";
 import { IRankBonus, RANKBONUS } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
-import { TableData } from "./TableData";
+import { TableData } from "components/TableUtils";
 import { Box, Image, Heading, Text } from "@chakra-ui/react";
 
 const columnHelper = createColumnHelper<IRankBonus>();
@@ -88,7 +88,11 @@ export const TableRankBonus = () => {
           }}
         />
       </Heading>
-      <TableData columns={columns} variant="valhalla" data={RANKBONUS} />
+      <TableData
+        columns={columns}
+        data={RANKBONUS}
+        tableCustom={{ variant: "valhalla", colorScheme: "valhalla" }}
+      />
     </Box>
   );
 };

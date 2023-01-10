@@ -1,5 +1,15 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, Text, Box } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Text,
+  Box,
+  TableProps,
+} from "@chakra-ui/react";
 import {
   useReactTable,
   flexRender,
@@ -12,15 +22,13 @@ import {
 type TableDataProps<Data extends object> = {
   data: Data[];
   columns: ColumnDef<Data, any>[];
-  variant?: string;
-  colorScheme?: string;
+  tableCustom: TableProps;
 };
 
 export const TableData = <Data extends object>({
   data,
   columns,
-  variant,
-  colorScheme,
+  tableCustom,
 }: TableDataProps<Data>) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
@@ -36,12 +44,7 @@ export const TableData = <Data extends object>({
 
   return (
     <Box overflowX="auto" w="100%">
-      <Table
-        variant={variant ?? "simple"}
-        colorScheme={colorScheme ?? "valhalla"}
-        size="sm"
-        w="100%"
-      >
+      <Table size="sm" w="100%" {...tableCustom}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Tr key={headerGroup.id}>

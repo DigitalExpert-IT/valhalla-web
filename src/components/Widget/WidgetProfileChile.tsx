@@ -1,10 +1,18 @@
-import { Box, Button, Card, CardProps, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Card,
+  CardProps,
+  Flex,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 
 type Props = CardProps & {
   value?: string;
   start: string[];
-  end: string | (string | number)[]
+  end: string | string[];
 };
 
 export const WidgetProfileChile = (props: Props) => {
@@ -27,13 +35,14 @@ export const WidgetProfileChile = (props: Props) => {
       >
         <Box>
           <Text>{start[0]}</Text>
-          <Text>{start[1] || null}</Text>
+          <Text color={"blue.300"}>{start[1] || null}</Text>
         </Box>
         <Box>
           {Array.isArray(end) ? (
-            <Text>
-              {end[0]} {end[1]}
-            </Text>
+            <HStack>
+              <Text>{end[0]}</Text>
+              <Text color={"blue.300"}>{end[1]}</Text>
+            </HStack>
           ) : (
             <Button colorScheme="brand">{end}</Button>
           )}

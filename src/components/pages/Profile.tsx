@@ -1,14 +1,14 @@
 import { Box, SimpleGrid, VStack, Heading } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
 import { WidgetProfileChile } from "components/Widget";
-import { PROFILE_BALANCE, PROFILE_WIDGET } from "constant/pages/profile";
 import { withConnection, withRegistration } from "hoc";
 import { useNFT, useValhalla } from "hooks";
+import { t } from "i18next";
 import { Trans } from "react-i18next";
 import { composeHoc, prettyBn } from "utils";
 
 const SectionProfile = () => {
-  const { account } = useValhalla();
+  const { account, personalReward, rankReward, ipoPool } = useValhalla();
   const nft = useNFT();
   return (
     <>
@@ -19,11 +19,28 @@ const SectionProfile = () => {
         <CardProfile />
         <Box>
           <CardProfileBalance />
-          {PROFILE_WIDGET.map((row, idx) => (
-            <VStack key={idx}>
-              <WidgetProfileChile start={row.start} end={row.end} />
-            </VStack>
-          ))}
+          <WidgetProfileChile
+            start={[t("common.globalBonus")]}
+            end={[prettyBn(personalReward), t("common.matic")]}
+          />
+          <WidgetProfileChile
+            start={[
+              t("common.referralBonus"),
+              prettyBn(rankReward) + " " + t("common.matic"),
+            ]}
+            end={"claim"}
+          />
+          <WidgetProfileChile
+            start={[
+              t("common.rankReward"),
+              prettyBn(rankReward) + " " + t("common.matic"),
+            ]}
+            end={"claim"}
+          />
+          <WidgetProfileChile
+            start={[t("common.globalBonus")]}
+            end={[prettyBn(ipoPool.claimable), t("common.matic")]}
+          />
         </Box>
       </SimpleGrid>
     </>

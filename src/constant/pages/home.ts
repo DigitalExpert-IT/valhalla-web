@@ -38,3 +38,179 @@ export const PARTNERSHIP = [
     image: "/assets/partnership/partner4.png",
   },
 ];
+
+export interface IRankBonus {
+  image: string;
+  rank: string;
+  pool: string;
+  level: string;
+  claim: string;
+  maxBuy: number;
+  color: string;
+}
+
+export interface IRankNetwork {
+  levelBonus: string;
+  percent: string;
+  value: number;
+}
+
+export interface ITokenomics {
+  totalSupply: string;
+  percent: string;
+  value: string;
+}
+
+export const RANKNETWORK = [
+  {
+    levelBonus: "level 1-2",
+    percent: "10%",
+    value: 6.7,
+  },
+  {
+    levelBonus: "level 3",
+    percent: "6%",
+    value: 4.02,
+  },
+  {
+    levelBonus: "level 4",
+    percent: "5%",
+    value: 3.35,
+  },
+  {
+    levelBonus: "level 5-6",
+    percent: "4%",
+    value: 2.68,
+  },
+  {
+    levelBonus: "level 7-8",
+    percent: "3%",
+    value: 2.01,
+  },
+  {
+    levelBonus: "level 9-11",
+    percent: "2%",
+    value: 1.34,
+  },
+  {
+    levelBonus: "level 12-15",
+    percent: "1%",
+    value: 0.67,
+  },
+  {
+    levelBonus: "Reserve",
+    percent: "3%",
+    value: 2.01,
+  },
+  {
+    levelBonus: "Global Omzet",
+    percent: "17%",
+    value: 11.39,
+  },
+  {
+    levelBonus: "Fee Receiver",
+    percent: "25%",
+    value: 16.75,
+  },
+  {
+    levelBonus: "Total",
+    percent: "100%",
+    value: 67,
+  },
+];
+
+export const RANKBONUS: Array<IRankBonus> = [
+  {
+    image: "/assets/rank/norank2.svg",
+    rank: "no rank",
+    pool: "",
+    level: "",
+    claim: "",
+    maxBuy: 100000,
+    color: "white",
+  },
+  {
+    image: "/assets/rank/common.svg",
+    rank: "common",
+    pool: "5%",
+    level: "10 level",
+    claim: "25000 NFT Value",
+    maxBuy: 100000,
+    color: "#A8742F",
+  },
+  {
+    image: "/assets/rank/rare.svg",
+    rank: "rare",
+    pool: "13%",
+    level: "20 level",
+    claim: "100000 NFT Value",
+    maxBuy: 500000,
+    color: "#666768",
+  },
+  {
+    image: "/assets/rank/super-rare.svg",
+    rank: "super rare",
+    pool: "16%",
+    level: "40 level",
+    claim: "500000 NFT Value",
+    maxBuy: 2500000,
+    color: "#2A7FB8",
+  },
+  {
+    image: "/assets/rank/epic.svg",
+    rank: "epic",
+    pool: "19%",
+    level: "60 level",
+    claim: "2500000 NFT Value",
+    maxBuy: 10000000,
+    color: "#E7570F",
+  },
+  {
+    image: "/assets/rank/legend.svg",
+    rank: "legend",
+    pool: "22%",
+    level: "80 level",
+    claim: "10000000 NFT Value",
+    maxBuy: 50000000,
+    color: "#E0475A",
+  },
+  {
+    image: "/assets/rank/super-legend.svg",
+    rank: "super legend",
+    pool: "25%",
+    level: "100 level",
+    claim: "50000000 NFT Value",
+    maxBuy: 250000000,
+    color: "#BE7DD8",
+  },
+  {
+    image: "",
+    rank: "Total",
+    pool: "100%",
+    level: "",
+    claim: "",
+    maxBuy: 0,
+    color: "",
+  },
+  {
+    image: "",
+    rank: "TAX All Claim",
+    pool: "10%",
+    level: "",
+    claim: "",
+    maxBuy: 0,
+    color: "white",
+  },
+];
+
+export const TOKENOMICS = [
+  { totalSupply: "reserves", percent: "10%", value: "10.000.000" },
+  { totalSupply: "network swap", percent: "65%", value: "65.000.000" },
+  { totalSupply: "team", percent: "10%", value: "10.000.000" },
+  { totalSupply: "marketing", percent: "10%", value: "10.000.000" },
+  {
+    totalSupply: "Ecosystem Development Fund",
+    percent: "5%",
+    value: "5.000.000",
+  },
+];

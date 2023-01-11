@@ -40,5 +40,14 @@
   "total15LevelReferral": "Total 15 Level Referral",
   "personalBuy": "Personal Buy",
   "total100LevelReferral": "Total 100 Level Referral",
-  "swap": "Swap"
+  "swap": "Swap",
+  "levelBonus": "Level Bonus",
+  "level": "Level",
+  "percent": "Percent",
+  "value": "Value",
+  "rank": "Rank",
+  "poolGNET": "Pool GNET",
+  "claimreq": "Claim Req",
+  "maxBuyNFT": "Max buy NFT",
+  "totalSupply": "Total Supply"
 }

@@ -11,6 +11,7 @@
     "social": "Social"
   },
   "back": "Back",
+  "balance": "Balance",
   "nftFarming": "NFT FARMING",
   "shareToEarn": "SHARE TO EARN",
   "royaltyProperty": "ROYALTY PROPERTY",
@@ -19,9 +20,20 @@
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",
+  "referrer": "Referrer",
   "accept": "Accept",
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
   "transactionSuccess": "Transaction Success",
+  "networkMembers": "Network Members",
+  "directReferrals": "Direct Referrals",
+  "telegramOnlyMember": "Telegram Only Member",
+  "globalBonus": "Global Bonus",
+  "referralBonus": "Referral Bonus",
+  "rankReward": "Rank Reward",
+  "PrivateSaleNewToken": "Private Sale New Token",
+  "gnet": "GNET",
+  "matic": "MATIC",
+  "ipo": "IPO",
   "swap": "Swap"
 }

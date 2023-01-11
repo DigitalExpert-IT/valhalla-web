@@ -11,7 +11,7 @@ export const SectionNetworkStatus = () => {
       <Heading textAlign={"center"}>
         <Trans i18nKey="common.networkStatus" />
       </Heading>
-      <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={6} mt={10}>
+      <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={6} my={10}>
         {NETWORK_STATUS.map((row, idx) => (
           <HStack key={idx}>
             <WidgetProfileChile start={row.start} end={row.end} />

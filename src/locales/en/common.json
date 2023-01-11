@@ -26,6 +26,7 @@
   "agreeAndAccept": "I Agree & Accept",
   "transactionSuccess": "Transaction Success",
   "networkMembers": "Network Members",
+  "networkStatus": "NETWORK STATUS",
   "directReferrals": "Direct Referrals",
   "telegramOnlyMember": "Telegram Only Member",
   "globalBonus": "Global Bonus",
@@ -35,5 +36,9 @@
   "gnet": "GNET",
   "matic": "MATIC",
   "ipo": "IPO",
+  "totalNetworkMembers": "Total Network Members",
+  "total15LevelReferral": "Total 15 Level Referral",
+  "personalBuy": "Personal Buy",
+  "total100LevelReferral": "Total 100 Level Referral",
   "swap": "Swap"
 }

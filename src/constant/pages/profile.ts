@@ -33,3 +33,22 @@ export const PROFILE_WIDGET = [
     end: [33, t("common.matic")],
   },
 ];
+
+export const NETWORK_STATUS = [
+  {
+    start: [t("common.totalNetworkMembers")],
+    end: ["2000"],
+  },
+  {
+    start: [t("common.total15LevelReferral")],
+    end: ["2000"],
+  },
+  {
+    start: [t("common.personalBuy")],
+    end: ["2000", t("common.gnet")],
+  },
+  {
+    start: [t("common.total100LevelReferral")],
+    end: ["2000"],
+  },
+]

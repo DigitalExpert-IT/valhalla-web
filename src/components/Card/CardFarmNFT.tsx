@@ -6,6 +6,11 @@ import { Stack, Box, Button, AspectRatio, Image, Text } from "@chakra-ui/react";
 export const CardFarmNFT = (props: INFTCard) => {
   const { id, price } = props;
   const name = `Farming ${id.add(1).toNumber()}`;
+  const { buy } = useNFT();
+  const buyAsync = useAsyncCall(buy);
+  const handleBuy = () => {
+    buyAsync.exec(id);
+  };
 
   return (
     <Stack>
@@ -35,7 +40,13 @@ export const CardFarmNFT = (props: INFTCard) => {
           </Text>
         </Box>
       </Box>
-      <Button w="full" size="sm" colorScheme="valhalla">
+      <Button
+        w="full"
+        size="sm"
+        colorScheme="blue"
+        onClick={handleBuy}
+        isLoading={buyAsync.isLoading}
+      >
         Buy
       </Button>
     </Stack>

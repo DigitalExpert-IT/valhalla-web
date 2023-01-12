@@ -1,13 +1,15 @@
 import React from "react";
-import { Heading } from "@chakra-ui/react";
+import { withConnection, withRegistration } from "hoc";
+import { SectionFarmNFT } from "components/pages/NFTFarm";
 import { LayoutMain } from "components";
+import { composeHoc } from "utils";
 
 const NftFarmingPage = () => {
   return (
     <LayoutMain>
-      <Heading>NFT Farming</Heading>
+      <SectionFarmNFT />
     </LayoutMain>
   );
 };
 
-export default NftFarmingPage;
+export default composeHoc(withRegistration, withConnection)(NftFarmingPage);

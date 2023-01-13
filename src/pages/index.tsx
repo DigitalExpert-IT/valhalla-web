@@ -1,15 +1,19 @@
+import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
+import { Box, Heading, Image } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 import {
+  SectionHeader,
+  SectionFeatures,
   LayoutMain,
   WidgetTimeLine,
   SectionFeaturedPopulation,
-  SectionHeader,
   SectionMatchingBonus,
   SectionTeam,
   SectionPartnership,
+  TableRankBonus,
+  TableRankNetwork,
+  TableTokenomic,
 } from "components";
-import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Heading } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -17,7 +21,10 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionFeatures />
       <SectionFeaturedPopulation />
+      <TableRankNetwork />
+      <TableRankBonus />
       <SectionMatchingBonus />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">
@@ -25,6 +32,7 @@ export default function Home() {
         </Heading>
         <WidgetTimeLine />
       </Box>
+      <TableTokenomic />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">
           {t("pages.home.teamSection")}

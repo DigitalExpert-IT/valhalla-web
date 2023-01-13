@@ -7,7 +7,7 @@ export const SectionFarmNFT = () => {
   const nft = useNFT();
 
   return (
-    <Stack textAlign="center">
+    <Stack textAlign="center" mb="20">
       <Box mb="10">
         <Heading>NFT Farming</Heading>
       </Box>

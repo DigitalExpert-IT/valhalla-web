@@ -2,10 +2,11 @@ import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
 import { Box, Heading, Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
+  SectionHeader,
+  SectionFeatures,
   LayoutMain,
   WidgetTimeLine,
   SectionFeaturedPopulation,
-  SectionHeader,
   SectionMatchingBonus,
   SectionTeam,
   SectionPartnership,
@@ -20,6 +21,7 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionFeatures />
       <SectionFeaturedPopulation />
       <TableRankNetwork />
       <TableRankBonus />

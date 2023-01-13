@@ -1,8 +1,9 @@
 import {
+  SectionHeader,
+  SectionFeatures,
   LayoutMain,
   WidgetTimeLine,
   SectionFeaturedPopulation,
-  SectionHeader,
   SectionMatchingBonus,
   SectionTeam,
   SectionPartnership,
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionFeatures />
       <SectionFeaturedPopulation />
       <SectionMatchingBonus />
       <Box textAlign="center" my="20">

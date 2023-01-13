@@ -58,7 +58,7 @@ export const CardProfile = () => {
               ? shortenAddress(account.referrer)
               : account.referrer.toUpperCase()}
           </Text>
-          <SimpleGrid columns={1} spacing={4} my={8}>
+          <SimpleGrid columns={1} spacing={4} my={8} fontWeight={"bold"}>
             <Flex
               justifyContent={"space-between"}
               bg={"brand.800"}
@@ -67,12 +67,10 @@ export const CardProfile = () => {
               px={6}
               fontSize={{ md: "lg" }}
             >
-              <Text fontWeight={"bold"}>
+              <Text>
                 <Trans i18nKey="common.networkMembers" />
               </Text>
-              <Text fontWeight={"bold"}>
-                {account.downlineCount.toNumber()}
-              </Text>
+              <Text>{account.downlineCount.toNumber()}</Text>
             </Flex>
             <Flex
               justifyContent={"space-between"}
@@ -82,12 +80,10 @@ export const CardProfile = () => {
               px={6}
               fontSize={{ md: "lg" }}
             >
-              <Text fontWeight={"bold"}>
+              <Text>
                 <Trans i18nKey="common.directReferrals" />
               </Text>
-              <Text fontWeight={"bold"}>
-                {account.directDownlineCount.toNumber()}
-              </Text>
+              <Text>{account.directDownlineCount.toNumber()}</Text>
             </Flex>
             <Flex
               justifyContent={"space-between"}
@@ -97,10 +93,10 @@ export const CardProfile = () => {
               px={6}
               fontSize={{ md: "lg" }}
             >
-              <Text fontWeight={"bold"}>
+              <Text>
                 <Trans i18nKey="common.telegramOnlyMember" />
               </Text>
-              <Text fontWeight={"bold"}>
+              <Text>
                 <SiTelegram />
               </Text>
             </Flex>

@@ -7,6 +7,29 @@ export const HEADER_IMAGE_DATA = [
   { uri: "/images/imgHeader4.png", alt: t("common.metaverseProject") },
 ];
 
+export const PROMOTION_IMAGE_DATA = [
+  {
+    uri: "/images/imgHomeFeatures1.png",
+    title: t("pages.home.sectionFeature.fullTransparency.title"),
+    subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle")
+  },
+  {
+    uri: "/images/imgHomeFeatures2.png",
+    title: t("pages.home.sectionFeature.fullAutomation.title"),
+    subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle")
+  },
+  {
+    uri: "/images/imgHomeFeatures3.png",
+    title: t("pages.home.sectionFeature.smartContract.title"),
+    subtitle: t("pages.home.sectionFeature.smartContract.subtitle")
+  },
+  {
+    uri: "/images/imgHomeFeatures4.png",
+    title: t("pages.home.sectionFeature.decentralized.title"),
+    subtitle: t("pages.home.sectionFeature.decentralized.subtitle")
+  },
+];
+
 export const OURTEAM = [
   {
     name: "Yosa Agung Hindarto",

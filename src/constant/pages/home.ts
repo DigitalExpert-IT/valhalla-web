@@ -11,22 +11,22 @@ export const PROMOTION_IMAGE_DATA = [
   {
     uri: "/images/imgHomeFeatures1.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
-    subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle")
+    subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
   },
   {
     uri: "/images/imgHomeFeatures2.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
-    subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle")
+    subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
-    subtitle: t("pages.home.sectionFeature.smartContract.subtitle")
+    subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
-    subtitle: t("pages.home.sectionFeature.decentralized.subtitle")
+    subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
   },
 ];
 
@@ -144,7 +144,7 @@ export const RANKNETWORK = [
 
 export const RANKBONUS: Array<IRankBonus> = [
   {
-    image: "/assets/rank/norank2.svg",
+    image: "/assets/rank/No Rank.svg",
     rank: "no rank",
     pool: "",
     level: "",
@@ -153,7 +153,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "white",
   },
   {
-    image: "/assets/rank/common.svg",
+    image: "/assets/rank/Common.svg",
     rank: "common",
     pool: "5%",
     level: "10 level",
@@ -162,7 +162,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#A8742F",
   },
   {
-    image: "/assets/rank/rare.svg",
+    image: "/assets/rank/Rare.svg",
     rank: "rare",
     pool: "13%",
     level: "20 level",
@@ -171,7 +171,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#666768",
   },
   {
-    image: "/assets/rank/super-rare.svg",
+    image: "/assets/rank/Super Rare.svg",
     rank: "super rare",
     pool: "16%",
     level: "40 level",
@@ -180,7 +180,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#2A7FB8",
   },
   {
-    image: "/assets/rank/epic.svg",
+    image: "/assets/rank/Epic.svg",
     rank: "epic",
     pool: "19%",
     level: "60 level",
@@ -189,7 +189,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E7570F",
   },
   {
-    image: "/assets/rank/legend.svg",
+    image: "/assets/rank/Legend.svg",
     rank: "legend",
     pool: "22%",
     level: "80 level",
@@ -198,7 +198,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E0475A",
   },
   {
-    image: "/assets/rank/super-legend.svg",
+    image: "/assets/rank/Super Legend.svg",
     rank: "super legend",
     pool: "25%",
     level: "100 level",

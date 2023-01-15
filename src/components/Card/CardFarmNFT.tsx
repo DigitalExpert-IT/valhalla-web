@@ -15,7 +15,7 @@ export const CardFarmNFT = (props: INFTCard) => {
   return (
     <Stack>
       <Box borderRadius="lg" overflow="hidden" pos="relative">
-        <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+        <AspectRatio w={{ base: "2xs", md: "sm" }} ratio={1}>
           <Image
             src={`/api/image/${id.toString()}`}
             alt={name}

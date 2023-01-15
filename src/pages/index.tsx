@@ -1,5 +1,5 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeader,

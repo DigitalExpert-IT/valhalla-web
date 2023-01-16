@@ -7,6 +7,9 @@
     "roadmapSection": "Roadmap",
     "teamSection": "Our team members",
     "partnershipSection": "Partnership",
+    "rankNetwork": "<strong>Rank Network</strong> Plan Gnet",
+    "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
+    "tokenomics": "Tokenomics",
     "roadmap": [
       {
         "name": "Q1 2022",
@@ -42,6 +45,28 @@
     "header": {
       "title": "No 1 <strong>Decentralized</strong> Web3 Network Marketing Platform",
       "subtitle": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application. Every application and utility will be build upon decentralized network marketing referral contract.<br />Get royalty from referral sales up to 100 levels."
+    },
+    "feature": {
+      "title": "Features",
+      "subtitle": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application. Every application and utility will be build upon decentralized network marketing referral contract. Get royalty from referral sales up to 100 levels."
+    },
+    "sectionFeature": {
+      "fullTransparency":{
+        "title": "Full Transparency",
+        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+      },
+      "fullAutomation":{
+        "title": "Full Automation",
+        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+      },
+      "smartContract":{
+        "title": "Smart Contract",
+        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+      },
+      "decentralized":{
+        "title": "Decentralized",
+        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+      }
     },
     "matchingBonus": {
       "title": "100 <strong>Level</strong>",

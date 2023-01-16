@@ -23,5 +23,14 @@
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
   "transactionSuccess": "Transaction Success",
-  "swap": "Swap"
+  "swap": "Swap",
+  "levelBonus": "Level Bonus",
+  "level": "Level",
+  "percent": "Percent",
+  "value": "Value",
+  "rank": "Rank",
+  "poolGNET": "Pool GNET",
+  "claimreq": "Claim Req",
+  "maxBuyNFT": "Max buy NFT",
+  "totalSupply": "Total Supply"
 }

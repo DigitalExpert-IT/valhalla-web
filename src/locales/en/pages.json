@@ -51,19 +51,19 @@
       "subtitle": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application. Every application and utility will be build upon decentralized network marketing referral contract. Get royalty from referral sales up to 100 levels."
     },
     "sectionFeature": {
-      "fullTransparency":{
+      "fullTransparency": {
         "title": "Full Transparency",
         "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
       },
-      "fullAutomation":{
+      "fullAutomation": {
         "title": "Full Automation",
         "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
       },
-      "smartContract":{
+      "smartContract": {
         "title": "Smart Contract",
         "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
       },
-      "decentralized":{
+      "decentralized": {
         "title": "Decentralized",
         "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
       }
@@ -86,5 +86,9 @@
       "startRankReward": "Start Rank Reward",
       "stopRankReward": "Stop Rank Reward"
     }
+  },
+
+  "nftFarming": {
+    "gnetProject": "<strong>Gnet</strong> Project"
   }
 }

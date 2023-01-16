@@ -53,6 +53,32 @@
       "content": "Only 1% from 7,96 billion earth population are owning a crypto wallet We still absurd early in this market. Most people around the world own a smartphone nowadays and with that, they would be able to own a crypto wallet and cryptocurrencies.<br /><br />Get passive income through build network marketing defi with global network platform. All product that build will be sell through defi global network. Start from NFT Farming, Share to Earn, Royalty Property, Crypto Cafe, Metaverse Project, and many more.<br /><br /><strong>Become a member</strong> and get the world’s best community referral program for all things you need to get profit from Crypto, DeFi, Metaverse, and Blockchain. "
     }
   },
+  "share": {
+    "title": "SHARE TO EARN",
+    "placeholder":"Paste your {{media}} post link here",
+    "item": {
+      "instagram": {
+        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "subtitle": "Requirement",
+        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+      },
+      "twitter": {
+        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "subtitle": "Requirement",
+        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+      },
+      "tiktok": {
+        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "subtitle": "Requirement",
+        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+      },
+      "facebook": {
+        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "subtitle": "Requirement",
+        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+      }
+    }
+  },
   "admin": {
     "title": {
       "globalPool": "Global Omzet Pool"
@@ -62,7 +88,7 @@
       "stopRankReward": "Stop Rank Reward"
     }
   },
-  "shareToEarn" : {
-    "title" : "Share To Earn"
+  "shareToEarn": {
+    "title": "Share To Earn"
   }
 }

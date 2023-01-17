@@ -1,7 +1,7 @@
 import React from "react";
 import { rankMap } from "constant/rank";
 import { useAsyncCall, useValhalla } from "hooks";
-import { CardFarmNFT } from "components/Card";
+import { CardOwnedFarmNFT } from "components/Card";
 import { useNFT } from "hooks";
 import {
   Box,
@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
-import { repeat } from "lodash";
 
 export const SectionMyNFT = () => {
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
@@ -39,7 +38,13 @@ export const SectionMyNFT = () => {
         borderRadius="xl"
         mb="5"
       >
-        <Stack direction="row" justify="space-between" align="center" mb="10">
+        <Stack
+          direction="row"
+          justify="space-between"
+          align="center"
+          mb="10"
+          px="5"
+        >
           <Heading>
             <Trans
               i18nKey="pages.nftFarming.gnetProject"
@@ -154,9 +159,9 @@ export const SectionMyNFT = () => {
         </Stack>
       </Card>
       <Wrap justify="center" spacing="10">
-        {nft.cardList.map(card => (
+        {nft.nftList.map(card => (
           <WrapItem key={card.id.toNumber()}>
-            <CardFarmNFT {...card} />
+            <CardOwnedFarmNFT {...card} />
           </WrapItem>
         ))}
       </Wrap>

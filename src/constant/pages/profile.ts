@@ -52,3 +52,21 @@ export const NETWORK_STATUS = [
     end: ["2000"],
   },
 ]
+
+export interface INetworkStatus {
+  levelBonus: string;
+  user: string;
+  buy: number;
+}
+
+export const TABLE_NETWORK_STATUS = () => {
+  const dataTable = [];
+  for (let index = 1; index <= 100; index++) {
+    dataTable.push({
+      levelBonus: `level ${index}`,
+      user: 9 * index,
+      buy: 5000 * index,
+    })
+  }
+  return dataTable
+};

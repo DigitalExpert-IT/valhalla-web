@@ -48,3 +48,4 @@ const SectionProfile = () => {
 };
 
 export default composeHoc(withRegistration, withConnection)(SectionProfile);
+// export default SectionProfile;

@@ -7,7 +7,8 @@
   "label": {
     "referrer": "Referral Code",
     "swap": "Swap Token",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "link":"Link to your {{media}} post"
   },
   "message": {
     "registrationSuccess": "Registration Success!",

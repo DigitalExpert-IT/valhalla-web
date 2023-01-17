@@ -34,7 +34,7 @@ specifiers:
   ethers: ^5.7.2
   evm-bn: ^1.1.2
   framer-motion: ^7.6.18
-  global-swap: ^1.6.0
+  global-swap: ^1.7.0
   globe.gl: ^2.26.11
   husky: ^8.0.2
   i18next: ^22.0.6
@@ -81,7 +81,7 @@ dependencies:
   ethers: 5.7.2
   evm-bn: 1.1.2_wm2mn6iiawtaxylcfp2vnso5me
   framer-motion: 7.6.18_biqbaboplfbrettd7655fr4n2y
-  global-swap: 1.6.0
+  global-swap: 1.7.0
   globe.gl: 2.26.11
   i18next: 22.0.6
   immer: 9.0.16
@@ -3765,8 +3765,8 @@ packages:
       once: 1.4.0
       path-is-absolute: 1.0.1
 
-  /global-swap/1.6.0:
-    resolution: {integrity: sha512-QKLGEOETm8KV0ziIo7RvIR2OeHm8DNRz8bGV02tN6mBRW1tDbNaRKw/f8ysHEtXfugnVLMK3a926WIS3hkrBoA==}
+  /global-swap/1.7.0:
+    resolution: {integrity: sha512-Vh7EBrlmeEnMb0RW599dy8AfZ+aw6eStsoGh5fYpuqf7jW1PIwYElFQWEcMUp/aznNFuI8b3gwosr305QRAnqw==}
     dev: false
 
   /globals/11.12.0:

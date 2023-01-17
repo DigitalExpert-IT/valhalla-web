@@ -1,10 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import {
-  LayoutMain,
-  TableNetworkStatus,
-  TableNetworkStatusDebug,
-  TableRankNetwork,
-} from "components";
+import { LayoutMain, TableNetworkStatus } from "components";
 import { Profile, SectionNetworkStatus } from "components/pages/Profile";
 
 export default function profile() {

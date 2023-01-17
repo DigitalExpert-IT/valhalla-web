@@ -1,3 +1,4 @@
+import { Table } from "@chakra-ui/react";
 import { t } from "i18next";
 
 export const PROFILE_MEMBER = [
@@ -45,17 +46,17 @@ export const NETWORK_STATUS = [
   },
   {
     start: [t("common.personalBuy")],
-    end: ["2000", t("common.gnet")],
+    end: ["2000", "common.gnet"],
   },
   {
     start: [t("common.total100LevelReferral")],
     end: ["2000"],
   },
-]
+];
 
 export interface INetworkStatus {
   levelBonus: string;
-  user: string;
+  user: number;
   buy: number;
 }
 
@@ -66,7 +67,7 @@ export const TABLE_NETWORK_STATUS = () => {
       levelBonus: `level ${index}`,
       user: 9 * index,
       buy: 5000 * index,
-    })
+    });
   }
-  return dataTable
+  return dataTable;
 };

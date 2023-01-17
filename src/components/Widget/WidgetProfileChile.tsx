@@ -8,6 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { Trans } from "react-i18next";
 
 type Props = CardProps & {
   value?: string;
@@ -41,7 +42,16 @@ export const WidgetProfileChile = (props: Props) => {
           {Array.isArray(end) ? (
             <HStack>
               <Text>{end[0]}</Text>
-              <Text color={"blue.300"}>{end[1]}</Text>
+              {end[1] ? (
+                <Text>
+                  <Trans
+                    i18nKey={end[1]}
+                    components={{
+                      strong: <Text as="span" color="secondary.500" />,
+                    }}
+                  />
+                </Text>
+              ) : null}
             </HStack>
           ) : (
             <Button colorScheme="brand">{end}</Button>

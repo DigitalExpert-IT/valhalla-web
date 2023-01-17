@@ -51,17 +51,16 @@ export const TableData = <Data extends object>({
               {headerGroup.headers.map(header => {
                 const meta: any = header.column.columnDef.meta;
                 return (
-                  <Th key={header.id} isNumeric={meta?.isNumeric}>
-                    <Text
-                      fontWeight="bold"
-                      fontSize="lg"
-                      textTransform="capitalize"
-                    >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </Text>
+                  <Th
+                    key={header.id}
+                    isNumeric={meta?.isNumeric}
+                    fontWeight="bold"
+                    fontSize="lg"
+                    textTransform="capitalize">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                   </Th>
                 );
               })}

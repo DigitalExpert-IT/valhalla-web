@@ -5,12 +5,10 @@ import { Profile, SectionNetworkStatus } from "components/pages/Profile";
 export default function profile() {
   return (
     <LayoutMain>
-      {/* <Profile /> */}
+      <Profile />
       <SectionNetworkStatus />
       <Box mt={20}>
         <TableNetworkStatus />
-        {/* <TableRankNetwork /> */}
-        {/* <TableNetworkStatusDebug /> */}
       </Box>
     </LayoutMain>
   );

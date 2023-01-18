@@ -1,13 +1,13 @@
-import { Box, Card, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Card, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { PROFILE_MEMBER } from "constant/pages/profile";
 import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
 import { SiTelegram } from "react-icons/si";
 import { t } from "i18next";
+import { WidgetProfileChile } from "components/Widget";
 
 export const CardProfile = () => {
   const { address, connect, initialized, isConnected } = useWallet();
@@ -58,48 +58,28 @@ export const CardProfile = () => {
               ? shortenAddress(account.referrer)
               : account.referrer.toUpperCase()}
           </Text>
-          <SimpleGrid columns={1} spacing={4} my={8} fontWeight={"bold"}>
-            <Flex
-              justifyContent={"space-between"}
+          <SimpleGrid columns={1} my={8} fontWeight={"bold"}>
+            <WidgetProfileChile
               bg={"brand.800"}
-              borderRadius={"md"}
               py={4}
               px={6}
-              fontSize={{ md: "lg" }}
-            >
-              <Text>
-                <Trans i18nKey="common.networkMembers" />
-              </Text>
-              <Text>{account.downlineCount.toNumber()}</Text>
-            </Flex>
-            <Flex
-              justifyContent={"space-between"}
+              label={t("common.networkMembers")}
+              element={<Text>{account.downlineCount.toNumber()}</Text>}
+            />
+            <WidgetProfileChile
               bg={"brand.800"}
-              borderRadius={"md"}
               py={4}
               px={6}
-              fontSize={{ md: "lg" }}
-            >
-              <Text>
-                <Trans i18nKey="common.directReferrals" />
-              </Text>
-              <Text>{account.directDownlineCount.toNumber()}</Text>
-            </Flex>
-            <Flex
-              justifyContent={"space-between"}
+              label={t("common.directReferrals")}
+              element={<Text>{account.directDownlineCount.toNumber()}</Text>}
+            />
+            <WidgetProfileChile
               bg={"brand.800"}
-              borderRadius={"md"}
               py={4}
               px={6}
-              fontSize={{ md: "lg" }}
-            >
-              <Text>
-                <Trans i18nKey="common.telegramOnlyMember" />
-              </Text>
-              <Text>
-                <SiTelegram />
-              </Text>
-            </Flex>
+              label={t("common.PrivateSaleNewToken")}
+              element={<SiTelegram />}
+            />
           </SimpleGrid>
         </Box>
       </Box>

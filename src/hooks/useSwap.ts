@@ -6,14 +6,14 @@ import { useWallet } from "./useWallet";
 import { SWAP_CONTRACT } from "constant/address";
 import { createInitiator, gnetCalculation, usdtCalculation } from "utils";
 import {
+  getWallet,
   getUSDTContract,
   getGNETContract,
   getSwapContract,
+  CURRENT_CHAIN_ID,
   getSwapSignerContract,
   getGNETSignerContract,
   getUSDTSignerContract,
-  getWallet,
-  CURRENT_CHAIN_ID,
 } from "lib/contractFactory";
 interface ICurencySpec {
   pair: {
@@ -65,11 +65,11 @@ export const useStore = create(() => initialState);
 const { setState } = useStore;
 
 const init = createInitiator(async () => {
-  const wallet = await getWallet();
-  const [address] = await wallet.listAccounts();
   const swap = await getSwapContract();
   const usdt = await getUSDTContract();
   const gnet = await getGNETContract();
+  const wallet = await getWallet();
+  const [address] = await wallet.listAccounts();
   const gnetAddress = await swap.nftn();
   const usdtAddress = await swap.usdt();
 
@@ -118,9 +118,9 @@ export const useSwap = () => {
   }, []);
 
   const approveGnet = async (quantity: BigNumber) => {
-    const gnetSigner = await getGNETSignerContract();
     const gnet = await getGNETContract();
     const balance = await gnet.balanceOf(address);
+    const gnetSigner = await getGNETSignerContract();
     const totalPrice = gnetCalculation(quantity);
     const allowance = await gnet.allowance(
       address,
@@ -149,9 +149,9 @@ export const useSwap = () => {
   };
 
   const approveUsdt = async (quantity: BigNumber) => {
-    const usdtSigner = await getUSDTSignerContract();
     const usdt = await getUSDTContract();
     const balance = await usdt.balanceOf(address);
+    const usdtSigner = await getUSDTSignerContract();
     const totalPrice = usdtCalculation(quantity);
     const allowance = await usdt.allowance(
       address,
@@ -178,7 +178,6 @@ export const useSwap = () => {
    * data.currency user wanted token
    * data.amount how much user want to swap his token
    */
-
   const swapCurrency = async (data: { currency: string; amount: string }) => {
     const tokenWanted = data.currency === "GNET";
     const swapContract = await getSwapSignerContract();

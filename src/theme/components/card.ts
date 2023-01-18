@@ -52,10 +52,10 @@ const sizes = {
 
 const variantGradient = defineStyle(props => {
   const { colorScheme: c } = props;
-  const [c1, c2 = "pink"] = c.split(/\:/);
+  const [c1, c2 = "pink", bg ] = c.split(/\:/);
   return definePartsStyle({
     container: {
-      bg: `${c1}.800`,
+      bg: `${bg ?? c1}.800`,
       position: "relative",
       overflow: "hidden",
       _after: {
@@ -82,7 +82,7 @@ const variantGradient = defineStyle(props => {
         zIndex: 2,
         opacity: 0.6,
         filter: "blur(20px)",
-        bgGradient: `radial(${c2}.800, transparent)`,
+        bgGradient: `radial(${c1}.800, transparent)`,
       },
     },
     body: {

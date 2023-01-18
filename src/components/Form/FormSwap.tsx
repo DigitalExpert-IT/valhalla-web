@@ -16,16 +16,15 @@ interface ISwapToken {
 }
 
 export const FormSwap = () => {
-  const { currency, swapCurrency } = useSwap();
-  const { handleSubmit, control, watch } = useForm<ISwapToken>();
   const { t } = useTranslation();
+  const { currency, swapCurrency } = useSwap();
   const { exec } = useAsyncCall(swapCurrency, t("form.message.swapSucces"));
+  const { handleSubmit, control, watch } = useForm<ISwapToken>();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
   const onSubmit = handleSubmit(async data => {
     await exec(data);
   });
-
   const normalizeCurrencies = useMemo(() => {
     return Object.values(currency).map(c => {
       const USDTPair = c.pair.name === "USDT";

@@ -1,7 +1,10 @@
 import create from "zustand";
-import { createInitiator, gnetCalculation, usdtCalculation } from "utils";
+import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { BigNumber } from "ethers";
+import { useWallet } from "./useWallet";
+import { SWAP_CONTRACT } from "constant/address";
+import { createInitiator, gnetCalculation, usdtCalculation } from "utils";
 import {
   getUSDTContract,
   getGNETContract,
@@ -10,12 +13,8 @@ import {
   getGNETSignerContract,
   getUSDTSignerContract,
   getWallet,
+  CURRENT_CHAIN_ID,
 } from "lib/contractFactory";
-import { useWallet } from "./useWallet";
-import { SWAP_CONTRACT } from "constant/address";
-import { fromBn, toBn } from "evm-bn";
-export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
-  "0x89") as "0x89";
 interface ICurencySpec {
   pair: {
     name: string;
@@ -71,8 +70,6 @@ const init = createInitiator(async () => {
   const swap = await getSwapContract();
   const usdt = await getUSDTContract();
   const gnet = await getGNETContract();
-  const gnetSigner = await getGNETSignerContract();
-  const usdtSigner = await getUSDTSignerContract();
   const gnetAddress = await swap.nftn();
   const usdtAddress = await swap.usdt();
 
@@ -82,8 +79,8 @@ const init = createInitiator(async () => {
       swap.getRatioFromAddress(usdtAddress),
       gnet.balanceOf(swap.address),
       usdt.balanceOf(swap.address),
-      gnetSigner.balanceOf(address),
-      usdtSigner.balanceOf(address),
+      gnet.balanceOf(address),
+      usdt.balanceOf(address),
     ]);
 
   setState({
@@ -177,41 +174,9 @@ export const useSwap = () => {
 
   /**
    * @param data
-   * @returns contract receipt
-   * @deprecated this function not used because can't be floating number
-   */
-
-  const swapToken = async (data: { currency: string; quantity: string }) => {
-    const payWithGNET = data.currency === "GNET";
-    const swapContract = await getSwapSignerContract();
-    if (payWithGNET) {
-      // in this logic, u swap your GNET with USDT
-      // await approveGnet(data.quantity);
-      const tx = await swapContract.swapToken(
-        store.currency.usdt.address,
-        data.quantity
-      );
-      const receipt = await tx.wait();
-      return receipt;
-    }
-    // deafult swap yout USDT with GNET
-    // await approveUsdt(data.quantity);
-    const tx = await swapContract.swapToken(
-      store.currency.gnet.address,
-      data.quantity
-    );
-    const receipt = await tx.wait();
-    return receipt;
-  };
-
-  /**
-   *
-   * @param data
    * @returns
-   * data.currency user token wanter
+   * data.currency user wanted token
    * data.amount how much user want to swap his token
-   *
-   *
    */
 
   const swapCurrency = async (data: { currency: string; amount: string }) => {
@@ -237,5 +202,5 @@ export const useSwap = () => {
     return receipt;
   };
 
-  return { ...store, swapToken, swapCurrency };
+  return { ...store, swapCurrency };
 };

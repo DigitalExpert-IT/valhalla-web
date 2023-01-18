@@ -1,1 +1,1 @@
-export * from "./GridMyNft";
+export * from "./CustomGridItem";

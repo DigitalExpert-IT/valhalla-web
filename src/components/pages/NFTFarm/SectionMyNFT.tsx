@@ -1,9 +1,10 @@
 import React from "react";
-import { rankMap } from "constant/rank";
-import { useAsyncCall, useValhalla } from "hooks";
-import { CardOwnedFarmNFT } from "components/Card";
-import { GridMyNft } from "components/Grid";
 import { useNFT } from "hooks";
+import { rankMap } from "constant/rank";
+import { CustomGridItem } from "components/Grid";
+import { CardOwnedFarmNFT } from "components/Card";
+import { Trans, useTranslation } from "react-i18next";
+import { useAsyncCall, useValhalla } from "hooks";
 import {
   Box,
   Heading,
@@ -15,13 +16,14 @@ import {
   Wrap,
   WrapItem,
   Button,
+  Grid,
 } from "@chakra-ui/react";
-import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 
 export const SectionMyNFT = () => {
-  const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const nft = useNFT();
+  const { t } = useTranslation();
+  const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
 
   return (
@@ -74,14 +76,24 @@ export const SectionMyNFT = () => {
               />
             </AspectRatio>
           </Box>
-          <GridMyNft
-            networkMembers={account.downlineCount.toNumber()}
-            globalBonusGnet={
-              isRankRewardClaimable
-                ? prettyBn(globalPool.valueLeft)
-                : prettyBn(globalPool.claimable)
-            }
-            rankReward={
+          <Grid
+            templateRows="repeat(2, 1fr)"
+            templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
+            gap={6}
+            flex={1}
+          >
+            <CustomGridItem title={t("pages.nftFarming.networkMembers")}>
+              {account.downlineCount.toNumber()}
+            </CustomGridItem>
+            <CustomGridItem title={t("pages.nftFarming.globalBonusGnet")}>
+              <Text>
+                {isRankRewardClaimable
+                  ? prettyBn(globalPool.valueLeft)
+                  : prettyBn(globalPool.claimable)}{" "}
+                MATIC
+              </Text>
+            </CustomGridItem>
+            <CustomGridItem title={t("pages.nftFarming.rankReward")}>
               <Button
                 size="sm"
                 colorScheme="blue"
@@ -90,13 +102,13 @@ export const SectionMyNFT = () => {
               >
                 Claim
               </Button>
-            }
-            farmingMatchingReward={
+            </CustomGridItem>
+            <CustomGridItem title={t("pages.nftFarming.farmingMatching")}>
               <Button size="sm" colorScheme="blue">
                 Claim
               </Button>
-            }
-          />
+            </CustomGridItem>
+          </Grid>
         </Stack>
       </Card>
       {nft.nftList.length !== 0 ? (

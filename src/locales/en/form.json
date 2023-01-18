@@ -17,6 +17,6 @@
   "helperText": {
     "referrer": "Please enter correct wallet address",
     "quantity": "please enter Quantity",
-    "balance":"balance {{balanceOf}} {{Symbol}}"
+    "balance":"Balance {{balanceOf}} {{symbol}}"
   }
 }

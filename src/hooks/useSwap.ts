@@ -9,10 +9,11 @@ import {
   getSwapSignerContract,
   getGNETSignerContract,
   getUSDTSignerContract,
+  getWallet,
 } from "lib/contractFactory";
 import { useWallet } from "./useWallet";
 import { SWAP_CONTRACT } from "constant/address";
-import { toBn } from "evm-bn";
+import { fromBn, toBn } from "evm-bn";
 export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
   "0x89") as "0x89";
 interface ICurencySpec {
@@ -23,6 +24,7 @@ interface ICurencySpec {
   };
   address: string;
   totalPool: BigNumber;
+  balance: BigNumber;
 }
 
 interface ICurency {
@@ -44,6 +46,7 @@ const initialState: IStore = {
       },
       address: "",
       totalPool: BigNumber.from(0),
+      balance: BigNumber.from(0),
     },
     usdt: {
       pair: {
@@ -53,6 +56,7 @@ const initialState: IStore = {
       },
       address: "",
       totalPool: BigNumber.from(0),
+      balance: BigNumber.from(0),
     },
   },
 };
@@ -62,18 +66,25 @@ export const useStore = create(() => initialState);
 const { setState } = useStore;
 
 const init = createInitiator(async () => {
+  const wallet = await getWallet();
+  const [address] = await wallet.listAccounts();
   const swap = await getSwapContract();
   const usdt = await getUSDTContract();
   const gnet = await getGNETContract();
+  const gnetSigner = await getGNETSignerContract();
+  const usdtSigner = await getUSDTSignerContract();
   const gnetAddress = await swap.nftn();
   const usdtAddress = await swap.usdt();
 
-  const [gnetRatio, usdtRatio, gnetPool, usdtPool] = await Promise.all([
-    swap.getRatioFromAddress(gnetAddress),
-    swap.getRatioFromAddress(usdtAddress),
-    gnet.balanceOf(swap.address),
-    usdt.balanceOf(swap.address),
-  ]);
+  const [gnetRatio, usdtRatio, gnetPool, usdtPool, gnetBalance, usdtBalance] =
+    await Promise.all([
+      swap.getRatioFromAddress(gnetAddress),
+      swap.getRatioFromAddress(usdtAddress),
+      gnet.balanceOf(swap.address),
+      usdt.balanceOf(swap.address),
+      gnetSigner.balanceOf(address),
+      usdtSigner.balanceOf(address),
+    ]);
 
   setState({
     currency: {
@@ -85,6 +96,7 @@ const init = createInitiator(async () => {
         },
         address: gnetAddress,
         totalPool: gnetPool,
+        balance: gnetBalance,
       },
       usdt: {
         pair: {
@@ -94,6 +106,7 @@ const init = createInitiator(async () => {
         },
         address: usdtAddress,
         totalPool: usdtPool,
+        balance: usdtBalance,
       },
     },
   });
@@ -111,7 +124,6 @@ export const useSwap = () => {
     const gnetSigner = await getGNETSignerContract();
     const gnet = await getGNETContract();
     const balance = await gnet.balanceOf(address);
-    const pricePerUsdt = store.currency.usdt.pair.price;
     const totalPrice = gnetCalculation(quantity);
     const allowance = await gnet.allowance(
       address,
@@ -166,7 +178,7 @@ export const useSwap = () => {
   /**
    * @param data
    * @returns contract receipt
-   * @deprecated this function not used because can't be float number
+   * @deprecated this function not used because can't be floating number
    */
 
   const swapToken = async (data: { currency: string; quantity: string }) => {
@@ -207,19 +219,19 @@ export const useSwap = () => {
     const swapContract = await getSwapSignerContract();
     if (tokenWanted) {
       // swap your USDT with GNET
-      await approveUsdt(toBn(data.amount));
+      await approveUsdt(toBn(data.amount, 9));
       const tx = await swapContract.swapCurrency(
         store.currency.gnet.address,
-        data.amount
+        toBn(data.amount, 9)
       );
       const receipt = await tx.wait();
       return receipt;
     }
     // in this logic, u swap your GNET with USDT
-    await approveGnet(toBn(data.amount, 9));
+    await approveGnet(toBn(data.amount));
     const tx = await swapContract.swapCurrency(
       store.currency.usdt.address,
-      data.amount
+      toBn(data.amount)
     );
     const receipt = await tx.wait();
     return receipt;

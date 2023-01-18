@@ -19,7 +19,7 @@ import {
 interface FormInputProps extends Omit<InputProps, "placeholder" | "label"> {
   label?: string | null;
   placeholder?: string | undefined;
-  helperText?: string | null;
+  helpertext?: string | null;
 }
 
 type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
@@ -46,8 +46,8 @@ export const FormInput = <T extends FieldValues, TName extends FieldPath<T>>(
           <Input {...rest} value={value ?? ""} {...props} />
         )}
       />
-      {props.helperText ? (
-        <FormHelperText>{props.helperText}</FormHelperText>
+      {props.helpertext ? (
+        <FormHelperText>{props.helpertext}</FormHelperText>
       ) : null}
       <FormErrorMessage>{error?.message ?? "Invalid Value"}</FormErrorMessage>
     </FormControl>

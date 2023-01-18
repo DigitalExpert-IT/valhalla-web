@@ -17,10 +17,11 @@ interface ISwapToken {
 
 export const FormSwap = () => {
   const { currency, swapCurrency } = useSwap();
-  const { exec } = useAsyncCall(swapCurrency);
   const { handleSubmit, control, watch } = useForm<ISwapToken>();
   const { t } = useTranslation();
+  const { exec } = useAsyncCall(swapCurrency, t("form.message.swapSucces"));
   const [price, setPrice] = useState("");
+  const [symbol, setSymbol] = useState(false);
   const onSubmit = handleSubmit(async data => {
     await exec(data);
   });
@@ -39,14 +40,18 @@ export const FormSwap = () => {
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "USDT") {
-        const toBigNumb = toBn(value.amount ? value.amount.toString() : "0");
+        if (!value.amount) return;
+        const toBigNumb = toBn(value.amount.toString());
         const format = fromBn(gnetCalculation(toBigNumb), 9);
         setPrice(format);
+        setSymbol(false);
         return;
       }
-      const toBigNumb = toBn(value.amount ? value.amount.toString() : "0", 9);
+      if (!value.amount) return;
+      const toBigNumb = toBn(value.amount.toString(), 9);
       const format = fromBn(usdtCalculation(toBigNumb));
       setPrice(format);
+      setSymbol(true);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -58,11 +63,16 @@ export const FormSwap = () => {
           control={control}
           label={t("form.label.from")}
           name="price"
-          helperText={t("form.helperText.balance")}
+          helpertext={t("form.helperText.balance", {
+            balanceOf: symbol
+              ? fromBn(currency.usdt.balance)
+              : fromBn(currency.gnet.balance, 9),
+            symbol: symbol ? "USDT" : "GNET",
+          })}
           placeholder={"0.0"}
           type="number"
           isDisabled
-          value={price}
+          value={price ?? undefined}
         ></FormInput>
         <Stack
           direction={{ md: "row", sm: "column", base: "column" }}
@@ -73,7 +83,12 @@ export const FormSwap = () => {
               control={control}
               label={t("form.label.to")}
               name="amount"
-              helperText={t("form.helperText.balance")}
+              helpertext={t("form.helperText.balance", {
+                balanceOf: symbol
+                  ? fromBn(currency.gnet.balance, 9)
+                  : fromBn(currency.usdt.balance),
+                symbol: symbol ? "GNET" : "USDT",
+              })}
               placeholder={"0.0"}
               type="number"
             ></FormInput>

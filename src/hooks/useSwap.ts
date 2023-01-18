@@ -65,9 +65,9 @@ export const useStore = create(() => initialState);
 const { setState } = useStore;
 
 const init = createInitiator(async () => {
-  const swap = await getSwapContract();
   const usdt = await getUSDTContract();
   const gnet = await getGNETContract();
+  const swap = await getSwapContract();
   const wallet = await getWallet();
   const [address] = await wallet.listAccounts();
   const gnetAddress = await swap.nftn();
@@ -122,10 +122,12 @@ export const useSwap = () => {
     const balance = await gnet.balanceOf(address);
     const gnetSigner = await getGNETSignerContract();
     const totalPrice = gnetCalculation(quantity);
+
     const allowance = await gnet.allowance(
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
+
     if (balance.lt(totalPrice)) {
       throw {
         code: "NotEnoughBalance",
@@ -153,15 +155,18 @@ export const useSwap = () => {
     const balance = await usdt.balanceOf(address);
     const usdtSigner = await getUSDTSignerContract();
     const totalPrice = usdtCalculation(quantity);
+
     const allowance = await usdt.allowance(
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
+
     if (balance.lt(totalPrice)) {
       throw {
         code: "NotEnoughBalance",
       };
     }
+
     if (allowance.lt(totalPrice)) {
       const tx = await usdtSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],

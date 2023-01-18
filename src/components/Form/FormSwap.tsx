@@ -59,8 +59,6 @@ export const FormSwap = () => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  console.log(currency.gnet.totalPool.toString());
-
   return (
     <Stack as="form" onSubmit={onSubmit}>
       <Stack alignItems="center" mb="5">

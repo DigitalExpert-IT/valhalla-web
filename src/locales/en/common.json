@@ -35,5 +35,14 @@
   "gnet": "GNET",
   "matic": "MATIC",
   "ipo": "IPO",
-  "swap": "Swap"
+  "swap": "Swap",
+  "levelBonus": "Level Bonus",
+  "level": "Level",
+  "percent": "Percent",
+  "value": "Value",
+  "rank": "Rank",
+  "poolGNET": "Pool GNET",
+  "claimreq": "Claim Req",
+  "maxBuyNFT": "Max buy NFT",
+  "totalSupply": "Total Supply"
 }

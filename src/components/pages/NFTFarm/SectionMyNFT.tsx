@@ -158,13 +158,19 @@ export const SectionMyNFT = () => {
           </Grid>
         </Stack>
       </Card>
-      <Wrap justify="center" spacing="10">
-        {nft.nftList.map(card => (
-          <WrapItem key={card.id.toNumber()}>
-            <CardOwnedFarmNFT {...card} />
-          </WrapItem>
-        ))}
-      </Wrap>
+      {nft.nftList.length !== 0 ? (
+        <Wrap justify="center" spacing="10">
+          {nft.nftList.map(card => (
+            <WrapItem key={card.id.toNumber()}>
+              <CardOwnedFarmNFT {...card} />
+            </WrapItem>
+          ))}
+        </Wrap>
+      ) : (
+        <Box textAlign="center" my="10">
+          <Heading color="gray.600">You don&apos;t own an NFT</Heading>
+        </Box>
+      )}
     </Box>
   );
 };

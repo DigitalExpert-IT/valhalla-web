@@ -79,7 +79,11 @@
     }
   },
   "nftFarming": {
-    "gnetProject": "<strong>Gnet</strong> Project"
+    "gnetProject": "<strong>Gnet</strong> Project",
+    "networkMembers": "Network members",
+    "globalBonusGnet": "Global bonus gnet",
+    "rankReward": "Rank reward",
+    "farmingMatching": "Farming matching reward"
   },
   "share": {
     "title": "SHARE TO EARN",

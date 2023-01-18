@@ -10,8 +10,6 @@ import {
   Card,
   Stack,
   Text,
-  Grid,
-  GridItem,
   AspectRatio,
   Image,
   Wrap,

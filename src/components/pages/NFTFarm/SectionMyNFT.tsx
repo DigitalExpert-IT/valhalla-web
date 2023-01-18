@@ -2,6 +2,7 @@ import React from "react";
 import { rankMap } from "constant/rank";
 import { useAsyncCall, useValhalla } from "hooks";
 import { CardOwnedFarmNFT } from "components/Card";
+import { GridMyNft } from "components/Grid";
 import { useNFT } from "hooks";
 import {
   Box,
@@ -75,60 +76,14 @@ export const SectionMyNFT = () => {
               />
             </AspectRatio>
           </Box>
-          <Grid
-            templateRows="repeat(2, 1fr)"
-            templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
-            gap={6}
-            flex={1}
-          >
-            <GridItem
-              borderRadius="lg"
-              rowSpan={2}
-              colSpan={2}
-              h="20"
-              bg="brand.800"
-              display="flex"
-              flexDir="row"
-              p="5"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Text fontWeight="bold">Network members</Text>
-              <Text fontWeight="bold">{account.downlineCount.toNumber()}</Text>
-            </GridItem>
-            <GridItem
-              borderRadius="lg"
-              rowSpan={2}
-              colSpan={2}
-              h="20"
-              bg="brand.800"
-              display="flex"
-              flexDir="row"
-              p="5"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Text fontWeight="bold">Global Bonus Gnet</Text>
-              <Text fontWeight="bold">
-                {isRankRewardClaimable
-                  ? prettyBn(globalPool.valueLeft)
-                  : prettyBn(globalPool.claimable)}{" "}
-                Matic
-              </Text>
-            </GridItem>
-            <GridItem
-              borderRadius="lg"
-              rowSpan={2}
-              colSpan={2}
-              h="20"
-              bg="brand.800"
-              display="flex"
-              flexDir="row"
-              p="5"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Text fontWeight="bold">Rank Reward</Text>
+          <GridMyNft
+            networkMembers={account.downlineCount.toNumber()}
+            globalBonusGnet={
+              isRankRewardClaimable
+                ? prettyBn(globalPool.valueLeft)
+                : prettyBn(globalPool.claimable)
+            }
+            rankReward={
               <Button
                 size="sm"
                 colorScheme="blue"
@@ -137,25 +92,13 @@ export const SectionMyNFT = () => {
               >
                 Claim
               </Button>
-            </GridItem>
-            <GridItem
-              borderRadius="lg"
-              rowSpan={2}
-              colSpan={2}
-              h="20"
-              bg="brand.800"
-              display="flex"
-              flexDir="row"
-              p="5"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Text fontWeight="bold">Farming Matching Reward</Text>
+            }
+            farmingMatchingReward={
               <Button size="sm" colorScheme="blue">
                 Claim
               </Button>
-            </GridItem>
-          </Grid>
+            }
+          />
         </Stack>
       </Card>
       {nft.nftList.length !== 0 ? (

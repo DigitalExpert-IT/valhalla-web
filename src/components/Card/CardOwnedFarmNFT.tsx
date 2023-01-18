@@ -4,12 +4,14 @@ import { prettyBn } from "utils";
 import { BigNumber } from "ethers";
 import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
+import { useTranslation } from "react-i18next";
 import { Stack, Box, AspectRatio, Image, Text, Button } from "@chakra-ui/react";
 
 export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
   const { id, mintingPrice, cardId, percentage, lastFarmedAt, tokenUri } =
     props;
   const intervalRef = useRef<any>();
+  const { t } = useTranslation();
   const lastFarmedAtRef = useRef<BigNumber>(props.lastFarmedAt);
   const [farmValue, setFarmValue] = useState(0);
   const { farm } = useNFT();
@@ -74,10 +76,10 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
                 NFT #{id.toNumber()}
               </Text>
               <Text color="black" fontWeight="bold">
-                Global Network Farm Level {cardId.toNumber()}
+                {t("common.globalNetworkFarm") + cardId.toNumber()}
               </Text>
               <Text fontWeight="bold" color="gray.800">
-                Percentage {percentage.toNumber() / 10}
+                Percentage {t("common.percentage") + percentage.toNumber() / 10}
               </Text>
             </Box>
             <Box>

@@ -1,30 +1,31 @@
+import { useForm } from "react-hook-form";
+import { fromBn, toBn } from "evm-bn";
+import { useTranslation } from "react-i18next";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
-
-import { fromBn, toBn } from "evm-bn";
 import { useAsyncCall, useSwap } from "hooks";
 import { useEffect, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { gnetCalculation, usdtCalculation } from "utils";
 
 interface ISwapToken {
-  currency: string;
-  amount: string;
   price?: number;
+  amount: string;
+  currency: string;
 }
 
 export const FormSwap = () => {
   const { t } = useTranslation();
-  const { currency, swapCurrency } = useSwap();
-  const { exec } = useAsyncCall(swapCurrency, t("form.message.swapSucces"));
-  const { handleSubmit, control, watch } = useForm<ISwapToken>();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const onSubmit = handleSubmit(async data => {
-    await exec(data);
-  });
+  const { currency, swapCurrency } = useSwap();
+  const { handleSubmit, control, watch } = useForm<ISwapToken>();
+
+  const { exec, isLoading: isSwapLoading } = useAsyncCall(
+    swapCurrency,
+    t("form.message.swapSucces")
+  );
+
   const normalizeCurrencies = useMemo(() => {
     return Object.values(currency).map(c => {
       const USDTPair = c.pair.name === "USDT";
@@ -36,18 +37,21 @@ export const FormSwap = () => {
     });
   }, [currency]);
 
+  const onSubmit = handleSubmit(async data => {
+    await exec(data);
+  });
+
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "USDT") {
-        if (!value.amount) return;
-        const toBigNumb = toBn(value.amount.toString());
+        const toBigNumb = toBn(value.amount ? value.amount : "0");
         const format = fromBn(gnetCalculation(toBigNumb), 9);
         setPrice(format);
         setSymbol(false);
         return;
       }
-      if (!value.amount) return;
-      const toBigNumb = toBn(value.amount.toString(), 9);
+
+      const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
       const format = fromBn(usdtCalculation(toBigNumb));
       setPrice(format);
       setSymbol(true);
@@ -104,7 +108,9 @@ export const FormSwap = () => {
         </Stack>
       </Stack>
       <ButtonConnectWrapper>
-        <Button type="submit">{t("common.swap")}</Button>
+        <Button type="submit" isLoading={isSwapLoading}>
+          {t("common.swap")}
+        </Button>
       </ButtonConnectWrapper>
     </Stack>
   );

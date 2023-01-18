@@ -16,14 +16,17 @@ import {
   useFormState,
 } from "react-hook-form";
 
+interface FormInputProps extends Omit<InputProps, "placeholder" | "label"> {
+  label?: string | null;
+  placeholder?: string | undefined;
+  helperText?: string | null;
+}
+
 type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
   ControllerProps<T, TName>,
   "render"
-> & {
-  label?: string | null;
-  placeholder?: string | null;
-  helperText?: string | null;
-};
+> &
+  FormInputProps;
 
 export const FormInput = <T extends FieldValues, TName extends FieldPath<T>>(
   props: Props<T, TName>
@@ -40,11 +43,7 @@ export const FormInput = <T extends FieldValues, TName extends FieldPath<T>>(
         rules={props.rules}
         name={props.name}
         render={({ field: { value, ...rest } }) => (
-          <Input
-            {...rest}
-            value={value ?? ""}
-            placeholder={props.placeholder ?? ""}
-          />
+          <Input {...rest} value={value ?? ""} {...props} />
         )}
       />
       {props.helperText ? (

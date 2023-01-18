@@ -29,7 +29,13 @@ export const SectionNFTFarmMatching = () => {
             mb="2"
           >
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+              <Box
+                as="span"
+                flex="1"
+                textAlign="left"
+                textTransform="capitalize"
+                fontWeight="bold"
+              >
                 {item.title}
               </Box>
               <AccordionIcon />

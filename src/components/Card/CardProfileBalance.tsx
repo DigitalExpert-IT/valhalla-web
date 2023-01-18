@@ -24,8 +24,8 @@ export const CardProfileBalance = () => {
           <Image src="/images/exampleProfile.png" alt="Profile" w={10} />
           <HStack>
             <Text>{fromBn(nft.genesisPool.claimable, 9)} </Text>
-            <Text color={"blue.300"} w={16}>
-              <Trans i18nKey="common.gnet" />
+            <Text color={"secondary.500"} w={16}>
+              GNET
             </Text>
           </HStack>
         </Flex>
@@ -42,8 +42,8 @@ export const CardProfileBalance = () => {
                 ? prettyBn(globalPool.valueLeft)
                 : prettyBn(globalPool.claimable)}{" "}
             </Text>
-            <Text color={"blue.300"} w={16}>
-              <Trans i18nKey="common.matic" />
+            <Text color={"secondary.500"} w={16}>
+              MATIC
             </Text>
           </HStack>
         </Flex>
@@ -56,7 +56,7 @@ export const CardProfileBalance = () => {
           <Image src="/images/exampleProfile.png" alt="Profile" w={10} />
           <HStack>
             <Text>{prettyBn(ipoPool.claimable)}</Text>
-            <Text color={"blue.300"} w={16}>
+            <Text color={"secondary.500"} w={16}>
               <Trans i18nKey="common.ipo" />
             </Text>
           </HStack>

@@ -39,7 +39,7 @@ export const SectionMyNFT = () => {
         mb="5"
       >
         <Stack
-          direction="row"
+          direction={{ base: "column", md: "row" }}
           justify="space-between"
           align="center"
           mb="10"

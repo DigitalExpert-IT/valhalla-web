@@ -8,7 +8,7 @@ import {
   AccordionPanel,
   Box,
   Heading,
-  HStack,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 
@@ -42,12 +42,18 @@ export const SectionNFTFarmMatching = () => {
             </AccordionButton>
             <AccordionPanel bgColor="valhalla.800">
               {item.content.map((obj, idx) => (
-                <HStack justify="space-between" key={idx} spacing={5}>
+                <Stack
+                  direction={{ base: "column", md: "row" }}
+                  justify={{ base: "none", md: "space-between" }}
+                  textAlign={{ base: "center", md: "left" }}
+                  key={idx}
+                  spacing={5}
+                >
                   <Text color={idx % 2 ? "blue.400" : ""}>{obj.name}</Text>
                   <Text color={idx % 2 ? "blue.400" : ""}>
                     {obj.description}
                   </Text>
-                </HStack>
+                </Stack>
               ))}
             </AccordionPanel>
           </AccordionItem>

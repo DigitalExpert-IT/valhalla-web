@@ -2,8 +2,8 @@ import create from "zustand";
 import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { BigNumber } from "ethers";
-import { useWallet } from "./useWallet";
 import { SWAP_CONTRACT } from "constant/address";
+import { useWallet, useWalletStore } from "hooks";
 import { createInitiator, getGnetPrice, getUsdtPrice } from "utils";
 import {
   getWallet,
@@ -25,12 +25,10 @@ interface ICurencySpec {
   balance: BigNumber;
   totalPool: BigNumber;
 }
-
 interface ICurency {
   gnet: ICurencySpec;
   usdt: ICurencySpec;
 }
-
 interface IStore {
   currency: ICurency;
 }
@@ -61,10 +59,9 @@ const initialState: IStore = {
 };
 
 export const useStore = create(() => initialState);
-
 const { setState } = useStore;
 
-const init = createInitiator(async () => {
+const fetchSwap = async () => {
   const usdt = await getUSDTContract();
   const gnet = await getGNETContract();
   const swap = await getSwapContract();
@@ -107,6 +104,23 @@ const init = createInitiator(async () => {
       },
     },
   });
+};
+
+const init = createInitiator(async () => {
+  const contractSwap = await getSwapContract();
+  await Promise.all([fetchSwap()]);
+
+  contractSwap.on("SwapToken", () => {
+    Promise.all([fetchSwap()]);
+  });
+
+  useWalletStore.subscribe(
+    state => state.address,
+    () => {
+      fetchSwap();
+    },
+    { fireImmediately: true }
+  );
 });
 
 export const useSwap = () => {

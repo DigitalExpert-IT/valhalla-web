@@ -31,9 +31,11 @@ interface ICurency {
 }
 interface IStore {
   currency: ICurency;
+  initialized: boolean;
 }
 
 const initialState: IStore = {
+  initialized: false,
   currency: {
     gnet: {
       pair: {
@@ -81,6 +83,7 @@ const fetchSwap = async () => {
     ]);
 
   setState({
+    initialized: true,
     currency: {
       gnet: {
         pair: {
@@ -201,6 +204,12 @@ export const useSwap = () => {
     if (balance.lt(totalPrice)) {
       throw {
         code: "NotEnoughBalance",
+      };
+    }
+
+    if (store.currency.usdt.totalPool.lt(totalPrice)) {
+      throw {
+        code: "NotEnoughPool",
       };
     }
 

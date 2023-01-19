@@ -18,7 +18,7 @@ export const FormSwap = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { currency, swapCurrency } = useSwap();
+  const { currency, swapCurrency, initialized } = useSwap();
   const { handleSubmit, control, watch } = useForm<ISwapToken>();
 
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
@@ -103,12 +103,13 @@ export const FormSwap = () => {
               name="currency"
               defaultValue={"USDT"}
               option={normalizeCurrencies}
+              isDisabled={!initialized}
             ></FormSelect>
           </Box>
         </Stack>
       </Stack>
       <ButtonConnectWrapper>
-        <Button type="submit" isLoading={isSwapLoading}>
+        <Button type="submit" isLoading={isSwapLoading || !initialized}>
           {t("common.swap")}
         </Button>
       </ButtonConnectWrapper>

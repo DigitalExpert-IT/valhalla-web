@@ -24,6 +24,7 @@ specifiers:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
+  '@types/react-table': ^7.7.14
   '@warmbyte/valhalla': 1.12.0
   axios: ^1.2.1
   d3-org-chart: ^2.6.0
@@ -47,12 +48,14 @@ specifiers:
   prettier: ^2.8.1
   prisma: ^4.8.0
   react: 18.2.0
+  react-chakra-pagination: ^1.0.1
   react-dom: 18.2.0
   react-hook-form: ^7.41.0
   react-i18next: ^12.0.0
   react-icons: ^4.7.1
   react-jazzicon: ^1.0.4
   react-paginate-chakra-ui: ^0.1.2
+  react-table: ^7.8.0
   react-use: ^17.4.0
   telegraf: ^4.11.2
   three: ^0.148.0
@@ -75,6 +78,7 @@ dependencies:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
+  '@types/react-table': 7.7.14
   '@warmbyte/valhalla': 1.12.0
   axios: 1.2.1
   d3-org-chart: 2.6.0
@@ -93,12 +97,14 @@ dependencies:
   next: 13.1.2_672uxklweod7ene3nqtsh262ca
   prisma: 4.8.0
   react: 18.2.0
+  react-chakra-pagination: 1.0.1
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.0_react@18.2.0
   react-i18next: 12.0.0_nger6pvrp5hnzeykouhwqmsdti
   react-icons: 4.7.1_react@18.2.0
   react-jazzicon: 1.0.4_biqbaboplfbrettd7655fr4n2y
   react-paginate-chakra-ui: 0.1.2_6lg3bhg6jp5o5qwbtzwmkhcldy
+  react-table: 7.8.0_react@18.2.0
   react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
   telegraf: 4.11.2
   three: 0.148.0
@@ -2301,6 +2307,12 @@ packages:
 
   /@types/react-dom/18.0.9:
     resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
+    dependencies:
+      '@types/react': 18.0.25
+    dev: false
+
+  /@types/react-table/7.7.14:
+    resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
     dependencies:
       '@types/react': 18.0.25
     dev: false
@@ -4714,6 +4726,10 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  /react-chakra-pagination/1.0.1:
+    resolution: {integrity: sha512-S/ldhbvYBXpmOuurNm4s9KmOa7A2i+PInE1GVwTauS3BDkAePp1TfpWhScq/V2f3Mq57uFEFlkVMWTTsukc+6A==}
+    dev: false
+
   /react-clientside-effect/1.2.6_react@18.2.0:
     resolution: {integrity: sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg==}
     peerDependencies:
@@ -4884,6 +4900,14 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.4.1
+    dev: false
+
+  /react-table/7.8.0_react@18.2.0:
+    resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
+    peerDependencies:
+      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-universal-interface/0.6.2_react@18.2.0+tslib@2.4.1:

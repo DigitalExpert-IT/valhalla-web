@@ -83,7 +83,8 @@
     "networkMembers": "Network members",
     "globalBonusGnet": "Global bonus gnet",
     "rankReward": "Rank reward",
-    "farmingMatching": "Farming matching reward"
+    "farmingMatching": "Farming matching reward",
+    "farmMathcingRequirement": "NFT farm matching requirement"
   },
   "share": {
     "title": "SHARE TO EARN",

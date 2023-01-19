@@ -1,16 +1,19 @@
 import React from "react";
 import { prettyBn } from "utils";
+import { useTranslation } from "react-i18next";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { Stack, Box, Button, AspectRatio, Image, Text } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
+  const { t } = useTranslation();
   const { id, price } = props;
-  const name = `Farming ${id.add(1).toNumber()}`;
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
   const handleBuy = () => {
     buyAsync.exec(id);
   };
+
+  const name = `Farming ${id.add(1).toNumber()}`;
 
   return (
     <Stack>
@@ -22,23 +25,31 @@ export const CardFarmNFT = (props: INFTCard) => {
             objectFit="cover"
           />
         </AspectRatio>
-        <Box
+        <Stack
+          direction="row"
           pos="absolute"
           bottom="0"
-          w="full"
-          h="20"
+          justify="space-between"
           textAlign="left"
+          w="full"
           p="2"
           backdropFilter="auto"
-          backdropContrast="20%"
+          backdropContrast="10%"
         >
-          <Text fontSize="xl" fontWeight="bold" color="black">
-            Price: {prettyBn(price, 9)}
-          </Text>
-          <Text color="black" fontWeight="bold">
-            {name}
-          </Text>
-        </Box>
+          <Box>
+            <Text fontSize="xl" fontWeight="bold" color="black">
+              NFT #{id.toNumber()}
+            </Text>
+            <Text color="black" fontWeight="bold" fontSize="lg">
+              {name}
+            </Text>
+          </Box>
+          <Box>
+            <Text fontSize="xl" fontWeight="bold" color="black">
+              Price: {prettyBn(price, 9)}
+            </Text>
+          </Box>
+        </Stack>
       </Box>
       <Button
         w="full"

@@ -1,5 +1,6 @@
 import React from "react";
 import { NFTMATHCING } from "constant/pages/nftFarming";
+import { useTranslation } from "react-i18next";
 import {
   Accordion,
   AccordionItem,
@@ -13,10 +14,13 @@ import {
 } from "@chakra-ui/react";
 
 export const SectionNFTFarmMatching = () => {
+  const { t } = useTranslation();
   return (
     <Box>
       <Box textAlign="center" mb="10" mt="60">
-        <Heading>NFT Farm Matching Requirement</Heading>
+        <Heading textTransform="capitalize">
+          {t("pages.nftFarming.farmMathcingRequirement")}
+        </Heading>
       </Box>
       <Accordion allowToggle p="2">
         {NFTMATHCING.map((item, idx) => (

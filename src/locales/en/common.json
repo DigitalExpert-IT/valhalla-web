@@ -34,5 +34,6 @@
   "maxBuyNFT": "Max buy NFT",
   "totalSupply": "Total Supply",
   "globalNetworkFarm": "Global network farm level",
-  "percentage": "Percentage"
+  "percentage": "Percentage",
+  "claim": "Claim"
 }

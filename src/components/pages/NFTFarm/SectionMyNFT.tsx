@@ -100,12 +100,12 @@ export const SectionMyNFT = () => {
                 onClick={claimNftRankRewardAsync.exec}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
-                Claim
+                {t("common.claim")}
               </Button>
             </CustomGridItem>
             <CustomGridItem title={t("pages.nftFarming.farmingMatching")}>
               <Button size="sm" colorScheme="blue">
-                Claim
+                {t("common.claim")}
               </Button>
             </CustomGridItem>
           </Grid>

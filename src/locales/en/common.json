@@ -32,5 +32,8 @@
   "poolGNET": "Pool GNET",
   "claimreq": "Claim Req",
   "maxBuyNFT": "Max buy NFT",
-  "totalSupply": "Total Supply"
+  "totalSupply": "Total Supply",
+  "globalNetworkFarm": "Global network farm level",
+  "percentage": "Percentage",
+  "claim": "Claim"
 }

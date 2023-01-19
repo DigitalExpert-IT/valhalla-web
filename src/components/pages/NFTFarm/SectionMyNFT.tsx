@@ -121,7 +121,7 @@ export const SectionMyNFT = () => {
         </Wrap>
       ) : (
         <Box textAlign="center" my="10">
-          <Heading color="gray.600">You don&apos;t own an NFT</Heading>
+          <Heading color="gray.600">{t("error.notOwnedNft")}</Heading>
         </Box>
       )}
     </Box>

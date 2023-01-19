@@ -5,8 +5,8 @@ import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { useAsyncCall, useSwap } from "hooks";
-import { useEffect, useMemo, useState } from "react";
 import { getGnetPrice, getUsdtPrice } from "utils";
+import { useEffect, useMemo, useState } from "react";
 
 interface ISwapToken {
   price?: number;

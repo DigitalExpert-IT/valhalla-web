@@ -1,25 +1,25 @@
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Select,
+  FormLabel,
   SelectProps,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import {
-  Controller,
-  ControllerProps,
-  FieldValues,
-  FieldError,
-  FieldPath,
   get,
+  FieldPath,
+  FieldError,
+  Controller,
+  FieldValues,
   useFormState,
+  ControllerProps,
 } from "react-hook-form";
 
 interface FormSelectProps extends Omit<SelectProps, "placeholder"> {
   label?: string | null;
-  placeholder?: string;
   helperText?: string | null;
+  placeholder?: string;
   option: { value: string; label: string }[];
 }
 

@@ -14,7 +14,14 @@ export const SectionNetworkStatus = () => {
       <SimpleGrid columns={{ base: 1, lg: 2 }} spacingX={6} my={10}>
         {NETWORK_STATUS.map((row, idx) => (
           <HStack key={idx}>
-            <WidgetProfileChile start={row.start} end={row.end} />
+            <WidgetProfileChile
+              variant={"gradient"}
+              colorScheme={"purple:pink"}
+              rounded="xl"
+              minH={"24"}
+              label={row.label}
+              value={row.value}
+            />
           </HStack>
         ))}
       </SimpleGrid>

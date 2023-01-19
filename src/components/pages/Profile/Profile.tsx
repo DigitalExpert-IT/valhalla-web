@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, VStack, Heading } from "@chakra-ui/react";
+import { Box, SimpleGrid, VStack, Heading, Button } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
 import { WidgetProfileChile } from "components/Widget";
 import { withConnection, withRegistration } from "hoc";
@@ -20,26 +20,38 @@ const SectionProfile = () => {
         <Box>
           <CardProfileBalance />
           <WidgetProfileChile
-            start={[t("common.globalBonus")]}
-            end={[prettyBn(personalReward), t("common.matic")]}
+            variant={"gradient"}
+            colorScheme={"purple:pink"}
+            rounded="xl"
+            minH={"24"}
+            label={t("common.globalBonus")}
+            value={prettyBn(personalReward)}
           />
           <WidgetProfileChile
-            start={[
-              t("common.referralBonus"),
-              prettyBn(rankReward) + " " + t("common.matic"),
-            ]}
-            end={"claim"}
+            variant={"gradient"}
+            colorScheme={"purple:pink"}
+            rounded="xl"
+            minH={"24"}
+            label={t("common.referralBonus")}
+            labelBalace={prettyBn(personalReward)}
+            element={<Button colorScheme="brand">{t("common.claim")}</Button>}
           />
           <WidgetProfileChile
-            start={[
-              t("common.rankReward"),
-              prettyBn(rankReward) + " " + t("common.matic"),
-            ]}
-            end={"claim"}
+            variant={"gradient"}
+            colorScheme={"purple:pink"}
+            rounded="xl"
+            minH={"24"}
+            label={t("common.rankReward")}
+            labelBalace={prettyBn(rankReward)}
+            element={<Button colorScheme="brand">{t("common.claim")}</Button>}
           />
           <WidgetProfileChile
-            start={[t("common.PrivateSaleNewToken")]}
-            end={[prettyBn(ipoPool.claimable), t("common.matic")]}
+            variant={"gradient"}
+            colorScheme={"purple:pink"}
+            rounded="xl"
+            minH={"24"}
+            label={t("common.PrivateSaleNewToken")}
+            value={prettyBn(ipoPool.claimable)}
           />
         </Box>
       </SimpleGrid>
@@ -48,4 +60,3 @@ const SectionProfile = () => {
 };
 
 export default composeHoc(withRegistration, withConnection)(SectionProfile);
-// export default SectionProfile;

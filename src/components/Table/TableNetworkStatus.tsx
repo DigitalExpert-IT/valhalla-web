@@ -46,12 +46,9 @@ const columns = [
         textAlign={"center"}
       >
         {info.getValue()}{" "}
-        <Trans
-          i18nKey="common.gnet"
-          components={{
-            strong: <Text as="span" color="secondary.500" />,
-          }}
-        />
+        <Text as="span" color="secondary.500">
+          MATIC
+        </Text>
       </Text>
     ),
     header: info => <Text textAlign={"center"}>{t("common.totalBuy")}</Text>,

@@ -16,41 +16,41 @@ export const PROFILE_BALANCE = [
 export const PROFILE_WIDGET = [
   {
     start: [t("common.globalBonus")],
-    end: [100000000000000, t("common.matic")],
+    end: [100000000000000, "MATIC"],
   },
   {
     start: [
       t("common.referralBonus"),
-      "1000000000000000000000000000 " + t("common.matic"),
+      "1000000000000000000000000000 " + "MATIC",
     ],
     end: "claim",
   },
   {
-    start: [t("common.rankReward"), `0 ${t("common.matic")}`],
+    start: [t("common.rankReward"), `0 ${"MATIC"}`],
     end: "claim",
   },
   {
     start: [t("common.globalBonus")],
-    end: [33, t("common.matic")],
+    end: [33, "MATIC"],
   },
 ];
 
 export const NETWORK_STATUS = [
   {
-    start: [t("common.totalNetworkMembers")],
-    end: ["2000"],
+    label: t("common.totalNetworkMembers"),
+    value: "2000",
   },
   {
-    start: [t("common.total15LevelReferral")],
-    end: ["2000"],
+    label: t("common.total15LevelReferral"),
+    value: "2000",
   },
   {
-    start: [t("common.personalBuy")],
-    end: ["2000", "common.gnet"],
+    label: t("common.personalBuy"),
+    value: "2000",
   },
   {
-    start: [t("common.total100LevelReferral")],
-    end: ["2000"],
+    label: t("common.total100LevelReferral"),
+    value: "2000",
   },
 ];
 

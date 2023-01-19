@@ -1,61 +1,43 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardProps,
-  Flex,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
-import React from "react";
-import { Trans } from "react-i18next";
+import { Box, Card, CardProps, Flex, Text } from "@chakra-ui/react";
+import React, { ReactNode } from "react";
 
 type Props = CardProps & {
+  label: string;
+  labelBalace?: string;
   value?: string;
-  start: string[];
-  end: string | string[];
+  element?: ReactNode;
 };
 
 export const WidgetProfileChile = (props: Props) => {
-  const { start, end } = props;
+  const { label, labelBalace, value, element, ...rest } = props;
   return (
-    <Card
-      variant={"gradient"}
-      colorScheme={"purple:pink"}
-      rounded="xl"
-      minH={"24"}
-      px={8}
-      mt={6}
-      justifyContent={"center"}
-      w={"full"}
-    >
+    <Card px={8} mt={6} justifyContent={"center"} w={"full"} {...rest}>
       <Flex
         justifyContent={"space-between"}
         placeItems={"center"}
         zIndex={"docked"}
       >
         <Box>
-          <Text>{start[0]}</Text>
-          <Text color={"blue.300"}>{start[1] || null}</Text>
+          <Text>{label}</Text>
+          {labelBalace ? (
+            <Text>
+              {labelBalace}{" "}
+              <Text as={"span"} color={"secondary.500"}>
+                MATIC
+              </Text>
+            </Text>
+          ) : null}
         </Box>
         <Box>
-          {Array.isArray(end) ? (
-            <HStack>
-              <Text>{end[0]}</Text>
-              {end[1] ? (
-                <Text>
-                  <Trans
-                    i18nKey={end[1]}
-                    components={{
-                      strong: <Text as="span" color="secondary.500" />,
-                    }}
-                  />
-                </Text>
-              ) : null}
-            </HStack>
-          ) : (
-            <Button colorScheme="brand">{end}</Button>
-          )}
+          {value ? (
+            <Text>
+              {value}{" "}
+              <Text as={"span"} color={"secondary.500"}>
+                MATIC
+              </Text>
+            </Text>
+          ) : null}
+          {element ? <Box>{element}</Box> : null}
         </Box>
       </Flex>
     </Card>

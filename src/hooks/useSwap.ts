@@ -18,12 +18,12 @@ import {
 interface ICurencySpec {
   pair: {
     name: string;
-    decimals: BigNumber;
     price: BigNumber;
+    decimals: BigNumber;
   };
   address: string;
-  totalPool: BigNumber;
   balance: BigNumber;
+  totalPool: BigNumber;
 }
 
 interface ICurency {
@@ -87,22 +87,22 @@ const init = createInitiator(async () => {
     currency: {
       gnet: {
         pair: {
+          price: gnetRatio.price,
           name: gnetRatio.symbol,
           decimals: gnetRatio.decimal,
-          price: gnetRatio.price,
         },
-        address: gnetAddress,
         totalPool: gnetPool,
+        address: gnetAddress,
         balance: gnetBalance,
       },
       usdt: {
         pair: {
           name: usdtRatio.symbol,
-          decimals: usdtRatio.decimal,
           price: usdtRatio.price,
+          decimals: usdtRatio.decimal,
         },
-        address: usdtAddress,
         totalPool: usdtPool,
+        address: usdtAddress,
         balance: usdtBalance,
       },
     },
@@ -120,13 +120,13 @@ export const useSwap = () => {
   /**
    * @param usdtAmount type bignumber with 18 decimals
    * @returns contract receipts
+   * @example approveGnet(toBn('1'))
    * @description this function make litle bit confusing
    * why parameters usdtAmount.
    * so in this function you ned swap your GNET with USDT.
-   * this function depend in to gnetCalculation.
+   * this function depend in to getGnetPrice.
    * it means if user input how much USDT needed it going to be calculate how much GNET price want to swap.
    * and than this function call approval to approve your GNET to swap with USDT
-   * @example approveGnet(toBn('1'))
    */
   const approveGnet = async (usdtAmount: BigNumber) => {
     const gnet = await getGNETContract();
@@ -164,13 +164,13 @@ export const useSwap = () => {
   /**
    * @param gnetAmount type bignumber with 9 decimals
    * @returns contract receipts
+   * @example approveUsdt(toBn('1', 9))
    * @description this function make litle bit confusing
    * why parameters gnetAmount.
    * so in this function you ned swap your USDT with GNET.
-   * this function depend in to usdtCalculation.
+   * this function depend in to getUsdtPrice.
    * it means if user input how much gnet needed it going to be calculate how much USDT price want to swap.
    * and than after that this function call approval to approve your USDT to swap with GNET
-   * @example approveUsdt(toBn('1', 9))
    */
 
   const approveUsdt = async (gnetAmount: BigNumber) => {
@@ -202,9 +202,10 @@ export const useSwap = () => {
 
   /**
    * @param data
-   * @returns
-   * data.currency user wanted token
-   * data.amount how much user want to swap his token
+   * @returns contract receipts
+   * @description
+   * {data.currency} user wanted token,
+   * {data.amount} how much user want to swap his token
    */
   const swapCurrency = async (data: { currency: string; amount: string }) => {
     const tokenWanted = data.currency === "GNET";

@@ -6,7 +6,7 @@ import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { useAsyncCall, useSwap } from "hooks";
 import { useEffect, useMemo, useState } from "react";
-import { gnetCalculation, usdtCalculation } from "utils";
+import { getGnetPrice, getUsdtPrice } from "utils";
 
 interface ISwapToken {
   price?: number;
@@ -45,14 +45,14 @@ export const FormSwap = () => {
     const subscription = watch(value => {
       if (value.currency === "USDT") {
         const toBigNumb = toBn(value.amount ? value.amount : "0");
-        const format = fromBn(gnetCalculation(toBigNumb), 9);
+        const format = fromBn(getGnetPrice(toBigNumb), 9);
         setPrice(format);
         setSymbol(false);
         return;
       }
 
       const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
-      const format = fromBn(usdtCalculation(toBigNumb));
+      const format = fromBn(getUsdtPrice(toBigNumb));
       setPrice(format);
       setSymbol(true);
     });

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { BigNumber } from "ethers";
 import { useWallet } from "./useWallet";
 import { SWAP_CONTRACT } from "constant/address";
-import { createInitiator, gnetCalculation, usdtCalculation } from "utils";
+import { createInitiator, getGnetPrice, getUsdtPrice } from "utils";
 import {
   getWallet,
   getUSDTContract,
@@ -117,11 +117,22 @@ export const useSwap = () => {
     init();
   }, []);
 
-  const approveGnet = async (quantity: BigNumber) => {
+  /**
+   * @param usdtAmount type bignumber with 18 decimals
+   * @returns contract receipts
+   * @description this function make litle bit confusing
+   * why parameters usdtAmount.
+   * so in this function you ned swap your GNET with USDT.
+   * this function depend in to gnetCalculation.
+   * it means if user input how much USDT needed it going to be calculate how much GNET price want to swap.
+   * and than this function call approval to approve your GNET to swap with USDT
+   * @example approveGnet(toBn('1'))
+   */
+  const approveGnet = async (usdtAmount: BigNumber) => {
     const gnet = await getGNETContract();
     const balance = await gnet.balanceOf(address);
     const gnetSigner = await getGNETSignerContract();
-    const totalPrice = gnetCalculation(quantity);
+    const totalPrice = getGnetPrice(usdtAmount);
 
     const allowance = await gnet.allowance(
       address,
@@ -150,11 +161,23 @@ export const useSwap = () => {
     }
   };
 
-  const approveUsdt = async (quantity: BigNumber) => {
+  /**
+   * @param gnetAmount type bignumber with 9 decimals
+   * @returns contract receipts
+   * @description this function make litle bit confusing
+   * why parameters gnetAmount.
+   * so in this function you ned swap your USDT with GNET.
+   * this function depend in to usdtCalculation.
+   * it means if user input how much gnet needed it going to be calculate how much USDT price want to swap.
+   * and than after that this function call approval to approve your USDT to swap with GNET
+   * @example approveUsdt(toBn('1', 9))
+   */
+
+  const approveUsdt = async (gnetAmount: BigNumber) => {
     const usdt = await getUSDTContract();
     const balance = await usdt.balanceOf(address);
     const usdtSigner = await getUSDTSignerContract();
-    const totalPrice = usdtCalculation(quantity);
+    const totalPrice = getUsdtPrice(gnetAmount);
 
     const allowance = await usdt.allowance(
       address,

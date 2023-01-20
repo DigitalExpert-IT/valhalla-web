@@ -8,3 +8,4 @@ export * from "./hash";
 export * from "./string";
 export * from "./hoc";
 export * from "./signature";
+export * from "./swapCalculation";

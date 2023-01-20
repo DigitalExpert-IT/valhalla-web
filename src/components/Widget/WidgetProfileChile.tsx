@@ -5,11 +5,19 @@ type Props = CardProps & {
   label: string;
   labelBalace?: string;
   value?: string;
+  isValueLabel?: boolean;
   element?: ReactNode;
 };
 
 export const WidgetProfileChile = (props: Props) => {
-  const { label, labelBalace, value, element, ...rest } = props;
+  const {
+    label,
+    labelBalace,
+    value,
+    element,
+    isValueLabel = false,
+    ...rest
+  } = props;
   return (
     <Card px={8} mt={6} justifyContent={"center"} w={"full"} {...rest}>
       <Flex
@@ -32,9 +40,11 @@ export const WidgetProfileChile = (props: Props) => {
           {value ? (
             <Text>
               {value}{" "}
-              <Text as={"span"} color={"secondary.500"}>
-                MATIC
-              </Text>
+              {isValueLabel ? (
+                <Text as={"span"} color={"secondary.500"}>
+                  MATIC
+                </Text>
+              ) : null}
             </Text>
           ) : null}
           {element ? <Box>{element}</Box> : null}

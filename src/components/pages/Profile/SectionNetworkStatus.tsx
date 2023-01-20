@@ -21,6 +21,7 @@ export const SectionNetworkStatus = () => {
               minH={"24"}
               label={row.label}
               value={row.value}
+              isValueLabel={row.isValueLabel}
             />
           </HStack>
         ))}

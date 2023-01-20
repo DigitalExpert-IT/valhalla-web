@@ -47,6 +47,7 @@ export const NETWORK_STATUS = [
   {
     label: t("common.personalBuy"),
     value: "2000",
+    isValueLabel: true
   },
   {
     label: t("common.total100LevelReferral"),

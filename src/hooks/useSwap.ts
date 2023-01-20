@@ -69,7 +69,7 @@ const fetchSwap = async () => {
   const swap = await getSwapContract();
   const wallet = await getWallet();
   const [address] = await wallet.listAccounts();
-  const gnetAddress = await swap.nftn();
+  const gnetAddress = await swap.gnet();
   const usdtAddress = await swap.usdt();
 
   const [gnetRatio, usdtRatio, gnetPool, usdtPool, gnetBalance, usdtBalance] =

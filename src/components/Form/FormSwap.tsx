@@ -101,7 +101,6 @@ export const FormSwap = () => {
               control={control}
               label={t("form.label.swap")}
               name="currency"
-              defaultValue={"USDT"}
               option={normalizeCurrencies}
               isDisabled={!initialized}
             ></FormSelect>

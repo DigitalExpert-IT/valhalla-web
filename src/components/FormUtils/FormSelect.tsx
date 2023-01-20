@@ -44,7 +44,7 @@ export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
         rules={props.rules}
         name={props.name}
         render={({ field: { ...rest } }) => (
-          <Select {...rest} placeholder={props.placeholder ?? ""} {...props}>
+          <Select {...rest} {...props}>
             {props.option.map((e, i) => (
               <option value={e.value} key={i}>
                 {e.label}

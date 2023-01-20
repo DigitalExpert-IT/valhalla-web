@@ -21,7 +21,7 @@ export const GNET_CONTRACT = {
 
 export const SWAP_CONTRACT = {
   "0x89": "",
-  "0x29a": "0xdA5Cb1CE15808A058393D8Ec503B2a7e61D9aD29",
+  "0x29a": "0xEfe357c98DD74EF69c09a1b85B01Af9D6d79705a",
 };
 
 export const USDT_CONTRACT = {

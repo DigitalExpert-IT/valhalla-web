@@ -40,7 +40,6 @@ export const CardProfile = () => {
       </Box>
       <Box mt={8} zIndex={"overlay"}>
         <CopiableText
-          fontFamily="mono"
           display="inline-flex"
           alignItems={"center"}
           gap={2}

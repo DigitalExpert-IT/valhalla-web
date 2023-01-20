@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { LayoutMain, TableNetworkStatus } from "components";
 import { Profile, SectionNetworkStatus } from "components/pages/Profile";
-// import { TableNetworkStatusDebug } from "components/Table/TableNetworkStatusDebug";
-import { TableNetworkStatusDebug2 } from "components/Table/TableNetworkStatusDebug2";
+// import { TableNetworkStatus } from "components/Table";
+// import { TableNetworkStatusDebug2 } from "components/Table/TableNetworkStatus";
 
 export default function profile() {
   return (
@@ -10,7 +10,7 @@ export default function profile() {
       <Profile />
       <SectionNetworkStatus />
       <Box mt={20}>
-        <TableNetworkStatusDebug2 />
+        <TableNetworkStatus />
       </Box>
     </LayoutMain>
   );

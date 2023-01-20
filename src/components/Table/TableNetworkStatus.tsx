@@ -3,9 +3,8 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { INetworkStatus, TABLE_NETWORK_STATUS } from "constant/pages/profile";
 import { t } from "i18next";
 import React, { useMemo, useState } from "react";
-import { Trans } from "react-i18next";
-import { Paginate } from "react-paginate-chakra-ui";
 import { TableData } from ".";
+import { Pagination } from "../PaginationUtils";
 
 const columnHelper = createColumnHelper<INetworkStatus>();
 
@@ -65,14 +64,29 @@ export const TableNetworkStatus = () => {
   }, [TABLE_NETWORK_STATUS()]);
 
   const itemsPage = 15;
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
-  const handlePageClick = (event: number) => {
-    const newOffset = (event * itemsPage) % DataTableNetworkStatus.length;
-    setPage(event);
-    setItemOffset(newOffset);
-  };
+  const [prev, setPrev] = useState<number[]>([]);
+  const [next, setNext] = useState<number[]>([2]);
 
+  const handlePageClick = (event: number) => {
+    const n = event - 1;
+    const newOffset = (n * itemsPage) % DataTableNetworkStatus.length;
+    setItemOffset(newOffset);
+    setPage(event);
+    if (n < Math.ceil(DataTableNetworkStatus.length / itemsPage)) {
+      setNext([event + 1]);
+    }
+    if (event >= Math.ceil(DataTableNetworkStatus.length / itemsPage)) {
+      setNext([])
+    }
+    if (n >= 1) {
+      setPrev([event - 1]);
+    }
+    if (event <= 1) {
+      setPrev([])
+    }
+  };
   const endOffset = itemOffset + itemsPage;
   const currentItems = DataTableNetworkStatus.slice(itemOffset, endOffset);
 
@@ -85,21 +99,15 @@ export const TableNetworkStatus = () => {
           tableCustom={{ variant: "valhalla", colorScheme: "valhalla" }}
         />
       </Box>
-      <Paginate
-        // required props
-        page={page}
-        count={DataTableNetworkStatus.length}
-        pageSize={itemsPage}
+
+      <Pagination
+        currentPage={page}
+        lastPage={Math.ceil(DataTableNetworkStatus.length / itemsPage)}
+        siblingsCount={1}
+        previousPages={[...prev]}
+        nextPages={[...next]}
         onPageChange={handlePageClick}
-        // optional props
-        px={0}
-        margin={1}
-        shadow="lg"
-        fontWeight="blue"
-        variant="outline"
-        // ...border
-        border="2px solid"
-        ml="auto"
+        colorScheme={"valhalla"}
       />
     </Stack>
   );

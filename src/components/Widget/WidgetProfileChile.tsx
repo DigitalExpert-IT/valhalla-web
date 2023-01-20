@@ -36,7 +36,6 @@ export const WidgetProfileChile = (props: Props) => {
               </Text>
             </Text>
           ) : null}
-          {/* {element ? <Box>{element}</Box> : null} */}
           {children}
         </Box>
       </Flex>

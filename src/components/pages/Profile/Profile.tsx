@@ -61,5 +61,4 @@ const SectionProfile = () => {
   );
 };
 
-// export default composeHoc(withRegistration, withConnection)(SectionProfile);
-export default SectionProfile;
+export default composeHoc(withRegistration, withConnection)(SectionProfile);

@@ -2,6 +2,7 @@ import React from "react";
 import { prettyBn } from "utils";
 import { useTranslation } from "react-i18next";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
+import { LazyVideo } from "components/LazyVideo";
 import { Stack, Box, Button, AspectRatio, Image, Text } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
@@ -19,11 +20,7 @@ export const CardFarmNFT = (props: INFTCard) => {
     <Stack>
       <Box borderRadius="lg" overflow="hidden" pos="relative">
         <AspectRatio w={{ base: "2xs", md: "sm" }} ratio={1}>
-          <Image
-            src={`/api/image/${id.toString()}`}
-            alt={name}
-            objectFit="cover"
-          />
+          <LazyVideo src={`/api/image/${id.toString()}`} objectFit="cover" />
         </AspectRatio>
         <Stack
           direction="row"

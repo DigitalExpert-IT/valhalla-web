@@ -6,9 +6,9 @@
   },
   "label": {
     "referrer": "Referral Code",
-    "swap": "Swap Token",
-    "quantity": "Quantity",
-    "link":"Link to your {{media}} post"
+    "swap": "Swap To",
+    "from":"From",
+    "to":"To"
   },
   "message": {
     "registrationSuccess": "Registration Success!",
@@ -16,6 +16,7 @@
   },
   "helperText": {
     "referrer": "Please enter correct wallet address",
-    "quantity": "please enter Quantity"
+    "quantity": "please enter Quantity",
+    "balance":"Balance {{balanceOf}} {{symbol}}"
   }
 }

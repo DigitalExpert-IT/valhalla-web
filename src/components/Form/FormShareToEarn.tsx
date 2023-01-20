@@ -21,7 +21,9 @@ export const FormShareToEarn = (props: { mediaName: string }) => {
       <FormInput
         control={control}
         name={"link"}
-        placeholder={t(`pages.share.placeholder`, { media: props.mediaName })}
+        placeholder={
+          t(`pages.share.placeholder`, { media: props.mediaName }) ?? ""
+        }
         rules={{
           required: validateRequired(
             t("form.label.link", { media: props.mediaName })

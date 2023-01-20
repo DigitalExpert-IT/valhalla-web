@@ -1,31 +1,33 @@
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Select,
+  FormLabel,
   SelectProps,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import {
-  Controller,
-  ControllerProps,
-  FieldValues,
-  FieldError,
-  FieldPath,
   get,
+  FieldPath,
+  FieldError,
+  Controller,
+  FieldValues,
   useFormState,
+  ControllerProps,
 } from "react-hook-form";
+
+interface FormSelectProps extends Omit<SelectProps, "placeholder"> {
+  label?: string | null;
+  helperText?: string | null;
+  placeholder?: string;
+  option: { value: string; label: string }[];
+}
 
 type Props<T extends FieldValues, TName extends FieldPath<T>> = Omit<
   ControllerProps<T, TName>,
   "render"
-> & {
-  label?: string | null;
-  placeholder?: string | null;
-  helperText?: string | null;
-  option: { value: string; label: string }[];
-  selectProps?: SelectProps;
-};
+> &
+  FormSelectProps;
 
 export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
   props: Props<T, TName>
@@ -42,11 +44,7 @@ export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
         rules={props.rules}
         name={props.name}
         render={({ field: { ...rest } }) => (
-          <Select
-            {...rest}
-            placeholder={props.placeholder ?? ""}
-            {...props.selectProps}
-          >
+          <Select {...rest} placeholder={props.placeholder ?? ""} {...props}>
             {props.option.map((e, i) => (
               <option value={e.value} key={i}>
                 {e.label}

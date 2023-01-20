@@ -17,7 +17,6 @@
   "royaltyProperty": "ROYALTY PROPERTY",
   "metaverseProject": "METAVERSE PROJECT",
   "connectWallet": "Connect Wallet",
-  "claim": "Claim",
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",
@@ -49,6 +48,9 @@
   "claimreq": "Claim Req",
   "maxBuyNFT": "Max buy NFT",
   "totalSupply": "Total Supply",
+  "globalNetworkFarm": "Global network farm level",
+  "percentage": "Percentage",
+  "claim": "Claim",
   "totalUser": "Total User",
   "totalBuy": "Total Buy"
 }

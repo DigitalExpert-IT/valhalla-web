@@ -1,26 +1,30 @@
-import { Badge, Box, Button, Stack } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { fromBn, toBn } from "evm-bn";
+import { useTranslation } from "react-i18next";
+import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
-import { fromBn } from "evm-bn";
 import { useAsyncCall, useSwap } from "hooks";
-import { useMemo } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { validateRequired } from "utils";
+import { getGnetPrice, getUsdtPrice } from "utils";
+import { useEffect, useMemo, useState } from "react";
 
 interface ISwapToken {
+  price?: number;
+  amount: string;
   currency: string;
-  quantity: number;
 }
 
 export const FormSwap = () => {
-  const { currency, swapToken } = useSwap();
-  const { exec } = useAsyncCall(swapToken);
-  const { handleSubmit, control, watch } = useForm<ISwapToken>();
   const { t } = useTranslation();
-  const onSubmit = handleSubmit(async data => {
-    await exec(data);
-  });
+  const [price, setPrice] = useState("");
+  const [symbol, setSymbol] = useState(false);
+  const { currency, swapCurrency, initialized } = useSwap();
+  const { handleSubmit, control, watch } = useForm<ISwapToken>();
+
+  const { exec, isLoading: isSwapLoading } = useAsyncCall(
+    swapCurrency,
+    t("form.message.swapSucces")
+  );
 
   const normalizeCurrencies = useMemo(() => {
     return Object.values(currency).map(c => {
@@ -28,55 +32,86 @@ export const FormSwap = () => {
       return {
         ...c,
         value: c.pair.name,
-        label: USDTPair ? "GNET / USDT" : "USDT / GNET",
+        label: USDTPair ? "USDT" : "GNET",
       };
     });
   }, [currency]);
 
-  const USDTFormat = fromBn(
-    currency.gnet.pair?.price?.mul(
-      watch("quantity") ? Number(watch("quantity")) : 1
-    )
-  );
-  const GNETFormat = fromBn(
-    currency.usdt.pair?.price?.mul(
-      watch("quantity") ? Number(watch("quantity")) : 1
-    ),
-    9
-  );
+  const onSubmit = handleSubmit(async data => {
+    await exec(data);
+  });
+
+  useEffect(() => {
+    const subscription = watch(value => {
+      if (value.currency === "USDT") {
+        const toBigNumb = toBn(value.amount ? value.amount : "0");
+        const format = fromBn(getGnetPrice(toBigNumb), 9);
+        setPrice(format);
+        setSymbol(false);
+        return;
+      }
+
+      const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
+      const format = fromBn(getUsdtPrice(toBigNumb));
+      setPrice(format);
+      setSymbol(true);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <Stack as="form" onSubmit={onSubmit}>
-      <Stack alignItems="center">
-        <FormSelect
-          control={control}
-          label={t("form.label.swap")}
-          name="currency"
-          placeholder={t("form.placeholder.selectCurrency")}
-          rules={{
-            required: validateRequired(t("form.label.swap")),
-          }}
-          option={normalizeCurrencies}
-        ></FormSelect>
+      <Stack alignItems="center" mb="5">
         <FormInput
           control={control}
-          label={t("form.label.quantity")}
-          name="quantity"
-          rules={{
-            required: validateRequired(t("form.label.quantity")),
-          }}
-          placeholder={t("form.placeholder.quantity")}
+          label={t("form.label.from")}
+          name="price"
+          helpertext={t("form.helperText.balance", {
+            balanceOf: symbol
+              ? fromBn(currency.usdt.balance)
+              : fromBn(currency.gnet.balance, 9),
+            symbol: symbol ? "USDT" : "GNET",
+          })}
+          placeholder={"0.0"}
+          type="number"
+          isDisabled
+          value={price ?? undefined}
         ></FormInput>
+        <Stack
+          direction={{ md: "row", sm: "column", base: "column" }}
+          w={"full"}
+        >
+          <Box flex={1}>
+            <FormInput
+              control={control}
+              label={t("form.label.to")}
+              name="amount"
+              helpertext={t("form.helperText.balance", {
+                balanceOf: symbol
+                  ? fromBn(currency.gnet.balance, 9)
+                  : fromBn(currency.usdt.balance),
+                symbol: symbol ? "GNET" : "USDT",
+              })}
+              placeholder={"0.0"}
+              type="number"
+            ></FormInput>
+          </Box>
+          <Box>
+            <FormSelect
+              control={control}
+              label={t("form.label.swap")}
+              name="currency"
+              defaultValue={"USDT"}
+              option={normalizeCurrencies}
+              isDisabled={!initialized}
+            ></FormSelect>
+          </Box>
+        </Stack>
       </Stack>
-      <Box>
-        {watch("currency") && watch("quantity") && (
-          <Badge float={"right"}>{`${
-            watch("currency") === "USDT" ? USDTFormat : GNETFormat
-          } ${watch("currency")}`}</Badge>
-        )}
-      </Box>
       <ButtonConnectWrapper>
-        <Button type="submit">{t("common.swap")}</Button>
+        <Button type="submit" isLoading={isSwapLoading || !initialized}>
+          {t("common.swap")}
+        </Button>
       </ButtonConnectWrapper>
     </Stack>
   );

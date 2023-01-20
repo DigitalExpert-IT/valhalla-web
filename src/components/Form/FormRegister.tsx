@@ -43,9 +43,9 @@ export const FormRegister = () => {
       <FormInput
         control={control}
         name="referrer"
-        helperText={t("form.helperText.referrer")}
+        helpertext={t("form.helperText.referrer")}
         label={t("form.label.referrer")}
-        placeholder={t("form.placeholder.referrer")}
+        placeholder={t("form.placeholder.referrer") ?? ""}
         rules={{
           required: validateRequired(t("form.label.referrer")),
           validate: validateAddress,

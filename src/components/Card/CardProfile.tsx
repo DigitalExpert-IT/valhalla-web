@@ -49,11 +49,11 @@ export const CardProfile = () => {
           {widthMob ? shortenAddress(address) : address.toUpperCase()}{" "}
           <IoCopyOutline />
         </CopiableText>
-        <Box py={4}>
-          <Text color={"purple.500"}>
+        <Box py={4} color={"brand.300"}>
+          <Text>
             <Trans i18nKey="common.referrer" />
           </Text>
-          <Text color={"purple.500"} pt={4}>
+          <Text pt={4}>
             {widthMob
               ? shortenAddress(account.referrer)
               : account.referrer.toUpperCase()}
@@ -64,22 +64,25 @@ export const CardProfile = () => {
               py={4}
               px={6}
               label={t("common.networkMembers")}
-              element={<Text>{account.downlineCount.toNumber()}</Text>}
-            />
+            >
+              <Text>{account.downlineCount.toNumber()}</Text>
+            </WidgetProfileChile>
             <WidgetProfileChile
               bg={"brand.800"}
               py={4}
               px={6}
               label={t("common.directReferrals")}
-              element={<Text>{account.directDownlineCount.toNumber()}</Text>}
-            />
+            >
+              <Text>{account.directDownlineCount.toNumber()}</Text>
+            </WidgetProfileChile>
             <WidgetProfileChile
               bg={"brand.800"}
               py={4}
               px={6}
               label={t("common.PrivateSaleNewToken")}
-              element={<SiTelegram />}
-            />
+            >
+              <SiTelegram />
+            </WidgetProfileChile>
           </SimpleGrid>
         </Box>
       </Box>

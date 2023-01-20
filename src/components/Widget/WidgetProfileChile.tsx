@@ -5,11 +5,10 @@ type Props = CardProps & {
   label: string;
   labelBalace?: string;
   value?: string;
-  element?: ReactNode;
 };
 
 export const WidgetProfileChile = (props: Props) => {
-  const { label, labelBalace, value, element, ...rest } = props;
+  const { children, label, labelBalace, value, ...rest } = props;
   return (
     <Card px={8} mt={6} justifyContent={"center"} w={"full"} {...rest}>
       <Flex
@@ -37,7 +36,8 @@ export const WidgetProfileChile = (props: Props) => {
               </Text>
             </Text>
           ) : null}
-          {element ? <Box>{element}</Box> : null}
+          {/* {element ? <Box>{element}</Box> : null} */}
+          {children}
         </Box>
       </Flex>
     </Card>

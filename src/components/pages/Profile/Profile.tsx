@@ -34,8 +34,9 @@ const SectionProfile = () => {
             minH={"24"}
             label={t("common.referralBonus")}
             labelBalace={prettyBn(personalReward)}
-            element={<Button colorScheme="brand">{t("common.claim")}</Button>}
-          />
+          >
+            <Button colorScheme="brand">{t("common.claim")}</Button>
+          </WidgetProfileChile>
           <WidgetProfileChile
             variant={"gradient"}
             colorScheme={"purple:pink"}
@@ -43,8 +44,9 @@ const SectionProfile = () => {
             minH={"24"}
             label={t("common.rankReward")}
             labelBalace={prettyBn(rankReward)}
-            element={<Button colorScheme="brand">{t("common.claim")}</Button>}
-          />
+          >
+            <Button colorScheme="brand">{t("common.claim")}</Button>
+          </WidgetProfileChile>
           <WidgetProfileChile
             variant={"gradient"}
             colorScheme={"purple:pink"}
@@ -59,4 +61,5 @@ const SectionProfile = () => {
   );
 };
 
-export default composeHoc(withRegistration, withConnection)(SectionProfile);
+// export default composeHoc(withRegistration, withConnection)(SectionProfile);
+export default SectionProfile;

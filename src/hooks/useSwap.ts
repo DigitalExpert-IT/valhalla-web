@@ -162,7 +162,7 @@ export const useSwap = () => {
       };
     }
 
-    if (store.currency.gnet.totalPool.lt(totalPrice)) {
+    if (store.currency.usdt.totalPool.lt(usdtAmount)) {
       throw {
         code: "NotEnoughPool",
       };
@@ -207,7 +207,7 @@ export const useSwap = () => {
       };
     }
 
-    if (store.currency.usdt.totalPool.lt(totalPrice)) {
+    if (store.currency.gnet.totalPool.lt(gnetAmount)) {
       throw {
         code: "NotEnoughPool",
       };

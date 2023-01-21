@@ -12,7 +12,8 @@ import {
   DrawerCloseButton,
   Stack,
   Text,
-  Heading,
+  AspectRatio,
+  Image,
   DrawerFooter,
 } from "@chakra-ui/react";
 
@@ -31,7 +32,9 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
       <DrawerContent bgColor="gray.800">
         <DrawerCloseButton />
         <DrawerHeader>
-          <Heading color="brand.400">GN</Heading>
+          <AspectRatio w={50} ratio={1}>
+            <Image src={"/assets/logo/logo.png"} alt="logo-image" />
+          </AspectRatio>
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">
           <ButtonConnectWallet />

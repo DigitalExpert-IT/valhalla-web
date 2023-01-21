@@ -12,32 +12,32 @@
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
-        "name": "Q1 2022",
-        "headline": "Concept 1",
+        "name": "Q4 2022",
+        "headline": "Team Formation",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "shades": "teal"
       },
       {
-        "name": "Q2 2022",
-        "headline": "Concept 2",
+        "name": "Q1 2023",
+        "headline": "Contract Deployed",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "shades": "pink"
       },
       {
-        "name": "Q3 2022",
-        "headline": "Concept 3",
+        "name": "Q2 2023",
+        "headline": "Enlarge community",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "shades": "green"
       },
       {
-        "name": "Q4 2022",
-        "headline": "Concept 4",
+        "name": "Q3 2023",
+        "headline": "New Partnership",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "shades": "blue.400"
       },
       {
-        "name": "Q1 2023",
-        "headline": "Concept 5",
+        "name": "Q4 2023",
+        "headline": "Decentralized Product NFT Development",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "shades": "orange"
       }

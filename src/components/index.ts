@@ -15,3 +15,4 @@ export * from "./Animation";
 export * from "./pages/Home";
 export * from "./Table";
 export * from "./TableUtils";
+export * from "./LazyVideo";

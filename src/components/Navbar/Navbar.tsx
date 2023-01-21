@@ -1,18 +1,18 @@
 import React from "react";
+import Link from "next/link";
 import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
-import { PROJECT_NAME, PROJECT_SHORT_NAME } from "constant/siteConfig";
-import Link from "next/link";
 import {
   Box,
   Flex,
   Stack,
-  Heading,
   useDisclosure,
   IconButton,
   useMediaQuery,
   Container,
+  Image,
+  AspectRatio,
 } from "@chakra-ui/react";
 
 export const Navbar = () => {
@@ -43,14 +43,19 @@ export const Navbar = () => {
               onClick={isOpen ? onClose : onOpen}
             />
             <Link href="/">
-              <Heading
-                variant="gradient"
-                colorScheme="orange:pink"
-                fontWeight="bold"
-                fontSize="2xl"
+              <AspectRatio
+                w={isLargethan800 ? 130 : 50}
+                ratio={isLargethan800 ? 5 / 2 : 1}
               >
-                {isLargethan800 ? PROJECT_NAME : PROJECT_SHORT_NAME}
-              </Heading>
+                <Image
+                  src={
+                    isLargethan800
+                      ? "/assets/logo/logo-gn.png"
+                      : "/assets/logo/logo.png"
+                  }
+                  alt="logo-image"
+                />
+              </AspectRatio>
             </Link>
           </Stack>
           <Stack

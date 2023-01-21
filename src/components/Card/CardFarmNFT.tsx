@@ -17,46 +17,54 @@ export const CardFarmNFT = (props: INFTCard) => {
   const name = `Farming ${id.add(1).toNumber()}`;
 
   return (
-    <Stack>
-      <Box borderRadius="lg" overflow="hidden" pos="relative">
-        <AspectRatio w={{ base: "2xs", md: "sm" }} ratio={1}>
-          <LazyVideo src={`/api/image/${id.toString()}`} objectFit="cover" />
-        </AspectRatio>
-        <Stack
-          direction="row"
-          pos="absolute"
-          bottom="0"
-          justify="space-between"
-          textAlign="left"
-          w="full"
-          p="2"
-          backdropFilter="auto"
-          backdropContrast="10%"
-        >
-          <Box>
-            <Text fontSize="xl" fontWeight="bold" color="black">
-              NFT #{id.toNumber()}
-            </Text>
-            <Text color="black" fontWeight="bold" fontSize="lg">
-              {name}
-            </Text>
-          </Box>
-          <Box>
-            <Text fontSize="xl" fontWeight="bold" color="black">
-              Price: {prettyBn(price, 9)}
-            </Text>
-          </Box>
-        </Stack>
+    <Stack
+      bgGradient="linear-gradient(to right, #8e2de2, #4a00e0)"
+      p="1"
+      borderRadius="xl"
+    >
+      <Box borderRadius="lg" bg="gray.800" p="2">
+        <Box borderRadius="lg" overflow="hidden">
+          <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+            <LazyVideo src={`/api/image/${id.toString()}`} objectFit="cover" />
+          </AspectRatio>
+          <Stack
+            direction="row"
+            justify="space-between"
+            textAlign="left"
+            w="full"
+            p="2"
+            mt="5"
+            backdropFilter="auto"
+            backdropBlur="8px"
+          >
+            <Box>
+              <Text fontSize="xl" fontWeight="bold">
+                NFT #{id.toNumber()}
+              </Text>
+              <Text fontWeight="bold" fontSize="lg">
+                {name}
+              </Text>
+            </Box>
+            <Box>
+              <Text fontSize="xl" fontWeight="bold">
+                Price: {prettyBn(price, 9)}
+              </Text>
+              <Button
+                variant="gradient"
+                colorScheme="purple:valhalla"
+                mt="5"
+                w="full"
+                size="sm"
+                rounded="lg"
+                onClick={handleBuy}
+                isLoading={buyAsync.isLoading}
+              >
+                Buy
+              </Button>
+            </Box>
+          </Stack>
+        </Box>
       </Box>
-      <Button
-        w="full"
-        size="sm"
-        colorScheme="blue"
-        onClick={handleBuy}
-        isLoading={buyAsync.isLoading}
-      >
-        Buy
-      </Button>
     </Stack>
   );
 };

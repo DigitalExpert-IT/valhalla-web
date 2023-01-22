@@ -17,11 +17,7 @@ export const CardFarmNFT = (props: INFTCard) => {
   const name = `Farming ${id.add(1).toNumber()}`;
 
   return (
-    <Stack
-      bgGradient="linear-gradient(to right, #8e2de2, #4a00e0)"
-      p="1"
-      borderRadius="xl"
-    >
+    <Stack bg="valhalla.500" p="1" borderRadius="xl">
       <Box borderRadius="lg" bg="gray.800" p="2">
         <Box borderRadius="lg" overflow="hidden">
           <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
@@ -32,27 +28,25 @@ export const CardFarmNFT = (props: INFTCard) => {
             justify="space-between"
             textAlign="left"
             w="full"
-            p="2"
-            mt="5"
+            my="2"
             backdropFilter="auto"
             backdropBlur="8px"
           >
-            <Box>
-              <Text fontSize="xl" fontWeight="bold">
-                NFT #{id.toNumber()}
-              </Text>
+            <Stack spacing={2}>
               <Text fontWeight="bold" fontSize="lg">
                 {name}
               </Text>
-            </Box>
-            <Box>
-              <Text fontSize="xl" fontWeight="bold">
+              <Text fontWeight="bold" fontSize="lg">
+                NFT #{id.toNumber()}
+              </Text>
+            </Stack>
+            <Stack spacing={2}>
+              <Text fontWeight="bold" fontSize="lg">
                 Price: {prettyBn(price, 9)}
               </Text>
               <Button
                 variant="gradient"
-                colorScheme="purple:valhalla"
-                mt="5"
+                colorScheme="red:orange"
                 w="full"
                 size="sm"
                 rounded="lg"
@@ -61,7 +55,7 @@ export const CardFarmNFT = (props: INFTCard) => {
               >
                 Buy
               </Button>
-            </Box>
+            </Stack>
           </Stack>
         </Box>
       </Box>

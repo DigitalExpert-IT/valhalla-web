@@ -4,6 +4,7 @@ import { prettyBn } from "utils";
 import { BigNumber } from "ethers";
 import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
+import { LazyVideo } from "components/LazyVideo";
 import { useTranslation } from "react-i18next";
 import { Stack, Box, AspectRatio, Image, Text, Button } from "@chakra-ui/react";
 
@@ -56,12 +57,41 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
   const name = `Farming ${id.add(1).toNumber()}`;
 
   return (
-    <Stack>
-      <Box borderRadius="lg" overflow="hidden" pos="relative">
-        <AspectRatio w={{ base: "2xs", md: "sm" }} ratio={1}>
-          <Image src={tokenUri} alt={name} objectFit="cover" />
+    <Stack bg="valhalla.500" p="1" borderRadius="xl">
+      <Box borderRadius="lg" bg="gray.800" p="2">
+        <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+          <LazyVideo src={tokenUri} objectFit="cover" />
         </AspectRatio>
-        <Box
+        <Stack
+          direction="row"
+          justify="space-between"
+          textAlign="left"
+          w="full"
+          my="2"
+          backdropFilter="auto"
+          backdropBlur="8px"
+        >
+          <Stack spacing={2}>
+            <Text fontSize="lg" fontWeight="bold">
+              NFT #{id.toNumber()}
+            </Text>
+            <Text fontWeight="bold">
+              {t("common.percentage") + " " + percentage.toNumber() / 10}
+            </Text>
+            <Text fontWeight="bold">
+              {t("common.globalNetworkFarm") + " " + cardId.toNumber()}
+            </Text>
+          </Stack>
+          <Stack spacing={2} align="center">
+            <Text fontSize="xs">
+              Minting Price: {prettyBn(mintingPrice, 9)}
+            </Text>
+            <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
+              GNET<TextAnimation>{farmValue}</TextAnimation>
+            </Text>
+          </Stack>
+        </Stack>
+        {/* <Box
           pos="absolute"
           bottom="0"
           w="full"
@@ -96,19 +126,21 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
               </Stack>
             </Box>
           </Stack>
-        </Box>
+        </Box> */}
+        <ButtonConnectWrapper mt="4" size="sm" w="full" colorScheme="orange">
+          <Button
+            variant="gradient"
+            w="full"
+            rounded="lg"
+            size="sm"
+            colorScheme="red:orange"
+            onClick={handleFarm}
+            isLoading={farmAsync.isLoading}
+          >
+            Claim
+          </Button>
+        </ButtonConnectWrapper>
       </Box>
-      <ButtonConnectWrapper mt="4" size="sm" w="full" colorScheme="orange">
-        <Button
-          w="full"
-          size="sm"
-          colorScheme="blue"
-          onClick={handleFarm}
-          isLoading={farmAsync.isLoading}
-        >
-          Claim
-        </Button>
-      </ButtonConnectWrapper>
     </Stack>
   );
 };

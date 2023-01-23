@@ -12,12 +12,17 @@ const SectionProfile = () => {
     account,
     personalReward,
     rankReward,
+    claimReward,
+    claimRankReward,
     ipoPool,
     globalPool,
     isRankRewardClaimable,
   } = useValhalla();
   const nft = useNFT();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
+  const claimRankRewardAsync = useAsyncCall(claimRankReward);
+  const claimRewardAsync = useAsyncCall(claimReward);
+
   return (
     <>
       <Heading textAlign={"center"}>
@@ -47,7 +52,13 @@ const SectionProfile = () => {
             label={t("common.referralBonus")}
             labelBalace={prettyBn(personalReward)}
           >
-            <Button colorScheme="brand">{t("common.claim")}</Button>
+            <Button
+              onClick={claimRewardAsync.exec}
+              isLoading={claimRewardAsync.isLoading}
+              colorScheme="brand"
+            >
+              {t("common.claim")}
+            </Button>
           </WidgetProfileChile>
           <WidgetProfileChile
             variant={"gradient"}
@@ -58,9 +69,10 @@ const SectionProfile = () => {
             labelBalace={prettyBn(rankReward)}
           >
             <Button
-              onClick={claimNftRankRewardAsync.exec}
-              isLoading={claimNftRankRewardAsync.isLoading}
-              colorScheme="brand">
+              onClick={claimRankRewardAsync.exec}
+              isLoading={claimRankRewardAsync.isLoading}
+              colorScheme="brand"
+            >
               {t("common.claim")}
             </Button>
           </WidgetProfileChile>

@@ -74,14 +74,14 @@ export const CardProfile = () => {
             >
               <Text>{account.directDownlineCount.toNumber()}</Text>
             </WidgetProfileChile>
-            <WidgetProfileChile
+            {/* <WidgetProfileChile
               bg={"brand.800"}
               py={4}
               px={6}
               label={t("common.PrivateSaleNewToken")}
             >
               <SiTelegram />
-            </WidgetProfileChile>
+            </WidgetProfileChile> */}
           </SimpleGrid>
         </Box>
       </Box>

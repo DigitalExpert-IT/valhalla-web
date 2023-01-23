@@ -67,11 +67,6 @@ const init = createInitiator(async () => {
 const switchChain = async () => {
   try {
     await globalThis.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [network[CURRENT_CHAIN_ID]],
-    });
-
-    await globalThis.ethereum.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: CURRENT_CHAIN_ID }],
     });

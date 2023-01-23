@@ -8,6 +8,7 @@ import { shortenAddress } from "utils";
 import { SiTelegram } from "react-icons/si";
 import { t } from "i18next";
 import { WidgetProfileChile } from "components/Widget";
+import { rankMap } from "constant/rank";
 
 export const CardProfile = () => {
   const { address, connect, initialized, isConnected } = useWallet();
@@ -32,11 +33,17 @@ export const CardProfile = () => {
       variant={"gradient"}
       colorScheme={"purple:pink"}
       rounded="xl"
-      py={20}
       px={{ base: 4, md: 20 }}
     >
       <Box>
-        <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} />
+        {/* <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} /> */}
+        <Image
+          src={`/assets/rank/${rankMap[account.rank]}.svg`}
+          alt="rank-image"
+          mx="auto"
+          w="full"
+          maxW="64"
+        />
       </Box>
       <Box mt={8} zIndex={"overlay"}>
         <CopiableText

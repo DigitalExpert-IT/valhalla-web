@@ -21,7 +21,7 @@ export const prettyBn = (bn: BigNumberish, baseNumber = 18): string => {
   }
 
   if (value > 1_000) {
-    return toFixed(value / 1_000, "K");
+    return toFixed(value / 1_0, "K");
   }
 
   return toFixed(value);

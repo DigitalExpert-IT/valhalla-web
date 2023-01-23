@@ -24,8 +24,8 @@ export const WidgetTimeLine = () => {
           <WidgetTimelineItem
             key={idx}
             boxprops={{
-              top: "10%",
-              height: "3xs",
+              top: "5%",
+              height: "2xs",
               _before: {
                 content: "''",
                 position: "absolute",
@@ -36,7 +36,7 @@ export const WidgetTimeLine = () => {
                 borderRadius: "100%",
                 border: "4px solid",
                 borderColor: item.shades,
-                top: "calc(100% - 8px)",
+                top: "calc(100% - 10px)",
                 left: "calc(-6% - 2px)",
                 zIndex: "1",
               },

@@ -69,7 +69,7 @@ const fetchSwap = async () => {
   const swap = await getSwapContract();
   const wallet = await getWallet();
   const [address] = await wallet.listAccounts();
-  const gnetAddress = await swap.nftn();
+  const gnetAddress = await swap.gnet();
   const usdtAddress = await swap.usdt();
 
   const [gnetRatio, usdtRatio, gnetPool, usdtPool, gnetBalance, usdtBalance] =
@@ -162,7 +162,7 @@ export const useSwap = () => {
       };
     }
 
-    if (store.currency.gnet.totalPool.lt(totalPrice)) {
+    if (store.currency.usdt.totalPool.lt(usdtAmount)) {
       throw {
         code: "NotEnoughPool",
       };
@@ -207,7 +207,7 @@ export const useSwap = () => {
       };
     }
 
-    if (store.currency.usdt.totalPool.lt(totalPrice)) {
+    if (store.currency.gnet.totalPool.lt(gnetAmount)) {
       throw {
         code: "NotEnoughPool",
       };

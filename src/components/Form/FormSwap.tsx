@@ -59,6 +59,8 @@ export const FormSwap = () => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  console.log(currency.gnet.totalPool.toString());
+
   return (
     <Stack as="form" onSubmit={onSubmit}>
       <Stack alignItems="center" mb="5">
@@ -101,7 +103,6 @@ export const FormSwap = () => {
               control={control}
               label={t("form.label.swap")}
               name="currency"
-              defaultValue={"USDT"}
               option={normalizeCurrencies}
               isDisabled={!initialized}
             ></FormSelect>

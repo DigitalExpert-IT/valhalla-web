@@ -65,6 +65,15 @@ const columns = [
     header: t("common.claimreq") ?? "",
   }),
 
+  columnHelper.accessor("requirement", {
+    cell: info => (
+      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+        {info.getValue()}
+      </Text>
+    ),
+    header: t("common.claimreq") ?? "",
+  }),
+
   columnHelper.accessor("maxBuy", {
     cell: info => (
       <Text fontWeight="bold" fontSize="md" textTransform="capitalize">

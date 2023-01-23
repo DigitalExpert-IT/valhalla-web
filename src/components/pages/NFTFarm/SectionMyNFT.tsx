@@ -25,11 +25,12 @@ export const SectionMyNFT = () => {
   const { t } = useTranslation();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
 
   return (
     <Box mb="60">
       <Box textAlign="center" mb="10">
-        <Heading>MY NFT</Heading>
+        <Heading>Gnet NFT Project</Heading>
       </Box>
       <Card
         w="full"
@@ -104,7 +105,12 @@ export const SectionMyNFT = () => {
               </Button>
             </CustomGridItem>
             <CustomGridItem title={t("pages.nftFarming.farmingMatching")}>
-              <Button size="sm" colorScheme="blue">
+              <Button
+                size="sm"
+                colorScheme="blue"
+                onClick={claimRewardGnetAsync.exec}
+                isLoading={claimRewardGnetAsync.isLoading}
+              >
                 {t("common.claim")}
               </Button>
             </CustomGridItem>

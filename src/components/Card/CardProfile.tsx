@@ -1,7 +1,14 @@
-import { Box, Card, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  Image,
+  SimpleGrid,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
 import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
@@ -14,29 +21,15 @@ export const CardProfile = () => {
   const { address, connect, initialized, isConnected } = useWallet();
   const { account } = useValhalla();
 
-  const [widthMob, setWidthMob] = useState(false);
-  useEffect(() => {
-    function handleResize() {
-      let windowSet =
-        window.innerWidth < 500 ||
-        (window.innerWidth > 992 && window.innerWidth < 1160);
-      setWidthMob(windowSet);
-    }
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [setWidthMob]);
+  const [widthMob] = useMediaQuery("(max-width: 500px)");
   return (
     <Card
       variant={"gradient"}
       colorScheme={"purple:pink"}
       rounded="xl"
-      px={{ base: 4, md: 20 }}
+      px={{ base: 4, md: 20, lg: 4, xl: 20 }}
     >
       <Box>
-        {/* <Image src="/images/exampleProfile.png" alt="Profile" mx={"auto"} /> */}
         <Image
           src={`/assets/rank/${rankMap[account.rank]}.svg`}
           alt="rank-image"

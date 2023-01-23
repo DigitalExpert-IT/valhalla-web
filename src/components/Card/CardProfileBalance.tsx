@@ -21,7 +21,7 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Image src="/images/exampleProfile.png" alt="Profile" w={10} />
+          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
           <HStack>
             <Text>{fromBn(nft.genesisPool.claimable, 9)} </Text>
             <Text color={"secondary.500"} w={16}>
@@ -35,7 +35,7 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Image src="/images/exampleProfile.png" alt="Profile" w={10} />
+          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
           <HStack>
             <Text>
               {isRankRewardClaimable
@@ -53,7 +53,7 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Image src="/images/exampleProfile.png" alt="Profile" w={10} />
+          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
           <HStack>
             <Text>{prettyBn(ipoPool.claimable)}</Text>
             <Text color={"secondary.500"} w={16}>

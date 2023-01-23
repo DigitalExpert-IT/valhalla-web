@@ -2,14 +2,22 @@ import { Box, SimpleGrid, VStack, Heading, Button } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
 import { WidgetProfileChile } from "components/Widget";
 import { withConnection, withRegistration } from "hoc";
-import { useNFT, useValhalla } from "hooks";
+import { useAsyncCall, useNFT, useValhalla } from "hooks";
 import { t } from "i18next";
 import { Trans } from "react-i18next";
 import { composeHoc, prettyBn } from "utils";
 
 const SectionProfile = () => {
-  const { account, personalReward, rankReward, ipoPool } = useValhalla();
+  const {
+    account,
+    personalReward,
+    rankReward,
+    ipoPool,
+    globalPool,
+    isRankRewardClaimable,
+  } = useValhalla();
   const nft = useNFT();
+  const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
   return (
     <>
       <Heading textAlign={"center"}>
@@ -25,7 +33,11 @@ const SectionProfile = () => {
             rounded="xl"
             minH={"24"}
             label={t("common.globalBonus")}
-            value={prettyBn(personalReward)}
+            value={
+              isRankRewardClaimable
+                ? prettyBn(globalPool.valueLeft)
+                : prettyBn(globalPool.claimable)
+            }
           />
           <WidgetProfileChile
             variant={"gradient"}
@@ -45,7 +57,12 @@ const SectionProfile = () => {
             label={t("common.rankReward")}
             labelBalace={prettyBn(rankReward)}
           >
-            <Button colorScheme="brand">{t("common.claim")}</Button>
+            <Button
+              onClick={claimNftRankRewardAsync.exec}
+              isLoading={claimNftRankRewardAsync.isLoading}
+              colorScheme="brand">
+              {t("common.claim")}
+            </Button>
           </WidgetProfileChile>
           <WidgetProfileChile
             variant={"gradient"}

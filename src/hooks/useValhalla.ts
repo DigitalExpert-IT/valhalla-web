@@ -141,6 +141,8 @@ const init = createInitiator(async () => {
       isConnected => {
         if (!isConnected) {
           resetAccount();
+        } else {
+          fetchAccount();
         }
       },
       { fireImmediately: true }

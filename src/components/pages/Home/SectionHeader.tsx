@@ -31,15 +31,18 @@ export const SectionHeader = () => {
 
   const createSignature = async () => {
     try {
+      const linkToTelegram = document.createElement("a");
+      linkToTelegram.href = process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK || "";
+      linkToTelegram.target = "_blank";
       const { data } = await telegramInvite.refetch();
       if (!data) return;
       if (!valhalla.account.isRegistered) {
-        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+        linkToTelegram.click();
         return;
       }
 
       if (data.type === "redirect") {
-        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+        linkToTelegram.click();
         return;
       }
 

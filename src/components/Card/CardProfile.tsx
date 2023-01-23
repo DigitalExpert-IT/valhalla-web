@@ -1,10 +1,13 @@
 import {
   Box,
   Card,
+  HStack,
+  Icon,
   Image,
   SimpleGrid,
   Text,
   useMediaQuery,
+  VStack,
 } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
 import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
@@ -74,14 +77,17 @@ export const CardProfile = () => {
             >
               <Text>{account.directDownlineCount.toNumber()}</Text>
             </WidgetProfileChile>
-            {/* <WidgetProfileChile
+            <WidgetProfileChile
               bg={"brand.800"}
               py={4}
               px={6}
-              label={t("common.PrivateSaleNewToken")}
+              label={t("common.telegramOnlyMember")}
             >
-              <SiTelegram />
-            </WidgetProfileChile> */}
+              <HStack>
+                <Icon as={SiTelegram} color="telegram.500" />
+                <Text>@username</Text>
+              </HStack>
+            </WidgetProfileChile>
           </SimpleGrid>
         </Box>
       </Box>

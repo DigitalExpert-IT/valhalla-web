@@ -1,55 +1,80 @@
 import React from "react";
 import { prettyBn } from "utils";
-import { useTranslation } from "react-i18next";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { LazyVideo } from "components/LazyVideo";
 import { Stack, Box, Button, AspectRatio, Image, Text } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
-  const { t } = useTranslation();
-  const { id, price } = props;
+  const { id, price, halfingPercentage } = props;
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
   const handleBuy = () => {
     buyAsync.exec(id);
   };
 
-  const name = `Farming ${id.add(1).toNumber()}`;
+  const name = `#Farm ${id.add(1).toNumber()}`;
+  const fullName = `global network farm level ${id.add(1).toNumber()}`;
 
   return (
-    <Stack bg="valhalla.500" p="1" borderRadius="xl">
+    <Stack
+      p="1"
+      mt="5"
+      bg="valhalla.500"
+      borderRadius="xl"
+      boxShadow={"0px 0px 15px rgb(145 83 246 / 60%)"}
+    >
       <Box borderRadius="lg" bg="gray.800" p="2">
         <Box borderRadius="lg" overflow="hidden">
           <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
             <LazyVideo src={`/api/image/${id.toString()}`} objectFit="cover" />
           </AspectRatio>
-          <Stack
-            direction="row"
-            justify="space-between"
-            textAlign="left"
-            w="full"
-            my="2"
-            backdropFilter="auto"
-            backdropBlur="8px"
-          >
-            <Stack spacing={2}>
-              <Text fontWeight="bold" fontSize="lg">
+          <Stack mt="5" p="2">
+            <Stack direction="row" justify="space-between" align="center">
+              <Text fontWeight="bold" fontSize={{ base: "md", md: "xl" }}>
                 {name}
               </Text>
-              <Text fontWeight="bold" fontSize="lg">
-                NFT #{id.toNumber()}
+            </Stack>
+            <Stack textAlign="left">
+              <Text
+                fontWeight="bold"
+                color="teal"
+                textTransform="capitalize"
+                fontSize="sm"
+              >
+                gacha: <br /> 0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
+              </Text>
+              <Text
+                fontWeight="bold"
+                textTransform="capitalize"
+                fontSize="lg"
+                color="gray.500"
+              >
+                {fullName}
               </Text>
             </Stack>
-            <Stack spacing={2}>
-              <Text fontWeight="bold" fontSize="lg">
-                Price: {prettyBn(price, 9)}
-              </Text>
+            <Stack
+              direction="row"
+              justify="space-between"
+              align="center"
+              pt="5"
+            >
+              <Box textAlign="left">
+                <Text
+                  fontWeight="bold"
+                  fontSize={{ base: "xs", md: "sm" }}
+                  color="brand.300"
+                >
+                  Price
+                </Text>
+                <Text fontWeight="bold" fontSize={{ base: "md", md: "xl" }}>
+                  {prettyBn(price, 9)}
+                </Text>
+              </Box>
               <Button
                 variant="gradient"
-                colorScheme="red:orange"
-                w="full"
-                size="sm"
-                rounded="lg"
+                colorScheme="yellow:red"
+                w="60%"
+                rounded="xl"
                 onClick={handleBuy}
                 isLoading={buyAsync.isLoading}
               >

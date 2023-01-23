@@ -54,92 +54,56 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
     farmAsync.exec(id);
   };
 
-  const name = `Farming ${id.add(1).toNumber()}`;
-
   return (
-    <Stack bg="valhalla.500" p="1" borderRadius="xl">
+    <Stack
+      p="1"
+      mt="5"
+      bg="valhalla.500"
+      borderRadius="xl"
+      boxShadow={"0px 0px 15px rgb(145 83 246 / 60%)"}
+    >
       <Box borderRadius="lg" bg="gray.800" p="2">
-        <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
-          <LazyVideo src={tokenUri} objectFit="cover" />
-        </AspectRatio>
-        <Stack
-          direction="row"
-          justify="space-between"
-          textAlign="left"
-          w="full"
-          my="2"
-          backdropFilter="auto"
-          backdropBlur="8px"
-        >
-          <Stack spacing={2}>
-            <Text fontSize="lg" fontWeight="bold">
-              NFT #{id.toNumber()}
-            </Text>
-            <Text fontWeight="bold">
-              {t("common.percentage") + " " + percentage.toNumber() / 10}
-            </Text>
-            <Text fontWeight="bold">
-              {t("common.globalNetworkFarm") + " " + cardId.toNumber()}
-            </Text>
-          </Stack>
-          <Stack spacing={2} align="center">
-            <Text fontSize="xs">
-              Minting Price: {prettyBn(mintingPrice, 9)}
-            </Text>
-            <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
-              GNET<TextAnimation>{farmValue}</TextAnimation>
-            </Text>
-          </Stack>
-        </Stack>
-        {/* <Box
-          pos="absolute"
-          bottom="0"
-          w="full"
-          textAlign="left"
-          p="2"
-          backdropFilter="auto"
-          backdropContrast="10%"
-        >
-          <Stack direction="row" justify="space-between">
+        <Box borderRadius="lg" overflow="hidden" minW="100px">
+          <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+            <LazyVideo src={tokenUri} objectFit="cover" />
+          </AspectRatio>
+          <Stack my="5">
+            <Stack direction="row" spacing={1} justify="space-between">
+              <Text fontWeight="bold" fontSize="lg">
+                #NFT {id.toNumber()}
+              </Text>
+              <Text fontWeight="bold" fontSize="lg" color="teal">
+                {percentage.toNumber() / 10 + "%"}
+              </Text>
+            </Stack>
             <Box>
-              <Text fontSize="xl" fontWeight="bold" color="black">
-                NFT #{id.toNumber()}
+              <Text fontWeight="bold" fontSize="sm">
+                Minting: {prettyBn(mintingPrice, 9)}
               </Text>
-              <Text color="black" fontWeight="bold">
-                {t("common.globalNetworkFarm") + cardId.toNumber()}
-              </Text>
-              <Text fontWeight="bold" color="gray.800">
-                Percentage {t("common.percentage") + percentage.toNumber() / 10}
+              <Text
+                fontWeight="bold"
+                textTransform="capitalize"
+                color="gray.500"
+              >
+                {t("common.globalNetworkFarm") + " " + cardId.toNumber()}
               </Text>
             </Box>
-            <Box>
-              <Text fontSize="xs">
-                Minting Price: {prettyBn(mintingPrice, 9)}
-              </Text>
-              <Stack direction="row">
-                <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
-                  <TextAnimation>{farmValue}</TextAnimation>
-                </Text>
-                <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
-                  GNET
-                </Text>
-              </Stack>
-            </Box>
           </Stack>
-        </Box> */}
-        <ButtonConnectWrapper mt="4" size="sm" w="full" colorScheme="orange">
-          <Button
-            variant="gradient"
-            w="full"
-            rounded="lg"
-            size="sm"
-            colorScheme="red:orange"
-            onClick={handleFarm}
-            isLoading={farmAsync.isLoading}
-          >
-            Claim
-          </Button>
-        </ButtonConnectWrapper>
+          <ButtonConnectWrapper size="sm" w="full" colorScheme="orange">
+            <Button
+              variant="gradient"
+              w="full"
+              rounded="lg"
+              size="sm"
+              colorScheme="valhalla:teal"
+              onClick={handleFarm}
+              isLoading={farmAsync.isLoading}
+            >
+              <TextAnimation>{farmValue}</TextAnimation>
+              Gnet Claim
+            </Button>
+          </ButtonConnectWrapper>
+        </Box>
       </Box>
     </Stack>
   );

@@ -1,4 +1,4 @@
-import { Box, Card, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Card, Flex, HStack, Image, Stack, Text } from "@chakra-ui/react";
 import { useNFT, useValhalla } from "hooks";
 import React from "react";
 import { Trans } from "react-i18next";
@@ -53,7 +53,7 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
+          <Stack />
           <HStack>
             <Text>{prettyBn(ipoPool.claimable)}</Text>
             <Text color={"secondary.500"} w={16}>

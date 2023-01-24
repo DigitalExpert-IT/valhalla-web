@@ -2,7 +2,7 @@ import React from "react";
 import { prettyBn } from "utils";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { LazyVideo } from "components/LazyVideo";
-import { Stack, Box, Button, AspectRatio, Image, Text } from "@chakra-ui/react";
+import { Stack, Box, Button, AspectRatio, Text, Badge } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
   const { id, price, halfingPercentage } = props;
@@ -16,14 +16,8 @@ export const CardFarmNFT = (props: INFTCard) => {
   const fullName = `global network farm level ${id.add(1).toNumber()}`;
 
   return (
-    <Stack
-      p="1"
-      mt="5"
-      bg="valhalla.500"
-      borderRadius="xl"
-      boxShadow={"0px 0px 15px rgb(145 83 246 / 60%)"}
-    >
-      <Box borderRadius="lg" bg="gray.800" p="2">
+    <Stack p="0.5" mt="5" bg="brand.300" borderRadius="xl">
+      <Box borderRadius="xl" bg="black" p="5">
         <Box borderRadius="lg" overflow="hidden">
           <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
             <LazyVideo src={`/api/image/${id.toString()}`} objectFit="cover" />
@@ -35,21 +29,16 @@ export const CardFarmNFT = (props: INFTCard) => {
               </Text>
             </Stack>
             <Stack textAlign="left">
+              <Text fontWeight="bold" textTransform="capitalize">
+                {fullName}
+              </Text>
               <Text
                 fontWeight="bold"
-                color="teal"
+                color="secondary.500"
                 textTransform="capitalize"
                 fontSize="sm"
               >
                 gacha: <br /> 0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
-              </Text>
-              <Text
-                fontWeight="bold"
-                textTransform="capitalize"
-                fontSize="lg"
-                color="gray.500"
-              >
-                {fullName}
               </Text>
             </Stack>
             <Stack
@@ -58,21 +47,19 @@ export const CardFarmNFT = (props: INFTCard) => {
               align="center"
               pt="5"
             >
-              <Box textAlign="left">
+              <Box textAlign="left" rounded="full">
                 <Text
                   fontWeight="bold"
-                  fontSize={{ base: "xs", md: "sm" }}
+                  fontSize={{ base: "md", md: "2xl" }}
+                  letterSpacing={2}
                   color="brand.300"
                 >
-                  Price
-                </Text>
-                <Text fontWeight="bold" fontSize={{ base: "md", md: "xl" }}>
                   {prettyBn(price, 9)}
                 </Text>
               </Box>
               <Button
-                variant="gradient"
-                colorScheme="yellow:red"
+                colorScheme="brand"
+                color="white"
                 w="60%"
                 rounded="xl"
                 onClick={handleBuy}

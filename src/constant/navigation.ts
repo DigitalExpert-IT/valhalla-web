@@ -21,12 +21,12 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/swap",
   },
   {
-    name: "features",
-    href: "/features",
+    name: "profile",
+    href: "/profile",
   },
   {
-    name: "projects",
-    href: "/projects",
+    name: "nftfarming",
+    href: "/nft-farming",
   },
 ];
 

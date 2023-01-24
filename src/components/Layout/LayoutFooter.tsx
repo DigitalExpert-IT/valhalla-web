@@ -54,7 +54,7 @@ export const LayoutFooter = () => {
           >
             <Box>
               <Text fontSize="sm">
-                &#169; {new Date().getFullYear()} PT.Aset Masa Depan, All right
+                &#169; {new Date().getFullYear()} Global Network, All right
                 reserved
               </Text>
             </Box>

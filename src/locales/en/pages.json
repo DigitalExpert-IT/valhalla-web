@@ -7,38 +7,109 @@
     "roadmapSection": "Roadmap",
     "teamSection": "Our team members",
     "partnershipSection": "Partnership",
-    "rankNetwork": "<strong>Rank Network</strong> Plan Gnet",
+    "rankNetwork": "<strong>Rank Network</strong> Plan Global Network",
     "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
         "name": "Q4 2022",
-        "headline": "Team Formation",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Oct - Dec 2022",
+        "description": [
+          {
+            "title": "Team formation"
+          },
+          {
+            "title": "Website development"
+          },
+          {
+            "title": "Dapps global network marketing development"
+          },
+          {
+            "title": "Issue gnet token"
+          },
+          {
+            "title": "gnet token swap"
+          }
+        ],
         "shades": "teal"
       },
       {
         "name": "Q1 2023",
-        "headline": "Contract Deployed",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Jan - Mar 2023",
+        "description": [
+          {
+            "title": "Contract deployed"
+          },
+          {
+            "title": "Global network start"
+          },
+          {
+            "title": "Gnet token swap start"
+          },
+          {
+            "title": "Community building"
+          },
+          {
+            "title": "Genesis NFT launch"
+          },
+          {
+            "title": "Telegram special registered address"
+          }
+        ],
         "shades": "pink"
       },
       {
         "name": "Q2 2023",
-        "headline": "Enlarge community",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Apr - Jun 2023",
+        "description": [
+          {
+            "title": "Enlarge community"
+          },
+          {
+            "title": "Share to earn start"
+          },
+          {
+            "title": "Promotional boost"
+          },
+          {
+            "title": "Network NFT market development"
+          }
+        ],
         "shades": "green"
       },
       {
         "name": "Q3 2023",
-        "headline": "New Partnership",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Jul - Sep 2023",
+        "description": [
+          {
+            "title": "New partnership"
+          },
+          {
+            "title": "New NFT Product"
+          },
+          {
+            "title": "Royalti property program development"
+          }
+        ],
         "shades": "blue.400"
       },
       {
         "name": "Q4 2023",
-        "headline": "Decentralized Product NFT Development",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Oct - Dec 2023",
+        "description": [
+          {
+            "title": "Decentralized product NFT development"
+          },
+          {
+            "title": "New NFT product"
+          },
+          {
+            "title": "Product offering"
+          },
+          {
+            "title": "Venture capital program"
+          }
+        ],
         "shades": "orange"
       }
     ],
@@ -82,7 +153,7 @@
     "gnetProject": "<strong>Gnet</strong> Project",
     "networkMembers": "Network members",
     "globalBonusGnet": "Global bonus gnet",
-    "rankReward": "Rank reward",
+    "rankReward": "Rank reward gnet",
     "farmingMatching": "Farming matching reward",
     "farmMathcingRequirement": "NFT farm matching requirement"
   },

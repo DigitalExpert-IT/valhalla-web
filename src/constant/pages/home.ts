@@ -1,10 +1,10 @@
 import { t } from "i18next";
 
 export const HEADER_IMAGE_DATA = [
-  { uri: "/images/imgHeader1.png", alt: t("common.nftFarming") },
-  { uri: "/images/imgHeader2.png", alt: t("common.shareToEarn") },
-  { uri: "/images/imgHeader3.png", alt: t("common.royaltyProperty") },
-  { uri: "/images/imgHeader4.png", alt: t("common.metaverseProject") },
+  { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
+  { uri: "/images/share-to-earn.png", alt: t("common.shareToEarn") },
+  { uri: "/images/royalty-property.png", alt: t("common.royaltyProperty") },
+  { uri: "/images/metavers.png", alt: t("common.metaverseProject") },
 ];
 
 export const PROMOTION_IMAGE_DATA = [
@@ -237,13 +237,13 @@ export const RANKBONUS: Array<IRankBonus> = [
 ];
 
 export const TOKENOMICS = [
-  { totalSupply: "reserves", percent: "10%", value: "10.000.000" },
-  { totalSupply: "network swap", percent: "65%", value: "65.000.000" },
-  { totalSupply: "team", percent: "10%", value: "10.000.000" },
-  { totalSupply: "marketing", percent: "10%", value: "10.000.000" },
+  { totalSupply: "reserves", percent: "20%", value: "20.000.000" },
+  { totalSupply: "network swap", percent: "25%", value: "250.000.000" },
+  { totalSupply: "team", percent: "20%", value: "200.000.000" },
+  { totalSupply: "marketing", percent: "20%", value: "100.000.000" },
   {
     totalSupply: "Ecosystem Development Fund",
-    percent: "5%",
-    value: "5.000.000",
+    percent: "15%",
+    value: "150.000.000",
   },
 ];

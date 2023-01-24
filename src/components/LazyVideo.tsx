@@ -33,7 +33,7 @@ export const LazyVideo = (props: LazyVideoProps) => {
   return (
     <AspectRatio ratio={1} w="full" {...rest}>
       {src ? (
-        <Box as="video" ref={videoRef as any} loop muted>
+        <Box as="video" ref={videoRef as any} loop muted autoPlay>
           <source src={src} type="video/mp4" />
         </Box>
       ) : (

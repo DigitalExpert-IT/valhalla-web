@@ -1,16 +1,26 @@
 import React from "react";
-import { Box, Flex, Text, FlexProps, BoxProps } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  FlexProps,
+  BoxProps,
+  UnorderedList,
+  ListItem,
+} from "@chakra-ui/react";
 
+interface IDescription {
+  title: string;
+}
 export interface IRoadmap {
   name: string;
   headline: string;
-  description: string;
+  description: IDescription[];
   shades: string;
 }
 interface WidgetTimeline extends FlexProps, IRoadmap {
   boxprops?: BoxProps;
   headline: string;
-  description: string;
   children: React.ReactNode;
 }
 
@@ -60,7 +70,11 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
         <Text mb="3" fontWeight="bold" textTransform="capitalize">
           {props.headline}
         </Text>
-        <Text>{props.description}</Text>
+        <UnorderedList>
+          {props.description.map((item, idx) => (
+            <ListItem key={idx}>{item.title}</ListItem>
+          ))}
+        </UnorderedList>
       </Box>
     </Flex>
   );

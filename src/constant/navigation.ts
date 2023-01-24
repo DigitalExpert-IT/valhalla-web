@@ -32,11 +32,6 @@ export const NAVIGATION: Array<INavigation> = [
 
 export const SOCIAL: Array<ISocial> = [
   {
-    name: "instagram",
-    href: "#",
-    icon: BsInstagram,
-  },
-  {
     name: "facebook",
     href: "#",
     icon: BsFacebook,

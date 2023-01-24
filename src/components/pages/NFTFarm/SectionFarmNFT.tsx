@@ -1,6 +1,5 @@
 import React from "react";
 import { CardFarmNFT } from "components/Card";
-import { LazyVideo } from "components/LazyVideo";
 import { Box, Wrap, WrapItem, Heading, Stack } from "@chakra-ui/react";
 import { useNFT } from "hooks";
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNFT } from "hooks";
+import { prettyBn } from "utils";
 import { rankMap } from "constant/rank";
 import { CustomGridItem } from "components/Grid";
 import { CardOwnedFarmNFT } from "components/Card";
@@ -18,18 +19,18 @@ import {
   Button,
   Grid,
 } from "@chakra-ui/react";
-import { prettyBn } from "utils";
 
 export const SectionMyNFT = () => {
   const nft = useNFT();
   const { t } = useTranslation();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
 
   return (
     <Box mb="60">
       <Box textAlign="center" mb="10">
-        <Heading>MY NFT</Heading>
+        <Heading>Gnet NFT Project</Heading>
       </Box>
       <Card
         w="full"
@@ -104,7 +105,12 @@ export const SectionMyNFT = () => {
               </Button>
             </CustomGridItem>
             <CustomGridItem title={t("pages.nftFarming.farmingMatching")}>
-              <Button size="sm" colorScheme="blue">
+              <Button
+                size="sm"
+                colorScheme="blue"
+                onClick={claimRewardGnetAsync.exec}
+                isLoading={claimRewardGnetAsync.isLoading}
+              >
                 {t("common.claim")}
               </Button>
             </CustomGridItem>
@@ -120,7 +126,7 @@ export const SectionMyNFT = () => {
           ))}
         </Wrap>
       ) : (
-        <Box textAlign="center" my="10">
+        <Box textAlign="center" my="20">
           <Heading color="gray.600">{t("error.notOwnedNft")}</Heading>
         </Box>
       )}

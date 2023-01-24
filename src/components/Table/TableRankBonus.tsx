@@ -71,7 +71,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: t("common.claimreq") ?? "",
+    header: t("common.rankreq") ?? "",
   }),
 
   columnHelper.accessor("maxBuy", {

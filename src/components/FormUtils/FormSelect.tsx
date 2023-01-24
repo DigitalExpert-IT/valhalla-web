@@ -16,7 +16,8 @@ import {
   ControllerProps,
 } from "react-hook-form";
 
-interface FormSelectProps extends Omit<SelectProps, "placeholder"> {
+interface FormSelectProps
+  extends Omit<SelectProps, "placeholder" | "defaultValue"> {
   label?: string | null;
   helperText?: string | null;
   placeholder?: string;

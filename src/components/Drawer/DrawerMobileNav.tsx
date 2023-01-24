@@ -55,16 +55,6 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             ))}
           </Stack>
         </DrawerBody>
-        <DrawerFooter
-          borderTopWidth={2}
-          justifyContent="left"
-          borderColor="brand.700"
-        >
-          <Stack spacing="4" direction="row">
-            <SvgTwitter />
-            <SvgTelegram />
-          </Stack>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

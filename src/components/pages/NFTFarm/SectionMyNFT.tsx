@@ -126,7 +126,7 @@ export const SectionMyNFT = () => {
           ))}
         </Wrap>
       ) : (
-        <Box textAlign="center" py="60">
+        <Box textAlign="center" my="10">
           <Heading color="gray.600">{t("error.notOwnedNft")}</Heading>
         </Box>
       )}

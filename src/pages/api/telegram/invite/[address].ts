@@ -73,7 +73,7 @@ const handler: NextApiHandler = async (req, res) => {
         getTelegramBindingSignatureMessage(username),
         signature
       );
-      if (verifiedAddress !== address) {
+      if (verifiedAddress.toLowerCase() !== address.toLowerCase()) {
         return res.status(401).json({ message: "Invalid Signature" });
       }
       await prisma.user.update({

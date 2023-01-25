@@ -38,7 +38,7 @@ export const SectionMyNFT = () => {
         colorScheme="blue"
         p="5"
         borderRadius="xl"
-        mb="5"
+        mb="10"
       >
         <Stack
           direction={{ base: "column", md: "row" }}
@@ -126,7 +126,7 @@ export const SectionMyNFT = () => {
           ))}
         </Wrap>
       ) : (
-        <Box textAlign="center" my="20">
+        <Box textAlign="center" my="10">
           <Heading color="gray.600">{t("error.notOwnedNft")}</Heading>
         </Box>
       )}

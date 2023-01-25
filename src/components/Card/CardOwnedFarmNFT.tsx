@@ -55,14 +55,8 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
   };
 
   return (
-    <Stack
-      p="1"
-      mt="5"
-      bg="valhalla.500"
-      borderRadius="xl"
-      boxShadow={"0px 0px 15px rgb(145 83 246 / 60%)"}
-    >
-      <Box borderRadius="lg" bg="gray.800" p="2">
+    <Stack p="0.5" mt="5" bg="brand.300" borderRadius="xl">
+      <Box borderRadius="xl" bg="black" p="5">
         <Box borderRadius="lg" overflow="hidden" minW="100px">
           <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
             <LazyVideo src={tokenUri} objectFit="cover" />
@@ -72,7 +66,7 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
               <Text fontWeight="bold" fontSize="lg">
                 #NFT {id.toNumber()}
               </Text>
-              <Text fontWeight="bold" fontSize="lg" color="teal">
+              <Text fontWeight="bold" fontSize="lg" color="secondary.500">
                 {percentage.toNumber() / 10 + "%"}
               </Text>
             </Stack>
@@ -91,15 +85,15 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
           </Stack>
           <ButtonConnectWrapper size="sm" w="full" colorScheme="orange">
             <Button
-              variant="gradient"
               w="full"
               rounded="lg"
               size="sm"
-              colorScheme="valhalla:teal"
+              colorScheme="brand"
+              color="white"
               onClick={handleFarm}
               isLoading={farmAsync.isLoading}
             >
-              <TextAnimation>{farmValue}</TextAnimation>
+              <TextAnimation mr="1">{farmValue}</TextAnimation>
               Gnet Claim
             </Button>
           </ButtonConnectWrapper>

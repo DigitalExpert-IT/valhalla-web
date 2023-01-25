@@ -1,5 +1,5 @@
 import { Box, Card, Flex, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { useNFT, useValhalla } from "hooks";
+import { useNFT, useValhalla, useSwap } from "hooks";
 import React from "react";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
@@ -8,6 +8,7 @@ import { fromBn } from "evm-bn";
 export const CardProfileBalance = () => {
   const { isRankRewardClaimable, globalPool, ipoPool } = useValhalla();
   const nft = useNFT();
+  const { currency } = useSwap();
 
   return (
     <Card p={8} rounded="xl" bg={"brand.800"}>
@@ -35,7 +36,11 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
+          <Image
+            src="/assets/partnership/polygon-logo.png"
+            alt="Profile"
+            w={10}
+          />
           <HStack>
             <Text>
               {isRankRewardClaimable
@@ -53,11 +58,11 @@ export const CardProfileBalance = () => {
           mt={4}
           fontSize={"lg"}
         >
-          <Stack />
+          <Image src="/assets/logo/tether-logo.svg" alt="Profile" w={10} />
           <HStack>
-            <Text>{prettyBn(ipoPool.claimable)}</Text>
+            <Text>{prettyBn(currency.usdt.balance)}</Text>
             <Text color={"secondary.500"} w={16}>
-              <Trans i18nKey="common.ipo" />
+              USDT
             </Text>
           </HStack>
         </Flex>

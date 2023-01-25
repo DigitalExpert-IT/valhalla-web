@@ -64,7 +64,7 @@ export interface IRankBonus {
   pool: string;
   level: string;
   claim: string;
-  maxBuy: number;
+  maxBuy: string;
   color: string;
   requirement: string;
 }
@@ -146,7 +146,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "",
     level: "",
     claim: "",
-    maxBuy: 100000,
+    maxBuy: "100000",
     requirement: "-",
     color: "white",
   },
@@ -156,7 +156,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "5%",
     level: "10 level",
     claim: "25000 NFT Value",
-    maxBuy: 100000,
+    maxBuy: "100000",
     requirement: "-",
     color: "#A8742F",
   },
@@ -166,7 +166,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "13%",
     level: "20 level",
     claim: "100000 NFT Value",
-    maxBuy: 500000,
+    maxBuy: "500000",
     requirement: "2 common rank",
     color: "#666768",
   },
@@ -176,7 +176,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "16%",
     level: "40 level",
     claim: "500000 NFT Value",
-    maxBuy: 2500000,
+    maxBuy: "2500000",
     requirement: "2 rare rank",
     color: "#2A7FB8",
   },
@@ -186,7 +186,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "19%",
     level: "60 level",
     claim: "2500000 NFT Value",
-    maxBuy: 10000000,
+    maxBuy: "10000000",
     requirement: "2 super rare rank",
     color: "#E7570F",
   },
@@ -196,7 +196,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "22%",
     level: "80 level",
     claim: "10000000 NFT Value",
-    maxBuy: 50000000,
+    maxBuy: "50000000",
     requirement: "2 epic rank",
     color: "#E0475A",
   },
@@ -206,7 +206,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "25%",
     level: "100 level",
     claim: "50000000 NFT Value",
-    maxBuy: 250000000,
+    maxBuy: "250000000",
     requirement: "2 legend rank",
     color: "#BE7DD8",
   },
@@ -216,7 +216,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "100%",
     level: "",
     claim: "",
-    maxBuy: 0,
+    maxBuy: "",
     requirement: "",
     color: "",
   },
@@ -226,7 +226,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     pool: "10%",
     level: "",
     claim: "",
-    maxBuy: 0,
+    maxBuy: "",
     requirement: "",
     color: "white",
   },

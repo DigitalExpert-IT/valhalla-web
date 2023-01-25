@@ -194,5 +194,8 @@
   },
   "shareToEarn": {
     "title": "Share To Earn"
+  },
+  "profile": {
+    "header": "MY ACCOUNT"
   }
 }

@@ -30,7 +30,7 @@ export const SectionMyNFT = () => {
   return (
     <Box mb="60">
       <Box textAlign="center" mb="10">
-        <Heading>Gnet NFT Project</Heading>
+        <Heading>GNET NFT Project</Heading>
       </Box>
       <Card
         w="full"

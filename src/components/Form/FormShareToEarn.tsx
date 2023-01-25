@@ -31,7 +31,7 @@ export const FormShareToEarn = (props: { mediaName: string }) => {
         }}
       />
       <Button variant={"solid"} colorScheme={"brand"} onClick={onSubmit}>
-        <Image src="/assets/icon/send.png" w={5} h={5} />
+        <Image src="/assets/icon/send.png" w={5} h={5} alt="send-icon" />
       </Button>
     </Flex>
   );

@@ -142,7 +142,7 @@
     "matchingBonus": {
       "title": "100 <strong>Level</strong>",
       "subtitle": "Matching bonus",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vitae quae provident quos tenetur. A suscipit debitis magnam facilis nobis! Id dolorem voluptatum laborum ducimus veniam tempora a officiis voluptates"
+      "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },
     "populationSection": {
       "title": "Global <strong>Decentralized</strong> Network Marketing",
@@ -162,24 +162,24 @@
     "placeholder": "Paste your {{media}} post link here",
     "item": {
       "instagram": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to instagram to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "twitter": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to twitter to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "tiktok": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to tiktok to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "facebook": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to facebook to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       }
     }
   },

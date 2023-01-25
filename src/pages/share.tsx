@@ -64,9 +64,7 @@ const Share = () => {
               <Text>
                 {t(`pages.share.item.${item.mediaName}.subtitleDescription`)}
               </Text>
-              <FormShareToEarn
-                mediaName={item.mediaName}
-              />
+              <FormShareToEarn mediaName={item.mediaName} />
             </CardBody>
           </Card>
         ))}

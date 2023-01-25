@@ -46,19 +46,15 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/partner1.png",
+    image: "/assets/partnership/polygon-logo.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/partner2.png",
+    image: "/assets/partnership/solidproofv2.svg",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/partner3.png",
-  },
-  {
-    name: "partner4",
-    image: "/assets/partnership/partner4.png",
+    image: "/assets/partnership/gn-patnership.png",
   },
 ];
 

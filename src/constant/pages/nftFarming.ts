@@ -24,23 +24,23 @@ export const NFTMATHCING = [
       },
       {
         name: "level 6 - 1%",
-        description: "1% NFT Farm 25000 GNET Token + Common Rank ",
+        description: "NFT Farm 25000 GNET Token + Common Rank ",
       },
       {
         name: "level 7 - 1%",
-        description: "1% NFT Farm 25000 GNET Token + Common Rank ",
+        description: "NFT Farm 25000 GNET Token + Common Rank ",
       },
       {
         name: "level 8 - 1%",
-        description: "1% NFT Farm 25000 GNET Token + Common Rank ",
+        description: "NFT Farm 25000 GNET Token + Common Rank ",
       },
       {
         name: "level 9 - 1%",
-        description: "1% NFT Farm 25000 GNET Token + Common Rank ",
+        description: "NFT Farm 25000 GNET Token + Common Rank ",
       },
       {
         name: "level 10 - 1%",
-        description: "1% NFT Farm 25000 GNET Token + Common Rank ",
+        description: "NFT Farm 25000 GNET Token + Common Rank ",
       },
     ],
   },
@@ -69,23 +69,23 @@ export const NFTMATHCING = [
       },
       {
         name: "level 16 - 1%",
-        description: "NFT Farm 100000 GNET token + Rare Rank ",
+        description: "NFT Farm 100000 GNET token + Rare Rank",
       },
       {
         name: "level 17 - 1%",
-        description: "NFT Farm 100000 GNET token + Rare Rank ",
+        description: "NFT Farm 100000 GNET token + Rare Rank",
       },
       {
         name: "level 18 - 1%",
-        description: "NFT Farm 100000 GNET token + Rare Rank ",
+        description: "NFT Farm 100000 GNET token + Rare Rank",
       },
       {
         name: "level 19 - 1%",
-        description: "NFT Farm 100000 GNET token + Rare Rank ",
+        description: "NFT Farm 100000 GNET token + Rare Rank",
       },
       {
         name: "level 20 - 1%",
-        description: "NFT Farm 100000 GNET Token + Common Rank ",
+        description: "NFT Farm 100000 GNET token + Rare Rank",
       },
     ],
   },

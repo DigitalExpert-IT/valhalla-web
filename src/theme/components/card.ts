@@ -52,7 +52,7 @@ const sizes = {
 
 const variantGradient = defineStyle(props => {
   const { colorScheme: c } = props;
-  const [c1, c2 = "pink", bg ] = c.split(/\:/);
+  const [c1, c2 = "pink", bg] = c.split(/\:/);
   return definePartsStyle({
     container: {
       bg: `${bg ?? c1}.800`,

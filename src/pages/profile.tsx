@@ -1,10 +1,14 @@
 import { LayoutMain } from "components";
-import { Profile } from "components/pages/Profile";
+import { SectionProfile } from "components/pages/Profile";
+import { withConnection, withRegistration } from "hoc";
+import { composeHoc } from "utils";
 
-export default function profile() {
+const Profile = () => {
   return (
     <LayoutMain>
-      <Profile />
+      <SectionProfile />
     </LayoutMain>
   );
-}
+};
+
+export default composeHoc(withRegistration, withConnection)(Profile);

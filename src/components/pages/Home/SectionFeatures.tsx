@@ -6,7 +6,7 @@ import { PROMOTION_IMAGE_DATA } from "constant/pages/home";
 
 export const SectionFeatures = () => {
   return (
-    <Box my={8} px={4}>
+    <Box mt="60" px={4}>
       <Box py={8}>
         <Heading textAlign={"center"} my={8}>
           <Trans i18nKey="pages.home.feature.title" />

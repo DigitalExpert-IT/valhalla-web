@@ -9,7 +9,7 @@ export const SectionFeaturedPopulation = () => {
       overflow="hidden"
       mx={{ base: "-4", lg: "auto" }}
       px={{ base: "4", lg: "auto" }}
-      py="40"
+      my={60}
       direction="row"
       alignItems="center"
     >

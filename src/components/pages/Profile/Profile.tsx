@@ -7,7 +7,7 @@ import { t } from "i18next";
 import { Trans } from "react-i18next";
 import { composeHoc, prettyBn } from "utils";
 
-const SectionProfile = () => {
+export const SectionProfile = () => {
   const {
     account,
     personalReward,
@@ -89,5 +89,3 @@ const SectionProfile = () => {
     </>
   );
 };
-
-export default composeHoc(withRegistration, withConnection)(SectionProfile);

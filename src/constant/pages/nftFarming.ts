@@ -4,23 +4,23 @@ export const NFTMATHCING = [
     content: [
       {
         name: "level 1 - 5%",
-        description: "Nft Farm 5000 GNET Token",
+        description: "NFT Farm 5000 GNET Token",
       },
       {
         name: "level 2 - 5%",
-        description: "Nft Farm 5000 GNET Token",
+        description: "NFT Farm 5000 GNET Token",
       },
       {
         name: "level 3 - 5%",
-        description: "Nft Farm 5000 GNET Token",
+        description: "NFT Farm 5000 GNET Token",
       },
       {
         name: "level 4 - 5%",
-        description: "Nft Farm 5000 GNET Token",
+        description: "NFT Farm 5000 GNET Token",
       },
       {
         name: "level 5 - 5%",
-        description: "Nft Farm 5000 GNET Token",
+        description: "NFT Farm 5000 GNET Token",
       },
       {
         name: "level 6 - 1%",

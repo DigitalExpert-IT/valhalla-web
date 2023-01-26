@@ -1,5 +1,5 @@
 export * from "./SectionHeader";
-export * from "./backgroundHeader";
+export * from "./BackgroundHeader";
 export * from "./SectionFeatures";
 export * from "./SectionFeaturedPopulation";
 export * from "./SectionMatchingBonus";

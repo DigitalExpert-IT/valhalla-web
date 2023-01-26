@@ -13,6 +13,7 @@ import {
   TableRankBonus,
   TableRankNetwork,
   TableTokenomic,
+  BackgroundHeader,
 } from "components";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <BackgroundHeader />
       <SectionFeatures />
       <SectionFeaturedPopulation />
       <TableRankNetwork />

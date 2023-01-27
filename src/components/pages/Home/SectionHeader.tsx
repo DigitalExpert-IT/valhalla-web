@@ -76,7 +76,7 @@ export const SectionHeader = () => {
           />
         </Heading>
         <Text
-          textAlign={{ base: "center", lg: "initial" }}
+          textAlign={{ base: "center", lg: "justify" }}
           mt="4"
           fontSize="lg"
         >

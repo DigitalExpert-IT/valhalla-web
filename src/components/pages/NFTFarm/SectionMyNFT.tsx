@@ -55,14 +55,17 @@ export const SectionMyNFT = () => {
               }}
             />
           </Heading>
-          <Text fontWeight="bold">
+
+          {/* TODO: Change with total minting all NFT owned */}
+
+          {/* <Text fontWeight="bold">
             {`Total Invest ${
               isRankRewardClaimable
                 ? prettyBn(globalPool.valueLeft, 9)
                 : prettyBn(globalPool.claimable, 9)
             }`}{" "}
             GNET
-          </Text>
+          </Text> */}
         </Stack>
         <Stack
           direction={{ base: "column", md: "row" }}

@@ -7,7 +7,7 @@
     "roadmapSection": "Roadmap",
     "teamSection": "Our team members",
     "partnershipSection": "Partnership",
-    "rankNetwork": "<strong>Global network</strong> rank network plan",
+    "rankNetwork": "<strong>Global network</strong> matic plan",
     "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
     "tokenomics": "Tokenomics",
     "roadmap": [
@@ -155,7 +155,8 @@
     "globalBonusGnet": "Global bonus gnet",
     "rankReward": "Rank reward gnet",
     "farmingMatching": "Farming matching reward",
-    "farmMathcingRequirement": "NFT farm matching requirement"
+    "farmMathcingRequirement": "NFT farm matching requirement",
+    "globalnftbonus": "<strong>Global Rank NFT</strong> Bonus System"
   },
   "share": {
     "title": "SHARE TO EARN",

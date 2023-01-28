@@ -26,11 +26,6 @@ export const LayoutFooter = () => {
           </Box>
           <Box>
             <Text fontWeight="bold" fontSize="lg">
-              {t("common.footer.listedOn")}
-            </Text>
-          </Box>
-          <Box>
-            <Text fontWeight="bold" fontSize="lg">
               {t("common.footer.social")}
             </Text>
             <Stack spacing={1} mt={4}>

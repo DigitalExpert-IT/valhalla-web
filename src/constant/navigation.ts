@@ -28,6 +28,10 @@ export const NAVIGATION: Array<INavigation> = [
     name: "nftfarming",
     href: "/nft-farming",
   },
+  {
+    name: "sharetoearn",
+    href: "/share",
+  },
 ];
 
 export const SOCIAL: Array<ISocial> = [

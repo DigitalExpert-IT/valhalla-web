@@ -44,25 +44,16 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: t("common.poolGNET") ?? "",
+    header: t("common.maticBonus") ?? "",
   }),
 
-  columnHelper.accessor("level", {
+  columnHelper.accessor("downline", {
     cell: info => (
       <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
         {info.getValue()}
       </Text>
     ),
-    header: t("common.level") ?? "",
-  }),
-
-  columnHelper.accessor("claim", {
-    cell: info => (
-      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
-        {info.getValue()}
-      </Text>
-    ),
-    header: t("common.claimreq") ?? "",
+    header: t("common.15Leveldown") ?? "",
   }),
 
   columnHelper.accessor("requirement", {
@@ -72,18 +63,6 @@ const columns = [
       </Text>
     ),
     header: t("common.rankreq") ?? "",
-  }),
-
-  columnHelper.accessor("maxBuy", {
-    cell: info => (
-      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
-        {info.getValue()}
-      </Text>
-    ),
-    header: t("common.maxBuyNFT") ?? "",
-    meta: {
-      isNumeric: false,
-    },
   }),
 ];
 

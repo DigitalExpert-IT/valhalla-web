@@ -4,7 +4,7 @@
     "swap": "Swap",
     "profile": "Profile",
     "nftfarming": "Nft Farming",
-    "share": "Share To Earn"
+    "sharetoearn": "Share To Earn"
   },
   "footer": {
     "description": "Global network aims to revolutionize the market of network marketing by decentralized millions of users to web3 application.",
@@ -40,8 +40,10 @@
   "percent": "Percent",
   "value": "Value",
   "rank": "Rank",
-  "poolGNET": "Pool GNET",
-  "claimreq": "Claim Req",
+  "maticBonus": "Matic bonus",
+  "gnetBonus": "GNET bonus",
+  "15Leveldown": "15 Level downline",
+  "claimReq": "Claim req",
   "rankreq": "Rank Req",
   "maxBuyNFT": "Max buy NFT",
   "totalSupply": "Total Supply",

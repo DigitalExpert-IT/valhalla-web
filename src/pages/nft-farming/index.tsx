@@ -5,7 +5,7 @@ import {
   SectionMyNFT,
   SectionNFTFarmMatching,
 } from "components/pages/NFTFarm";
-import { LayoutMain, TableRankBonus } from "components";
+import { LayoutMain, TableRankNFTBonus } from "components";
 import { composeHoc } from "utils";
 
 const NftFarmingPage = () => {
@@ -13,7 +13,7 @@ const NftFarmingPage = () => {
     <LayoutMain>
       <SectionFarmNFT />
       <SectionMyNFT />
-      <TableRankBonus />
+      <TableRankNFTBonus />
       <SectionNFTFarmMatching />
     </LayoutMain>
   );

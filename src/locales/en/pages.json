@@ -124,15 +124,15 @@
     "sectionFeature": {
       "fullTransparency": {
         "title": "Full Transparency",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "Anyone can view the entire transaction history at any time. This ensures fair conditions and reliable statistics that you can rely on"
       },
       "fullAutomation": {
         "title": "Full Automation",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "All transactions take place directly from personal wallet to smart contract. Participants do all transaction directly to smart contract and processing automatically through smart contract"
       },
       "smartContract": {
         "title": "Smart Contract",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "Global Network ecosystem is built around the technology of smart contracts and NFTs, which are completely autonomous and exclude the influence of the human factor."
       },
       "decentralized": {
         "title": "Decentralized",

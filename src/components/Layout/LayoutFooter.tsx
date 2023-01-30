@@ -26,11 +26,6 @@ export const LayoutFooter = () => {
           </Box>
           <Box>
             <Text fontWeight="bold" fontSize="lg">
-              {t("common.footer.listedOn")}
-            </Text>
-          </Box>
-          <Box>
-            <Text fontWeight="bold" fontSize="lg">
               {t("common.footer.social")}
             </Text>
             <Stack spacing={1} mt={4}>
@@ -54,7 +49,7 @@ export const LayoutFooter = () => {
           >
             <Box>
               <Text fontSize="sm">
-                &#169; {new Date().getFullYear()} PT.Aset Masa Depan, All right
+                &#169; {new Date().getFullYear()} Global Network, All right
                 reserved
               </Text>
             </Box>

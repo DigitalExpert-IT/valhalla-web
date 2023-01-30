@@ -20,7 +20,7 @@ export const GNET_CONTRACT = {
 };
 
 export const SWAP_CONTRACT = {
-  "0x89": "",
+  "0x89": "0x7e7D7EaA50489713d6b1e4C547D804af60BC0Ef3",
   "0x29a": "0xEfe357c98DD74EF69c09a1b85B01Af9D6d79705a",
 };
 

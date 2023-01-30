@@ -30,7 +30,7 @@ const columns = [
         {info.getValue()}
       </Text>
     ),
-    header: "100.000.000",
+    header: "1.000.000.000",
   }),
 ];
 

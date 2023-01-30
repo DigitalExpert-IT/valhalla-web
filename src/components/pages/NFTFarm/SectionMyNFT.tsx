@@ -1,5 +1,6 @@
 import React from "react";
 import { useNFT } from "hooks";
+import { prettyBn } from "utils";
 import { rankMap } from "constant/rank";
 import { CustomGridItem } from "components/Grid";
 import { CardOwnedFarmNFT } from "components/Card";
@@ -18,18 +19,18 @@ import {
   Button,
   Grid,
 } from "@chakra-ui/react";
-import { prettyBn } from "utils";
 
 export const SectionMyNFT = () => {
   const nft = useNFT();
   const { t } = useTranslation();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
 
   return (
     <Box mb="60">
       <Box textAlign="center" mb="10">
-        <Heading>MY NFT</Heading>
+        <Heading>GNET NFT Project</Heading>
       </Box>
       <Card
         w="full"
@@ -37,7 +38,7 @@ export const SectionMyNFT = () => {
         colorScheme="blue"
         p="5"
         borderRadius="xl"
-        mb="5"
+        mb="10"
       >
         <Stack
           direction={{ base: "column", md: "row" }}
@@ -54,14 +55,17 @@ export const SectionMyNFT = () => {
               }}
             />
           </Heading>
-          <Text fontWeight="bold">
+
+          {/* TODO: Change with total minting all NFT owned */}
+
+          {/* <Text fontWeight="bold">
             {`Total Invest ${
               isRankRewardClaimable
                 ? prettyBn(globalPool.valueLeft, 9)
                 : prettyBn(globalPool.claimable, 9)
             }`}{" "}
             GNET
-          </Text>
+          </Text> */}
         </Stack>
         <Stack
           direction={{ base: "column", md: "row" }}
@@ -104,7 +108,12 @@ export const SectionMyNFT = () => {
               </Button>
             </CustomGridItem>
             <CustomGridItem title={t("pages.nftFarming.farmingMatching")}>
-              <Button size="sm" colorScheme="blue">
+              <Button
+                size="sm"
+                colorScheme="blue"
+                onClick={claimRewardGnetAsync.exec}
+                isLoading={claimRewardGnetAsync.isLoading}
+              >
                 {t("common.claim")}
               </Button>
             </CustomGridItem>

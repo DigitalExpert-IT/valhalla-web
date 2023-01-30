@@ -21,21 +21,20 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/swap",
   },
   {
-    name: "features",
-    href: "/features",
+    name: "profile",
+    href: "/profile",
   },
   {
-    name: "projects",
-    href: "/projects",
+    name: "nftfarming",
+    href: "/nft-farming",
+  },
+  {
+    name: "sharetoearn",
+    href: "/share",
   },
 ];
 
 export const SOCIAL: Array<ISocial> = [
-  {
-    name: "instagram",
-    href: "#",
-    icon: BsInstagram,
-  },
   {
     name: "facebook",
     href: "#",

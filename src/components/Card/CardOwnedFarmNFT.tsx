@@ -4,6 +4,7 @@ import { prettyBn } from "utils";
 import { BigNumber } from "ethers";
 import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
+import { LazyVideo } from "components/LazyVideo";
 import { useTranslation } from "react-i18next";
 import { Stack, Box, AspectRatio, Image, Text, Button } from "@chakra-ui/react";
 
@@ -53,62 +54,51 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
     farmAsync.exec(id);
   };
 
-  const name = `Farming ${id.add(1).toNumber()}`;
-
   return (
-    <Stack>
-      <Box borderRadius="lg" overflow="hidden" pos="relative">
-        <AspectRatio w={{ base: "2xs", md: "sm" }} ratio={1}>
-          <Image src={tokenUri} alt={name} objectFit="cover" />
-        </AspectRatio>
-        <Box
-          pos="absolute"
-          bottom="0"
-          w="full"
-          textAlign="left"
-          p="2"
-          backdropFilter="auto"
-          backdropContrast="10%"
-        >
-          <Stack direction="row" justify="space-between">
+    <Stack p="0.5" mt="5" bg="brand.300" borderRadius="xl">
+      <Box borderRadius="xl" bg="black" p="5">
+        <Box borderRadius="lg" overflow="hidden" minW="100px">
+          <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+            <LazyVideo src={tokenUri} objectFit="cover" />
+          </AspectRatio>
+          <Stack my="5">
+            <Stack direction="row" spacing={1} justify="space-between">
+              <Text fontWeight="bold" fontSize="lg">
+                #NFT {id.toNumber()}
+              </Text>
+              <Text fontWeight="bold" fontSize="lg" color="secondary.500">
+                {percentage.toNumber() / 10 + "%"}
+              </Text>
+            </Stack>
             <Box>
-              <Text fontSize="xl" fontWeight="bold" color="black">
-                NFT #{id.toNumber()}
+              <Text fontWeight="bold" fontSize="sm">
+                Minting: {prettyBn(mintingPrice, 9)}
               </Text>
-              <Text color="black" fontWeight="bold">
-                {t("common.globalNetworkFarm") + cardId.toNumber()}
+              <Text
+                fontWeight="bold"
+                textTransform="capitalize"
+                color="gray.500"
+              >
+                {t("common.globalNetworkFarm") + " " + cardId.toNumber()}
               </Text>
-              <Text fontWeight="bold" color="gray.800">
-                Percentage {t("common.percentage") + percentage.toNumber() / 10}
-              </Text>
-            </Box>
-            <Box>
-              <Text fontSize="xs">
-                Minting Price: {prettyBn(mintingPrice, 9)}
-              </Text>
-              <Stack direction="row">
-                <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
-                  <TextAnimation>{farmValue}</TextAnimation>
-                </Text>
-                <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="bold">
-                  GNET
-                </Text>
-              </Stack>
             </Box>
           </Stack>
+          <ButtonConnectWrapper size="sm" w="full" colorScheme="orange">
+            <Button
+              w="full"
+              rounded="lg"
+              size="sm"
+              colorScheme="brand"
+              color="white"
+              onClick={handleFarm}
+              isLoading={farmAsync.isLoading}
+            >
+              <TextAnimation mr="1">{farmValue}</TextAnimation>
+              Gnet Claim
+            </Button>
+          </ButtonConnectWrapper>
         </Box>
       </Box>
-      <ButtonConnectWrapper mt="4" size="sm" w="full" colorScheme="orange">
-        <Button
-          w="full"
-          size="sm"
-          colorScheme="blue"
-          onClick={handleFarm}
-          isLoading={farmAsync.isLoading}
-        >
-          Claim
-        </Button>
-      </ButtonConnectWrapper>
     </Stack>
   );
 };

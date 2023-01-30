@@ -7,38 +7,109 @@
     "roadmapSection": "Roadmap",
     "teamSection": "Our team members",
     "partnershipSection": "Partnership",
-    "rankNetwork": "<strong>Rank Network</strong> Plan Gnet",
+    "rankNetwork": "<strong>Global network</strong> matic plan",
     "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
         "name": "Q4 2022",
-        "headline": "Team Formation",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Oct - Dec 2022",
+        "description": [
+          {
+            "title": "Team formation"
+          },
+          {
+            "title": "Website development"
+          },
+          {
+            "title": "Dapps global network marketing development"
+          },
+          {
+            "title": "Issue GNET token"
+          },
+          {
+            "title": "GNET token swap"
+          }
+        ],
         "shades": "teal"
       },
       {
         "name": "Q1 2023",
-        "headline": "Contract Deployed",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Jan - Mar 2023",
+        "description": [
+          {
+            "title": "Contract deployed"
+          },
+          {
+            "title": "Global network start"
+          },
+          {
+            "title": "Gnet token swap start"
+          },
+          {
+            "title": "Community building"
+          },
+          {
+            "title": "Genesis NFT launch"
+          },
+          {
+            "title": "Telegram special registered address"
+          }
+        ],
         "shades": "pink"
       },
       {
         "name": "Q2 2023",
-        "headline": "Enlarge community",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Apr - Jun 2023",
+        "description": [
+          {
+            "title": "Enlarge community"
+          },
+          {
+            "title": "Share to earn start"
+          },
+          {
+            "title": "Promotional boost"
+          },
+          {
+            "title": "Network NFT market development"
+          }
+        ],
         "shades": "green"
       },
       {
         "name": "Q3 2023",
-        "headline": "New Partnership",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Jul - Sep 2023",
+        "description": [
+          {
+            "title": "New partnership"
+          },
+          {
+            "title": "New NFT product"
+          },
+          {
+            "title": "Royalty property program development"
+          }
+        ],
         "shades": "blue.400"
       },
       {
         "name": "Q4 2023",
-        "headline": "Decentralized Product NFT Development",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "headline": "Oct - Dec 2023",
+        "description": [
+          {
+            "title": "Decentralized product NFT development"
+          },
+          {
+            "title": "New NFT product"
+          },
+          {
+            "title": "Product offering"
+          },
+          {
+            "title": "Venture capital program"
+          }
+        ],
         "shades": "orange"
       }
     ],
@@ -53,15 +124,15 @@
     "sectionFeature": {
       "fullTransparency": {
         "title": "Full Transparency",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "Anyone can view the entire transaction history at any time. This ensures fair conditions and reliable statistics that you can rely on"
       },
       "fullAutomation": {
         "title": "Full Automation",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "All transactions take place directly from personal wallet to smart contract. Participants do all transaction directly to smart contract and processing automatically through smart contract"
       },
       "smartContract": {
         "title": "Smart Contract",
-        "subtitle": "All data is stored in the blockchain in the public domain and can be verified!"
+        "subtitle": "Global Network ecosystem is built around the technology of smart contracts and NFTs, which are completely autonomous and exclude the influence of the human factor."
       },
       "decentralized": {
         "title": "Decentralized",
@@ -71,7 +142,7 @@
     "matchingBonus": {
       "title": "100 <strong>Level</strong>",
       "subtitle": "Matching bonus",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vitae quae provident quos tenetur. A suscipit debitis magnam facilis nobis! Id dolorem voluptatum laborum ducimus veniam tempora a officiis voluptates"
+      "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },
     "populationSection": {
       "title": "Global <strong>Decentralized</strong> Network Marketing",
@@ -79,36 +150,37 @@
     }
   },
   "nftFarming": {
-    "gnetProject": "<strong>Gnet</strong> Project",
+    "gnetProject": "<strong>Global Network</strong> Project",
     "networkMembers": "Network members",
     "globalBonusGnet": "Global bonus gnet",
-    "rankReward": "Rank reward",
+    "rankReward": "Rank reward gnet",
     "farmingMatching": "Farming matching reward",
-    "farmMathcingRequirement": "NFT farm matching requirement"
+    "farmMathcingRequirement": "NFT farm matching requirement",
+    "globalnftbonus": "<strong>Global Rank NFT</strong> Bonus System"
   },
   "share": {
     "title": "SHARE TO EARN",
     "placeholder": "Paste your {{media}} post link here",
     "item": {
       "instagram": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to instagram to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "twitter": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to twitter to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "tiktok": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to tiktok to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       },
       "facebook": {
-        "titleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "titleDescription": "Share content to facebook to earn token's",
         "subtitle": "Requirement",
-        "subtitleDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
+        "subtitleDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts."
       }
     }
   },
@@ -123,5 +195,8 @@
   },
   "shareToEarn": {
     "title": "Share To Earn"
+  },
+  "profile": {
+    "header": "MY ACCOUNT"
   }
 }

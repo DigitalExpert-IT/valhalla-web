@@ -32,7 +32,7 @@ const RegistrationRequired = () => {
 
   return (
     <LayoutIllustration
-      illustrationUri="/assets/illustration/join.svg"
+      illustrationUri="/assets/illustration/registration-required.svg"
       title={t("hoc.registration.title")}
       description={t("hoc.registration.description")}
     >

@@ -23,7 +23,7 @@ export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
       <Wrap spacing="5" justify="center">
         {props.data.map((item, idx) => (
           <WrapItem key={idx}>
-            <Box w="100%">
+            <Box maxW="4xs">
               <Image
                 src={item.image}
                 alt={`partner-${item.name}`}

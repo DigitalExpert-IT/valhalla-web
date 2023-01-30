@@ -42,8 +42,8 @@ const columns = [
 
 export const TableRankNetwork = () => {
   return (
-    <Box textAlign="center" mb={20}>
-      <Heading mb={20}>
+    <Box textAlign="center" mb={60}>
+      <Heading mb={20} textTransform="capitalize">
         <Trans
           i18nKey="pages.home.rankNetwork"
           components={{

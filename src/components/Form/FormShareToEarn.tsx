@@ -9,12 +9,8 @@ type FormType = {
 };
 
 export const FormShareToEarn = (props: { mediaName: string }) => {
-  const { control, handleSubmit } = useForm<FormType>();
+  const { control } = useForm<FormType>();
   const { t } = useTranslation();
-
-  const onSubmit = handleSubmit(data => {
-    console.log("submited : ", data);
-  });
 
   return (
     <Flex mt={3} gap={2}>
@@ -30,8 +26,8 @@ export const FormShareToEarn = (props: { mediaName: string }) => {
           ),
         }}
       />
-      <Button variant={"solid"} colorScheme={"brand"} onClick={onSubmit}>
-        <Image src="/assets/icon/send.png" w={5} h={5} />
+      <Button variant={"solid"} colorScheme={"brand"}>
+        <Image src="/assets/icon/send.png" w={5} h={5} alt="send-icon" />
       </Button>
     </Flex>
   );

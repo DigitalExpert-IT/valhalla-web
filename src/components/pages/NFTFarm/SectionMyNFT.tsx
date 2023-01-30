@@ -1,6 +1,7 @@
 import React from "react";
-import { useNFT } from "hooks";
+import { useNFT, useSwap } from "hooks";
 import { prettyBn } from "utils";
+import { fromBn } from "evm-bn";
 import { rankMap } from "constant/rank";
 import { CustomGridItem } from "components/Grid";
 import { CardOwnedFarmNFT } from "components/Card";
@@ -22,6 +23,7 @@ import {
 
 export const SectionMyNFT = () => {
   const nft = useNFT();
+  const { currency } = useSwap();
   const { t } = useTranslation();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
@@ -55,17 +57,7 @@ export const SectionMyNFT = () => {
               }}
             />
           </Heading>
-
-          {/* TODO: Change with total minting all NFT owned */}
-
-          {/* <Text fontWeight="bold">
-            {`Total Invest ${
-              isRankRewardClaimable
-                ? prettyBn(globalPool.valueLeft, 9)
-                : prettyBn(globalPool.claimable, 9)
-            }`}{" "}
-            GNET
-          </Text> */}
+          <Text fontWeight="bold">{fromBn(currency.gnet.balance, 9)} GNET</Text>
         </Stack>
         <Stack
           direction={{ base: "column", md: "row" }}

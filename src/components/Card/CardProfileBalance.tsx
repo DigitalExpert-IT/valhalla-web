@@ -1,13 +1,12 @@
-import { Box, Card, Flex, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { useNFT, useValhalla, useSwap } from "hooks";
+import { Box, Card, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { useValhalla, useSwap } from "hooks";
 import React from "react";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { fromBn } from "evm-bn";
 
 export const CardProfileBalance = () => {
-  const { isRankRewardClaimable, globalPool, ipoPool } = useValhalla();
-  const nft = useNFT();
+  const { isRankRewardClaimable, globalPool } = useValhalla();
   const { currency } = useSwap();
 
   return (
@@ -24,7 +23,7 @@ export const CardProfileBalance = () => {
         >
           <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
           <HStack>
-            <Text>{fromBn(nft.genesisPool.claimable, 9)} </Text>
+            <Text>{fromBn(currency.gnet.balance, 9)} </Text>
             <Text color={"secondary.500"} w={16}>
               GNET
             </Text>

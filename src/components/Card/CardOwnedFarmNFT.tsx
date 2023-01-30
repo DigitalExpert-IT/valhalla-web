@@ -79,7 +79,11 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
                 textTransform="capitalize"
                 color="gray.500"
               >
-                {t("common.globalNetworkFarm") + " " + cardId.toNumber()}
+                {t("common.globalNetworkFarm") +
+                  " " +
+                  cardId.toNumber() +
+                  " " +
+                  t("common.remainingFarm")}
               </Text>
             </Box>
           </Stack>

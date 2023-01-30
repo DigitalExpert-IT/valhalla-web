@@ -25,16 +25,12 @@ export const FormRegister = () => {
   const router = useRouter();
   const disclaimerModal = useModal(ModalDiscalimer);
   const { ref } = router.query;
-  const [referral, setreferral] = useState<string>("");
-  useEffect(() => {
-    if (ref) {
-      setreferral(ref as string);
-    }
-  }, [ref]);
+  const [referral, setReferral] = useState<string>("");
 
   useEffect(() => {
     setValue("referrer", router.query.referrer as string);
-  }, [router.query.referrer]);
+    setReferral(ref as string);
+  }, [router.query.referrer, router.query]);
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {

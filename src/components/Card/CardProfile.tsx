@@ -7,10 +7,9 @@ import {
   SimpleGrid,
   Text,
   useMediaQuery,
-  VStack,
 } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
+import { useWallet, useValhalla } from "hooks";
 import React, { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
@@ -19,12 +18,12 @@ import { SiTelegram } from "react-icons/si";
 import { t } from "i18next";
 import { WidgetProfileChile } from "components/Widget";
 import { rankMap } from "constant/rank";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export const CardProfile = () => {
   const router = useRouter();
   const [defaultHost, setDefaultHost] = useState("");
-  const { address, connect, initialized, isConnected } = useWallet();
+  const { address } = useWallet();
   const { account } = useValhalla();
   const [widthMob] = useMediaQuery("(max-width: 500px)");
   useEffect(() => {

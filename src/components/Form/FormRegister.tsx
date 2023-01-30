@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Stack, Badge, Box } from "@chakra-ui/react";
@@ -24,6 +24,13 @@ export const FormRegister = () => {
   const wallet = useWallet();
   const router = useRouter();
   const disclaimerModal = useModal(ModalDiscalimer);
+  const { ref } = router.query;
+  const [referral, setreferral] = useState<string>("");
+  useEffect(() => {
+    if (ref) {
+      setreferral(ref as string);
+    }
+  }, [ref]);
 
   useEffect(() => {
     setValue("referrer", router.query.referrer as string);
@@ -50,6 +57,7 @@ export const FormRegister = () => {
           required: validateRequired(t("form.label.referrer")),
           validate: validateAddress,
         }}
+        value={referral}
       />
       <ButtonConnectWrapper type="submit">
         <Button isLoading={register.isLoading} type="submit">

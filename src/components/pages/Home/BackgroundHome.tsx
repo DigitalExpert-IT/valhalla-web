@@ -3,7 +3,15 @@ import React from "react";
 
 export const BackgroundHome = () => {
   return (
-    <Box position="absolute" maxH="full" overflow="hidden" top="0" left="0" right="0" zIndex="hide">
+    <Box
+      position="absolute"
+      maxH="full"
+      overflow="hidden"
+      top="0"
+      left="0"
+      right="0"
+      zIndex="hide"
+    >
       <Image
         objectFit="cover"
         w="full"

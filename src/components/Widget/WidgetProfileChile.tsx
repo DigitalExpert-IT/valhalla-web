@@ -1,10 +1,10 @@
+import React from "react";
 import { Box, Card, CardProps, Flex, Text } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
 
 type Props = CardProps & {
   label: string;
-  labelBalace?: string;
   value?: string;
+  labelBalace?: string;
 };
 
 export const WidgetProfileChile = (props: Props) => {

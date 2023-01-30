@@ -1,25 +1,21 @@
-import { Box, SimpleGrid, VStack, Heading, Button } from "@chakra-ui/react";
-import { CardProfile, CardProfileBalance } from "components/Card";
-import { WidgetProfileChile } from "components/Widget";
-import { withConnection, withRegistration } from "hoc";
-import { useAsyncCall, useNFT, useValhalla } from "hooks";
 import { t } from "i18next";
 import { Trans } from "react-i18next";
-import { composeHoc, prettyBn } from "utils";
+import { prettyBn } from "utils";
+import { WidgetProfileChile } from "components/Widget";
+import { useAsyncCall, useValhalla } from "hooks";
+import { CardProfile, CardProfileBalance } from "components/Card";
+import { Box, SimpleGrid, Heading, Button } from "@chakra-ui/react";
 
 export const SectionProfile = () => {
   const {
-    account,
-    personalReward,
-    rankReward,
-    claimReward,
-    claimRankReward,
     ipoPool,
     globalPool,
+    rankReward,
+    claimReward,
+    personalReward,
+    claimRankReward,
     isRankRewardClaimable,
   } = useValhalla();
-  const nft = useNFT();
-  const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
   const claimRewardAsync = useAsyncCall(claimReward);
 

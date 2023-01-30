@@ -81,7 +81,7 @@ export const SectionProfile = () => {
             colorScheme={"purple:pink"}
             rounded="xl"
             minH={"24"}
-            label={t("common.PrivateSaleNewToken")}
+            label={t("common.PrivateSalePull")}
             value={prettyBn(ipoPool.claimable)}
           />
         </Box>

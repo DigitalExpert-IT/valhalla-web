@@ -1,8 +1,21 @@
 import { Heading, Text, Card, CardBody, Box } from "@chakra-ui/react";
 import { FormRegister, LayoutMain } from "components";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 
 const Register = () => {
+  const router = useRouter();
+  const { ref } = router.query;
+  const [referal, setreferral] = useState<string>("");
+  useEffect(() => {
+    if (ref) {
+      setreferral(ref as string);
+    }
+  }, [ref]);
+
+  console.log(referal);
+
   return (
     <LayoutMain>
       <Box as="header" textAlign="center" px={{ base: "8", lg: "4" }}>

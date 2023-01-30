@@ -1,6 +1,13 @@
 import axios from "axios";
 import Link from "next/link";
-import { Heading, Text, Box, HStack, Button } from "@chakra-ui/react";
+import {
+  Heading,
+  Text,
+  Box,
+  HStack,
+  Button,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 import { useModal } from "@ebay/nice-modal-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -8,10 +15,16 @@ import { useValhalla, useWallet } from "hooks";
 import { WidgetMainHeader, ModalBindTelegram } from "components";
 import { HEADER_IMAGE_DATA } from "constant/pages/home";
 import { getWallet } from "lib/contractFactory";
-import { getTelegramBindingSignatureMessage } from "utils";
+import { getTelegramBindingSignatureMessage, shortenAddress } from "utils";
+import { GNET_CONTRACT } from "constant/address";
+import { IoCopyOutline } from "react-icons/io5";
+import { CopiableText } from "components/CopiableText";
+
+const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
 export const SectionHeader = () => {
   const { t } = useTranslation();
+  const [widthMob] = useMediaQuery("(max-width: 500px)");
   const valhalla = useValhalla();
   const wallet = useWallet();
   const bindTelegramModal = useModal(ModalBindTelegram);
@@ -82,6 +95,30 @@ export const SectionHeader = () => {
         >
           <Trans i18nKey="pages.home.header.subtitle" />
         </Text>
+        <HStack
+          direction="row"
+          bg="brand.300"
+          mt="5"
+          p="2"
+          rounded="lg"
+          opacity="0.7"
+          justify="center"
+        >
+          <Text textTransform="uppercase" fontWeight="bold">
+            {t("common.contractGnet")}
+          </Text>
+          <CopiableText
+            display="inline-flex"
+            alignItems={"center"}
+            gap={2}
+            value={ContractGnet}
+          >
+            {widthMob
+              ? shortenAddress(ContractGnet)
+              : ContractGnet.toUpperCase()}
+            <IoCopyOutline />
+          </CopiableText>
+        </HStack>
         <HStack justify={{ base: "center", lg: "start" }} mt="6" spacing="4">
           {valhalla.account.isRegistered ? null : (
             <Link href="/register">

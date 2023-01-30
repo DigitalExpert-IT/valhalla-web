@@ -6,7 +6,7 @@ import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
 import { LazyVideo } from "components/LazyVideo";
 import { useTranslation } from "react-i18next";
-import { Stack, Box, AspectRatio, Image, Text, Button } from "@chakra-ui/react";
+import { Stack, Box, AspectRatio, Text, Button } from "@chakra-ui/react";
 
 export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
   const { id, mintingPrice, cardId, percentage, lastFarmedAt, tokenUri } =

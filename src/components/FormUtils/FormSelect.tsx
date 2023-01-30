@@ -16,7 +16,8 @@ import {
   ControllerProps,
 } from "react-hook-form";
 
-interface FormSelectProps extends Omit<SelectProps, "placeholder"> {
+interface FormSelectProps
+  extends Omit<SelectProps, "placeholder" | "defaultValue"> {
   label?: string | null;
   helperText?: string | null;
   placeholder?: string;
@@ -44,7 +45,7 @@ export const FormSelect = <T extends FieldValues, TName extends FieldPath<T>>(
         rules={props.rules}
         name={props.name}
         render={({ field: { ...rest } }) => (
-          <Select {...rest} {...props}>
+          <Select {...rest} defaultValue={props.defaultValue} {...props}>
             {props.option.map((e, i) => (
               <option value={e.value} key={i}>
                 {e.label}

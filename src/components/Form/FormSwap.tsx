@@ -18,8 +18,8 @@ export const FormSwap = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { currency, swapCurrency, initialized } = useSwap();
   const { handleSubmit, control, watch } = useForm<ISwapToken>();
+  const { currency, swapCurrency, initialized } = useSwap();
 
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
     swapCurrency,
@@ -37,27 +37,28 @@ export const FormSwap = () => {
     });
   }, [currency]);
 
-  const onSubmit = handleSubmit(async data => {
-    await exec(data);
-  });
-
   useEffect(() => {
     const subscription = watch(value => {
-      if (value.currency === "USDT") {
-        const toBigNumb = toBn(value.amount ? value.amount : "0");
-        const format = fromBn(getGnetPrice(toBigNumb), 9);
+      if (value.currency === "GNET") {
+        const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
+        const format = fromBn(getUsdtPrice(toBigNumb));
         setPrice(format);
-        setSymbol(false);
+        setSymbol(true);
         return;
       }
 
-      const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
-      const format = fromBn(getUsdtPrice(toBigNumb));
+      const toBigNumb = toBn(value.amount ? value.amount : "0");
+      const format = fromBn(getGnetPrice(toBigNumb), 9);
       setPrice(format);
-      setSymbol(true);
+      setSymbol(false);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
+
+
+  const onSubmit = handleSubmit(async data => {
+    await exec(data);
+  });
 
   return (
     <Stack as="form" onSubmit={onSubmit}>
@@ -94,6 +95,7 @@ export const FormSwap = () => {
               })}
               placeholder={"0.0"}
               type="number"
+              min={0}
             ></FormInput>
           </Box>
           <Box>
@@ -103,6 +105,7 @@ export const FormSwap = () => {
               name="currency"
               option={normalizeCurrencies}
               isDisabled={!initialized}
+              defaultValue="USDT"
             ></FormSelect>
           </Box>
         </Stack>

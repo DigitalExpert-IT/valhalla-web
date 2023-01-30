@@ -12,10 +12,9 @@ export const getGnetPrice = (usdtAmount: BigNumber) => {
 };
 
 export const getUsdtPrice = (gnetAmount: BigNumber) => {
-  const formatAmount = gnetAmount.mul(10 ** 9);
   const unit = toBn("1");
-  const ratePerUsdt = toBn("66.66666666");
-  const usdtAmout = formatAmount.mul(unit).div(ratePerUsdt);
+  const ratePerUsdt = toBn("66.66666666666666");
+  const usdtAmout = gnetAmount.mul(unit).div(ratePerUsdt);
   const tax = usdtAmout.mul(5).div(1000);
-  return usdtAmout.add(tax);
+  return usdtAmout.add(tax).mul(10 ** 9);
 };

@@ -7,7 +7,7 @@
     "sharetoearn": "Share To Earn"
   },
   "footer": {
-    "description": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications.",
+    "description": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
     "listedOn": "Listen On",
     "social": "Social"
   },
@@ -33,7 +33,7 @@
   "globalBonus": "Global Bonus",
   "referralBonus": "Referral Bonus",
   "rankReward": "Rank Reward",
-  "contractGnet": "Contract GNET",
+  "contractGnet": "GNET Token",
   "referralLink": "Referral Link",
   "PrivateSaleNewToken": "Private Sale New Token",
   "PrivateSalePool": "Private Sale Pool",
@@ -52,7 +52,7 @@
   "maxBuyNFT": "Max buy NFT",
   "totalSupply": "Total Supply",
   "globalNetworkFarm": "Farm level",
-  "remainingFarm": "Total Return 450 Days",
+  "remainingFarm": "Total Return (450 Days)",
   "percentage": "Percentage",
   "claim": "Claim"
 }

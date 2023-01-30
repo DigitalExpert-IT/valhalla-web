@@ -7,11 +7,10 @@ import {
   SimpleGrid,
   Text,
   useMediaQuery,
-  VStack,
 } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { useWallet, useNFT, useAsyncCall, useValhalla } from "hooks";
-import React from "react";
+import { useWallet, useValhalla } from "hooks";
+import React, { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
@@ -19,12 +18,23 @@ import { SiTelegram } from "react-icons/si";
 import { t } from "i18next";
 import { WidgetProfileChile } from "components/Widget";
 import { rankMap } from "constant/rank";
+import { useRouter } from "next/router";
 
 export const CardProfile = () => {
-  const { address, connect, initialized, isConnected } = useWallet();
+  const router = useRouter();
+  const [defaultHost, setDefaultHost] = useState("");
+  const { address } = useWallet();
   const { account } = useValhalla();
-
   const [widthMob] = useMediaQuery("(max-width: 500px)");
+
+  useEffect(() => {
+    if (router.isReady) {
+      setDefaultHost(
+        `${window.location.protocol}//${window.location.host}/register?referrer=`
+      );
+    }
+  }, [router.isReady]);
+
   return (
     <Card
       variant={"gradient"}
@@ -46,7 +56,7 @@ export const CardProfile = () => {
           display="inline-flex"
           alignItems={"center"}
           gap={2}
-          value={address}
+          value={defaultHost + address}
         >
           {widthMob ? shortenAddress(address) : address.toUpperCase()}{" "}
           <IoCopyOutline />

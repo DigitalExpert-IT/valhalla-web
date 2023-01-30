@@ -29,7 +29,7 @@ export const CardProfile = () => {
   useEffect(() => {
     if (router.isReady) {
       setDefaultHost(
-        `${window.location.protocol}//${window.location.host}/register?ref=`
+        `${window.location.protocol}//${window.location.host}/register?referrer=`
       );
     }
   }, [router.isReady]);

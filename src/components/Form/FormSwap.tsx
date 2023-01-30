@@ -18,8 +18,8 @@ export const FormSwap = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { currency, swapCurrency, initialized } = useSwap();
   const { handleSubmit, control, watch } = useForm<ISwapToken>();
+  const { currency, swapCurrency, initialized } = useSwap();
 
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
     swapCurrency,
@@ -36,10 +36,6 @@ export const FormSwap = () => {
       };
     });
   }, [currency]);
-
-  const onSubmit = handleSubmit(async data => {
-    await exec(data);
-  });
 
   useEffect(() => {
     const subscription = watch(value => {
@@ -58,6 +54,10 @@ export const FormSwap = () => {
     });
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  const onSubmit = handleSubmit(async data => {
+    await exec(data);
+  });
 
   return (
     <Stack as="form" onSubmit={onSubmit}>

@@ -43,18 +43,18 @@ export const FormSwap = () => {
 
   useEffect(() => {
     const subscription = watch(value => {
-      if (value.currency === "USDT") {
-        const toBigNumb = toBn(value.amount ? value.amount : "0");
-        const format = fromBn(getGnetPrice(toBigNumb), 9);
+      if (value.currency === "GNET") {
+        const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
+        const format = fromBn(getUsdtPrice(toBigNumb));
         setPrice(format);
-        setSymbol(false);
+        setSymbol(true);
         return;
       }
 
-      const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
-      const format = fromBn(getUsdtPrice(toBigNumb));
+      const toBigNumb = toBn(value.amount ? value.amount : "0");
+      const format = fromBn(getGnetPrice(toBigNumb), 9);
       setPrice(format);
-      setSymbol(true);
+      setSymbol(false);
     });
     return () => subscription.unsubscribe();
   }, [watch]);

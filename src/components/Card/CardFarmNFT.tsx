@@ -2,12 +2,10 @@ import React from "react";
 import { prettyBn } from "utils";
 import { INFTCard, useAsyncCall, useNFT } from "hooks";
 import { LazyVideo } from "components/LazyVideo";
-import { useTranslation } from "react-i18next";
-import { Stack, Box, Button, AspectRatio, Text } from "@chakra-ui/react";
+import { Stack, Box, Button, AspectRatio, Text, Badge } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
-  const { id, price } = props;
-  const { t } = useTranslation();
+  const { id, price, halfingPercentage } = props;
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
   const handleBuy = () => {
@@ -15,9 +13,7 @@ export const CardFarmNFT = (props: INFTCard) => {
   };
 
   const name = `#Farm ${id.add(1).toNumber()}`;
-  const fullName = `${t("common.globalNetworkFarm")} ${id
-    .add(1)
-    .toNumber()} ${t("common.remainingFarm")}`;
+  const fullName = `global network farm level ${id.add(1).toNumber()}`;
 
   return (
     <Stack p="0.5" mt="5" bg="brand.300" borderRadius="xl">

@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 export const CardProfile = () => {
   const router = useRouter();
   const [defaultHost, setDefaultHost] = useState("");
-  const { address, connect, initialized, isConnected } = useWallet();
+  const { address } = useWallet();
   const { account } = useValhalla();
   const [widthMob] = useMediaQuery("(max-width: 500px)");
 

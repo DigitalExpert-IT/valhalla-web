@@ -1,7 +1,5 @@
 import { Heading, Text, Card, CardBody, Box } from "@chakra-ui/react";
 import { FormRegister, LayoutMain } from "components";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 
 const Register = () => {

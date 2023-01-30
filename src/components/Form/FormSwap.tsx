@@ -40,21 +40,21 @@ export const FormSwap = () => {
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "GNET") {
-        const toBigNumb = toBn(value.amount ? value.amount : "0", 9);
+        const decimals = currency.usdt.pair.decimals.toNumber();
+        const toBigNumb = toBn(value.amount ? value.amount : "0", decimals);
         const format = fromBn(getUsdtPrice(toBigNumb));
         setPrice(format);
         setSymbol(true);
         return;
       }
-
+      const decimals = currency.gnet.pair.decimals.toNumber();
       const toBigNumb = toBn(value.amount ? value.amount : "0");
-      const format = fromBn(getGnetPrice(toBigNumb), 9);
+      const format = fromBn(getGnetPrice(toBigNumb), decimals);
       setPrice(format);
       setSymbol(false);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
-
 
   const onSubmit = handleSubmit(async data => {
     await exec(data);

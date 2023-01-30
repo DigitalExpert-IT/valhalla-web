@@ -5,7 +5,7 @@ import { LazyVideo } from "components/LazyVideo";
 import { Stack, Box, Button, AspectRatio, Text, Badge } from "@chakra-ui/react";
 
 export const CardFarmNFT = (props: INFTCard) => {
-  const { id, price, halfingPercentage } = props;
+  const { id, price } = props;
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
   const handleBuy = () => {

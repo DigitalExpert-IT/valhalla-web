@@ -1,10 +1,8 @@
 import {
-  Box,
   Flex,
   Grid,
   Heading,
   Image,
-  Input,
   Text,
   Card,
   CardBody,

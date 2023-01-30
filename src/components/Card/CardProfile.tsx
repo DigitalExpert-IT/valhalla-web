@@ -26,6 +26,7 @@ export const CardProfile = () => {
   const { address } = useWallet();
   const { account } = useValhalla();
   const [widthMob] = useMediaQuery("(max-width: 500px)");
+
   useEffect(() => {
     if (router.isReady) {
       setDefaultHost(
@@ -33,6 +34,7 @@ export const CardProfile = () => {
       );
     }
   }, [router.isReady]);
+
   return (
     <Card
       variant={"gradient"}

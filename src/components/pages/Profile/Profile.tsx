@@ -1,11 +1,10 @@
-import { Box, SimpleGrid, VStack, Heading, Button } from "@chakra-ui/react";
+import { Box, SimpleGrid, Heading, Button } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
 import { WidgetProfileChile } from "components/Widget";
-import { withConnection, withRegistration } from "hoc";
 import { useAsyncCall, useNFT, useValhalla } from "hooks";
 import { t } from "i18next";
 import { Trans } from "react-i18next";
-import { composeHoc, prettyBn } from "utils";
+import { prettyBn } from "utils";
 
 export const SectionProfile = () => {
   const {
@@ -19,7 +18,6 @@ export const SectionProfile = () => {
     isRankRewardClaimable,
   } = useValhalla();
   const nft = useNFT();
-  const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
   const claimRewardAsync = useAsyncCall(claimReward);
 

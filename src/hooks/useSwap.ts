@@ -111,10 +111,10 @@ const fetchSwap = async () => {
 
 const init = createInitiator(async () => {
   const contractSwap = await getSwapContract();
-  await Promise.all([fetchSwap()]);
+  await fetchSwap();
 
   contractSwap.on("SwapToken", () => {
-    Promise.all([fetchSwap()]);
+    fetchSwap();
   });
 
   useWalletStore.subscribe(

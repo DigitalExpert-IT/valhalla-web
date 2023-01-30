@@ -52,6 +52,7 @@ export const CardProfile = () => {
         />
       </Box>
       <Box mt={8} zIndex={"overlay"}>
+      <Text>Referral Link</Text>
         <CopiableText
           display="inline-flex"
           alignItems={"center"}
@@ -63,9 +64,9 @@ export const CardProfile = () => {
         </CopiableText>
         <Box py={4} color={"brand.300"}>
           <Text>
-            <Trans i18nKey="common.referrer" />
+            <Trans i18nKey="common.myReferrer" />
           </Text>
-          <Text pt={4}>
+          <Text>
             {widthMob
               ? shortenAddress(account.referrer)
               : account.referrer.toUpperCase()}

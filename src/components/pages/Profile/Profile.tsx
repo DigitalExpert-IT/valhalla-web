@@ -8,7 +8,6 @@ import { prettyBn } from "utils";
 
 export const SectionProfile = () => {
   const {
-    account,
     personalReward,
     rankReward,
     claimReward,

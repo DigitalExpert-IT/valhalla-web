@@ -1,7 +1,7 @@
 import { Box, SimpleGrid, Heading, Button } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
 import { WidgetProfileChile } from "components/Widget";
-import { useAsyncCall, useNFT, useValhalla } from "hooks";
+import { useAsyncCall, useValhalla } from "hooks";
 import { t } from "i18next";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
@@ -17,7 +17,6 @@ export const SectionProfile = () => {
     globalPool,
     isRankRewardClaimable,
   } = useValhalla();
-  const nft = useNFT();
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
   const claimRewardAsync = useAsyncCall(claimReward);
 

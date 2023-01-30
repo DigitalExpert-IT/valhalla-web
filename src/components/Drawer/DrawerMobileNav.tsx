@@ -1,21 +1,20 @@
 import React from "react";
-import { INavigation } from "constant/navigation";
-import { ButtonConnectWallet, SvgTwitter, SvgTelegram } from "components";
-import { useTranslation } from "react-i18next";
-import Link from "next/link";
 import {
+  Text,
+  Stack,
+  Image,
   Drawer,
   DrawerBody,
+  AspectRatio,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Stack,
-  Text,
-  AspectRatio,
-  Image,
-  DrawerFooter,
 } from "@chakra-ui/react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { ButtonConnectWallet } from "components";
+import { INavigation } from "constant/navigation";
 
 interface MobileDrawerProps {
   isOpen: boolean;

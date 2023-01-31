@@ -166,11 +166,10 @@ const init = createInitiator(async () => {
 
 export const useValhalla = () => {
   const store = useStore();
-  const wallet = useWallet();
 
   useEffect(() => {
-    if (wallet.initialized) init();
-  }, [wallet.initialized]);
+    init();
+  }, []);
 
   const getAccountMetadata = async (address: string) => {
     const valhalla = await getValhallaContract();

@@ -1,8 +1,9 @@
 import React from "react";
-import { INavigation } from "constant/navigation";
-import { ButtonConnectWallet, SvgTwitter, SvgTelegram } from "components";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { INavigation } from "constant/navigation";
+import { ButtonConnectWallet } from "components";
+import { useTranslation } from "react-i18next";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Drawer,
   DrawerBody,
@@ -14,7 +15,10 @@ import {
   Text,
   AspectRatio,
   Image,
-  DrawerFooter,
+  Flex,
+  Icon,
+  useDisclosure,
+  Collapse,
 } from "@chakra-ui/react";
 
 interface MobileDrawerProps {
@@ -25,7 +29,9 @@ interface MobileDrawerProps {
 
 export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   const { isOpen, onClose, data } = props;
+  const { isOpen: openChild, onToggle } = useDisclosure();
   const { t } = useTranslation();
+
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
@@ -42,16 +48,45 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         <DrawerBody>
           <Stack spacing="5">
             {data.map((item, idx) => (
-              <Link href={item.href} key={idx}>
-                <Text
-                  fontWeight="bold"
-                  textTransform="uppercase"
-                  variant="hoverGradient"
-                  colorScheme="orange:pink"
+              <Stack key={idx} onClick={item.children && onToggle}>
+                <Flex justify="space-between" align="center">
+                  <Link href={item.href ?? "#"}>
+                    <Text fontWeight="bold" textTransform="uppercase">
+                      {t(`common.navigation.${item.name}`)}
+                    </Text>
+                  </Link>
+                  {item.children && (
+                    <Icon
+                      as={ChevronDownIcon}
+                      transition="all .25s ease-in-out"
+                      transform={openChild ? "rotate(180deg)" : ""}
+                      w={6}
+                      h={6}
+                    />
+                  )}
+                </Flex>
+                <Collapse
+                  in={openChild}
+                  style={{ marginTop: "0!important" }}
+                  animateOpacity
                 >
-                  {t(`common.navigation.${item.name}`)}
-                </Text>
-              </Link>
+                  <Stack
+                    mt={2}
+                    pl={4}
+                    borderLeft={1}
+                    borderStyle="solid"
+                    borderColor="gray.700"
+                    align={"start"}
+                  >
+                    {item.children &&
+                      item.children.map((obj, id) => (
+                        <Link key={id} href={obj.link}>
+                          <Text>{t(`common.navigation.${obj.title}`)}</Text>
+                        </Link>
+                      ))}
+                  </Stack>
+                </Collapse>
+              </Stack>
             ))}
           </Stack>
         </DrawerBody>

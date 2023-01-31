@@ -45,7 +45,7 @@ export const CardHomeFeatures = (props: Props) => {
           bottom={0}
           right={0}
           left={0}
-          zIndex={"docked"}
+          zIndex={"3"}
         />
       </Fade>
       <Flex
@@ -53,7 +53,7 @@ export const CardHomeFeatures = (props: Props) => {
         flexDir={"column"}
         placeContent={isVisible ? "center" : "end"}
         h={"full"}
-        zIndex={"dropdown"}
+        zIndex={"3"}
         textAlign={"center"}
       >
         <Text
@@ -63,7 +63,7 @@ export const CardHomeFeatures = (props: Props) => {
         >
           {title}
         </Text>
-        <Collapse animateOpacity in={isVisible} style={{ zIndex: 10 }}>
+        <Collapse animateOpacity in={isVisible} style={{ zIndex: 5 }}>
           <Text fontSize={{ xs: "sm", xl: "md" }}>{subtitle}</Text>
         </Collapse>
       </Flex>

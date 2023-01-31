@@ -7,16 +7,19 @@ import { CURRENT_CHAIN_ID, getWallet } from "lib/contractFactory";
 import { compareChain, createInitiator } from "utils";
 import { ModalInstallMetamask } from "components";
 import { network } from "constant/network";
+import { BigNumber } from "ethers";
 
 interface IStore {
   initialized: boolean;
   address: string;
+  balance: BigNumber;
   isConnected: boolean;
 }
 
 const initialState = {
   initialized: false,
   address: "0x0",
+  balance: BigNumber.from(0),
   isConnected: false,
 };
 
@@ -29,8 +32,10 @@ const resetAccount = async () => {
   try {
     const wallet = await getWallet();
     const [address] = await wallet.listAccounts();
+    const balance = await wallet.getBalance(address);
     setState({
       address,
+      balance,
       isConnected:
         !!address &&
         compareChain(globalThis.ethereum.chainId, CURRENT_CHAIN_ID),
@@ -42,8 +47,10 @@ const init = createInitiator(async () => {
   try {
     const wallet = await getWallet();
     const [address] = await wallet.listAccounts();
+    const balance = await wallet.getBalance(address);
     setState({
       address,
+      balance,
       isConnected:
         !!address &&
         compareChain(globalThis.ethereum.chainId, CURRENT_CHAIN_ID),

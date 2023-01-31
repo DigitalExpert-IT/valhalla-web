@@ -1,12 +1,12 @@
 import { Box, Card, Flex, HStack, Image, Text } from "@chakra-ui/react";
-import { useValhalla, useSwap } from "hooks";
+import { useSwap, useWallet } from "hooks";
 import React from "react";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { fromBn } from "evm-bn";
 
 export const CardProfileBalance = () => {
-  const { isRankRewardClaimable, globalPool } = useValhalla();
+  const wallet = useWallet();
   const { currency } = useSwap();
 
   return (
@@ -41,11 +41,7 @@ export const CardProfileBalance = () => {
             w={10}
           />
           <HStack>
-            <Text>
-              {isRankRewardClaimable
-                ? prettyBn(globalPool.valueLeft)
-                : prettyBn(globalPool.claimable)}{" "}
-            </Text>
+            <Text>{prettyBn(wallet.balance, 18)}</Text>
             <Text color={"secondary.500"} w={16}>
               MATIC
             </Text>
@@ -59,7 +55,7 @@ export const CardProfileBalance = () => {
         >
           <Image src="/assets/logo/tether-logo.svg" alt="Profile" w={10} />
           <HStack>
-            <Text>{prettyBn(currency.usdt.balance)}</Text>
+            <Text>{prettyBn(currency.usdt.balance, 6)}</Text>
             <Text color={"secondary.500"} w={16}>
               USDT
             </Text>

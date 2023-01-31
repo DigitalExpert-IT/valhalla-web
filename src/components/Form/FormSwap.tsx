@@ -75,7 +75,7 @@ export const FormSwap = () => {
           placeholder={"0.0"}
           type="number"
           isDisabled={!initialized}
-        ></FormInput>
+        />
         <Stack
           direction={{ md: "row", sm: "column", base: "column" }}
           w={"full"}
@@ -96,7 +96,7 @@ export const FormSwap = () => {
               min={0}
               isDisabled
               value={price}
-            ></FormInput>
+            />
           </Box>
           <Box>
             <FormSelect
@@ -106,7 +106,7 @@ export const FormSwap = () => {
               option={normalizeCurrencies}
               isDisabled={!initialized}
               defaultValue="USDT"
-            ></FormSelect>
+            />
           </Box>
         </Stack>
       </Stack>

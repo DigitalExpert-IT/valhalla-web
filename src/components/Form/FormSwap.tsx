@@ -74,6 +74,7 @@ export const FormSwap = () => {
           })}
           placeholder={"0.0"}
           type="number"
+          isDisabled={!initialized}
         ></FormInput>
         <Stack
           direction={{ md: "row", sm: "column", base: "column" }}

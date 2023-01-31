@@ -217,7 +217,11 @@ export const useNFT = () => {
     }
 
     if (cardPrice.gt(allowance)) {
-      await gnetSigner.approve(nft.address, cardPrice.mul(10));
+      const approveTx = await gnetSigner.approve(
+        nft.address,
+        cardPrice.mul(10)
+      );
+      await approveTx.wait();
     }
 
     const nftWithSigner = await getNFTSignerContract();

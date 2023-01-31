@@ -11,4 +11,4 @@ const Profile = () => {
   );
 };
 
-export default composeHoc(withRegistration, withConnection)(Profile);
+export default composeHoc(withConnection)(Profile);

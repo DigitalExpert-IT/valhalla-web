@@ -148,7 +148,7 @@ export const RANKNETWORK = [
 
 export const RANKBONUS: Array<IRankBonus> = [
   {
-    image: "/assets/rank/No Rank.svg",
+    image: "/assets/rank/no-rank.svg",
     rank: "no rank",
     pool: "",
     level: "",
@@ -159,7 +159,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "white",
   },
   {
-    image: "/assets/rank/Common.svg",
+    image: "/assets/rank/common.svg",
     rank: "common",
     pool: "3%",
     level: "10 level",
@@ -170,7 +170,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#A8742F",
   },
   {
-    image: "/assets/rank/Rare.svg",
+    image: "/assets/rank/rare.svg",
     rank: "rare",
     pool: "7%",
     level: "20 level",
@@ -181,7 +181,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#666768",
   },
   {
-    image: "/assets/rank/Super Rare.svg",
+    image: "/assets/rank/super-rare.svg",
     rank: "super rare",
     pool: "12%",
     level: "40 level",
@@ -192,7 +192,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#2A7FB8",
   },
   {
-    image: "/assets/rank/Epic.svg",
+    image: "/assets/rank/epic.svg",
     rank: "epic",
     pool: "18%",
     level: "60 level",
@@ -203,7 +203,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E7570F",
   },
   {
-    image: "/assets/rank/Legend.svg",
+    image: "/assets/rank/legend.svg",
     rank: "legend",
     pool: "26%",
     level: "80 level",
@@ -214,7 +214,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E0475A",
   },
   {
-    image: "/assets/rank/Super Legend.svg",
+    image: "/assets/rank/super-legend.svg",
     rank: "super legend",
     pool: "34%",
     level: "100 level",

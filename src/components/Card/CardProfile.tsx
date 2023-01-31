@@ -16,6 +16,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
 import { shortenAddress } from "utils";
 import { SiTelegram } from "react-icons/si";
+import { lowerCase } from "lodash";
 
 import { WidgetProfileChile } from "components/Widget";
 import { rankMap } from "constant/rank";
@@ -41,6 +42,11 @@ export const CardProfile = () => {
     }
   }, [router.isReady]);
 
+  const imageUrl = `/assets/rank/${lowerCase(rankMap[account.rank]).replace(
+    /\s/,
+    "-"
+  )}.svg`;
+
   return (
     <Card
       variant={"gradient"}
@@ -49,13 +55,7 @@ export const CardProfile = () => {
       px={{ base: 4, md: 20, lg: 4, xl: 20 }}
     >
       <Box>
-        <Image
-          src={`/assets/rank/${rankMap[account.rank]}.svg`}
-          alt="rank-image"
-          mx="auto"
-          w="full"
-          maxW="64"
-        />
+        <Image src={imageUrl} alt="rank-image" mx="auto" w="full" maxW="64" />
       </Box>
       <Box mt={8} zIndex={"overlay"}>
         <Stack spacing={2}>

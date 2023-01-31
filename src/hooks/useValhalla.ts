@@ -124,14 +124,17 @@ const fetchAccount = async () => {
 const init = createInitiator(async () => {
   try {
     const valhalla = await getValhallaContract();
-    await Promise.all([fetchPool(), fetchAccount()]);
+    await fetchAccount();
+    await fetchPool();
 
     valhalla.on("ClaimReward", fetchAccount);
     valhalla.on("ClaimRankReward", () => {
-      Promise.all([fetchPool(), fetchAccount()]);
+      fetchPool();
+      fetchAccount();
     });
     valhalla.on("Registration", () => {
-      Promise.all([fetchPool(), fetchAccount()]);
+      fetchAccount();
+      fetchPool();
     });
     valhalla.on("RankRewardOpened", fetchPool);
     valhalla.on("RankRewardClosed", fetchPool);

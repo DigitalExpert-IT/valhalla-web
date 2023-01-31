@@ -34,7 +34,7 @@ const ConnectWalletRequred = () => {
 
   return (
     <LayoutIllustration
-      illustrationUri="/assets/illustration/signal-searching.svg"
+      illustrationUri="/assets/illustration/connect-fail.png"
       title={t("hoc.connection.title")}
       description={t("hoc.connection.description")}
     >

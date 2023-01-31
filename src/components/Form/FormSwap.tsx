@@ -5,11 +5,11 @@ import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { useAsyncCall, useSwap } from "hooks";
-import { getGnetPrice, getUsdtPrice } from "utils";
 import { useEffect, useMemo, useState } from "react";
+import { BigNumber } from "ethers";
 
 interface ISwapToken {
-  price?: number;
+  price: string;
   amount: string;
   currency: string;
 }
@@ -40,16 +40,24 @@ export const FormSwap = () => {
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "GNET") {
-        const decimals = currency.usdt.pair.decimals.toNumber();
-        const toBigNumb = toBn(value.amount ? value.amount : "0", decimals);
-        const format = fromBn(getUsdtPrice(toBigNumb));
+        const decimals = currency.gnet.pair.decimals.toNumber();
+        const price = currency.gnet.pair.price;
+        const toBigNumb = BigNumber.from(
+          value.amount ? Math.ceil(Number(value.amount)) : 0
+        );
+        const tax = price.mul(5).div(1000);
+        const format = fromBn(price.add(tax).mul(toBigNumb), decimals);
         setPrice(format);
         setSymbol(true);
         return;
       }
       const decimals = currency.usdt.pair.decimals.toNumber();
-      const toBigNumb = toBn(value.amount ? value.amount : "0");
-      const format = fromBn(getGnetPrice(toBigNumb), decimals);
+      const price = currency.usdt.pair.price;
+      const toBigNumb = BigNumber.from(
+        value.amount ? Math.ceil(Number(value.amount)) : 0
+      );
+      const tax = price.mul(5).div(1000);
+      const format = fromBn(price.add(tax).mul(toBigNumb), decimals);
       setPrice(format);
       setSymbol(false);
     });
@@ -57,7 +65,10 @@ export const FormSwap = () => {
   }, [watch, currency]);
 
   const onSubmit = handleSubmit(async data => {
-    await exec(data);
+    await exec({
+      currency: data.currency,
+      amount: data.price,
+    });
   });
 
   return (
@@ -75,8 +86,6 @@ export const FormSwap = () => {
           })}
           placeholder={"0.0"}
           type="number"
-          isDisabled
-          value={price ?? undefined}
         ></FormInput>
         <Stack
           direction={{ md: "row", sm: "column", base: "column" }}
@@ -96,6 +105,7 @@ export const FormSwap = () => {
               placeholder={"0.0"}
               type="number"
               min={0}
+              isDisabled
             ></FormInput>
           </Box>
           <Box>

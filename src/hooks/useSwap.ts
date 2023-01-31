@@ -1,5 +1,5 @@
 import create from "zustand";
-import { toBn } from "evm-bn";
+import { fromBn, toBn } from "evm-bn";
 import { useEffect } from "react";
 import { BigNumber } from "ethers";
 import { SWAP_CONTRACT } from "constant/address";
@@ -145,33 +145,35 @@ export const useSwap = () => {
    * it means if user input how much USDT needed it going to be calculate how much GNET price want to swap.
    * and than this function call approval to approve your GNET to swap with USDT
    */
-  const approveGnet = async (usdtAmount: BigNumber) => {
+  const approveGnet = async (gnetAmount: BigNumber) => {
     const gnet = await getGNETContract();
+    const decimal = await gnet.decimals();
     const balance = await gnet.balanceOf(address);
     const gnetSigner = await getGNETSignerContract();
-    const totalPrice = getGnetPrice(usdtAmount);
+    const swapContract = await getSwapContract();
+    const getRate = await swapContract.getGnetRate(gnetAmount);
 
     const allowance = await gnet.allowance(
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
 
-    if (balance.lt(totalPrice)) {
+    if (balance.lt(gnetAmount)) {
       throw {
         code: "NotEnoughBalance",
       };
     }
 
-    if (store.currency.usdt.totalPool.lt(usdtAmount)) {
+    if (store.currency.usdt.totalPool.lt(getRate)) {
       throw {
         code: "NotEnoughPool",
       };
     }
 
-    if (allowance.lt(totalPrice)) {
+    if (allowance.lt(gnetAmount)) {
       const tx = await gnetSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        totalPrice
+        gnetAmount
       );
       const receipt = await tx.wait();
       return receipt;
@@ -190,33 +192,34 @@ export const useSwap = () => {
    * and than after that this function call approval to approve your USDT to swap with GNET
    */
 
-  const approveUsdt = async (gnetAmount: BigNumber) => {
+  const approveUsdt = async (usdtAmount: BigNumber) => {
     const usdt = await getUSDTContract();
     const balance = await usdt.balanceOf(address);
     const usdtSigner = await getUSDTSignerContract();
-    const totalPrice = getUsdtPrice(gnetAmount);
+    const swapContract = await getSwapContract();
+    const getRate = await swapContract.getUsdtRate(usdtAmount);
 
     const allowance = await usdt.allowance(
       address,
       SWAP_CONTRACT[CURRENT_CHAIN_ID]
     );
 
-    if (balance.lt(totalPrice)) {
+    if (balance.lt(usdtAmount)) {
       throw {
         code: "NotEnoughBalance",
       };
     }
 
-    if (store.currency.gnet.totalPool.lt(gnetAmount)) {
+    if (store.currency.gnet.totalPool.lt(getRate)) {
       throw {
         code: "NotEnoughPool",
       };
     }
 
-    if (allowance.lt(totalPrice)) {
+    if (allowance.lt(usdtAmount)) {
       const tx = await usdtSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        totalPrice
+        usdtAmount
       );
       const receipt = await tx.wait();
       return receipt;
@@ -231,24 +234,17 @@ export const useSwap = () => {
    * {data.amount} how much user want to swap his token
    */
   const swapCurrency = async (data: { currency: string; amount: string }) => {
-    const tokenWanted = data.currency === "GNET";
+    const swapToGnet = data.currency === "GNET";
     const swapContract = await getSwapSignerContract();
-    if (tokenWanted) {
-      // swap your USDT with GNET
-      await approveUsdt(toBn(data.amount, 9));
-      const tx = await swapContract.swapCurrency(
-        store.currency.gnet.address,
-        toBn(data.amount, 9)
-      );
+    if (swapToGnet) {
+      await approveUsdt(toBn(data.amount, 6));
+      const tx = await swapContract.swapUsdt(toBn(data.amount, 6));
       const receipt = await tx.wait();
       return receipt;
     }
     // in this logic, u swap your GNET with USDT
-    await approveGnet(toBn(data.amount));
-    const tx = await swapContract.swapCurrency(
-      store.currency.usdt.address,
-      toBn(data.amount)
-    );
+    await approveGnet(toBn(data.amount, 9));
+    const tx = await swapContract.swapGnet(toBn(data.amount, 9));
     const receipt = await tx.wait();
     return receipt;
   };

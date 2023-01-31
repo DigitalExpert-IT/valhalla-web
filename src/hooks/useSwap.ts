@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { BigNumber } from "ethers";
 import { SWAP_CONTRACT } from "constant/address";
 import { useWallet, useWalletStore } from "hooks";
-import { createInitiator, getGnetPrice, getUsdtPrice } from "utils";
+import { createInitiator } from "utils";
 import {
   getWallet,
   getUSDTContract,

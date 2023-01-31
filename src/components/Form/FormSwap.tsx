@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import { fromBn, toBn } from "evm-bn";
+import { fromBn } from "evm-bn";
 import { useTranslation } from "react-i18next";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { useAsyncCall, useSwap } from "hooks";
 import { useEffect, useMemo, useState } from "react";
-import { BigNumber } from "ethers";
+import { getGnetRate, getUsdtRate } from "utils";
 
 interface ISwapToken {
   price: string;
@@ -40,24 +40,12 @@ export const FormSwap = () => {
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "GNET") {
-        const decimals = currency.gnet.pair.decimals.toNumber();
-        const price = currency.gnet.pair.price;
-        const toBigNumb = BigNumber.from(
-          value.amount ? Math.ceil(Number(value.amount)) : 0
-        );
-        const tax = price.mul(5).div(1000);
-        const format = fromBn(price.add(tax).mul(toBigNumb), decimals);
+        const format = fromBn(getUsdtRate(value.price ? value.price : "0"), 9);
         setPrice(format);
         setSymbol(true);
         return;
       }
-      const decimals = currency.usdt.pair.decimals.toNumber();
-      const price = currency.usdt.pair.price;
-      const toBigNumb = BigNumber.from(
-        value.amount ? Math.ceil(Number(value.amount)) : 0
-      );
-      const tax = price.mul(5).div(1000);
-      const format = fromBn(price.add(tax).mul(toBigNumb), decimals);
+      const format = fromBn(getGnetRate(value.price ? value.price : "0"), 6);
       setPrice(format);
       setSymbol(false);
     });
@@ -106,6 +94,7 @@ export const FormSwap = () => {
               type="number"
               min={0}
               isDisabled
+              value={price}
             ></FormInput>
           </Box>
           <Box>

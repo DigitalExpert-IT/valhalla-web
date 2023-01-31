@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
-import { fromBn, toBn } from "evm-bn";
+import { fromBn } from "evm-bn";
 import { useTranslation } from "react-i18next";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { useAsyncCall, useSwap } from "hooks";
-import { getGnetPrice, getUsdtPrice } from "utils";
 import { useEffect, useMemo, useState } from "react";
+import { getGnetRate, getUsdtRate } from "utils";
 
 interface ISwapToken {
-  price?: number;
+  price: string;
   amount: string;
   currency: string;
 }
@@ -40,16 +40,12 @@ export const FormSwap = () => {
   useEffect(() => {
     const subscription = watch(value => {
       if (value.currency === "GNET") {
-        const decimals = currency.usdt.pair.decimals.toNumber();
-        const toBigNumb = toBn(value.amount ? value.amount : "0", decimals);
-        const format = fromBn(getUsdtPrice(toBigNumb));
+        const format = fromBn(getUsdtRate(value.price ? value.price : "0"), 9);
         setPrice(format);
         setSymbol(true);
         return;
       }
-      const decimals = currency.usdt.pair.decimals.toNumber();
-      const toBigNumb = toBn(value.amount ? value.amount : "0");
-      const format = fromBn(getGnetPrice(toBigNumb), decimals);
+      const format = fromBn(getGnetRate(value.price ? value.price : "0"), 6);
       setPrice(format);
       setSymbol(false);
     });
@@ -57,7 +53,10 @@ export const FormSwap = () => {
   }, [watch, currency]);
 
   const onSubmit = handleSubmit(async data => {
-    await exec(data);
+    await exec({
+      currency: data.currency,
+      amount: data.price,
+    });
   });
 
   return (
@@ -75,9 +74,8 @@ export const FormSwap = () => {
           })}
           placeholder={"0.0"}
           type="number"
-          isDisabled
-          value={price ?? undefined}
-        ></FormInput>
+          isDisabled={!initialized}
+        />
         <Stack
           direction={{ md: "row", sm: "column", base: "column" }}
           w={"full"}
@@ -96,7 +94,9 @@ export const FormSwap = () => {
               placeholder={"0.0"}
               type="number"
               min={0}
-            ></FormInput>
+              isDisabled
+              value={price}
+            />
           </Box>
           <Box>
             <FormSelect
@@ -106,7 +106,7 @@ export const FormSwap = () => {
               option={normalizeCurrencies}
               isDisabled={!initialized}
               defaultValue="USDT"
-            ></FormSelect>
+            />
           </Box>
         </Stack>
       </Stack>

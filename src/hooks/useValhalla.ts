@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   getValhallaSignerContract,
   getValhallaContract,
+  getWallet,
 } from "lib/contractFactory";
 import create from "zustand";
 import { createInitiator } from "utils";
@@ -102,20 +103,20 @@ const fetchPool = async () => {
  */
 const fetchAccount = async () => {
   try {
-    const walletStore = useWalletStore.getState();
-    if (!walletStore.isConnected) return;
+    const wallet = await getWallet();
+    const [address] = await wallet.listAccounts();
     const valhalla = await getValhallaSignerContract();
     const [account, personalReward, rankReward, adminRole, staffRole] =
       await Promise.all([
-        valhalla.accountMap(walletStore.address),
-        valhalla.rewardMap(walletStore.address),
+        valhalla.accountMap(address),
+        valhalla.rewardMap(address),
         valhalla.getMyRankReward(),
         valhalla.DEFAULT_ADMIN_ROLE(),
         valhalla.STAFF_ROLE(),
       ]);
     const [isAdmin, isStaff] = await Promise.all([
-      valhalla.hasRole(adminRole, walletStore.address),
-      valhalla.hasRole(staffRole, walletStore.address),
+      valhalla.hasRole(adminRole, address),
+      valhalla.hasRole(staffRole, address),
     ]);
     setState({ account, personalReward, rankReward, isAdmin, isStaff });
   } catch (error) {}

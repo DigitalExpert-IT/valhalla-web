@@ -1,10 +1,3 @@
-import create from "zustand";
-import { fromBn, toBn } from "evm-bn";
-import { useEffect } from "react";
-import { BigNumber } from "ethers";
-import { SWAP_CONTRACT } from "constant/address";
-import { useWallet, useWalletStore } from "hooks";
-import { createInitiator } from "utils";
 import {
   getWallet,
   getUSDTContract,
@@ -15,6 +8,13 @@ import {
   getGNETSignerContract,
   getUSDTSignerContract,
 } from "lib/contractFactory";
+import create from "zustand";
+import { toBn } from "evm-bn";
+import { useEffect } from "react";
+import { BigNumber } from "ethers";
+import { createInitiator } from "utils";
+import { SWAP_CONTRACT } from "constant/address";
+import { useWallet, useWalletStore } from "hooks";
 interface ICurencySpec {
   pair: {
     name: string;
@@ -147,7 +147,6 @@ export const useSwap = () => {
    */
   const approveGnet = async (gnetAmount: BigNumber) => {
     const gnet = await getGNETContract();
-    const decimal = await gnet.decimals();
     const balance = await gnet.balanceOf(address);
     const gnetSigner = await getGNETSignerContract();
     const swapContract = await getSwapContract();

@@ -6,6 +6,7 @@ import { rankMap } from "constant/rank";
 import { CustomGridItem } from "components/Grid";
 import { CardOwnedFarmNFT } from "components/Card";
 import { Trans, useTranslation } from "react-i18next";
+import { lowerCase } from "lodash";
 import { useAsyncCall, useValhalla } from "hooks";
 import {
   Box,
@@ -28,6 +29,10 @@ export const SectionMyNFT = () => {
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
   const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
+  const imageUrl = `/assets/rank/${lowerCase(rankMap[account.rank]).replace(
+    /\s/,
+    "-"
+  )}.svg`;
 
   return (
     <Box mb="60">
@@ -66,10 +71,7 @@ export const SectionMyNFT = () => {
         >
           <Box>
             <AspectRatio w="300px" ratio={1}>
-              <Image
-                src={`/assets/rank/${rankMap[account.rank]}.svg`}
-                alt="rank-image"
-              />
+              <Image src={imageUrl} alt="rank-image" />
             </AspectRatio>
           </Box>
           <Grid

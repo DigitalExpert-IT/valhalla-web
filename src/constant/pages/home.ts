@@ -37,7 +37,7 @@ export const OURTEAM = [
     division: "Chief Executive Officer",
   },
   {
-    name: "Jonas Van DER Berg",
+    name: "Jonas Van Der Berg",
     image: "/assets/ourteam/jonas.jpg",
     division: "Chief Technology Officer",
   },

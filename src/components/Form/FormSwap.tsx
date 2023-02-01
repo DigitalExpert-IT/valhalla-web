@@ -1,12 +1,12 @@
-import { useForm } from "react-hook-form";
 import { fromBn } from "evm-bn";
+import { useForm } from "react-hook-form";
+import { useAsyncCall, useSwap } from "hooks";
 import { useTranslation } from "react-i18next";
+import { getGnetRate, getUsdtRate } from "utils";
+import { useEffect, useMemo, useState } from "react";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
-import { useAsyncCall, useSwap } from "hooks";
-import { useEffect, useMemo, useState } from "react";
-import { getGnetRate, getUsdtRate } from "utils";
 
 interface ISwapToken {
   price: string;
@@ -18,7 +18,7 @@ export const FormSwap = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { handleSubmit, control, watch } = useForm<ISwapToken>();
+  const { handleSubmit, control, watch, reset } = useForm<ISwapToken>();
   const { currency, swapCurrency, initialized } = useSwap();
 
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
@@ -57,6 +57,7 @@ export const FormSwap = () => {
       currency: data.currency,
       amount: data.price,
     });
+    reset();
   });
 
   return (
@@ -68,7 +69,7 @@ export const FormSwap = () => {
           name="price"
           helpertext={t("form.helperText.balance", {
             balanceOf: symbol
-              ? fromBn(currency.usdt.balance)
+              ? fromBn(currency.usdt.balance, 6)
               : fromBn(currency.gnet.balance, 9),
             symbol: symbol ? "USDT" : "GNET",
           })}
@@ -88,7 +89,7 @@ export const FormSwap = () => {
               helpertext={t("form.helperText.balance", {
                 balanceOf: symbol
                   ? fromBn(currency.gnet.balance, 9)
-                  : fromBn(currency.usdt.balance),
+                  : fromBn(currency.usdt.balance, 6),
                 symbol: symbol ? "GNET" : "USDT",
               })}
               placeholder={"0.0"}

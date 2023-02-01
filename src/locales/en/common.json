@@ -3,8 +3,9 @@
     "home": "Home",
     "swap": "Swap",
     "profile": "Profile",
-    "nftfarming": "Nft Farming",
-    "sharetoearn": "Share To Earn"
+    "nftFarming": "Nft Farming",
+    "sharetoearn": "Share To Earn",
+    "project": "Project"
   },
   "footer": {
     "description": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",

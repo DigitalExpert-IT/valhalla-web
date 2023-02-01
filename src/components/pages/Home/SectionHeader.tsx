@@ -75,10 +75,7 @@ export const SectionHeader = () => {
   };
 
   return (
-    <WidgetMainHeader
-      pt={{ base: "0", lg: "16" }}
-      imageData={HEADER_IMAGE_DATA}
-    >
+    <WidgetMainHeader pt={{ base: 0, md: "16" }} imageData={HEADER_IMAGE_DATA}>
       <Box px={{ base: "4", lg: "16" }} py={{ base: "0", lg: "16" }}>
         <Heading textAlign={{ base: "center", lg: "initial" }} as="h1">
           <Trans

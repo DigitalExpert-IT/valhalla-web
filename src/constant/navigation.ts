@@ -1,8 +1,14 @@
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
 import { IconType } from "react-icons/lib";
+
+export interface INavChild {
+  title: string;
+  link: string;
+}
 export interface INavigation {
   name: string;
-  href: string;
+  href?: string;
+  children?: INavChild[];
 }
 
 export interface ISocial {
@@ -17,20 +23,25 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/",
   },
   {
+    name: "project",
+    children: [
+      {
+        title: "nftFarming",
+        link: "/nft-farming",
+      },
+      {
+        title: "sharetoearn",
+        link: "/share",
+      },
+    ],
+  },
+  {
     name: "swap",
     href: "/swap",
   },
   {
     name: "profile",
     href: "/profile",
-  },
-  {
-    name: "nftfarming",
-    href: "/nft-farming",
-  },
-  {
-    name: "sharetoearn",
-    href: "/share",
   },
 ];
 

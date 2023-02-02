@@ -172,7 +172,7 @@ export const useSwap = () => {
     if (allowance.lt(gnetAmount)) {
       const tx = await gnetSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        gnetAmount
+        toBn("1000000", 9)
       );
       const receipt = await tx.wait();
       return receipt;
@@ -218,7 +218,7 @@ export const useSwap = () => {
     if (allowance.lt(usdtAmount)) {
       const tx = await usdtSigner.approve(
         SWAP_CONTRACT[CURRENT_CHAIN_ID],
-        usdtAmount
+        toBn("1000000", 6)
       );
       const receipt = await tx.wait();
       return receipt;

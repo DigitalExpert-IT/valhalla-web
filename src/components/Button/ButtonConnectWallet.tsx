@@ -32,7 +32,6 @@ export const ButtonConnectWallet = () => {
           </Button>
         )}
 
-        <Text>{isConnected ? "true" : "false"}</Text>
         <Stack direction="row" spacing="2" align="center">
           <Box mt="1">
             <Jazzicon diameter={28} seed={jsNumberForAddress(address)} />

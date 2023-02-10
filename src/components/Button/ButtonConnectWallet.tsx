@@ -1,4 +1,4 @@
-import { Button, Box, Stack } from "@chakra-ui/react";
+import { Button, Box, Stack, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { useWallet, useAsyncCall, useValhalla } from "hooks";
@@ -32,6 +32,7 @@ export const ButtonConnectWallet = () => {
           </Button>
         )}
 
+        <Text>{isConnected ? "true" : "false"}</Text>
         <Stack direction="row" spacing="2" align="center">
           <Box mt="1">
             <Jazzicon diameter={28} seed={jsNumberForAddress(address)} />

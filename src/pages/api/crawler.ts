@@ -105,7 +105,7 @@ const initCrawler = async () => {
         },
       });
 
-      setTimeout(crawl, 1000 * 10);
+      setTimeout(crawl, 1000 * 2);
     };
 
     crawl();

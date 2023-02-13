@@ -7,6 +7,23 @@ import { rootAdressList } from "@warmbyte/valhalla/constant/rootAddress";
 const prisma = new PrismaClient();
 const REGISTRATION_TOPIC = getKeccakHexHash("Registration(address,address)");
 
+const getStartingBlock = async () => {
+  try {
+    const valhalla = await getValhallaContract();
+    const lastBlock = await prisma.config.findFirst({
+      where: { key: "lastBlock" },
+    });
+    const _lastBlock = +(lastBlock?.value ?? "0");
+    if (_lastBlock === 0) {
+      const contractDeploymentBlock = await valhalla.deployedAtBlock();
+      return contractDeploymentBlock.toNumber();
+    }
+    return _lastBlock;
+  } catch (error) {
+    return 0;
+  }
+};
+
 const storeRootAddressList = async () => {
   try {
     let upline = "0x0";
@@ -28,65 +45,74 @@ const storeRootAddressList = async () => {
   } catch (error) {}
 };
 
+let isCrawlerInitialized = false;
 const initCrawler = async () => {
   try {
     const provider = await getMainProvider();
     const valhalla = await getValhallaContract();
 
-    if (valhalla.listenerCount("Registration") > 0) return;
+    if (isCrawlerInitialized) return;
+    isCrawlerInitialized = true;
 
     await storeRootAddressList();
-    const latestUser = await prisma.user.findFirst({
-      orderBy: {
-        blockNumber: "desc",
-      },
-    });
-    const contractDeploymentBlock = await valhalla.deployedAtBlock();
-    const startingBlock =
-      latestUser?.blockNumber ?? contractDeploymentBlock.toNumber();
-    const latestBlock = await provider.getBlockNumber();
+    const crawl = async () => {
+      const startingBlock = await getStartingBlock();
+      const latestBlock = await provider.getBlockNumber();
+      const nextBlock = startingBlock + 50;
+      console.log(`crawling from block ${startingBlock} to ${nextBlock}`);
 
-    const registrationEventList = await valhalla.queryFilter(
-      {
-        address: valhalla.address,
-        topics: [REGISTRATION_TOPIC],
-      },
-      startingBlock,
-      latestBlock
-    );
-
-    for (const registrationEvent of registrationEventList) {
-      const [user, referrer] = registrationEvent.args;
-
-      const existingUser = await prisma.user.findFirst({
-        where: { address: lowerCase(user) },
-      });
-      if (!existingUser) {
-        await prisma.user.create({
-          data: {
-            address: lowerCase(user),
-            upline: lowerCase(referrer),
-            blockNumber: Number(registrationEvent.blockNumber),
+      if (nextBlock < latestBlock) {
+        const registrationEventList = await valhalla.queryFilter(
+          {
+            address: valhalla.address,
+            topics: [REGISTRATION_TOPIC],
           },
-        });
-      }
-    }
+          startingBlock,
+          nextBlock
+        );
+        if (registrationEventList.length > 0) {
+          console.log(`found ${registrationEventList.length} events`);
+        }
 
-    valhalla.on("Registration", async (user, referrer, { blockNumber }) => {
-      const existingUser = await prisma.user.findFirst({
-        where: { address: lowerCase(user) },
-      });
-      if (!existingUser) {
-        await prisma.user.create({
-          data: {
-            address: lowerCase(user),
-            upline: lowerCase(referrer),
-            blockNumber: Number(blockNumber),
-          },
-        });
+        for (const registrationEvent of registrationEventList) {
+          const [user, referrer] = registrationEvent.args;
+
+          const existingUser = await prisma.user.findFirst({
+            where: { address: lowerCase(user) },
+          });
+          if (!existingUser) {
+            await prisma.user.create({
+              data: {
+                address: lowerCase(user),
+                upline: lowerCase(referrer),
+                blockNumber: Number(registrationEvent.blockNumber),
+              },
+            });
+          }
+        }
       }
-    });
-  } catch (error) {}
+
+      await prisma.config.upsert({
+        where: {
+          key: "lastBlock",
+        },
+        create: {
+          key: "lastBlock",
+          value: "" + nextBlock,
+        },
+        update: {
+          value: "" + nextBlock,
+        },
+      });
+
+      setTimeout(crawl, 1000 * 10);
+    };
+
+    crawl();
+  } catch (error) {
+    isCrawlerInitialized = false;
+    initCrawler();
+  }
 };
 
 const handler: NextApiHandler = async (_, res) => {

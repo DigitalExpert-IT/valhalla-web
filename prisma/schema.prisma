@@ -18,3 +18,11 @@ model User {
   @@index([telegramUsername])
   @@index([address])
 }
+
+model Config {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String @default("")
+
+  @@index([key])
+}

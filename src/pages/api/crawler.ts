@@ -58,37 +58,38 @@ const initCrawler = async () => {
     const crawl = async () => {
       const startingBlock = await getStartingBlock();
       const latestBlock = await provider.getBlockNumber();
-      const nextBlock = startingBlock + 50;
+      let nextBlock = startingBlock + 1000;
+      if (nextBlock > latestBlock) {
+        nextBlock = latestBlock;
+      }
       console.log(`crawling from block ${startingBlock} to ${nextBlock}`);
 
-      if (nextBlock < latestBlock) {
-        const registrationEventList = await valhalla.queryFilter(
-          {
-            address: valhalla.address,
-            topics: [REGISTRATION_TOPIC],
-          },
-          startingBlock,
-          nextBlock
-        );
-        if (registrationEventList.length > 0) {
-          console.log(`found ${registrationEventList.length} events`);
-        }
+      const registrationEventList = await valhalla.queryFilter(
+        {
+          address: valhalla.address,
+          topics: [REGISTRATION_TOPIC],
+        },
+        startingBlock,
+        nextBlock
+      );
+      if (registrationEventList.length > 0) {
+        console.log(`found ${registrationEventList.length} events`);
+      }
 
-        for (const registrationEvent of registrationEventList) {
-          const [user, referrer] = registrationEvent.args;
+      for (const registrationEvent of registrationEventList) {
+        const [user, referrer] = registrationEvent.args;
 
-          const existingUser = await prisma.user.findFirst({
-            where: { address: lowerCase(user) },
+        const existingUser = await prisma.user.findFirst({
+          where: { address: lowerCase(user) },
+        });
+        if (!existingUser) {
+          await prisma.user.create({
+            data: {
+              address: lowerCase(user),
+              upline: lowerCase(referrer),
+              blockNumber: Number(registrationEvent.blockNumber),
+            },
           });
-          if (!existingUser) {
-            await prisma.user.create({
-              data: {
-                address: lowerCase(user),
-                upline: lowerCase(referrer),
-                blockNumber: Number(registrationEvent.blockNumber),
-              },
-            });
-          }
         }
       }
 

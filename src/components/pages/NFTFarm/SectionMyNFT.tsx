@@ -28,7 +28,7 @@ export const SectionMyNFT = () => {
   const { t } = useTranslation();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
-  const claimRewardGnetAsync = useAsyncCall(nft.claimReward);
+  const claimRewardGnetAsync = useAsyncCall(nft.claimRankReward);
   const imageUrl = `/assets/rank/${lowerCase(rankMap[account.rank]).replace(
     /\s/,
     "-"
@@ -54,7 +54,7 @@ export const SectionMyNFT = () => {
           mb="10"
           px="5"
         >
-          <Heading>
+          <Heading textAlign="center">
             <Trans
               i18nKey="pages.nftFarming.gnetProject"
               components={{
@@ -108,7 +108,7 @@ export const SectionMyNFT = () => {
                 onClick={claimRewardGnetAsync.exec}
                 isLoading={claimRewardGnetAsync.isLoading}
               >
-                {t("common.claim")}
+                {prettyBn(nft.rankReward, 9) + " " + t("common.claim")}
               </Button>
             </CustomGridItem>
           </Grid>

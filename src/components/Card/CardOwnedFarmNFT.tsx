@@ -81,7 +81,7 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
               >
                 {t("common.globalNetworkFarm") +
                   " " +
-                  cardId.toNumber() +
+                  cardId.add(1).toNumber() +
                   " " +
                   t("common.remainingFarm")}
               </Text>

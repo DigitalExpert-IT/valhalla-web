@@ -85,22 +85,6 @@ export const Navbar = () => {
               display={{ md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Link href="/">
-              <AspectRatio
-                w={isLargethan800 ? 250 : 50}
-                ratio={isLargethan800 ? 16 / 3 : 1}
-                my="2"
-              >
-                <Image
-                  src={
-                    isLargethan800
-                      ? "/assets/logo/gnLogo.png"
-                      : "/assets/logo/logo.png"
-                  }
-                  alt="logo-image"
-                />
-              </AspectRatio>
-            </Link>
           </Stack>
           <Stack
             direction="row"

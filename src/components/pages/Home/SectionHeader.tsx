@@ -7,6 +7,12 @@ import {
   HStack,
   Button,
   useMediaQuery,
+  Flex,
+  Center,
+  Image,
+  Stack,
+  Icon,
+  VStack,
 } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 import { useModal } from "@ebay/nice-modal-react";
@@ -17,8 +23,10 @@ import { HEADER_IMAGE_DATA } from "constant/pages/home";
 import { getWallet } from "lib/contractFactory";
 import { getTelegramBindingSignatureMessage, shortenAddress } from "utils";
 import { GNET_CONTRACT } from "constant/address";
+import { AiOutlineArrowDown } from "react-icons/ai";
 import { IoCopyOutline } from "react-icons/io5";
 import { CopiableText } from "components/CopiableText";
+import { IconBase } from "react-icons";
 
 const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
@@ -75,64 +83,95 @@ export const SectionHeader = () => {
   };
 
   return (
-    <WidgetMainHeader pt={{ base: 0, md: "16" }} imageData={HEADER_IMAGE_DATA}>
-      <Box px={{ base: "4", lg: "16" }} py={{ base: "0", lg: "16" }}>
-        <Heading textAlign={{ base: "center", lg: "initial" }} as="h1">
-          <Trans
-            i18nKey="pages.home.header.title"
-            components={{
-              strong: <Text as="span" color="secondary.500" />,
-            }}
-          />
-        </Heading>
-        <Text
-          textAlign={{ base: "center", lg: "justify" }}
-          mt="4"
-          fontSize="lg"
+    <Box h={{ base: "100vh", lg: "fit-content" }}>
+      <Flex w={"full"}>
+        <Image
+          position={"absolute"}
+          top="0"
+          left="0"
+          right="0"
+          zIndex={"hide"}
+          objectFit="cover"
+          w="full"
+          h={{
+            base: "100vh",
+            lg: "45rem",
+            "2xl": "43rem",
+          }}
+          src={"/images/bgHeader_home.png"}
+          alt={"/images/bgHeader_home.png"}
+        />
+        <Box
+          minW={"50%"}
+          display={{
+            base: "none",
+            lg: "block",
+          }}
         >
-          <Trans i18nKey="pages.home.header.subtitle" />
-        </Text>
-        <HStack
-          direction="row"
-          bg="brand.300"
-          mt="5"
-          p="2"
-          rounded="lg"
-          opacity="0.7"
-          justify="center"
+          <Center h={"full"} bg={"blackAlpha.300"}>
+            <Text>BACKGROUND VIDEO</Text>
+          </Center>
+        </Box>
+        <Box
+          mt={{ base: "30vh", md: "20vh", lg: "0" }}
+          px={{ base: "4", lg: "16" }}
+          pt={{ base: "0", lg: "16" }}
+          mx={{ base: "auto", lg: "0" }}
+          ml={{ lg: "auto" }}
         >
-          <Text textTransform="uppercase" fontWeight="bold">
-            {t("common.contractGnet")}
-          </Text>
-          <CopiableText
-            display="inline-flex"
-            alignItems={"center"}
-            gap={2}
-            value={ContractGnet}
+          <Stack maxW={"sm"} textAlign={{ base: "center", lg: "left" }}>
+            <Heading
+              as="h1"
+              mt="4"
+              fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+              bgGradient="linear(to-r, brand.500, brand.100, white)"
+              bgClip="text"
+            >
+              <Trans i18nKey="pages.home.header.title" />
+            </Heading>
+            <Text
+              fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+              noOfLines={2}
+            >
+              <Trans
+                i18nKey="pages.home.header.subtitle"
+                components={{
+                  strong: (
+                    <Text
+                      as="strong"
+                      fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+                    />
+                  ),
+                }}
+              />
+            </Text>
+          </Stack>
+          <HStack
+            justify={{ base: "center", lg: "start" }}
+            mt="6"
+            spacing={{ base: "2", sm: "4" }}
           >
-            {widthMob
-              ? shortenAddress(ContractGnet)
-              : ContractGnet.toUpperCase()}
-            <IoCopyOutline />
-          </CopiableText>
-        </HStack>
-        <HStack justify={{ base: "center", lg: "start" }} mt="6" spacing="4">
-          {valhalla.account.isRegistered ? null : (
-            <Link href="/register">
-              <Button colorScheme="brand">{t("common.register")}</Button>
-            </Link>
-          )}
-          <Button
-            isLoading={
-              telegramInvite.isFetching || telegramInviteMutate.isLoading
-            }
-            onClick={createSignature}
-            colorScheme="brand"
-          >
-            {t("common.telegram")}
-          </Button>
-        </HStack>
-      </Box>
-    </WidgetMainHeader>
+            {valhalla.account.isRegistered ? null : (
+              <Link href="/register">
+                <Button colorScheme="white" variant={"outline"}>
+                  {t("common.register")}
+                </Button>
+              </Link>
+            )}
+          </HStack>
+        </Box>
+      </Flex>
+      <VStack
+        pb={"4"}
+        textAlign={"center"}
+        display={{ lg: "none" }}
+        mt={"25vh"}
+      >
+        <Text>Discrol</Text>
+        <Icon textColor={"white"} fontSize={"2xl"}>
+          <AiOutlineArrowDown />
+        </Icon>
+      </VStack>
+    </Box>
   );
 };

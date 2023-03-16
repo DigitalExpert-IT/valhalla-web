@@ -38,7 +38,7 @@ export const SectionHeader = () => {
         <Box
           mt={{ base: "30vh", md: "20vh", lg: "0" }}
           px={{ base: "4", lg: "16" }}
-          pt={{ base: "0", lg: "16" }}
+          py={{ base: "0", lg: "16" }}
           mx={{ base: "auto", lg: "0" }}
           ml={{ lg: "auto" }}
         >

@@ -1,4 +1,3 @@
-import axios from "axios";
 import Link from "next/link";
 import {
   Heading,
@@ -48,7 +47,7 @@ export const SectionHeader = () => {
               as="h1"
               mt="4"
               fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
-              bgGradient="linear(to-r, brand.500, brand.100, white)"
+              bgGradient="linear(to-r, brand.500, brand.300, white)"
               bgClip="text"
             >
               <Trans i18nKey="pages.home.header.title" />
@@ -77,9 +76,7 @@ export const SectionHeader = () => {
           >
             {valhalla.account.isRegistered ? null : (
               <Link href="/register">
-                <Button colorScheme="white" variant={"outline"}>
-                  {t("common.register")}
-                </Button>
+                <Button variant={"outline"}>{t("common.register")}</Button>
               </Link>
             )}
           </HStack>

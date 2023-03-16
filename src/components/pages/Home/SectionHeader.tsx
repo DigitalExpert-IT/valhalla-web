@@ -116,7 +116,7 @@ export const SectionHeader = () => {
         display={{ lg: "none" }}
         mt={"25vh"}
       >
-        <Text>Discrol</Text>
+        <Text>{t("common.discover")}</Text>
         <Icon textColor={"white"} fontSize={"2xl"}>
           <AiOutlineArrowDown />
         </Icon>

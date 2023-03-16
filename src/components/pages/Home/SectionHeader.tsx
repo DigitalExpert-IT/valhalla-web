@@ -18,7 +18,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useModal } from "@ebay/nice-modal-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useValhalla, useWallet } from "hooks";
-import { ModalBindTelegram } from "components";
+import { ImageBgHeaderHome, ModalBindTelegram } from "components";
 import { getWallet } from "lib/contractFactory";
 import { getTelegramBindingSignatureMessage } from "utils";
 import { GNET_CONTRACT } from "constant/address";
@@ -49,18 +49,7 @@ export const SectionHeader = () => {
   return (
     <Box h={{ base: "100vh", lg: "fit-content" }}>
       <Flex w={"full"}>
-        <Image
-          position={"absolute"}
-          top="0"
-          left="0"
-          right="0"
-          zIndex={"hide"}
-          objectFit="cover"
-          w="full"
-          h="100vh"
-          src={"/images/bgHeader_home.png"}
-          alt={"/images/bgHeader_home.png"}
-        />
+        <ImageBgHeaderHome />
         <Box
           minW={"50%"}
           display={{
@@ -127,7 +116,7 @@ export const SectionHeader = () => {
         display={{ lg: "none" }}
         mt={"25vh"}
       >
-        <Text>Discrol</Text>
+        <Text>{t("common.discover")}</Text>
         <Icon textColor={"white"} fontSize={"2xl"}>
           <AiOutlineArrowDown />
         </Icon>

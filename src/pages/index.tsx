@@ -14,6 +14,7 @@ import {
   TableRankNetwork,
   TableTokenomic,
   BackgroundHome,
+  SectionProject,
 } from "components";
 
 export default function Home() {
@@ -46,6 +47,9 @@ export default function Home() {
           {t("pages.home.partnershipSection")}
         </Heading>
         <SectionPartnership data={PARTNERSHIP} />
+      </Box>
+      <Box>
+        <SectionProject />
       </Box>
     </LayoutMain>
   );

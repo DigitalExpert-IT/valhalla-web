@@ -61,6 +61,22 @@ export const Navbar = () => {
               isOpen={isOpen}
               onClose={onClose}
             />
+            <Link href="/">
+              <AspectRatio
+                w={isLargethan800 ? 250 : 8}
+                ratio={isLargethan800 ? 16 / 3 : 1}
+                my={{ base: "none", md: 2 }}
+              >
+                <Image
+                  src={
+                    isLargethan800
+                      ? "/assets/logo/gnLogo.png"
+                      : "/assets/logo/gn.png"
+                  }
+                  alt="logo-image"
+                />
+              </AspectRatio>
+            </Link>
             <IconButton
               variant="ghost"
               fontSize="xl"

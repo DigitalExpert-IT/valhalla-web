@@ -15,7 +15,7 @@ export const ImageBgHeaderHome = () => {
         lg: "45rem",
         "2xl": "43rem",
       }}
-      src={"/images/bgHeader_home.png"}
+      src={"/images/bgHeader.svg"}
       alt={"/images/bgHeader_home.png"}
     />
   );

@@ -1,57 +1,37 @@
 import { Card, Image, Box, Text, Collapse, Fade, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-type Props = {
+export type CardData = {
   uri: string;
   title: string;
   subtitle: string;
+  bgColor: string;
+  bgImg?: string;
+  imgCenter: boolean;
 };
 
-export const CardHomeFeatures = (props: Props) => {
-  const { uri, title, subtitle } = props;
+export const CardHomeFeatures = (props: CardData) => {
+  const { uri, title, subtitle, bgColor, bgImg, imgCenter } = props;
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <Card
       px={6}
+      pt={10}
       maxW={"xs"}
       mx={"auto"}
       h={"full"}
       minH={"72"}
       position={"relative"}
       overflow={"hidden"}
-      onMouseOver={() => setIsVisible(true)}
-      onMouseOut={() => setIsVisible(false)}
+      bg={bgColor}
+    // onMouseOver={() => setIsVisible(true)}
+    // onMouseOut={() => setIsVisible(false)}
     >
-      <Image
-        src={uri}
-        alt={title}
-        objectFit={"cover"}
-        h={"full"}
-        w={"full"}
-        position={"absolute"}
-        top={0}
-        bottom={0}
-        right={0}
-        left={0}
-        zIndex={"base"}
-      />
-      <Fade in={isVisible}>
-        <Box
-          opacity={isVisible ? 0.8 : 0}
-          bg={"black"}
-          position={"absolute"}
-          top={0}
-          bottom={0}
-          right={0}
-          left={0}
-          zIndex={"3"}
-        />
-      </Fade>
       <Flex
-        py={4}
+        // py={4}
         flexDir={"column"}
-        placeContent={isVisible ? "center" : "end"}
+        // placeContent={isVisible ? "center" : "end"}
         h={"full"}
         zIndex={"3"}
         textAlign={"center"}
@@ -63,10 +43,49 @@ export const CardHomeFeatures = (props: Props) => {
         >
           {title}
         </Text>
-        <Collapse animateOpacity in={isVisible} style={{ zIndex: 5 }}>
-          <Text fontSize={{ xs: "sm", xl: "md" }}>{subtitle}</Text>
-        </Collapse>
+        <Text fontSize={{ xs: "sm", xl: "md" }}>{subtitle}</Text>
       </Flex>
+      <Image
+        src={uri}
+        alt={title}
+        mx={"auto"}
+        zIndex={"base"}
+        h={"50%"}
+        position={"absolute"}
+        right={"0"}
+        left={imgCenter ? "0" : "full"}
+        bottom={"0"}
+      />
+      {bgImg ? (
+        <Image
+          src={bgImg}
+          alt={title}
+          objectFit={"cover"}
+          mx={"auto"}
+          zIndex={"base"}
+          h={"full"}
+          w={"full"}
+          position={"absolute"}
+          right={"0"}
+          left={"0"}
+          top={"0"}
+          bottom={"0"}
+        />
+      ) : (
+        " "
+      )}
+      {/* <Fade in={isVisible}>
+        <Box
+          opacity={isVisible ? 0.8 : 0}
+          bg={"black"}
+          position={"absolute"}
+          top={0}
+          bottom={0}
+          right={0}
+          left={0}
+          zIndex={"3"}
+        />
+      </Fade> */}
     </Card>
   );
 };

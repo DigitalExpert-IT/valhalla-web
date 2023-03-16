@@ -71,13 +71,14 @@ export const Navbar = () => {
             />
             <Link href="/">
               <AspectRatio
-                w={isLargethan800 ? 150 : 50}
-                ratio={isLargethan800 ? 5 / 2 : 1}
+                w={isLargethan800 ? 250 : 50}
+                ratio={isLargethan800 ? 16 / 3 : 1}
+                my="2"
               >
                 <Image
                   src={
                     isLargethan800
-                      ? "/assets/logo/logo-gn.png"
+                      ? "/assets/logo/gnLogo.png"
                       : "/assets/logo/logo.png"
                   }
                   alt="logo-image"

@@ -1,12 +1,6 @@
 import { Box, SimpleGrid, SimpleGridProps } from "@chakra-ui/react";
-import { CardHomeFeatures } from "components/Card";
+import { CardData, CardHomeFeatures } from "components/Card";
 import React from "react";
-
-type CardData = {
-  uri: string;
-  title: string;
-  subtitle: string;
-};
 
 type CardProps = SimpleGridProps & {
   cardData: CardData[];
@@ -28,6 +22,9 @@ export const WidgetHomeFeatures = (props: CardProps) => {
             uri={data.uri}
             title={data.title}
             subtitle={data.subtitle}
+            bgColor={data.bgColor}
+            bgImg={data.bgImg}
+            imgCenter={data.imgCenter}
           />
         </Box>
       ))}

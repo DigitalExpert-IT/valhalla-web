@@ -18,15 +18,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { useModal } from "@ebay/nice-modal-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useValhalla, useWallet } from "hooks";
-import { WidgetMainHeader, ModalBindTelegram } from "components";
-import { HEADER_IMAGE_DATA } from "constant/pages/home";
+import { ModalBindTelegram } from "components";
 import { getWallet } from "lib/contractFactory";
-import { getTelegramBindingSignatureMessage, shortenAddress } from "utils";
+import { getTelegramBindingSignatureMessage } from "utils";
 import { GNET_CONTRACT } from "constant/address";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import { IoCopyOutline } from "react-icons/io5";
-import { CopiableText } from "components/CopiableText";
-import { IconBase } from "react-icons";
 
 const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
@@ -49,38 +45,6 @@ export const SectionHeader = () => {
       return data;
     },
   });
-
-  const createSignature = async () => {
-    try {
-      const linkToTelegram = document.createElement("a");
-      linkToTelegram.href = process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK || "";
-      linkToTelegram.target = "_blank";
-      const { data } = await telegramInvite.refetch();
-      if (!data) return;
-      if (!valhalla.account.isRegistered) {
-        linkToTelegram.click();
-        return;
-      }
-
-      if (data.type === "redirect") {
-        linkToTelegram.click();
-        return;
-      }
-
-      if (data.type === "request_bind") {
-        const username = (await bindTelegramModal.show()) as string;
-        const wallet = await getWallet();
-        const signer = wallet.getSigner();
-        const signature = await signer.signMessage(
-          getTelegramBindingSignatureMessage(username)
-        );
-        await telegramInviteMutate.mutateAsync({ signature, username });
-        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
-      }
-    } catch (error) {
-      window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
-    }
-  };
 
   return (
     <Box h={{ base: "100vh", lg: "fit-content" }}>

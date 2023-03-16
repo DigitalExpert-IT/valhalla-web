@@ -57,11 +57,7 @@ export const SectionHeader = () => {
           zIndex={"hide"}
           objectFit="cover"
           w="full"
-          h={{
-            base: "100vh",
-            lg: "45rem",
-            "2xl": "43rem",
-          }}
+          h="100vh"
           src={"/images/bgHeader_home.png"}
           alt={"/images/bgHeader_home.png"}
         />

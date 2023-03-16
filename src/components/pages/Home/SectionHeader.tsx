@@ -6,45 +6,20 @@ import {
   Box,
   HStack,
   Button,
-  useMediaQuery,
   Flex,
   Center,
-  Image,
   Stack,
   Icon,
   VStack,
 } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
-import { useModal } from "@ebay/nice-modal-react";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { useValhalla, useWallet } from "hooks";
-import { ImageBgHeaderHome, ModalBindTelegram } from "components";
-import { getWallet } from "lib/contractFactory";
-import { getTelegramBindingSignatureMessage } from "utils";
-import { GNET_CONTRACT } from "constant/address";
+import { useValhalla } from "hooks";
+import { ImageBgHeaderHome } from "components";
 import { AiOutlineArrowDown } from "react-icons/ai";
-
-const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
 export const SectionHeader = () => {
   const { t } = useTranslation();
-  const [widthMob] = useMediaQuery("(max-width: 500px)");
   const valhalla = useValhalla();
-  const wallet = useWallet();
-  const bindTelegramModal = useModal(ModalBindTelegram);
-  const telegramInvite = useQuery<{ type: string }>({
-    queryKey: [`/telegram/invite/${wallet.address}`],
-    enabled: false,
-  });
-  const telegramInviteMutate = useMutation({
-    mutationFn: async (body: { signature: string; username: string }) => {
-      const { data } = await axios.post(
-        `/api/telegram/invite/${wallet.address}`,
-        body
-      );
-      return data;
-    },
-  });
 
   return (
     <Box h={{ base: "100vh", lg: "fit-content" }}>

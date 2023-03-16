@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Icon, Stack } from "@chakra-ui/react";
 import { IRankNetwork, RANKNETWORK } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
+import { MdOutlineDoubleArrow } from "react-icons/md";
 import { t } from "i18next";
 
 const columnHelper = createColumnHelper<IRankNetwork>();
@@ -11,14 +12,17 @@ const columnHelper = createColumnHelper<IRankNetwork>();
 const columns = [
   columnHelper.accessor("levelBonus", {
     cell: info => (
-      <Text
-        fontWeight="bold"
-        fontSize="lg"
-        textTransform="capitalize"
-        color="brand.400"
-      >
-        {info.getValue()}
-      </Text>
+      <Stack direction="row" align="center">
+        <Icon as={MdOutlineDoubleArrow} color="teal" w={5} h={5} />
+        <Text
+          fontWeight="bold"
+          fontSize="lg"
+          textTransform="capitalize"
+          color="gray.300"
+        >
+          {info.getValue()}
+        </Text>
+      </Stack>
     ),
     header: t("common.levelBonus") ?? "",
   }),
@@ -54,7 +58,7 @@ export const TableRankNetwork = () => {
       <TableData
         data={RANKNETWORK}
         columns={columns}
-        tableCustom={{ variant: "gradient", colorScheme: "valhalla:brand" }}
+        tableCustom={{ variant: "valhallaV2", colorScheme: "valhalla:brand" }}
       />
     </Box>
   );

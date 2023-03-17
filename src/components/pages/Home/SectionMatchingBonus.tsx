@@ -11,13 +11,13 @@ export const SectionMatchingBonus = () => {
       justify="center"
       flexDir={{ base: "column", md: "row" }}
     >
-      <Box w={{ base: "100%", md: "60%" }}>
+      {/* <Box w={{ base: "100%", md: "60%" }}>
         <Image
           src="/matching-bonus.svg"
           alt="matching-image"
           objectFit="cover"
         />
-      </Box>
+      </Box> */}
       <Stack
         flex={1}
         display="flex"

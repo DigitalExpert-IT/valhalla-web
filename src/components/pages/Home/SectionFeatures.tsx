@@ -3,12 +3,14 @@ import { WidgetHomeFeatures } from "components/Widget";
 import React from "react";
 import { Trans } from "react-i18next";
 import { PROMOTION_IMAGE_DATA } from "constant/pages/home";
+import { WidgetTitleBg } from "components/Widget/WidgetTitleBg";
 
 export const SectionFeatures = () => {
   return (
-    <Box mt="60" px={4}>
-      <Box py={8}>
-        <Heading textAlign={"center"} my={8}>
+    <Box mt="60" px={4} position={"relative"}>
+      <WidgetTitleBg title={"pages.home.feature.title"} />
+      <Box py={{ base: 4, lg: 12 }}>
+        <Heading textAlign={"center"} mb={8}>
           <Trans i18nKey="pages.home.feature.title" />
         </Heading>
         <Text textAlign={"justify"}>

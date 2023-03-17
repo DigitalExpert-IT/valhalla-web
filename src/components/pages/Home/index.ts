@@ -8,4 +8,3 @@ export * from "./SectionTeam";
 export * from "./SectionPartnership";
 export * from "./SectionPatnershipv2";
 export * from "./SectionProject";
-export * from "./SectionPatnershipv2";

@@ -1,5 +1,7 @@
 import { t } from "i18next";
 
+export * from "./PROJECT_LIST";
+
 export const HEADER_IMAGE_DATA = [
   { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
   { uri: "/images/share-to-earn.png", alt: t("common.shareToEarn") },

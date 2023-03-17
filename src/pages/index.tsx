@@ -23,7 +23,6 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <BackgroundHome />
       <SectionFeatures />
       <SectionFeaturedPopulation />
       <TableRankNetwork />

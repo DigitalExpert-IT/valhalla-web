@@ -14,21 +14,30 @@ export const PROMOTION_IMAGE_DATA = [
     uri: "/images/imgHomeFeatures1.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
+    bgColor: "#1A192B",
+    imgCenter: false
   },
   {
     uri: "/images/imgHomeFeatures2.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
+    bgColor: "#6D2076",
+    imgCenter: false,
+    bgImg: "/images/imgHomeFeatures2-bg.png"
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
+    bgColor: "#080058",
+    imgCenter: true
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
+    bgColor: "#8E59FF",
+    imgCenter: true
   },
 ];
 

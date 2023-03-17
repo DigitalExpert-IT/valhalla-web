@@ -1,47 +1,69 @@
 import React from "react";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { SOCIAL } from "constant/navigation";
 import {
   Container,
   Box,
   Text,
-  AspectRatio,
-  Stack,
-  Icon,
   Image,
-  useMediaQuery,
   Flex,
 } from "@chakra-ui/react";
 
 export const LayoutFooter = () => {
   const { t } = useTranslation();
-  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
 
   return (
-    <Box as="footer" w="full">
-      <Box bg="#370065">
-        <Container maxW="container.lg" py={"2rem"}>
-          <Flex justify={"center"} gap={"1.5rem"}>
-            <Box textAlign={"right"} flex={"1 1 0 "} w={0}>
-              The Global Network aims to revolutionize the network marketing
-              industry by decentralizing millions of users to web3 applications
-            </Box>
-            <Box w={"1px"} bg={"white"} />
-            <Box flex={"1 1 0 "} w={0}>
+    <Box as="footer" w="full" position={"relative"}>
+      <Box
+        bg="#370065"
+        overflow={"hidden"}
+        backgroundImage={"/assets/pattern.png"}
+        backgroundSize={"cover"}
+        backgroundRepeat={"no-repeat"}
+        backgroundPosition={"center"}
+      >
+        <Container maxW="container.lg" py={"2rem"} px={30}>
+          <Flex
+            justify={"center"}
+            gap={{ base: 6, md: 20 }}
+            flexDirection={{ base: "column-reverse", md: "row" }}
+            w={"full"}
+            h={{ base: "unset", md: 100 }}
+          >
+            <Flex
+              alignItems={"center"}
+              flex={"1 1 0 "}
+              w={{ base: "full", md: 0 }}
+            >
+              <Text textAlign={{ base: "center", md: "right" }}>
+                {t("common.footer.description")}
+              </Text>
+            </Flex>
+            <Box
+              w={"1px"}
+              opacity={0.7}
+              bg={"white"}
+              display={{ base: "none", md: "block" }}
+            />
+            <Box
+              display={"flex"}
+              flex={"1 1 0"}
+              alignItems={"center"}
+              justifyContent={{ base: "center", md: "start" }}
+              w={{ base: "full", md: 0 }}
+            >
               <Image
-                src={
-                  isLargethan800
-                    ? "/assets/logo/gnLogo.png"
-                    : "/assets/logo/gn.png"
-                }
+                w={220}
+                src={"/assets/logo/gnLogo-2.png"}
                 alt="logo-image"
+                objectFit={"contain"}
               />
             </Box>
           </Flex>
         </Container>
       </Box>
-      <Flex justify={"center"}>© 2023 Global Network, All right reserved</Flex>
+      <Flex justify={"center"} py={2}>
+        © 2023 Global Network, All right reserved
+      </Flex>
     </Box>
   );
 };

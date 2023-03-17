@@ -47,13 +47,22 @@ const columns = [
 export const TableRankNetwork = () => {
   return (
     <Box textAlign="center" mb={60}>
-      <Heading mb={20} textTransform="capitalize">
-        <Trans
-          i18nKey="pages.home.rankNetwork"
-          components={{
-            strong: <Text as="span" color="brand.500" />,
-          }}
-        />
+      <Heading
+        mb={20}
+        fontSize="5xl"
+        textAlign="center"
+        textTransform="uppercase"
+        _after={{
+          content: `'${t("pages.home.maticPlan")}'`,
+          alignSelf: "center",
+          display: "block",
+          fontSize: { md: "111", base: "90" },
+          mt: { md: "-91px", base: "-68px" },
+          color: "whiteAlpha.100",
+          textAlign: "center",
+        }}
+      >
+        <Trans i18nKey="pages.home.rankNetwork" />
       </Heading>
       <TableData
         data={RANKNETWORK}

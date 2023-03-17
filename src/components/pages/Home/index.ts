@@ -7,3 +7,4 @@ export * from "./SectionFeaturedPopulation";
 export * from "./SectionTeam";
 export * from "./SectionPartnership";
 export * from "./SectionPatnershipv2";
+export * from "./SectionProject";

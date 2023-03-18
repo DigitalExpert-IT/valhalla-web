@@ -10,32 +10,28 @@ export const SectionMatchingBonus = () => {
       align="center"
       justify="center"
       flexDir={{ base: "column", md: "row" }}
+      minH={"xl"}
     >
-      {/* <Box w={{ base: "100%", md: "60%" }}>
+      <Box position={"absolute"} zIndex={"hide"} w={"full"}>
         <Image
-          src="/matching-bonus.svg"
+          src="/images/BgMatchingBonus.png"
           alt="matching-image"
           objectFit="cover"
+          w={"full"}
         />
-      </Box> */}
+      </Box>
       <Stack
+        maxW={"md"}
         flex={1}
         display="flex"
         flexDir="column"
         justifyContent="center"
         spacing="3"
-        align={{ base: "center", md: "unset" }}
-        textAlign={{ base: "justify", md: "justify" }}
+        align={"center"}
+        textAlign={"center"}
       >
-        <Heading size={{ base: "2xl", md: "3xl" }}>
-          <Trans
-            i18nKey="pages.home.matchingBonus.title"
-            components={{
-              strong: (
-                <Text as="span" color="purple.500" textTransform="uppercase" />
-              ),
-            }}
-          />
+        <Heading>
+          {t("pages.home.matchingBonus.title")}
         </Heading>
         <Heading textTransform="capitalize">
           {t("pages.home.matchingBonus.subtitle")}

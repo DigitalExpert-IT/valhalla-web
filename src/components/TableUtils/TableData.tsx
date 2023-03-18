@@ -43,7 +43,7 @@ export const TableData = <Data extends object>({
   });
 
   return (
-    <Box overflowX="auto" w="100%">
+    <Box display="flex" justifyContent="center" overflowX="auto" w="100%">
       <Table size="sm" w="100%" {...tableCustom}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (

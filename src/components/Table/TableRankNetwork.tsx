@@ -21,7 +21,7 @@ const columns = [
   columnHelper.accessor("levelBonus", {
     cell: info => (
       <Stack direction="row" align="center">
-        <Icon as={MdOutlineDoubleArrow} color="teal" w={5} h={5} />
+        <Icon as={MdOutlineDoubleArrow} color="teal" w={6} h={6} />
         <Text
           fontWeight="bold"
           fontSize="lg"
@@ -54,19 +54,20 @@ const columns = [
 
 export const TableRankNetwork = () => {
   return (
-    <Box
+    <Stack
       textAlign="center"
-      mb={60}
+      mb={40}
+      align="center"
+      justify="center"
       bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
       pos="relative"
-      display="flex"
     >
-      <Box pos="absolute" top="60" bottom="0" zIndex="1">
+      <Box pos="absolute" top="80" bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
       </Box>
-      <Container maxW="container.xl" zIndex="2" mx="80">
+      <Container maxW="container.xl" zIndex="2" my="20">
         <Heading
-          mb={20}
+          mb={2}
           fontSize="5xl"
           textAlign="center"
           textTransform="uppercase"
@@ -74,7 +75,7 @@ export const TableRankNetwork = () => {
             content: `'${t("pages.home.maticPlan")}'`,
             alignSelf: "center",
             display: "block",
-            fontSize: { md: "111", base: "90" },
+            fontSize: { md: "150", base: "90" },
             mt: { md: "-91px", base: "-68px" },
             color: "whiteAlpha.100",
             textAlign: "center",
@@ -88,9 +89,10 @@ export const TableRankNetwork = () => {
           tableCustom={{
             variant: "valhallaV2",
             colorScheme: "valhalla:brand",
+            maxWidth: "50%",
           }}
         />
       </Container>
-    </Box>
+    </Stack>
   );
 };

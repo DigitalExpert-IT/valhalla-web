@@ -10,14 +10,17 @@ export const SectionMatchingBonus = () => {
       align="center"
       justify="center"
       flexDir={{ base: "column", md: "row" }}
-      minH={"xl"}
+      minH={{base: "56", md:"md"}}
     >
       <Box position={"absolute"} zIndex={"hide"} w={"full"}>
         <Image
           src="/images/BgMatchingBonus.png"
           alt="matching-image"
+          mx={"auto"}
           objectFit="cover"
           w={"full"}
+          minH={"60"}
+          maxW={"7xl"}
         />
       </Box>
       <Stack
@@ -30,13 +33,15 @@ export const SectionMatchingBonus = () => {
         align={"center"}
         textAlign={"center"}
       >
-        <Heading>
-          {t("pages.home.matchingBonus.title")}
+        <Heading
+          fontSize={{ base: "4xl", lg: "5xl" }}
+          textTransform="capitalize"
+        >
+          <Trans i18nKey={"pages.home.matchingBonus.title"} />
         </Heading>
-        <Heading textTransform="capitalize">
-          {t("pages.home.matchingBonus.subtitle")}
-        </Heading>
-        <Text fontSize="lg">{t("pages.home.matchingBonus.description")}</Text>
+        <Text fontSize={{ base: "md", lg: "lg" }}>
+          {t("pages.home.matchingBonus.description")}
+        </Text>
       </Stack>
     </Flex>
   );

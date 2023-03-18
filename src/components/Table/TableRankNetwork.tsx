@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Heading, Text, Icon, Stack, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Icon,
+  Stack,
+  Container,
+  Image,
+} from "@chakra-ui/react";
 import { IRankNetwork, RANKNETWORK } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
@@ -50,8 +58,13 @@ export const TableRankNetwork = () => {
       textAlign="center"
       mb={60}
       bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+      pos="relative"
+      display="flex"
     >
-      <Container maxW="container.xl">
+      <Box pos="absolute" top="60" bottom="0" zIndex="1">
+        <Image src="/assets/project/pattern2.png" alt="pattern2" />
+      </Box>
+      <Container maxW="container.xl" zIndex="2" mx="80">
         <Heading
           mb={20}
           fontSize="5xl"
@@ -72,7 +85,10 @@ export const TableRankNetwork = () => {
         <TableData
           data={RANKNETWORK}
           columns={columns}
-          tableCustom={{ variant: "valhallaV2", colorScheme: "valhalla:brand" }}
+          tableCustom={{
+            variant: "valhallaV2",
+            colorScheme: "valhalla:brand",
+          }}
         />
       </Container>
     </Box>

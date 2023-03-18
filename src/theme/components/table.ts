@@ -165,8 +165,6 @@ const variantValhalla = definePartsStyle(props => {
 });
 
 const variantValhallaV2 = definePartsStyle(props => {
-  const { colorScheme: c } = props;
-
   return {
     table: {
       borderCollapse: "separate",
@@ -176,16 +174,16 @@ const variantValhallaV2 = definePartsStyle(props => {
       color: mode("gray.600", "gray.300")(props),
       border: "1px",
       textAlign: "center",
-      py: "5",
-      bgColor: "#130841",
-      borderColor: "#130841",
+      py: "4",
+      bgColor: "rgba(19, 8, 65, 0.5)",
+      borderColor: "rgba(19, 8, 65, 0.5)",
       ...numericStyles,
     },
     td: {
       border: "1px",
-      h: "51px",
-      bgColor: "#130841",
-      borderColor: "#130841",
+      h: "30px",
+      bgColor: "rgba(19, 8, 65, 0.5)",
+      borderColor: "rgba(19, 8, 65, 0.5)",
       ...numericStyles,
     },
     caption: {

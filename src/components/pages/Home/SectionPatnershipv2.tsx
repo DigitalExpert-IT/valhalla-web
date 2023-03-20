@@ -25,6 +25,7 @@ export const SectionPatnershipv2 = () => {
           alt=""
           position="absolute"
           left="0"
+          opacity={"0.5"}
         ></Image>
         <Wrap justify="space-between" zIndex="1" w="full">
           <WrapItem w="30%">

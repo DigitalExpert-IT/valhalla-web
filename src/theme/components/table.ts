@@ -174,7 +174,7 @@ const variantValhallaV2 = definePartsStyle(props => {
       color: mode("gray.600", "gray.300")(props),
       border: "1px",
       textAlign: "center",
-      py: "4",
+      h: "50px",
       bgColor: "rgba(19, 8, 65, 0.5)",
       borderColor: "rgba(19, 8, 65, 0.5)",
       ...numericStyles,

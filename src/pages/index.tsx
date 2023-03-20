@@ -23,6 +23,7 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionProject />
       <SectionFeatures />
       <SectionFeaturedPopulation />
       <TableRankNetwork />
@@ -46,9 +47,6 @@ export default function Home() {
           {t("pages.home.partnershipSection")}
         </Heading>
         <SectionPartnership data={PARTNERSHIP} />
-      </Box>
-      <Box>
-        <SectionProject />
       </Box>
     </LayoutMain>
   );

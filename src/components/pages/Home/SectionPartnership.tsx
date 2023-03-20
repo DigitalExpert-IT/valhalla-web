@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Wrap, WrapItem, Image, Box } from "@chakra-ui/react";
+import { Card, Wrap, WrapItem, Image, Box, Stack } from "@chakra-ui/react";
 
 interface IPartnership {
   name: string;
@@ -12,14 +12,7 @@ interface SectionPartnershipProps {
 
 export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
   return (
-    <Card
-      variant="gradient"
-      colorScheme="purple"
-      p={{ base: 10, md: 20 }}
-      align="center"
-      rounded="xl"
-      mt="20"
-    >
+    <Stack>
       <Wrap spacing="5" justify="center">
         {props.data.map((item, idx) => (
           <WrapItem key={idx}>
@@ -33,6 +26,6 @@ export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
           </WrapItem>
         ))}
       </Wrap>
-    </Card>
+    </Stack>
   );
 };

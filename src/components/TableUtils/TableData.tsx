@@ -59,8 +59,9 @@ export const TableData = <Data extends object>({
                     <Text
                       fontWeight="bold"
                       fontSize={{ base: "sm", md: "lg" }}
-                      mx="1"
-                      textTransform="capitalize"
+                      mx="2"
+                      my="4"
+                      textTransform="uppercase"
                     >
                       {flexRender(
                         header.column.columnDef.header,

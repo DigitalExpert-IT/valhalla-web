@@ -31,6 +31,7 @@ export const SectionTeam: React.FC<SectionTeamProps> = props => {
     <Box h={"100vh"}>
       <Box>
         <Image
+          display={{ base: "none", md: "block" }}
           src="assets/pattern-2.png"
           h={"100vh"}
           w={"100vw"}
@@ -51,8 +52,8 @@ export const SectionTeam: React.FC<SectionTeamProps> = props => {
               _after={{
                 content: `'${t("pages.home.teamSection.subTitle")}'`,
                 display: "block",
-                fontSize: { md: "130", xs: "80", base: "50" },
-                mt: { md: "-20", xs: "-16", base: "-12" },
+                fontSize: { md: "130", base: "130" },
+                mt: { md: "-20", base: "-20" },
                 color: "whiteAlpha.100",
                 textAlign: "center",
               }}
@@ -86,10 +87,13 @@ export const SectionTeam: React.FC<SectionTeamProps> = props => {
                   objectFit={"contain"}
                 />
                 <Box my="5" textAlign={"center"}>
-                  <Text fontSize="xl" fontWeight="bold">
+                  <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="bold">
                     {item.name}
                   </Text>
-                  <Text fontSize="lg" textTransform="capitalize">
+                  <Text
+                    fontSize={{ base: "sm", md: "lg" }}
+                    textTransform="capitalize"
+                  >
                     {item.division}
                   </Text>
                 </Box>

@@ -45,6 +45,7 @@ const columns = [
         fontWeight="bold"
         fontSize={{ base: "sm", md: "md" }}
         textTransform="capitalize"
+        ml="1"
       >
         {info.getValue()}
       </Text>
@@ -57,6 +58,7 @@ const columns = [
         fontWeight="bold"
         fontSize={{ base: "sm", md: "md" }}
         textTransform="capitalize"
+        ml="1"
       >
         {info.getValue()}
       </Text>

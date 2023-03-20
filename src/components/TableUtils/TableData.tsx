@@ -58,8 +58,8 @@ export const TableData = <Data extends object>({
                   <Th key={header.id} isNumeric={meta?.isNumeric}>
                     <Text
                       fontWeight="bold"
-                      mx="2"
                       fontSize={{ base: "sm", md: "lg" }}
+                      mx="1"
                       textTransform="capitalize"
                     >
                       {flexRender(

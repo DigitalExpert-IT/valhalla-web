@@ -1,6 +1,8 @@
 import { Box, Heading, Image, Stack, Wrap, WrapItem } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 export const SectionPatnershipv2 = () => {
+  const { t } = useTranslation();
   return (
     <Stack>
       <Heading
@@ -8,7 +10,7 @@ export const SectionPatnershipv2 = () => {
         textAlign="center"
         textTransform="uppercase"
         _after={{
-          content: `'patnership'`,
+          content: `${t("pages.home.patnership.title")}`,
           alignSelf: "center",
           display: "block",
           fontSize: { md: "111", base: "90" },
@@ -17,7 +19,7 @@ export const SectionPatnershipv2 = () => {
           textAlign: "center",
         }}
       >
-        patnership
+        {t("pages.home.patnership.title")}
       </Heading>
       <Box display="flex" position="relative">
         <Image

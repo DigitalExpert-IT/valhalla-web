@@ -151,6 +151,9 @@
     "project":{
       "title":"Project",
       "description":"All applications and utilities will be built on a decentralized network platform"
+    },
+    "patnership":{
+      "title":"PATNERSHIP"
     }
   },
   "nftFarming": {

@@ -1,6 +1,6 @@
 import React from "react";
-import { Wrap, WrapItem, Image, Box, Stack, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Wrap, WrapItem, Image, Box, Stack, Heading } from "@chakra-ui/react";
 
 interface IPartnership {
   name: string;
@@ -16,37 +16,36 @@ export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
   return (
     <Stack py="10">
       <Heading
-        textTransform="uppercase"
         _after={{
-          content: `'${t("pages.home.partnershipSection")}'`,
-          alignSelf: "center",
           display: "block",
-          // mt: "-8",
+          textAlign: "center",
+          alignSelf: "center",
+          color: "whiteAlpha.100",
           transform: {
             md: "scale(3) translateY(-10px)",
             base: "scale(3) translateY(-10px) translateX(35px)",
           },
-          color: "whiteAlpha.100",
-          textAlign: "center",
+          content: `'${t("pages.home.partnershipSection")}'`,
         }}
         mb={{ md: "100", base: "50" }}
+        textTransform="uppercase"
       >
         {t("pages.home.partnershipSection")}
       </Heading>
       <Box display="flex" position="relative">
         <Image
-          src="assets/partnership/bg-partnership.png"
-          position="absolute"
-          opacity="0.7"
           top="41"
+          opacity="0.7"
+          position="absolute"
           alt="background partnership"
+          src="assets/partnership/bg-partnership.png"
         ></Image>
         <Image
           src="assets/partnership/bg-support.png"
-          position="absolute"
           alt="background partnership"
-          top="-15"
+          position="absolute"
           opacity="0.5"
+          top="-15"
         ></Image>
       </Box>
       <Wrap spacing="5" justify="center" zIndex={1}>

@@ -13,7 +13,6 @@ import {
   TableRankBonus,
   TableRankNetwork,
   TableTokenomic,
-  BackgroundHome,
   SectionProject,
 } from "components";
 

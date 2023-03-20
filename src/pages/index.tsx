@@ -15,6 +15,7 @@ import {
   TableTokenomic,
   BackgroundHome,
   SectionProject,
+  SectionPatnershipv2,
 } from "components";
 
 export default function Home() {
@@ -47,8 +48,11 @@ export default function Home() {
         </Heading>
         <SectionPartnership data={PARTNERSHIP} />
       </Box>
-      <Box>
+      <Box py="40">
         <SectionProject />
+      </Box>
+      <Box py="40">
+        <SectionPatnershipv2 />
       </Box>
     </LayoutMain>
   );

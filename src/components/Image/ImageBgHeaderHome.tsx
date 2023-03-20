@@ -12,8 +12,6 @@ export const ImageBgHeaderHome = () => {
       w="full"
       h={{
         base: "100vh",
-        lg: "45rem",
-        "2xl": "43rem",
       }}
       src={"/images/bgHeader.svg"}
       alt={"/images/bgHeader_home.png"}

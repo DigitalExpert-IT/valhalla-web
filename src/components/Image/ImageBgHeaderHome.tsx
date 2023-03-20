@@ -13,8 +13,8 @@ export const ImageBgHeaderHome = () => {
       h={{
         base: "100vh",
       }}
-      src={"/images/bgHeader.svg"}
-      alt={"/images/bgHeader_home.png"}
+      src={"/images/bgHeader_home.png"}
+      alt={"Background"}
     />
   );
 };

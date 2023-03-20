@@ -45,7 +45,6 @@ export const LayoutMain: React.FC<MainProps> = ({ children }) => {
           {cloneElement(children, { ...children.props, index: 0 })}
         </Container>
       )}
-
       <LayoutFooter />
     </Box>
   );

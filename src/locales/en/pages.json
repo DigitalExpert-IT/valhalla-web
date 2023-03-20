@@ -10,7 +10,8 @@
       "subTitle": "TEAM"
     },
     "partnershipSection": "Partnership",
-    "rankNetwork": "<strong>Global network</strong> matic plan",
+    "rankNetwork": "Global network matic plan",
+    "maticPlan": "Matic plan",
     "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
     "tokenomics": "Tokenomics",
     "roadmap": [

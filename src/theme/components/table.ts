@@ -164,6 +164,41 @@ const variantValhalla = definePartsStyle(props => {
   };
 });
 
+const variantValhallaV2 = definePartsStyle(props => {
+  return {
+    table: {
+      borderCollapse: "separate",
+      borderSpacing: "15px",
+    },
+    th: {
+      color: mode("gray.600", "gray.300")(props),
+      border: "1px",
+      textAlign: "center",
+      h: "50px",
+      bgColor: "rgba(19, 8, 65, 0.5)",
+      borderColor: "rgba(19, 8, 65, 0.5)",
+      ...numericStyles,
+    },
+    td: {
+      border: "1px",
+      h: "30px",
+      bgColor: "rgba(19, 8, 65, 0.5)",
+      borderColor: "rgba(19, 8, 65, 0.5)",
+      ...numericStyles,
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
 const variantGradient = definePartsStyle(props => {
   const { colorScheme: c } = props;
   const [c1, c2 = "pink"] = c.split(/\:/);
@@ -294,6 +329,7 @@ const variants = {
   simple: variantSimple,
   striped: variantStripe,
   valhalla: variantValhalla,
+  valhallaV2: variantValhallaV2,
   gradient: variantGradient,
   basic: variantBasic,
   unstyled: defineStyle({}),

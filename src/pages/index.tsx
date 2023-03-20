@@ -23,6 +23,7 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
+      <SectionProject />
       <SectionFeatures />
       <SectionFeaturedPopulation />
       <TableRankNetwork />
@@ -49,9 +50,6 @@ export default function Home() {
           overflowX="hidden"
         >
           <Box textAlign="center" py="20">
-            <Heading textTransform="uppercase">
-              {t("pages.home.partnershipSection")}
-            </Heading>
             <SectionPartnership data={PARTNERSHIP} />
           </Box>
         </Container>

@@ -15,7 +15,7 @@ export const PROMOTION_IMAGE_DATA = [
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
     bgColor: "#1A192B",
-    imgCenter: false
+    imgCenter: false,
   },
   {
     uri: "/images/imgHomeFeatures2.png",
@@ -23,21 +23,21 @@ export const PROMOTION_IMAGE_DATA = [
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
     bgColor: "#6D2076",
     imgCenter: false,
-    bgImg: "/images/imgHomeFeatures2-bg.png"
+    bgImg: "/images/imgHomeFeatures2-bg.png",
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
     bgColor: "#080058",
-    imgCenter: true
+    imgCenter: true,
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
     bgColor: "#8E59FF",
-    imgCenter: true
+    imgCenter: true,
   },
 ];
 
@@ -57,15 +57,15 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon-logo.png",
+    image: "/assets/partnership/polygon.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/solidproofv2.svg",
+    image: "/assets/partnership/solid-proof.png",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/gn-patnership.png",
+    image: "/assets/partnership/global-network.png",
   },
 ];
 

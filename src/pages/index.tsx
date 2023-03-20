@@ -13,8 +13,8 @@ import {
   TableRankBonus,
   TableRankNetwork,
   TableTokenomic,
-  BackgroundHome,
   SectionProject,
+  SectionRoadmap,
 } from "components";
 
 export default function Home() {
@@ -29,12 +29,7 @@ export default function Home() {
       <TableRankNetwork />
       <TableRankBonus />
       <SectionMatchingBonus />
-      <Box textAlign="center" my="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.roadmapSection")}
-        </Heading>
-        <WidgetTimeLine />
-      </Box>
+      <SectionRoadmap />
       <TableTokenomic />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { WidgetTimelineItem } from "./WidgetTimlineItem";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Text } from "@chakra-ui/react";
 
 export interface IRoadmap {
   name: string;
@@ -97,6 +97,22 @@ export const WidgetTimeLine = () => {
           </WidgetTimelineItem>
         )
       )}
+    </Box>
+  );
+};
+
+export const WidgetTimeLineLabel = (props: BoxProps) => {
+  const { children, ...rest } = props;
+  return (
+    <Box
+      px={"10"}
+      {...rest}
+      css={{
+        transform: "scale(1.4)",
+        clipPath: "polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%)",
+      }}
+    >
+      {children}
     </Box>
   );
 };

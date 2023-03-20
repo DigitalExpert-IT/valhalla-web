@@ -39,14 +39,14 @@ export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
           position="absolute"
           alt="background partnership"
           src="assets/partnership/bg-partnership.png"
-        ></Image>
+        />
         <Image
           src="assets/partnership/bg-support.png"
           alt="background partnership"
           position="absolute"
           opacity="0.5"
           top="-15"
-        ></Image>
+        />
       </Box>
       <Wrap spacing="5" justify="center" zIndex={1}>
         {props.data.map((item, idx) => (

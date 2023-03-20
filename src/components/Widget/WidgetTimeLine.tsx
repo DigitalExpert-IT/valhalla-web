@@ -18,85 +18,147 @@ export const WidgetTimeLine = () => {
   });
 
   return (
-    <Box display="flex" h="xl" overflowX="auto">
-      {roadmaps.map((item: any, idx: number) =>
-        idx % 2 ? (
-          <WidgetTimelineItem
-            key={idx}
-            boxprops={{
-              top: "5%",
-              height: "2xs",
-              _before: {
-                content: "''",
-                position: "absolute",
-                width: "8",
-                height: "8",
-                bg: item.shades,
-                opacity: "0.3",
-                borderRadius: "100%",
-                border: "4px solid",
-                borderColor: item.shades,
-                top: "calc(100% - 10px)",
-                left: "calc(-6% - 2px)",
-                zIndex: "1",
-              },
-            }}
-            name={item.name}
-            shades={item.shades}
-            headline={item.headline}
-            description={item.description}
+    <Box
+      display="flex"
+      h="xl"
+      overflowX="auto"
+      px={"8"}
+      pb={"10"}
+      justifyContent={{ base: "start", xl: "center" }}
+    >
+      {roadmaps.map((item: any, idx: number) => (
+        // idx % 2 ? (
+        //   <WidgetTimelineItem
+        //     key={idx}
+        //     boxprops={{
+        //       top: "5%",
+        //       height: "2xs",
+        //       _before: {
+        //         content: "''",
+        //         position: "absolute",
+        //         width: "8",
+        //         height: "8",
+        //         bg: item.shades,
+        //         opacity: "0.3",
+        //         borderRadius: "100%",
+        //         border: "4px solid",
+        //         borderColor: item.shades,
+        //         top: "calc(100% - 10px)",
+        //         left: "calc(-6% - 2px)",
+        //         zIndex: "1",
+        //       },
+        //     }}
+        //     name={item.name}
+        //     shades={item.shades}
+        //     headline={item.headline}
+        //     description={item.description}
+        //   >
+        //     <Box
+        //       position="absolute"
+        //       bottom="40%"
+        //       left="calc(30% - 10px)"
+        //       color={item.shades}
+        //     >
+        //       <Text textShadow={`${item.shades} 2px 0 12px`}>{item.name}</Text>
+        //     </Box>
+        //   </WidgetTimelineItem>
+        // ) : (
+        //   <WidgetTimelineItem
+        //     boxprops={{
+        //       pt: "70",
+        //       _before: {
+        //         content: "''",
+        //         position: "absolute",
+        //         width: "8",
+        //         height: "8",
+        //         bg: item.shades,
+        //         opacity: "0.3",
+        //         borderRadius: "100%",
+        //         border: "4px solid",
+        //         borderColor: item.shades,
+        //         top: "-6%",
+        //         left: "calc(-10% + 9px)",
+        //         zIndex: "1",
+        //       },
+        //     }}
+        //     key={idx}
+        //     name={item.name}
+        //     shades={item.shades}
+        //     headline={item.headline}
+        //     description={item.description}
+        //   >
+        //     <Box
+        //       position="absolute"
+        //       top="40%"
+        //       left="calc(30% - 20px)"
+        //       color={item.shades}
+        //     >
+        //       <Text
+        //         fontSize="lg"
+        //         fontWeight="bold"
+        //         textShadow={`${item.shades} 2px 0 12px `}
+        //       >
+        //         {item.name}
+        //       </Text>
+        //     </Box>
+        //   </WidgetTimelineItem>
+        // )
+        <WidgetTimelineItem
+          boxprops={{
+            pt: "70",
+            _before: {
+              content: "''",
+              position: "absolute",
+              width: "8",
+              height: "8",
+              bg: item.shades,
+              opacity: "0.3",
+              borderRadius: "100%",
+              border: "4px solid",
+              borderColor: item.shades,
+              top: "-6%",
+              left: "34.5%",
+              zIndex: "1",
+            },
+            _after: {
+              content: "''",
+              position: "absolute",
+              mx: "auto",
+              width: "1",
+              height: "50%",
+              bg: item.shades,
+              borderColor: item.shades,
+              top: "0",
+              left: "40%",
+              zIndex: "-10",
+            },
+          }}
+          key={idx}
+          name={item.name}
+          shades={item.shades}
+          headline={item.headline}
+          description={item.description}
+        >
+          <Box
+            position="absolute"
+            top="40%"
+            left="0"
+            // right="0"
+            color={item.shades}
           >
-            <Box
-              position="absolute"
-              bottom="40%"
-              left="calc(30% - 10px)"
-              color={item.shades}
+            {/* <Text
+              fontSize="lg"
+              fontWeight="bold"
+              textShadow={`${item.shades} 2px 0 12px `}
             >
-              <Text textShadow={`${item.shades} 2px 0 12px`}>{item.name}</Text>
-            </Box>
-          </WidgetTimelineItem>
-        ) : (
-          <WidgetTimelineItem
-            boxprops={{
-              pt: "70",
-              _before: {
-                content: "''",
-                position: "absolute",
-                width: "8",
-                height: "8",
-                bg: item.shades,
-                opacity: "0.3",
-                borderRadius: "100%",
-                border: "4px solid",
-                borderColor: item.shades,
-                top: "-6%",
-                left: "calc(-10% + 9px)",
-                zIndex: "1",
-              },
-            }}
-            key={idx}
-            name={item.name}
-            shades={item.shades}
-            headline={item.headline}
-            description={item.description}
-          >
-            <Box
-              position="absolute"
-              top="40%"
-              left="calc(30% - 20px)"
-              color={item.shades}
-            >
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                textShadow={`${item.shades} 2px 0 12px `}
-              >
-                {item.name}
-              </Text>
-            </Box>
-          </WidgetTimelineItem>
-        )
-      )}
+              {item.name}
+            </Text> */}
+            <WidgetTimeLineLabel bg={"#5307e2"} zIndex={3}>
+              <Text>{item.name}</Text>
+            </WidgetTimeLineLabel>
+          </Box>
+        </WidgetTimelineItem>
+      ))}
     </Box>
   );
 };

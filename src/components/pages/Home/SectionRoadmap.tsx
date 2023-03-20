@@ -21,7 +21,7 @@ export const SectionRoadmap = () => {
       >
         {t("pages.home.roadmapSection")}
       </Heading>
-      {/* <WidgetTimeLine /> */}
+      <WidgetTimeLine />
       <HStack>
         <WidgetTimeLineLabel bg={"#5307e2"} zIndex={3}>
           <Text>2022</Text>

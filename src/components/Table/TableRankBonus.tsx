@@ -16,7 +16,7 @@ const columns = [
         align="center"
         mx="2"
         my={{ base: "2", md: "3" }}
-        w="xs"
+        w={{ base: "4xs", md: "xs" }}
       >
         {info.getValue().image ? (
           <Image
@@ -107,7 +107,7 @@ export const TableRankBonus = () => {
           alignSelf: "center",
           display: "block",
           fontSize: { base: "40", md: "100", lg: "210" },
-          mt: { base: "-38px", md: "-150px", lg: "-120px" },
+          mt: { base: "-38px", md: "-90px", lg: "-120px" },
           color: "whiteAlpha.100",
           textAlign: "center",
         }}

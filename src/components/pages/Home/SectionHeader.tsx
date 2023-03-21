@@ -56,7 +56,7 @@ export const SectionHeader = () => {
                 as="h1"
                 mt="4"
                 fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
-                bgGradient="linear(to-r, purple.600, #ffff)"
+                bgGradient="linear(to-r, purple.600, #ffffff)"
                 bgClip="text"
               >
                 <Trans i18nKey="pages.home.header.title" />

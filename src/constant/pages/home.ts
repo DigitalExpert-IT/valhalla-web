@@ -69,6 +69,33 @@ export const PARTNERSHIP = [
   },
 ];
 
+export const ROADMAP = [
+  {
+    zIndex: "6",
+    shades: "#e93dcd ",
+  },
+  {
+    zIndex: "5",
+    shades: "#e33de6",
+  },
+  {
+    zIndex: "4",
+    shades: "#7b39c7",
+  },
+  {
+    zIndex: "3",
+    shades: "#7f2ead",
+  },
+  {
+    zIndex: "2",
+    shades: "#a230b7",
+  },
+  {
+    zIndex: "1",
+    shades: "#9d3de9",
+  },
+];
+
 export interface IRankBonus {
   image: string;
   rank: string;

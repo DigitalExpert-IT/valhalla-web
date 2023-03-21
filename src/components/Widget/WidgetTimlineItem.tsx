@@ -16,6 +16,7 @@ export interface IRoadmap {
   name: string;
   headline: string;
   description: IDescription[];
+  zLabel: string;
   shades: string;
 }
 interface WidgetTimeline extends FlexProps, IRoadmap {
@@ -45,7 +46,16 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
       }}
       {...props}
     >
-      {props.children}
+      <Box
+        position="absolute"
+        top="35%"
+        right="5"
+        left="5"
+        my={"4"}
+        zIndex={props.zLabel}
+      >
+        {props.children}
+      </Box>
       <Box
         py="2"
         height="3xs"

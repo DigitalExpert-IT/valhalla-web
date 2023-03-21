@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { WidgetTimelineItem } from "./WidgetTimlineItem";
+import { IRoadmap, WidgetTimelineItem } from "./WidgetTimlineItem";
 import { Box, BoxProps, Text } from "@chakra-ui/react";
-
-export interface IRoadmap {
-  name: string;
-  headline: string;
-  description: string;
-  shades: string;
-}
+import { ROADMAP } from "constant/roadmap";
 
 export const WidgetTimeLine = () => {
   const { t } = useTranslation();
 
   const roadmaps = t<any, any>("pages.home.roadmap", {
     returnObjects: true,
+  });
+
+  const changeRoadmap = roadmaps.map((row: IRoadmap, i: number) => {
+    return { ...row, zIndex: ROADMAP[i].zIndex, shades: ROADMAP[i].shades }
   });
 
   return (
@@ -26,7 +24,7 @@ export const WidgetTimeLine = () => {
       placeItems={"start"}
       justifyContent={{ base: "start", "2xl": "center" }}
     >
-      {roadmaps.map((item: any, idx: number) => (
+      {changeRoadmap.map((item: any, idx: number) => (
         <WidgetTimelineItem
           boxprops={{
             pt: "70",
@@ -62,19 +60,11 @@ export const WidgetTimeLine = () => {
           shades={item.shades}
           headline={item.headline}
           description={item.description}
+          zLabel={item.zIndex}
         >
-          <Box
-            position="absolute"
-            top="35%"
-            right="5"
-            left="5"
-            my={"4"}
-            zIndex={item.zIndex}
-          >
-            <WidgetTimeLineLabel bg={item.shades} zIndex={3} fontSize={"xl"} fontWeight={"black"}>
-              <Text>{item.name}</Text>
-            </WidgetTimeLineLabel>
-          </Box>
+          <WidgetTimeLineLabel bg={item.shades} fontSize={"xl"} fontWeight={"black"}>
+            <Text>{item.name}</Text>
+          </WidgetTimeLineLabel>
         </WidgetTimelineItem>
       ))}
     </Box>

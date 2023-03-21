@@ -13,7 +13,6 @@
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
-        "zIndex": "6",
         "name": "2022",
         "headline": "Oct - Dec 2022",
         "description": [
@@ -32,11 +31,9 @@
           {
             "title": "GNET token swap"
           }
-        ],
-        "shades": "#e93dcd "
+        ]
       },
       {
-        "zIndex": "5",
         "name": "Q1 2023",
         "headline": "Jan - Mar 2023",
         "description": [
@@ -58,11 +55,9 @@
           {
             "title": "Telegram special registered address"
           }
-        ],
-        "shades": "#e33de6"
+        ]
       },
       {
-        "zIndex": "4",
         "name": "Q2 2023",
         "headline": "Apr - Jun 2023",
         "description": [
@@ -78,11 +73,9 @@
           {
             "title": "Network NFT market development"
           }
-        ],
-        "shades": "#7b39c7"
+        ]
       },
       {
-        "zIndex": "3",
         "name": "Q3 2023",
         "headline": "Jul - Sep 2023",
         "description": [
@@ -95,11 +88,9 @@
           {
             "title": "Royalty property program development"
           }
-        ],
-        "shades": "#7f2ead"
+        ]
       },
       {
-        "zIndex": "2",
         "name": "Q4 2023",
         "headline": "Oct - Dec 2023",
         "description": [
@@ -115,11 +106,9 @@
           {
             "title": "Venture capital program"
           }
-        ],
-        "shades": "#a230b7"
+        ]
       },
       {
-        "zIndex": "1",
         "name": "2024",
         "headline": "Oct - Dec 2023",
         "description": [
@@ -135,8 +124,7 @@
           {
             "title": "New event community"
           }
-        ],
-        "shades": "#9d3de9"
+        ]
       }
     ],
     "header": {

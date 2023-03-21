@@ -17,6 +17,7 @@ export const SectionRoadmap = () => {
           mt: { md: "-20", xs: "-16", base: "-12" },
           color: "whiteAlpha.100",
           textAlign: "center",
+          textTransform: "uppercase"
         }}
       >
         {t("pages.home.roadmapSection")}

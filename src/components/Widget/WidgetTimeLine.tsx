@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { IRoadmap, WidgetTimelineItem } from "./WidgetTimlineItem";
 import { Box, BoxProps, Text } from "@chakra-ui/react";

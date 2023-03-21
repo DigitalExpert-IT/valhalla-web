@@ -44,7 +44,7 @@ export const PROMOTION_IMAGE_DATA = [
 export const OURTEAM = [
   {
     name: "Yusuf Kenan Can",
-    image: "/assets/ourteam/yusuf3.png",
+    image: "/assets/ourteam/yusuf-w-bg.JPG",
     division: "Chief Executive Officer",
   },
   {

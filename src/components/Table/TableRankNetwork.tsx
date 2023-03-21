@@ -21,10 +21,15 @@ const columns = [
   columnHelper.accessor("levelBonus", {
     cell: info => (
       <Stack direction="row" align="center">
-        <Icon as={MdOutlineDoubleArrow} color="teal" w={6} h={6} />
+        <Icon
+          as={MdOutlineDoubleArrow}
+          color="teal"
+          w={{ base: "3", md: "6" }}
+          h={{ base: "3", md: "6" }}
+        />
         <Text
           fontWeight="bold"
-          fontSize="lg"
+          fontSize={{ base: "sm", md: "lg" }}
           textTransform="capitalize"
           color="gray.300"
         >
@@ -36,7 +41,12 @@ const columns = [
   }),
   columnHelper.accessor("percent", {
     cell: info => (
-      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+      <Text
+        fontWeight="bold"
+        fontSize={{ base: "sm", md: "md" }}
+        textTransform="capitalize"
+        ml="1"
+      >
         {info.getValue()}
       </Text>
     ),
@@ -44,7 +54,12 @@ const columns = [
   }),
   columnHelper.accessor("value", {
     cell: info => (
-      <Text fontWeight="bold" fontSize="md" textTransform="capitalize">
+      <Text
+        fontWeight="bold"
+        fontSize={{ base: "sm", md: "md" }}
+        textTransform="capitalize"
+        ml="1"
+      >
         {info.getValue()}
       </Text>
     ),
@@ -57,6 +72,7 @@ export const TableRankNetwork = () => {
     <Stack
       textAlign="center"
       mb={40}
+      pt={20}
       align="center"
       justify="center"
       bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
@@ -67,16 +83,16 @@ export const TableRankNetwork = () => {
       </Box>
       <Container maxW="container.xl" zIndex="2" my="20">
         <Heading
-          mb={2}
-          fontSize="5xl"
+          mb={{ base: 10, md: 10, lg: 2 }}
+          fontSize={{ base: "xl", md: "5xl" }}
           textAlign="center"
           textTransform="uppercase"
           _after={{
             content: `'${t("pages.home.maticPlan")}'`,
             alignSelf: "center",
             display: "block",
-            fontSize: { md: "150", base: "90" },
-            mt: { md: "-91px", base: "-68px" },
+            fontSize: { base: "40", md: "100", lg: "150" },
+            mt: { base: "-45px", md: "-150px", lg: "-91px" },
             color: "whiteAlpha.100",
             textAlign: "center",
           }}

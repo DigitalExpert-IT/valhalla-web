@@ -38,9 +38,6 @@ export default function Home() {
         <SectionTeam data={OURTEAM} />
       </Box>
       <Box textAlign="center" py="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.partnershipSection")}
-        </Heading>
         <SectionPartnership data={PARTNERSHIP} />
       </Box>
     </LayoutMain>

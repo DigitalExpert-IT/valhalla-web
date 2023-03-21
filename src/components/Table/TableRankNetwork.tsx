@@ -74,7 +74,6 @@ export const TableRankNetwork = () => {
       pt={20}
       align="center"
       justify="center"
-      bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
       pos="relative"
     >
       <Box pos="absolute" top="80" bottom="0" zIndex="1">
@@ -98,16 +97,16 @@ export const TableRankNetwork = () => {
       >
         <Trans i18nKey="pages.home.rankNetwork" />
       </Heading>
-      <Container maxW="container.xl" zIndex="2" my="20">
-        <TableData
-          data={RANKNETWORK}
-          columns={columns}
-          tableCustom={{
-            variant: "valhallaV2",
-            maxWidth: "50%",
-          }}
-        />
-      </Container>
+
+      <TableData
+        data={RANKNETWORK}
+        columns={columns}
+        tableCustom={{
+          variant: "valhallaV2",
+          maxWidth: "50%",
+          zIndex: "2",
+        }}
+      />
     </Stack>
   );
 };

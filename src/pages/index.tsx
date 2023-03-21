@@ -23,11 +23,24 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <SectionProject />
+      <LayoutItem>
+        <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
+          <SectionProject />
+        </Container>
+      </LayoutItem>
       <SectionFeatures />
-      <SectionFeaturedPopulation />
-      <TableRankNetwork />
-      <TableRankBonus />
+      <LayoutItem withoutContainer>
+        <SectionFeaturedPopulation />
+      </LayoutItem>
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+      >
+        <TableRankNetwork />
+      </LayoutItem>
+      <LayoutItem withoutContainer bgColor="#6D02C9">
+        <TableRankBonus />
+      </LayoutItem>
       <SectionMatchingBonus />
       <Box textAlign="center" my="20">
         <Heading textTransform="uppercase">
@@ -35,20 +48,12 @@ export default function Home() {
         </Heading>
         <WidgetTimeLine />
       </Box>
-      <TableTokenomic />
-      <Box>
-        <SectionProject />
-      </Box>
       <LayoutItem
         withoutContainer
         bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"
       >
         <SectionTeam data={OURTEAM} />
-        <Container
-          minH="55vh"
-          maxW="container.xl"
-          overflowX="hidden"
-        >
+        <Container minH="55vh" maxW="container.xl" overflowX="hidden">
           <Box textAlign="center" py="20">
             <SectionPartnership data={PARTNERSHIP} />
           </Box>

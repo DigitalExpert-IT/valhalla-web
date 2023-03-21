@@ -6,7 +6,7 @@ interface LayoutItemProps extends BoxProps {
   withoutContainer?: boolean;
 }
 
-export const LayoutItem: React.FC<LayoutItemProps> = (props) => {
-  const {withoutContainer, children, ...rest} = props;
+export const LayoutItem: React.FC<LayoutItemProps> = props => {
+  const { withoutContainer, children, ...rest } = props;
   return <Box {...rest}>{props.children}</Box>;
 };

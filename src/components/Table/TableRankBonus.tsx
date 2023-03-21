@@ -92,7 +92,6 @@ export const TableRankBonus = () => {
       pos="relative"
       mb={20}
       pt={40}
-      bgColor="#6D02C9"
     >
       <Box pos="absolute" top="700" bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
@@ -114,13 +113,12 @@ export const TableRankBonus = () => {
       >
         <Trans i18nKey="pages.home.globalrankbonus" />
       </Heading>
-      <Container maxW="container.xl" zIndex="2">
-        <TableData
-          columns={columns}
-          data={RANKBONUS}
-          tableCustom={{ variant: "valhallaV2", maxWidth: "50%" }}
-        />
-      </Container>
+
+      <TableData
+        columns={columns}
+        data={RANKBONUS}
+        tableCustom={{ variant: "valhallaV2", maxWidth: "50%", zIndex: "2" }}
+      />
     </Stack>
   );
 };

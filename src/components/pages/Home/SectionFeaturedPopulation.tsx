@@ -10,36 +10,38 @@ export const SectionFeaturedPopulation = () => {
       alignItems="center"
       position="relative"
     >
-      <Box display={{ lg: "flex", base: "none" }}>
-        <Image
-          src="assets/global-decentralize/globe.png"
-          alt="globe"
-          position="absolute"
-          top="0"
-          transform="scale(0.8) translateX(-200px) translateY(100px)"
-          zIndex="1"
-        />
-        <Image
-          src="assets/global-decentralize/globe-support.png"
-          alt="globe-support"
-          position="absolute"
-          top="0"
-          transform="scale(0.8) translateX(-250px) translateY(20px)"
-          zIndex="2"
-        />
-        <Box
-          top="0"
-          position="absolute"
-          w="100px"
-          h="100px"
-          rounded="full"
-          bg="radial-gradient(38.6% 38.67% at 50.4% 47.9%, #EBEBEB 0%, #C5C5C5 14%, #A2A2A2 24%, #636363 39%, #3D3D3D 55%, #2B2B2B 65%, #1F1F1F 75%, #0C0C0C 87%, #000000 100%)"
-          backgroundBlendMode="color-dodge"
-          mixBlendMode="color-dodge"
-          transform="matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(6rem) translateY(33rem) scale(10.5)"
-          zIndex="3"
-        ></Box>
-      </Box>
+      <Image
+        src="assets/global-decentralize/globe.png"
+        alt="globe"
+        position="absolute"
+        top="0"
+        transform="scale(0.8) translateX(-200px) translateY(100px)"
+        zIndex="1"
+        display={{ base: "none", lg: "block" }}
+      />
+      <Image
+        src="assets/global-decentralize/globe-support.png"
+        alt="globe-support"
+        position="absolute"
+        top="0"
+        transform="scale(0.8) translateX(-250px) translateY(20px)"
+        zIndex="2"
+        display={{ base: "none", lg: "block" }}
+      />
+      <Box
+        display={{ base: "none", lg: "block" }}
+        top="0"
+        position="absolute"
+        w="100px"
+        h="100px"
+        rounded="full"
+        bg="radial-gradient(38.6% 38.67% at 50.4% 47.9%, #EBEBEB 0%, #C5C5C5 14%, #A2A2A2 24%, #636363 39%, #3D3D3D 55%, #2B2B2B 65%, #1F1F1F 75%, #0C0C0C 87%, #000000 100%)"
+        backgroundBlendMode="color-dodge"
+        mixBlendMode="color-dodge"
+        transform="matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(6rem) translateY(33rem) scale(10.5)"
+        zIndex="3"
+      ></Box>
+
       <Container maxW="container.xl" overflowX="hidden">
         <Box
           w={{ lg: "50%", base: "100%" }}

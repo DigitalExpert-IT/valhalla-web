@@ -9,11 +9,11 @@ export const SectionMatchingBonus = () => {
     <Flex
       align="center"
       justify="center"
-      my={{ base: "10", lg: "40" }}
+      pt={"20"}
       flexDir={{ base: "column", md: "row" }}
-      minH={{ base: "56", md: "md" }}
+      minH={{ base: "sm", sm: "md", md: "xl" }}
     >
-      <Box position={"absolute"} zIndex={"hide"} w={"full"}>
+      <Box position={"absolute"} w={"full"}>
         <Image
           src="/images/BgMatchingBonus.png"
           alt="matching-image"
@@ -33,6 +33,7 @@ export const SectionMatchingBonus = () => {
         spacing="3"
         align={"center"}
         textAlign={"center"}
+        zIndex={"10"}
       >
         <Heading
           fontSize={{ base: "4xl", lg: "5xl" }}

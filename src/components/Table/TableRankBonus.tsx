@@ -3,7 +3,7 @@ import { IRankBonus, RANKBONUS } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
-import { Stack, Image, Heading, Text, Container, Box } from "@chakra-ui/react";
+import { Stack, Image, Heading, Text, Box } from "@chakra-ui/react";
 import { t } from "i18next";
 
 const columnHelper = createColumnHelper<IRankBonus>();
@@ -90,7 +90,6 @@ export const TableRankBonus = () => {
       align="center"
       textAlign="center"
       pos="relative"
-      mb={20}
       pt={40}
     >
       <Box pos="absolute" top="700" bottom="0" zIndex="1">

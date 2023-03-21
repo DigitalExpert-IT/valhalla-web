@@ -13,6 +13,7 @@ export const ImageBgHeaderHome = () => {
       h={{
         base: "100vh",
       }}
+      maxH={{ lg: "45rem" }}
       src={"/images/bgHeader_home.png"}
       alt={"Background"}
     />

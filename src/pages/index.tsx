@@ -15,15 +15,18 @@ import {
   TableTokenomic,
   SectionProject,
   SectionRoadmap,
+  ImageBgHeaderHome,
 } from "components";
 import { LayoutItem } from "components/Layout/LayoutItem";
 
 export default function Home() {
-  const { t } = useTranslation();
 
   return (
     <LayoutMain>
-      <SectionHeader />
+      <LayoutItem withoutContainer>
+        <SectionHeader />
+        <ImageBgHeaderHome />
+      </LayoutItem>
       <LayoutItem>
         <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
           <SectionProject />

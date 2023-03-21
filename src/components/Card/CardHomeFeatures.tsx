@@ -27,6 +27,7 @@ export const CardHomeFeatures = (props: CardData) => {
       bg={bgColor}
       minH={{ base: "36", sm: "72" }}
       maxH={"44"}
+      rounded={"3xl"}
     >
       <Flex
         flexDir={"column"}
@@ -52,6 +53,7 @@ export const CardHomeFeatures = (props: CardData) => {
         bottom={"0"}
         mt={"auto"}
         mb={imgCenter ? "auto" : "0.5"}
+        pb={id == 3 || id == 2 ? "4" : "0.5"}
       />
       {bgImg ? (
         <Image

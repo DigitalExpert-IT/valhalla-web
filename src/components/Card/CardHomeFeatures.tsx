@@ -25,13 +25,13 @@ export const CardHomeFeatures = (props: CardData) => {
       position={"relative"}
       overflow={"hidden"}
       bg={bgColor}
-      minH={{ base: "36", sm: "72" }}
+      minH={{ base: "36", sm: "80" }}
       maxH={"44"}
       rounded={"3xl"}
     >
       <Flex
         flexDir={"column"}
-        pr={{ base: "8", lg: "0" }}
+        pr={{ base: "16", sm: "0" }}
         h={"full"}
         zIndex={"3"}
         textAlign={{ base: "start", lg: "center" }}

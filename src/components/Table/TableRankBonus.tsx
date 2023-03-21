@@ -90,7 +90,6 @@ export const TableRankBonus = () => {
       align="center"
       textAlign="center"
       pos="relative"
-      mb={20}
       pt={40}
     >
       <Box pos="absolute" top="700" bottom="0" zIndex="1">

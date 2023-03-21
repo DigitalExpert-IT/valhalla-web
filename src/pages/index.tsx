@@ -1,5 +1,5 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Container, Heading } from "@chakra-ui/react";
+import { Box, Container, Heading, Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeader,
@@ -45,7 +45,12 @@ export default function Home() {
       <LayoutItem withoutContainer bgColor="#6D02C9">
         <TableRankBonus />
       </LayoutItem>
-      <SectionMatchingBonus />
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"
+      >
+        <SectionMatchingBonus />
+      </LayoutItem>
       <LayoutItem
         withoutContainer
         bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"

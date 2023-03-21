@@ -7,7 +7,6 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
-import { WidgetTimeLineLabel } from "./WidgetTimeLine";
 
 interface IDescription {
   title: string;

@@ -5,7 +5,7 @@ import React from "react";
 
 export const SectionRoadmap = () => {
   return (
-    <Box textAlign="center" my="20" pt={"20"}>
+    <Box textAlign="center" pt={"20"}>
       <Heading
         textAlign={"center"}
         mb={8}

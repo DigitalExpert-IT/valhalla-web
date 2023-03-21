@@ -43,9 +43,12 @@ export default function Home() {
         <TableRankBonus />
       </LayoutItem>
       <SectionMatchingBonus />
-      <Box textAlign="center" my="20">
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"
+      >
         <SectionRoadmap />
-      </Box>
+      </LayoutItem>
       <LayoutItem
         withoutContainer
         bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"

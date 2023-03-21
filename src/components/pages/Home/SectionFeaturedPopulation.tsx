@@ -1,63 +1,79 @@
-import {
-  Flex,
-  Box,
-  Heading,
-  Text,
-  AspectRatio,
-  Container,
-} from "@chakra-ui/react";
-import { AnimationGlobe } from "components";
+import { Box, Heading, Text, Container, Image } from "@chakra-ui/react";
 import { Trans } from "react-i18next";
 
 export const SectionFeaturedPopulation = () => {
   return (
-    <Box bgGradient="linear-gradient(180deg, #17106e 0%, #2C1FA7 100%)">
+    <Box
+      bgGradient="linear-gradient(180deg, #17106e 0%, #2C1FA7 100%)"
+      h={{ lg: "100vh", base: "70vh" }}
+      display="flex"
+      alignItems="center"
+      position="relative"
+    >
+      <Box display={{ lg: "flex", base: "none" }}>
+        <Image
+          src="assets/global-decentralize/globe.png"
+          alt="globe"
+          position="absolute"
+          top="0"
+          transform="scale(0.8) translateX(-200px) translateY(100px)"
+          zIndex="1"
+        />
+        <Image
+          src="assets/global-decentralize/globe-support.png"
+          alt="globe-support"
+          position="absolute"
+          top="0"
+          transform="scale(0.8) translateX(-250px) translateY(20px)"
+          zIndex="2"
+        />
+        <Box
+          top="0"
+          position="absolute"
+          w="100px"
+          h="100px"
+          rounded="full"
+          bg="radial-gradient(38.6% 38.67% at 50.4% 47.9%, #EBEBEB 0%, #C5C5C5 14%, #A2A2A2 24%, #636363 39%, #3D3D3D 55%, #2B2B2B 65%, #1F1F1F 75%, #0C0C0C 87%, #000000 100%)"
+          backgroundBlendMode="color-dodge"
+          mixBlendMode="color-dodge"
+          transform="matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(6rem) translateY(33rem) scale(10.5)"
+          zIndex="3"
+        ></Box>
+      </Box>
       <Container maxW="container.xl" overflowX="hidden">
-        <Flex
-          position="relative"
-          overflow="hidden"
-          mx={{ base: "-4", lg: "auto" }}
-          px={{ base: "4", lg: "auto" }}
-          direction="row"
-          alignItems="center"
+        <Box
+          w={{ lg: "50%", base: "100%" }}
+          float="right"
+          textAlign={{ base: "center", lg: "left" }}
         >
-          <Box flex="1" position="relative" zIndex="3">
-            <Heading mb="6">
-              <Trans
-                i18nKey="pages.home.populationSection.title"
-                components={{
-                  strong: (
-                    <Text as="span" fontWeight="bold" color="secondary.500" />
-                  ),
-                }}
-              />
-            </Heading>
-            <Text>
-              <Trans
-                i18nKey="pages.home.populationSection.content"
-                components={{
-                  strong: (
-                    <Text as="span" fontWeight="bold" color="secondary.500" />
-                  ),
-                }}
-              />
-            </Text>
-          </Box>
-          <Box
-            position={{ base: "absolute", lg: "initial" }}
-            right={{ base: "-20", md: "-50%", lg: "auto" }}
-            top={{ base: "50%", lg: "auto" }}
-            transform={{ base: "translateY(-50%)", lg: "initial" }}
-            w={{ base: "200vw", md: "100vw", lg: "auto" }}
-            opacity={{ base: ".8", lg: "auto" }}
-            pointerEvents={{ base: "none", lg: "all" }}
-            flex="2"
-          >
-            <AspectRatio w="full" ratio={{ base: 1, md: 0.8 }}>
-              <AnimationGlobe />
-            </AspectRatio>
-          </Box>
-        </Flex>
+          <Heading mb="6">
+            <Trans
+              i18nKey="pages.home.populationSection.title"
+              components={{
+                strong: (
+                  <Text
+                    as="span"
+                    fontWeight="bold"
+                    bgClip="text"
+                    bgGradient="linear(to-r, purple.600, #ffff)"
+                    _after={{
+                      content: "''",
+                      display: "block",
+                    }}
+                  />
+                ),
+              }}
+            />
+          </Heading>
+          <Text>
+            <Trans
+              i18nKey="pages.home.populationSection.content"
+              components={{
+                strong: <Text as="span" fontWeight="bold" color="blue.500" />,
+              }}
+            />
+          </Text>
+        </Box>
       </Container>
     </Box>
   );

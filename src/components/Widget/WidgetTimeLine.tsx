@@ -60,7 +60,7 @@ export const WidgetTimeLine = () => {
           shades={item.shades}
           headline={item.headline}
           description={item.description}
-          zLabel={changeRoadmap.length - idx}
+          zlabel={changeRoadmap.length - idx}
         >
           <WidgetTimeLineLabel
             bg={item.shades}

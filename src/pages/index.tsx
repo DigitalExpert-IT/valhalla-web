@@ -1,5 +1,5 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Container, Heading, Image } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeader,
@@ -53,7 +53,7 @@ export default function Home() {
       </LayoutItem>
       <LayoutItem
         withoutContainer
-        bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"
+        bgGradient="linear(#2C1FA7 0%, #6D02C9 10%, #2C1FA7 30%)"
       >
         <SectionRoadmap />
       </LayoutItem>

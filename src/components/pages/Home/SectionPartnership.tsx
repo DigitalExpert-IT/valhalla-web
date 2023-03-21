@@ -14,7 +14,7 @@ interface SectionPartnershipProps {
 export const SectionPartnership: React.FC<SectionPartnershipProps> = props => {
   const { t } = useTranslation();
   return (
-    <Stack py="10">
+    <Stack py="10" w="full" overflow="hidden">
       <Heading
         _after={{
           display: "block",

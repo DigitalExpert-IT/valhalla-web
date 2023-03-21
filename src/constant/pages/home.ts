@@ -44,7 +44,7 @@ export const PROMOTION_IMAGE_DATA = [
 export const OURTEAM = [
   {
     name: "Yusuf Kenan Can",
-    image: "/assets/ourteam/yusuf3.png",
+    image: "/assets/ourteam/yusuf-w-bg.JPG",
     division: "Chief Executive Officer",
   },
   {
@@ -57,15 +57,15 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon-logo.png",
+    image: "/assets/partnership/polygon.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/solidproofv2.svg",
+    image: "/assets/partnership/solid-proof.png",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/gn-patnership.png",
+    image: "/assets/partnership/global-network.png",
   },
 ];
 

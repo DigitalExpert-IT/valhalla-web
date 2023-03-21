@@ -9,38 +9,40 @@ export const SectionMatchingBonus = () => {
     <Flex
       align="center"
       justify="center"
+      my={{ base: "10", lg: "40" }}
       flexDir={{ base: "column", md: "row" }}
+      minH={{ base: "56", md: "md" }}
     >
-      <Box w={{ base: "100%", md: "60%" }}>
+      <Box position={"absolute"} zIndex={"hide"} w={"full"}>
         <Image
-          src="/matching-bonus.svg"
+          src="/images/BgMatchingBonus.png"
           alt="matching-image"
+          mx={"auto"}
           objectFit="cover"
+          w={"full"}
+          minH={"60"}
+          maxW={"7xl"}
         />
       </Box>
       <Stack
+        maxW={"md"}
         flex={1}
         display="flex"
         flexDir="column"
         justifyContent="center"
         spacing="3"
-        align={{ base: "center", md: "unset" }}
-        textAlign={{ base: "justify", md: "justify" }}
+        align={"center"}
+        textAlign={"center"}
       >
-        <Heading size={{ base: "2xl", md: "3xl" }}>
-          <Trans
-            i18nKey="pages.home.matchingBonus.title"
-            components={{
-              strong: (
-                <Text as="span" color="purple.500" textTransform="uppercase" />
-              ),
-            }}
-          />
+        <Heading
+          fontSize={{ base: "4xl", lg: "5xl" }}
+          textTransform="capitalize"
+        >
+          <Trans i18nKey={"pages.home.matchingBonus.title"} />
         </Heading>
-        <Heading textTransform="capitalize">
-          {t("pages.home.matchingBonus.subtitle")}
-        </Heading>
-        <Text fontSize="lg">{t("pages.home.matchingBonus.description")}</Text>
+        <Text fontSize={{ base: "md", lg: "lg" }}>
+          {t("pages.home.matchingBonus.description")}
+        </Text>
       </Stack>
     </Flex>
   );

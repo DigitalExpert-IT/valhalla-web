@@ -5,7 +5,10 @@
   },
   "home": {
     "roadmapSection": "Roadmap",
-    "teamSection": "Our team members",
+    "teamSection": {
+      "title": "Our Team Member",
+      "subTitle": "TEAM"
+    },
     "partnershipSection": "Partnership",
     "rankNetwork": "Global network matic plan",
     "maticPlan": "Matic plan",
@@ -142,8 +145,7 @@
       }
     },
     "matchingBonus": {
-      "title": "100 <strong>Level</strong>",
-      "subtitle": "Matching bonus",
+      "title": "100 Level <br/> Matching bonus",
       "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },
     "populationSection": {

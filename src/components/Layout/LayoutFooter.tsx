@@ -12,7 +12,7 @@ export const LayoutFooter = () => {
   const { t } = useTranslation();
 
   return (
-    <Box as="footer" w="full" position={"relative"}>
+    <Box as="footer" w="full" position={"relative"} bg={"#6D02C9"}>
       <Box
         bg="#370065"
         overflow={"hidden"}

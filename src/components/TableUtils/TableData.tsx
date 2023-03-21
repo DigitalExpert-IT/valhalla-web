@@ -48,7 +48,7 @@ export const TableData = <Data extends object>({
       justifyContent={{ base: "none", md: "center" }}
       overflowX="auto"
     >
-      <Table width="100%" size="ms" {...tableCustom}>
+      <Table width="100%" size="sm" {...tableCustom}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Tr key={headerGroup.id}>

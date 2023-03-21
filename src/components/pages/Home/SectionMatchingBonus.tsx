@@ -9,8 +9,9 @@ export const SectionMatchingBonus = () => {
     <Flex
       align="center"
       justify="center"
+      my={{ base: "10", lg: "40" }}
       flexDir={{ base: "column", md: "row" }}
-      minH={{base: "56", md:"md"}}
+      minH={{ base: "56", md: "md" }}
     >
       <Box position={"absolute"} zIndex={"hide"} w={"full"}>
         <Image

@@ -14,6 +14,7 @@ import {
   TableRankNetwork,
   TableTokenomic,
   SectionProject,
+  SectionRoadmap,
 } from "components";
 import { LayoutItem } from "components/Layout/LayoutItem";
 
@@ -42,12 +43,12 @@ export default function Home() {
         <TableRankBonus />
       </LayoutItem>
       <SectionMatchingBonus />
-      <Box textAlign="center" my="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.roadmapSection")}
-        </Heading>
-        <WidgetTimeLine />
-      </Box>
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"
+      >
+        <SectionRoadmap />
+      </LayoutItem>
       <LayoutItem
         withoutContainer
         bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"

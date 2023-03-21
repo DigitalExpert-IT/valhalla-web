@@ -17,7 +17,7 @@
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
-        "name": "Q4 2022",
+        "name": "2022",
         "headline": "Oct - Dec 2022",
         "description": [
           {
@@ -35,8 +35,7 @@
           {
             "title": "GNET token swap"
           }
-        ],
-        "shades": "teal"
+        ]
       },
       {
         "name": "Q1 2023",
@@ -60,8 +59,7 @@
           {
             "title": "Telegram special registered address"
           }
-        ],
-        "shades": "pink"
+        ]
       },
       {
         "name": "Q2 2023",
@@ -79,8 +77,7 @@
           {
             "title": "Network NFT market development"
           }
-        ],
-        "shades": "green"
+        ]
       },
       {
         "name": "Q3 2023",
@@ -95,8 +92,7 @@
           {
             "title": "Royalty property program development"
           }
-        ],
-        "shades": "blue.400"
+        ]
       },
       {
         "name": "Q4 2023",
@@ -114,8 +110,25 @@
           {
             "title": "Venture capital program"
           }
-        ],
-        "shades": "orange"
+        ]
+      },
+      {
+        "name": "2024",
+        "headline": "Oct - Dec 2023",
+        "description": [
+          {
+            "title": "Private sale new token project launch"
+          },
+          {
+            "title": "Venture capital start"
+          },
+          {
+            "title": "New metaverse product"
+          },
+          {
+            "title": "New event community"
+          }
+        ]
       }
     ],
     "header": {

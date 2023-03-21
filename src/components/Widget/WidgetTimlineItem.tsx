@@ -16,7 +16,7 @@ export interface IRoadmap {
   name: string;
   headline: string;
   description: IDescription[];
-  zLabel: string;
+  zLabel: number;
   shades: string;
 }
 interface WidgetTimeline extends FlexProps, IRoadmap {

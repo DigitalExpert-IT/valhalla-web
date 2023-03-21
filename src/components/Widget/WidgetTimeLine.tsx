@@ -12,7 +12,7 @@ export const WidgetTimeLine = () => {
   });
 
   const changeRoadmap = roadmaps.map((row: IRoadmap, i: number) => {
-    return { ...row, zIndex: ROADMAP[i].zIndex, shades: ROADMAP[i].shades }
+    return { ...row, shades: ROADMAP[i].shades };
   });
 
   return (
@@ -60,9 +60,13 @@ export const WidgetTimeLine = () => {
           shades={item.shades}
           headline={item.headline}
           description={item.description}
-          zLabel={item.zIndex}
+          zLabel={changeRoadmap.length - idx}
         >
-          <WidgetTimeLineLabel bg={item.shades} fontSize={"xl"} fontWeight={"black"}>
+          <WidgetTimeLineLabel
+            bg={item.shades}
+            fontSize={"xl"}
+            fontWeight={"black"}
+          >
             <Text>{item.name}</Text>
           </WidgetTimeLineLabel>
         </WidgetTimelineItem>

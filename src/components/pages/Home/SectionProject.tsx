@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 export const SectionProject = () => {
   const { t } = useTranslation();
   return (
-    <Container pt="80" minH="55vh" maxW="container.xl">
+    <>
       <Heading
         fontSize="5xl"
         textAlign="center"
@@ -60,6 +60,6 @@ export const SectionProject = () => {
           </UnorderedList>
         </Stack>
       </Stack>
-    </Container>
+    </>
   );
 };

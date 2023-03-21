@@ -71,44 +71,42 @@ export const TableRankNetwork = () => {
   return (
     <Stack
       textAlign="center"
-      mb={40}
       pt={20}
       align="center"
       justify="center"
-      bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
       pos="relative"
     >
       <Box pos="absolute" top="80" bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
       </Box>
-      <Container maxW="container.xl" zIndex="2" my="20">
-        <Heading
-          mb={{ base: 10, md: 10, lg: 2 }}
-          fontSize={{ base: "xl", md: "5xl" }}
-          textAlign="center"
-          textTransform="uppercase"
-          _after={{
-            content: `'${t("pages.home.maticPlan")}'`,
-            alignSelf: "center",
-            display: "block",
-            fontSize: { base: "40", md: "100", lg: "150" },
-            mt: { base: "-45px", md: "-150px", lg: "-91px" },
-            color: "whiteAlpha.100",
-            textAlign: "center",
-          }}
-        >
-          <Trans i18nKey="pages.home.rankNetwork" />
-        </Heading>
-        <TableData
-          data={RANKNETWORK}
-          columns={columns}
-          tableCustom={{
-            variant: "valhallaV2",
-            colorScheme: "valhalla:brand",
-            maxWidth: "50%",
-          }}
-        />
-      </Container>
+
+      <Heading
+        mb={{ base: 10, md: 10, lg: 2 }}
+        fontSize={{ base: "xl", md: "5xl" }}
+        textAlign="center"
+        textTransform="uppercase"
+        _after={{
+          content: `'${t("pages.home.maticPlan")}'`,
+          alignSelf: "center",
+          display: "block",
+          fontSize: { base: "40", md: "100", lg: "150" },
+          mt: { base: "-45px", md: "-150px", lg: "-91px" },
+          color: "whiteAlpha.100",
+          textAlign: "center",
+        }}
+      >
+        <Trans i18nKey="pages.home.rankNetwork" />
+      </Heading>
+
+      <TableData
+        data={RANKNETWORK}
+        columns={columns}
+        tableCustom={{
+          variant: "valhallaV2",
+          maxWidth: "50%",
+          zIndex: "2",
+        }}
+      />
     </Stack>
   );
 };

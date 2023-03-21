@@ -1,5 +1,5 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeader,
@@ -16,6 +16,7 @@ import {
   SectionProject,
   SectionRoadmap,
 } from "components";
+import { LayoutItem } from "components/Layout/LayoutItem";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -23,23 +24,39 @@ export default function Home() {
   return (
     <LayoutMain>
       <SectionHeader />
-      <SectionProject />
+      <LayoutItem>
+        <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
+          <SectionProject />
+        </Container>
+      </LayoutItem>
       <SectionFeatures />
-      <SectionFeaturedPopulation />
-      <TableRankNetwork />
-      <TableRankBonus />
+      <LayoutItem withoutContainer>
+        <SectionFeaturedPopulation />
+      </LayoutItem>
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+      >
+        <TableRankNetwork />
+      </LayoutItem>
+      <LayoutItem withoutContainer bgColor="#6D02C9">
+        <TableRankBonus />
+      </LayoutItem>
       <SectionMatchingBonus />
-      <SectionRoadmap />
-      <TableTokenomic />
       <Box textAlign="center" my="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.teamSection")}
-        </Heading>
+        <SectionRoadmap />
+      </Box>
+      <LayoutItem
+        withoutContainer
+        bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"
+      >
         <SectionTeam data={OURTEAM} />
-      </Box>
-      <Box textAlign="center" py="20">
-        <SectionPartnership data={PARTNERSHIP} />
-      </Box>
+        <Container minH="55vh" maxW="container.xl" overflowX="hidden">
+          <Box textAlign="center" py="20">
+            <SectionPartnership data={PARTNERSHIP} />
+          </Box>
+        </Container>
+      </LayoutItem>
     </LayoutMain>
   );
 }

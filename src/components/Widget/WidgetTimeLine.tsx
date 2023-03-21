@@ -20,89 +20,13 @@ export const WidgetTimeLine = () => {
   return (
     <Box
       display="flex"
-      h="xl"
+      h="md"
       overflowX="auto"
-      px={"8"}
-      pb={"10"}
-      justifyContent={{ base: "start", xl: "center" }}
+      px={"10"}
+      placeItems={"start"}
+      justifyContent={{ base: "start", "2xl": "center" }}
     >
       {roadmaps.map((item: any, idx: number) => (
-        // idx % 2 ? (
-        //   <WidgetTimelineItem
-        //     key={idx}
-        //     boxprops={{
-        //       top: "5%",
-        //       height: "2xs",
-        //       _before: {
-        //         content: "''",
-        //         position: "absolute",
-        //         width: "8",
-        //         height: "8",
-        //         bg: item.shades,
-        //         opacity: "0.3",
-        //         borderRadius: "100%",
-        //         border: "4px solid",
-        //         borderColor: item.shades,
-        //         top: "calc(100% - 10px)",
-        //         left: "calc(-6% - 2px)",
-        //         zIndex: "1",
-        //       },
-        //     }}
-        //     name={item.name}
-        //     shades={item.shades}
-        //     headline={item.headline}
-        //     description={item.description}
-        //   >
-        //     <Box
-        //       position="absolute"
-        //       bottom="40%"
-        //       left="calc(30% - 10px)"
-        //       color={item.shades}
-        //     >
-        //       <Text textShadow={`${item.shades} 2px 0 12px`}>{item.name}</Text>
-        //     </Box>
-        //   </WidgetTimelineItem>
-        // ) : (
-        //   <WidgetTimelineItem
-        //     boxprops={{
-        //       pt: "70",
-        //       _before: {
-        //         content: "''",
-        //         position: "absolute",
-        //         width: "8",
-        //         height: "8",
-        //         bg: item.shades,
-        //         opacity: "0.3",
-        //         borderRadius: "100%",
-        //         border: "4px solid",
-        //         borderColor: item.shades,
-        //         top: "-6%",
-        //         left: "calc(-10% + 9px)",
-        //         zIndex: "1",
-        //       },
-        //     }}
-        //     key={idx}
-        //     name={item.name}
-        //     shades={item.shades}
-        //     headline={item.headline}
-        //     description={item.description}
-        //   >
-        //     <Box
-        //       position="absolute"
-        //       top="40%"
-        //       left="calc(30% - 20px)"
-        //       color={item.shades}
-        //     >
-        //       <Text
-        //         fontSize="lg"
-        //         fontWeight="bold"
-        //         textShadow={`${item.shades} 2px 0 12px `}
-        //       >
-        //         {item.name}
-        //       </Text>
-        //     </Box>
-        //   </WidgetTimelineItem>
-        // )
         <WidgetTimelineItem
           boxprops={{
             pt: "70",
@@ -116,8 +40,8 @@ export const WidgetTimeLine = () => {
               borderRadius: "100%",
               border: "4px solid",
               borderColor: item.shades,
-              top: "-6%",
-              left: "34.5%",
+              top: "39%",
+              left: "40%",
               zIndex: "1",
             },
             _after: {
@@ -128,8 +52,8 @@ export const WidgetTimeLine = () => {
               height: "50%",
               bg: item.shades,
               borderColor: item.shades,
-              top: "0",
-              left: "40%",
+              top: "50%",
+              left: "45.6%",
               zIndex: "-10",
             },
           }}
@@ -141,19 +65,13 @@ export const WidgetTimeLine = () => {
         >
           <Box
             position="absolute"
-            top="40%"
-            left="0"
-            // right="0"
-            color={item.shades}
+            top="35%"
+            right="5"
+            left="5"
+            my={"4"}
+            zIndex={item.zIndex}
           >
-            {/* <Text
-              fontSize="lg"
-              fontWeight="bold"
-              textShadow={`${item.shades} 2px 0 12px `}
-            >
-              {item.name}
-            </Text> */}
-            <WidgetTimeLineLabel bg={"#5307e2"} zIndex={3}>
+            <WidgetTimeLineLabel bg={item.shades} zIndex={3} fontSize={"xl"} fontWeight={"black"}>
               <Text>{item.name}</Text>
             </WidgetTimeLineLabel>
           </Box>
@@ -171,7 +89,7 @@ export const WidgetTimeLineLabel = (props: BoxProps) => {
       {...rest}
       css={{
         transform: "scale(1.4)",
-        clipPath: "polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%)",
+        clipPath: "polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%)",
       }}
     >
       {children}

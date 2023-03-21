@@ -2,7 +2,6 @@ import React from "react";
 import {
   Box,
   Flex,
-  Text,
   FlexProps,
   BoxProps,
   UnorderedList,
@@ -29,15 +28,9 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
   return (
     <Flex
       pos="relative"
-      align="center"
-      m="0"
       _before={{
         content: "''",
-        width: "3xs",
-        height: "1",
-        // bgColor: "gray.700",
-        // top: "calc(50% - 1px)",
-        // left: "calc(50% - 1px)",
+        width: "2xs",
       }}
       _after={{
         content: "''",
@@ -46,20 +39,16 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
         height: "4",
         bg: "white",
         borderRadius: "100%",
-        top: "49%",
         left: "43%",
-        zIndex: "1",
+        zIndex: "991",
+        mt: "24"
       }}
       {...props}
     >
-      {/* <WidgetTimeLineLabel bg={"#5307e2"} zIndex={3}>
-        <Text>2022</Text>
-      </WidgetTimeLineLabel> */}
       {props.children}
       <Box
         py="2"
         height="3xs"
-        pl="5"
         position="absolute"
         textAlign="left"
         w="2xs"
@@ -67,18 +56,16 @@ export const WidgetTimelineItem: React.FC<WidgetTimeline> = props => {
         {...props.boxprops}
       >
         <Box
-          minH={"56"}
-          maxW={"48"}
+          minH={"48"}
+          mt={"24"}
+          mx={"4"}
           p={"4"}
-          bg={"yellow.800"}
+          bg={props.shades}
           roundedTopLeft={"3xl"}
           roundedBottomRight={"3xl"}
           fontSize={"sm"}
           zIndex={"99"}
         >
-          <Text mb="3" fontWeight="bold" textTransform="capitalize">
-            {props.headline}
-          </Text>
           <UnorderedList>
             {props.description.map((item, idx) => (
               <ListItem key={idx}>{item.title}</ListItem>

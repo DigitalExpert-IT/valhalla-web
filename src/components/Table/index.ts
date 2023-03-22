@@ -3,3 +3,4 @@ export * from "./TableRankBonus";
 export * from "./TableRankNetwork";
 export * from "./TableTokenomic";
 export * from "./TableRankNFTBonus";
+export * from "./TableRankNetworkV2";

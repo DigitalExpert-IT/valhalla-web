@@ -6,3 +6,7 @@ export * from "./SectionMatchingBonus";
 export * from "./SectionFeaturedPopulation";
 export * from "./SectionTeam";
 export * from "./SectionPartnership";
+export * from "./SectionProject";
+export * from "./SectionHeaderV2";
+export * from "./SectionFeaturesV2";
+export * from "./SectionFeaturedPopulationV2";

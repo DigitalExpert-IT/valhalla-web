@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 
 export const SectionProject = () => {
   const { t } = useTranslation();
-
   return (
     <>
       <Heading

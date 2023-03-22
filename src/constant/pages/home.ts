@@ -1,5 +1,7 @@
 import { t } from "i18next";
 
+export * from "./PROJECT_LIST";
+
 export const HEADER_IMAGE_DATA = [
   { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
   { uri: "/images/share-to-earn.png", alt: t("common.shareToEarn") },
@@ -12,21 +14,30 @@ export const PROMOTION_IMAGE_DATA = [
     uri: "/images/imgHomeFeatures1.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
+    bgColor: "#1A192B",
+    imgCenter: false,
   },
   {
     uri: "/images/imgHomeFeatures2.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
+    bgColor: "#6D2076",
+    imgCenter: false,
+    bgImg: "/images/imgHomeFeatures2-bg.png",
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
+    bgColor: "#080058",
+    imgCenter: true,
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
+    bgColor: "#8E59FF",
+    imgCenter: true,
   },
 ];
 
@@ -65,7 +76,7 @@ export const PROMOTION_IMAGE_DATAV2 = [
 export const OURTEAM = [
   {
     name: "Yusuf Kenan Can",
-    image: "/assets/ourteam/yusuf3.png",
+    image: "/assets/ourteam/yusuf-w-bg.JPG",
     division: "Chief Executive Officer",
   },
   {
@@ -78,15 +89,42 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon-logo.png",
+    image: "/assets/partnership/polygon.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/solidproofv2.svg",
+    image: "/assets/partnership/solid-proof.png",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/gn-patnership.png",
+    image: "/assets/partnership/global-network.png",
+  },
+];
+
+export const ROADMAP = [
+  {
+    zIndex: "6",
+    shades: "#e93dcd ",
+  },
+  {
+    zIndex: "5",
+    shades: "#e33de6",
+  },
+  {
+    zIndex: "4",
+    shades: "#7b39c7",
+  },
+  {
+    zIndex: "3",
+    shades: "#7f2ead",
+  },
+  {
+    zIndex: "2",
+    shades: "#a230b7",
+  },
+  {
+    zIndex: "1",
+    shades: "#9d3de9",
   },
 ];
 

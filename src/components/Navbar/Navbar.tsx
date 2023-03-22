@@ -43,7 +43,7 @@ export const Navbar = () => {
       pb="2"
       w="full"
       zIndex={5}
-      bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
+      bg={isOpen ? "#00293E" : scrolled ? "#00293E" : "transparent"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       pos="fixed"
       transition="0.5s"
@@ -61,6 +61,22 @@ export const Navbar = () => {
               isOpen={isOpen}
               onClose={onClose}
             />
+            <Link href="/">
+              <AspectRatio
+                w={isLargethan800 ? 250 : 8}
+                ratio={isLargethan800 ? 16 / 3 : 1}
+                my={{ base: "none", md: 2 }}
+              >
+                <Image
+                  src={
+                    isLargethan800
+                      ? "/assets/logo/gnLogo.png"
+                      : "/assets/logo/gn.png"
+                  }
+                  alt="logo-image"
+                />
+              </AspectRatio>
+            </Link>
             <IconButton
               variant="ghost"
               fontSize="xl"
@@ -69,21 +85,6 @@ export const Navbar = () => {
               display={{ md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Link href="/">
-              <AspectRatio
-                w={isLargethan800 ? 150 : 50}
-                ratio={isLargethan800 ? 5 / 2 : 1}
-              >
-                <Image
-                  src={
-                    isLargethan800
-                      ? "/assets/logo/logo-gn.png"
-                      : "/assets/logo/logo.png"
-                  }
-                  alt="logo-image"
-                />
-              </AspectRatio>
-            </Link>
           </Stack>
           <Stack
             direction="row"

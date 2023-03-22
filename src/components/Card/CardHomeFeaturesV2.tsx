@@ -1,7 +1,7 @@
 import { Card, Image, Text, Flex } from "@chakra-ui/react";
 import React from "react";
 
-export type CardData = {
+export type ICardData = {
   id?: number;
   uri: string;
   title: string;
@@ -11,7 +11,7 @@ export type CardData = {
   imgCenter: boolean;
 };
 
-export const CardHomeFeaturesV2 = (props: CardData) => {
+export const CardHomeFeaturesV2 = (props: ICardData) => {
   const { id, uri, title, subtitle, bgColor, bgImg, imgCenter } = props;
 
   return (

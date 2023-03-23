@@ -82,7 +82,7 @@ export const TableRankNetworkV2 = () => {
 
       <Heading
         mb={{ base: 10, md: 10, lg: 2 }}
-        fontSize={{ base: "xl", md: "5xl" }}
+        fontSize={{ base: "xl", md: "4xl", lg: "5xl" }}
         textAlign="center"
         textTransform="uppercase"
         _after={{
@@ -90,7 +90,7 @@ export const TableRankNetworkV2 = () => {
           alignSelf: "center",
           display: "block",
           fontSize: { base: "40", md: "100", lg: "150" },
-          mt: { base: "-45px", md: "-150px", lg: "-91px" },
+          mt: { base: "-45px", md: "-80px", lg: "-91px" },
           color: "whiteAlpha.100",
           textAlign: "center",
         }}

@@ -16,7 +16,7 @@ const columns = [
         align="center"
         mx="2"
         my={{ base: "2", md: "3" }}
-        w={{ base: "4xs", md: "xs" }}
+        w={{ base: "4xs", md: "4xs", lg: "xs" }}
       >
         {info.getValue().image ? (
           <Image
@@ -116,7 +116,12 @@ export const TableRankBonusV2 = () => {
       <TableData
         columns={columns}
         data={RANKBONUSV2}
-        tableCustom={{ variant: "valhallaV2", maxWidth: "50%", zIndex: "2" }}
+        tableCustom={{
+          variant: "valhallaV2",
+          maxWidth: "50%",
+          zIndex: "2",
+          size: "xs",
+        }}
       />
     </Stack>
   );

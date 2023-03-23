@@ -24,7 +24,7 @@ export const SectionProject = () => {
           content: `'${t("pages.home.project.title")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { md: "111", base: "90" },
+          fontSize: { md: "111", base: "60" },
           mt: { md: "-91px", base: "-68px" },
           color: "whiteAlpha.100",
           textAlign: "center",
@@ -45,7 +45,7 @@ export const SectionProject = () => {
             alt="logo"
             pos="absolute"
             alignSelf="center"
-            w="5xs"
+            w={{ base: "6xs", md: "5xs" }}
           />
         </Box>
         <Stack flex={1} spacing="5">

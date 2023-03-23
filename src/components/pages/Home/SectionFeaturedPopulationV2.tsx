@@ -6,6 +6,7 @@ export const SectionFeaturedPopulationV2 = () => {
     <Box
       bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
       h={{ lg: "100vh", base: "70vh" }}
+      pt={{ base: 20 }}
       display="flex"
       alignItems="center"
       position="relative"

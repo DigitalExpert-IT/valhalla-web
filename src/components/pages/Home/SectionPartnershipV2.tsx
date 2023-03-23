@@ -25,7 +25,7 @@ export const SectionPartnershipV2: React.FC<
           color: "whiteAlpha.100",
           transform: {
             md: "scale(3) translateY(-10px)",
-            base: "scale(3) translateY(-10px) translateX(35px)",
+            base: "scale(3) translateY(-10px) translateX(12px)",
           },
           content: `'${t("pages.home.partnershipSection")}'`,
         }}

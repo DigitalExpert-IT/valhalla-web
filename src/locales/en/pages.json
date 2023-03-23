@@ -235,9 +235,13 @@
         ]
       }
     ],
-    "header": {
+    "headerv2": {
       "title": "Decentralized",
       "subtitle": "<strong>Web3</strong> Network <br/> Marketing Platform"
+    },
+    "header": {
+      "title": "No 1 <strong>Decentralized</strong> Web3 Network Marketing Platform",
+      "subtitle": "The global network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications. Every application and utility will be built on top of the decentralized network marketing referral contract, allowing users to receive royalties from referral sales up to 100 levels."
     },
     "feature": {
       "title": "FEATURES",
@@ -262,6 +266,11 @@
       }
     },
     "matchingBonus": {
+      "title": "100 <strong>Level</strong>",
+      "subtitle": "Matching bonus",
+      "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
+    },
+    "matchingBonusv2": {
       "title": "100 Level <br/> Matching bonus",
       "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },

@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Box } from "@chakra-ui/react";
-import { NavbarV2 } from "components";
-import { LayoutFooter } from "components";
+import { LayoutFooterV2, NavbarV2 } from "components";
 
 interface MainProps {
   children: React.ReactNode;
@@ -11,10 +10,8 @@ export const LayoutMainV2: React.FC<MainProps> = ({ children }) => {
   return (
     <Box>
       <NavbarV2 />
-
-      {children}
-
-      <LayoutFooter />
+      <Box bgColor="#191272">{children}</Box>
+      <LayoutFooterV2 />
     </Box>
   );
 };

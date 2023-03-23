@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 export const SectionFeaturedPopulationV2 = () => {
   return (
     <Box
-      bgGradient="linear-gradient(180deg, #17106e 0%, #2C1FA7 100%)"
+      bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
       h={{ lg: "100vh", base: "70vh" }}
       display="flex"
       alignItems="center"
@@ -55,9 +55,14 @@ export const SectionFeaturedPopulationV2 = () => {
                 strong: (
                   <Text
                     as="span"
+                    style={{
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                    backgroundClip="text"
                     fontWeight="bold"
                     bgClip="text"
-                    bgGradient="linear(to-r, purple.600, #ffff)"
+                    bgGradient="linear-gradient(90deg, #9C29FF 0%, #FFFFFF 100%)"
                     _after={{
                       content: "''",
                       display: "block",

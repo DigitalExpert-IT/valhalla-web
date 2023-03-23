@@ -51,11 +51,11 @@ export const SectionHeaderV2 = () => {
           bgGradient="linear(to-r, #9C29FF, #ffffff)"
           bgClip="text"
         >
-          <Trans i18nKey="pages.home.header.title" />
+          <Trans i18nKey="pages.home.headerv2.title" />
         </Heading>
         <Text fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }} noOfLines={2}>
           <Trans
-            i18nKey="pages.home.header.subtitle"
+            i18nKey="pages.home.headerv2.subtitle"
             components={{
               strong: (
                 <Text

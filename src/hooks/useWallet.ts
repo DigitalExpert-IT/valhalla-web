@@ -107,6 +107,7 @@ export const useWallet = () => {
     await switchChain();
     const wallet = await getWallet();
     await wallet.send("eth_requestAccounts", []);
+    resetAccount();
   };
 
   return { connect, ...store };

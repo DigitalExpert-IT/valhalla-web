@@ -3,41 +3,40 @@ import { IRankBonus, RANKBONUS } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
-import { Box, Image, Heading, Text, Stack } from "@chakra-ui/react";
+import { Box, Image, Heading, Text } from "@chakra-ui/react";
 import { t } from "i18next";
 
 export const TableRankNFTBonus = () => {
   const columnHelper = createColumnHelper<IRankBonus>();
 
   const columns = [
-    columnHelper.accessor("rankData", {
+    columnHelper.accessor("image", {
+      cell: info =>
+        info.getValue() ? (
+          <Image
+            src={info.getValue()}
+            alt="rank-image"
+            w={20}
+            h={20}
+            minH={10}
+            minW={10}
+          />
+        ) : null,
+      header: "",
+    }),
+
+    columnHelper.accessor("rank", {
       cell: info => (
-        <Stack
-          direction="row"
-          align="center"
-          mx="2"
-          my={{ base: "2", md: "3" }}
-          w={{ base: "4xs", md: "xs" }}
+        <Text
+          fontWeight="bold"
+          fontSize="lg"
+          textTransform="capitalize"
+          color={info.cell.row.original.color}
         >
-          {info.getValue().image ? (
-            <Image
-              src={info.getValue().image}
-              alt="rank-image"
-              maxH={12}
-              maxW={12}
-            />
-          ) : null}
-          <Text
-            fontWeight="bold"
-            fontSize="lg"
-            textTransform="capitalize"
-            color={info.cell.row.original.color}
-          >
-            {info.getValue().rank}
-          </Text>
-        </Stack>
+          {info.getValue()}
+        </Text>
       ),
-      header: "Rank",
+      header: t("common.rank") ?? "",
     }),
 
     columnHelper.accessor("pool", {

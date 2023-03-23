@@ -1,5 +1,5 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeader,
@@ -13,61 +13,40 @@ import {
   TableRankBonus,
   TableRankNetwork,
   TableTokenomic,
-  SectionProject,
-  SectionRoadmap,
-  ImageBgHeaderHome,
+  BackgroundHome,
 } from "components";
-import { LayoutItem } from "components/Layout/LayoutItem";
 
 export default function Home() {
+  const { t } = useTranslation();
 
   return (
     <LayoutMain>
-      <LayoutItem withoutContainer>
-        <SectionHeader />
-        <ImageBgHeaderHome />
-      </LayoutItem>
-      <LayoutItem>
-        <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
-          <SectionProject />
-        </Container>
-      </LayoutItem>
+      <SectionHeader />
+      <BackgroundHome />
       <SectionFeatures />
-      <LayoutItem withoutContainer>
-        <SectionFeaturedPopulation />
-      </LayoutItem>
-      <LayoutItem
-        withoutContainer
-        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
-      >
-        <TableRankNetwork />
-      </LayoutItem>
-      <LayoutItem withoutContainer bgColor="#6D02C9">
-        <TableRankBonus />
-      </LayoutItem>
-      <LayoutItem
-        withoutContainer
-        bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)"
-      >
-        <SectionMatchingBonus />
-      </LayoutItem>
-      <LayoutItem
-        withoutContainer
-        bgGradient="linear(#2C1FA7 0%, #6D02C9 10%, #2C1FA7 30%)"
-      >
-        <SectionRoadmap />
-      </LayoutItem>
-      <LayoutItem
-        withoutContainer
-        bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"
-      >
+      <SectionFeaturedPopulation />
+      <TableRankNetwork />
+      <TableRankBonus />
+      <SectionMatchingBonus />
+      <Box textAlign="center" my="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.roadmapSection")}
+        </Heading>
+        <WidgetTimeLine />
+      </Box>
+      <TableTokenomic />
+      <Box textAlign="center" my="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.teamSection")}
+        </Heading>
         <SectionTeam data={OURTEAM} />
-        <Container minH="55vh" maxW="container.xl" overflowX="hidden">
-          <Box textAlign="center" py="20">
-            <SectionPartnership data={PARTNERSHIP} />
-          </Box>
-        </Container>
-      </LayoutItem>
+      </Box>
+      <Box textAlign="center" py="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.partnershipSection")}
+        </Heading>
+        <SectionPartnership data={PARTNERSHIP} />
+      </Box>
     </LayoutMain>
   );
 }

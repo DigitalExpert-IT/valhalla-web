@@ -5,7 +5,8 @@
   },
   "home": {
     "roadmapSection": "Roadmap",
-    "teamSection": {
+    "teamSection": "Our team members",
+    "teamSectionV2": {
       "title": "Our Team Member",
       "subTitle": "TEAM"
     },
@@ -16,6 +17,109 @@
     "globalrankbonus": "<strong>Global Rank</strong> Bonus System",
     "tokenomics": "Tokenomics",
     "roadmap": [
+      {
+        "name": "Q4 2022",
+        "headline": "Oct - Dec 2022",
+        "description": [
+          {
+            "title": "Team formation"
+          },
+          {
+            "title": "Website development"
+          },
+          {
+            "title": "Dapps global network marketing development"
+          },
+          {
+            "title": "Issue GNET token"
+          },
+          {
+            "title": "GNET token swap"
+          }
+        ],
+        "shades": "teal"
+      },
+      {
+        "name": "Q1 2023",
+        "headline": "Jan - Mar 2023",
+        "description": [
+          {
+            "title": "Contract deployed"
+          },
+          {
+            "title": "Global network start"
+          },
+          {
+            "title": "Gnet token swap start"
+          },
+          {
+            "title": "Community building"
+          },
+          {
+            "title": "Genesis NFT launch"
+          },
+          {
+            "title": "Telegram special registered address"
+          }
+        ],
+        "shades": "pink"
+      },
+      {
+        "name": "Q2 2023",
+        "headline": "Apr - Jun 2023",
+        "description": [
+          {
+            "title": "Enlarge community"
+          },
+          {
+            "title": "Share to earn start"
+          },
+          {
+            "title": "Promotional boost"
+          },
+          {
+            "title": "Network NFT market development"
+          }
+        ],
+        "shades": "green"
+      },
+      {
+        "name": "Q3 2023",
+        "headline": "Jul - Sep 2023",
+        "description": [
+          {
+            "title": "New partnership"
+          },
+          {
+            "title": "New NFT product"
+          },
+          {
+            "title": "Royalty property program development"
+          }
+        ],
+        "shades": "blue.400"
+      },
+      {
+        "name": "Q4 2023",
+        "headline": "Oct - Dec 2023",
+        "description": [
+          {
+            "title": "Decentralized product NFT development"
+          },
+          {
+            "title": "New NFT product"
+          },
+          {
+            "title": "Product offering"
+          },
+          {
+            "title": "Venture capital program"
+          }
+        ],
+        "shades": "orange"
+      }
+    ],
+    "roadmapV2": [
       {
         "name": "2022",
         "headline": "Oct - Dec 2022",
@@ -131,9 +235,13 @@
         ]
       }
     ],
-    "header": {
+    "headerv2": {
       "title": "Decentralized",
       "subtitle": "<strong>Web3</strong> Network <br/> Marketing Platform"
+    },
+    "header": {
+      "title": "No 1 <strong>Decentralized</strong> Web3 Network Marketing Platform",
+      "subtitle": "The global network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications. Every application and utility will be built on top of the decentralized network marketing referral contract, allowing users to receive royalties from referral sales up to 100 levels."
     },
     "feature": {
       "title": "FEATURES",
@@ -158,6 +266,11 @@
       }
     },
     "matchingBonus": {
+      "title": "100 <strong>Level</strong>",
+      "subtitle": "Matching bonus",
+      "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
+    },
+    "matchingBonusv2": {
       "title": "100 Level <br/> Matching bonus",
       "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },

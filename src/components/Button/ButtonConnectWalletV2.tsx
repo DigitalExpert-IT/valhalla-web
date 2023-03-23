@@ -6,7 +6,7 @@ import { CopiableText } from "components";
 import { shortenAddress } from "utils";
 import { useRouter } from "next/router";
 
-export const ButtonConnectWallet = () => {
+export const ButtonConnectWalletV2 = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { address, connect, isConnected } = useWallet();
@@ -21,13 +21,7 @@ export const ButtonConnectWallet = () => {
     return (
       <Stack spacing="4" direction="row" align="center">
         {valhalla.account.isRegistered ? null : (
-          <Button
-            px="6"
-            size="sm"
-            variant="outline"
-            colorScheme="brand"
-            onClick={handleNavigate}
-          >
+          <Button px="6" size="sm" variant="outline" onClick={handleNavigate}>
             {t("common.register")}
           </Button>
         )}
@@ -52,7 +46,6 @@ export const ButtonConnectWallet = () => {
             px="6"
             size="sm"
             variant="outline"
-            colorScheme="brand"
             onClick={handleNavigate}
             w="full"
           >
@@ -64,7 +57,7 @@ export const ButtonConnectWallet = () => {
         <Button
           px="6"
           size="sm"
-          colorScheme="brand"
+          variant="outline"
           onClick={connectAsync.exec}
           isLoading={connectAsync.isLoading}
         >

@@ -12,6 +12,7 @@ specifiers:
   '@ebay/nice-modal-react': ^1.2.8
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@fontsource/poppins': ^4.5.10
   '@fontsource/raleway': ^4.5.11
   '@fontsource/roboto': ^4.5.8
   '@metamask/detect-provider': ^2.0.0
@@ -65,6 +66,7 @@ dependencies:
   '@ebay/nice-modal-react': 1.2.8_biqbaboplfbrettd7655fr4n2y
   '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
   '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
+  '@fontsource/poppins': 4.5.10
   '@fontsource/raleway': 4.5.11
   '@fontsource/roboto': 4.5.8
   '@metamask/detect-provider': 2.0.0
@@ -1880,6 +1882,10 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@fontsource/poppins/4.5.10:
+    resolution: {integrity: sha512-oYZVHsnlwV3VWM1SE/m6SUxVh0QLk5+2wB+lBiXcI7N/0KVQWmV9YykaPqfJHBLvmdya+MAOnv+BQHeLU1vOOw==}
     dev: false
 
   /@fontsource/raleway/4.5.11:

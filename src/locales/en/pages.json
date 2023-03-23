@@ -18,7 +18,7 @@
     "tokenomics": "Tokenomics",
     "roadmap": [
       {
-        "name": "Q4 2022",
+        "name": "2022",
         "headline": "Oct - Dec 2022",
         "description": [
           {
@@ -36,8 +36,7 @@
           {
             "title": "GNET token swap"
           }
-        ],
-        "shades": "teal"
+        ]
       },
       {
         "name": "Q1 2023",
@@ -61,8 +60,7 @@
           {
             "title": "Telegram special registered address"
           }
-        ],
-        "shades": "pink"
+        ]
       },
       {
         "name": "Q2 2023",
@@ -80,8 +78,7 @@
           {
             "title": "Network NFT market development"
           }
-        ],
-        "shades": "green"
+        ]
       },
       {
         "name": "Q3 2023",
@@ -96,8 +93,7 @@
           {
             "title": "Royalty property program development"
           }
-        ],
-        "shades": "blue.400"
+        ]
       },
       {
         "name": "Q4 2023",
@@ -115,8 +111,25 @@
           {
             "title": "Venture capital program"
           }
-        ],
-        "shades": "orange"
+        ]
+      },
+      {
+        "name": "2024",
+        "headline": "Oct - Dec 2023",
+        "description": [
+          {
+            "title": "Private sale new token project launch"
+          },
+          {
+            "title": "Venture capital start"
+          },
+          {
+            "title": "New metaverse product"
+          },
+          {
+            "title": "New event community"
+          }
+        ]
       }
     ],
     "roadmapV2": [
@@ -240,8 +253,8 @@
       "subtitle": "<strong>Web3</strong> Network <br/> Marketing Platform"
     },
     "header": {
-      "title": "No 1 <strong>Decentralized</strong> Web3 Network Marketing Platform",
-      "subtitle": "The global network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications. Every application and utility will be built on top of the decentralized network marketing referral contract, allowing users to receive royalties from referral sales up to 100 levels."
+      "title": "Decentralized",
+      "subtitle": "<strong>Web3</strong> Network <br/> Marketing Platform"
     },
     "feature": {
       "title": "FEATURES",
@@ -266,8 +279,7 @@
       }
     },
     "matchingBonus": {
-      "title": "100 <strong>Level</strong>",
-      "subtitle": "Matching bonus",
+      "title": "100 Level <br/> Matching bonus",
       "description": "Get matching up to 100 levels for any project issued by the decentralized global network marketing team"
     },
     "matchingBonusv2": {

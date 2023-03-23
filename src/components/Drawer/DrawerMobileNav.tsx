@@ -39,7 +39,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         <DrawerCloseButton />
         <DrawerHeader>
           <AspectRatio w={50} ratio={1}>
-            <Image src={"/assets/logo/logo.png"} alt="logo-image" />
+            <Image src={"/assets/logo/gn.png"} alt="logo-image" />
           </AspectRatio>
         </DrawerHeader>
         <Stack direction="row" w="full" justify="center" p="2" my="5">

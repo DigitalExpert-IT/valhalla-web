@@ -1,6 +1,5 @@
 import { t } from "i18next";
 export interface IRoadmap {
-  name: string;
   shades: string;
 }
 
@@ -10,24 +9,22 @@ export interface IRoadmapV2 {
 
 export const ROADMAP: Array<IRoadmap> = [
   {
-    name: "Q1 2022",
-    shades: "teal",
+    shades: "#e93dcd ",
   },
   {
-    name: "Q2 2022",
-    shades: "pink",
+    shades: "#e33de6",
   },
   {
-    name: "Q3 2022",
-    shades: "green",
+    shades: "#7b39c7",
   },
   {
-    name: "Q4 2022",
-    shades: "blue",
+    shades: "#7f2ead",
   },
   {
-    name: "Q1 2023",
-    shades: "orange",
+    shades: "#a230b7",
+  },
+  {
+    shades: "#9d3de9",
   },
 ];
 

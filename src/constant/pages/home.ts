@@ -1,5 +1,7 @@
 import { t } from "i18next";
 
+export * from "./PROJECT_LIST";
+
 export const HEADER_IMAGE_DATA = [
   { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
   { uri: "/images/share-to-earn.png", alt: t("common.shareToEarn") },
@@ -12,21 +14,30 @@ export const PROMOTION_IMAGE_DATA = [
     uri: "/images/imgHomeFeatures1.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
+    bgColor: "#1A192B",
+    imgCenter: false,
   },
   {
     uri: "/images/imgHomeFeatures2.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
+    bgColor: "#6D2076",
+    imgCenter: false,
+    bgImg: "/images/imgHomeFeatures2-bg.png",
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
+    bgColor: "#080058",
+    imgCenter: true,
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
+    bgColor: "#8E59FF",
+    imgCenter: true,
   },
 ];
 
@@ -65,7 +76,7 @@ export const PROMOTION_IMAGE_DATAV2 = [
 export const OURTEAM = [
   {
     name: "Yusuf Kenan Can",
-    image: "/assets/ourteam/yusuf3.png",
+    image: "/assets/ourteam/yusuf-w-bg.JPG",
     division: "Chief Executive Officer",
   },
   {
@@ -78,15 +89,42 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon-logo.png",
+    image: "/assets/partnership/polygon.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/solidproofv2.svg",
+    image: "/assets/partnership/solid-proof.png",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/gn-patnership.png",
+    image: "/assets/partnership/global-network.png",
+  },
+];
+
+export const ROADMAP = [
+  {
+    zIndex: "6",
+    shades: "#e93dcd ",
+  },
+  {
+    zIndex: "5",
+    shades: "#e33de6",
+  },
+  {
+    zIndex: "4",
+    shades: "#7b39c7",
+  },
+  {
+    zIndex: "3",
+    shades: "#7f2ead",
+  },
+  {
+    zIndex: "2",
+    shades: "#a230b7",
+  },
+  {
+    zIndex: "1",
+    shades: "#9d3de9",
   },
 ];
 
@@ -105,8 +143,10 @@ export interface IRankBonusV2 {
 }
 
 export interface IRankBonus {
-  image: string;
-  rank: string;
+  rankData: {
+    image: string;
+    rank: string;
+  };
   pool: string;
   level: string;
   downline: string;
@@ -194,19 +234,23 @@ export const RANKNETWORK = [
 
 export const RANKBONUS: Array<IRankBonus> = [
   {
-    image: "/assets/rank/no-rank.svg",
-    rank: "no rank",
+    rankData: {
+      image: "/assets/rank/no-rank.svg",
+      rank: "no rank",
+    },
     pool: "",
     level: "",
     downline: "",
     claim: "",
     maxbuy: "100000",
-    requirement: "-",
+    requirement: "",
     color: "white",
   },
   {
-    image: "/assets/rank/common.svg",
-    rank: "common",
+    rankData: {
+      image: "/assets/rank/common.svg",
+      rank: "common",
+    },
     pool: "3%",
     level: "10 level",
     downline: "100",
@@ -216,8 +260,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#A8742F",
   },
   {
-    image: "/assets/rank/rare.svg",
-    rank: "rare",
+    rankData: {
+      image: "/assets/rank/rare.svg",
+      rank: "rare",
+    },
     pool: "7%",
     level: "20 level",
     downline: "400",
@@ -227,8 +273,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#666768",
   },
   {
-    image: "/assets/rank/super-rare.svg",
-    rank: "super rare",
+    rankData: {
+      rank: "super rare",
+      image: "/assets/rank/super-rare.svg",
+    },
     pool: "12%",
     level: "40 level",
     downline: "2000",
@@ -238,8 +286,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#2A7FB8",
   },
   {
-    image: "/assets/rank/epic.svg",
-    rank: "epic",
+    rankData: {
+      image: "/assets/rank/epic.svg",
+      rank: "epic",
+    },
     pool: "18%",
     level: "60 level",
     downline: "10000",
@@ -249,8 +299,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E7570F",
   },
   {
-    image: "/assets/rank/legend.svg",
-    rank: "legend",
+    rankData: {
+      image: "/assets/rank/legend.svg",
+      rank: "legend",
+    },
     pool: "26%",
     level: "80 level",
     downline: "50000",
@@ -260,8 +312,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#E0475A",
   },
   {
-    image: "/assets/rank/super-legend.svg",
-    rank: "super legend",
+    rankData: {
+      image: "/assets/rank/super-legend.svg",
+      rank: "super legend",
+    },
     pool: "34%",
     level: "100 level",
     downline: "200000",
@@ -271,8 +325,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "#BE7DD8",
   },
   {
-    image: "",
-    rank: "Total",
+    rankData: {
+      image: "",
+      rank: "Total",
+    },
     pool: "100%",
     level: "",
     downline: "",
@@ -282,8 +338,10 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "",
   },
   {
-    image: "",
-    rank: "TAX All downline",
+    rankData: {
+      image: "",
+      rank: "TAX All downline",
+    },
     pool: "10%",
     level: "",
     downline: "",

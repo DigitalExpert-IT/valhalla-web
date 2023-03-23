@@ -52,7 +52,7 @@ export const WidgetTimeLine = () => {
               borderColor: item.shades,
               top: "50%",
               left: "45.6%",
-              zIndex: "-10",
+              zIndex: "0",
             },
           }}
           key={idx}

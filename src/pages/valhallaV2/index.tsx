@@ -1,12 +1,13 @@
 import React from "react";
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Heading, Container } from "@chakra-ui/react";
+import { Container, Box } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeaderV2,
   SectionProject,
   LayoutMainV2,
   WidgetTimeLine,
+  SectionRoadmapV2,
   SectionFeaturedPopulationV2,
   SectionMatchingBonus,
   SectionTeam,
@@ -33,6 +34,14 @@ const ValhallaV2 = () => {
       <SectionFeaturedPopulationV2 />
       <TableRankNetworkV2 />
       <TableRankBonus />
+      <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
+        <SectionMatchingBonus />
+      </Container>
+      <SectionRoadmapV2 />
+      <SectionTeam data={OURTEAM} />
+      <Box textAlign="center" py="20">
+        <SectionPartnership data={PARTNERSHIP} />
+      </Box>
     </LayoutMainV2>
   );
 };

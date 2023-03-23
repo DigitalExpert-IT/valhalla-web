@@ -10,3 +10,4 @@ export * from "./SectionProject";
 export * from "./SectionHeaderV2";
 export * from "./SectionFeaturesV2";
 export * from "./SectionFeaturedPopulationV2";
+export * from "./SectionRoadmapV2";

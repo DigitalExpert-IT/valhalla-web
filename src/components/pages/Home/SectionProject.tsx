@@ -6,14 +6,16 @@ import {
   Stack,
   Text,
   UnorderedList,
+  Container,
 } from "@chakra-ui/react";
-import { PROJECT_LIST } from "constant/pages/PROJECT_LIST";
+import { PROJECT_LIST } from "constant/pages/projectList";
 import { useTranslation } from "react-i18next";
 
 export const SectionProject = () => {
   const { t } = useTranslation();
+
   return (
-    <Stack>
+    <>
       <Heading
         fontSize="5xl"
         textAlign="center"
@@ -22,7 +24,7 @@ export const SectionProject = () => {
           content: `'${t("pages.home.project.title")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { md: "111", base: "90" },
+          fontSize: { md: "111", base: "60" },
           mt: { md: "-91px", base: "-68px" },
           color: "whiteAlpha.100",
           textAlign: "center",
@@ -37,13 +39,14 @@ export const SectionProject = () => {
         alignItems="center"
       >
         <Box flex={1} display="flex" justifyContent="center">
-          <Image src="/assets/project/project.png" alt="project"></Image>
+          <Image src="/assets/project/project.png" alt="project" w="md" />
           <Image
-            src="/assets/project/Group.png"
+            src="/assets/logo/gn.png"
             alt="logo"
             pos="absolute"
             alignSelf="center"
-          ></Image>
+            w={{ base: "6xs", md: "5xs" }}
+          />
         </Box>
         <Stack flex={1} spacing="5">
           <Text fontSize="20">{t("pages.home.project.description")}</Text>
@@ -58,6 +61,6 @@ export const SectionProject = () => {
           </UnorderedList>
         </Stack>
       </Stack>
-    </Stack>
+    </>
   );
 };

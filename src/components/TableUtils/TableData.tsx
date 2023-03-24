@@ -7,7 +7,7 @@ import {
   Th,
   Td,
   Text,
-  Box,
+  TableContainer,
   TableProps,
 } from "@chakra-ui/react";
 import {
@@ -43,8 +43,12 @@ export const TableData = <Data extends object>({
   });
 
   return (
-    <Box overflowX="auto" w="100%">
-      <Table size="sm" w="100%" {...tableCustom}>
+    <TableContainer
+      display="flex"
+      justifyContent={{ base: "none", md: "center" }}
+      overflowX="auto"
+    >
+      <Table width="100%" size="sm" {...tableCustom}>
         <Thead>
           {table.getHeaderGroups().map(headerGroup => (
             <Tr key={headerGroup.id}>
@@ -54,8 +58,10 @@ export const TableData = <Data extends object>({
                   <Th key={header.id} isNumeric={meta?.isNumeric}>
                     <Text
                       fontWeight="bold"
-                      fontSize="lg"
-                      textTransform="capitalize"
+                      fontSize={{ base: "sm", md: "lg" }}
+                      mx="2"
+                      my="4"
+                      textTransform="uppercase"
                     >
                       {flexRender(
                         header.column.columnDef.header,
@@ -83,6 +89,6 @@ export const TableData = <Data extends object>({
           ))}
         </Tbody>
       </Table>
-    </Box>
+    </TableContainer>
   );
 };

@@ -1,7 +1,5 @@
 import { t } from "i18next";
 
-export * from "./PROJECT_LIST";
-
 export const HEADER_IMAGE_DATA = [
   { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
   { uri: "/images/share-to-earn.png", alt: t("common.shareToEarn") },
@@ -14,30 +12,53 @@ export const PROMOTION_IMAGE_DATA = [
     uri: "/images/imgHomeFeatures1.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
-    bgColor: "#1A192B",
-    imgCenter: false
   },
   {
     uri: "/images/imgHomeFeatures2.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
-    bgColor: "#6D2076",
-    imgCenter: false,
-    bgImg: "/images/imgHomeFeatures2-bg.png"
   },
   {
     uri: "/images/imgHomeFeatures3.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
-    bgColor: "#080058",
-    imgCenter: true
   },
   {
     uri: "/images/imgHomeFeatures4.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
+  },
+];
+
+export const PROMOTION_IMAGE_DATAV2 = [
+  {
+    uri: "/images/imgHomeFeatures5.png",
+    title: t("pages.home.sectionFeature.fullTransparency.title"),
+    subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
+    bgColor: "#1A192B",
+    imgCenter: false,
+  },
+  {
+    uri: "/images/imgHomeFeatures6.png",
+    title: t("pages.home.sectionFeature.fullAutomation.title"),
+    subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
+    bgColor: "#6D2076",
+    imgCenter: false,
+    bgImg: "/images/imgHomeFeatures6-bg.png",
+  },
+  {
+    uri: "/images/imgHomeFeatures7.png",
+    title: t("pages.home.sectionFeature.smartContract.title"),
+    subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
+    bgColor: "#080058",
+    imgCenter: true,
+  },
+  {
+    uri: "/images/imgHomeFeatures8.png",
+    title: t("pages.home.sectionFeature.decentralized.title"),
+    subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
     bgColor: "#8E59FF",
-    imgCenter: true
+    imgCenter: true,
   },
 ];
 
@@ -68,6 +89,20 @@ export const PARTNERSHIP = [
     image: "/assets/partnership/gn-patnership.png",
   },
 ];
+
+export interface IRankBonusV2 {
+  rankData: {
+    image: string;
+    rank: string;
+  };
+  pool: string;
+  level: string;
+  downline: string;
+  claim: string;
+  maxbuy: string;
+  color: string;
+  requirement: string;
+}
 
 export interface IRankBonus {
   image: string;
@@ -249,6 +284,126 @@ export const RANKBONUS: Array<IRankBonus> = [
   {
     image: "",
     rank: "TAX All downline",
+    pool: "10%",
+    level: "",
+    downline: "",
+    claim: "",
+    maxbuy: "",
+    requirement: "",
+    color: "white",
+  },
+];
+
+export const RANKBONUSV2: Array<IRankBonusV2> = [
+  {
+    rankData: {
+      image: "/assets/rank/no-rank.svg",
+      rank: "no rank",
+    },
+    pool: "",
+    level: "",
+    downline: "",
+    claim: "",
+    maxbuy: "100000",
+    requirement: "",
+    color: "white",
+  },
+  {
+    rankData: {
+      image: "/assets/rank/common.svg",
+      rank: "common",
+    },
+    pool: "3%",
+    level: "10 level",
+    downline: "100",
+    claim: "50000 NFT Value",
+    maxbuy: "200000",
+    requirement: "-",
+    color: "#A8742F",
+  },
+  {
+    rankData: {
+      image: "/assets/rank/rare.svg",
+      rank: "rare",
+    },
+    pool: "7%",
+    level: "20 level",
+    downline: "400",
+    claim: "200000 NFT Value    ",
+    maxbuy: "1000000",
+    requirement: "2 common rank",
+    color: "#666768",
+  },
+  {
+    rankData: {
+      rank: "super rare",
+      image: "/assets/rank/super-rare.svg",
+    },
+    pool: "12%",
+    level: "40 level",
+    downline: "2000",
+    claim: "1000000 NFT Value",
+    maxbuy: "5000000",
+    requirement: "2 rare rank",
+    color: "#2A7FB8",
+  },
+  {
+    rankData: {
+      image: "/assets/rank/epic.svg",
+      rank: "epic",
+    },
+    pool: "18%",
+    level: "60 level",
+    downline: "10000",
+    claim: "5000000 NFT Value",
+    maxbuy: "20000000",
+    requirement: "2 super rare rank",
+    color: "#E7570F",
+  },
+  {
+    rankData: {
+      image: "/assets/rank/legend.svg",
+      rank: "legend",
+    },
+    pool: "26%",
+    level: "80 level",
+    downline: "50000",
+    claim: "25000000 NFT Value",
+    maxbuy: "100000000",
+    requirement: "2 epic rank",
+    color: "#E0475A",
+  },
+  {
+    rankData: {
+      image: "/assets/rank/super-legend.svg",
+      rank: "super legend",
+    },
+    pool: "34%",
+    level: "100 level",
+    downline: "200000",
+    claim: "100000000 NFT Value",
+    maxbuy: "500000000",
+    requirement: "2 legend rank",
+    color: "#BE7DD8",
+  },
+  {
+    rankData: {
+      image: "",
+      rank: "Total",
+    },
+    pool: "100%",
+    level: "",
+    downline: "",
+    claim: "",
+    maxbuy: "",
+    requirement: "",
+    color: "",
+  },
+  {
+    rankData: {
+      image: "",
+      rank: "TAX All downline",
+    },
     pool: "10%",
     level: "",
     downline: "",

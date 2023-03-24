@@ -1,69 +1,87 @@
 import React from "react";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { SOCIAL } from "constant/navigation";
 import {
   Container,
   Box,
   Text,
+  AspectRatio,
+  Stack,
+  Icon,
   Image,
-  Flex,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 export const LayoutFooter = () => {
   const { t } = useTranslation();
+  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
 
   return (
-    <Box as="footer" w="full" position={"relative"}>
-      <Box
-        bg="#370065"
-        overflow={"hidden"}
-        backgroundImage={"/assets/pattern.png"}
-        backgroundSize={"cover"}
-        backgroundRepeat={"no-repeat"}
-        backgroundPosition={"center"}
-      >
-        <Container maxW="container.lg" py={"2rem"} px={30}>
-          <Flex
-            justify={"center"}
-            gap={{ base: 6, md: 20 }}
-            flexDirection={{ base: "column-reverse", md: "row" }}
-            w={"full"}
-            h={{ base: "unset", md: 100 }}
-          >
-            <Flex
-              alignItems={"center"}
-              flex={"1 1 0 "}
-              w={{ base: "full", md: 0 }}
-            >
-              <Text textAlign={{ base: "center", md: "right" }}>
-                {t("common.footer.description")}
-              </Text>
-            </Flex>
-            <Box
-              w={"1px"}
-              opacity={0.7}
-              bg={"white"}
-              display={{ base: "none", md: "block" }}
-            />
-            <Box
-              display={"flex"}
-              flex={"1 1 0"}
-              alignItems={"center"}
-              justifyContent={{ base: "center", md: "start" }}
-              w={{ base: "full", md: 0 }}
+    <Box as="footer" bg="gray.800" w="full">
+      <Container maxW="container.xl">
+        <Stack
+          as="footer"
+          direction={{ base: "column", md: "row" }}
+          justify="space-between"
+          spacing="10"
+          pt="10"
+        >
+          <Box>
+            <AspectRatio
+              w={isLargethan800 ? 140 : 50}
+              ratio={isLargethan800 ? 5 / 2 : 1}
             >
               <Image
-                w={220}
-                src={"/assets/logo/gnLogo-2.png"}
+                src={
+                  isLargethan800
+                    ? "/assets/logo/logo-gn.png"
+                    : "/assets/logo/logo.png"
+                }
                 alt="logo-image"
-                objectFit={"contain"}
               />
+            </AspectRatio>
+            <Text mt="5">{t("common.footer.description")}</Text>
+          </Box>
+          <Box>
+            <Text fontWeight="bold" fontSize="lg">
+              {t("common.footer.social")}
+            </Text>
+            <Stack spacing={1} mt={4}>
+              {SOCIAL.map((item, idx) => (
+                <Link href={item.href} key={idx}>
+                  <Text textTransform="capitalize">{item.name}</Text>
+                </Link>
+              ))}
+            </Stack>
+          </Box>
+        </Stack>
+        <Box py={10}>
+          <Stack
+            direction={{ base: "column-reverse", md: "row" }}
+            align="center"
+            justify="space-between"
+            textAlign="center"
+            borderTop="1px solid"
+            borderColor="purple.800"
+            pt="6"
+          >
+            <Box>
+              <Text fontSize="sm">
+                &#169; {new Date().getFullYear()} Global Network, All right
+                reserved
+              </Text>
             </Box>
-          </Flex>
-        </Container>
-      </Box>
-      <Flex justify={"center"} py={2}>
-        © 2023 Global Network, All right reserved
-      </Flex>
+            <Stack spacing="4" direction="row">
+              {SOCIAL.map((item, idx) => (
+                <Link href={item.href} key={idx} target="_blank">
+                  <Icon as={item.icon} h={5} w={5} />
+                </Link>
+              ))}
+            </Stack>
+          </Stack>
+        </Box>
+      </Container>
     </Box>
   );
 };

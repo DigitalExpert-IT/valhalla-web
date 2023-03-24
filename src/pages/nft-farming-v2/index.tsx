@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { LayoutMainV2, LazyVideo } from "components";
-import { useNFT } from "hooks";
+import { useAsyncCall, useNFT } from "hooks";
 import { fromBn } from "evm-bn";
 
 interface CardNFTV2Props {
@@ -20,9 +20,16 @@ interface CardNFTV2Props {
   contentTitle: string;
   subtitle: string;
   price: string;
+  id: string;
 }
 
 const CardNFTV2: React.FC<CardNFTV2Props> = props => {
+  const { buy } = useNFT();
+  const buyAsync = useAsyncCall(buy);
+
+  const handleBuy = () => {
+    buyAsync.exec(props.id);
+  };
   return (
     <Box>
       <Heading>{props.title}</Heading>
@@ -36,7 +43,7 @@ const CardNFTV2: React.FC<CardNFTV2Props> = props => {
           <Text>{props.subtitle}</Text>
           <Stack direction="row">
             <Box>{props.price}</Box>
-            <Button>Buy</Button>
+            <Button onClick={handleBuy}>Buy</Button>
           </Stack>
         </Box>
       </Stack>
@@ -86,6 +93,7 @@ const NftFarmingV2 = () => {
                 contentTitle={e.halfingPercentage.toString()}
                 price={fromBn(e.price, 9)}
                 subtitle={""}
+                id={e.id.toString()}
               />
             </WrapItem>
           ))}

@@ -46,7 +46,7 @@ export const SectionProfileV2 = () => {
         py={"6"}
         justify={{ base: "center", xl: "space-between" }}
         wrap={"wrap"}
-        gap="8"
+        gap={{ base: "4", lg: "8" }}
       >
         <WidgetProfileMember
           label={"common.networkMembers"}

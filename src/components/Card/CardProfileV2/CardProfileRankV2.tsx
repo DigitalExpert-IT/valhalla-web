@@ -14,7 +14,7 @@ export const CardProfileRankV2 = () => {
   return (
     <CardProfileV2>
       <Image src={imageUrl} alt="rank-image" mx="auto" h="52" />
-      <Heading my={"2"} textAlign={"center"}>
+      <Heading mt={"4"} textAlign={"center"}>
         {rankMap[account.rank]}
       </Heading>
     </CardProfileV2>

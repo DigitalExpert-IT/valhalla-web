@@ -8,7 +8,7 @@ import { composeHoc } from "utils";
 const Profile = () => {
   return (
     <LayoutMainV2>
-      <LayoutItem bgGradient="linear(#2C1FA7 50%, #6D02C9 100%)" pt="32">
+      <LayoutItem bgGradient="linear(#2C1FA7 50%, #6D02C9 100%)" pt="20">
         <Box position={"absolute"} w={"full"} pt={"20"} zIndex="0">
           <Image
             src="/assets/profile/bg_profile.png"

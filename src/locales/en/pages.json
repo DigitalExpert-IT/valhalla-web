@@ -328,7 +328,8 @@
     }
   },
   "shareToEarn": {
-    "title": "Share To Earn"
+    "title": "Share To Earn",
+    "share": "Share"
   },
   "profile": {
     "header": "MY ACCOUNT"

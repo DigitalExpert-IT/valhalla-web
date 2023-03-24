@@ -1,6 +1,6 @@
 import { SimpleGrid, Heading, Stack, GridItem, Flex } from "@chakra-ui/react";
 import {
-  CardProfileBalaceV2,
+  CardProfileBalanceV2,
   CardProfileRankV2,
   CardProfileAddress,
   CardProfileBonus,
@@ -33,7 +33,7 @@ export const SectionProfileV2 = () => {
           <CardProfileRankV2 />
         </GridItem>
         <GridItem colSpan={{ base: 1, lg: 2 }}>
-          <CardProfileBalaceV2 />
+          <CardProfileBalanceV2 />
         </GridItem>
         <GridItem>
           <CardProfileAddress />

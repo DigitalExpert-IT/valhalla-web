@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
 
-export const CardProfileBalaceV2 = () => {
+export const CardProfileBalanceV2 = () => {
   const { balance } = useWallet();
   const { currency } = useSwap();
   return (
@@ -16,15 +16,15 @@ export const CardProfileBalaceV2 = () => {
       </Text>
       <Box maxW={"xl"} w={"full"} mx={"auto"}>
         <WidgetProfileBalace>
-          <Image src="/assets/logo/logo.png" alt="Profile" w={10} />
+          <Image src="/assets/logo/logo-white.png" alt="Logo GN" w={10} />
           <HStack w={"full"} justifyContent={"center"}>
             <Text>{fromBn(currency.gnet.balance, 9)} GNET</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace>
           <Image
-            src="/assets/partnership/polygon-logo.png"
-            alt="Profile"
+            src="/assets/logo/polygon-logo-white.png"
+            alt="Logo Polygon"
             w={10}
           />
           <HStack w={"full"} justifyContent={"center"}>
@@ -32,7 +32,11 @@ export const CardProfileBalaceV2 = () => {
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace>
-          <Image src="/assets/logo/tether-logo.svg" alt="Profile" w={10} />
+          <Image
+            src="/assets/logo/tether-logo-white.png"
+            alt="Logo Tether"
+            w={10}
+          />
           <HStack w={"full"} justifyContent={"center"}>
             <Text>{prettyBn(currency.usdt.balance, 6)} USDT</Text>
           </HStack>

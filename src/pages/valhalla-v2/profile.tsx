@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { LayoutMain, LayoutMainV2 } from "components";
+import { LayoutMainV2 } from "components";
 import { LayoutItem } from "components/Layout/LayoutItem";
 import { SectionProfileV2 } from "components/pages/Profile";
 import { withConnection } from "hoc";

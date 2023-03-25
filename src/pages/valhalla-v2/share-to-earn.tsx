@@ -15,7 +15,7 @@ import { FormShareToEarnV2 } from "components/Form/FormShareToEarnV2";
 import { SHARE_MEDIA } from "constant/pages/share";
 import { useTranslation } from "react-i18next";
 
-const Share = () => {
+const ShareToEarn = () => {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
@@ -109,4 +109,4 @@ const Share = () => {
   );
 };
 
-export default Share;
+export default ShareToEarn;

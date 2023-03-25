@@ -6,3 +6,4 @@ export * from "./CardHomeFeaturesV2";
 export * from "./CardOwnedFarmNFT";
 export * from "./CardProfile";
 export * from "./CardProfileBalance";
+export * from "./CardProfileV2";

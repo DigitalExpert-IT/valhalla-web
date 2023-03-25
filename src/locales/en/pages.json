@@ -332,6 +332,7 @@
     "share": "Share"
   },
   "profile": {
+    "account": "ACCOUNT",
     "header": "MY ACCOUNT"
   }
 }

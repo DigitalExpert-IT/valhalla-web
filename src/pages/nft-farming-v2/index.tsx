@@ -7,7 +7,6 @@ const NftFarmingV2 = () => {
   return (
     <LayoutMainV2>
       <SectionNFTList />
-
       <SectionGnetProject />
       <Box bgColor="#6D02C9">
         <TableRankBonusV2 />

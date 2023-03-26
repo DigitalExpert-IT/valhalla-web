@@ -122,7 +122,7 @@ const fetchAccount = async () => {
 
 const onBuy = async (...params: [string, BigNumber]) => {
   fetchPool();
-  fetchAccount();
+  // fetchAccount();
   const nft = await getNFTContract();
   const [address, tokenId] = params;
   if (compareAddress(address, useWalletStore.getState().address)) {
@@ -136,30 +136,34 @@ const onBuy = async (...params: [string, BigNumber]) => {
 };
 
 const fetchTokenList = async () => {
-  const address = useWalletStore.getState().address;
-  if (!address) return;
-  const nft = await getNFTContract();
-  const balance = await nft.balanceOf(address);
-  const tokenIds = await Promise.all(
-    Array(balance.toNumber())
-      .fill(null)
-      .map((_, idx) => {
-        return nft.tokenOfOwnerByIndex(address, idx);
+  try {
+    const address = useWalletStore.getState().address;
+    if (!address) return;
+    const nft = await getNFTContract();
+    const balance = await nft.balanceOf(address);
+    const tokenIds = await Promise.all(
+      Array(balance.toNumber())
+        .fill(null)
+        .map((_, idx) => {
+          return nft.tokenOfOwnerByIndex(address, idx);
+        })
+    );
+
+    const nfts = await Promise.all(
+      tokenIds.reverse().map(async tokenId => {
+        const ownedNft = await nft.ownedTokenMap(tokenId);
+        const tokenUri = await nft.tokenURI(tokenId);
+        return { ...ownedNft, id: tokenId, tokenUri };
       })
-  );
+    );
 
-  const nfts = await Promise.all(
-    tokenIds.reverse().map(async tokenId => {
-      const ownedNft = await nft.ownedTokenMap(tokenId);
-      const tokenUri = await nft.tokenURI(tokenId);
-      return { ...ownedNft, id: tokenId, tokenUri };
-    })
-  );
-
-  setState({
-    nftList: nfts.map(nft => nft),
-    balance: balance,
-  });
+    setState({
+      nftList: nfts.map(nft => nft),
+      balance: balance,
+    });
+  } catch (e) {
+    // @todo we got error right here, address dosn't exist
+  }
 };
 
 const resetAccount = () => {
@@ -193,7 +197,7 @@ const init = createInitiator(async () => {
     () => {
       resetAccount();
       fetchTokenList();
-      fetchAccount();
+      // fetchAccount();
     },
     { fireImmediately: true }
   );

@@ -7,8 +7,9 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { CardFarmNFTV2 } from "components/Card";
-import { fromBn } from "evm-bn";
+
 import { useNFT } from "hooks";
+import { prettyBn } from "utils";
 
 export const SectionNFTList = () => {
   const { cardList, isLoading } = useNFT();
@@ -22,7 +23,7 @@ export const SectionNFTList = () => {
         overflow="hidden"
         display="flex"
         w="100vw"
-        h="60vh"
+        h={{ md: "60vh", base: "40vh" }}
       >
         <Heading
           _after={{
@@ -32,12 +33,12 @@ export const SectionNFTList = () => {
             alignSelf: "center",
             color: "whiteAlpha.100",
             transform: {
-              md: "scale(3) translateY(-10px)",
+              md: "scale(3) translateY(-20px)",
               base: "scale(3) translateY(-10px)",
             },
           }}
           textTransform="uppercase"
-          fontSize="6xl"
+          fontSize={{ md: "6xl", base: "4xl" }}
         >
           NFT FARMING
         </Heading>
@@ -57,9 +58,9 @@ export const SectionNFTList = () => {
               p="1rem"
             >
               <CardFarmNFTV2
-                title={`Farm ${e.id.add(1)}`}
                 contentTitle={e.halfingPercentage.toString()}
-                price={fromBn(e.price, 9)}
+                title={`Farm ${e.id.add(1)}`}
+                price={prettyBn(e.price, 9)}
                 id={e.id.toString()}
               />
             </WrapItem>

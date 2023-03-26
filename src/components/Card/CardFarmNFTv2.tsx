@@ -18,7 +18,9 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
   };
   return (
     <Box textAlign="center" rounded="xl" overflow="hidden">
-      <Heading textTransform="uppercase">{props.title}</Heading>
+      <Heading textTransform="uppercase" py="1">
+        {props.title}
+      </Heading>
       <Stack
         rounded="xl"
         color="white"
@@ -30,11 +32,11 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
             <Box as="video" autoPlay loop muted rounded="xl">
               <source src={`/api/image/${props.id}`} type="video/mp4" />
             </Box>
-            <Box>
+            <Box py="1rem">
               <Text fontWeight="600">
                 Farm Level {props.title} Total Return (450 Days)
               </Text>
-              <Text color="#FF00FF">
+              <Text color="#FF00FF" fontSize="md">
                 Gacha:0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
               </Text>
               <Stack alignItems="center" py="1rem">

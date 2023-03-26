@@ -29,7 +29,7 @@ interface UglyButtonProps extends ButtonProps {
   label: string;
 }
 const UglyButton: React.FC<UglyButtonProps> = props => {
-  const { price, label } = props;
+  const { price, label, ...rest } = props;
   return (
     <Box
       bgGradient="linear(to-r, #FF00FF, blue.500)"
@@ -61,6 +61,7 @@ const UglyButton: React.FC<UglyButtonProps> = props => {
           padding="0"
           bg="transparent"
           onClick={props.onClick}
+          {...rest}
         >
           {label}
         </Button>
@@ -98,7 +99,11 @@ const CardNFTV2: React.FC<CardNFTV2Props> = props => {
                 Gacha:0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
               </Text>
               <Stack alignItems="center" py="1rem">
-                <UglyButton price={props.price} label="buy"></UglyButton>
+                <UglyButton
+                  price={props.price}
+                  label="buy"
+                  onClick={handleBuy}
+                ></UglyButton>
               </Stack>
             </Box>
           </Stack>

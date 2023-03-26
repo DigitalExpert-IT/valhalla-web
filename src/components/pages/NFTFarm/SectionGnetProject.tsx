@@ -73,12 +73,7 @@ export const SectionGnetProject = () => {
               />
             </AspectRatio>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            bg="whiteAlpha.100"
-            alignItems="center"
-            display="flex"
-          >
+          <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
               direction="row"
               alignItems="center"
@@ -91,12 +86,7 @@ export const SectionGnetProject = () => {
               </Badge>
             </Stack>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            bg="whiteAlpha.100"
-            alignItems="center"
-            display="flex"
-          >
+          <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
               direction="row"
               alignItems="center"
@@ -109,12 +99,7 @@ export const SectionGnetProject = () => {
               </Badge>
             </Stack>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            bg="whiteAlpha.100"
-            alignItems="center"
-            display="flex"
-          >
+          <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
               direction="row"
               alignItems="center"
@@ -123,21 +108,17 @@ export const SectionGnetProject = () => {
             >
               <Text>Rank Reward Gnet</Text>
               <Badge
-                as={"button"}
+                as={Button}
                 variant="solid"
                 rounded="full"
                 colorScheme={"blue"}
+                p="3"
               >
                 claim
               </Badge>
             </Stack>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            bg="whiteAlpha.100"
-            alignItems="center"
-            display="flex"
-          >
+          <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack direction={"row"} w="20rem" justifyContent="space-between">
               <Text>Farm Matching Bonus</Text>
               <Badge
@@ -145,6 +126,7 @@ export const SectionGnetProject = () => {
                 variant="solid"
                 colorScheme={"blue"}
                 rounded="full"
+                p="3"
               >
                 Claim
               </Badge>

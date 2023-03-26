@@ -15,10 +15,10 @@ export const SectionMatchingRequirment = () => {
       >
         <Heading
           _after={{
-            content: `'Matching'`,
             display: "block",
             textAlign: "center",
             alignSelf: "center",
+            content: `'Matching'`,
             color: "whiteAlpha.100",
             transform: {
               md: "scale(3) translateY(-20px)",

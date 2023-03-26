@@ -1,10 +1,18 @@
-import { Box, Container, Heading, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Heading,
+  Spinner,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import { CardFarmNFTV2 } from "components/Card";
 import { fromBn } from "evm-bn";
 import { useNFT } from "hooks";
 
 export const SectionNFTList = () => {
-  const { cardList } = useNFT();
+  const { cardList, isLoading } = useNFT();
+
   return (
     <Box bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)">
       <Box
@@ -35,6 +43,12 @@ export const SectionNFTList = () => {
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>
+        {isLoading ? (
+          <Box display="flex" justifyContent="center">
+            <Spinner size="xl" />
+          </Box>
+        ) : null}
+
         <Wrap justifyContent="space-around">
           {cardList.map((e, idx) => (
             <WrapItem
@@ -43,10 +57,9 @@ export const SectionNFTList = () => {
               p="1rem"
             >
               <CardFarmNFTV2
-                title={`Farm ${e.id}`}
+                title={`Farm ${e.id.add(1)}`}
                 contentTitle={e.halfingPercentage.toString()}
                 price={fromBn(e.price, 9)}
-                subtitle={"public "}
                 id={e.id.toString()}
               />
             </WrapItem>

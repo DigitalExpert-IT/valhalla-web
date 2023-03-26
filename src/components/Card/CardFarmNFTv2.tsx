@@ -5,7 +5,6 @@ import { useAsyncCall, useNFT } from "hooks";
 interface CardNFTV2Props {
   title: string;
   contentTitle: string;
-  subtitle: string;
   price: string;
   id: string;
 }
@@ -33,7 +32,7 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
             </Box>
             <Box>
               <Text fontWeight="600">
-                Farm Level {props.id} Total Return (450 Days)
+                Farm Level {props.title} Total Return (450 Days)
               </Text>
               <Text color="#FF00FF">
                 Gacha:0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%

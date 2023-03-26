@@ -76,14 +76,20 @@ export const useNftStore = create<IStore>(() => initialState);
 const { setState } = useNftStore;
 
 const loadCardList = async () => {
-  const nft = await getNFTContract();
-  const cardList = await Promise.all(
-    CARD_IDS.map(async cardId => {
-      const card = await nft.cardMap(cardId);
-      return { ...card, id: BigNumber.from(cardId) };
-    })
-  );
-  setState({ cardList });
+  setState({ isLoading: true });
+  try {
+    const nft = await getNFTContract();
+    const cardList = await Promise.all(
+      CARD_IDS.map(async cardId => {
+        const card = await nft.cardMap(cardId);
+        return { ...card, id: BigNumber.from(cardId) };
+      })
+    );
+    setState({ cardList });
+  } catch (e) {
+  } finally {
+    setState({ isLoading: false });
+  }
 };
 
 /**

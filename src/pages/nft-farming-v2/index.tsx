@@ -9,6 +9,7 @@ import {
   Heading,
   WrapItem,
   Container,
+  ButtonProps,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { LayoutMainV2, LazyVideo } from "components";
@@ -23,6 +24,51 @@ interface CardNFTV2Props {
   id: string;
 }
 
+interface UglyButtonProps extends ButtonProps {
+  price: string;
+  label: string;
+}
+const UglyButton: React.FC<UglyButtonProps> = props => {
+  const { price, label } = props;
+  return (
+    <Box
+      bgGradient="linear(to-r, #FF00FF, blue.500)"
+      rounded="lg"
+      w="full"
+      p="1px"
+    >
+      <Stack
+        direction="row"
+        spacing={"0"}
+        w="full"
+        justifyContent="space-between"
+        rounded="lg"
+        bg="#191272"
+      >
+        <Box
+          flex={1}
+          borderRight="1px solid #FF00FF"
+          alignItems="center"
+          display="flex"
+          justifyContent="center"
+          rounded="lg"
+        >
+          {price}
+        </Box>
+        <Button
+          rounded="none"
+          flex={1}
+          padding="0"
+          bg="transparent"
+          onClick={props.onClick}
+        >
+          {label}
+        </Button>
+      </Stack>
+    </Box>
+  );
+};
+
 const CardNFTV2: React.FC<CardNFTV2Props> = props => {
   const { buy } = useNFT();
   const buyAsync = useAsyncCall(buy);
@@ -32,16 +78,16 @@ const CardNFTV2: React.FC<CardNFTV2Props> = props => {
   };
   return (
     <Box textAlign="center" rounded="xl" overflow="hidden">
-      <Heading>{props.title}</Heading>
+      <Heading textTransform="uppercase">{props.title}</Heading>
       <Stack
         rounded="xl"
         color="white"
         bgGradient="linear(130deg, purple, blue.500)"
         p="3px"
       >
-        <Stack bg="#191272" p="1rem" rounded="xl">
+        <Stack bg="#191272" p="1.4rem" rounded="xl">
           <Stack>
-            <Box as="video" autoPlay loop muted rounded="lg">
+            <Box as="video" autoPlay loop muted rounded="xl">
               <source src={`/api/image/${props.id}`} type="video/mp4" />
             </Box>
             <Box>
@@ -52,15 +98,7 @@ const CardNFTV2: React.FC<CardNFTV2Props> = props => {
                 Gacha:0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
               </Text>
               <Stack alignItems="center" py="1rem">
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  border="1px"
-                  w="full"
-                >
-                  <Box>{props.price}</Box>
-                  <Button onClick={handleBuy}>Buy</Button>
-                </Stack>
+                <UglyButton price={props.price} label="buy"></UglyButton>
               </Stack>
             </Box>
           </Stack>
@@ -106,7 +144,11 @@ const NftFarmingV2 = () => {
       <Container maxW={"container.xl"}>
         <Wrap justifyContent="space-around">
           {cardList.map((e, idx) => (
-            <WrapItem w="30%" key={idx} p="1rem">
+            <WrapItem
+              w={{ md: "30%", sm: "45%", base: "100%" }}
+              key={idx}
+              p="1rem"
+            >
               <CardNFTV2
                 title={`Farm ${idx + 1}`}
                 contentTitle={e.halfingPercentage.toString()}

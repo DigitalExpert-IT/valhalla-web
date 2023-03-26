@@ -54,10 +54,10 @@ export const SectionGnetProject = () => {
 
       <Container maxW="container.xl">
         <Grid
+          gap={4}
           h="200px"
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(5, 1fr)"
-          gap={4}
         >
           <GridItem
             rowSpan={2}

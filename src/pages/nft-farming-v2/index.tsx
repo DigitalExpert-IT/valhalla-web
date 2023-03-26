@@ -1,12 +1,13 @@
 import React from "react";
 import { LayoutMainV2 } from "components";
-import { SectionNFTList } from "components/pages/NFTFarm";
-import { Heading } from "@chakra-ui/react";
+import { SectionGnetProject, SectionNFTList } from "components/pages/NFTFarm";
 
 const NftFarmingV2 = () => {
   return (
     <LayoutMainV2>
       <SectionNFTList />
+
+      <SectionGnetProject />
     </LayoutMainV2>
   );
 };

@@ -111,31 +111,29 @@ export const SectionGnetProject = () => {
               w="20rem"
             >
               <Text>Rank Reward Gnet</Text>
-              <Badge
-                as={Button}
+              <Button
                 variant="solid"
                 rounded="full"
                 colorScheme={"blue"}
-                w="100"
                 onClick={claimNftRankRewardAsync.exec}
+                isLoading={claimNftRankRewardAsync.isLoading}
               >
-                claim
-              </Badge>
+                {t("common.claim")}
+              </Button>
             </Stack>
           </GridItem>
           <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack direction={"row"} w="20rem" justifyContent="space-between">
               <Text>Farm Matching Bonus</Text>
-              <Badge
-                as={Button}
+              <Button
                 variant="solid"
                 colorScheme={"blue"}
                 rounded="full"
-                w="100"
                 onClick={claimRewardGnetAsync.exec}
+                isLoading={claimRewardGnetAsync.isLoading}
               >
                 {prettyBn(nft.rankReward, 9) + " " + t("common.claim")}
-              </Badge>
+              </Button>
             </Stack>
           </GridItem>
         </Grid>

@@ -1,6 +1,10 @@
 import React from "react";
 import { LayoutMainV2, TableRankBonusV2 } from "components";
-import { SectionGnetProject, SectionNFTList } from "components/pages/NFTFarm";
+import {
+  SectionGnetProject,
+  SectionNFTList,
+  SectionMatchingRequirment,
+} from "components/pages/NFTFarm";
 import { Box } from "@chakra-ui/react";
 
 const NftFarmingV2 = () => {
@@ -11,6 +15,7 @@ const NftFarmingV2 = () => {
       <Box bgColor="#6D02C9">
         <TableRankBonusV2 />
       </Box>
+      <SectionMatchingRequirment />
     </LayoutMainV2>
   );
 };

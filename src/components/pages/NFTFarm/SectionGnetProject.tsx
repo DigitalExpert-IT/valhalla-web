@@ -60,8 +60,8 @@ export const SectionGnetProject = () => {
           templateColumns="repeat(5, 1fr)"
         >
           <GridItem
-            rowSpan={2}
-            colSpan={1}
+            rowSpan={{ md: 2, base: 1 }}
+            colSpan={{ md: 1, base: 5 }}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -74,9 +74,13 @@ export const SectionGnetProject = () => {
               />
             </AspectRatio>
           </GridItem>
-          <GridItem colSpan={2} alignItems="center" display="flex">
+          <GridItem
+            colSpan={{ md: 2, base: 5 }}
+            alignItems="center"
+            display="flex"
+          >
             <Stack
-              w="20rem"
+              w={{ md: "20rem", base: "full" }}
               direction="row"
               alignItems="center"
               justifyContent="space-between"
@@ -87,9 +91,13 @@ export const SectionGnetProject = () => {
               </Badge>
             </Stack>
           </GridItem>
-          <GridItem colSpan={2} alignItems="center" display="flex">
+          <GridItem
+            colSpan={{ md: 2, base: 5 }}
+            alignItems="center"
+            display="flex"
+          >
             <Stack
-              w="20rem"
+              w={{ md: "20rem", base: "full" }}
               direction="row"
               alignItems="center"
               justifyContent="space-between"
@@ -103,9 +111,13 @@ export const SectionGnetProject = () => {
               </Badge>
             </Stack>
           </GridItem>
-          <GridItem colSpan={2} alignItems="center" display="flex">
+          <GridItem
+            colSpan={{ md: 2, base: 5 }}
+            alignItems="center"
+            display="flex"
+          >
             <Stack
-              w="20rem"
+              w={{ md: "20rem", base: "full" }}
               direction="row"
               alignItems="center"
               justifyContent={"space-between"}
@@ -122,8 +134,16 @@ export const SectionGnetProject = () => {
               </Button>
             </Stack>
           </GridItem>
-          <GridItem colSpan={2} alignItems="center" display="flex">
-            <Stack direction={"row"} w="20rem" justifyContent="space-between">
+          <GridItem
+            colSpan={{ md: 2, base: 5 }}
+            alignItems="center"
+            display="flex"
+          >
+            <Stack
+              direction={"row"}
+              w={{ md: "20rem", base: "full" }}
+              justifyContent="space-between"
+            >
               <Text>Farm Matching Bonus</Text>
               <Button
                 variant="solid"

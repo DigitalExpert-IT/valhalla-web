@@ -1,8 +1,9 @@
-import { Box, Container, Heading } from "@chakra-ui/react";
+import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { NFTMATHCING } from "constant/pages/nftFarming";
 
 export const SectionMatchingRequirment = () => {
   return (
-    <Box>
+    <Box bgGradient="linear(to-b, #6D02C9, #2C1FA7, #6D02C9)">
       <Box
         h={{ md: "60vh", base: "40vh" }}
         justifyContent="center"
@@ -30,7 +31,26 @@ export const SectionMatchingRequirment = () => {
           NFT FARM Matching requirement
         </Heading>
       </Box>
-      <Container maxW={"container.xl"}></Container>
+      <Container maxW={"container.xl"}>
+        <Box h="80vh">
+          <Stack direction="row">
+            <Stack>
+              {NFTMATHCING.map((e, i) => (
+                <Button rounded="none" key={i}>
+                  {e.title}
+                </Button>
+              ))}
+            </Stack>
+            <Box flex={1}>
+              {NFTMATHCING.map((e, i) => (
+                <Text rounded="none" key={i}>
+                  {e.title}
+                </Text>
+              ))}
+            </Box>
+          </Stack>
+        </Box>
+      </Container>
     </Box>
   );
 };

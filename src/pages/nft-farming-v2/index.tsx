@@ -31,21 +31,40 @@ const CardNFTV2: React.FC<CardNFTV2Props> = props => {
     buyAsync.exec(props.id);
   };
   return (
-    <Box>
+    <Box textAlign="center" rounded="xl" overflow="hidden">
       <Heading>{props.title}</Heading>
-      <Stack>
-        {/* <LazyVideo src={`/api/image/1`} objectFit="cover" /> */}
-        <video autoPlay>
-          <source src="/api/image/1" type="video/mp4" />
-        </video>
-        <Box>
-          <Heading>{props.contentTitle}</Heading>
-          <Text>{props.subtitle}</Text>
-          <Stack direction="row">
-            <Box>{props.price}</Box>
-            <Button onClick={handleBuy}>Buy</Button>
+      <Stack
+        rounded="xl"
+        color="white"
+        bgGradient="linear(130deg, purple, blue.500)"
+        p="3px"
+      >
+        <Stack bg="#191272" p="1rem" rounded="xl">
+          <Stack>
+            <Box as="video" autoPlay loop muted rounded="lg">
+              <source src={`/api/image/${props.id}`} type="video/mp4" />
+            </Box>
+            <Box>
+              <Text fontWeight="600">
+                Farm Level {props.id} Total Return (450 Days)
+              </Text>
+              <Text color="#FF00FF">
+                Gacha:0.5%, 0.6%, 0.7%, 0.8%, 1.5%, 2%
+              </Text>
+              <Stack alignItems="center" py="1rem">
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  border="1px"
+                  w="full"
+                >
+                  <Box>{props.price}</Box>
+                  <Button onClick={handleBuy}>Buy</Button>
+                </Stack>
+              </Stack>
+            </Box>
           </Stack>
-        </Box>
+        </Stack>
       </Stack>
     </Box>
   );
@@ -85,14 +104,14 @@ const NftFarmingV2 = () => {
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>
-        <Wrap>
+        <Wrap justifyContent="space-around">
           {cardList.map((e, idx) => (
-            <WrapItem w="30%" key={idx}>
+            <WrapItem w="30%" key={idx} p="1rem">
               <CardNFTV2
                 title={`Farm ${idx + 1}`}
                 contentTitle={e.halfingPercentage.toString()}
                 price={fromBn(e.price, 9)}
-                subtitle={""}
+                subtitle={"public "}
                 id={e.id.toString()}
               />
             </WrapItem>

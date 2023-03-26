@@ -1,15 +1,15 @@
 import { Box, Image } from "@chakra-ui/react";
 import { LayoutMainV2 } from "components";
-import { LayoutItem } from "components/Layout/LayoutItem";
 import { SectionProfileV2 } from "components/pages/Profile";
+import { SectionMyNFTV2 } from "components/pages/NFTFarm";
 import { withConnection } from "hoc";
 import { composeHoc } from "utils";
 
 const Profile = () => {
   return (
     <LayoutMainV2>
-      <LayoutItem bgGradient="linear(#2C1FA7 50%, #6D02C9 100%)" pt="20">
-        <Box position={"absolute"} w={"full"} pt={"20"} zIndex="0">
+      <Box pt="40">
+        <Box position={"absolute"} w={"full"}>
           <Image
             src="/assets/profile/bg_profile.png"
             alt="matching-image"
@@ -20,7 +20,8 @@ const Profile = () => {
           />
         </Box>
         <SectionProfileV2 />
-      </LayoutItem>
+        <SectionMyNFTV2 />
+      </Box>
     </LayoutMainV2>
   );
 };

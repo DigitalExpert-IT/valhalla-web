@@ -97,8 +97,8 @@ export const SectionGnetProject = () => {
               <Text>Global Bonus Gnet</Text>
               <Badge variant="solid" rounded="full" colorScheme={"blue"}>
                 {isRankRewardClaimable
-                  ? prettyBn(globalPool.valueLeft)
-                  : prettyBn(globalPool.claimable)}{" "}
+                  ? prettyBn(globalPool.valueLeft, 18)
+                  : prettyBn(globalPool.claimable, 18)}{" "}
                 MATIC
               </Badge>
             </Stack>
@@ -116,7 +116,7 @@ export const SectionGnetProject = () => {
                 variant="solid"
                 rounded="full"
                 colorScheme={"blue"}
-                p="3"
+                w="100"
                 onClick={claimNftRankRewardAsync.exec}
               >
                 claim
@@ -131,7 +131,7 @@ export const SectionGnetProject = () => {
                 variant="solid"
                 colorScheme={"blue"}
                 rounded="full"
-                p="3"
+                w="100"
                 onClick={claimRewardGnetAsync.exec}
               >
                 {prettyBn(nft.rankReward, 9) + " " + t("common.claim")}

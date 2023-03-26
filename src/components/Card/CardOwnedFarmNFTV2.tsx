@@ -72,7 +72,12 @@ export const CardOwnedFarmNFTV2 = (props: IOwnedNFT) => {
         bgGradient="linear(to-r, #FF00FF, blue.500)"
         borderRadius="xl"
       >
-        <Box borderRadius="xl" bg="#6d02c9" p={{ base: 1.5, sm: 2, md: 5 }}>
+        <Box
+          borderRadius="xl"
+          bg="#6d02c9"
+          px={{ base: 1.5, sm: 2, md: 5 }}
+          py={5}
+        >
           <Box rounded="xl" overflow="hidden" m="2">
             <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
               <LazyVideo src={tokenUri} objectFit="cover" />

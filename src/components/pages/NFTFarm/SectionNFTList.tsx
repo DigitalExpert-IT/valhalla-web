@@ -2,11 +2,9 @@ import { Box, Container, Heading, Wrap, WrapItem } from "@chakra-ui/react";
 import { CardFarmNFTV2 } from "components/Card";
 import { fromBn } from "evm-bn";
 import { useNFT } from "hooks";
-import { useTranslation } from "react-i18next";
 
 export const SectionNFTList = () => {
-  const { t } = useTranslation();
-  const { nftList, cardList } = useNFT();
+  const { cardList } = useNFT();
   return (
     <Box bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)">
       <Box

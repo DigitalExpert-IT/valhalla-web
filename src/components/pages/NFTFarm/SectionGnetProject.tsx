@@ -13,9 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { useAsyncCall, useNFT, useValhalla } from "hooks";
-import { button } from "telegraf/typings/markup";
+import { useTranslation } from "react-i18next";
+import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
+  const { t } = useTranslation();
   const nft = useNFT();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
@@ -60,7 +62,6 @@ export const SectionGnetProject = () => {
           <GridItem
             rowSpan={2}
             colSpan={1}
-            // bg="tomato"
             justifyContent="center"
             alignItems="center"
             display="flex"
@@ -95,7 +96,10 @@ export const SectionGnetProject = () => {
             >
               <Text>Global Bonus Gnet</Text>
               <Badge variant="solid" rounded="full" colorScheme={"blue"}>
-                170 Matic
+                {isRankRewardClaimable
+                  ? prettyBn(globalPool.valueLeft)
+                  : prettyBn(globalPool.claimable)}{" "}
+                MATIC
               </Badge>
             </Stack>
           </GridItem>
@@ -113,6 +117,7 @@ export const SectionGnetProject = () => {
                 rounded="full"
                 colorScheme={"blue"}
                 p="3"
+                onClick={claimNftRankRewardAsync.exec}
               >
                 claim
               </Badge>
@@ -127,8 +132,9 @@ export const SectionGnetProject = () => {
                 colorScheme={"blue"}
                 rounded="full"
                 p="3"
+                onClick={claimRewardGnetAsync.exec}
               >
-                Claim
+                {prettyBn(nft.rankReward, 9) + " " + t("common.claim")}
               </Badge>
             </Stack>
           </GridItem>

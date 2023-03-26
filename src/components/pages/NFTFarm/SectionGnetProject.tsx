@@ -25,13 +25,13 @@ export const SectionGnetProject = () => {
   return (
     <Box>
       <Box
+        h={{ md: "60vh", base: "40vh" }}
         justifyContent="center"
         alignItems="center"
         textAlign="center"
         overflow="hidden"
         display="flex"
         w="100vw"
-        h={{ md: "60vh", base: "40vh" }}
       >
         <Heading
           _after={{
@@ -62,9 +62,9 @@ export const SectionGnetProject = () => {
           <GridItem
             rowSpan={2}
             colSpan={1}
-            justifyContent="center"
-            alignItems="center"
             display="flex"
+            alignItems="center"
+            justifyContent="center"
           >
             <AspectRatio w="100px" ratio={1}>
               <Image
@@ -76,10 +76,10 @@ export const SectionGnetProject = () => {
           </GridItem>
           <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
+              w="20rem"
               direction="row"
               alignItems="center"
               justifyContent="space-between"
-              w="20rem"
             >
               <Text>Network Member</Text>
               <Badge variant="solid" rounded="full" colorScheme="blue">
@@ -89,10 +89,10 @@ export const SectionGnetProject = () => {
           </GridItem>
           <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
+              w="20rem"
               direction="row"
               alignItems="center"
               justifyContent="space-between"
-              w="20rem"
             >
               <Text>Global Bonus Gnet</Text>
               <Badge variant="solid" rounded="full" colorScheme={"blue"}>
@@ -105,15 +105,15 @@ export const SectionGnetProject = () => {
           </GridItem>
           <GridItem colSpan={2} alignItems="center" display="flex">
             <Stack
+              w="20rem"
               direction="row"
               alignItems="center"
               justifyContent={"space-between"}
-              w="20rem"
             >
               <Text>Rank Reward Gnet</Text>
               <Button
-                variant="solid"
                 rounded="full"
+                variant="solid"
                 colorScheme={"blue"}
                 onClick={claimNftRankRewardAsync.exec}
                 isLoading={claimNftRankRewardAsync.isLoading}

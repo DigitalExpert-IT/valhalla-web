@@ -1,6 +1,4 @@
 import {
-  Box,
-  BoxProps,
   Button,
   ButtonProps,
   Flex,
@@ -9,7 +7,6 @@ import {
   Stack,
   StackProps,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { Trans } from "react-i18next";

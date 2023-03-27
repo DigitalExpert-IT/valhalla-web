@@ -340,6 +340,9 @@
       "Total15LevelReferral": "Total 15 <br/>Level Referral",
       "PersonalBuy": "Personal Buy",
       "Total100LevelReferral": "Total 100 <br/>Level Referral"
-    }
+    },
+    "level": "LEVEL",
+    "totalUser": "Total User",
+    "totalBuy": "Total Buy"
   }
 }

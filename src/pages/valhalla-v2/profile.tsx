@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { LayoutMainV2 } from "components";
+import { LayoutMainV2, TableNetworkStatus } from "components";
 import {
   SectionNetworkStatusV2,
   SectionProfileV2,
@@ -24,7 +24,10 @@ const Profile = () => {
         </Box>
         <SectionProfileV2 />
         <SectionMyNFTV2 />
-        <SectionNetworkStatusV2 />
+        <Box py={"20"}>
+          <SectionNetworkStatusV2 />
+          <TableNetworkStatus />
+        </Box>
       </Box>
     </LayoutMainV2>
   );

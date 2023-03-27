@@ -328,9 +328,21 @@
     }
   },
   "shareToEarn": {
-    "title": "Share To Earn"
+    "title": "Share To Earn",
+    "share": "Share"
   },
   "profile": {
-    "header": "MY ACCOUNT"
+    "account": "ACCOUNT",
+    "header": "MY ACCOUNT",
+    "networkStatus": {
+      "label": "Network Status",
+      "TotalNetworkMember": "Total Network <br/>Member",
+      "Total15LevelReferral": "Total 15 <br/>Level Referral",
+      "PersonalBuy": "Personal Buy",
+      "Total100LevelReferral": "Total 100 <br/>Level Referral"
+    },
+    "level": "LEVEL",
+    "totalUser": "Total User",
+    "totalBuy": "Total Buy"
   }
 }

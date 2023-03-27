@@ -1,10 +1,10 @@
 import {
   Box,
-  BoxProps,
-  Button,
-  ButtonProps,
   Stack,
+  Button,
+  BoxProps,
   StackProps,
+  ButtonProps,
 } from "@chakra-ui/react";
 import { createContext, useContext, useState } from "react";
 
@@ -32,25 +32,31 @@ interface TabClubTriggerProps extends ButtonProps {
 export const TabClubTrigger: React.FC<TabClubTriggerProps> = props => {
   const { activeId, ...res } = props;
   const [active, setActive] = useContext(TabClubContext);
+  const buttonTemplate = {
+    bg: "#8E59FF",
+    rounded: "none",
+    borderBottom: "1px solid",
+    borderBottomColor: "blackAlpha.500",
+    _active: {
+      bg: "#311769",
+      opacity: 1,
+      _hover: {
+        bg: "#311769",
+      },
+    },
+    _hover: {
+      bg: "#421f8d",
+    },
+    color: "white",
+    opacity: 1,
+  };
 
   return (
     <Button
-      rounded="none"
-      bg={"#8E59FF"}
       isActive={active === activeId}
       isDisabled={active === activeId}
-      borderBottom="1px solid"
-      borderBottomColor={"blackAlpha.500"}
-      _active={{
-        bg: "#311769",
-        opacity: 1,
-        _hover: {
-          bg: "#311769",
-        },
-      }}
-      color="white"
-      opacity={1}
       onClick={() => setActive(activeId)}
+      {...buttonTemplate}
       {...res}
     >
       {props.children}

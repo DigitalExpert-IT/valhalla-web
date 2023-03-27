@@ -5,6 +5,7 @@ export * from "./CardHomeFeatures";
 export * from "./CardOwnedFarmNFT";
 export * from "./CardProfile";
 export * from "./CardProfileBalance";
+export * from "./CardFarmNFTv2";
 export * from "./CardProfileV2";
 export * from "./CardHomeFeaturesV2";
 export * from "./CardOwnedFarmNFTV2";

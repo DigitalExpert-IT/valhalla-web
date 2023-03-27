@@ -7,9 +7,11 @@ import {
   TabClubTrigger,
 } from "components/Tab";
 import { NFTMATHCING } from "constant/pages/nftFarming";
+import { useTranslation } from "react-i18next";
 import { AccordionNFTFarm } from "./SectionNFTFarmMatching";
 
 export const SectionMatchingRequirment = () => {
+  const { t } = useTranslation();
   return (
     <Box bgGradient="linear(to-b, #6D02C9, #2C1FA7, #6D02C9)">
       <Box
@@ -36,7 +38,7 @@ export const SectionMatchingRequirment = () => {
           textTransform="uppercase"
           fontSize={{ md: "6xl", base: "4xl" }}
         >
-          NFT FARM Matching requirement
+          {t("pages.nftFarming.farmMathcingRequirement")}
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>

@@ -1,11 +1,4 @@
-import {
-  Box,
-  ButtonProps,
-  Container,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 import {
   TabClub,
   TabClubList,
@@ -14,6 +7,7 @@ import {
   TabClubTrigger,
 } from "components/Tab";
 import { NFTMATHCING } from "constant/pages/nftFarming";
+import { AccordionNFTFarm } from "./SectionNFTFarmMatching";
 
 export const SectionMatchingRequirment = () => {
   return (
@@ -46,7 +40,12 @@ export const SectionMatchingRequirment = () => {
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>
-        <Stack w="full" alignItems={"center"} p="1rem">
+        <Stack
+          w="full"
+          alignItems={"center"}
+          display={{ lg: "flex", base: "none" }}
+          h="100vh"
+        >
           <Box w="50vw">
             <TabClub spacing="0">
               <TabClubList spacing="0">
@@ -67,6 +66,9 @@ export const SectionMatchingRequirment = () => {
               </TabClubPanelList>
             </TabClub>
           </Box>
+        </Stack>
+        <Stack display={{ lg: "none", base: "flex" }}>
+          <AccordionNFTFarm />
         </Stack>
       </Container>
     </Box>

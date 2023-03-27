@@ -72,9 +72,10 @@ interface TabClubPanelItemProps extends BoxProps {
 }
 
 export const TabClubPanelItem: React.FC<TabClubPanelItemProps> = props => {
+  const { whenActive, ...rest } = props;
   const [active] = useContext(TabClubContext);
 
   return (
-    <Box {...props}>{active === props.whenActive ? props.children : null}</Box>
+    <Box {...rest}>{active === props.whenActive ? props.children : null}</Box>
   );
 };

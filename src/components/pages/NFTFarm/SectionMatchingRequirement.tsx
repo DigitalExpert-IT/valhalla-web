@@ -1,4 +1,11 @@
-import { Box, ButtonProps, Container, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  ButtonProps,
+  Container,
+  Heading,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import {
   TabClub,
   TabClubList,
@@ -39,26 +46,28 @@ export const SectionMatchingRequirment = () => {
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>
-        <Box>
-          <TabClub>
-            <TabClubList>
-              {NFTMATHCING.map((e, i) => (
-                <TabClubTrigger rounded="none" key={i} Id={i}>
-                  {e.title}
-                </TabClubTrigger>
-              ))}
-            </TabClubList>
-            <TabClubPanelList flex={1}>
-              {NFTMATHCING.map((e, i) => (
-                <TabClubPanelItem whenActive={i} key={i}>
-                  {e.content.map((j, ij) => (
-                    <Text key={ij}>{`${j.name} ${j.description}`}</Text>
-                  ))}
-                </TabClubPanelItem>
-              ))}
-            </TabClubPanelList>
-          </TabClub>
-        </Box>
+        <Stack w="full" alignItems={"center"} p="1rem">
+          <Box w="50vw">
+            <TabClub spacing="0">
+              <TabClubList spacing="0">
+                {NFTMATHCING.map((e, i) => (
+                  <TabClubTrigger key={i} activeId={i}>
+                    {e.title}
+                  </TabClubTrigger>
+                ))}
+              </TabClubList>
+              <TabClubPanelList flex={1} bg="#311769BF" p="2rem">
+                {NFTMATHCING.map((e, i) => (
+                  <TabClubPanelItem whenActive={i} key={i}>
+                    {e.content.map((j, ij) => (
+                      <Text key={ij}>{`${j.name} ${j.description}`}</Text>
+                    ))}
+                  </TabClubPanelItem>
+                ))}
+              </TabClubPanelList>
+            </TabClub>
+          </Box>
+        </Stack>
       </Container>
     </Box>
   );

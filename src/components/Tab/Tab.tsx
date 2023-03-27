@@ -26,15 +26,33 @@ export const TabClubList: React.FC<StackProps> = props => {
 };
 
 interface TabClubTriggerProps extends ButtonProps {
-  Id: number;
+  activeId: number;
 }
 
 export const TabClubTrigger: React.FC<TabClubTriggerProps> = props => {
-  const { Id, ...res } = props;
-  const [, setActive] = useContext(TabClubContext);
+  const { activeId, ...res } = props;
+  const [active, setActive] = useContext(TabClubContext);
 
   return (
-    <Button rounded="none" {...res} onClick={() => setActive(Id)}>
+    <Button
+      rounded="none"
+      bg={"#8E59FF"}
+      isActive={active === activeId}
+      isDisabled={active === activeId}
+      borderBottom="1px solid"
+      borderBottomColor={"blackAlpha.500"}
+      _active={{
+        bg: "#311769",
+        opacity: 1,
+        _hover: {
+          bg: "#311769",
+        },
+      }}
+      color="white"
+      opacity={1}
+      onClick={() => setActive(activeId)}
+      {...res}
+    >
       {props.children}
     </Button>
   );

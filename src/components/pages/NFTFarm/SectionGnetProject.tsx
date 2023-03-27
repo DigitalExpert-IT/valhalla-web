@@ -57,14 +57,14 @@ export const SectionGnetProject = () => {
           gap={4}
           h="200px"
           templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(5, 1fr)"
+          templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
         >
           <GridItem
-            rowSpan={{ md: 2, base: 1 }}
-            colSpan={{ md: 1, base: 5 }}
+            colSpan={1}
             display="flex"
             alignItems="center"
             justifyContent="center"
+            rowSpan={{ md: 2, base: 1 }}
           >
             <AspectRatio w="100px" ratio={1}>
               <Image
@@ -75,26 +75,28 @@ export const SectionGnetProject = () => {
             </AspectRatio>
           </GridItem>
           <GridItem
-            colSpan={{ md: 2, base: 5 }}
-            alignItems="center"
+            colSpan={2}
             display="flex"
+            alignItems="center"
+            textTransform={"capitalize"}
           >
             <Stack
               w={{ md: "20rem", base: "full" }}
-              direction="row"
-              alignItems="center"
               justifyContent="space-between"
+              alignItems="center"
+              direction="row"
             >
-              <Text>Network Member</Text>
+              <Text>{t("pages.nftFarming.networkMembers")}</Text>
               <Badge variant="solid" rounded="full" colorScheme="blue">
-                7676
+                {account.downlineCount.toNumber()}
               </Badge>
             </Stack>
           </GridItem>
           <GridItem
-            colSpan={{ md: 2, base: 5 }}
+            colSpan={2}
             alignItems="center"
             display="flex"
+            textTransform={"capitalize"}
           >
             <Stack
               w={{ md: "20rem", base: "full" }}
@@ -102,7 +104,7 @@ export const SectionGnetProject = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Text>Global Bonus Gnet</Text>
+              <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" colorScheme={"blue"}>
                 {isRankRewardClaimable
                   ? prettyBn(globalPool.valueLeft, 18)
@@ -112,9 +114,10 @@ export const SectionGnetProject = () => {
             </Stack>
           </GridItem>
           <GridItem
-            colSpan={{ md: 2, base: 5 }}
+            colSpan={2}
             alignItems="center"
             display="flex"
+            textTransform={"capitalize"}
           >
             <Stack
               w={{ md: "20rem", base: "full" }}
@@ -122,7 +125,7 @@ export const SectionGnetProject = () => {
               alignItems="center"
               justifyContent={"space-between"}
             >
-              <Text>Rank Reward Gnet</Text>
+              <Text>{t("pages.nftFarming.rankReward")}</Text>
               <Button
                 rounded="full"
                 variant="solid"
@@ -135,16 +138,17 @@ export const SectionGnetProject = () => {
             </Stack>
           </GridItem>
           <GridItem
-            colSpan={{ md: 2, base: 5 }}
+            colSpan={2}
             alignItems="center"
             display="flex"
+            textTransform={"capitalize"}
           >
             <Stack
               direction={"row"}
               w={{ md: "20rem", base: "full" }}
               justifyContent="space-between"
             >
-              <Text>Farm Matching Bonus</Text>
+              <Text>{t("pages.nftFarming.farmingMatching")}</Text>
               <Button
                 variant="solid"
                 colorScheme={"blue"}

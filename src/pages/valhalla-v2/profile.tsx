@@ -1,6 +1,9 @@
 import { Box, Image } from "@chakra-ui/react";
 import { LayoutMainV2 } from "components";
-import { SectionProfileV2 } from "components/pages/Profile";
+import {
+  SectionNetworkStatusV2,
+  SectionProfileV2,
+} from "components/pages/Profile";
 import { SectionMyNFTV2 } from "components/pages/NFTFarm";
 import { withConnection } from "hoc";
 import { composeHoc } from "utils";
@@ -21,6 +24,7 @@ const Profile = () => {
         </Box>
         <SectionProfileV2 />
         <SectionMyNFTV2 />
+        <SectionNetworkStatusV2 />
       </Box>
     </LayoutMainV2>
   );

@@ -48,9 +48,9 @@ export const WidgetProfileMember = (props: IPropsMember) => {
   const { label, value, children, ...rest } = props;
   return (
     <HStack
-      w={"80"}
+      w={"96"}
       h={"14"}
-      bg={"brand.700"}
+      bg={"brand.800"}
       justify={"center"}
       roundedRight={"full"}
       roundedLeft={"full"}
@@ -63,7 +63,7 @@ export const WidgetProfileMember = (props: IPropsMember) => {
         minW={"55%"}
         textAlign={"center"}
         placeContent={"center"}
-        bg={"#9F2FFF"}
+        bg={"#6705C6"}
         roundedRight={"full"}
       >
         <Text lineHeight={"4"}>

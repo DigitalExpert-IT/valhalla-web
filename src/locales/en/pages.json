@@ -333,6 +333,13 @@
   },
   "profile": {
     "account": "ACCOUNT",
-    "header": "MY ACCOUNT"
+    "header": "MY ACCOUNT",
+    "networkStatus": {
+      "label": "Network Status",
+      "TotalNetworkMember": "Total Network <br/>Member",
+      "Total15LevelReferral": "Total 15 <br/>Level Referral",
+      "PersonalBuy": "Personal Buy",
+      "Total100LevelReferral": "Total 100 <br/>Level Referral"
+    }
   }
 }

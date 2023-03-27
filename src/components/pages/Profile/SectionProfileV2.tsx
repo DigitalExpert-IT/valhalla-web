@@ -12,7 +12,7 @@ import { t } from "i18next";
 export const SectionProfileV2 = () => {
   const { account } = useValhalla();
   return (
-    <Stack maxW="container.lg" mx={{ base: "4", lg: "auto" }}>
+    <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
         textAlign={"center"}
         _after={{

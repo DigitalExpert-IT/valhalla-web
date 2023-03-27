@@ -190,4 +190,4 @@ const Debug = () => {
   );
 };
 
-export default composeHoc(withConnection)(Debug);
+export default withConnection(composeHoc(withRegistration)(Debug));

@@ -1,5 +1,6 @@
 import "@fontsource/roboto";
 import "@fontsource/raleway/700.css";
+import "@fontsource/poppins";
 
 const typography = {
   letterSpacings: {
@@ -42,7 +43,7 @@ const typography = {
   },
 
   fonts: {
-    heading: `Raleway, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
+    heading: `poppins, Raleway, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
     body: `Roboto, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
     mono: `SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace`,
   },

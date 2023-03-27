@@ -34,11 +34,11 @@ const ConnectWalletRequred = () => {
 
   return (
     <LayoutIllustration
-      illustrationUri="/assets/illustration/connect-fail.png"
+      illustrationUri="/assets/illustration/fail-connect.png"
       title={t("hoc.connection.title")}
       description={t("hoc.connection.description")}
     >
-      <ButtonConnectWrapper variant="gradient" mt="3" />
+      <ButtonConnectWrapper variant="outline" mt="3" />
     </LayoutIllustration>
   );
 };

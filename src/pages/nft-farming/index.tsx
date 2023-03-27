@@ -19,4 +19,4 @@ const NftFarmingPage = () => {
   );
 };
 
-export default composeHoc(withConnection)(NftFarmingPage);
+export default withConnection(composeHoc(withRegistration)(NftFarmingPage));

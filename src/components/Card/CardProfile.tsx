@@ -105,7 +105,7 @@ export const CardProfile = () => {
               bg={"brand.800"}
               py={4}
               px={6}
-              label={t("common.networkMembers")}
+              label={t("common.networkMembers").replace("<br/>", "")}
             >
               <Text>{account.downlineCount.toNumber()}</Text>
             </WidgetProfileChile>
@@ -113,7 +113,7 @@ export const CardProfile = () => {
               bg={"brand.800"}
               py={4}
               px={6}
-              label={t("common.directReferrals")}
+              label={t("common.directReferrals").replace("<br/>", "")}
             >
               <Text>{account.directDownlineCount.toNumber()}</Text>
             </WidgetProfileChile>
@@ -121,7 +121,7 @@ export const CardProfile = () => {
               bg={"brand.800"}
               py={4}
               px={6}
-              label={t("common.telegramOnlyMember")}
+              label={t("common.telegramOnlyMember").replace("<br/>", "")}
             >
               <HStack>
                 <Icon as={SiTelegram} color="telegram.500" />

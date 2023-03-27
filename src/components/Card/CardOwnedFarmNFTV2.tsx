@@ -6,7 +6,14 @@ import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
 import { LazyVideo } from "components/LazyVideo";
 import { useTranslation } from "react-i18next";
-import { Stack, Box, AspectRatio, Text, Button } from "@chakra-ui/react";
+import {
+  Stack,
+  Box,
+  AspectRatio,
+  Text,
+  Button,
+  Heading,
+} from "@chakra-ui/react";
 
 export const CardOwnedFarmNFTV2 = (props: IOwnedNFT) => {
   const { id, mintingPrice, cardId, percentage, lastFarmedAt, tokenUri } =
@@ -55,17 +62,27 @@ export const CardOwnedFarmNFTV2 = (props: IOwnedNFT) => {
   };
 
   return (
-    <Stack
-      p="0.5"
-      mt="5"
-      bgGradient="linear(to-r, #FF00FF, blue.500)"
-      borderRadius="xl"
-    >
-      <Box borderRadius="xl" bg="#6d02c9" p="5">
-        <Box borderRadius="lg" overflow="hidden" minW="100px">
-          <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
-            <LazyVideo src={tokenUri} objectFit="cover" />
-          </AspectRatio>
+    <Box>
+      <Box textAlign="center">
+        <Heading>#NFT {id.toNumber()}</Heading>
+      </Box>
+      <Stack
+        p="0.5"
+        mt="5"
+        bgGradient="linear(to-r, #FF00FF, blue.500)"
+        borderRadius="xl"
+      >
+        <Box
+          borderRadius="xl"
+          bg="#6d02c9"
+          px={{ base: 1.5, sm: 2, md: 5 }}
+          py={5}
+        >
+          <Box rounded="xl" overflow="hidden" m="2">
+            <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
+              <LazyVideo src={tokenUri} objectFit="cover" />
+            </AspectRatio>
+          </Box>
           <Stack my="5">
             <Stack direction="row" spacing={1} justify="space-between">
               <Text fontWeight="bold" fontSize="16px">
@@ -106,7 +123,7 @@ export const CardOwnedFarmNFTV2 = (props: IOwnedNFT) => {
             </Button>
           </ButtonConnectWrapper>
         </Box>
-      </Box>
-    </Stack>
+      </Stack>
+    </Box>
   );
 };

@@ -17,6 +17,7 @@ const Swap = () => {
         <Heading
           mt={"24"}
           textAlign={"center"}
+          zIndex={"1"}
           _after={{
             content: `'${t("common.swap").toUpperCase()}'`,
             alignSelf: "center",

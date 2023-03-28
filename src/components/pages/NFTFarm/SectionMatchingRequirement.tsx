@@ -48,7 +48,7 @@ export const SectionMatchingRequirment = () => {
           display={{ lg: "flex", base: "none" }}
           h="100vh"
         >
-          <Box w="50vw">
+          <Box>
             <TabClub spacing="0">
               <TabClubList spacing="0">
                 {NFTMATHCING.map((e, i) => (

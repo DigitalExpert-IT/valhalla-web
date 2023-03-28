@@ -47,12 +47,11 @@ export const WidgetTimeLineV2 = () => {
               position: "absolute",
               mx: "auto",
               width: "1",
-              height: "50%",
+              height: "55",
               bg: item.shades,
               borderColor: item.shades,
               top: "50%",
               left: "45.6%",
-              zIndex: "0",
             },
           }}
           key={idx}

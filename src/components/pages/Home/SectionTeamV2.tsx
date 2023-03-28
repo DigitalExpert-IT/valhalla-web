@@ -47,13 +47,14 @@ export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
       >
         <Box py={{ base: 4, lg: 12 }}>
           <Heading
+            fontSize={{ base: "md", md: "5xl" }}
             textAlign={"center"}
             mb={8}
             _after={{
               content: `'${t("pages.home.teamSectionV2.subTitle")}'`,
               display: "block",
-              fontSize: { md: "130", base: "90" },
-              mt: { md: "-20", base: "-20" },
+              fontSize: { md: "200", base: "90" },
+              mt: { md: "-130", base: "-20" },
               color: "whiteAlpha.100",
               textAlign: "center",
             }}

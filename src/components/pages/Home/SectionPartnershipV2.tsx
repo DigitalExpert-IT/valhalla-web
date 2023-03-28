@@ -18,10 +18,12 @@ export const SectionPartnershipV2: React.FC<
   return (
     <Stack py="10" w="full" overflow="hidden">
       <Heading
+        fontSize={{ base: "md", md: "5xl" }}
         _after={{
           display: "block",
           textAlign: "center",
           alignSelf: "center",
+          textTransform: "uppercase",
           color: "whiteAlpha.100",
           transform: {
             md: "scale(3) translateY(-10px)",
@@ -30,7 +32,7 @@ export const SectionPartnershipV2: React.FC<
           content: `'${t("pages.home.partnershipSection")}'`,
         }}
         mb={{ md: "100", base: "50" }}
-        textTransform="uppercase"
+        textTransform="capitalize"
       >
         {t("pages.home.partnershipSection")}
       </Heading>

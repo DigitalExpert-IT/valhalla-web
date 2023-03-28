@@ -1,5 +1,5 @@
 import { Card, CardBody, Flex, Heading, Image, Stack } from "@chakra-ui/react";
-import { FormSwap, LayoutMainV2 } from "components";
+import { FormSwapV2, LayoutMainV2 } from "components";
 import { t } from "i18next";
 
 const Swap = () => {
@@ -42,7 +42,7 @@ const Swap = () => {
           zIndex={"3"}
         >
           <CardBody>
-            <FormSwap />
+            <FormSwapV2 />
           </CardBody>
         </Card>
         <Stack

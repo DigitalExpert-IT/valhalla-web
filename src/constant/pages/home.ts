@@ -78,7 +78,7 @@ export const OURTEAM = [
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon-logo.png",
+    image: "/assets/partnership/polygon.png",
   },
   {
     name: "partner2",
@@ -86,7 +86,7 @@ export const PARTNERSHIP = [
   },
   {
     name: "partner3",
-    image: "/assets/partnership/gn-patnership.png",
+    image: "/assets/partnership/global-network.png",
   },
 ];
 

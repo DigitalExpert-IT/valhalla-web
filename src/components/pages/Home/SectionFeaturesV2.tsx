@@ -14,19 +14,20 @@ export const SectionFeaturesV2 = () => {
         _after={{
           content: `'${t("pages.home.feature.subtitle")}'`,
           display: "block",
-          mt: { md: "-20", xs: "-16", base: "-12" },
+          mt: { md: "-110", xs: "-16", base: "-12" },
           textAlign: "center",
         }}
       >
         <Heading
           textAlign={"center"}
           mb={8}
+          fontSize="5xl"
           _after={{
             content: `'${t("pages.home.feature.title")}'`,
             alignSelf: "center",
             display: "block",
-            fontSize: { md: "130", xs: "80", base: "50" },
-            mt: { md: "-20", xs: "-16", base: "-12" },
+            fontSize: { md: "200", xs: "80", base: "50" },
+            mt: { md: "-130", xs: "-16", base: "-12" },
             color: "whiteAlpha.100",
             textAlign: "center",
           }}

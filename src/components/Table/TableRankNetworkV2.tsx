@@ -89,8 +89,8 @@ export const TableRankNetworkV2 = () => {
           content: `'${t("pages.home.maticPlan")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { base: "40", md: "100", lg: "150" },
-          mt: { base: "-45px", md: "-80px", lg: "-91px" },
+          fontSize: { base: "40", md: "100", lg: "200" },
+          mt: { base: "-45px", md: "-80px", lg: "-100px" },
           color: "whiteAlpha.100",
           textAlign: "center",
         }}

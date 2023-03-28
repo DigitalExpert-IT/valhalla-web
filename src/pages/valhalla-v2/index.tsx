@@ -25,7 +25,7 @@ const ValhallaV2 = () => {
       <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
         <SectionProject />
       </Container>
-      <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
+      <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="40">
         <SectionFeaturesV2 />
       </Container>
       <SectionFeaturedPopulationV2 />

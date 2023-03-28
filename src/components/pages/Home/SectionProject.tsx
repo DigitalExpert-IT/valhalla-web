@@ -24,8 +24,9 @@ export const SectionProject = () => {
           content: `'${t("pages.home.project.title")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { md: "111", base: "60" },
-          mt: { md: "-91px", base: "-68px" },
+          fontSize: { md: "200", base: "60" },
+          fontWeight: "bold",
+          mt: { md: "-120px", base: "-68px" },
           color: "whiteAlpha.100",
           textAlign: "center",
         }}

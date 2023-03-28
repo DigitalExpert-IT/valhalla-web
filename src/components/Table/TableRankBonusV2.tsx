@@ -99,12 +99,12 @@ export const TableRankBonusV2 = () => {
         mb={{ base: 10, md: 10, lg: 2 }}
         fontSize={{ base: "xl", md: "5xl" }}
         textAlign="center"
-        textTransform="uppercase"
+        textTransform="capitalize"
         _after={{
           content: `'${t("pages.home.bonus")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { base: "40", md: "100", lg: "210" },
+          fontSize: { base: "40", md: "100", lg: "200" },
           mt: { base: "-38px", md: "-90px", lg: "-120px" },
           color: "whiteAlpha.100",
           textAlign: "center",

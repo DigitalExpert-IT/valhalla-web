@@ -56,5 +56,6 @@
   "globalNetworkFarm": "Farm level",
   "remainingFarm": "Total Return (450 Days)",
   "percentage": "Percentage",
-  "claim": "Claim"
+  "claim": "Claim",
+  "buy":"Buy"
 }

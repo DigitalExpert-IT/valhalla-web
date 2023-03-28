@@ -1,15 +1,15 @@
 import {
-  AspectRatio,
-  Badge,
   Box,
+  Badge,
   Button,
-  Container,
-  Grid,
   GridItem,
+  Container,
+  AspectRatio,
   Heading,
   Image,
   Stack,
   Text,
+  Grid,
 } from "@chakra-ui/react";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { useAsyncCall, useNFT, useValhalla } from "hooks";
@@ -18,10 +18,10 @@ import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
-  const nft = useNFT();
+  const { rankReward, claimRankReward, claimReward, personalReward } = useNFT();
   const { account, isRankRewardClaimable, globalPool } = useValhalla();
-  const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
-  const claimRewardGnetAsync = useAsyncCall(nft.claimRankReward);
+  const claimNftRankRewardAsync = useAsyncCall(claimReward);
+  const claimRewardGnetAsync = useAsyncCall(claimRankReward);
   return (
     <Box
       bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
@@ -135,7 +135,7 @@ export const SectionGnetProject = () => {
                 onClick={claimNftRankRewardAsync.exec}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
-                {t("common.claim")}
+                {prettyBn(rankReward, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>
@@ -153,7 +153,7 @@ export const SectionGnetProject = () => {
                 onClick={claimRewardGnetAsync.exec}
                 isLoading={claimRewardGnetAsync.isLoading}
               >
-                {prettyBn(nft.rankReward, 9) + " " + t("common.claim")}
+                {prettyBn(personalReward, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>

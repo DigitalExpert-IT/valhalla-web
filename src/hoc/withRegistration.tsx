@@ -32,12 +32,12 @@ const RegistrationRequired = () => {
 
   return (
     <LayoutIllustration
-      illustrationUri="/assets/illustration/registration-required.svg"
+      illustrationUri="/assets/illustration/registration-required.png"
       title={t("hoc.registration.title")}
       description={t("hoc.registration.description")}
     >
       <Link href="/register">
-        <Button variant="gradient" mt="3">
+        <Button variant="outline" mt="3">
           {t("common.register")}
         </Button>
       </Link>

@@ -235,7 +235,7 @@ export const FormSwapV2 = () => {
               bg: "whiteAlpha.500",
             }}
           >
-            {t("common.connectWallet")}
+            {t("common.swap")}
           </Button>
         </ButtonConnectWrapper>
       </Stack>

@@ -1,22 +1,22 @@
+import {
+  Box,
+  Text,
+  Icon,
+  Stack,
+  Button,
+  SimpleGrid,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { fromBn } from "evm-bn";
 import { useForm } from "react-hook-form";
 import { useAsyncCall, useSwap } from "hooks";
 import { useTranslation } from "react-i18next";
+import { ClipPathImage } from "./ClipPathImage";
 import { getGnetRate, getUsdtRate } from "utils";
 import { useEffect, useMemo, useState } from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
-import { AiOutlineArrowRight } from "react-icons/ai";
 
 interface ISwapToken {
   price: string;
@@ -251,7 +251,9 @@ export const FormSwapV2 = () => {
         borderRight={"1px"}
       />
       <Stack justifyContent={"center"}>
-        <Image src="/assets/SwapImage.png" alt="Image Swap" w={"full"} />
+        <AspectRatio ratio={1} ml="-5rem">
+          <ClipPathImage />
+        </AspectRatio>
       </Stack>
     </SimpleGrid>
   );

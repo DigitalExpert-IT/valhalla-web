@@ -36,7 +36,7 @@ const columns = [
         </Text>
       </Stack>
     ),
-    header: t("common.maticBonus") ?? "",
+    header: t("common.rank") ?? "",
   }),
 
   columnHelper.accessor("pool", {

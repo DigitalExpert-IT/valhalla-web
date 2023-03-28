@@ -23,7 +23,11 @@ export const SectionGnetProject = () => {
   const claimNftRankRewardAsync = useAsyncCall(nft.claimReward);
   const claimRewardGnetAsync = useAsyncCall(nft.claimRankReward);
   return (
-    <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+    <Box
+      bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+      position="relative"
+      zIndex={1}
+    >
       <Box
         h={{ md: "60vh", base: "40vh" }}
         justifyContent="center"
@@ -87,25 +91,25 @@ export const SectionGnetProject = () => {
               direction="row"
             >
               <Text>{t("pages.nftFarming.networkMembers")}</Text>
-              <Badge variant="solid" rounded="full" colorScheme="blue">
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {account.downlineCount.toNumber()}
               </Badge>
             </Stack>
           </GridItem>
           <GridItem
             colSpan={2}
-            alignItems="center"
             display="flex"
+            alignItems="center"
             textTransform={"capitalize"}
           >
             <Stack
-              w={{ md: "20rem", base: "full" }}
               direction="row"
               alignItems="center"
               justifyContent="space-between"
+              w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
-              <Badge variant="solid" rounded="full" colorScheme={"blue"}>
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {isRankRewardClaimable
                   ? prettyBn(globalPool.valueLeft, 18)
                   : prettyBn(globalPool.claimable, 18)}{" "}
@@ -115,21 +119,19 @@ export const SectionGnetProject = () => {
           </GridItem>
           <GridItem
             colSpan={2}
-            alignItems="center"
             display="flex"
+            alignItems="center"
             textTransform={"capitalize"}
           >
             <Stack
-              w={{ md: "20rem", base: "full" }}
               direction="row"
               alignItems="center"
               justifyContent={"space-between"}
+              w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.rankReward")}</Text>
               <Button
-                rounded="full"
-                variant="solid"
-                colorScheme={"blue"}
+                variant="swag"
                 onClick={claimNftRankRewardAsync.exec}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
@@ -137,22 +139,17 @@ export const SectionGnetProject = () => {
               </Button>
             </Stack>
           </GridItem>
-          <GridItem
-            colSpan={2}
-            alignItems="center"
-            display="flex"
-            textTransform={"capitalize"}
-          >
+          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
             <Stack
               direction={"row"}
-              w={{ md: "20rem", base: "full" }}
               justifyContent="space-between"
+              alignItems={"center"}
+              w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.farmingMatching")}</Text>
               <Button
-                variant="solid"
-                colorScheme={"blue"}
-                rounded="full"
+                variant="swag"
+                color="white"
                 onClick={claimRewardGnetAsync.exec}
                 isLoading={claimRewardGnetAsync.isLoading}
               >

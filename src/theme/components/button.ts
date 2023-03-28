@@ -188,6 +188,13 @@ const variantUnstyled = defineStyle({
   p: "0",
 });
 
+const variantNotIncluded = defineStyle({
+  bg: "blueOcean.600",
+  color: "white",
+  display: "inline",
+  lineHeight: "inherit",
+});
+
 const variants = {
   ghost: variantGhost,
   outline: variantOutline,
@@ -195,6 +202,7 @@ const variants = {
   link: variantLink,
   gradient: variantGradient,
   unstyled: variantUnstyled,
+  swag: variantNotIncluded,
 };
 
 const sizes = {

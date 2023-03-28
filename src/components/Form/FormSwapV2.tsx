@@ -1,22 +1,22 @@
+import {
+  Box,
+  Text,
+  Icon,
+  Stack,
+  Button,
+  SimpleGrid,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { fromBn } from "evm-bn";
 import { useForm } from "react-hook-form";
 import { useAsyncCall, useSwap } from "hooks";
 import { useTranslation } from "react-i18next";
+import { ClipPathImage } from "./ClipPathImage";
 import { getGnetRate, getUsdtRate } from "utils";
 import { useEffect, useMemo, useState } from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
-import { AiOutlineArrowRight } from "react-icons/ai";
 
 interface ISwapToken {
   price: string;
@@ -108,6 +108,10 @@ export const FormSwapV2 = () => {
                   border: "none",
                   bg: "whiteAlpha.200",
                 }}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.300",
+                }}
                 control={control}
                 name="price"
                 placeholder={"0.0"}
@@ -146,11 +150,16 @@ export const FormSwapV2 = () => {
               </Icon>
               <FormSelect
                 bg={"white"}
+                textAlign={"center"}
                 control={control}
                 _focus={{
+                  border: "none",
                   bg: "white",
                 }}
-                // label={t("form.label.swap")}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.100",
+                }}
                 name="currency"
                 option={normalizeCurrencies}
                 isDisabled={!initialized}
@@ -189,11 +198,16 @@ export const FormSwapV2 = () => {
                   border: "none",
                   bg: "whiteAlpha.200",
                 }}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.300",
+                }}
                 control={control}
                 name="price"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled={!initialized}
+                isDisabled
+                value={price}
               />
             </Box>
             <Text
@@ -212,7 +226,15 @@ export const FormSwapV2 = () => {
           </Stack>
         </Stack>
         <ButtonConnectWrapper>
-          <Button type="submit" isLoading={isSwapLoading || !initialized}>
+          <Button
+            type="submit"
+            isLoading={isSwapLoading || !initialized}
+            color={"purple.900"}
+            bg={"white"}
+            _hover={{
+              bg: "whiteAlpha.500",
+            }}
+          >
             {t("common.swap")}
           </Button>
         </ButtonConnectWrapper>
@@ -229,7 +251,9 @@ export const FormSwapV2 = () => {
         borderRight={"1px"}
       />
       <Stack justifyContent={"center"}>
-        <Image src="/assets/SwapImage.png" alt="Image Swap" w={"full"} />
+        <AspectRatio ratio={1} ml="-5rem" mt="-4rem">
+          <ClipPathImage />
+        </AspectRatio>
       </Stack>
     </SimpleGrid>
   );

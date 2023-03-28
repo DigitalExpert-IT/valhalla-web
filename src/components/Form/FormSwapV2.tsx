@@ -251,7 +251,7 @@ export const FormSwapV2 = () => {
         borderRight={"1px"}
       />
       <Stack justifyContent={"center"}>
-        <AspectRatio ratio={1} ml="-5rem">
+        <AspectRatio ratio={1} ml="-5rem" mt="-4rem">
           <ClipPathImage />
         </AspectRatio>
       </Stack>

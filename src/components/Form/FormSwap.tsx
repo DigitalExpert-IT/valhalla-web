@@ -71,7 +71,11 @@ export const FormSwap = () => {
   });
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: "8", md: "20" }} pos={"relative"}>
+    <SimpleGrid
+      columns={{ base: 1, md: 2 }}
+      gap={{ base: "8", md: "20" }}
+      pos={"relative"}
+    >
       <Stack as="form" onSubmit={onSubmit}>
         <Stack alignItems="center" mb="5">
           <Stack w={"full"}>

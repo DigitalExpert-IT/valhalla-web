@@ -108,6 +108,10 @@ export const FormSwapV2 = () => {
                   border: "none",
                   bg: "whiteAlpha.200",
                 }}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.300",
+                }}
                 control={control}
                 name="price"
                 placeholder={"0.0"}
@@ -146,11 +150,16 @@ export const FormSwapV2 = () => {
               </Icon>
               <FormSelect
                 bg={"white"}
+                textAlign={"center"}
                 control={control}
                 _focus={{
+                  border: "none",
                   bg: "white",
                 }}
-                // label={t("form.label.swap")}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.100",
+                }}
                 name="currency"
                 option={normalizeCurrencies}
                 isDisabled={!initialized}
@@ -189,11 +198,16 @@ export const FormSwapV2 = () => {
                   border: "none",
                   bg: "whiteAlpha.200",
                 }}
+                _hover={{
+                  border: "none",
+                  bg: "whiteAlpha.300",
+                }}
                 control={control}
                 name="price"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled={!initialized}
+                isDisabled
+                value={price}
               />
             </Box>
             <Text
@@ -212,8 +226,16 @@ export const FormSwapV2 = () => {
           </Stack>
         </Stack>
         <ButtonConnectWrapper>
-          <Button type="submit" isLoading={isSwapLoading || !initialized}>
-            {t("common.swap")}
+          <Button
+            type="submit"
+            isLoading={isSwapLoading || !initialized}
+            color={"purple.900"}
+            bg={"white"}
+            _hover={{
+              bg: "whiteAlpha.500",
+            }}
+          >
+            {t("common.connectWallet")}
           </Button>
         </ButtonConnectWrapper>
       </Stack>

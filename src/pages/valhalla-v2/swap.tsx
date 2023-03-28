@@ -39,6 +39,7 @@ const Swap = () => {
           px={{ sm: "8" }}
           rounded={"3xl"}
           maxW="4xl"
+          shadow={"none"}
           zIndex={"3"}
         >
           <CardBody>

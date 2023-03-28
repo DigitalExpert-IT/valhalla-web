@@ -11,7 +11,7 @@ import { composeHoc } from "utils";
 const Profile = () => {
   return (
     <LayoutMainV2>
-      <Box pt="40">
+      <Box pt="40" bgColor="#2C1FA7">
         <Box position={"absolute"} w={"full"}>
           <Image
             src="/assets/profile/bg_profile.png"

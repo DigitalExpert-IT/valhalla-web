@@ -352,6 +352,7 @@
   "profile": {
     "account": "ACCOUNT",
     "header": "MY ACCOUNT",
+    "myFarms": "My Farms",
     "networkStatus": {
       "label": "Network Status",
       "TotalNetworkMember": "Total Network <br/>Member",

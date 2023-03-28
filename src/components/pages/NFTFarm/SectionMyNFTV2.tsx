@@ -9,14 +9,18 @@ import {
   Image,
   Container,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 import { CardOwnedFarmNFTV2 } from "components/Card";
 
 export const SectionMyNFTV2 = () => {
   const nft = useNFT();
+  const { t } = useTranslation();
   return (
     <Box mt="40" pos="relative">
       <Box textAlign="center">
-        <Heading textTransform="uppercase">My Farms</Heading>
+        <Heading textTransform="uppercase">
+          {t("pages.profile.myFarms")}
+        </Heading>
       </Box>
       <Box display="flex" position="relative">
         <Image
@@ -47,11 +51,23 @@ export const SectionMyNFTV2 = () => {
             backdropFilter="auto"
             backdropBlur="2.5px"
           >
-            {nft.nftList.map(item => (
-              <WrapItem key={item.id.toNumber()}>
-                <CardOwnedFarmNFTV2 {...item} />
-              </WrapItem>
-            ))}
+            {nft.nftList.length !== 0 ? (
+              nft.nftList.map(item => (
+                <WrapItem key={item.id.toNumber()}>
+                  <CardOwnedFarmNFTV2 {...item} />
+                </WrapItem>
+              ))
+            ) : (
+              <Box
+                textAlign="center"
+                display="flex"
+                alignItems="center"
+                my="10"
+                minH="55vh"
+              >
+                <Heading>{t("error.notOwnedNft")}</Heading>
+              </Box>
+            )}
           </Wrap>
         </Stack>
       </Container>

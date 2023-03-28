@@ -44,6 +44,7 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
                   price={props.price}
                   label="buy"
                   onClick={handleBuy}
+                  isLoading={buyAsync.isLoading}
                 ></UglyButton>
               </Stack>
             </Box>

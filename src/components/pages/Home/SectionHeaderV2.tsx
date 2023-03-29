@@ -40,27 +40,31 @@ export const SectionHeaderV2 = () => {
         </Center>
       </Box>
       <Stack
-        maxW={"sm"}
+        maxW={"xl"}
         textAlign={{ base: "center", lg: "left" }}
         fontWeight="black"
       >
         <Heading
-          as="h1"
-          mt="4"
-          fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+          fontWeight="black"
+          textShadow={{ base: "0px 4px 4px rgba(0, 0, 0, 0.25)", md: "none" }}
+          fontSize={{ base: "4xl", xs: "5xl", md: "5xl", lg: "7xl" }}
+          lineHeight="101%"
           bgGradient="linear(to-r, #9C29FF, #ffffff)"
           bgClip="text"
         >
           <Trans i18nKey="pages.home.headerv2.title" />
         </Heading>
-        <Text fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }} noOfLines={2}>
+        <Text
+          fontSize={{ base: "2xl", md: "3xl", lg: "6xl" }}
+          lineHeight="127.5%"
+        >
           <Trans
             i18nKey="pages.home.headerv2.subtitle"
             components={{
               strong: (
                 <Text
                   as="strong"
-                  fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+                  fontSize={{ base: "4xl", md: "4xl", lg: "7xl" }}
                 />
               ),
             }}

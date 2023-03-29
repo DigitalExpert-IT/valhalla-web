@@ -39,7 +39,7 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
               <PopoverContent
                 border="0"
                 boxShadow="xl"
-                bg="gray.800"
+                bg="#00293E"
                 p="4"
                 rounded="xl"
                 maxW="xs"

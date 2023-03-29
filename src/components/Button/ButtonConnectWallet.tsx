@@ -21,13 +21,7 @@ export const ButtonConnectWallet = () => {
     return (
       <Stack spacing="4" direction="row" align="center">
         {valhalla.account.isRegistered ? null : (
-          <Button
-            px="6"
-            size="sm"
-            variant="outline"
-            colorScheme="brand"
-            onClick={handleNavigate}
-          >
+          <Button px="6" size="sm" variant="outline" onClick={handleNavigate}>
             {t("common.register")}
           </Button>
         )}

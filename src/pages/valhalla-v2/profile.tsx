@@ -11,8 +11,16 @@ import { composeHoc } from "utils";
 const Profile = () => {
   return (
     <LayoutMainV2>
-      <Box pt="40" bgColor="#2C1FA7">
-        <Box position={"absolute"} w={"full"}>
+      <Box
+        pt="40"
+        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+      >
+        <Box
+          position={"absolute"}
+          w={"full"}
+          pt="36"
+          display={{ base: "none", lg: "block" }}
+        >
           <Image
             src="/assets/profile/bg_profile.png"
             alt="matching-image"

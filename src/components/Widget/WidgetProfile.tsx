@@ -19,7 +19,7 @@ export const WidgetProfileBalace = (props: FlexProps) => {
       mt={4}
       py={"2"}
       fontSize={"lg"}
-      bgGradient="linear-gradient(to-r, #6D02C9 0%, whiteAlpha.400 50%, #6D02C9 100%)"
+      bgGradient="linear-gradient(to-r, #6d02c900 0%, whiteAlpha.300 50%, #6d02c900 100%)"
       {...rest}
     >
       {children}
@@ -47,7 +47,7 @@ export const WidgetProfileMember = (props: IPropsMember) => {
     <HStack
       w={"96"}
       h={"14"}
-      bg={"brand.800"}
+      bg={"#33056C"}
       justify={"center"}
       roundedRight={"full"}
       roundedLeft={"full"}

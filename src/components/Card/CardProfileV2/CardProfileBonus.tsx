@@ -22,46 +22,50 @@ export const CardProfileBonus = () => {
   const claimRankRewardAsync = useAsyncCall(claimRankReward);
   return (
     <CardProfileV2>
-      <WidgetProfileBalace>
-        <HStack w={"full"} justifyContent={"space-between"}>
-          <Text>{t("common.globalBonus")}</Text>
-          <Text textAlign={"end"}>{prettyBn(globalPool.claimable)} MATIC</Text>
-        </HStack>
-      </WidgetProfileBalace>
-      <WidgetProfileBalace>
-        <HStack w={"full"} justifyContent={"space-between"}>
-          <Stack>
-            <Text>{t("common.referralBonus")}</Text>
-            <Text>{prettyBn(personalReward)} MATIC</Text>
-          </Stack>
-          <WidgetProfileBtn
-            onClick={claimRewardAsync.exec}
-            isLoading={claimRewardAsync.isLoading}
-          >
-            {t("common.claim")}
-          </WidgetProfileBtn>
-        </HStack>
-      </WidgetProfileBalace>
-      <WidgetProfileBalace>
-        <HStack w={"full"} justifyContent={"space-between"}>
-          <Stack>
-            <Text>{t("common.rankReward")}</Text>
-            <Text>{prettyBn(rankReward)} MATIC</Text>
-          </Stack>
-          <WidgetProfileBtn
-            onClick={claimRankRewardAsync.exec}
-            isLoading={claimRankRewardAsync.isLoading}
-          >
-            {t("common.claim")}
-          </WidgetProfileBtn>
-        </HStack>
-      </WidgetProfileBalace>
-      <WidgetProfileBalace>
-        <HStack w={"full"} justifyContent={"space-between"}>
-          <Text>{t("common.PrivateSalePool")}</Text>
-          <Text textAlign={"end"}>{prettyBn(ipoPool.claimable)} MATIC</Text>
-        </HStack>
-      </WidgetProfileBalace>
+      <Stack gap={"3"} px={"4"} mx={"auto"} w={"full"} maxW={"2xl"}>
+        <WidgetProfileBalace>
+          <HStack w={"full"} justifyContent={"space-between"}>
+            <Text>{t("common.globalBonus")}</Text>
+            <Text textAlign={"end"}>
+              {prettyBn(globalPool.claimable)} MATIC
+            </Text>
+          </HStack>
+        </WidgetProfileBalace>
+        <WidgetProfileBalace>
+          <HStack w={"full"} justifyContent={"space-between"}>
+            <Stack>
+              <Text>{t("common.referralBonus")}</Text>
+              <Text>{prettyBn(personalReward)} MATIC</Text>
+            </Stack>
+            <WidgetProfileBtn
+              onClick={claimRewardAsync.exec}
+              isLoading={claimRewardAsync.isLoading}
+            >
+              {t("common.claim")}
+            </WidgetProfileBtn>
+          </HStack>
+        </WidgetProfileBalace>
+        <WidgetProfileBalace>
+          <HStack w={"full"} justifyContent={"space-between"}>
+            <Stack>
+              <Text>{t("common.rankReward")}</Text>
+              <Text>{prettyBn(rankReward)} MATIC</Text>
+            </Stack>
+            <WidgetProfileBtn
+              onClick={claimRankRewardAsync.exec}
+              isLoading={claimRankRewardAsync.isLoading}
+            >
+              {t("common.claim")}
+            </WidgetProfileBtn>
+          </HStack>
+        </WidgetProfileBalace>
+        <WidgetProfileBalace>
+          <HStack w={"full"} justifyContent={"space-between"}>
+            <Text>{t("common.PrivateSalePool")}</Text>
+            <Text textAlign={"end"}>{prettyBn(ipoPool.claimable)} MATIC</Text>
+          </HStack>
+        </WidgetProfileBalace>
+      </Stack>
     </CardProfileV2>
   );
 };

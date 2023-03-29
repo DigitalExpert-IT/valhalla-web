@@ -26,14 +26,14 @@ export const CardProfileAddress = () => {
   }, [router.isReady]);
   return (
     <CardProfileV2>
-      <VStack gap={"6"}>
+      <VStack gap={"8"}>
         <WidgetProfileBalace justifyContent={"center"}>
-          <Center>
+          <Center py={"2"}>
             <CopiableText
               alignItems={"center"}
               textAlign={"center"}
               gap={2}
-              fontSize={{ base: "2xs", sm: "xs" }}
+              fontSize={{ base: "2xs", sm: "xs", xl: "sm" }}
               value={ContractGnet}
             >
               <Text
@@ -52,12 +52,12 @@ export const CardProfileAddress = () => {
           </Center>
         </WidgetProfileBalace>
         <WidgetProfileBalace justifyContent={"center"}>
-          <Center>
+          <Center py={"2"}>
             <CopiableText
               alignItems={"center"}
               textAlign={"center"}
               gap={2}
-              fontSize={{ base: "2xs", sm: "xs" }}
+              fontSize={{ base: "2xs", sm: "xs", xl: "sm" }}
               value={defaultHost + address}
             >
               <Text
@@ -76,12 +76,12 @@ export const CardProfileAddress = () => {
           </Center>
         </WidgetProfileBalace>
         <WidgetProfileBalace justifyContent={"center"}>
-          <Center>
+          <Center py={"2"}>
             <Text
               alignItems={"center"}
               textAlign={"center"}
               gap={2}
-              fontSize={{ base: "2xs", sm: "xs" }}
+              fontSize={{ base: "2xs", sm: "xs", xl: "sm" }}
             >
               <Text
                 as={"span"}

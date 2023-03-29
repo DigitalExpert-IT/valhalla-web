@@ -23,7 +23,7 @@ export const CardProfileBalanceV2 = () => {
             pos={"absolute"}
             left={"0"}
           />
-          <HStack w={"full"} justifyContent={"center"}>
+          <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>{fromBn(currency.gnet.balance, 9)} GNET</Text>
           </HStack>
         </WidgetProfileBalace>
@@ -35,7 +35,7 @@ export const CardProfileBalanceV2 = () => {
             pos={"absolute"}
             left={"0"}
           />
-          <HStack w={"full"} justifyContent={"center"}>
+          <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>{prettyBn(balance, 18)} MATIC</Text>
           </HStack>
         </WidgetProfileBalace>
@@ -47,7 +47,7 @@ export const CardProfileBalanceV2 = () => {
             pos={"absolute"}
             left={"0"}
           />
-          <HStack w={"full"} justifyContent={"center"}>
+          <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>{prettyBn(currency.usdt.balance, 6)} USDT</Text>
           </HStack>
         </WidgetProfileBalace>

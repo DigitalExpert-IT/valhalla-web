@@ -47,7 +47,7 @@ export const WidgetProfileMember = (props: IPropsMember) => {
     <HStack
       w={"96"}
       h={"14"}
-      bg={"brand.800"}
+      bg={"#33056C"}
       justify={"center"}
       roundedRight={"full"}
       roundedLeft={"full"}

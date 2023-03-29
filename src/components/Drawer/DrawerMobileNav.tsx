@@ -35,7 +35,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent bgColor="gray.800">
+      <DrawerContent bgColor="#00293E">
         <DrawerCloseButton />
         <DrawerHeader>
           <AspectRatio w={50} ratio={1}>

@@ -50,13 +50,14 @@ export const SectionNFTList = () => {
           </Box>
         ) : null}
 
-        <Wrap justifyContent="space-around">
+        <Wrap
+          justifyContent="space-between"
+          spacing="5"
+          align="center"
+          justify="center"
+        >
           {cardList.map((e, idx) => (
-            <WrapItem
-              w={{ md: "30%", sm: "45%", base: "100%" }}
-              key={idx}
-              p="1rem"
-            >
+            <WrapItem w={{ md: "30%", sm: "45%", base: "100%" }} key={idx}>
               <CardFarmNFTV2
                 contentTitle={e.halfingPercentage.toString()}
                 title={`Farm ${e.id.add(1)}`}

@@ -1,10 +1,10 @@
 import { Heading, Text, Card, CardBody, Box } from "@chakra-ui/react";
-import { FormRegister, LayoutMain } from "components";
+import { FormRegister, LayoutMainV2 } from "components";
 import { Trans } from "react-i18next";
 
 const Register = () => {
   return (
-    <LayoutMain>
+    <LayoutMainV2>
       <Box as="header" textAlign="center" px={{ base: "8", lg: "4" }}>
         <Heading pt={{ base: "24", sm: "36" }} as="h1" textAlign="center">
           <Trans
@@ -33,12 +33,13 @@ const Register = () => {
         py="8"
         px={{ base: "4", sm: "8" }}
         maxW="xl"
+        mb="20"
       >
         <CardBody>
           <FormRegister />
         </CardBody>
       </Card>
-    </LayoutMain>
+    </LayoutMainV2>
   );
 };
 

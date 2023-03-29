@@ -10,10 +10,12 @@ import {
   Stack,
   Icon,
   VStack,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 import { useValhalla } from "hooks";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import { LazyVideo } from "components/LazyVideo";
 
 export const SectionHeaderV2 = () => {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ export const SectionHeaderV2 = () => {
       bgImage="url('/images/bgHeader_home.png')"
       align="center"
       justify="center"
-      gap="40"
+      gap="10"
     >
       <Box
         display={{
@@ -34,10 +36,15 @@ export const SectionHeaderV2 = () => {
           lg: "block",
         }}
         minW="30%"
+        rounded="xl"
+        overflow="hidden"
       >
-        <Center h={"full"}>
-          <Text>BACKGROUND VIDEO</Text>
-        </Center>
+        <AspectRatio w={{ base: "none", md: "md", xl: " xl" }} ratio={1}>
+          <LazyVideo
+            src="https://res.cloudinary.com/do5ykudx9/video/upload/v1680114199/intro.mp4"
+            objectFit="cover"
+          />
+        </AspectRatio>
       </Box>
       <Stack
         maxW={"xl"}

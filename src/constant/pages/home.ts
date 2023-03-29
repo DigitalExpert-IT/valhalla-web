@@ -306,7 +306,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
   {
     rankData: {
       image: "/assets/rank/common.svg",
-      rank: "common",
+      rank: "ellite",
     },
     pool: "3%",
     level: "10 level",

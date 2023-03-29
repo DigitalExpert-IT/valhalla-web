@@ -20,8 +20,8 @@ export default function Home() {
 
   return (
     <LayoutMainV2>
-      <SectionHeaderV2 />
       <Container maxW="container.xxl">
+        <SectionHeaderV2 />
         <SectionProject />
         <SectionFeaturesV2 />
       </Container>

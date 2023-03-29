@@ -55,7 +55,11 @@ export const TableData = <Data extends object>({
               {headerGroup.headers.map(header => {
                 const meta: any = header.column.columnDef.meta;
                 return (
-                  <Th key={header.id} isNumeric={meta?.isNumeric}>
+                  <Th
+                    key={header.id}
+                    isNumeric={meta?.isNumeric}
+                    whiteSpace="break-spaces"
+                  >
                     <Text
                       fontWeight="bold"
                       fontSize={{ base: "sm", md: "lg" }}

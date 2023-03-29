@@ -10,7 +10,9 @@ export const LayoutMainV2: React.FC<MainProps> = ({ children }) => {
   return (
     <Box>
       <NavbarV2 />
-      <Box bgColor="#191272">{children}</Box>
+      <Box bgColor="#191272" maxW="">
+        {children}
+      </Box>
       <LayoutFooterV2 />
     </Box>
   );

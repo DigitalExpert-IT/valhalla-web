@@ -36,7 +36,10 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
         zIndex={"3"}
         textAlign={{ base: "start", lg: "center" }}
       >
-        <Text fontWeight={"bold"} fontSize={{ base: "xl", md: "2xl" }}>
+        <Text
+          fontWeight={"bold"}
+          fontSize={{ base: "xl", md: "xl", xl: "2xl" }}
+        >
           {title}
         </Text>
         <Text fontSize={"xs"}>{subtitle}</Text>

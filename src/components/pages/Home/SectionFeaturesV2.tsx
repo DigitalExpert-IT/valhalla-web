@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Stack } from "@chakra-ui/react";
+import { Box, Heading, Text, Stack, Container } from "@chakra-ui/react";
 import { WidgetHomeFeaturesV2 } from "components/Widget";
 import React from "react";
 import { Trans } from "react-i18next";

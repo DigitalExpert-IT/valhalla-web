@@ -54,7 +54,7 @@ export const NavbarV2 = () => {
       pos="fixed"
       transition="0.5s"
     >
-      <Container maxW="container.xl">
+      <Container maxW="container.xxl">
         <Flex alignItems="center" justify="space-around">
           <Stack
             direction="row"

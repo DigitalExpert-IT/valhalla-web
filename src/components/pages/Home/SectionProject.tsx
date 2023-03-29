@@ -60,13 +60,15 @@ export const SectionProject = () => {
           />
         </Box>
         <Stack flex={1} spacing="5">
-          <Text fontSize={{ base: "md", md: "xl", lg: "40" }}>
-            {t("pages.home.project.description")}
-          </Text>
+          <Box maxW="5xl">
+            <Text fontSize={{ base: "md", md: "3xl", xl: "40" }}>
+              {t("pages.home.project.description")}
+            </Text>
+          </Box>
           <UnorderedList
             listStyleType="none"
             marginInlineStart={"none"}
-            fontSize={{ base: "md", md: "lg", lg: "27" }}
+            fontSize={{ base: "md", md: "lg", xl: "27" }}
           >
             {PROJECT_LIST.map((e, i) => (
               <ListItem key={i}>{e}</ListItem>

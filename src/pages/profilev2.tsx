@@ -8,7 +8,7 @@ import {
   SectionProfileV2,
 } from "components/pages/Profile";
 
-const Profile = () => {
+const ProfileV2 = () => {
   return (
     <LayoutMainV2>
       <Box
@@ -41,4 +41,4 @@ const Profile = () => {
   );
 };
 
-export default withConnection(composeHoc(withRegistration)(Profile));
+export default withConnection(composeHoc(withRegistration)(ProfileV2));

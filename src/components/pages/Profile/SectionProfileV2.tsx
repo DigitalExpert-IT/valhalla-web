@@ -15,12 +15,13 @@ export const SectionProfileV2 = () => {
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
         textAlign={"center"}
+        fontSize={{ base: "xl", md: "5xl" }}
         _after={{
           content: `'${t("pages.profile.account")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "200", md: "130", xs: "80", base: "50" },
-          mt: { xl: "-28", lg: "-24", md: "-20", xs: "-16", base: "-12" },
+          fontSize: { xl: "250", lg: "200", md: "130", xs: "70", base: "50" },
+          mt: { xl: "-32", lg: "-28", md: "-24", xs: "-12", base: "-10" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",

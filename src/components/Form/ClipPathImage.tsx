@@ -10,37 +10,37 @@ export const ClipPathImage = () => {
       <path
         d="M420.901 0H386.953L310.016 133.804L326.813 163.017L420.901 0Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M558.154 29.8508L540.99 0H430.704L414.261 29.8508H558.154Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M415.673 129.031L430.576 213.751H491.119L533.24 141.004L507.232 96.3654L558.948 96.6046L591.644 40.1291H529.208L476.93 126.057L470.724 40.1291H408.288L330.545 175.295L352.595 213.751H368.971L415.673 129.031Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M308.428 213.753H342.413L325.421 184.196L308.428 213.753Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M404.111 237.756L384.644 203.9L374.731 222.362H360.933L386.953 267.607H496.164L513.554 237.756H404.111Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M555.247 105.164H522.459L538.853 133.678L555.247 105.164Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <path
         d="M601.362 105.164H565.099L548.656 133.807H583.423L506.596 267.611H540.813L617.75 133.807L601.362 105.164Z"
         fill="white"
-        fill-opacity="0.2"
+        fillOpacity="0.2"
       />
       <g
         style={{
@@ -242,9 +242,9 @@ export const ClipPathImage = () => {
           width="636.56"
           height="271.382"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -276,9 +276,9 @@ export const ClipPathImage = () => {
           width="93.5811"
           height="106.223"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -310,9 +310,9 @@ export const ClipPathImage = () => {
           width="109.436"
           height="124.631"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -345,8 +345,8 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(574.244 211.404) scale(80.752 80.7629)"
         >
-          <stop stop-color="#00FFFF" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="#00FFFF" />
+          <stop offset="1" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_84_2328"
@@ -356,8 +356,8 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(542.685 202.255) scale(78.493 78.5036)"
         >
-          <stop stop-color="#00FFFF" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="#00FFFF" />
+          <stop offset="1" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_84_2328"
@@ -367,8 +367,8 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(467.57 402.557) scale(235.401 235.433)"
         >
-          <stop stop-color="#00FFFF" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="#00FFFF" />
+          <stop offset="1" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint3_linear_84_2328"
@@ -378,9 +378,9 @@ export const ClipPathImage = () => {
           y2="314.782"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.2" stop-color="#CDA945" />
-          <stop offset="0.64" stop-color="#5E4D20" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.2" stopColor="#CDA945" />
+          <stop offset="0.64" stopColor="#5E4D20" />
           <stop offset="1" />
         </linearGradient>
         <linearGradient
@@ -391,12 +391,12 @@ export const ClipPathImage = () => {
           y2="278.577"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.03" stop-color="#996E0D" />
-          <stop offset="0.29" stop-color="#B2800F" />
-          <stop offset="0.4" stop-color="#C89826" />
-          <stop offset="0.49" stop-color="#FAD05B" />
-          <stop offset="0.69" stop-color="#B88510" />
-          <stop offset="1" stop-color="#996E0D" />
+          <stop offset="0.03" stopColor="#996E0D" />
+          <stop offset="0.29" stopColor="#B2800F" />
+          <stop offset="0.4" stopColor="#C89826" />
+          <stop offset="0.49" stopColor="#FAD05B" />
+          <stop offset="0.69" stopColor="#B88510" />
+          <stop offset="1" stopColor="#996E0D" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_84_2328"
@@ -406,11 +406,11 @@ export const ClipPathImage = () => {
           y2="174.799"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_84_2328"
@@ -420,11 +420,11 @@ export const ClipPathImage = () => {
           y2="248.167"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint7_linear_84_2328"
@@ -434,13 +434,13 @@ export const ClipPathImage = () => {
           y2="245.829"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <linearGradient
           id="paint8_linear_84_2328"
@@ -450,13 +450,13 @@ export const ClipPathImage = () => {
           y2="103.347"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <radialGradient
           id="paint9_radial_84_2328"
@@ -466,14 +466,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(464.652 209.993) rotate(6.71091) scale(26.2352 26.2386)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -484,14 +484,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(466.455 204.436) rotate(-41.6938) scale(73.0314 11.9094)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <linearGradient
@@ -502,9 +502,9 @@ export const ClipPathImage = () => {
           y2="414.133"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.2" stop-color="#CDA945" />
-          <stop offset="0.64" stop-color="#5E4D20" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.2" stopColor="#CDA945" />
+          <stop offset="0.64" stopColor="#5E4D20" />
           <stop offset="1" />
         </linearGradient>
         <linearGradient
@@ -515,9 +515,9 @@ export const ClipPathImage = () => {
           y2="438.549"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.2" stop-color="#CDA945" />
-          <stop offset="0.64" stop-color="#5E4D20" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.2" stopColor="#CDA945" />
+          <stop offset="0.64" stopColor="#5E4D20" />
           <stop offset="1" />
         </linearGradient>
         <linearGradient
@@ -528,12 +528,12 @@ export const ClipPathImage = () => {
           y2="361.588"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.03" stop-color="#996E0D" />
-          <stop offset="0.29" stop-color="#B2800F" />
-          <stop offset="0.4" stop-color="#C89826" />
-          <stop offset="0.49" stop-color="#FAD05B" />
-          <stop offset="0.69" stop-color="#B88510" />
-          <stop offset="1" stop-color="#996E0D" />
+          <stop offset="0.03" stopColor="#996E0D" />
+          <stop offset="0.29" stopColor="#B2800F" />
+          <stop offset="0.4" stopColor="#C89826" />
+          <stop offset="0.49" stopColor="#FAD05B" />
+          <stop offset="0.69" stopColor="#B88510" />
+          <stop offset="1" stopColor="#996E0D" />
         </linearGradient>
         <linearGradient
           id="paint14_linear_84_2328"
@@ -543,11 +543,11 @@ export const ClipPathImage = () => {
           y2="257.832"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint15_linear_84_2328"
@@ -557,11 +557,11 @@ export const ClipPathImage = () => {
           y2="351.436"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint16_linear_84_2328"
@@ -571,13 +571,13 @@ export const ClipPathImage = () => {
           y2="348.451"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_84_2328"
@@ -587,13 +587,13 @@ export const ClipPathImage = () => {
           y2="277.291"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <radialGradient
           id="paint18_radial_84_2328"
@@ -603,14 +603,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(539.213 263.023) rotate(6.7209) scale(18.0828 18.0852)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -621,14 +621,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(540.944 257.791) rotate(-41.6938) scale(50.3198 8.20576)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <linearGradient
@@ -639,12 +639,12 @@ export const ClipPathImage = () => {
           y2="415.475"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.03" stop-color="#996E0D" />
-          <stop offset="0.29" stop-color="#B2800F" />
-          <stop offset="0.4" stop-color="#C89826" />
-          <stop offset="0.49" stop-color="#FAD05B" />
-          <stop offset="0.69" stop-color="#B88510" />
-          <stop offset="1" stop-color="#996E0D" />
+          <stop offset="0.03" stopColor="#996E0D" />
+          <stop offset="0.29" stopColor="#B2800F" />
+          <stop offset="0.4" stopColor="#C89826" />
+          <stop offset="0.49" stopColor="#FAD05B" />
+          <stop offset="0.69" stopColor="#B88510" />
+          <stop offset="1" stopColor="#996E0D" />
         </linearGradient>
         <linearGradient
           id="paint21_linear_84_2328"
@@ -654,11 +654,11 @@ export const ClipPathImage = () => {
           y2="261.282"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint22_linear_84_2328"
@@ -668,11 +668,11 @@ export const ClipPathImage = () => {
           y2="373.13"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFBF2" />
-          <stop offset="0.17" stop-color="#B88510" />
-          <stop offset="0.45" stop-color="#FFE5AB" />
-          <stop offset="0.71" stop-color="#FFB817" />
-          <stop offset="1" stop-color="#FFE5AB" />
+          <stop stopColor="#FFFBF2" />
+          <stop offset="0.17" stopColor="#B88510" />
+          <stop offset="0.45" stopColor="#FFE5AB" />
+          <stop offset="0.71" stopColor="#FFB817" />
+          <stop offset="1" stopColor="#FFE5AB" />
         </linearGradient>
         <linearGradient
           id="paint23_linear_84_2328"
@@ -682,13 +682,13 @@ export const ClipPathImage = () => {
           y2="369.563"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <linearGradient
           id="paint24_linear_84_2328"
@@ -698,13 +698,13 @@ export const ClipPathImage = () => {
           y2="284.546"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B88510" />
-          <stop offset="0.38" stop-color="#FFB817" />
-          <stop offset="0.45" stop-color="#FFC033" />
-          <stop offset="0.59" stop-color="#FFCE60" />
-          <stop offset="0.7" stop-color="#FFD67C" />
-          <stop offset="0.76" stop-color="#FFDA87" />
-          <stop offset="1" stop-color="#FFFBF2" />
+          <stop stopColor="#B88510" />
+          <stop offset="0.38" stopColor="#FFB817" />
+          <stop offset="0.45" stopColor="#FFC033" />
+          <stop offset="0.59" stopColor="#FFCE60" />
+          <stop offset="0.7" stopColor="#FFD67C" />
+          <stop offset="0.76" stopColor="#FFDA87" />
+          <stop offset="1" stopColor="#FFFBF2" />
         </linearGradient>
         <radialGradient
           id="paint25_radial_84_2328"
@@ -714,14 +714,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(394.072 303.32) rotate(6.7209) scale(15.9804 15.9825)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -732,14 +732,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(395.591 298.07) rotate(-41.6938) scale(44.4904 7.25514)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -750,14 +750,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(440.564 389.673) rotate(6.7209) scale(26.9397 26.9433)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -768,14 +768,14 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(442.339 384.153) rotate(-41.6938) scale(74.9901 12.2288)"
         >
-          <stop stop-color="#FACE55" />
-          <stop offset="0.11" stop-color="#C8A444" />
-          <stop offset="0.23" stop-color="#937932" />
-          <stop offset="0.36" stop-color="#665422" />
-          <stop offset="0.49" stop-color="#413516" />
-          <stop offset="0.62" stop-color="#241E0C" />
-          <stop offset="0.75" stop-color="#100D05" />
-          <stop offset="0.88" stop-color="#040301" />
+          <stop stopColor="#FACE55" />
+          <stop offset="0.11" stopColor="#C8A444" />
+          <stop offset="0.23" stopColor="#937932" />
+          <stop offset="0.36" stopColor="#665422" />
+          <stop offset="0.49" stopColor="#413516" />
+          <stop offset="0.62" stopColor="#241E0C" />
+          <stop offset="0.75" stopColor="#100D05" />
+          <stop offset="0.88" stopColor="#040301" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -786,8 +786,8 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(363.355 223.953) rotate(180) scale(80.752 80.7629)"
         >
-          <stop stop-color="#00FFFF" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="#00FFFF" />
+          <stop offset="1" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint30_radial_84_2328"
@@ -797,8 +797,8 @@ export const ClipPathImage = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(394.914 233.09) rotate(180) scale(78.493 78.5036)"
         >
-          <stop stop-color="#00FFFF" />
-          <stop offset="1" stop-opacity="0" />
+          <stop stopColor="#00FFFF" />
+          <stop offset="1" stopOpacity="0" />
         </radialGradient>
       </defs>
     </svg>

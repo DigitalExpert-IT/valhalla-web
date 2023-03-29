@@ -3,7 +3,7 @@ import { Styles } from "@chakra-ui/theme-tools";
 export const styles: Styles = {
   global: {
     body: {
-      fontFamily: "body",
+      fontFamily: "poppins",
       color: "chakra-body-text",
       bg: "chakra-body-bg",
       transitionProperty: "background-color",

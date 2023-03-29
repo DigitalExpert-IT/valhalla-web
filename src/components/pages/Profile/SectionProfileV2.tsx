@@ -19,8 +19,8 @@ export const SectionProfileV2 = () => {
           content: `'${t("pages.profile.account")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { md: "130", xs: "80", base: "50" },
-          mt: { md: "-20", xs: "-16", base: "-12" },
+          fontSize: { xl: "250", lg: "200", md: "130", xs: "80", base: "50" },
+          mt: { xl: "-28", lg: "-24", md: "-20", xs: "-16", base: "-12" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",
@@ -28,7 +28,7 @@ export const SectionProfileV2 = () => {
       >
         {t("pages.profile.header")}
       </Heading>
-      <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={{ base: 4, md: 8 }}>
+      <SimpleGrid columns={{ base: 1, lg: 3 }} gap={{ base: 4, md: 6, xl: 12 }}>
         <GridItem>
           <CardProfileRankV2 />
         </GridItem>

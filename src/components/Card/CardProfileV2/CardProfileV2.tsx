@@ -8,7 +8,7 @@ export const CardProfileV2 = (props: CardProps) => {
       px={{ base: "4", md: "12" }}
       h={"full"}
       placeContent={"center"}
-      rounded={"3xl"}
+      rounded={"2.5rem"}
       bg={"#6D02C9"}
       {...rest}
     >

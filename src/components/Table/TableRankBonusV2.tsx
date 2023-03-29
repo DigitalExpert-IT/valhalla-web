@@ -91,23 +91,32 @@ export const TableRankBonusV2 = () => {
       textAlign="center"
       pos="relative"
       pt={40}
+      overflow="hidden"
     >
-      <Box pos="absolute" top="700" bottom="0" zIndex="1">
+      <Box pos="absolute" top="500" bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
       </Box>
       <Heading
-        mb={{ base: 10, md: 10, lg: 2 }}
-        fontSize={{ base: "xl", md: "5xl" }}
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
-        textTransform="capitalize"
+        textTransform="uppercase"
         _after={{
+          background:
+            "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
           content: `'${t("pages.home.bonus")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { base: "40", md: "100", lg: "200" },
-          mt: { base: "-38px", md: "-90px", lg: "-120px" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
+          textTransform: "capi",
+          color: "whiteAlpha.100",
+          transform: {
+            base: "scale(2) translateY(-30px) translateX(1px)",
+            md: "scale(2) translateY(-80px)",
+            xl: "scale(3) translateY(-20px)",
+          },
         }}
       >
         <Trans i18nKey="pages.home.globalrankbonus" />

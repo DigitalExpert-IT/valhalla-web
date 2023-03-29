@@ -20,16 +20,21 @@ const columnHelper = createColumnHelper<IRankNetwork>();
 const columns = [
   columnHelper.accessor("levelBonus", {
     cell: info => (
-      <Stack direction="row" align="center">
+      <Stack
+        direction="row"
+        align="center"
+        w={{ base: 20, md: 80 }}
+        whiteSpace="pre-line"
+      >
         <Icon
           as={MdOutlineDoubleArrow}
-          color="teal"
-          w={{ base: "3", md: "6" }}
-          h={{ base: "3", md: "6" }}
+          color="teal.400"
+          w={{ base: "3", md: "7" }}
+          h={{ base: "3", md: "7" }}
         />
         <Text
           fontWeight="bold"
-          fontSize={{ base: "sm", md: "lg" }}
+          fontSize={{ base: "sm", md: "xl" }}
           textTransform="capitalize"
           color="gray.300"
         >
@@ -43,9 +48,9 @@ const columns = [
     cell: info => (
       <Text
         fontWeight="bold"
-        fontSize={{ base: "sm", md: "md" }}
+        fontSize={{ base: "sm", md: "xl" }}
         textTransform="capitalize"
-        ml="1"
+        textAlign="center"
       >
         {info.getValue()}
       </Text>
@@ -56,9 +61,9 @@ const columns = [
     cell: info => (
       <Text
         fontWeight="bold"
-        fontSize={{ base: "sm", md: "md" }}
+        fontSize={{ base: "sm", md: "xl" }}
         textTransform="capitalize"
-        ml="1"
+        textAlign="center"
       >
         {info.getValue()}
       </Text>
@@ -71,28 +76,36 @@ export const TableRankNetworkV2 = () => {
   return (
     <Stack
       textAlign="center"
-      pt={20}
+      pt={{ base: 40 }}
       align="center"
       justify="center"
       pos="relative"
+      overflow="hidden"
     >
-      <Box pos="absolute" top="80" bottom="0" zIndex="1">
+      <Box pos="absolute" top={{ base: 1000, md: 800 }} bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
       </Box>
-
       <Heading
-        mb={{ base: 10, md: 10, lg: 2 }}
-        fontSize={{ base: "xl", md: "4xl", lg: "5xl" }}
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"
         _after={{
+          background:
+            "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
           content: `'${t("pages.home.maticPlan")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { base: "40", md: "100", lg: "200" },
-          mt: { base: "-45px", md: "-80px", lg: "-100px" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
+          textTransform: "uppercase",
+          color: "whiteAlpha.100",
+          transform: {
+            base: "scale(2) translateY(-40px) translateX(1px)",
+            md: "scale(2) translateY(-80px)",
+            xl: "scale(3) translateY(-20px)",
+          },
         }}
       >
         <Trans i18nKey="pages.home.rankNetwork" />
@@ -102,7 +115,7 @@ export const TableRankNetworkV2 = () => {
         columns={columns}
         tableCustom={{
           variant: "valhallaV2",
-          maxWidth: "50%",
+          maxWidth: "80%",
           zIndex: "2",
         }}
       />

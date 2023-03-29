@@ -130,65 +130,60 @@ export interface ITokenomics {
 
 export const RANKNETWORK = [
   {
-    levelBonus: "level 1-2",
-    percent: "10%",
-    value: "6.7 matic",
+    levelBonus: "level 1",
+    percent: "30%",
+    value: "18 matic",
+  },
+  {
+    levelBonus: "level 2",
+    percent: "8%",
+    value: "4.8 matic",
   },
   {
     levelBonus: "level 3",
-    percent: "6%",
-    value: "4.02 matic",
+    percent: "3%",
+    value: "1.8 matic",
   },
   {
     levelBonus: "level 4",
-    percent: "5%",
-    value: "3.35 matic",
-  },
-  {
-    levelBonus: "level 5-6",
-    percent: "4%",
-    value: "2.68 matic",
-  },
-  {
-    levelBonus: "level 7-8",
-    percent: "3%",
-    value: "2.01 matic",
-  },
-  {
-    levelBonus: "level 9-11",
     percent: "2%",
-    value: "1.34 matic",
+    value: "1.2 matic",
   },
   {
-    levelBonus: "level 12-15",
+    levelBonus: "level 5",
+    percent: "2%",
+    value: "1.2 matic",
+  },
+  {
+    levelBonus: "level 6 - 15",
     percent: "1%",
-    value: "0.67 matic",
+    value: "0.6 matic",
   },
   {
     levelBonus: "Reserve",
     percent: "3%",
-    value: "2.01 matic",
+    value: "1.8 matic",
   },
   {
     levelBonus: "Global Bonus",
     percent: "17%",
-    value: "11.39 matic",
+    value: "10.2 matic",
   },
   {
     levelBonus: "Development / Marketing",
     percent: "25%",
-    value: "16.75 matic",
+    value: "15 matic",
   },
 
   {
     levelBonus: "Total",
     percent: "100%",
-    value: "67 matic",
+    value: "60 matic",
   },
   {
     levelBonus: "Private Sale",
     percent: "-",
-    value: "33 matic",
+    value: "-",
   },
 ];
 

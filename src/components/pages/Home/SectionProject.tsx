@@ -15,20 +15,30 @@ export const SectionProject = () => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Stack mt="20" overflow="hidden">
       <Heading
-        fontSize="5xl"
+        pt="20"
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"
         _after={{
+          fontWeight: "black",
+          background:
+            "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
           content: `'${t("pages.home.project.title")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { md: "200", base: "60" },
-          fontWeight: "bold",
-          mt: { md: "-120px", base: "-68px" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
+          textTransform: "uppercase",
+          color: "whiteAlpha.100",
+          transform: {
+            base: "scale(3) translateY(-9px) translateX(1px)",
+            md: "scale(3) translateY(-15px)",
+            xl: "scale(4) translateY(-8px)",
+          },
         }}
       >
         {t("pages.home.project.title")}
@@ -39,22 +49,24 @@ export const SectionProject = () => {
         spacing="8"
         alignItems="center"
       >
-        <Box flex={1} display="flex" justifyContent="center">
-          <Image src="/assets/project/project.png" alt="project" w="md" />
+        <Box flex={1} display="flex" justifyContent="center" mt="5">
+          <Image src="/assets/project/project.svg" alt="project" w="xl" />
           <Image
-            src="/assets/logo/gn.png"
+            src="/assets/logo/gn.svg"
             alt="logo"
             pos="absolute"
             alignSelf="center"
-            w={{ base: "6xs", md: "5xs" }}
+            w={{ base: "120px", md: "6xs" }}
           />
         </Box>
         <Stack flex={1} spacing="5">
-          <Text fontSize="20">{t("pages.home.project.description")}</Text>
+          <Text fontSize={{ base: "md", md: "xl", lg: "40" }}>
+            {t("pages.home.project.description")}
+          </Text>
           <UnorderedList
             listStyleType="none"
             marginInlineStart={"none"}
-            fontSize="15"
+            fontSize={{ base: "md", md: "lg", lg: "27" }}
           >
             {PROJECT_LIST.map((e, i) => (
               <ListItem key={i}>{e}</ListItem>
@@ -62,6 +74,6 @@ export const SectionProject = () => {
           </UnorderedList>
         </Stack>
       </Stack>
-    </>
+    </Stack>
   );
 };

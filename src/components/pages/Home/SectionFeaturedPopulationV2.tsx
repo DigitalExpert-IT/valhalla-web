@@ -14,7 +14,7 @@ export const SectionFeaturedPopulationV2 = () => {
     <Box
       bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
       h={{ lg: "100vh", base: "70vh" }}
-      pt={{ base: 20 }}
+      pt={{ base: 40 }}
       display="flex"
       alignItems="center"
       position="relative"
@@ -65,11 +65,16 @@ export const SectionFeaturedPopulationV2 = () => {
 
       <Container maxW="container.xl" overflowX="hidden">
         <Box
-          w={{ lg: "50%", base: "100%" }}
+          w={{ lg: "60%", base: "100%" }}
           float="right"
           textAlign={{ base: "center", lg: "left" }}
         >
-          <Heading mb="6">
+          <Heading
+            mb="6"
+            size={{ base: "lg", md: "4xl" }}
+            lineHeight="101%"
+            fontWeight="extrabold"
+          >
             <Trans
               i18nKey="pages.home.populationSection.title"
               components={{
@@ -80,7 +85,6 @@ export const SectionFeaturedPopulationV2 = () => {
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}
-                    backgroundClip="text"
                     fontWeight="bold"
                     bgClip="text"
                     bgGradient="linear-gradient(90deg, #9C29FF 0%, #FFFFFF 100%)"
@@ -93,11 +97,11 @@ export const SectionFeaturedPopulationV2 = () => {
               }}
             />
           </Heading>
-          <Text>
+          <Text fontSize={{ base: "md", md: "2xl" }}>
             <Trans
               i18nKey="pages.home.populationSection.content"
               components={{
-                strong: <Text as="span" fontWeight="bold" color="blue.500" />,
+                strong: <Text as="span" fontWeight="bold" color="#FF00FF" />,
               }}
             />
           </Text>

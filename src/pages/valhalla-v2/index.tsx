@@ -22,12 +22,8 @@ const ValhallaV2 = () => {
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />
-      <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="20">
-        <SectionProject />
-      </Container>
-      <Container minH="55vh" maxW="container.xl" overflowX="hidden" pt="40">
-        <SectionFeaturesV2 />
-      </Container>
+      <SectionProject />
+      <SectionFeaturesV2 />
       <SectionFeaturedPopulationV2 />
       <Box
         bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"

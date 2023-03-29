@@ -17,6 +17,7 @@ const Swap = () => {
         <Heading
           mt={"24"}
           textAlign={"center"}
+          zIndex={"1"}
           _after={{
             content: `'${t("common.swap").toUpperCase()}'`,
             alignSelf: "center",
@@ -39,6 +40,7 @@ const Swap = () => {
           px={{ sm: "8" }}
           rounded={"3xl"}
           maxW="4xl"
+          shadow={"none"}
           zIndex={"3"}
         >
           <CardBody>

@@ -62,7 +62,8 @@ export const CardProfileBonus = () => {
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.PrivateSalePool")}</Text>
-            <Text textAlign={"end"}>{prettyBn(ipoPool.claimable)} MATIC</Text>
+            {/* <Text textAlign={"end"}>{prettyBn(ipoPool.claimable)} MATIC</Text> */}
+            <Text textAlign={"end"}>TBA</Text>
           </HStack>
         </WidgetProfileBalace>
       </Stack>

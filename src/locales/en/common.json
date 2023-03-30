@@ -38,7 +38,7 @@
   "contractGnet": "GNET Token",
   "referralLink": "Referral Link",
   "PrivateSaleNewToken": "Private Sale New Token",
-  "PrivateSalePool": "Private Sale Pool",
+  "PrivateSalePool": "Private Sale",
   "ipo": "IPO",
   "swap": "Swap",
   "levelBonus": "Level Bonus",
@@ -57,5 +57,5 @@
   "remainingFarm": "Total Return (450 Days)",
   "percentage": "Percentage",
   "claim": "Claim",
-  "buy":"Buy"
+  "buy": "Buy"
 }

@@ -62,8 +62,9 @@ export const SectionHeaderV2 = () => {
           <Trans i18nKey="pages.home.headerv2.title" />
         </Heading>
         <Text
-          fontSize={{ base: "2xl", md: "3xl", lg: "6xl" }}
-          lineHeight="127.5%"
+          fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
+          fontWeight={"normal"}
+          lineHeight="130%"
         >
           <Trans
             i18nKey="pages.home.headerv2.subtitle"
@@ -71,7 +72,7 @@ export const SectionHeaderV2 = () => {
               strong: (
                 <Text
                   as="strong"
-                  fontSize={{ base: "4xl", md: "4xl", lg: "7xl" }}
+                  fontSize={{ base: "4xl", md: "5xl", lg: "7xl" }}
                 />
               ),
             }}
@@ -84,7 +85,14 @@ export const SectionHeaderV2 = () => {
         >
           {valhalla.account.isRegistered ? null : (
             <Link href="/register">
-              <Button variant={"outline"}>{t("common.register")}</Button>
+              <Button
+                variant={"outline"}
+                fontWeight={"thin"}
+                border={"2px"}
+                borderColor={"white"}
+              >
+                {t("common.register").toUpperCase()}
+              </Button>
             </Link>
           )}
         </HStack>

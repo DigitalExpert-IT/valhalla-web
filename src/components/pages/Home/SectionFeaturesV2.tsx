@@ -35,13 +35,12 @@ export const SectionFeaturesV2 = () => {
         <Trans i18nKey="pages.home.feature.title" />
       </Heading>
       <Stack
-        w="85%"
-        justify="center"
+        placeItems={"center"}
         textAlign="center"
         spacing="20"
         mt={{ base: "0", md: "-5rem" }}
       >
-        <Text fontSize={{ base: "md", md: "xl" }} fontWeight="thin">
+        <Text fontSize={{ base: "md", md: "xl" }} fontWeight="hairline">
           {t("pages.home.feature.subtitle")}
         </Text>
         <WidgetHomeFeaturesV2 cardData={PROMOTION_IMAGE_DATAV2} />

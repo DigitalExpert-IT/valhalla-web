@@ -1,4 +1,5 @@
 import { Styles } from "@chakra-ui/theme-tools";
+import "@fontsource/poppins/700.css"
 
 export const styles: Styles = {
   global: {

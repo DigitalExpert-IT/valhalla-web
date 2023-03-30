@@ -17,21 +17,21 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
   return (
     <Card
       px={6}
-      pt={4}
+      py={4}
       w={"full"}
-      maxW={"sm"}
+      maxW={"xs"}
       mx={"auto"}
       h={"full"}
       position={"relative"}
       overflow={"hidden"}
       bg={bgColor}
-      minH={{ base: "36", sm: "80" }}
-      maxH={"44"}
+      minH={{ base: "36", sm: "72" }}
+      maxH={{ base: "full", md: "44" }}
       rounded={"3xl"}
     >
       <Flex
         flexDir={"column"}
-        pr={{ base: "16", sm: "0" }}
+        pr={{ base: "20", sm: "0" }}
         h={"full"}
         zIndex={"3"}
         textAlign={{ base: "start", lg: "center" }}
@@ -42,14 +42,16 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
         >
           {title}
         </Text>
-        <Text fontSize={"xs"}>{subtitle}</Text>
+        <Text fontSize={"xs"} fontWeight="hairline">
+          {subtitle}
+        </Text>
       </Flex>
       <Image
         src={uri}
         alt={title}
         mx={"auto"}
         zIndex={"base"}
-        h={{ base: id == 1 ? "full" : "80%", sm: "60%" }}
+        h={{ base: id == 1 ? "full" : "70%", sm: "60%" }}
         w={"fit-content"}
         position={"absolute"}
         right={"0"}

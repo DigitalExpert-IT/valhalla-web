@@ -65,7 +65,7 @@ export const PROMOTION_IMAGE_DATAV2 = [
 export const OURTEAM = [
   {
     name: "Yusuf Kenan Can",
-    image: "/assets/ourteam/yusuf3.png",
+    image: "/assets/ourteam/yusuf4.png",
     division: "Chief Executive Officer",
   },
   {

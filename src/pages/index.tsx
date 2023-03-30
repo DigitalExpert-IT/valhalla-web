@@ -35,10 +35,10 @@ export default function Home() {
       <Box bgColor="#6D02C9">
         <TableRankBonusV2 />
       </Box>
-      <Box bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)" py="20">
+      <Box bgGradient="linear(#6D02C9 0%, #6D02C9 50%, #2C1FA7 100%)" py="20">
         <SectionMatchingBonusV2 />
       </Box>
-      <Box bgGradient="linear(#2C1FA7 0%, #6D02C9 10%, #2C1FA7 30%)" pt="40">
+      <Box bgGradient="linear(#2C1FA7 0%, #401fa7 5%, #2C1FA7 30%)" pt="40">
         <SectionRoadmapV2 />
       </Box>
       <Box

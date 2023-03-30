@@ -25,7 +25,7 @@ export const SectionMatchingBonusV2 = () => {
         />
       </Box>
       <Stack
-        maxW={"md"}
+        maxW={"xl"}
         flex={1}
         display="flex"
         flexDir="column"

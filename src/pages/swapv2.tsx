@@ -15,16 +15,19 @@ const SwapV2 = () => {
         bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)"
       >
         <Heading
-          mt={"24"}
-          textAlign={"center"}
+          fontWeight="black"
+          fontSize={{ base: "3xl", md: "7xl" }}
+          textAlign="center"
+          textTransform="uppercase"
+          mt={"40"}
           zIndex={"1"}
           _after={{
             content: `'${t("common.swap").toUpperCase()}'`,
             alignSelf: "center",
             display: "block",
             fontWeight: "black",
-            fontSize: { lg: "180", md: "130", xs: "100", base: "80" },
-            mt: { lg: "-24", md: "-20", xs: "-20", base: "-16" },
+            fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
+            mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
             color: "whiteAlpha.100",
             textAlign: "center",
             textTransform: "uppercase",
@@ -33,7 +36,7 @@ const SwapV2 = () => {
           {t("common.swap").toUpperCase()}
         </Heading>
         <Card
-          bg={"#6D02C9BF"}
+          bg={"#6d02c9eb"}
           mx="auto"
           py={"8"}
           w={"full"}
@@ -50,6 +53,7 @@ const SwapV2 = () => {
         <Stack
           justifyContent={"center"}
           pos={"absolute"}
+          top={"40"}
           bottom={"0"}
           right={"0"}
           left={"0"}
@@ -59,7 +63,8 @@ const SwapV2 = () => {
             src="/images/BgSwap.png"
             alt="Bg Swap"
             w={"full"}
-            minH={"2xl"}
+            h={"full"}
+            minH={"xl"}
             objectFit={"cover"}
           />
         </Stack>

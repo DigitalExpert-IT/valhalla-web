@@ -14,22 +14,14 @@ export const SectionFeaturesV2 = () => {
         textAlign="center"
         textTransform="uppercase"
         _after={{
-          fontWeight: "black",
-          background:
-            "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
-          backgroundClip: "text",
-          WebkitTextFillColor: "transparent",
           content: `'${t("pages.home.feature.title")}'`,
-          display: "block",
-          textAlign: "center",
           alignSelf: "center",
-          textTransform: "uppercase",
+          display: "block",
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
           color: "whiteAlpha.100",
-          transform: {
-            base: "scale(2) translateY(-20px) translateX(1px)",
-            md: "scale(2) translateY(-40px)",
-            xl: "scale(4) translateY(-8px)",
-          },
+          textAlign: "center",
+          textTransform: "uppercase",
         }}
       >
         <Trans i18nKey="pages.home.feature.title" />

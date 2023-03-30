@@ -18,21 +18,20 @@ export const SectionPartnershipV2: React.FC<
   return (
     <Stack py="10" w="full" overflow="hidden">
       <Heading
-        fontSize={{ base: "md", md: "5xl" }}
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
+        textTransform="uppercase"
         _after={{
           display: "block",
-          textAlign: "center",
-          alignSelf: "center",
           textTransform: "uppercase",
           color: "whiteAlpha.100",
           transform: {
-            md: "scale(3) translateY(-10px)",
+            md: "scale(3) translateY(-20px)",
             base: "scale(3) translateY(-10px) translateX(12px)",
           },
-          content: `'${t("pages.home.partnershipSection")}'`,
+          content: `'${t("pages.home.partnershipSection").replace("ship", "")}'`,
         }}
         mb={{ md: "100", base: "50" }}
-        textTransform="capitalize"
       >
         {t("pages.home.partnershipSection")}
       </Heading>

@@ -32,10 +32,10 @@ const ProfileV2 = () => {
         </Box>
         <SectionProfileV2 />
         <SectionMyNFTV2 />
-        <Box py={"20"}>
+        {/* <Box py={"20"}>
           <SectionNetworkStatusV2 />
           <TableNetworkStatus />
-        </Box>
+        </Box> */}
       </Box>
     </LayoutMainV2>
   );

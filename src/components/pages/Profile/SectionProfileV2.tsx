@@ -14,14 +14,16 @@ export const SectionProfileV2 = () => {
   return (
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
-        textAlign={"center"}
-        fontSize={{ base: "xl", md: "5xl" }}
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
+        textAlign="center"
+        textTransform="uppercase"
         _after={{
           content: `'${t("pages.profile.account")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "200", md: "130", xs: "70", base: "50" },
-          mt: { xl: "-32", lg: "-28", md: "-24", xs: "-12", base: "-10" },
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",

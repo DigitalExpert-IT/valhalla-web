@@ -20,16 +20,13 @@ export default function Home() {
 
   return (
     <LayoutMainV2>
-      <Container maxW="container.xl">
-        <SectionHeaderV2 />
+      <SectionHeaderV2 />
+      <Container maxW="container.xxl">
         <SectionProject />
         <SectionFeaturesV2 />
       </Container>
       <SectionFeaturedPopulationV2 />
-      <Box
-        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
-        pt={20}
-      >
+      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <TableRankNetworkV2 />
       </Box>
       <Box bgColor="#6D02C9">

@@ -13,8 +13,8 @@ export const SectionFeaturedPopulationV2 = () => {
   return (
     <Box
       bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
-      h={{ lg: "100vh", base: "70vh" }}
-      pt={{ base: 40 }}
+      h={isLargerThan2000 ? "50vh" : { base: "70vh", lg: "100vh" }}
+      mt={{ base: 10, md: 40 }}
       display="flex"
       alignItems="center"
       position="relative"
@@ -26,7 +26,7 @@ export const SectionFeaturedPopulationV2 = () => {
         top="0"
         transform={
           isLargerThan2000
-            ? "scale(0.8) translateX(350px) translateY(32rem)"
+            ? "scale(0.8) translateX(350px) translateY(2rem)"
             : "scale(0.8) translateX(-200px) translateY(100px)"
         }
         zIndex="1"
@@ -39,7 +39,7 @@ export const SectionFeaturedPopulationV2 = () => {
         top="0"
         transform={
           isLargerThan2000
-            ? "scale(0.8) translateX(300px) translateY(28rem)"
+            ? "scale(0.8) translateX(300px) translateY(-50px)"
             : "scale(0.8) translateX(-250px) translateY(20px)"
         }
         zIndex="2"
@@ -57,7 +57,7 @@ export const SectionFeaturedPopulationV2 = () => {
         mixBlendMode="color-dodge"
         transform={
           isLargerThan2000
-            ? "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(20rem) translateY(66rem) scale(10.5)"
+            ? "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(34rem) translateY(45rem) scale(10.5)"
             : "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(6rem) translateY(33rem) scale(10.5)"
         }
         zIndex="3"

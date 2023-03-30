@@ -68,23 +68,23 @@ export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
           position={"relative"}
         >
           {data.map((item, idx) => (
-            <Box w={{ md: "250px" }} h={{ md: "250px" }} key={idx}>
+            <Box w={{ md: "300px" }} h={{ md: "300px" }} key={idx}>
               <Box position={"absolute"}>
                 <Image
                   left={{ base: (width * 12) / 100, md: "30px" }}
                   top={{ base: (width * 12) / 100, md: "30px" }}
                   position={"relative"}
                   objectFit={"cover"}
-                  w={{ base: width - (width * 25) / 100, md: "190px" }}
-                  h={{ base: width - (width * 25) / 100, md: "190px" }}
+                  w={{ base: width - (width * 25) / 100, md: "238px" }}
+                  h={{ base: width - (width * 25) / 100, md: "238px" }}
                   src={item.image}
                   alt="frame-1"
                 />
               </Box>
               <Image
                 ref={sizeBox}
-                w={{ md: "250px" }}
-                h={{ md: "250px" }}
+                w={{ md: "300px" }}
+                h={{ md: "300px" }}
                 src={"assets/frame-photo.png"}
                 objectFit={"contain"}
                 alt="frame-2"

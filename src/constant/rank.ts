@@ -1,6 +1,6 @@
 export const rankMap = [
   "No Rank",
-  "Common",
+  "Elite",
   "Rare",
   "Super Rare",
   "Epic",
@@ -10,7 +10,7 @@ export const rankMap = [
 
 export const RANK_SYMBOL_MAP = [
   "assets/rank/no-rank.svg",
-  "assets/rank/common.svg",
+  "assets/rank/elite.svg",
   "assets/rank/rare.svg",
   "sassets/rank/super-rare.svg",
   "assets/rank/epic.svg",

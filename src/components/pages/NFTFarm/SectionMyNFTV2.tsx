@@ -18,7 +18,10 @@ export const SectionMyNFTV2 = () => {
   return (
     <Box mt="40" pos="relative">
       <Box textAlign="center">
-        <Heading textTransform="uppercase">
+        <Heading
+          textTransform="uppercase"
+          fontSize={{ base: "4xl", md: "5xl" }}
+        >
           {t("pages.profile.myFarms")}
         </Heading>
       </Box>

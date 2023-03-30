@@ -8,7 +8,14 @@ import {
 import { useTranslation } from "react-i18next";
 import { NFTMATHCING } from "constant/pages/nftFarming";
 import { AccordionNFTFarm } from "./SectionNFTFarmMatching";
-import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Container,
+  Heading,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
 export const SectionMatchingRequirment = () => {
   const { t } = useTranslation();
@@ -61,7 +68,10 @@ export const SectionMatchingRequirment = () => {
                 {NFTMATHCING.map((e, i) => (
                   <TabClubPanelItem whenActive={i} key={i}>
                     {e.content.map((j, ij) => (
-                      <Text key={ij}>{`${j.name} ${j.description}`}</Text>
+                      <Text
+                        key={ij}
+                        py="0.3rem"
+                      >{`${j.name} ${j.description}`}</Text>
                     ))}
                   </TabClubPanelItem>
                 ))}

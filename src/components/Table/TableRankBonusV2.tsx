@@ -16,7 +16,7 @@ const columns = [
         align="center"
         mx="2"
         my={{ base: "2", md: "3" }}
-        w={{ base: "4xs", md: "4xs", lg: "xs" }}
+        w={{ base: "4xs", md: "4xs", xl: "2xs" }}
       >
         {info.getValue().image ? (
           <Image
@@ -46,6 +46,7 @@ const columns = [
         fontSize="md"
         textTransform="capitalize"
         textAlign="center"
+        w={{ base: "4xs", md: "5xs", xl: "4xs" }}
       >
         {info.getValue().length !== 0 ? info.getValue() : "-"}
       </Text>
@@ -60,6 +61,7 @@ const columns = [
         fontSize="md"
         textTransform="capitalize"
         textAlign="center"
+        w={{ base: "4xs", md: "5xs", xl: "3xs" }}
       >
         {info.getValue().length !== 0 ? info.getValue() : "-"}
       </Text>
@@ -75,6 +77,7 @@ const columns = [
         textTransform="capitalize"
         textAlign="center"
         mx="2"
+        w={{ base: "5xs", md: "5xs", xl: "4xs" }}
       >
         {info.getValue().length !== 0 ? info.getValue() : "-"}
       </Text>
@@ -91,11 +94,14 @@ export const TableRankBonusV2 = () => {
       textAlign="center"
       pos="relative"
       pt={40}
+      bgImage="url('/assets/project/pattern2.png')"
       overflow="hidden"
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
     >
-      <Box pos="absolute" top="500" bottom="0" zIndex="1">
+      {/* <Box pos="absolute" top="500" bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
-      </Box>
+      </Box> */}
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}

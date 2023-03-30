@@ -7,14 +7,17 @@ export const SectionRoadmapV2 = () => {
   return (
     <Box textAlign="center" pt={"20"}>
       <Heading
-        textAlign={"center"}
+        fontWeight="black"
+        fontSize={{ base: "3xl", md: "7xl" }}
+        textAlign="center"
+        textTransform="uppercase"
         mb={8}
         _after={{
           content: `'${t("pages.home.roadmapSection")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { md: "200", xs: "80", base: "50" },
-          mt: { md: "-100", xs: "-16", base: "-12" },
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",

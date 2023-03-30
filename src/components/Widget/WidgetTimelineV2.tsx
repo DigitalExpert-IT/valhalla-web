@@ -7,7 +7,7 @@ import { ROADMAPV2 } from "constant/roadmap";
 export const WidgetTimeLineV2 = () => {
   const { t } = useTranslation();
 
-  const roadmaps = t<any, any>("pages.home.roadmap", {
+  const roadmaps = t<any, any>("pages.home.roadmapV2", {
     returnObjects: true,
   });
 
@@ -34,11 +34,10 @@ export const WidgetTimeLineV2 = () => {
               width: "8",
               height: "8",
               bg: item.shades,
-              opacity: "0.3",
               borderRadius: "100%",
               border: "4px solid",
               borderColor: item.shades,
-              top: "39%",
+              top: "29.5%",
               left: "40%",
               zIndex: "1",
             },
@@ -46,12 +45,12 @@ export const WidgetTimeLineV2 = () => {
               content: "''",
               position: "absolute",
               mx: "auto",
-              width: "1",
+              width: "1px",
               height: "55",
               bg: item.shades,
               borderColor: item.shades,
-              top: "50%",
-              left: "45.6%",
+              top: "43%",
+              left: "46.3%",
             },
           }}
           key={idx}
@@ -62,8 +61,9 @@ export const WidgetTimeLineV2 = () => {
           zlabel={changeRoadmap.length - idx}
         >
           <WidgetTimeLineLabel
+            py={"2"}
             bg={item.shades}
-            fontSize={"xl"}
+            fontSize={"3xl"}
             fontWeight={"black"}
           >
             <Text>{item.name}</Text>

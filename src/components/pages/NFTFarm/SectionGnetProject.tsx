@@ -23,11 +23,7 @@ export const SectionGnetProject = () => {
   const claimNftRankRewardAsync = useAsyncCall(claimReward);
   const claimRewardGnetAsync = useAsyncCall(claimRankReward);
   return (
-    <Box
-      bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
-      position="relative"
-      zIndex={1}
-    >
+    <Box position="relative" zIndex={1}>
       <Box
         h={{ md: "60vh", base: "40vh" }}
         justifyContent="center"

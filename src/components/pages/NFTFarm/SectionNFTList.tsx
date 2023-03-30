@@ -15,7 +15,11 @@ export const SectionNFTList = () => {
   const { cardList, isLoading } = useNFT();
 
   return (
-    <Box bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)">
+    <Box
+      bgImage="url('assets/pattern-2.png')"
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
+    >
       <Box
         justifyContent="center"
         alignItems="center"
@@ -23,7 +27,8 @@ export const SectionNFTList = () => {
         overflow="hidden"
         display="flex"
         w="100vw"
-        h={{ md: "60vh", base: "40vh" }}
+        pt="40"
+        // h={{ md: "50vh", base: "40vh" }}
       >
         <Heading
           _after={{
@@ -43,7 +48,7 @@ export const SectionNFTList = () => {
           NFT FARMING
         </Heading>
       </Box>
-      <Container maxW={"container.xl"}>
+      <Container maxW={"container.xxl"}>
         {isLoading ? (
           <Box display="flex" justifyContent="center">
             <Spinner size="xl" />
@@ -52,12 +57,12 @@ export const SectionNFTList = () => {
 
         <Wrap
           justifyContent="space-between"
-          spacing="5"
+          spacing="20"
           align="center"
           justify="center"
         >
           {cardList.map((e, idx) => (
-            <WrapItem w={{ md: "30%", sm: "45%", base: "100%" }} key={idx}>
+            <WrapItem w={{ md: "25%", sm: "45%", base: "100%" }} key={idx}>
               <CardFarmNFTV2
                 contentTitle={e.halfingPercentage.toString()}
                 title={`Farm ${e.id.add(1)}`}

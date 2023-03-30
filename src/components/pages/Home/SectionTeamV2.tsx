@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Text, Flex, Heading, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Heading,
+  Image,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { t } from "i18next";
 import { Trans } from "react-i18next";
 
@@ -15,6 +22,7 @@ interface SectionTeamV2Props {
 
 export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
   const sizeBox = useRef(null);
+  const [isLargerThan2000] = useMediaQuery("(min-width: 2000px)");
   const [width, setwidth] = useState(0);
 
   //@ts-ignore
@@ -28,8 +36,12 @@ export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
 
   const { data } = props;
   return (
-    <Box>
-      <Image
+    <Box
+      bgImage="url('assets/pattern-2.png')"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="center"
+    >
+      {/* <Image
         display={{ base: "none", md: "block" }}
         src="assets/pattern-2.png"
         h={"100vh"}
@@ -38,14 +50,14 @@ export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
         opacity={0.5}
         objectFit={"cover"}
         alt="pattern"
-      />
+      /> */}
       <Flex
         direction={"column"}
         justify={"center"}
         align={"center"}
-        h={"100vh"}
+        h={isLargerThan2000 ? "70vh" : "100vh"}
       >
-        <Box py={{ base: 4, lg: 12 }}>
+        <Box py={{ base: 4, lg: 8 }}>
           <Heading
             fontSize={{ base: "md", md: "5xl" }}
             textAlign={"center"}

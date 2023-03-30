@@ -4,15 +4,19 @@ import {
   SectionGnetProject,
   SectionNFTList,
   SectionMatchingRequirment,
+  SectionMyNFTV2,
 } from "components/pages/NFTFarm";
 import { Box, Container } from "@chakra-ui/react";
 
 const NftFarmingV2 = () => {
   return (
     <LayoutMainV2>
-      <SectionNFTList />
-      <SectionGnetProject />
-      <Box bgColor="#6D02C9">
+      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+        <SectionNFTList />
+        <SectionGnetProject />
+        <SectionMyNFTV2 />
+      </Box>
+      <Box bgGradient="linear(to-b, #6D02C9, #2C1FA7, #6D02C9)">
         <TableRankNFTBonusV2 />
       </Box>
       <SectionMatchingRequirment />

@@ -29,7 +29,11 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
         bgGradient="linear(130deg, purple, blue.500)"
         p="3px"
       >
-        <Stack bg="#191272" p="1.4rem" rounded="xl">
+        <Stack
+          bgGradient="linear-gradient(360deg, #2C1FA7 0%, #6D02C9 100%)"
+          p="1.4rem"
+          rounded="xl"
+        >
           <Stack>
             <Box as="video" autoPlay loop muted rounded="xl">
               <source src={`/api/image/${props.id}`} type="video/mp4" />

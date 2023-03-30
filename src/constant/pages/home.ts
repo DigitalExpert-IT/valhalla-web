@@ -180,11 +180,6 @@ export const RANKNETWORK = [
     percent: "100%",
     value: "60 matic",
   },
-  {
-    levelBonus: "Private Sale",
-    percent: "-",
-    value: "-",
-  },
 ];
 
 export const RANKBONUS: Array<IRankBonus> = [

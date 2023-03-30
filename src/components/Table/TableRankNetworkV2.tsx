@@ -23,17 +23,16 @@ const columns = [
       <Stack
         direction="row"
         align="center"
-        w={{ base: 20, md: 80 }}
-        whiteSpace="pre-line"
+        w={{ base: 40, md: 80 }}
+        whiteSpace="pre-wrap"
       >
         <Icon
           as={MdOutlineDoubleArrow}
           color="teal.400"
-          w={{ base: "3", md: "7" }}
+          w={{ base: "3", md: "5" }}
           h={{ base: "3", md: "7" }}
         />
         <Text
-          fontWeight="bold"
           fontSize={{ base: "sm", md: "xl" }}
           textTransform="capitalize"
           color="gray.300"
@@ -47,7 +46,6 @@ const columns = [
   columnHelper.accessor("percent", {
     cell: info => (
       <Text
-        fontWeight="bold"
         fontSize={{ base: "sm", md: "xl" }}
         textTransform="capitalize"
         textAlign="center"
@@ -60,7 +58,6 @@ const columns = [
   columnHelper.accessor("value", {
     cell: info => (
       <Text
-        fontWeight="bold"
         fontSize={{ base: "sm", md: "xl" }}
         textTransform="capitalize"
         textAlign="center"
@@ -82,7 +79,7 @@ export const TableRankNetworkV2 = () => {
       pos="relative"
       overflow="hidden"
     >
-      <Box pos="absolute" top={{ base: 1000, md: 800 }} bottom="0" zIndex="1">
+      <Box pos="absolute" top={{ base: 1000, md: 500 }} bottom="0" zIndex="1">
         <Image src="/assets/project/pattern2.png" alt="pattern2" />
       </Box>
       <Heading

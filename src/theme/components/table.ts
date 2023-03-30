@@ -168,7 +168,7 @@ const variantValhallaV2 = definePartsStyle(props => {
   return {
     table: {
       borderCollapse: "separate",
-      borderSpacing: "15px",
+      borderSpacing: "10px",
     },
     th: {
       color: mode("gray.600", "gray.300")(props),

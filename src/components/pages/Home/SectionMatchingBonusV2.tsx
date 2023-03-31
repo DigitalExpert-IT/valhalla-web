@@ -9,9 +9,9 @@ export const SectionMatchingBonusV2 = () => {
     <Flex
       align="center"
       justify="center"
-      pt={"20"}
       flexDir={{ base: "column", md: "row" }}
       minH={{ base: "sm", sm: "md", md: "xl" }}
+      py={{ base: "0", lg: "80", xl: "96" }}
     >
       <Box position={"absolute"} w={"full"}>
         <Image
@@ -25,7 +25,9 @@ export const SectionMatchingBonusV2 = () => {
         />
       </Box>
       <Stack
-        maxW={"xl"}
+        maxW={"3xl"}
+        px={"2"}
+        mt={{ base: "0", md: "-20", lg: "-28" }}
         flex={1}
         display="flex"
         flexDir="column"
@@ -33,15 +35,20 @@ export const SectionMatchingBonusV2 = () => {
         spacing="3"
         align={"center"}
         textAlign={"center"}
-        zIndex={"10"}
+        zIndex={"99"}
       >
         <Heading
-          fontSize={{ base: "4xl", lg: "5xl" }}
+          fontSize={{ base: "4xl", lg: "7xl" }}
           textTransform="capitalize"
+          lineHeight={{ base: "9", lg: "5rem" }}
         >
           <Trans i18nKey={"pages.home.matchingBonusv2.title"} />
         </Heading>
-        <Text fontSize={{ base: "md", lg: "lg" }}>
+        <Text
+          fontSize={{ base: "sm", lg: "lg" }}
+          lineHeight={"5"}
+          pt={{ base: "0", lg: "4" }}
+        >
           {t("pages.home.matchingBonusv2.description")}
         </Text>
       </Stack>

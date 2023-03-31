@@ -41,21 +41,12 @@ export const SectionTeamV2: React.FC<SectionTeamV2Props> = props => {
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
     >
-      {/* <Image
-        display={{ base: "none", md: "block" }}
-        src="assets/pattern-2.png"
-        h={"100vh"}
-        w={"100vw"}
-        position={"absolute"}
-        opacity={0.5}
-        objectFit={"cover"}
-        alt="pattern"
-      /> */}
       <Flex
         direction={"column"}
         justify={"center"}
         align={"center"}
-        h={isLargerThan2000 ? "70vh" : "100vh"}
+        h={isLargerThan2000 ? "70vh" : "full"}
+        py={{ base: "10", md: "20", lg: "40" }}
       >
         <Box py={{ base: 4, lg: 8 }}>
           <Heading

@@ -16,7 +16,7 @@ export const SectionPartnershipV2: React.FC<
 > = props => {
   const { t } = useTranslation();
   return (
-    <Stack py="10" w="full" overflow="hidden">
+    <Stack py={{ base: "10", md: "20" }} w="full" overflow="hidden">
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
@@ -29,7 +29,10 @@ export const SectionPartnershipV2: React.FC<
             md: "scale(3) translateY(-20px)",
             base: "scale(3) translateY(-10px) translateX(12px)",
           },
-          content: `'${t("pages.home.partnershipSection").replace("ship", "")}'`,
+          content: `'${t("pages.home.partnershipSection").replace(
+            "ship",
+            ""
+          )}'`,
         }}
         mb={{ md: "100", base: "50" }}
       >

@@ -7,21 +7,35 @@ import { t } from "i18next";
 
 export const SectionFeaturesV2 = () => {
   return (
-    <Box mt="40" alignItems="center" display="flex" flexDir="column">
+    <Box
+      pt="20"
+      alignItems="center"
+      display="flex"
+      flexDir="column"
+      overflow="hidden"
+    >
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"
         _after={{
+          fontWeight: "black",
+          background:
+            "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
+          backgroundClip: "text",
+          WebkitTextFillColor: "transparent",
           content: `'${t("pages.home.feature.title")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
-          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
           textTransform: "uppercase",
+          color: "whiteAlpha.100",
+          transform: {
+            base: "scale(3) translateY(-9px) translateX(1px)",
+            md: "scale(3) translateY(-15px)",
+            xl: "scale(4) translateY(-8px)",
+          },
         }}
       >
         <Trans i18nKey="pages.home.feature.title" />

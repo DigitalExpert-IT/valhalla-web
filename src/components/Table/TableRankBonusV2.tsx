@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
 import { Stack, Image, Heading, Text, Box } from "@chakra-ui/react";
 import { t } from "i18next";
+import { WidgetSwipe } from "components/Widget";
 
 const columnHelper = createColumnHelper<IRankBonusV2>();
 
@@ -138,6 +139,7 @@ export const TableRankBonusV2 = () => {
           size: "xs",
         }}
       />
+      <WidgetSwipe display={{ base: "flex", md: "none" }} />
     </Stack>
   );
 };

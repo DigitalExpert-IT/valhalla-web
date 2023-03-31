@@ -73,20 +73,21 @@ export const TableRankNetworkV2 = () => {
   return (
     <Stack
       textAlign="center"
-      pt={{ base: 40 }}
+      pt={{ base: "10", sm: "20" }}
       align="center"
       justify="center"
       pos="relative"
       overflow="hidden"
     >
-      <Box pos="absolute" top={{ base: 1000, md: 500 }} bottom="0" zIndex="1">
-        <Image src="/assets/project/pattern2.png" alt="pattern2" />
-      </Box>
+      <Stack pos="absolute" h="full" zIndex="1">
+        <Image src="/assets/project/pattern2.png" alt="pattern2" my={"auto"} />
+      </Stack>
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"
+        pb={{ xl: "10" }}
         _after={{
           background:
             "linear-gradient(90deg, rgba(156, 41, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)",
@@ -99,9 +100,12 @@ export const TableRankNetworkV2 = () => {
           textTransform: "uppercase",
           color: "whiteAlpha.100",
           transform: {
-            base: "scale(2) translateY(-40px) translateX(1px)",
-            md: "scale(2) translateY(-80px)",
-            xl: "scale(3) translateY(-20px)",
+            base: "scale(1.5) translateY(-35px) translateX(1px)",
+            xs: "scale(2) translateY(-24px)",
+            sm: "scale(3) translateY(-10px)",
+            md: "scale(3) translateY(-45px)",
+            lg: "scale(3) translateY(-25px)",
+            xl: "scale(4) translateY(-10px)",
           },
         }}
       >
@@ -116,6 +120,6 @@ export const TableRankNetworkV2 = () => {
           zIndex: "2",
         }}
       />
-    </Stack>
+    </Stack >
   );
 };

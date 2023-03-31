@@ -37,7 +37,7 @@ export const WidgetTimeLineV2 = () => {
               borderRadius: "100%",
               border: "4px solid",
               borderColor: item.shades,
-              top: "29.5%",
+              top: { base: "15%", md: "29.5%" },
               left: "40%",
               zIndex: "1",
             },
@@ -49,7 +49,7 @@ export const WidgetTimeLineV2 = () => {
               height: "55",
               bg: item.shades,
               borderColor: item.shades,
-              top: "43%",
+              top: { base: "28%", md: "43%" },
               left: "46.3%",
             },
           }}
@@ -61,9 +61,9 @@ export const WidgetTimeLineV2 = () => {
           zlabel={changeRoadmap.length - idx}
         >
           <WidgetTimeLineLabel
-            py={"2"}
+            py={{ base: "1", md: "2" }}
             bg={item.shades}
-            fontSize={"3xl"}
+            fontSize={{ base: "xl", md: "2xl", xl: "3xl" }}
             fontWeight={"black"}
           >
             <Text>{item.name}</Text>

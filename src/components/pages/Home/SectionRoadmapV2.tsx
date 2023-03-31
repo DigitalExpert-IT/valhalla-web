@@ -1,11 +1,11 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { WidgetTimeLine, WidgetTimeLineV2 } from "components/Widget";
+import { WidgetSwipe, WidgetTimeLineV2 } from "components/Widget";
 import { t } from "i18next";
 import React from "react";
 
 export const SectionRoadmapV2 = () => {
   return (
-    <Box textAlign="center" pt={"20"}>
+    <Box textAlign="center" pos={"relative"}>
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
@@ -26,6 +26,11 @@ export const SectionRoadmapV2 = () => {
         {t("pages.home.roadmapSection")}
       </Heading>
       <WidgetTimeLineV2 />
+      <WidgetSwipe
+        pos={"absolute"}
+        bottom={{ base: "10", md: "0" }}
+        display={{ base: "flex", xl: "none" }}
+      />
     </Box>
   );
 };

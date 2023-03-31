@@ -37,7 +37,7 @@ const SwapV2 = () => {
             textAlign: "center",
             textTransform: "uppercase",
           }}
-          mb="2rem"
+          mb={{ md: "2rem", base: "1rem" }}
         >
           {t("common.swap").toUpperCase()}
         </Heading>

@@ -31,8 +31,6 @@ const SwapV2 = () => {
               md: "scale(3.5) translateY(-1rem)",
               base: "scale(3) translateY(-8px)",
             },
-            // fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
-            // mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
             color: "whiteAlpha.100",
             textAlign: "center",
             textTransform: "uppercase",

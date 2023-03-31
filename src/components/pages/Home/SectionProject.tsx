@@ -15,9 +15,8 @@ export const SectionProject = () => {
   const { t } = useTranslation();
 
   return (
-    <Stack mt="20" overflow="hidden">
+    <Stack pt="10" overflow="hidden">
       <Heading
-        pt="20"
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"

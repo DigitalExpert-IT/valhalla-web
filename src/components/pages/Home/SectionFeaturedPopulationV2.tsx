@@ -76,7 +76,7 @@ export const SectionFeaturedPopulationV2 = () => {
         zIndex="0"
       />
 
-      <Container maxW="container.2xl" zIndex={"9"}>
+      <Container maxW="container.xl" overflowX="hidden" zIndex={"9"}>
         <Box
           w={{ lg: "60%", base: "100%" }}
           float="right"

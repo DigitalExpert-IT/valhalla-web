@@ -73,7 +73,7 @@ export const WidgetTimelineItemV2: React.FC<WidgetTimeline> = props => {
           bg={props.shades}
           roundedTopLeft={"2.5rem"}
           roundedBottomRight={"2.5rem"}
-          fontSize={{ base: "xs", md: "sm" }}
+          fontSize={"sm"}
           zIndex={"99"}
         >
           <UnorderedList>

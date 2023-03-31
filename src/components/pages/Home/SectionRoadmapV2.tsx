@@ -11,7 +11,7 @@ export const SectionRoadmapV2 = () => {
         fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"
-        mb={8}
+        mb={{ sm: "8" }}
         _after={{
           content: `'${t("pages.home.roadmapSection")}'`,
           alignSelf: "center",
@@ -28,7 +28,7 @@ export const SectionRoadmapV2 = () => {
       <WidgetTimeLineV2 />
       <WidgetSwipe
         pos={"absolute"}
-        bottom={{ base: "10", md: "0" }}
+        bottom={"0"}
         display={{ base: "flex", xl: "none" }}
       />
     </Box>

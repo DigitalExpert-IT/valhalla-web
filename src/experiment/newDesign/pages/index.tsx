@@ -1,7 +1,6 @@
 import React from "react";
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
 import { Container, Box } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -17,8 +16,6 @@ import {
 } from "components";
 
 const ValhallaV2 = () => {
-  const { t } = useTranslation();
-
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />

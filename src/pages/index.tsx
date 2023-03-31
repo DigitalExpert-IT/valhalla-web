@@ -1,4 +1,3 @@
-import NewHome from "experiment/homeV2";
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
 import { Box, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
@@ -16,7 +15,7 @@ import {
   TableTokenomic,
   BackgroundHome,
 } from "components";
-import { withNewDesign } from "lib/featureFlag";
+import { withExperiment } from "lib/featureFlag";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -53,4 +52,4 @@ const Home = () => {
   );
 };
 
-export default withNewDesign(NewHome, Home);
+export default withExperiment(Home, "newDesign/pages/index");

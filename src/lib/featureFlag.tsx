@@ -1,44 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 
 export const getConfig = async (experimentName: string): Promise<boolean> => {
   try {
-    const isEnabled = localStorage.getItem(experimentName);
-    return isEnabled === "true";
+    const flagsMapJson = localStorage.getItem("flag") || "{}";
+    const flagsMap = JSON.parse(flagsMapJson);
+    return !!flagsMap[experimentName];
   } catch (error) {
     return false;
   }
 };
 
-export const withExperiment =
-  (experinmentName: string) =>
-  (NewComponent: React.FC, OldComponent: React.FC) => {
-    const WithExperiment = () => {
-      const [isLoading, setLoading] = useState(true);
-      const [isEnabled, setEnabled] = useState(false);
+export const withExperiment = (
+  OldComponent: React.FC,
+  experimentPath: string
+) => {
+  let ComponentA: any = null;
+  const WithExperiment = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [isEnabled, setEnabled] = useState(false);
 
-      useEffect(() => {
-        const loadConfig = async () => {
-          setLoading(true);
-          const config = await getConfig(experinmentName);
-          setEnabled(config);
-          setLoading(false);
-        };
+    useEffect(() => {
+      const loadConfig = async () => {
+        setLoading(true);
+        const experimentName = experimentPath.match(/[^\/]*/)?.[0]!;
+        const isExperimentEnabled = await getConfig(experimentName);
+        if (isExperimentEnabled) {
+          ComponentA = lazy(() => import(`../experiment/${experimentPath}`));
+        }
+        setEnabled(isExperimentEnabled);
+        setLoading(false);
+      };
 
-        loadConfig();
-      }, []);
+      loadConfig();
+    }, []);
 
-      if (isLoading) {
-        return null;
-      }
+    if (isLoading) {
+      return null;
+    }
 
-      if (isEnabled) {
-        return <NewComponent />;
-      }
+    if (isEnabled) {
+      return <ComponentA />;
+    }
 
-      return <OldComponent />;
-    };
-
-    return WithExperiment;
+    return <OldComponent />;
   };
 
-export const withNewDesign = withExperiment("new-design");
+  return WithExperiment;
+};

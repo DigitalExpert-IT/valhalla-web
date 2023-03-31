@@ -37,19 +37,25 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
       <DrawerOverlay />
       <DrawerContent bgColor="#00293E">
         <DrawerCloseButton />
-        <DrawerHeader>
-          <AspectRatio w={50} ratio={1}>
-            <Image src={"/assets/logo/logo.png"} alt="logo-image" />
+        <DrawerHeader justifyContent="center" display="flex">
+          <AspectRatio ratio={9 / 1.5} minWidth="190">
+            <Image
+              src={"/assets/logo/gnLogo.png"}
+              alt="logo-image"
+              objectFit="cover"
+            />
           </AspectRatio>
         </DrawerHeader>
-        <Stack direction="row" w="full" justify="center" p="2" my="5">
-          <ButtonConnectWallet />
-        </Stack>
         <DrawerBody>
           <Stack spacing="5">
             {data.map((item, idx) => (
               <Stack key={idx} onClick={item.children && onToggle}>
-                <Flex justify="space-between" align="center">
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  justifyContent="center"
+                  display="flex"
+                >
                   <Link href={item.href ?? "#"}>
                     <Text fontWeight="bold" textTransform="uppercase">
                       {t(`common.navigation.${item.name}`)}
@@ -73,14 +79,21 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   <Stack
                     mt={2}
                     pl={4}
-                    borderLeft={1}
-                    borderStyle="solid"
-                    borderColor="gray.700"
-                    align={"start"}
+                    // borderLeft={1}
+                    // borderStyle="solid"
+                    // borderColor="gray.700"
+                    // align={"start"}
                   >
                     {item.children &&
                       item.children.map((obj, id) => (
-                        <Link key={id} href={obj.link}>
+                        <Link
+                          key={id}
+                          href={obj.link}
+                          style={{
+                            width: "100%",
+                            textAlign: "center",
+                          }}
+                        >
                           <Text>{t(`common.navigation.${obj.title}`)}</Text>
                         </Link>
                       ))}
@@ -90,6 +103,9 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             ))}
           </Stack>
         </DrawerBody>
+        <Stack direction="row" w="full" justify="center" p="2" my="5">
+          <ButtonConnectWallet />
+        </Stack>
       </DrawerContent>
     </Drawer>
   );

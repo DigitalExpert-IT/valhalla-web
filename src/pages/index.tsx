@@ -1,51 +1,55 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
-  SectionHeaderV2,
-  SectionProject,
-  LayoutMainV2,
-  SectionRoadmapV2,
-  SectionFeaturedPopulationV2,
-  SectionMatchingBonusV2,
-  SectionTeamV2,
-  SectionPartnershipV2,
-  TableRankBonusV2,
-  TableRankNetworkV2,
-  SectionFeaturesV2,
+  SectionHeader,
+  SectionFeatures,
+  LayoutMain,
+  WidgetTimeLine,
+  SectionFeaturedPopulation,
+  SectionMatchingBonus,
+  SectionTeam,
+  SectionPartnership,
+  TableRankBonus,
+  TableRankNetwork,
+  TableTokenomic,
+  BackgroundHome,
 } from "components";
+import { withExperiment } from "lib/featureFlag";
 
-export default function Home() {
+const Home = () => {
   const { t } = useTranslation();
 
   return (
-    <LayoutMainV2>
-      <SectionHeaderV2 />
-      <Container maxW="container.xxl">
-        <SectionProject />
-        <SectionFeaturesV2 />
-      </Container>
-      <SectionFeaturedPopulationV2 />
-      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
-        <TableRankNetworkV2 />
+    <LayoutMain>
+      <SectionHeader />
+      <BackgroundHome />
+      <SectionFeatures />
+      <SectionFeaturedPopulation />
+      <TableRankNetwork />
+      <TableRankBonus />
+      <SectionMatchingBonus />
+      <Box textAlign="center" my="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.roadmapSection")}
+        </Heading>
+        <WidgetTimeLine />
       </Box>
-      <Box bgColor="#6D02C9">
-        <TableRankBonusV2 />
+      <TableTokenomic />
+      <Box textAlign="center" my="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.teamSection")}
+        </Heading>
+        <SectionTeam data={OURTEAM} />
       </Box>
-      <Box bgGradient="linear(#6D02C9 0%, #6D02C9 50%, #2C1FA7 100%)" py="20">
-        <SectionMatchingBonusV2 />
+      <Box textAlign="center" py="20">
+        <Heading textTransform="uppercase">
+          {t("pages.home.partnershipSection")}
+        </Heading>
+        <SectionPartnership data={PARTNERSHIP} />
       </Box>
-      <Box bgGradient="linear(#2C1FA7 0%, #401fa7 5%, #2C1FA7 30%)" pt="40">
-        <SectionRoadmapV2 />
-      </Box>
-      <Box
-        textAlign="center"
-        bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"
-        pb="40"
-      >
-        <SectionTeamV2 data={OURTEAM} />
-        <SectionPartnershipV2 data={PARTNERSHIP} />
-      </Box>
-    </LayoutMainV2>
+    </LayoutMain>
   );
-}
+};
+
+export default withExperiment(Home, "newDesign/pages/index");

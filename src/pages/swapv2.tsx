@@ -13,6 +13,7 @@ const SwapV2 = () => {
         pb={"10"}
         placeContent={"center"}
         bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)"
+        overflow="hidden"
       >
         <Heading
           fontWeight="black"
@@ -26,12 +27,17 @@ const SwapV2 = () => {
             alignSelf: "center",
             display: "block",
             fontWeight: "black",
-            fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
-            mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
+            transform: {
+              md: "scale(3.5) translateY(-1rem)",
+              base: "scale(3) translateY(-8px)",
+            },
+            // fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
+            // mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
             color: "whiteAlpha.100",
             textAlign: "center",
             textTransform: "uppercase",
           }}
+          mb="2rem"
         >
           {t("common.swap").toUpperCase()}
         </Heading>

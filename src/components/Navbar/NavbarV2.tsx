@@ -49,7 +49,7 @@ export const NavbarV2 = () => {
       pb="2"
       w="full"
       zIndex={1000}
-      bg={isOpen ? "#00293E" : scrolled ? "#00293E" : "transparent"}
+      bg={isOpen ? "#191272" : scrolled ? "#191272" : "transparent"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       pos="fixed"
       transition="0.5s"
@@ -61,6 +61,7 @@ export const NavbarV2 = () => {
             align="center"
             flex={1}
             justify="space-between"
+            pos={"relative"}
           >
             <DrawerMobileNav
               data={NAVIGATION}
@@ -69,15 +70,20 @@ export const NavbarV2 = () => {
             />
             <Link href="/">
               <AspectRatio
-                w={isLargethan800 ? 250 : 8}
-                ratio={isLargethan800 ? 16 / 3 : 1}
-                my={{ base: "none", md: 2 }}
+                w={{ base: 200, lg: 250 }}
+                ratio={16 / 3}
+                my={2}
+                mx={{ sm: "auto" }}
+                pos={{ base: "absolute", lg: "sticky" }}
+                right={"0"}
+                left={"0"}
+                top={"-2"}
               >
                 <Image
                   src={
                     isLargethan800
                       ? "/assets/logo/gnLogo.png"
-                      : "/assets/logo/gn.png"
+                      : "/assets/logo/gnLogo.png"
                   }
                   alt="logo-image"
                 />

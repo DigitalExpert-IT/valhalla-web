@@ -13,13 +13,15 @@ export const SectionFeaturedPopulationV2 = () => {
   return (
     <Box
       bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
-      h={isLargerThan2000 ? "50vh" : { base: "70vh", lg: "100vh" }}
+      h={isLargerThan2000 ? "60vh" : { base: "70vh", md: "100vh" }}
       mt={{ base: 10, md: 40 }}
       display="flex"
       alignItems="center"
       position="relative"
+      overflow={{ base: "hidden", lg: "visible" }}
     >
       <Image
+        opacity={{ base: "0.3", lg: "1" }}
         src="assets/global-decentralize/globe.png"
         alt="globe"
         position="absolute"
@@ -27,12 +29,16 @@ export const SectionFeaturedPopulationV2 = () => {
         transform={
           isLargerThan2000
             ? "scale(0.8) translateX(350px) translateY(2rem)"
-            : "scale(0.8) translateX(-200px) translateY(100px)"
+            : {
+                base: "scale(1.3) translateX(0) translateY(80px)",
+                xs: "scale(0.9) translateX(0) translateY(50px)",
+                md: "scale(0.9) translateX(-150px) translateY(0)",
+              }
         }
         zIndex="1"
-        display={{ base: "none", lg: "block" }}
       />
       <Image
+        opacity={{ base: "0.3", lg: "1" }}
         src="assets/global-decentralize/globe-support.png"
         alt="globe-support"
         position="absolute"
@@ -40,17 +46,20 @@ export const SectionFeaturedPopulationV2 = () => {
         transform={
           isLargerThan2000
             ? "scale(0.8) translateX(300px) translateY(-50px)"
-            : "scale(0.8) translateX(-250px) translateY(20px)"
+            : {
+                base: "scale(1.3) translateX(0) translateY(80px)",
+                xs: "scale(0.9) translateX(-10px) translateY(30px)",
+                md: "scale(0.9) translateX(-200px) translateY(-50px)",
+              }
         }
         zIndex="2"
-        display={{ base: "none", lg: "block" }}
       />
       <Box
-        display={{ base: "none", lg: "block" }}
+        opacity={{ base: "0.3", lg: "1" }}
         top="0"
         position="absolute"
-        w="80px"
-        h="80px"
+        w={{ base: "50px", lg: "80px" }}
+        h={{ base: "50px", lg: "80px" }}
         rounded="full"
         bg="radial-gradient(38.6% 38.67% at 50.4% 47.9%, #EBEBEB 0%, #C5C5C5 14%, #A2A2A2 24%, #636363 39%, #3D3D3D 55%, #2B2B2B 65%, #1F1F1F 75%, #0C0C0C 87%, #000000 100%)"
         backgroundBlendMode="color-dodge"
@@ -58,12 +67,16 @@ export const SectionFeaturedPopulationV2 = () => {
         transform={
           isLargerThan2000
             ? "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(34rem) translateY(45rem) scale(10.5)"
-            : "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(6rem) translateY(33rem) scale(10.5)"
+            : {
+                base: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(5rem) translateY(15rem) scale(10.5)",
+                xs: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(23rem) scale(10.5)",
+                md: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(25rem) scale(10.5)",
+              }
         }
-        zIndex="3"
+        zIndex="0"
       />
 
-      <Container maxW="container.xl" overflowX="hidden">
+      <Container maxW="container.xl" overflowX="hidden" zIndex={"9"}>
         <Box
           w={{ lg: "60%", base: "100%" }}
           float="right"
@@ -97,7 +110,7 @@ export const SectionFeaturedPopulationV2 = () => {
               }}
             />
           </Heading>
-          <Text fontSize={{ base: "md", md: "2xl" }}>
+          <Text fontSize={{ base: "md", md: "2xl" }} maxW={"4xl"}>
             <Trans
               i18nKey="pages.home.populationSection.content"
               components={{

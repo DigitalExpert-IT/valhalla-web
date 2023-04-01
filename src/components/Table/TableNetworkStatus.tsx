@@ -80,13 +80,13 @@ export const TableNetworkStatus = () => {
       setNext([event + 1]);
     }
     if (event >= Math.ceil(DataTableNetworkStatus.length / itemsPage)) {
-      setNext([])
+      setNext([]);
     }
     if (n >= 1) {
       setPrev([event - 1]);
     }
     if (event <= 1) {
-      setPrev([])
+      setPrev([]);
     }
   };
   const endOffset = itemOffset + itemsPage;

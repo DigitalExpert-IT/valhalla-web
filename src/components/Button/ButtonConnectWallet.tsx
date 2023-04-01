@@ -46,7 +46,6 @@ export const ButtonConnectWallet = () => {
             px="6"
             size="sm"
             variant="outline"
-            colorScheme="brand"
             onClick={handleNavigate}
             w="full"
           >
@@ -58,7 +57,7 @@ export const ButtonConnectWallet = () => {
         <Button
           px="6"
           size="sm"
-          colorScheme="brand"
+          variant="outline"
           onClick={connectAsync.exec}
           isLoading={connectAsync.isLoading}
         >

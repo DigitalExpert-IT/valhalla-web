@@ -1,6 +1,6 @@
+import React from "react";
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Container } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { Container, Box } from "@chakra-ui/react";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -15,9 +15,7 @@ import {
   SectionFeaturesV2,
 } from "components";
 
-export default function Home() {
-  const { t } = useTranslation();
-
+const ValhallaV2 = () => {
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />
@@ -26,16 +24,19 @@ export default function Home() {
         <SectionFeaturesV2 />
       </Container>
       <SectionFeaturedPopulationV2 />
-      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+      <Box
+        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
+        pt={20}
+      >
         <TableRankNetworkV2 />
       </Box>
       <Box bgColor="#6D02C9">
         <TableRankBonusV2 />
       </Box>
-      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
+      <Box bgGradient="linear(#6D02C9 10%, #2C1FA7 100%)" py="20">
         <SectionMatchingBonusV2 />
       </Box>
-      <Box bgGradient="linear(#2C1FA7 0%, #401fa7 5%, #2C1FA7 30%)">
+      <Box bgGradient="linear(#2C1FA7 0%, #6D02C9 10%, #2C1FA7 30%)" pt="40">
         <SectionRoadmapV2 />
       </Box>
       <Box
@@ -48,4 +49,6 @@ export default function Home() {
       </Box>
     </LayoutMainV2>
   );
-}
+};
+
+export default ValhallaV2;

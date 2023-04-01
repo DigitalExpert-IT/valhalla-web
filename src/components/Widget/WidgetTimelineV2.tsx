@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IRoadmapV2, WidgetTimelineItemV2 } from "./WidgetTimelineItemV2";
-import { Box, BoxProps, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Stack, Text } from "@chakra-ui/react";
 import { ROADMAPV2 } from "constant/roadmap";
 
 export const WidgetTimeLineV2 = () => {
@@ -16,60 +16,63 @@ export const WidgetTimeLineV2 = () => {
   });
 
   return (
-    <Box
-      display="flex"
-      h="md"
-      overflowX="auto"
-      px={"10"}
-      placeItems={"start"}
-      justifyContent={{ base: "start", "2xl": "center" }}
-    >
-      {changeRoadmap.map((item: any, idx: number) => (
-        <WidgetTimelineItemV2
-          boxprops={{
-            pt: "70",
-            _before: {
-              content: "''",
-              position: "absolute",
-              width: "8",
-              height: "8",
-              bg: item.shades,
-              borderRadius: "100%",
-              border: "4px solid",
-              borderColor: item.shades,
-              top: "29.5%",
-              left: "40%",
-              zIndex: "1",
-            },
-            _after: {
-              content: "''",
-              position: "absolute",
-              mx: "auto",
-              width: "1px",
-              height: "55",
-              bg: item.shades,
-              borderColor: item.shades,
-              top: "43%",
-              left: "46.3%",
-            },
-          }}
-          key={idx}
-          name={item.name}
-          shades={item.shades}
-          headline={item.headline}
-          description={item.description}
-          zlabel={changeRoadmap.length - idx}
-        >
-          <WidgetTimeLineLabel
-            py={"2"}
-            bg={item.shades}
-            fontSize={"3xl"}
-            fontWeight={"black"}
+    <Box overflowX={"auto"}>
+      <Box
+        display="flex"
+        h={{ base: "64", xs: "sm", sm: "md" }}
+        px={"10"}
+        mt={{ base: "-16", xs: "-6", sm: "0" }}
+        justifyContent={{ base: "start", "2xl": "center" }}
+        ml={{ base: "-45%", xs: "-10%", sm: "0" }}
+        transform={{ base: "scale(0.4)", xs: "scale(0.8)", sm: "scale(1)" }}
+      >
+        {changeRoadmap.map((item: any, idx: number) => (
+          <WidgetTimelineItemV2
+            boxprops={{
+              pt: "70",
+              _before: {
+                content: "''",
+                position: "absolute",
+                width: "8",
+                height: "8",
+                bg: item.shades,
+                borderRadius: "100%",
+                border: "4px solid",
+                borderColor: item.shades,
+                top: { base: "15%", md: "29.5%" },
+                left: "40%",
+                zIndex: "1",
+              },
+              _after: {
+                content: "''",
+                position: "absolute",
+                mx: "auto",
+                width: "1px",
+                height: "55",
+                bg: item.shades,
+                borderColor: item.shades,
+                top: { base: "28%", md: "43%" },
+                left: "46.3%",
+              },
+            }}
+            key={idx}
+            name={item.name}
+            shades={item.shades}
+            headline={item.headline}
+            description={item.description}
+            zlabel={changeRoadmap.length - idx}
           >
-            <Text>{item.name}</Text>
-          </WidgetTimeLineLabel>
-        </WidgetTimelineItemV2>
-      ))}
+            <WidgetTimeLineLabel
+              py={{ base: "1", md: "2" }}
+              bg={item.shades}
+              fontSize={{ base: "2xl", xl: "3xl" }}
+              fontWeight={"black"}
+            >
+              <Text>{item.name}</Text>
+            </WidgetTimeLineLabel>
+          </WidgetTimelineItemV2>
+        ))}
+      </Box>
     </Box>
   );
 };

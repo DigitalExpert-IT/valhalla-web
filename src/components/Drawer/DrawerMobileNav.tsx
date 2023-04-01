@@ -35,7 +35,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent bgColor="#00293E">
+      <DrawerContent bgColor="#191272">
         <DrawerCloseButton />
         <DrawerHeader justifyContent="center" display="flex">
           <AspectRatio ratio={9 / 1.5} minWidth="190">
@@ -57,7 +57,11 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   display="flex"
                 >
                   <Link href={item.href ?? "#"}>
-                    <Text fontWeight="bold" textTransform="uppercase">
+                    <Text
+                      fontWeight="400"
+                      textTransform="uppercase"
+                      fontSize="xl"
+                    >
                       {t(`common.navigation.${item.name}`)}
                     </Text>
                   </Link>

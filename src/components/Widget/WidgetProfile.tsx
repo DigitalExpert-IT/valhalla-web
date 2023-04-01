@@ -39,7 +39,7 @@ export const WidgetProfileBtn = (props: ButtonProps) => {
 type IPropsMember = StackProps & {
   label: string;
   value: string;
-}
+};
 
 export const WidgetProfileMember = (props: IPropsMember) => {
   const { label, value, children, ...rest } = props;

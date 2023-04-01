@@ -14,7 +14,7 @@ export const CardProfileBalanceV2 = () => {
       <Text fontSize={"xl"} textAlign={"center"}>
         <Trans i18nKey="common.balance" />
       </Text>
-      <Stack gap={"2"} w={"full"} >
+      <Stack gap={"2"} w={"full"}>
         <WidgetProfileBalace pos={"relative"}>
           <Image
             src="/assets/logo/logo-white.png"

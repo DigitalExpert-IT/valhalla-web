@@ -42,7 +42,7 @@ export const WidgetTimelineItemV2: React.FC<WidgetTimeline> = props => {
         left: "43%",
         top: "7",
         zIndex: "991",
-        mt: "24",
+        mt: { base: "16", md: "24" },
       }}
       {...props}
     >
@@ -56,7 +56,7 @@ export const WidgetTimelineItemV2: React.FC<WidgetTimeline> = props => {
         {props.children}
       </Box>
       <Box
-        py="2"
+        // py="2"
         height="3xs"
         position="absolute"
         textAlign="left"
@@ -66,7 +66,7 @@ export const WidgetTimelineItemV2: React.FC<WidgetTimeline> = props => {
       >
         <Box
           minH={"48"}
-          mt={"20"}
+          mt={{ base: "10", md: "20" }}
           mx={"4"}
           py={"4"}
           px={"6"}

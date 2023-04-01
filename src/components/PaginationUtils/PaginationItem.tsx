@@ -12,7 +12,6 @@ export function PaginationItem({
   isCurrent = false,
   page,
   onPageChange,
-  colorScheme,
 }: PaginationItemProps) {
   if (isCurrent) {
     return (
@@ -25,7 +24,6 @@ export function PaginationItem({
         _hover={{
           bg: "pink.500",
         }}
-      // disabled
       >
         {page}
       </Button>

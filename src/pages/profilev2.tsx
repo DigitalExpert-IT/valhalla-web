@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { LayoutMainV2, TableNetworkStatus } from "components";
+import { LayoutMainV2 } from "components";
 import { SectionMyNFTV2 } from "components/pages/NFTFarm";
 import { withConnection, withRegistration } from "hoc";
 import { composeHoc } from "utils";
@@ -32,10 +32,6 @@ const ProfileV2 = () => {
         </Box>
         <SectionProfileV2 />
         <SectionMyNFTV2 />
-        {/* <Box py={"20"}>
-          <SectionNetworkStatusV2 />
-          <TableNetworkStatus />
-        </Box> */}
       </Box>
     </LayoutMainV2>
   );

@@ -120,6 +120,6 @@ export const TableRankNetworkV2 = () => {
           zIndex: "2",
         }}
       />
-    </Stack >
+    </Stack>
   );
 };

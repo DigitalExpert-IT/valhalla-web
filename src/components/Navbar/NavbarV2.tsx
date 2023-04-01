@@ -49,7 +49,7 @@ export const NavbarV2 = () => {
       pb="2"
       w="full"
       zIndex={1000}
-      bg={isOpen ? "#00293E" : scrolled ? "#00293E" : "transparent"}
+      bg={isOpen ? "#191272" : scrolled ? "#191272" : "transparent"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       pos="fixed"
       transition="0.5s"

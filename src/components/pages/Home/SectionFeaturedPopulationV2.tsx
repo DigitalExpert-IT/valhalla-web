@@ -30,10 +30,10 @@ export const SectionFeaturedPopulationV2 = () => {
           isLargerThan2000
             ? "scale(0.8) translateX(350px) translateY(2rem)"
             : {
-              base: "scale(1.3) translateX(0) translateY(80px)",
-              xs: "scale(0.9) translateX(0) translateY(50px)",
-              md: "scale(0.9) translateX(-150px) translateY(0)",
-            }
+                base: "scale(1.3) translateX(0) translateY(80px)",
+                xs: "scale(0.9) translateX(0) translateY(50px)",
+                md: "scale(0.9) translateX(-150px) translateY(0)",
+              }
         }
         zIndex="1"
       />
@@ -47,10 +47,10 @@ export const SectionFeaturedPopulationV2 = () => {
           isLargerThan2000
             ? "scale(0.8) translateX(300px) translateY(-50px)"
             : {
-              base: "scale(1.3) translateX(0) translateY(80px)",
-              xs: "scale(0.9) translateX(-10px) translateY(30px)",
-              md: "scale(0.9) translateX(-200px) translateY(-50px)",
-            }
+                base: "scale(1.3) translateX(0) translateY(80px)",
+                xs: "scale(0.9) translateX(-10px) translateY(30px)",
+                md: "scale(0.9) translateX(-200px) translateY(-50px)",
+              }
         }
         zIndex="2"
       />
@@ -68,10 +68,10 @@ export const SectionFeaturedPopulationV2 = () => {
           isLargerThan2000
             ? "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(34rem) translateY(45rem) scale(10.5)"
             : {
-              base: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(5rem) translateY(15rem) scale(10.5)",
-              xs: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(23rem) scale(10.5)",
-              md: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(25rem) scale(10.5)",
-            }
+                base: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(5rem) translateY(15rem) scale(10.5)",
+                xs: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(23rem) scale(10.5)",
+                md: "matrix(0.8, -0.6, 0.6, 0.8, 0, 0) translateX(10rem) translateY(25rem) scale(10.5)",
+              }
         }
         zIndex="0"
       />

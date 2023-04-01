@@ -46,7 +46,7 @@ export const SectionFeaturesV2 = () => {
         spacing="20"
         mt={{ base: "0", md: "-5rem" }}
       >
-        <Text fontSize={{ base: "md", md: "xl" }} fontWeight="hairline">
+        <Text fontSize={{ base: "md", md: "2xl" }} fontWeight="200">
           {t("pages.home.feature.subtitle")}
         </Text>
         <WidgetHomeFeaturesV2 cardData={PROMOTION_IMAGE_DATAV2} />

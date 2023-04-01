@@ -60,12 +60,16 @@ export const SectionProject = () => {
         </Box>
         <Stack flex={1} spacing="5">
           <Box maxW="5xl">
-            <Text fontSize={{ base: "md", md: "3xl", xl: "40" }}>
+            <Text
+              fontSize={{ base: "md", md: "3xl", xl: "40" }}
+              fontWeight="200"
+            >
               {t("pages.home.project.description")}
             </Text>
           </Box>
           <UnorderedList
             listStyleType="none"
+            fontWeight="200"
             marginInlineStart={"none"}
             fontSize={{ base: "md", md: "lg", xl: "27" }}
           >

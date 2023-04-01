@@ -1,46 +1,36 @@
 import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
-  SectionHeader,
-  SectionFeatures,
-  LayoutMain,
-  WidgetTimeLine,
-  SectionFeaturedPopulation,
-  SectionMatchingBonus,
-  SectionTeam,
-  SectionPartnership,
-  TableRankBonus,
-  TableRankNetwork,
-  TableTokenomic,
-  BackgroundHome,
+  SectionHeaderV2,
+  SectionProject,
+  LayoutMainV2,
+  SectionRoadmapV2,
+  SectionFeaturedPopulationV2,
+  SectionMatchingBonusV2,
+  SectionTeamV2,
+  SectionPartnershipV2,
+  TableRankBonusV2,
+  TableRankNetworkV2,
+  SectionFeaturesV2,
 } from "components";
-import { withExperiment } from "lib/featureFlag";
 
-const Home = () => {
+export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <LayoutMain>
-      <SectionHeader />
-      <BackgroundHome />
-      <SectionFeatures />
-      <SectionFeaturedPopulation />
-      <TableRankNetwork />
-      <TableRankBonus />
-      <SectionMatchingBonus />
-      <Box textAlign="center" my="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.roadmapSection")}
-        </Heading>
-        <WidgetTimeLine />
+    <LayoutMainV2>
+      <SectionHeaderV2 />
+      <Container maxW="container.xxl">
+        <SectionProject />
+        <SectionFeaturesV2 />
+      </Container>
+      <SectionFeaturedPopulationV2 />
+      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+        <TableRankNetworkV2 />
       </Box>
-      <TableTokenomic />
-      <Box textAlign="center" my="20">
-        <Heading textTransform="uppercase">
-          {t("pages.home.teamSection")}
-        </Heading>
-        <SectionTeam data={OURTEAM} />
+      <Box bgColor="#6D02C9">
+        <TableRankBonusV2 />
       </Box>
       <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
         <SectionMatchingBonusV2 />
@@ -58,6 +48,4 @@ const Home = () => {
       </Box>
     </LayoutMainV2>
   );
-};
-
-export default withExperiment(Home, "newDesign/pages/index");
+}

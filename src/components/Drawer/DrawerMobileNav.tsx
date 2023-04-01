@@ -19,6 +19,7 @@ import {
   Icon,
   useDisclosure,
   Collapse,
+  DrawerFooter,
 } from "@chakra-ui/react";
 
 interface MobileDrawerProps {
@@ -46,7 +47,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             />
           </AspectRatio>
         </DrawerHeader>
-        <DrawerBody>
+        <DrawerBody p="0">
           <Stack spacing="5">
             {data.map((item, idx) => (
               <Stack key={idx} onClick={item.children && onToggle}>
@@ -80,22 +81,18 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   style={{ marginTop: "0!important" }}
                   animateOpacity
                 >
-                  <Stack
-                    mt={2}
-                    pl={4}
-                    // borderLeft={1}
-                    // borderStyle="solid"
-                    // borderColor="gray.700"
-                    // align={"start"}
-                  >
+                  <Stack bg="whiteAlpha.100" spacing="0">
                     {item.children &&
                       item.children.map((obj, id) => (
                         <Link
-                          key={id}
+                          key={"tahu" + id}
                           href={obj.link}
                           style={{
                             width: "100%",
                             textAlign: "center",
+                            paddingTop: "5px",
+                            paddingBottom: "5px",
+                            textTransform: "uppercase",
                           }}
                         >
                           <Text>{t(`common.navigation.${obj.title}`)}</Text>
@@ -106,10 +103,21 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
               </Stack>
             ))}
           </Stack>
+          <Stack
+            direction="row"
+            w="full"
+            justify="center"
+            p="2"
+            my="5"
+            h="30%"
+            alignItems={"center"}
+          >
+            <ButtonConnectWallet />
+          </Stack>
         </DrawerBody>
-        <Stack direction="row" w="full" justify="center" p="2" my="5">
-          <ButtonConnectWallet />
-        </Stack>
+        <DrawerFooter bg="red">
+          <Text>Halo Bosku</Text>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

@@ -61,7 +61,7 @@ export const TableData = <Data extends object>({
                     whiteSpace="break-spaces"
                   >
                     <Text
-                      fontWeight="bold"
+                      fontWeight="400"
                       fontSize={{ base: "sm", md: "lg" }}
                       mx="2"
                       my="4"

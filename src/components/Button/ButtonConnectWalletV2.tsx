@@ -19,7 +19,17 @@ export const ButtonConnectWalletV2 = () => {
 
   if (isConnected) {
     return (
-      <Stack spacing="4" direction="row" align="center">
+      <Stack
+        spacing="4"
+        direction="row"
+        align="center"
+        border="1px solid"
+        rounded="full"
+        borderColor="white"
+        pr="3"
+        h="2rem"
+        overflow="hidden"
+      >
         {valhalla.account.isRegistered ? null : (
           <Button px="6" size="sm" variant="outline" onClick={handleNavigate}>
             {t("common.register")}
@@ -28,7 +38,7 @@ export const ButtonConnectWalletV2 = () => {
 
         <Stack direction="row" spacing="2" align="center">
           <Box mt="1">
-            <Jazzicon diameter={28} seed={jsNumberForAddress(address)} />
+            <Jazzicon diameter={30} seed={jsNumberForAddress(address)} />
           </Box>
           <CopiableText fontFamily="mono" display="block" value={address}>
             {shortenAddress(address)}

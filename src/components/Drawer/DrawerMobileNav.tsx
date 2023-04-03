@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { INavigation } from "constant/navigation";
-import { ButtonConnectWallet } from "components";
+import { ButtonConnectWallet, ButtonConnectWalletV2 } from "components";
 import { useTranslation } from "react-i18next";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
@@ -20,6 +20,7 @@ import {
   useDisclosure,
   Collapse,
   DrawerFooter,
+  Box,
 } from "@chakra-ui/react";
 
 interface MobileDrawerProps {
@@ -112,12 +113,19 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             h="30%"
             alignItems={"center"}
           >
-            <ButtonConnectWallet />
+            <ButtonConnectWalletV2 />
+          </Stack>
+          <Stack align={"center"}>
+            <Box>
+              <Image
+                src="/assets/logo/logo-type-big.svg"
+                w="100%"
+                objectFit="cover"
+                loading="lazy"
+              ></Image>
+            </Box>
           </Stack>
         </DrawerBody>
-        <DrawerFooter bg="red">
-          <Text>Halo Bosku</Text>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

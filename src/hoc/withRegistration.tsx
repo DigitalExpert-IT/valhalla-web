@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@chakra-ui/react";
-import { useValhalla, useWallet } from "hooks";
+import { fetchAccount, useValhalla } from "hooks";
 import { LayoutIllustration, LayoutLoading } from "components";
 import { useTranslation } from "react-i18next";
 
 export const withRegistration = (Component: () => JSX.Element | null) => {
   const RegistrationWrapper = () => {
     const valhalla = useValhalla();
-    const wallet = useWallet();
     const [isReady, setReady] = useState(valhalla.initialized);
     useEffect(() => {
-      if (valhalla.initialized) {
+      const fetch = async () => {
+        await fetchAccount();
         setReady(true);
-      }
-    }, [valhalla, wallet]);
+      };
+      fetch();
+    }, [valhalla.account.isRegistered]);
 
     if (!isReady) return <LayoutLoading />;
     if (!valhalla.account.isRegistered) {

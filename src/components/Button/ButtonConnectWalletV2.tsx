@@ -26,9 +26,19 @@ export const ButtonConnectWalletV2 = () => {
           </Button>
         )}
 
-        <Stack direction="row" spacing="2" align="center">
+        <Stack
+          direction="row"
+          spacing="2"
+          align="center"
+          border="1px solid"
+          rounded="full"
+          borderColor="white"
+          pr="3"
+          h="2rem"
+          overflow="hidden"
+        >
           <Box mt="1">
-            <Jazzicon diameter={28} seed={jsNumberForAddress(address)} />
+            <Jazzicon diameter={30} seed={jsNumberForAddress(address)} />
           </Box>
           <CopiableText fontFamily="mono" display="block" value={address}>
             {shortenAddress(address)}

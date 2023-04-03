@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { INavigation } from "constant/navigation";
-import { ButtonConnectWallet } from "components";
+import { ButtonConnectWallet, ButtonConnectWalletV2 } from "components";
 import { useTranslation } from "react-i18next";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
@@ -19,6 +19,8 @@ import {
   Icon,
   useDisclosure,
   Collapse,
+  DrawerFooter,
+  Box,
 } from "@chakra-ui/react";
 
 interface MobileDrawerProps {
@@ -37,19 +39,25 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
       <DrawerOverlay />
       <DrawerContent bgColor="#191272">
         <DrawerCloseButton />
-        <DrawerHeader>
-          <AspectRatio w={50} ratio={6 / 5}>
-            <Image src={"/assets/logo/gn.png"} alt="logo-image" />
+        <DrawerHeader justifyContent="center" display="flex">
+          <AspectRatio ratio={9 / 1.5} minWidth="190">
+            <Image
+              src={"/assets/logo/gnLogo.png"}
+              alt="logo-image"
+              objectFit="cover"
+            />
           </AspectRatio>
         </DrawerHeader>
-        <Stack direction="row" w="full" justify="center" p="2" my="5">
-          <ButtonConnectWallet />
-        </Stack>
-        <DrawerBody>
+        <DrawerBody p="0">
           <Stack spacing="5">
             {data.map((item, idx) => (
               <Stack key={idx} onClick={item.children && onToggle}>
-                <Flex justify="space-between" align="center">
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  justifyContent="center"
+                  display="flex"
+                >
                   <Link href={item.href ?? "#"}>
                     <Text
                       fontWeight="400"
@@ -74,26 +82,48 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   style={{ marginTop: "0!important" }}
                   animateOpacity
                 >
-                  <Stack
-                    mt={2}
-                    pl={4}
-                    borderLeft={1}
-                    borderStyle="solid"
-                    borderColor="gray.700"
-                    align={"start"}
-                  >
+                  <Stack bg="whiteAlpha.100" spacing="0">
                     {item.children &&
                       item.children.map((obj, id) => (
-                        <Link key={id} href={obj.link}>
-                          <Text fontWeight="400" fontSize="xl">
-                            {t(`common.navigation.${obj.title}`)}
-                          </Text>
+                        <Link
+                          key={"tahu" + id}
+                          href={obj.link}
+                          style={{
+                            width: "100%",
+                            textAlign: "center",
+                            paddingTop: "5px",
+                            paddingBottom: "5px",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          <Text>{t(`common.navigation.${obj.title}`)}</Text>
                         </Link>
                       ))}
                   </Stack>
                 </Collapse>
               </Stack>
             ))}
+          </Stack>
+          <Stack
+            direction="row"
+            w="full"
+            justify="center"
+            p="2"
+            my="5"
+            h="30%"
+            alignItems={"center"}
+          >
+            <ButtonConnectWalletV2 />
+          </Stack>
+          <Stack align={"center"}>
+            <Box>
+              <Image
+                src="/assets/logo/logo-type-big.svg"
+                w="100%"
+                objectFit="cover"
+                loading="lazy"
+              ></Image>
+            </Box>
           </Stack>
         </DrawerBody>
       </DrawerContent>

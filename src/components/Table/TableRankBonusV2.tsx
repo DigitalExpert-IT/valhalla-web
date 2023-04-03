@@ -1,5 +1,5 @@
 import React from "react";
-import { IRankBonusV2, RANKBONUS, RANKBONUSV2 } from "constant/pages/home";
+import { IRankBonusV2, RANKBONUSV2 } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
@@ -28,7 +28,6 @@ const columns = [
           />
         ) : null}
         <Text
-          fontWeight="bold"
           fontSize="lg"
           textTransform="capitalize"
           color={info.cell.row.original.color}
@@ -43,11 +42,10 @@ const columns = [
   columnHelper.accessor("pool", {
     cell: info => (
       <Text
-        fontWeight="bold"
         fontSize="md"
         textTransform="capitalize"
         textAlign="center"
-        w={{ base: "4xs", md: "5xs", xl: "4xs" }}
+        w={{ base: "4xs", md: "5xs", lg: "3xs", xl: "4xs" }}
       >
         {info.getValue().length !== 0 ? info.getValue() : "-"}
       </Text>
@@ -58,11 +56,10 @@ const columns = [
   columnHelper.accessor("downline", {
     cell: info => (
       <Text
-        fontWeight="bold"
         fontSize="md"
         textTransform="capitalize"
         textAlign="center"
-        w={{ base: "4xs", md: "5xs", xl: "3xs" }}
+        w={{ base: "4xs", md: "4xs", lg: "3xs", xl: "3xs" }}
       >
         {info.getValue().length !== 0 ? info.getValue() : "-"}
       </Text>
@@ -73,7 +70,6 @@ const columns = [
   columnHelper.accessor("requirement", {
     cell: info => (
       <Text
-        fontWeight="bold"
         fontSize="md"
         textTransform="capitalize"
         textAlign="center"
@@ -100,9 +96,6 @@ export const TableRankBonusV2 = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
     >
-      {/* <Box pos="absolute" top="500" bottom="0" zIndex="1">
-        <Image src="/assets/project/pattern2.png" alt="pattern2" />
-      </Box> */}
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}

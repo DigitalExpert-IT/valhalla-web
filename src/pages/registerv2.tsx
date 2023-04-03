@@ -24,7 +24,7 @@ const Registerv2 = () => {
           as="header"
           textAlign="center"
           px={{ base: "8", lg: "4" }}
-          letterSpacing={"0.2em"}
+          letterSpacing={{ base: "normal", md: "0.2em" }}
         >
           <Heading
             pt={{ base: "24", sm: "36" }}

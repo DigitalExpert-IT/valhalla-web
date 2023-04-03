@@ -7,7 +7,6 @@ import {
   Badge,
   Box,
   Text,
-  TagLabel,
   FormLabel,
   Center,
 } from "@chakra-ui/react";

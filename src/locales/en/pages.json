@@ -313,6 +313,8 @@
   "share": {
     "title": "SHARE TO EARN",
     "placeholder": "Paste your {{media}} post link here",
+    "subtitle": "Requirement",
+    "subDescription": "Share2earn is an app that let you discover the latest property development and share with your friends and family. Earn extra income and points to redeem amazing gifts.",
     "item": {
       "instagram": {
         "titleDescription": "Share content to instagram to earn token's",

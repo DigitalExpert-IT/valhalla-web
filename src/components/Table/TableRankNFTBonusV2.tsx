@@ -12,7 +12,19 @@ export const TableRankNFTBonusV2 = () => {
   const columns = [
     columnHelper.accessor("rankData", {
       cell: info => (
-        <Stack direction="row" align="center" mx="2">
+        <Stack
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          direction="row"
+          align="center"
+          m="2"
+          whiteSpace="pre-wrap"
+          w={{ base: "4xs", md: "5xs", xl: "3xs" }}
+          bg={
+            info.getValue().rank === info.getValue().rank.slice(-1)
+              ? "blue"
+              : "none"
+          }
+        >
           {info.getValue().image ? (
             <Image
               src={info.getValue().image}
@@ -21,12 +33,7 @@ export const TableRankNFTBonusV2 = () => {
               maxW={12}
             />
           ) : null}
-          <Text
-            fontWeight="bold"
-            fontSize="lg"
-            textTransform="capitalize"
-            color={info.cell.row.original.color}
-          >
+          <Text textTransform="capitalize" color={info.cell.row.original.color}>
             {info.getValue().rank}
           </Text>
         </Stack>
@@ -37,12 +44,13 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("pool", {
       cell: info => (
         <Text
-          fontWeight="bold"
-          fontSize="md"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          whiteSpace="pre-wrap"
           textTransform="capitalize"
           textAlign="center"
+          w={{ base: "5xs", md: "20", xl: "5xs" }}
         >
-          {info.getValue()}
+          {info.getValue().length !== 0 ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.gnetBonus") ?? "",
@@ -51,12 +59,12 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("level", {
       cell: info => (
         <Text
-          fontWeight="bold"
-          fontSize="md"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          w={{ base: "5xs", md: "20", xl: "4xs" }}
           textTransform="capitalize"
           textAlign="center"
         >
-          {info.getValue()}
+          {info.getValue().length !== 0 ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.level") ?? "",
@@ -65,12 +73,14 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("claim", {
       cell: info => (
         <Text
-          fontWeight="bold"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          w={{ base: "5xs", md: "20", lg: "5xs", xl: "4xs" }}
+          mx="2"
           textAlign="center"
-          fontSize="md"
+          whiteSpace="pre-wrap"
           textTransform="capitalize"
         >
-          {info.getValue()}
+          {info.getValue().length ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.claimReq") ?? "",
@@ -79,12 +89,12 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("downline", {
       cell: info => (
         <Text
-          fontWeight="bold"
-          fontSize="md"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          w={{ base: "5xs", md: "20", lg: "6xs", xl: "4xs" }}
           textTransform="capitalize"
           textAlign="center"
         >
-          {info.getValue()}
+          {info.getValue().length ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.15Leveldown") ?? "",
@@ -93,12 +103,12 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("maxbuy", {
       cell: info => (
         <Text
-          fontWeight="bold"
-          fontSize="md"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
+          w={{ base: "5xs", md: "20", lg: "5xs", xl: "5xs" }}
           textTransform="capitalize"
           textAlign="center"
         >
-          {info.getValue()}
+          {info.getValue().length ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.maxBuyNFT") ?? "",
@@ -107,14 +117,13 @@ export const TableRankNFTBonusV2 = () => {
     columnHelper.accessor("requirement", {
       cell: info => (
         <Text
-          fontWeight="bold"
-          fontSize="md"
+          fontSize={{ base: "md", md: "sm", xl: "lg" }}
           textTransform="capitalize"
           textAlign="center"
           whiteSpace="pre-wrap"
-          w="6xs"
+          w={{ base: "5xs", md: "20", lg: "4xs", xl: "4xs" }}
         >
-          {info.getValue()}
+          {info.getValue().length ? info.getValue() : "-"}
         </Text>
       ),
       header: t("common.rankreq") ?? "",

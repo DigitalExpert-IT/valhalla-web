@@ -31,7 +31,7 @@ export const SectionGnetProject = () => {
         textAlign="center"
         overflow="hidden"
         display="flex"
-        w="100vw"
+        w="100%"
       >
         <Heading
           _after={{

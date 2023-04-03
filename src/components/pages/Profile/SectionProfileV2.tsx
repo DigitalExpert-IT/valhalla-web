@@ -1,4 +1,11 @@
-import { SimpleGrid, Heading, Stack, GridItem, Flex } from "@chakra-ui/react";
+import {
+  SimpleGrid,
+  Heading,
+  Stack,
+  GridItem,
+  Flex,
+  Box,
+} from "@chakra-ui/react";
 import {
   CardProfileBalanceV2,
   CardProfileRankV2,
@@ -22,8 +29,8 @@ export const SectionProfileV2 = () => {
           content: `'${t("pages.profile.account")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "180", md: "130", xs: "70", base: "50" },
-          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "75", base: "56" },
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-70px", base: "-55px" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",
@@ -31,20 +38,39 @@ export const SectionProfileV2 = () => {
       >
         {t("pages.profile.header")}
       </Heading>
-      <SimpleGrid columns={{ base: 1, lg: 3 }} gap={{ base: 4, md: 6, xl: 12 }}>
-        <GridItem>
-          <CardProfileRankV2 />
-        </GridItem>
-        <GridItem colSpan={{ base: 1, lg: 2 }}>
-          <CardProfileBalanceV2 />
-        </GridItem>
-        <GridItem>
-          <CardProfileAddress />
-        </GridItem>
-        <GridItem colSpan={{ base: 1, lg: 2 }}>
-          <CardProfileBonus />
-        </GridItem>
-      </SimpleGrid>
+
+      <Flex direction="column" gap="10" p="2">
+        <Stack
+          w="100%"
+          direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
+          spacing="10"
+        >
+          <Box flex="1" minW={{ base: "100%", md: "35%" }}>
+            <CardProfileRankV2 />
+          </Box>
+          <Box w="100%">
+            <CardProfileBalanceV2 />
+          </Box>
+        </Stack>
+        <Stack
+          w="100%"
+          direction={{
+            base: "column-reverse",
+            md: "column-reverse",
+            lg: "row",
+            xl: "row",
+          }}
+          spacing="10"
+        >
+          <Box flex="1" minW={{ base: "100%", md: "35%" }}>
+            <CardProfileAddress />
+          </Box>
+          <Box w="100%">
+            <CardProfileBonus />
+          </Box>
+        </Stack>
+      </Flex>
+
       <Flex
         py={"6"}
         justify={{ base: "center", xl: "space-between" }}

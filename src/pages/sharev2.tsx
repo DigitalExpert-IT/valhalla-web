@@ -41,14 +41,18 @@ const ShareV2 = () => {
                 content: `'${t("pages.shareToEarn.share")}'`,
                 alignSelf: "center",
                 display: "block",
-                fontSize: { base: "40", md: "100", lg: "210" },
-                mt: { base: "-38px", md: "-90px", lg: "-120px" },
+                fontSize: { base: "56", md: "100", lg: "210" },
+                mt: { base: "-45px", md: "-90px", lg: "-120px" },
                 color: "whiteAlpha.100",
                 textAlign: "center",
               }}
             >
               {t("pages.shareToEarn.title").toUpperCase()}
             </Heading>
+            <Box textAlign="center" display={{ base: "block", md: "none" }}>
+              <Text as="u">{t(`pages.share.subtitle`)}</Text>
+              <Text fontSize="xs">{t(`pages.share.subDescription`)}</Text>
+            </Box>
             <Grid
               templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
               gap={"5"}
@@ -85,7 +89,10 @@ const ShareV2 = () => {
                         </Flex>
                       </Flex>
                     </CardHeader>
-                    <CardBody p={"unset"}>
+                    <CardBody
+                      p={"unset"}
+                      display={{ base: "none", md: "block" }}
+                    >
                       <Text fontWeight={"700"} mt={5} mb={2}>
                         {t(`pages.share.item.${item.mediaName}.subtitle`)}
                       </Text>

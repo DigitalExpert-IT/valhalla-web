@@ -101,7 +101,7 @@ const fetchPool = async () => {
 /**
  * fetch account data
  */
-const fetchAccount = async () => {
+export const fetchAccount = async () => {
   try {
     const wallet = await getWallet();
     const [address] = await wallet.listAccounts();

@@ -203,7 +203,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "50000 NFT Value",
     maxbuy: "200000",
     requirement: "-",
-    color: "#A8742F",
+    color: "white",
   },
   {
     image: "/assets/rank/rare.svg",
@@ -214,7 +214,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "200000 NFT Value    ",
     maxbuy: "1000000",
     requirement: "2 common rank",
-    color: "#666768",
+    color: "white",
   },
   {
     image: "/assets/rank/super-rare.svg",
@@ -225,7 +225,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "1000000 NFT Value",
     maxbuy: "5000000",
     requirement: "2 rare rank",
-    color: "#2A7FB8",
+    color: "white",
   },
   {
     image: "/assets/rank/epic.svg",
@@ -236,7 +236,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "5000000 NFT Value",
     maxbuy: "20000000",
     requirement: "2 super rare rank",
-    color: "#E7570F",
+    color: "white",
   },
   {
     image: "/assets/rank/legend.svg",
@@ -247,7 +247,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "25000000 NFT Value",
     maxbuy: "100000000",
     requirement: "2 epic rank",
-    color: "#E0475A",
+    color: "white",
   },
   {
     image: "/assets/rank/super-legend.svg",
@@ -258,7 +258,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     claim: "100000000 NFT Value",
     maxbuy: "500000000",
     requirement: "2 legend rank",
-    color: "#BE7DD8",
+    color: "white",
   },
   {
     image: "",
@@ -309,7 +309,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "50000 NFT Value",
     maxbuy: "200000",
     requirement: "-",
-    color: "#A8742F",
+    color: "white",
   },
   {
     rankData: {
@@ -322,7 +322,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "200000 NFT Value    ",
     maxbuy: "1000000",
     requirement: "2 common rank",
-    color: "#666768",
+    color: "white",
   },
   {
     rankData: {
@@ -335,7 +335,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "1000000 NFT Value",
     maxbuy: "5000000",
     requirement: "2 rare rank",
-    color: "#2A7FB8",
+    color: "white",
   },
   {
     rankData: {
@@ -348,7 +348,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "5000000 NFT Value",
     maxbuy: "20000000",
     requirement: "2 super rare rank",
-    color: "#E7570F",
+    color: "white",
   },
   {
     rankData: {
@@ -361,7 +361,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "25000000 NFT Value",
     maxbuy: "100000000",
     requirement: "2 epic rank",
-    color: "#E0475A",
+    color: "white",
   },
   {
     rankData: {
@@ -374,7 +374,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     claim: "100000000 NFT Value",
     maxbuy: "500000000",
     requirement: "2 legend rank",
-    color: "#BE7DD8",
+    color: "white",
   },
   {
     rankData: {

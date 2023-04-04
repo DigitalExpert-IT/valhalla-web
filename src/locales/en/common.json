@@ -58,5 +58,6 @@
   "remainingFarm": "Total Return (450 Days)",
   "percentage": "Percentage",
   "claim": "Claim",
-  "buy": "Buy"
+  "buy": "Buy",
+  "isConnectingToBlockChain":"Connecting to BlockChain"
 }

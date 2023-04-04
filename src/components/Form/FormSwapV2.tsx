@@ -229,6 +229,7 @@ export const FormSwapV2 = () => {
           <Button
             type="submit"
             isLoading={isSwapLoading || !initialized}
+            loadingText={t("common.isConnectingToBlockChain")!}
             color={"purple.900"}
             bg={"white"}
             _hover={{

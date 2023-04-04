@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
-import {
-  ButtonConnectWallet,
-  DrawerMobileNav,
-  NavbarMenu,
-  ButtonConnectWalletV2,
-} from "components";
+import { DrawerMobileNav, NavbarMenu, ButtonConnectWalletV2 } from "components";
 
 import {
   Box,

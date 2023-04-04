@@ -26,7 +26,7 @@ export const SectionNFTList = () => {
         textAlign="center"
         overflow="hidden"
         display="flex"
-        w="100vw"
+        w="full"
         pt="40"
         // h={{ md: "50vh", base: "40vh" }}
       >

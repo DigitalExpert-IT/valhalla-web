@@ -28,7 +28,7 @@ export const SectionMatchingRequirment = () => {
         textAlign="center"
         overflow="hidden"
         display="flex"
-        w="100vw"
+        w="full"
       >
         <Heading
           _after={{

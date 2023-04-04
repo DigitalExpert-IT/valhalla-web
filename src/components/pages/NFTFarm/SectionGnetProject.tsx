@@ -66,7 +66,7 @@ export const SectionGnetProject = () => {
             justifyContent="center"
             rowSpan={{ md: 2, base: 1 }}
           >
-            <AspectRatio w="100px" ratio={1}>
+            <AspectRatio w="100px" ratio={15 / 17}>
               <Image
                 src={RANK_SYMBOL_MAP[account.rank]}
                 alt={rankMap[account.rank]}

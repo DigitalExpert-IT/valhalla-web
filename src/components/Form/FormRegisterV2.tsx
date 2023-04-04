@@ -40,7 +40,7 @@ export const FormRegisterV2 = () => {
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
       await register.exec(data.referrer);
-      router.replace("/profile");
+      router.replace("/profilev2");
     });
   });
 

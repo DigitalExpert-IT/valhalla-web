@@ -1,12 +1,14 @@
 import React from "react";
 import { LayoutMainV2, TableRankNFTBonusV2 } from "components";
+import { withConnection, withRegistration } from "hoc";
+import { composeHoc } from "utils";
 import {
   SectionGnetProject,
   SectionNFTList,
   SectionMatchingRequirment,
   SectionMyNFTV2,
 } from "components/pages/NFTFarm";
-import { Box, Container } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 const NftFarmingV2 = () => {
   return (
@@ -24,4 +26,4 @@ const NftFarmingV2 = () => {
   );
 };
 
-export default NftFarmingV2;
+export default withConnection(composeHoc(withRegistration)(NftFarmingV2));

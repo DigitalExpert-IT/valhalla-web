@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Box, Text, Image, Flex } from "@chakra-ui/react";
+import { Container, Box, Text, Image, Flex, HStack } from "@chakra-ui/react";
+import { ICONS_FOOTER } from "constant/icon";
+import Link from "next/link";
 
 export const LayoutFooterV2 = () => {
   const { t } = useTranslation();
@@ -54,9 +56,26 @@ export const LayoutFooterV2 = () => {
             </Box>
           </Flex>
         </Container>
+        <HStack justify={"center"} pb={"2rem"}>
+          {ICONS_FOOTER.map((row, i) => (
+            <Box key={i} w={"10"} h={"6"}>
+              <Link href={row.href} target="_blank">
+                <Image
+                  src={row.src}
+                  alt={row.alt}
+                  h={"full"}
+                  objectFit={"cover"}
+                  mx={"auto"}
+                />
+              </Link>
+            </Box>
+          ))}
+        </HStack>
       </Box>
       <Flex justify={"center"} py={2}>
-        © 2023 Global Network, All right reserved
+        <Text fontSize={{ base: "sm", sm: "md" }}>
+          &#169; {new Date().getFullYear()} Global Network, All right reserved
+        </Text>
       </Flex>
     </Box>
   );

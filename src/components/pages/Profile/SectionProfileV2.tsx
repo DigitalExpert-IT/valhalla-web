@@ -6,6 +6,7 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
+import { User } from "@prisma/client";
 import {
   CardProfileBalanceV2,
   CardProfileRankV2,
@@ -13,11 +14,20 @@ import {
   CardProfileBonus,
 } from "components/Card";
 import { WidgetProfileMember } from "components/Widget/WidgetProfile";
-import { useValhalla } from "hooks";
+import { useMe, useValhalla, useWallet } from "hooks";
 import { t } from "i18next";
+import { useMemo } from "react";
 
 export const SectionProfileV2 = () => {
   const { account } = useValhalla();
+  const { address } = useWallet();
+  const { data, isLoading } = useMe();
+  const user = useMemo<User>(() => {
+    const convert = data
+      ?.filter(e => e.address === address.toLowerCase())
+      .reduce((acc, cv) => ({ ...cv }), {});
+    return convert as User;
+  }, [data]);
   return (
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
@@ -88,7 +98,8 @@ export const SectionProfileV2 = () => {
         />
         <WidgetProfileMember
           label={"common.telegramOnlyMember"}
-          value={"@username"}
+          value={`@${user?.telegramUsername}`}
+          isLoading={isLoading}
         />
       </Flex>
     </Stack>

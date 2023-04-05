@@ -4,6 +4,7 @@ import {
   Flex,
   FlexProps,
   HStack,
+  Spinner,
   Stack,
   StackProps,
   Text,
@@ -39,10 +40,11 @@ export const WidgetProfileBtn = (props: ButtonProps) => {
 type IPropsMember = StackProps & {
   label: string;
   value: string;
+  isLoading?: boolean;
 };
 
 export const WidgetProfileMember = (props: IPropsMember) => {
-  const { label, value, children, ...rest } = props;
+  const { label, value, isLoading, children, ...rest } = props;
   return (
     <HStack
       w={"96"}
@@ -67,8 +69,8 @@ export const WidgetProfileMember = (props: IPropsMember) => {
           <Trans i18nKey={label} />
         </Text>
       </Stack>
-      <Stack w={"full"} textAlign={"center"} pr={"4"}>
-        <Text lineHeight={"4"}>{value}</Text>
+      <Stack w={"full"} textAlign={"center"} pr={"4"} align={"center"}>
+        {isLoading ? <Spinner /> : <Text lineHeight={"4"}>{value}</Text>}
       </Stack>
     </HStack>
   );

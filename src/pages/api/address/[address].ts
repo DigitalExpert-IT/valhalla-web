@@ -6,13 +6,18 @@ const prisma = new PrismaClient();
 
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
+  const firstUser = await prisma.user.findUnique({
+    where: {
+      address,
+    },
+  });
   let result: User[] = [
     {
       id: "root" as any,
       address,
-      upline: "",
-      blockNumber: 0,
-      telegramUsername: "",
+      upline: firstUser?.upline ?? "",
+      blockNumber: firstUser?.blockNumber ?? 0,
+      telegramUsername: firstUser?.telegramUsername ?? "",
     },
   ];
   let upperList = [address];

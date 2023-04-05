@@ -1,23 +1,79 @@
 import {
-  SimpleGrid,
-  Heading,
-  Stack,
-  GridItem,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import {
-  CardProfileBalanceV2,
+  CardProfileBonus,
   CardProfileRankV2,
   CardProfileAddress,
-  CardProfileBonus,
+  CardProfileBalanceV2,
 } from "components/Card";
-import { WidgetProfileMember } from "components/Widget/WidgetProfile";
-import { useValhalla } from "hooks";
+import axios from "axios";
 import { t } from "i18next";
+import { useMemo } from "react";
+import { User } from "@prisma/client";
+import { getWallet } from "lib/contractFactory";
+import { useModal } from "@ebay/nice-modal-react";
+import { ModalBindTelegram } from "components/Modal";
+import { useMe, useValhalla, useWallet } from "hooks";
+import { getTelegramBindingSignatureMessage } from "utils";
+import { Heading, Stack, Flex, Box } from "@chakra-ui/react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 
 export const SectionProfileV2 = () => {
+  const { address } = useWallet();
   const { account } = useValhalla();
+  const { data, isLoading } = useMe();
+  const user = useMemo<User>(() => {
+    const convert = data
+      ?.filter(e => e.address === address.toLowerCase())
+      .reduce((acc, cv) => ({ ...cv }), {});
+    return convert as User;
+  }, [data]);
+
+  const bindTelegramModal = useModal(ModalBindTelegram);
+  const telegramInvite = useQuery<{ type: string }>({
+    queryKey: [`/telegram/invite/${address}`],
+    enabled: false,
+  });
+  const telegramInviteMutate = useMutation({
+    mutationFn: async (body: { signature: string; username: string }) => {
+      const { data } = await axios.post(
+        `/api/telegram/invite/${address}`,
+        body
+      );
+      return data;
+    },
+  });
+
+  const createSignature = async () => {
+    try {
+      const linkToTelegram = document.createElement("a");
+      linkToTelegram.href = process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK || "";
+      linkToTelegram.target = "_blank";
+      const { data } = await telegramInvite.refetch();
+      if (!data) return;
+      if (!account.isRegistered) {
+        linkToTelegram.click();
+        return;
+      }
+
+      if (data.type === "redirect") {
+        linkToTelegram.click();
+        return;
+      }
+
+      if (data.type === "request_bind") {
+        const username = (await bindTelegramModal.show()) as string;
+        const wallet = await getWallet();
+        const signer = wallet.getSigner();
+        const signature = await signer.signMessage(
+          getTelegramBindingSignatureMessage(username)
+        );
+        await telegramInviteMutate.mutateAsync({ signature, username });
+        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+      }
+    } catch (error) {
+      window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+    }
+  };
   return (
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
@@ -26,14 +82,14 @@ export const SectionProfileV2 = () => {
         textAlign="center"
         textTransform="uppercase"
         _after={{
-          content: `'${t("pages.profile.account")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "180", md: "130", xs: "75", base: "56" },
-          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-70px", base: "-55px" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
+          color: "whiteAlpha.100",
           textTransform: "uppercase",
+          content: `'${t("pages.profile.account")}'`,
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-70px", base: "-55px" },
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "75", base: "56" },
         }}
       >
         {t("pages.profile.header")}
@@ -87,8 +143,17 @@ export const SectionProfileV2 = () => {
           value={account.directDownlineCount.toString()}
         />
         <WidgetProfileMember
+          isLoading={
+            isLoading ||
+            telegramInvite.isFetching ||
+            telegramInviteMutate.isLoading
+          }
           label={"common.telegramOnlyMember"}
-          value={"@username"}
+          cursor={!user?.telegramUsername ? "pointer" : "default"}
+          value={
+            user?.telegramUsername ? `@${user?.telegramUsername}` : "@username"
+          }
+          onClick={user?.telegramUsername ? () => null : createSignature}
         />
       </Flex>
     </Stack>

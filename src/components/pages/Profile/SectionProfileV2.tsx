@@ -6,17 +6,23 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
+import { useModal } from "@ebay/nice-modal-react";
 import { User } from "@prisma/client";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import {
   CardProfileBalanceV2,
   CardProfileRankV2,
   CardProfileAddress,
   CardProfileBonus,
 } from "components/Card";
+import { ModalBindTelegram } from "components/Modal";
 import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 import { useMe, useValhalla, useWallet } from "hooks";
 import { t } from "i18next";
+import { getWallet } from "lib/contractFactory";
 import { useMemo } from "react";
+import { getTelegramBindingSignatureMessage } from "utils";
 
 export const SectionProfileV2 = () => {
   const { account } = useValhalla();
@@ -28,6 +34,53 @@ export const SectionProfileV2 = () => {
       .reduce((acc, cv) => ({ ...cv }), {});
     return convert as User;
   }, [data]);
+
+  const bindTelegramModal = useModal(ModalBindTelegram);
+  const telegramInvite = useQuery<{ type: string }>({
+    queryKey: [`/telegram/invite/${address}`],
+    enabled: false,
+  });
+  const telegramInviteMutate = useMutation({
+    mutationFn: async (body: { signature: string; username: string }) => {
+      const { data } = await axios.post(
+        `/api/telegram/invite/${address}`,
+        body
+      );
+      return data;
+    },
+  });
+
+  const createSignature = async () => {
+    try {
+      const linkToTelegram = document.createElement("a");
+      linkToTelegram.href = process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK || "";
+      linkToTelegram.target = "_blank";
+      const { data } = await telegramInvite.refetch();
+      if (!data) return;
+      if (!account.isRegistered) {
+        linkToTelegram.click();
+        return;
+      }
+
+      if (data.type === "redirect") {
+        linkToTelegram.click();
+        return;
+      }
+
+      if (data.type === "request_bind") {
+        const username = (await bindTelegramModal.show()) as string;
+        const wallet = await getWallet();
+        const signer = wallet.getSigner();
+        const signature = await signer.signMessage(
+          getTelegramBindingSignatureMessage(username)
+        );
+        await telegramInviteMutate.mutateAsync({ signature, username });
+        window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+      }
+    } catch (error) {
+      window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
+    }
+  };
   return (
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
@@ -98,7 +151,11 @@ export const SectionProfileV2 = () => {
         />
         <WidgetProfileMember
           label={"common.telegramOnlyMember"}
-          value={`@${user?.telegramUsername}`}
+          value={
+            user?.telegramUsername ? `@${user?.telegramUsername}` : "@userName"
+          }
+          cursor={!user?.telegramUsername ? "pointer" : "default"}
+          onClick={user?.telegramUsername ? () => null : createSignature}
           isLoading={isLoading}
         />
       </Flex>

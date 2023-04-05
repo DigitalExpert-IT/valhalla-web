@@ -26,4 +26,4 @@ const NftFarmingV2 = () => {
   );
 };
 
-export default withConnection(composeHoc(withRegistration)(NftFarmingV2));
+export default withConnection(NftFarmingV2);

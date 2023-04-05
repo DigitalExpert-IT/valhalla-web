@@ -152,11 +152,15 @@ export const SectionProfileV2 = () => {
         <WidgetProfileMember
           label={"common.telegramOnlyMember"}
           value={
-            user?.telegramUsername ? `@${user?.telegramUsername}` : "@userName"
+            user?.telegramUsername ? `@${user?.telegramUsername}` : "@username"
           }
           cursor={!user?.telegramUsername ? "pointer" : "default"}
           onClick={user?.telegramUsername ? () => null : createSignature}
-          isLoading={isLoading}
+          isLoading={
+            isLoading ||
+            telegramInvite.isFetching ||
+            telegramInviteMutate.isLoading
+          }
         />
       </Flex>
     </Stack>

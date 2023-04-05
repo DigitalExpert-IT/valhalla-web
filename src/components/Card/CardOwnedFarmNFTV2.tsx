@@ -4,7 +4,6 @@ import { prettyBn } from "utils";
 import { BigNumber } from "ethers";
 import { fromBn } from "evm-bn";
 import { TextAnimation, ButtonConnectWrapper } from "components";
-import { LazyVideo } from "components/LazyVideo";
 import { useTranslation } from "react-i18next";
 import {
   Stack,
@@ -80,7 +79,6 @@ export const CardOwnedFarmNFTV2 = (props: IOwnedNFT) => {
         >
           <Box rounded="xl" overflow="hidden" m="2">
             <AspectRatio w={{ base: "2xs", md: "xs" }} ratio={1}>
-              {/* <LazyVideo src={tokenUri} objectFit="cover" /> */}
               <Box as="video" autoPlay loop muted rounded="xl">
                 <source src={tokenUri} type="video/mp4" />
               </Box>

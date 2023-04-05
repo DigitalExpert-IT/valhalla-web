@@ -6,10 +6,11 @@ import {
   Stack,
   Text,
   UnorderedList,
-  Container,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { PROJECT_LIST } from "constant/pages/projectList";
 import { useTranslation } from "react-i18next";
+import { ProjectImage } from "./ProjectImage";
 
 export const SectionProject = () => {
   const { t } = useTranslation();
@@ -49,14 +50,9 @@ export const SectionProject = () => {
         alignItems="center"
       >
         <Box flex={1} display="flex" justifyContent="center" mt="5">
-          <Image src="/assets/project/project.svg" alt="project" w="xl" />
-          <Image
-            src="/assets/logo/gn.svg"
-            alt="logo"
-            pos="absolute"
-            alignSelf="center"
-            w={{ base: "120px", md: "6xs" }}
-          />
+          <AspectRatio w="100%" minW="300px" ratio={1}>
+            <ProjectImage />
+          </AspectRatio>
         </Box>
         <Stack flex={1} spacing="5">
           <Box maxW="5xl">

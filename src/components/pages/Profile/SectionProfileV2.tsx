@@ -1,32 +1,25 @@
 import {
-  SimpleGrid,
-  Heading,
-  Stack,
-  GridItem,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
-import { useModal } from "@ebay/nice-modal-react";
-import { User } from "@prisma/client";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import {
-  CardProfileBalanceV2,
+  CardProfileBonus,
   CardProfileRankV2,
   CardProfileAddress,
-  CardProfileBonus,
+  CardProfileBalanceV2,
 } from "components/Card";
-import { ModalBindTelegram } from "components/Modal";
-import { WidgetProfileMember } from "components/Widget/WidgetProfile";
-import { useMe, useValhalla, useWallet } from "hooks";
+import axios from "axios";
 import { t } from "i18next";
-import { getWallet } from "lib/contractFactory";
 import { useMemo } from "react";
+import { User } from "@prisma/client";
+import { getWallet } from "lib/contractFactory";
+import { useModal } from "@ebay/nice-modal-react";
+import { ModalBindTelegram } from "components/Modal";
+import { useMe, useValhalla, useWallet } from "hooks";
 import { getTelegramBindingSignatureMessage } from "utils";
+import { Heading, Stack, Flex, Box } from "@chakra-ui/react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 
 export const SectionProfileV2 = () => {
-  const { account } = useValhalla();
   const { address } = useWallet();
+  const { account } = useValhalla();
   const { data, isLoading } = useMe();
   const user = useMemo<User>(() => {
     const convert = data
@@ -89,14 +82,14 @@ export const SectionProfileV2 = () => {
         textAlign="center"
         textTransform="uppercase"
         _after={{
-          content: `'${t("pages.profile.account")}'`,
-          alignSelf: "center",
           display: "block",
-          fontSize: { xl: "250", lg: "180", md: "130", xs: "75", base: "56" },
-          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-70px", base: "-55px" },
-          color: "whiteAlpha.100",
           textAlign: "center",
+          alignSelf: "center",
+          color: "whiteAlpha.100",
           textTransform: "uppercase",
+          content: `'${t("pages.profile.account")}'`,
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-70px", base: "-55px" },
+          fontSize: { xl: "250", lg: "180", md: "130", xs: "75", base: "56" },
         }}
       >
         {t("pages.profile.header")}
@@ -150,17 +143,17 @@ export const SectionProfileV2 = () => {
           value={account.directDownlineCount.toString()}
         />
         <WidgetProfileMember
-          label={"common.telegramOnlyMember"}
-          value={
-            user?.telegramUsername ? `@${user?.telegramUsername}` : "@username"
-          }
-          cursor={!user?.telegramUsername ? "pointer" : "default"}
-          onClick={user?.telegramUsername ? () => null : createSignature}
           isLoading={
             isLoading ||
             telegramInvite.isFetching ||
             telegramInviteMutate.isLoading
           }
+          label={"common.telegramOnlyMember"}
+          cursor={!user?.telegramUsername ? "pointer" : "default"}
+          value={
+            user?.telegramUsername ? `@${user?.telegramUsername}` : "@username"
+          }
+          onClick={user?.telegramUsername ? () => null : createSignature}
         />
       </Flex>
     </Stack>

@@ -1,5 +1,5 @@
-import React from "react";
-import { useNFT } from "hooks";
+import React, { useEffect, useState } from "react";
+import { IOwnedNFT, useNFT } from "hooks";
 import {
   Box,
   Heading,
@@ -8,13 +8,15 @@ import {
   Stack,
   Image,
   Container,
+  Spinner,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { CardOwnedFarmNFTV2 } from "components/Card";
 
 export const SectionMyNFTV2 = () => {
-  const nft = useNFT();
+  const { nftList, isLoading } = useNFT();
   const { t } = useTranslation();
+
   return (
     <Box mt="40" pos="relative">
       <Box textAlign="center">
@@ -54,13 +56,11 @@ export const SectionMyNFTV2 = () => {
             backdropFilter="auto"
             backdropBlur="2.5px"
           >
-            {nft.nftList.length !== 0 ? (
-              nft.nftList.map(item => (
-                <WrapItem key={item.id.toNumber()}>
-                  <CardOwnedFarmNFTV2 {...item} />
-                </WrapItem>
-              ))
-            ) : (
+            {isLoading ? (
+              <Box display="flex" justifyContent="center" minH="55vh">
+                <Spinner size="xl" />
+              </Box>
+            ) : nftList.length === 0 ? (
               <Box
                 textAlign="center"
                 display="flex"
@@ -70,6 +70,12 @@ export const SectionMyNFTV2 = () => {
               >
                 <Heading>{t("error.notOwnedNft")}</Heading>
               </Box>
+            ) : (
+              nftList.map(item => (
+                <WrapItem key={item.id.toNumber()}>
+                  <CardOwnedFarmNFTV2 {...item} />
+                </WrapItem>
+              ))
             )}
           </Wrap>
         </Stack>

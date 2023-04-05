@@ -15,7 +15,7 @@ const handler: NextApiHandler = async (req, res) => {
     {
       id: "root" as any,
       address,
-      upline: firstUser?.address ?? "",
+      upline: firstUser?.upline ?? "",
       blockNumber: firstUser?.blockNumber ?? 0,
       telegramUsername: firstUser?.telegramUsername ?? "",
     },

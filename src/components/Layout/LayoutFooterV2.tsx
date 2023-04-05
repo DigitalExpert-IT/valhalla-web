@@ -1,16 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Container,
-  Box,
-  Text,
-  Image,
-  Flex,
-  Stack,
-  AspectRatio,
-  VStack,
-  HStack,
-} from "@chakra-ui/react";
+import { Container, Box, Text, Image, Flex, HStack } from "@chakra-ui/react";
 import { ICONS_FOOTER } from "constant/icon";
 import Link from "next/link";
 

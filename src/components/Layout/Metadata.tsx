@@ -43,6 +43,8 @@ export const Metadata: React.FC<MetadataProps> = props => {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
+      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta name="copyright" content={copyright} />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />

@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { withConnection } from "hoc";
 import { useMe } from "hooks";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
@@ -22,6 +23,7 @@ const nodes = [
 ];
 const Hierarchy = () => {
   const { data } = useMe();
+
   console.log(data);
 
   const router = useRouter();
@@ -35,4 +37,4 @@ const Hierarchy = () => {
   );
 };
 
-export default Hierarchy;
+export default withConnection(Hierarchy);

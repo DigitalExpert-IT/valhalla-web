@@ -47,6 +47,7 @@ export const OrgChart = (props: Props) => {
       address: item.address,
     }));
   }, [hierarchy.data]);
+  console.log("hierarchy data", hierarchy.data);
 
   useEffect(() => {
     if (!containerRef.current) return;

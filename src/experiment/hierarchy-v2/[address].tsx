@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { withConnection } from "hoc";
 import { useMe } from "hooks";
 import { useRouter } from "next/router";
+<<<<<<< HEAD
 import { useCallback, useEffect } from "react";
 import ReactFlow, {
   Background,
@@ -19,6 +20,15 @@ const edgesinit = [
 ];
 
 const nodesinit = [
+=======
+import { useEffect, useMemo, useState } from "react";
+import ReactFlow, { Background, Controls } from "reactflow";
+import "reactflow/dist/style.css";
+
+const edges = [{ id: "1-2", source: "1", target: "2", type: "step" }];
+
+const nodes = [
+>>>>>>> 9266b95 (update)
   {
     id: "1",
     data: { label: "Hello" },
@@ -30,15 +40,19 @@ const nodesinit = [
     data: { label: "World" },
     position: { x: 100, y: 100 },
   },
+<<<<<<< HEAD
   {
     id: "3",
     data: { label: "World" },
     position: { x: 100, y: 200 },
   },
+=======
+>>>>>>> 9266b95 (update)
 ];
 const Hierarchy = () => {
   const { data } = useMe();
 
+<<<<<<< HEAD
   const [nodes, setNodes, onNodesChange] = useNodesState(nodesinit);
   const [edges, setEdges, onEdgesChange] = useEdgesState(edgesinit);
 
@@ -87,10 +101,14 @@ const Hierarchy = () => {
     (params: any) => setEdges(eds => addEdge(params, eds)),
     [setEdges]
   );
+=======
+  console.log(data);
+>>>>>>> 9266b95 (update)
 
   const router = useRouter();
   return (
     <Box h="100vh">
+<<<<<<< HEAD
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -101,6 +119,11 @@ const Hierarchy = () => {
         <Background />
         <Controls />
         <MiniMap />
+=======
+      <ReactFlow nodes={nodes} edges={edges}>
+        <Background />
+        {/* <Controls /> */}
+>>>>>>> 9266b95 (update)
       </ReactFlow>
     </Box>
   );

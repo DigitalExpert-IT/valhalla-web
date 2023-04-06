@@ -222,7 +222,7 @@ export const useNFT = () => {
 
     if (cardPrice.gt(balance)) {
       throw {
-        code: "NotEnoughBalance",
+        code: "NotEnoughGnetBalance",
       };
     }
 

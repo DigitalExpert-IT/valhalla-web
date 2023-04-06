@@ -8,6 +8,7 @@
     "ACTION_REJECTED": "User Reject Transaction!",
     "NotEnoughBalance": "Not Enough Balance",
     "NotEnoughGnetBalance": "Not Enough GNET Balances",
-    "NotEnoughPool": "Not Enough Pool"
+    "NotEnoughPool": "Not Enough Pool",
+    "TokenFrozen": "Token Frozen"
   }
 }

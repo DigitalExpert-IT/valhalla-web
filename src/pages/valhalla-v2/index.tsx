@@ -20,7 +20,7 @@ const ValhallaV2 = () => {
   const { t } = useTranslation();
 
   return (
-    <LayoutMainV2>
+    <LayoutMainV2 title="Home">
       <SectionHeaderV2 />
       <Container maxW="container.xxl">
         <SectionProject />

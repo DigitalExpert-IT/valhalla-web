@@ -12,7 +12,7 @@ import { Trans } from "react-i18next";
 
 const Registerv2 = () => {
   return (
-    <LayoutMainV2>
+    <LayoutMainV2 title="Register">
       <Stack bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)">
         <Stack
           alignItems={"center"}

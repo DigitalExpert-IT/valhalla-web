@@ -19,7 +19,7 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <LayoutMainV2>
+    <LayoutMainV2 title="HOME">
       <SectionHeaderV2 />
       <Container maxW="container.xxl">
         <SectionProject />

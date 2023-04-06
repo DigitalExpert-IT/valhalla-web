@@ -4,7 +4,7 @@ import { t } from "i18next";
 
 const SwapV2 = () => {
   return (
-    <LayoutMainV2>
+    <LayoutMainV2 title="Swap">
       <Flex
         pos={"relative"}
         flexDir={"column"}

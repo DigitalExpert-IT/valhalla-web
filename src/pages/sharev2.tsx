@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 const ShareV2 = () => {
   const { t } = useTranslation();
   return (
-    <LayoutMainV2>
+    <LayoutMainV2 title="Share">
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <Box
           bgImage="url('/assets/project/pattern2.png')"

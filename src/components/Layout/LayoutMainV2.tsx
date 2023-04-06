@@ -14,7 +14,7 @@ export const LayoutMainV2: React.FC<MainProps> = ({ children, title }) => {
         title={title}
         language="en"
         author="Global Network"
-        description="Register Global Network to get a lot of Daily Reward !"
+        description="The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications"
       />
       <NavbarV2 />
       {children}

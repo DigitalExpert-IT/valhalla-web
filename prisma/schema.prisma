@@ -14,6 +14,7 @@ model User {
   telegramUsername String? @unique
   upline           String
   blockNumber      Int     @default(0)
+  Nft              Nft[]
 
   @@index([telegramUsername])
   @@index([address])
@@ -25,4 +26,15 @@ model Config {
   value String @default("")
 
   @@index([key])
+}
+
+model Nft {
+  id          Int    @id @default(autoincrement())
+  type        String
+  owner       User   @relation(fields: [idNft], references: [address])
+  idNft       String
+  url         String
+  probability Int
+
+  @@index([idNft])
 }

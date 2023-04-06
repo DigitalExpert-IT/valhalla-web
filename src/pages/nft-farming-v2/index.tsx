@@ -12,7 +12,7 @@ import { Box } from "@chakra-ui/react";
 
 const NftFarmingV2 = () => {
   return (
-    <LayoutMainV2 title="NFT Farming">
+    <LayoutMainV2>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <SectionNFTList />
         <SectionGnetProject />

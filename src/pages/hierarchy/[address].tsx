@@ -1,3 +1,4 @@
+import { withExperiment } from "lib/featureFlag";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 const OrgChart = dynamic(
@@ -19,4 +20,4 @@ const Hierarchy = () => {
   );
 };
 
-export default Hierarchy;
+export default withExperiment(Hierarchy, "hierarchy-v2/[address].tsx");

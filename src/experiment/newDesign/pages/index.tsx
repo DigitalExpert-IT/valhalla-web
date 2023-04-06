@@ -17,7 +17,7 @@ import {
 
 const ValhallaV2 = () => {
   return (
-    <LayoutMainV2 title="Home">
+    <LayoutMainV2>
       <SectionHeaderV2 />
       <Container maxW="container.xxl">
         <SectionProject />

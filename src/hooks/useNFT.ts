@@ -243,11 +243,19 @@ export const useNFT = () => {
   const farm = async (tokenId: BigNumber) => {
     const nftSigner = await getNFTSignerContract();
     const tx = await nftSigner.farm(tokenId);
+    const ownedNft = await nftSigner.ownedTokenMap(tokenId);
     const receipt = await tx.wait();
+
+    if (ownedNft.isBlackListed) {
+      throw {
+        code: "TokenFrozen",
+      };
+    }
 
     const nftIndex = store.nftList.findIndex(
       item => item.id.toNumber() === tokenId.toNumber()
     );
+
     if (nftIndex !== -1) {
       const ownedNft = await nftSigner.ownedTokenMap(tokenId);
       const nextState = produce(store, draft => {

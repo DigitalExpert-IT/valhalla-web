@@ -246,7 +246,7 @@ export const useNFT = () => {
     const ownedNft = await nftSigner.ownedTokenMap(tokenId);
     const receipt = await tx.wait();
 
-    if (ownedNft.isBlackListed) {
+    if (ownedNft.isBlackListed === true) {
       throw {
         code: "TokenFrozen",
       };

@@ -5,8 +5,7 @@ export const WS_ENDPOINTS = {
 };
 
 export const RPC_ENDPOINTS = {
-  "0x89":
-    "https://matic.getblock.io/c93b3096-bc13-4daf-8c73-b5ac0c1c8855/mainnet/",
+  "0x89": "https://polygon-rpc.com/",
   "0x13881": "https://matic-mumbai.chainstacklabs.com",
   "0x539": "http://localhost:8545",
   "0x29a": "https://valhalacoin.cloud",

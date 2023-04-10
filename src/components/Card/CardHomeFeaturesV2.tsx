@@ -53,6 +53,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
         zIndex={"base"}
         h={{ base: id == 1 ? "full" : "70%", sm: "60%" }}
         w={"fit-content"}
+        objectFit="cover"
         position={"absolute"}
         right={"0"}
         left={{ base: "auto", sm: imgCenter ? "0" : "full" }}

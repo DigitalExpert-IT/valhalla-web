@@ -195,7 +195,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     color: "white",
   },
   {
-    image: "/assets/rank/common.svg",
+    image: "/assets/rank/elite.svg",
     rank: "elite",
     pool: "3%",
     level: "10 level",
@@ -213,7 +213,7 @@ export const RANKBONUS: Array<IRankBonus> = [
     downline: "400",
     claim: "200000 NFT Value    ",
     maxbuy: "1000000",
-    requirement: "2 common rank",
+    requirement: "2 elite rank",
     color: "white",
   },
   {
@@ -321,7 +321,7 @@ export const RANKBONUSV2: Array<IRankBonusV2> = [
     downline: "400",
     claim: "200000 NFT Value    ",
     maxbuy: "1000000",
-    requirement: "2 common rank",
+    requirement: "2 elite rank",
     color: "white",
   },
   {

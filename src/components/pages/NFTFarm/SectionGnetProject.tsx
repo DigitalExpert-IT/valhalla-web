@@ -18,8 +18,14 @@ import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
-  const { rankReward, claimRankReward, claimReward, personalReward } = useNFT();
-  const { account, isRankRewardClaimable, globalPool } = useValhalla();
+  const {
+    rankReward,
+    claimRankReward,
+    claimReward,
+    personalReward,
+    globalPool,
+  } = useNFT();
+  const { account, isRankRewardClaimable } = useValhalla();
   const claimNftRankRewardAsync = useAsyncCall(claimReward);
   const claimRewardGnetAsync = useAsyncCall(claimRankReward);
   return (
@@ -107,9 +113,9 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {isRankRewardClaimable
-                  ? prettyBn(globalPool.valueLeft, 18)
-                  : prettyBn(globalPool.claimable, 18)}{" "}
-                MATIC
+                  ? prettyBn(globalPool.valueLeft, 9)
+                  : prettyBn(globalPool.claimable, 9)}{" "}
+                GNET
               </Badge>
             </Stack>
           </GridItem>

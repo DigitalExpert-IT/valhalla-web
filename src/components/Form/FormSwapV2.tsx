@@ -76,7 +76,7 @@ export const FormSwapV2 = () => {
       gap={{ base: "8", md: "20" }}
       pos={"relative"}
     >
-      <Stack as="form" onSubmit={onSubmit}>
+      <Stack as="form" onSubmit={onSubmit} align="center">
         <Stack alignItems="center" mb="5">
           <Stack w={"full"}>
             <Box
@@ -123,7 +123,7 @@ export const FormSwapV2 = () => {
               as={"span"}
               fontSize={"sm"}
               textAlign={"center"}
-              color={"whiteAlpha.500"}
+              color={"whiteAlpha.700"}
             >
               {t("form.helperText.balance", {
                 balanceOf: symbol
@@ -213,7 +213,7 @@ export const FormSwapV2 = () => {
             <Text
               as={"span"}
               fontSize={"sm"}
-              color={"whiteAlpha.500"}
+              color={"whiteAlpha.700"}
               textAlign={"center"}
             >
               {t("form.helperText.balance", {
@@ -228,6 +228,7 @@ export const FormSwapV2 = () => {
         <ButtonConnectWrapper>
           <Button
             type="submit"
+            w={{ base: "70%", md: "100%" }}
             isLoading={isSwapLoading || !initialized}
             loadingText={t("common.isConnectingToBlockChain")!}
             color={"purple.900"}
@@ -251,7 +252,7 @@ export const FormSwapV2 = () => {
         mx={"auto"}
         borderRight={"1px"}
       />
-      <Stack justifyContent={"center"}>
+      <Stack justifyContent={"center"} mt={{ base: 10, md: 0 }}>
         <AspectRatio ratio={1} ml="-5rem" mt="-4rem">
           <ClipPathImage />
         </AspectRatio>

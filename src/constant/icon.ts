@@ -24,4 +24,9 @@ export const ICONS_FOOTER = [
     src: "/assets/icon/youtube.png",
     alt: "icon youtube",
   },
+  {
+    href: "https://t.me/globalnetworkann",
+    src: "/assets/icon/telegram.png",
+    alt: "icon telegram",
+  },
 ];

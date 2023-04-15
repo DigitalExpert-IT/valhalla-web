@@ -26,8 +26,8 @@ export const SectionGnetProject = () => {
     globalPool,
   } = useNFT();
   const { account, isRankRewardClaimable } = useValhalla();
-  const claimNftRankRewardAsync = useAsyncCall(claimReward);
-  const claimRewardGnetAsync = useAsyncCall(claimRankReward);
+  const claimNftRankRewardAsync = useAsyncCall(claimRankReward);
+  const claimRewardGnetAsync = useAsyncCall(claimReward);
   return (
     <Box position="relative" zIndex={1}>
       <Box

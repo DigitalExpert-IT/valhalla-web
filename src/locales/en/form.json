@@ -7,16 +7,16 @@
   "label": {
     "referrer": "Referral Code",
     "swap": "Swap To",
-    "from":"From",
-    "to":"To"
+    "from": "From",
+    "to": "To"
   },
   "message": {
     "registrationSuccess": "Registration Success!",
     "swapSucces": "Succes Swap"
   },
   "helperText": {
-    "referrer": "Please enter correct wallet address",
+    "referrer": "Please enter your referral address",
     "quantity": "please enter Quantity",
-    "balance":"Balance {{balanceOf}} {{symbol}}"
+    "balance": "Balance {{balanceOf}} {{symbol}}"
   }
 }

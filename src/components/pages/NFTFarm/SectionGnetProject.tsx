@@ -138,6 +138,7 @@ export const SectionGnetProject = () => {
                 variant="swag"
                 onClick={claimNftRankRewardAsync.exec}
                 isLoading={claimNftRankRewardAsync.isLoading}
+                disabled={rankReward.isZero()}
               >
                 {prettyBn(rankReward, 9) + " " + t("common.claim")}
               </Button>
@@ -156,6 +157,7 @@ export const SectionGnetProject = () => {
                 color="white"
                 onClick={claimRewardGnetAsync.exec}
                 isLoading={claimRewardGnetAsync.isLoading}
+                disabled={personalReward.isZero()}
               >
                 {prettyBn(personalReward, 9) + " " + t("common.claim")}
               </Button>

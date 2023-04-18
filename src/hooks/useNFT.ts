@@ -111,7 +111,7 @@ const fetchAccount = async () => {
   try {
     const address = useWalletStore.getState().address;
     if (!address) return;
-    const nft = await getNFTSignerContract();
+    const nft = await getNFTContract();
     const [personalReward, rankReward] = await Promise.all([
       nft.rewardMap(address),
       nft.getMyRankReward(),

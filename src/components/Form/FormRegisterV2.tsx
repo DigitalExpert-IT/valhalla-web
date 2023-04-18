@@ -78,6 +78,7 @@ export const FormRegisterV2 = () => {
           required: validateRequired(t("form.label.referrer")),
           validate: validateAddress,
         }}
+        helpertext={t("form.helperText.referrer")}
         _placeholder={{ color: "brand.400", opacity: "0.5" }}
         rounded={"none"}
         borderBottom={"1px"}

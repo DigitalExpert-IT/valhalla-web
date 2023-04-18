@@ -122,7 +122,7 @@ const fetchAccount = async () => {
 
 const onBuy = async (...params: [string, BigNumber]) => {
   fetchPool();
-  // fetchAccount();
+  fetchAccount();
   const nft = await getNFTContract();
   const [address, tokenId] = params;
   if (compareAddress(address, useWalletStore.getState().address)) {
@@ -181,10 +181,13 @@ const init = createInitiator(async () => {
   const valhalla = await getValhallaContract();
   fetchPool();
   loadCardList();
+  fetchAccount();
   nft.on("Buy", onBuy);
   valhalla.on("RankRewardOpened", fetchPool);
   valhalla.on("RankRewardClosed", fetchPool);
-  valhalla.on("ClaimReward", fetchAccount);
+  valhalla.on("ClaimReward", () => {
+    Promise.all([fetchAccount(), fetchPool()]);
+  });
   valhalla.on("ClaimRankReward", () => {
     Promise.all([fetchPool(), fetchAccount()]);
   });
@@ -197,7 +200,7 @@ const init = createInitiator(async () => {
     () => {
       resetAccount();
       fetchTokenList();
-      // fetchAccount();
+      fetchAccount();
     },
     { fireImmediately: true }
   );

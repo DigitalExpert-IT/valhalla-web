@@ -193,6 +193,11 @@ const variantNotIncluded = defineStyle({
   color: "white",
   display: "inline",
   lineHeight: "inherit",
+  _hover: {
+    _disabled: {
+      bg: "blueOcean.600",
+    },
+  },
 });
 
 const variants = {

@@ -9,6 +9,7 @@ import {
   SectionFeaturedPopulationV2,
   SectionMatchingBonusV2,
   SectionTeamV2,
+  SectionTeamV3,
   SectionPartnershipV2,
   TableRankBonusV2,
   TableRankNetworkV2,
@@ -40,10 +41,11 @@ export default function Home() {
       </Box>
       <Box
         textAlign="center"
-        bgGradient="linear(#2C1FA7 10%, #6D02C9 100%)"
-        pb="40"
+        bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"
       >
-        <SectionTeamV2 data={OURTEAM} />
+        {/* <SectionTeamV2 data={OURTEAM} /> */}
+
+        <SectionTeamV3 />
         <SectionPartnershipV2 data={PARTNERSHIP} />
       </Box>
     </LayoutMainV2>

@@ -20,21 +20,19 @@ export const SectionPartnershipV2: React.FC<
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
+        textAlign="center"
         textTransform="uppercase"
+        mb={{ sm: "8" }}
         _after={{
+          content: `'${t("pages.home.partnershipSection")}'`,
+          alignSelf: "center",
           display: "block",
-          textTransform: "uppercase",
+          fontSize: { xl: "200", lg: "145", md: "110", xs: "60", base: "45" },
+          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
           color: "whiteAlpha.100",
-          transform: {
-            md: "scale(3) translateY(-20px)",
-            base: "scale(3) translateY(-10px) translateX(12px)",
-          },
-          content: `'${t("pages.home.partnershipSection").replace(
-            "ship",
-            ""
-          )}'`,
+          textAlign: "center",
+          textTransform: "uppercase",
         }}
-        mb={{ md: "100", base: "50" }}
       >
         {t("pages.home.partnershipSection")}
       </Heading>

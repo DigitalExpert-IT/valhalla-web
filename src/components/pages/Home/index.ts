@@ -14,3 +14,4 @@ export * from "./SectionRoadmapV2";
 export * from "./SectionHeaderV2";
 export * from "./SectionTeamV2";
 export * from "./ProjectImage";
+export * from "./SectionTeamV3";

@@ -1,4 +1,4 @@
-import { OURTEAM, PARTNERSHIP } from "constant/pages/home";
+import { OURTEAM, PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
 import { Box, Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
@@ -45,7 +45,13 @@ export default function Home() {
       >
         {/* <SectionTeamV2 data={OURTEAM} /> */}
 
-        <SectionTeamV3 />
+        <SectionTeamV3
+          image={OURTEAMV3.image}
+          name={OURTEAMV3.name}
+          occupation={OURTEAMV3.occupation}
+          social={OURTEAMV3.social}
+          quotes={t("pages.home.quotes")}
+        />
         <SectionPartnershipV2 data={PARTNERSHIP} />
       </Box>
     </LayoutMainV2>

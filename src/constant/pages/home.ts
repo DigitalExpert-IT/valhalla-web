@@ -1,4 +1,9 @@
 import { t } from "i18next";
+import {
+  AiOutlineLinkedin,
+  AiOutlineInstagram,
+  AiOutlineTwitter,
+} from "react-icons/ai";
 
 export const HEADER_IMAGE_DATA = [
   { uri: "/images/nft-farming.png", alt: t("common.nftFarming") },
@@ -74,6 +79,26 @@ export const OURTEAM = [
     division: "Chief Technology Officer",
   },
 ];
+
+export const OURTEAMV3 = {
+  name: "Yusuf Kenan Can",
+  image: "/assets/ourteam/yusuf-new.png",
+  occupation: "Founder & President",
+  social: [
+    {
+      link: "https://www.instagram.com/yusufkenancannn/",
+      icon: AiOutlineInstagram,
+    },
+    {
+      link: "https://twitter.com/yusufkenancan33",
+      icon: AiOutlineTwitter,
+    },
+    {
+      link: "https://www.linkedin.com/in/yusuf-kenan-can-7baaa016a/",
+      icon: AiOutlineLinkedin,
+    },
+  ],
+};
 
 export const PARTNERSHIP = [
   {

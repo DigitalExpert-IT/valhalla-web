@@ -1,13 +1,28 @@
-import React from "react";
-import { Stack, Box, Image, Text, Icon } from "@chakra-ui/react";
+import React, { ReactComponentElement } from "react";
+import { Stack, Box, Image, Text, Icon, useMediaQuery } from "@chakra-ui/react";
 import {
   AiOutlineLinkedin,
   AiOutlineInstagram,
   AiOutlineTwitter,
 } from "react-icons/ai";
 import Link from "next/link";
+import { IconType } from "react-icons";
 
-export const SectionTeamV3 = () => {
+interface ISocial {
+  link: string;
+  icon: IconType;
+}
+interface IOurTeamV3 {
+  name: string;
+  image: string;
+  quotes: string;
+  occupation: string;
+  social: ISocial[];
+}
+
+export const SectionTeamV3: React.FC<IOurTeamV3> = props => {
+  const [isLargerThan2000] = useMediaQuery("(min-width: 2000px)");
+
   return (
     <Stack direction={{ base: "column", md: "row" }} mb="10" align="center">
       <Stack
@@ -31,12 +46,11 @@ export const SectionTeamV3 = () => {
         textAlign={{ base: "center", md: "left" }}
         spacing="10"
         pt={{ base: "none", md: "10rem" }}
+        w="100%"
       >
-        <Box>
+        <Box w={isLargerThan2000 ? "50%" : "full"}>
           <Text fontSize={{ base: "md", md: "2xl" }}>
-            “We will always do the right thing and work together to succeed. By
-            constantly improving ourselves, we aim to achieve even greater
-            things as a community”
+            &ldquo;{props.quotes}&rdquo;
           </Text>
         </Box>
         <Box>
@@ -45,27 +59,17 @@ export const SectionTeamV3 = () => {
             fontSize={{ base: "md", md: "2xl" }}
             fontWeight="bold"
           >
-            Yusuf Kenan Can
+            {props.name}
           </Text>
           <Text textTransform="capitalize" fontSize={{ base: "sm", md: "xl" }}>
-            founder & president
+            {props.occupation}
           </Text>
           <Stack direction="row" justify={{ base: "center", md: "left" }}>
-            <Link
-              href="https://www.instagram.com/yusufkenancannn/"
-              target="_blank"
-            >
-              <Icon as={AiOutlineInstagram} w={5} h={5} />
-            </Link>
-            <Link href="https://twitter.com/yusufkenancan33" target="_blank">
-              <Icon as={AiOutlineTwitter} w={5} h={5} />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/yusuf-kenan-can-7baaa016a/"
-              target="_blank"
-            >
-              <Icon as={AiOutlineLinkedin} w={5} h={5} />
-            </Link>
+            {props.social.map((item, idx) => (
+              <Link key={idx} href={item.link} target="_blank">
+                <Icon as={item.icon} w={5} h={5} />
+              </Link>
+            ))}
           </Stack>
         </Box>
       </Stack>

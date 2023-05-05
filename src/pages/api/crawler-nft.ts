@@ -48,7 +48,7 @@ const nftCrawler = async () => {
     });
   });
   await Promise.all(loopNFT);
-  return "success";
+  return "success crawling NFT";
 };
 
 const handler: NextApiHandler = async (_, res) => {

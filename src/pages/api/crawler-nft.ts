@@ -18,7 +18,7 @@ const nftCrawler = async () => {
   const loopNFT = new Array(Number(totalSuply)).fill(null).map(async (_, i) => {
     const URI = await nftContract.tokenURI(i);
     const getTokenMetaData = URI.slice(URI.length - 1);
-    const spec = await nftContract.cardMap(Number(getTokenMetaData));
+    const tokenSpec = await nftContract.ownedTokenMap(i);
     const owner = await nftContract.ownerOf(i);
     const ownerOnDataBase = await prisma.user.findUnique({
       where: {
@@ -35,7 +35,7 @@ const nftCrawler = async () => {
           connectOrCreate: {
             create: {
               id: i,
-              probability: Number(spec.halfingPercentage),
+              probability: Number(tokenSpec.percentage),
               type: nftTypeList[Number(getTokenMetaData)],
               url: URI,
             },

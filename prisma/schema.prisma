@@ -27,19 +27,22 @@ model Config {
   @@index([key])
 }
 
-model NFT {
-  id          Int     @id @unique
-  price       Int
-  type        Int
-  owner       String
-  url         String
-  probability Int
-  burn        Boolean
+model NftTransaction {
+  id      String @id @default(uuid())
+  tokenId String
+  from    String
+  to      String
+
+  @@index([to])
 }
 
-model NFTsales {
-  id             Int @id @unique
-  type           Int @unique
-  totalSold      Int
-  totalSoldValue Int
+model NftMetadata {
+  id             String   @id @default(uuid())
+  tokenId        String   @unique
+  farmPercentage Decimal
+  tokenType      String
+  mintingPrice   Decimal
+  mintedAt       DateTime
+
+  @@index([tokenId])
 }

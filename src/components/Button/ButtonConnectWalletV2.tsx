@@ -17,6 +17,8 @@ export const ButtonConnectWalletV2 = () => {
     router.push("/register");
   };
 
+  console.log(valhalla.account.isRegistered);
+
   if (isConnected) {
     return (
       <Stack spacing="4" direction="row" align="center">

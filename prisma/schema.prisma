@@ -26,3 +26,20 @@ model Config {
 
   @@index([key])
 }
+
+model NFT {
+  id          Int     @id @unique
+  price       Int
+  type        Int
+  owner       String
+  url         String
+  probability Int
+  burn        Boolean
+}
+
+model NFTsales {
+  id             Int @id @unique
+  type           Int @unique
+  totalSold      Int
+  totalSoldValue Int
+}

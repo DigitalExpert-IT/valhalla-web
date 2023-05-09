@@ -1,13 +1,49 @@
 import type { NextApiHandler } from "next";
 import { PrismaClient } from "@prisma/client";
 import { getKeccakHexHash, lowerCase } from "utils";
-import { getValhallaContract, getMainProvider, getNFTContract } from "lib/contractFactory";
-import { rootAdressList } from "@warmbyte/valhalla/constant/rootAddress";
-import fsp from "fs/promises";
-import path from "path"
+import {
+  getValhallaContract,
+  getMainProvider,
+  getNFTContract,
+} from "lib/contractFactory";
+import { fromBn } from "evm-bn";
 
 const prisma = new PrismaClient();
 const TRANSFER_TOPIC = getKeccakHexHash("Transfer(address,address,uint256)");
+
+const seedTransaction = async (from: string, to: string, tokenId: string) => {
+  await prisma.nftTransaction.create({
+    data: {
+      from,
+      to,
+      tokenId,
+    },
+  });
+};
+
+const seedMetaData = async (
+  tokenId: string,
+  farmPercentage: number,
+  tokenType: string,
+  mintingPrice: number,
+  mintedAt: Date
+) => {
+  const isAvailable = await prisma.nftMetadata.findUnique({
+    where: {
+      tokenId,
+    },
+  });
+  if (isAvailable) return;
+  await prisma.nftMetadata.create({
+    data: {
+      tokenId,
+      farmPercentage,
+      tokenType,
+      mintingPrice,
+      mintedAt,
+    },
+  });
+};
 
 const getStartingBlock = async () => {
   try {
@@ -26,27 +62,6 @@ const getStartingBlock = async () => {
   }
 };
 
-// const storeRootAddressList = async () => {
-//   try {
-//     let upline = "0x0";
-//     for (const address of rootAdressList) {
-//       const existingUser = await prisma.user.findUnique({
-//         where: { address: lowerCase(address) },
-//       });
-//       if (!existingUser) {
-//         await prisma.user.create({
-//           data: {
-//             address: lowerCase(address),
-//             upline: lowerCase(upline),
-//             blockNumber: 0,
-//           },
-//         });
-//       }
-//       upline = lowerCase(address);
-//     }
-//   } catch (error) {}
-// };
-
 let isCrawlerInitialized = false;
 const initCrawler = async () => {
   try {
@@ -56,7 +71,6 @@ const initCrawler = async () => {
     if (isCrawlerInitialized) return;
     isCrawlerInitialized = true;
 
-    // await storeRootAddressList();
     const crawl = async () => {
       const startingBlock = await getStartingBlock();
       const latestBlock = await provider.getBlockNumber();
@@ -66,7 +80,7 @@ const initCrawler = async () => {
       }
       console.log(`crawling from block ${startingBlock} to ${nextBlock}`);
 
-      const registrationEventList = await nft.queryFilter(
+      const transferEventList = await nft.queryFilter(
         {
           address: nft.address,
           topics: [TRANSFER_TOPIC],
@@ -74,52 +88,37 @@ const initCrawler = async () => {
         startingBlock,
         nextBlock
       );
-      if (registrationEventList.length > 0) {
-        console.log(`found ${registrationEventList.length} events`);
+      if (transferEventList.length > 0) {
+        console.log(`found ${transferEventList.length} events`);
       }
 
-      for (const registrationEvent of registrationEventList) {
-        const [from, to, tokenId] = registrationEvent.args;
-        const transactionPath = 'C:\\Users\\manan\\project\\valhalla-web\\transaction.json'
-        const currentTransaction = await fsp.readFile(transactionPath, "utf-8");
-        const currentTransactionJson = JSON.parse(currentTransaction);
-        currentTransactionJson.push({
-          from,
-          to,
-          tokenId: Number(tokenId),
-        })
-        await fsp.writeFile(transactionPath, JSON.stringify(currentTransactionJson));
+      for (const transferEvent of transferEventList) {
+        const [from, to, tokenId] = transferEvent.args;
+        await seedTransaction(
+          lowerCase(from),
+          lowerCase(to),
+          tokenId.toString()
+        );
+
         const chainMetadata = await nft.ownedTokenMap(tokenId);
-        const metadataPath = 'C:\\Users\\manan\\project\\valhalla-web\\metadata.json'
-        const currentMetadata = await fsp.readFile(metadataPath, "utf-8");
-        const currentMetadataJson = JSON.parse(currentMetadata);
-        // @ts-ignore
-        if (!currentMetadataJson.find(item => item.tokenId !== Number(tokenId))) {
-          currentMetadataJson.push({
-            tokenId: Number(tokenId),
-            cardId: Number(chainMetadata.cardId),
-            farmPercentage: Number(chainMetadata.percentage),
-            mintingPrice: Number(chainMetadata.mintingPrice),
-            mintedAt: Number(chainMetadata.mintedAt)
-          })
-          await fsp.writeFile(metadataPath, JSON.stringify(currentMetadataJson));
-        }
-        // get metadata
+        await seedMetaData(
+          tokenId.toString(),
+          Number(chainMetadata.percentage),
+          chainMetadata.cardId.toString(),
+          Number(fromBn(chainMetadata.mintingPrice, 9)),
+          new Date(Number(chainMetadata.mintedAt.mul(1000)))
+        );
 
-        // const existingUser = await prisma.user.findFirst({
-        //   where: { address: lowerCase(user) },
-        // });
-        // if (!existingUser) {
-        //   await prisma.user.create({
-        //     data: {
-        //       address: lowerCase(user),
-        //       upline: lowerCase(referrer),
-        //       blockNumber: Number(registrationEvent.blockNumber),
-        //     },
-        //   });
-        // }
-
-        console.log('from:', from, to, tokenId)
+        console.log(
+          "from:",
+          lowerCase(from),
+          "to :",
+          lowerCase(to),
+          "tokenId :",
+          tokenId.toString(),
+          "percentage",
+          Number(chainMetadata.percentage)
+        );
       }
 
       await prisma.config.upsert({

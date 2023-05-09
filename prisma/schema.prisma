@@ -28,10 +28,11 @@ model Config {
 }
 
 model NftTransaction {
-  id      String @id @default(uuid())
-  tokenId String
-  from    String
-  to      String
+  id        String   @id @default(uuid())
+  tokenId   String
+  from      String
+  to        String
+  createdAt DateTime @default(now())
 
   @@index([to])
 }

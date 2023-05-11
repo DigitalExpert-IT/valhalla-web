@@ -46,4 +46,5 @@ model NftMetadata {
   mintedAt       DateTime
 
   @@index([tokenId])
+  @@index([tokenType])
 }

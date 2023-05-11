@@ -106,7 +106,7 @@ const initCrawler = async () => {
           Number(chainMetadata.percentage),
           chainMetadata.cardId.toString(),
           Number(fromBn(chainMetadata.mintingPrice, 9)),
-          new Date(Number(chainMetadata.mintedAt.mul(1000)))
+          new Date(Number(chainMetadata.mintedAt) * 1000)
         );
 
         console.log(

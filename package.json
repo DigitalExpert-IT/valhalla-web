@@ -29,6 +29,7 @@
     "@warmbyte/valhalla": "1.13.5",
     "axios": "^1.2.1",
     "d3-org-chart": "^2.6.0",
+    "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.6",
     "ethers": "^5.7.2",

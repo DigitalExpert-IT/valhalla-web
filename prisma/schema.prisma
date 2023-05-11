@@ -26,3 +26,24 @@ model Config {
 
   @@index([key])
 }
+
+model NftTransaction {
+  id        String   @id @default(uuid())
+  tokenId   String
+  from      String
+  to        String
+  createdAt DateTime @default(now())
+
+  @@index([to])
+}
+
+model NftMetadata {
+  id             String   @id @default(uuid())
+  tokenId        String   @unique
+  farmPercentage Decimal
+  tokenType      String
+  mintingPrice   Decimal
+  mintedAt       DateTime
+
+  @@index([tokenId])
+}

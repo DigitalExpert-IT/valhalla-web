@@ -24,7 +24,7 @@ const seedTransaction = async (from: string, to: string, tokenId: string) => {
 const seedMetaData = async (
   tokenId: string,
   farmPercentage: number,
-  tokenType: string,
+  cardId: string,
   mintingPrice: number,
   mintedAt: Date
 ) => {
@@ -38,7 +38,7 @@ const seedMetaData = async (
     data: {
       tokenId,
       farmPercentage,
-      tokenType,
+      cardId,
       mintingPrice,
       mintedAt,
     },

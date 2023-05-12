@@ -1,6 +1,7 @@
 import type { NextApiHandler } from "next";
 import { PrismaClient } from "@prisma/client";
 import { getKeccakHexHash, lowerCase } from "utils";
+import { ethers } from "ethers";
 import {
   getValhallaContract,
   getMainProvider,
@@ -11,12 +12,18 @@ import { fromBn } from "evm-bn";
 const prisma = new PrismaClient();
 const TRANSFER_TOPIC = getKeccakHexHash("Transfer(address,address,uint256)");
 
-const seedTransaction = async (from: string, to: string, tokenId: string) => {
+const seedTransaction = async (
+  from: string,
+  to: string,
+  tokenId: string,
+  createdAt: Date
+) => {
   await prisma.nftTransaction.create({
     data: {
       from,
       to,
       tokenId,
+      createdAt,
     },
   });
 };
@@ -94,10 +101,14 @@ const initCrawler = async () => {
 
       for (const transferEvent of transferEventList) {
         const [from, to, tokenId] = transferEvent.args;
+        const { blockHash } = await transferEvent.getTransaction();
+        if (!blockHash) return;
+        const { timestamp } = await provider.getBlock(blockHash);
         await seedTransaction(
           lowerCase(from),
           lowerCase(to),
-          tokenId.toString()
+          tokenId.toString(),
+          new Date(timestamp * 1000)
         );
 
         const chainMetadata = await nft.ownedTokenMap(tokenId);
@@ -117,7 +128,8 @@ const initCrawler = async () => {
           "tokenId :",
           tokenId.toString(),
           "percentage",
-          Number(chainMetadata.percentage)
+          "getTime",
+          new Date(timestamp * 1000)
         );
       }
 

@@ -20,6 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(200).json({
       status: "200",
       data: {
+        cardId,
         totalSales: getTokenList.length,
         omzet: getTokenList.reduce((pv, cv) => {
           return pv + cv.mintingPrice.toNumber();

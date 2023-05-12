@@ -2,19 +2,19 @@ import { NextApiHandler } from "next";
 import { PrismaClient } from "@prisma/client";
 const Prisma = new PrismaClient();
 const handler: NextApiHandler = async (req, res) => {
-  const tokenType = req.query.nft;
+  const cardId = req.query.nft;
 
   try {
-    if (!tokenType) return;
+    if (!cardId) return;
     const getTokenList = await Prisma.nftMetadata.findMany({
       where: {
-        tokenType: tokenType.toString(),
+        cardId: cardId.toString(),
       },
     });
     if (getTokenList.length < 1) {
       return res.status(400).json({
         status: "400",
-        message: ["bad request", "undifined", "out of bond"],
+        message: ["bad request", "undefined", "out of bond"],
       });
     }
     return res.status(200).json({

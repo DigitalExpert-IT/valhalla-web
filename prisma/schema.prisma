@@ -41,10 +41,10 @@ model NftMetadata {
   id             String   @id @default(uuid())
   tokenId        String   @unique
   farmPercentage Decimal
-  tokenType      String
+  cardId         String
   mintingPrice   Decimal
   mintedAt       DateTime
 
   @@index([tokenId])
-  @@index([tokenType])
+  @@index([cardId])
 }

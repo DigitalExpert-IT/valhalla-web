@@ -37,7 +37,7 @@ const nodesinit = [
   },
 ];
 const Hierarchy = () => {
-  const { data } = useMe();
+  const { data } = useMe('0x0');
 
   const [nodes, setNodes, onNodesChange] = useNodesState(nodesinit);
   const [edges, setEdges, onEdgesChange] = useEdgesState(edgesinit);

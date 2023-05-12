@@ -37,7 +37,9 @@ const nodesinit = [
   },
 ];
 const Hierarchy = () => {
-  const { data } = useMe('0x0');
+  // kalo datanya belum ada bisa crawling dulu, host/api/crawler
+  // kalo datanya sudah ada bisa di masukka ke usemenya di bawah ini 
+  const { data } = useMe('0x0') 
 
   const [nodes, setNodes, onNodesChange] = useNodesState(nodesinit);
   const [edges, setEdges, onEdgesChange] = useEdgesState(edgesinit);

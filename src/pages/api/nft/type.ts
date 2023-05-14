@@ -14,7 +14,7 @@ const handler: NextApiHandler = async (req, res) => {
     if (getTokenList.length < 1) {
       return res.status(400).json({
         status: "400",
-        message: ["bad request", "undefined", "out of bond"],
+        message: ["bad request", "undefined", "out of bounds"],
       });
     }
     return res.status(200).json({

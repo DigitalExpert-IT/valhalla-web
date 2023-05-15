@@ -16,7 +16,7 @@ const seedTransaction = async (
   from: string,
   to: string,
   tokenId: string,
-  createdAt: Date
+  createdAt?: Date
 ) => {
   await prisma.nftTransaction.create({
     data: {
@@ -102,35 +102,43 @@ const initCrawler = async () => {
       for (const transferEvent of transferEventList) {
         const [from, to, tokenId] = transferEvent.args;
         const { blockHash } = await transferEvent.getTransaction();
-        if (!blockHash) return;
-        const { timestamp } = await provider.getBlock(blockHash);
-        await seedTransaction(
-          lowerCase(from),
-          lowerCase(to),
-          tokenId.toString(),
-          new Date(timestamp * 1000)
-        );
+        if (blockHash) {
+          const { timestamp } = await provider.getBlock(blockHash!);
+          if (!timestamp && !blockHash) {
+            await seedTransaction(
+              lowerCase(from),
+              lowerCase(to),
+              tokenId.toString()
+            );
+            return;
+          }
+          await seedTransaction(
+            lowerCase(from),
+            lowerCase(to),
+            tokenId.toString(),
+            new Date(timestamp * 1000)
+          );
+          const chainMetadata = await nft.ownedTokenMap(tokenId);
+          await seedMetaData(
+            tokenId.toString(),
+            Number(chainMetadata.percentage),
+            chainMetadata.cardId.toString(),
+            Number(fromBn(chainMetadata.mintingPrice, 9)),
+            new Date(Number(chainMetadata.mintedAt) * 1000)
+          );
 
-        const chainMetadata = await nft.ownedTokenMap(tokenId);
-        await seedMetaData(
-          tokenId.toString(),
-          Number(chainMetadata.percentage),
-          chainMetadata.cardId.toString(),
-          Number(fromBn(chainMetadata.mintingPrice, 9)),
-          new Date(Number(chainMetadata.mintedAt) * 1000)
-        );
-
-        console.log(
-          "from:",
-          lowerCase(from),
-          "to :",
-          lowerCase(to),
-          "tokenId :",
-          tokenId.toString(),
-          "percentage",
-          "getTime",
-          new Date(timestamp * 1000)
-        );
+          console.log(
+            "from:",
+            lowerCase(from),
+            "to :",
+            lowerCase(to),
+            "tokenId :",
+            tokenId.toString(),
+            "percentage",
+            "getTime",
+            new Date(timestamp * 1000)
+          );
+        }
       }
 
       await prisma.config.upsert({

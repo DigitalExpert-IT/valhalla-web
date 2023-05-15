@@ -28,6 +28,7 @@ specifiers:
   '@warmbyte/valhalla': 1.13.5
   axios: ^1.2.1
   d3-org-chart: ^2.6.0
+  dotenv: ^16.0.3
   eslint: 8.28.0
   eslint-config-next: 13.0.6
   eslint-config-prettier: ^8.5.0
@@ -60,138 +61,50 @@ specifiers:
   zustand: ^4.1.4
 
 dependencies:
-  '@chakra-ui/anatomy':
-    specifier: ^2.1.0
-    version: 2.1.0
-  '@chakra-ui/react':
-    specifier: ^2.4.2
-    version: 2.4.2(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@types/react@18.0.25)(framer-motion@7.6.18)(react-dom@18.2.0)(react@18.2.0)
-  '@chakra-ui/system':
-    specifier: ^2.3.5
-    version: 2.3.5(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(react@18.2.0)
-  '@ebay/nice-modal-react':
-    specifier: ^1.2.8
-    version: 1.2.8(react-dom@18.2.0)(react@18.2.0)
-  '@emotion/react':
-    specifier: ^11.10.5
-    version: 11.10.5(@babel/core@7.20.5)(@types/react@18.0.25)(react@18.2.0)
-  '@emotion/styled':
-    specifier: ^11.10.5
-    version: 11.10.5(@babel/core@7.20.5)(@emotion/react@11.10.5)(@types/react@18.0.25)(react@18.2.0)
-  '@fontsource/poppins':
-    specifier: ^4.5.10
-    version: 4.5.10
-  '@fontsource/raleway':
-    specifier: ^4.5.11
-    version: 4.5.11
-  '@fontsource/roboto':
-    specifier: ^4.5.8
-    version: 4.5.8
-  '@metamask/detect-provider':
-    specifier: ^2.0.0
-    version: 2.0.0
-  '@prisma/client':
-    specifier: ^4.10.1
-    version: 4.10.1(prisma@4.8.0)
-  '@tanstack/react-query':
-    specifier: ^4.20.4
-    version: 4.20.4(react-dom@18.2.0)(react@18.2.0)
-  '@tanstack/react-table':
-    specifier: ^8.7.4
-    version: 8.7.4(react-dom@18.2.0)(react@18.2.0)
-  '@types/node':
-    specifier: 18.11.10
-    version: 18.11.10
-  '@types/react':
-    specifier: 18.0.25
-    version: 18.0.25
-  '@types/react-dom':
-    specifier: 18.0.9
-    version: 18.0.9
-  '@warmbyte/valhalla':
-    specifier: 1.13.5
-    version: 1.13.5(@ethersproject/bignumber@5.7.0)
-  axios:
-    specifier: ^1.2.1
-    version: 1.2.1
-  d3-org-chart:
-    specifier: ^2.6.0
-    version: 2.6.0
-  dotenv:
-    specifier: ^16.0.3
-    version: 16.0.3
-  eslint:
-    specifier: 8.28.0
-    version: 8.28.0
-  eslint-config-next:
-    specifier: 13.0.6
-    version: 13.0.6(eslint@8.28.0)(typescript@4.9.3)
-  ethers:
-    specifier: ^5.7.2
-    version: 5.7.2
-  evm-bn:
-    specifier: ^1.1.2
-    version: 1.1.2(@ethersproject/bignumber@5.7.0)
-  framer-motion:
-    specifier: ^7.6.18
-    version: 7.6.18(react-dom@18.2.0)(react@18.2.0)
-  global-swap:
-    specifier: ^1.12.0
-    version: 1.12.0
-  globe.gl:
-    specifier: ^2.26.11
-    version: 2.26.11
-  i18next:
-    specifier: ^22.0.6
-    version: 22.0.6
-  immer:
-    specifier: ^9.0.16
-    version: 9.0.16
-  keccak:
-    specifier: ^3.0.2
-    version: 3.0.2
-  lodash:
-    specifier: ^4.17.21
-    version: 4.17.21
-  next:
-    specifier: 13.1.2
-    version: 13.1.2(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
-  prisma:
-    specifier: ^4.8.0
-    version: 4.8.0
-  react:
-    specifier: 18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: 18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-hook-form:
-    specifier: ^7.41.0
-    version: 7.41.0(react@18.2.0)
-  react-i18next:
-    specifier: ^12.0.0
-    version: 12.0.0(i18next@22.0.6)(react-dom@18.2.0)(react@18.2.0)
-  react-icons:
-    specifier: ^4.7.1
-    version: 4.7.1(react@18.2.0)
-  react-intersection-observer:
-    specifier: ^9.4.1
-    version: 9.4.1(react@18.2.0)
-  react-jazzicon:
-    specifier: ^1.0.4
-    version: 1.0.4(react-dom@18.2.0)(react@18.2.0)
-  react-use:
-    specifier: ^17.4.0
-    version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
-  telegraf:
-    specifier: ^4.11.2
-    version: 4.11.2
-  three:
-    specifier: ^0.148.0
-    version: 0.148.0
-  zustand:
-    specifier: ^4.1.4
-    version: 4.1.4(immer@9.0.16)(react@18.2.0)
+  '@chakra-ui/anatomy': 2.1.0
+  '@chakra-ui/react': 2.4.2_m2vubyyo5syhczxlb6p57urkvm
+  '@chakra-ui/system': 2.3.5_dovxhg2tvkkxkdnqyoum6wzcxm
+  '@ebay/nice-modal-react': 1.2.8_biqbaboplfbrettd7655fr4n2y
+  '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
+  '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
+  '@fontsource/poppins': 4.5.10
+  '@fontsource/raleway': 4.5.11
+  '@fontsource/roboto': 4.5.8
+  '@metamask/detect-provider': 2.0.0
+  '@prisma/client': 4.10.1_prisma@4.8.0
+  '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-table': 8.7.4_biqbaboplfbrettd7655fr4n2y
+  '@types/node': 18.11.10
+  '@types/react': 18.0.25
+  '@types/react-dom': 18.0.9
+  '@warmbyte/valhalla': 1.13.5_wm2mn6iiawtaxylcfp2vnso5me
+  axios: 1.2.1
+  d3-org-chart: 2.6.0
+  dotenv: 16.0.3
+  eslint: 8.28.0
+  eslint-config-next: 13.0.6_hsf322ms6xhhd4b5ne6lb74y4a
+  ethers: 5.7.2
+  evm-bn: 1.1.2_wm2mn6iiawtaxylcfp2vnso5me
+  framer-motion: 7.6.18_biqbaboplfbrettd7655fr4n2y
+  global-swap: 1.12.0
+  globe.gl: 2.26.11
+  i18next: 22.0.6
+  immer: 9.0.16
+  keccak: 3.0.2
+  lodash: 4.17.21
+  next: 13.1.2_672uxklweod7ene3nqtsh262ca
+  prisma: 4.8.0
+  react: 18.2.0
+  react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.41.0_react@18.2.0
+  react-i18next: 12.0.0_nger6pvrp5hnzeykouhwqmsdti
+  react-icons: 4.7.1_react@18.2.0
+  react-intersection-observer: 9.4.1_react@18.2.0
+  react-jazzicon: 1.0.4_biqbaboplfbrettd7655fr4n2y
+  react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
+  telegraf: 4.11.2
+  three: 0.148.0
+  zustand: 4.1.4_immer@9.0.16+react@18.2.0
 
 devDependencies:
   '@babel/core': 7.20.5

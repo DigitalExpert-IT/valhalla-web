@@ -101,17 +101,9 @@ const initCrawler = async () => {
 
       for (const transferEvent of transferEventList) {
         const [from, to, tokenId] = transferEvent.args;
-        const { blockHash } = await transferEvent.getTransaction();
-        if (blockHash) {
+        try {
+          const { blockHash } = await transferEvent.getTransaction();
           const { timestamp } = await provider.getBlock(blockHash!);
-          if (!timestamp && !blockHash) {
-            await seedTransaction(
-              lowerCase(from),
-              lowerCase(to),
-              tokenId.toString()
-            );
-            return;
-          }
           await seedTransaction(
             lowerCase(from),
             lowerCase(to),
@@ -134,9 +126,32 @@ const initCrawler = async () => {
             lowerCase(to),
             "tokenId :",
             tokenId.toString(),
-            "percentage",
-            "getTime",
+            "getTime :",
             new Date(timestamp * 1000)
+          );
+        } catch (e) {
+          console.log("didn't get timestamp");
+          await seedTransaction(
+            lowerCase(from),
+            lowerCase(to),
+            tokenId.toString()
+          );
+          const chainMetadata = await nft.ownedTokenMap(tokenId);
+          await seedMetaData(
+            tokenId.toString(),
+            Number(chainMetadata.percentage),
+            chainMetadata.cardId.toString(),
+            Number(fromBn(chainMetadata.mintingPrice, 9)),
+            new Date(Number(chainMetadata.mintedAt) * 1000)
+          );
+
+          console.log(
+            "from:",
+            lowerCase(from),
+            "to :",
+            lowerCase(to),
+            "tokenId :",
+            tokenId.toString()
           );
         }
       }

@@ -12,6 +12,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
+import { fromBn } from "evm-bn";
 import { useAsyncCall, useNFT, useValhalla } from "hooks";
 import { useTranslation } from "react-i18next";
 import { prettyBn } from "utils";
@@ -115,8 +116,8 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {isRankRewardClaimable
-                  ? prettyBn(globalPool.valueLeft, 9)
-                  : prettyBn(globalPool.claimable, 9)}{" "}
+                  ? fromBn(globalPool.valueLeft, 9)
+                  : fromBn(globalPool.claimable, 9)}{" "}
                 GNET
               </Badge>
             </Stack>
@@ -140,7 +141,7 @@ export const SectionGnetProject = () => {
                 isLoading={claimNftRankRewardAsync.isLoading}
                 disabled={rankReward.isZero()}
               >
-                {prettyBn(rankReward, 9) + " " + t("common.claim")}
+                {fromBn(rankReward, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>
@@ -159,7 +160,7 @@ export const SectionGnetProject = () => {
                 isLoading={claimRewardGnetAsync.isLoading}
                 disabled={personalReward.isZero()}
               >
-                {prettyBn(personalReward, 9) + " " + t("common.claim")}
+                {fromBn(personalReward, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>

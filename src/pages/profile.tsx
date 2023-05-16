@@ -1,7 +1,6 @@
 import { LayoutMain } from "components";
 import { SectionProfile } from "components/pages/Profile";
-import { withConnection, withRegistration } from "hoc";
-import { composeHoc } from "utils";
+import { withConnection } from "hoc";
 
 const Profile = () => {
   return (
@@ -11,4 +10,4 @@ const Profile = () => {
   );
 };
 
-export default withConnection(composeHoc(withRegistration)(Profile));
+export default withConnection(Profile);

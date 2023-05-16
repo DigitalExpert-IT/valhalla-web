@@ -1,7 +1,6 @@
 import React from "react";
 import { LayoutMainV2, TableRankNFTBonusV2 } from "components";
-import { withConnection, withRegistration } from "hoc";
-import { composeHoc } from "utils";
+import { withConnection } from "hoc";
 import {
   SectionGnetProject,
   SectionNFTList,

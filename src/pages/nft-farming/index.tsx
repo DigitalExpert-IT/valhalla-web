@@ -1,12 +1,11 @@
 import React from "react";
-import { withConnection, withRegistration } from "hoc";
+import { withConnection } from "hoc";
 import {
   SectionFarmNFT,
   SectionMyNFT,
   SectionNFTFarmMatching,
 } from "components/pages/NFTFarm";
 import { LayoutMain, TableRankNFTBonus } from "components";
-import { composeHoc } from "utils";
 
 const NftFarmingPage = () => {
   return (
@@ -19,4 +18,4 @@ const NftFarmingPage = () => {
   );
 };
 
-export default withConnection(composeHoc(withRegistration)(NftFarmingPage));
+export default withConnection(NftFarmingPage);

@@ -1,12 +1,8 @@
 import { Box, Image } from "@chakra-ui/react";
 import { LayoutMainV2 } from "components";
 import { SectionMyNFTV2 } from "components/pages/NFTFarm";
-import { withConnection, withRegistration } from "hoc";
-import { composeHoc } from "utils";
-import {
-  SectionNetworkStatusV2,
-  SectionProfileV2,
-} from "components/pages/Profile";
+import { withConnection } from "hoc";
+import { SectionProfileV2 } from "components/pages/Profile";
 
 const ProfileV2 = () => {
   return (
@@ -37,4 +33,4 @@ const ProfileV2 = () => {
   );
 };
 
-export default withConnection(composeHoc(withRegistration)(ProfileV2));
+export default withConnection(ProfileV2);

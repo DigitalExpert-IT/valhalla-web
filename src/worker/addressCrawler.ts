@@ -5,6 +5,7 @@ import { rootAdressList } from "@warmbyte/valhalla/constant/rootAddress";
 
 const prisma = new PrismaClient();
 const REGISTRATION_TOPIC = getKeccakHexHash("Registration(address,address)");
+let CRAWLER_BLOCK_SIZE = 1000;
 
 const getStartingBlock = async () => {
   try {
@@ -54,14 +55,21 @@ const initCrawler = async () => {
     isCrawlerInitialized = true;
 
     await storeRootAddressList();
-    const crawl = async () => {
+    const crawl = async (): Promise<any> => {
       const startingBlock = await getStartingBlock();
       const latestBlock = await provider.getBlockNumber();
-      let nextBlock = startingBlock + 1000;
+      let nextBlock = startingBlock + CRAWLER_BLOCK_SIZE;
       if (nextBlock > latestBlock) {
         nextBlock = latestBlock;
       }
-      console.log(`crawling from block ${startingBlock} to ${nextBlock}`);
+      if (startingBlock === nextBlock) {
+        setTimeout(crawl, 1000 * 60);
+        return;
+      }
+      console.log(
+        "address crawler",
+        `crawling from block ${startingBlock} to ${nextBlock}`
+      );
 
       const registrationEventList = await valhalla.queryFilter(
         {
@@ -104,14 +112,17 @@ const initCrawler = async () => {
           value: "" + nextBlock,
         },
       });
-
-      setTimeout(crawl, 1000 * 2);
+      CRAWLER_BLOCK_SIZE = 1000;
+      crawl();
     };
 
     crawl();
   } catch (error) {
     isCrawlerInitialized = false;
-    initCrawler();
+    if (CRAWLER_BLOCK_SIZE > 2) {
+      CRAWLER_BLOCK_SIZE = CRAWLER_BLOCK_SIZE / 2;
+    }
+    setTimeout(initCrawler, 1000 * 60);
   }
 };
 

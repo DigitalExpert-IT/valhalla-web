@@ -50,14 +50,21 @@ const initCrawler = async () => {
     if (isCrawlerInitialized) return;
     isCrawlerInitialized = true;
 
-    const crawl = async () => {
+    const crawl = async (): Promise<any> => {
       const startingBlock = await getStartingBlock();
       const latestBlock = await provider.getBlockNumber();
       let nextBlock = startingBlock + CRAWLER_BLOCK_SIZE;
       if (nextBlock > latestBlock) {
         nextBlock = latestBlock;
       }
-      console.log(`crawling from block ${startingBlock} to ${nextBlock}`);
+      if (startingBlock === nextBlock) {
+        setTimeout(crawl, 1000 * 60);
+        return;
+      }
+      console.log(
+        "event crawler",
+        `crawling from block ${startingBlock} to ${nextBlock}`
+      );
       const eventList = await nft.queryFilter(
         "*" as any,
         startingBlock,

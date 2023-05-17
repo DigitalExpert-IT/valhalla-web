@@ -1,4 +1,5 @@
-import { BigNumberish, utils } from "ethers/lib/ethers";
+import { BigNumber, BigNumberish, utils } from "ethers/lib/ethers";
+import { fromBn } from "evm-bn";
 
 const toFixed = (num: number, symbol = "") => {
   const formatted = num
@@ -8,8 +9,8 @@ const toFixed = (num: number, symbol = "") => {
   return `${formatted}${symbol}`;
 };
 
-export const prettyBn = (bn: BigNumberish, baseNumber = 18): string => {
-  const value = +utils.formatUnits(bn, baseNumber);
+export const prettyBn = (bn: BigNumber, baseNumber = 18): string => {
+  const value = +fromBn(bn, baseNumber);
   if (value === 0) return "0";
 
   if (value > 1_000_000_000) {

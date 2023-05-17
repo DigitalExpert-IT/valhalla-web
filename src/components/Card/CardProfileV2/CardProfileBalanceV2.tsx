@@ -24,7 +24,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>{fromBn(currency.gnet.balance, 9)} GNET</Text>
+            <Text>{prettyBn(currency.gnet.balance, 9)} GNET</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace pos={"relative"}>

@@ -4,6 +4,12 @@ import { lowerCase } from "utils";
 
 const prisma = new PrismaClient();
 
+type GroupDownline = {
+  level: number;
+  userList: User[];
+  total: number;
+};
+
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
   const rank = req.query.rank as string;
@@ -12,7 +18,7 @@ const handler: NextApiHandler = async (req, res) => {
       address,
     },
   });
-  let result: User[] = [
+  let result: (User | GroupDownline)[] = [
     {
       id: "root" as any,
       address,
@@ -31,12 +37,15 @@ const handler: NextApiHandler = async (req, res) => {
         upline: { in: upperList },
       },
     });
+
+    const group = {
+      level: i + 1,
+      userList: userList,
+      total: userList.length,
+    };
+
     upperList = userList.map(user => user.address);
-    result = [...result, ...userList.map(user => ({
-      ...user,
-      level: i+1,
-      total: userList.length
-    }))];
+    result.push(group);
   }
 
   return res.json(result);

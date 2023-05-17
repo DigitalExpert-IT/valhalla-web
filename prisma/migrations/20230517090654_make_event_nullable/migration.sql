@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Event" ALTER COLUMN "event" DROP NOT NULL,
-ALTER COLUMN "eventSignature" DROP NOT NULL;

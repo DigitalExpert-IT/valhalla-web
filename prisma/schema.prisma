@@ -27,16 +27,6 @@ model Config {
   @@index([key])
 }
 
-model NftTransaction {
-  id        String   @id @default(uuid())
-  tokenId   String
-  from      String
-  to        String
-  createdAt DateTime @default(now())
-
-  @@index([to])
-}
-
 model NftMetadata {
   id             String   @id @default(uuid())
   tokenId        String   @unique
@@ -47,4 +37,14 @@ model NftMetadata {
 
   @@index([tokenId])
   @@index([cardId])
+}
+
+model Event {
+  id              String  @id @default(uuid())
+  transactionHash String
+  address         String
+  event           String?
+  eventSignature  String?
+  args            Json
+  blockNumber     Decimal
 }

@@ -1,8 +1,9 @@
 import type { NextApiHandler } from "next";
 import addressCrawler from "worker/addressCrawler";
+import eventCrawler from "worker/eventCrawler";
 
 const handler: NextApiHandler = async (_, res) => {
-  addressCrawler();
+  eventCrawler();
   return res.send("OK");
 };
 

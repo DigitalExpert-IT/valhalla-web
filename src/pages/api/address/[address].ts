@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
+  const rank = req.query.rank as string;
   const firstUser = await prisma.user.findUnique({
     where: {
       address,
@@ -20,15 +21,22 @@ const handler: NextApiHandler = async (req, res) => {
       telegramUsername: firstUser?.telegramUsername ?? "",
     },
   ];
+
+  const maxDownline = [0, 10, 20, 40, 60, 80, 100];
   let upperList = [address];
-  for (let i = 0; i < 100; i++) {
+
+  for (let i = 0; i < maxDownline[+rank]; i++) {
     const userList = await prisma.user.findMany({
       where: {
         upline: { in: upperList },
       },
     });
     upperList = userList.map(user => user.address);
-    result = [...result, ...userList];
+    result = [...result, ...userList.map(user => ({
+      ...user,
+      level: i+1,
+      total: userList.length
+    }))];
   }
 
   return res.json(result);

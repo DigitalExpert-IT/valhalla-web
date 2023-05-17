@@ -17,7 +17,7 @@ const handler: NextApiHandler = async (req, res) => {
           "Event"."args"->>'from' as "from",
           "Event"."args"->>'to' as "to",
           "Event"."blockNumber",
-          cast("NftMetadata"."mintingPrice"/10e9 as int) as "price",
+          cast("NftMetadata"."mintingPrice"/1e9 as int) as "price",
           cast(cast("NftMetadata"."farmPercentage" as DECIMAL)/10 as float) as "farmPercentage",
           "NftMetadata"."mintedAt" as "mintedAt"
         from "Event" INNER JOIN "NftMetadata" ON "Event"."args"->>'tokenId'="NftMetadata"."tokenId" 

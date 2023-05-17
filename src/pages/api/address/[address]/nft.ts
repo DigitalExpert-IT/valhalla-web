@@ -8,7 +8,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const result = await prisma.$queryRaw`
     SELECT * from (
-      SELECT distinct on ("tokenId") * from (
+      SELECT distinct on ("tokenId") "tokenId", * from (
         SELECT 
           "Event"."id",
           "Event"."address",
@@ -22,9 +22,8 @@ const handler: NextApiHandler = async (req, res) => {
           "NftMetadata"."mintedAt" as "mintedAt"
         from "Event" INNER JOIN "NftMetadata" ON "Event"."args"->>'tokenId'="NftMetadata"."tokenId" 
         where "args"->>'from'=${address} 
-          OR "args"->>'to'=${address} 
-          order by "blockNumber" desc
-      ) "transList"
+          OR "args"->>'to'=${address}
+      ) "transList" order by "transList"."tokenId", "transList"."blockNumber" desc
     ) "filteredTransList" where "filteredTransList"."from" <> ${address}`;
 
   res.json(result);

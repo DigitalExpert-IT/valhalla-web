@@ -9,8 +9,8 @@ const toFixed = (num: number, symbol = "") => {
   return `${formatted}${symbol}`;
 };
 
-export const prettyBn = (bn: BigNumberish, baseNumber = 18): string => {
-  const value = +utils.formatUnits(bn, baseNumber);
+export const prettyBn = (bn: BigNumber, baseNumber = 18): string => {
+  const value = +fromBn(bn, baseNumber);
   if (value === 0) return "0";
 
   if (value > 1_000_000_000) {
@@ -26,13 +26,4 @@ export const prettyBn = (bn: BigNumberish, baseNumber = 18): string => {
   }
 
   return toFixed(value);
-};
-
-// 2960 348 045 694 butuh di convert ke string
-// 0x14Fdf080b86dcA51233B005921572EE04C149782
-
-export const prettyBnV2 = (bn: BigNumber, baseNumber = 18): String => {
-  const value = fromBn(bn, baseNumber);
-  // if()
-  return value;
 };

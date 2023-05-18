@@ -40,11 +40,12 @@ model NftMetadata {
 }
 
 model Event {
-  id              String  @id @default(uuid())
+  id              String    @id @default(uuid())
   transactionHash String
   address         String
   event           String?
   eventSignature  String?
   args            Json
   blockNumber     Decimal
+  createdAt       DateTime?
 }

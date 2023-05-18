@@ -90,6 +90,9 @@ const initCrawler = async () => {
           });
         }
 
+        const timestamp = (await provider.getBlock(event.blockNumber))
+          .timestamp;
+
         await prisma.event.create({
           data: {
             args,
@@ -98,6 +101,7 @@ const initCrawler = async () => {
             transactionHash: event.transactionHash,
             event: event.event,
             eventSignature: event.eventSignature,
+            createdAt: new Date(timestamp * 1000),
           },
         });
       }

@@ -44,9 +44,7 @@ const handler: NextApiHandler = async (req, res) => {
     result = [...result, ...userLevelList];
   }
 
-  _.groupBy(result, "level");
-
-  return res.json(result);
+  return res.json(_.groupBy(result, "level"));
 };
 
 export default handler;

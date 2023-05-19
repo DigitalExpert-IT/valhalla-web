@@ -24,11 +24,10 @@ import { jsNumberForAddress } from "react-jazzicon";
 import Jazzicon from "react-jazzicon/dist/Jazzicon";
 import { shortenAddress } from "utils";
 
-const TableDasboard = () => {
+const TableUser = () => {
   return (
     <TableContainer>
       <Table variant="simple" color="gray.800">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
             <Th>To convert</Th>
@@ -53,13 +52,6 @@ const TableDasboard = () => {
             <Td isNumeric>0.91444</Td>
           </Tr>
         </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
       </Table>
     </TableContainer>
   );
@@ -120,9 +112,9 @@ const Dashboard = () => {
             </Text>
           </Box>
 
-          <Box>
-            <TableDasboard></TableDasboard>
-          </Box>
+          <Stack direction="row">
+            <TableUser></TableUser>
+          </Stack>
         </Box>
         <Stack flex={1} alignItems="center" color="gray.800">
           <UserAddress />

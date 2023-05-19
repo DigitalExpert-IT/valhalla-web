@@ -17,8 +17,7 @@ import {
   UnorderedList,
   TableContainer,
 } from "@chakra-ui/react";
-import { CopiableText } from "components";
-import { DASHBOARD_CATEGORY } from "constant/pages/dashboard";
+import { CopiableText, Sidebar } from "components";
 import { useWallet } from "hooks";
 import { jsNumberForAddress } from "react-jazzicon";
 import Jazzicon from "react-jazzicon/dist/Jazzicon";
@@ -84,21 +83,8 @@ const UserAddress = () => {
 const Dashboard = () => {
   return (
     <Stack direction={"row"} spacing={0} w="full" h="100vh">
-      <Stack flex={1}>
-        <UnorderedList>
-          {DASHBOARD_CATEGORY.map((kategoryItem, ctgrIdx) => (
-            <ListItem key={ctgrIdx}>
-              <Text>{kategoryItem.name}</Text>
-              <UnorderedList>
-                {kategoryItem.menus.map((menu, mIdx) => (
-                  <ListItem key={mIdx}>{menu.name}</ListItem>
-                ))}
-              </UnorderedList>
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </Stack>
-      <Stack direction={"row"} flex={4} bg="gray.100" p="1rem">
+      <Sidebar />
+      <Stack direction={"row"} flex={4} bg="gray.100" p="8">
         <Box flex={2}>
           <FormControl>
             <Input type="search" bg="white" boxShadow={"md"} />

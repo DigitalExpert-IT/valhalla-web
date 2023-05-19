@@ -15,10 +15,12 @@ import {
   TableRankNetworkV2,
   SectionFeaturesV2,
 } from "components";
+import { useDashboard } from "hooks/useDashboard";
 
 export default function Home() {
   const { t } = useTranslation();
-
+  const data = useDashboard();
+  console.log(data);
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />

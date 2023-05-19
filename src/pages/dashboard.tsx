@@ -1,11 +1,21 @@
 import {
   Box,
   FormControl,
+  Heading,
   Input,
   ListItem,
   Stack,
   Text,
   UnorderedList,
+  Table,
+  TableCaption,
+  TableContainer,
+  Thead,
+  Tr,
+  Th,
+  Td,
+  Tbody,
+  Tfoot,
 } from "@chakra-ui/react";
 import { CopiableText } from "components";
 import { DASHBOARD_CATEGORY } from "constant/pages/dashboard";
@@ -13,6 +23,47 @@ import { useWallet } from "hooks";
 import { jsNumberForAddress } from "react-jazzicon";
 import Jazzicon from "react-jazzicon/dist/Jazzicon";
 import { shortenAddress } from "utils";
+
+const TableDasboard = () => {
+  return (
+    <TableContainer>
+      <Table variant="simple" color="gray.800">
+        <TableCaption>Imperial to metric conversion factors</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>To convert</Th>
+            <Th>into</Th>
+            <Th isNumeric>multiply by</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>inches</Td>
+            <Td>millimetres (mm)</Td>
+            <Td isNumeric>25.4</Td>
+          </Tr>
+          <Tr>
+            <Td>feet</Td>
+            <Td>centimetres (cm)</Td>
+            <Td isNumeric>30.48</Td>
+          </Tr>
+          <Tr>
+            <Td>yards</Td>
+            <Td>metres (m)</Td>
+            <Td isNumeric>0.91444</Td>
+          </Tr>
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Th>To convert</Th>
+            <Th>into</Th>
+            <Th isNumeric>multiply by</Th>
+          </Tr>
+        </Tfoot>
+      </Table>
+    </TableContainer>
+  );
+};
 
 const UserAddress = () => {
   const { address } = useWallet();
@@ -68,9 +119,27 @@ const Dashboard = () => {
               earum doloribus est.
             </Text>
           </Box>
+
+          <Box>
+            <TableDasboard></TableDasboard>
+          </Box>
         </Box>
         <Stack flex={1} alignItems="center" color="gray.800">
           <UserAddress />
+          <Stack bg="white" w="full" p="10" h="100vh">
+            <Stack bg="gray.100" w="full" p="5" rounded="lg">
+              <Heading>Market Progress</Heading>
+              <Box bg="gray.400" p="1" rounded="md">
+                <Text>Market Progress</Text>
+              </Box>
+            </Stack>
+            <Stack bg="gray.100" w="full" p="5" rounded="lg">
+              <Heading>Best Network</Heading>
+              <Box bg="gray.400" p="1" rounded="md">
+                <Text>Market Progress</Text>
+              </Box>
+            </Stack>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

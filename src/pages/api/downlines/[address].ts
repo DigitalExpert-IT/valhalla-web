@@ -1,14 +1,13 @@
 import { NextApiHandler } from "next";
 import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
+import _ from "lodash";
 
 const prisma = new PrismaClient();
 
-type GroupDownline = {
+interface Downlines extends User {
   level: number;
-  userList: User[];
-  total: number;
-};
+}
 
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
@@ -18,13 +17,14 @@ const handler: NextApiHandler = async (req, res) => {
       address,
     },
   });
-  let result: (User | GroupDownline)[] = [
+  let result: Downlines[] = [
     {
       id: "root" as any,
       address,
       upline: "",
       blockNumber: firstUser?.blockNumber ?? 0,
       telegramUsername: firstUser?.telegramUsername ?? "",
+      level: 0,
     },
   ];
 
@@ -38,17 +38,13 @@ const handler: NextApiHandler = async (req, res) => {
       },
     });
 
-    const group = {
-      level: i + 1,
-      userList: userList,
-      total: userList.length,
-    };
+    const userLevelList = userList.map(e => ({ ...e, level: i + 1 }));
 
     upperList = userList.map(user => user.address);
-    result.push(group);
+    result = [...result, ...userLevelList];
   }
 
-  return res.json(result);
+  return res.json(_.groupBy(result, "level"));
 };
 
 export default handler;

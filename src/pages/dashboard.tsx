@@ -112,7 +112,7 @@ const Dashboard = () => {
             </Text>
           </Box>
 
-          <Stack direction="row">
+          <Stack>
             <TableUser></TableUser>
           </Stack>
         </Box>

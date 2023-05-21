@@ -2,10 +2,10 @@ import create from "zustand";
 import { useValhalla, useWallet, useWalletStore } from "hooks";
 import { useEffect } from "react";
 import Axios from "axios";
-
+import { useQuery } from "@tanstack/react-query";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
-import { BigNumber } from "ethers";
-import { fromBn, toBn } from "evm-bn";
+import { toBn } from "evm-bn";
+import { groupBy, toArray } from "lodash";
 interface IDashboard {
   totalUser: number;
   totalNFTSales: string;
@@ -27,10 +27,12 @@ const init = createInitiator(async (address: string, rank: number) => {
   let listNft = {};
   let totalNFTSales = 0;
   for (let i = 0; i < 11; i++) {
-    for (const loop of data[i]) {
-      const nftList = await Axios.get(`/api/address/${loop.address}/nft`);
+    for (const level of data[i]) {
+      const nftList = await Axios.get<any[]>(
+        `/api/address/${level.address}/nft`
+      );
       listNft = { ...listNft, [i]: nftList.data };
-      //@ts-ignore
+
       nftList.data.map(k => {
         totalNFTSales += k.price;
       });

@@ -7,6 +7,7 @@ import { useAsyncCall, useValhalla } from "hooks";
 import { t } from "i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
+import { fromBn } from "evm-bn";
 
 export const CardProfileBonus = () => {
   const {
@@ -26,16 +27,14 @@ export const CardProfileBonus = () => {
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.globalBonus")}</Text>
-            <Text textAlign={"end"}>
-              {prettyBn(globalPool.claimable)} MATIC
-            </Text>
+            <Text textAlign={"end"}>{fromBn(globalPool.claimable)} MATIC</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.referralBonus")}</Text>
-              <Text>{prettyBn(personalReward)} MATIC</Text>
+              <Text>{fromBn(personalReward)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
               onClick={claimRewardAsync.exec}
@@ -49,11 +48,12 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.rankReward")}</Text>
-              <Text>{prettyBn(rankReward)} MATIC</Text>
+              <Text>{fromBn(rankReward)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
               onClick={claimRankRewardAsync.exec}
               isLoading={claimRankRewardAsync.isLoading}
+              isDisabled={!isRankRewardClaimable}
             >
               {t("common.claim")}
             </WidgetProfileBtn>

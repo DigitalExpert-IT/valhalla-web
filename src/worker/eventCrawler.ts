@@ -82,6 +82,7 @@ const initCrawler = async () => {
               farmPercentage: String(nftMetadata.percentage),
               mintedAt: new Date(Number(nftMetadata.mintedAt) * 1000),
               mintingPrice: Number(nftMetadata.mintingPrice),
+              isBlackListed: nftMetadata.isBlackListed,
             },
             update: {},
             where: {

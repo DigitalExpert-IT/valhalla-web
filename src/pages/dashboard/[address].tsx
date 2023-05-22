@@ -18,6 +18,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { CopiableText, Sidebar } from "components";
+import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import { useWallet } from "hooks";
 import { jsNumberForAddress } from "react-jazzicon";
 import Jazzicon from "react-jazzicon/dist/Jazzicon";
@@ -82,8 +83,7 @@ const UserAddress = () => {
 
 const Dashboard = () => {
   return (
-    <Stack direction={"row"} spacing={0} w="full" h="100vh">
-      <Sidebar />
+    <LayoutDashboard>
       <Stack direction={"row"} flex={4} bg="gray.100" p="8">
         <Box flex={2}>
           <FormControl>
@@ -120,7 +120,7 @@ const Dashboard = () => {
           </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    </LayoutDashboard>
   );
 };
 

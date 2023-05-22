@@ -13,6 +13,7 @@ interface IDashboard {
   totalUser: number;
   totalNFTSales: string;
   totalNFTCirculating: number;
+  potensialProfite: number;
 }
 
 const initialState: IDashboard = {
@@ -20,6 +21,7 @@ const initialState: IDashboard = {
   listUser: {},
   totalUser: 0,
   totalNFTSales: "",
+  potensialProfite: 0,
   totalNFTCirculating: 0,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
@@ -31,6 +33,7 @@ const init = createInitiator(async (address: string, rank: number) => {
   let totalUser = 0;
   let totalNFTSales = 0;
   let totalNFTCirculating = 0;
+  let potensialProfite = 0;
   const hierarchyValue = Object.values(data);
 
   for (let i = 0; i < hierarchyValue.length; i++) {
@@ -38,14 +41,15 @@ const init = createInitiator(async (address: string, rank: number) => {
     let nftUserLevel: any[] = [];
 
     for (const level of data[i]) {
-      const getNFTList = await Axios.get<{ address: string; price: number }[]>(
-        `/api/address/${level.address}/nft`
-      );
+      const getNFTList = await Axios.get<
+        { address: string; price: number; farmRewardPerDay: number }[]
+      >(`/api/address/${level.address}/nft`);
 
       totalNFTCirculating += getNFTList.data.length;
       nftUserLevel.push(getNFTList.data);
 
       getNFTList.data.forEach((nftItem, keyNft) => {
+        potensialProfite += (nftItem.farmRewardPerDay * 5) / 100;
         totalNFTSales += nftItem.price;
       });
     }
@@ -66,6 +70,7 @@ const init = createInitiator(async (address: string, rank: number) => {
     listNFT,
     totalUser,
     listUser: data,
+    potensialProfite,
     totalNFTCirculating,
     totalNFTSales: `${convert} USDT`,
   }));

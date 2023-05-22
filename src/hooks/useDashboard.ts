@@ -1,13 +1,14 @@
 import create from "zustand";
 import { useValhalla, useWallet, useWalletStore } from "hooks";
 import { useEffect } from "react";
-import Axios from "axios";
+import Axios, { all } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
 import { fromBn, toBn } from "evm-bn";
 import { groupBy, toArray } from "lodash";
+import { current } from "immer";
 interface IDashboard {
-  listNft: {};
+  listNFT: {};
   listUser: {};
   totalUser: number;
   totalNFTSales: string;
@@ -15,7 +16,7 @@ interface IDashboard {
 }
 
 const initialState: IDashboard = {
-  listNft: {},
+  listNFT: {},
   listUser: {},
   totalUser: 0,
   totalNFTSales: "",
@@ -26,27 +27,33 @@ const useDashoardStore = create<IDashboard>(() => initialState);
 const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
   const { data } = await Axios.get(`/api/downlines/${address}?rank=${rank}`);
-  let listNft = {};
+  let listNFT: any[] = [];
   let totalUser = 0;
   let totalNFTSales = 0;
   let totalNFTCirculating = 0;
-
   const hierarchyValue = Object.values(data);
 
   for (let i = 0; i < hierarchyValue.length; i++) {
     totalUser += data[i].length;
+    let nftUserLevel: any[] = [];
+
     for (const level of data[i]) {
-      const nftList = await Axios.get<{ address: string; price: number }[]>(
+      const getNFTList = await Axios.get<{ address: string; price: number }[]>(
         `/api/address/${level.address}/nft`
       );
-      if (nftList.data.length > 1) {
-        totalNFTCirculating += nftList.data.length;
-      }
-      listNft = { ...listNft, [i]: nftList.data };
-      nftList.data.map((nftItem, keyNft) => {
+
+      totalNFTCirculating += getNFTList.data.length;
+      nftUserLevel.push(getNFTList.data);
+
+      getNFTList.data.forEach((nftItem, keyNft) => {
         totalNFTSales += nftItem.price;
       });
     }
+    const nftPerLevel = nftUserLevel.reduce(
+      (acc, curr) => acc.concat(curr),
+      []
+    );
+    listNFT.push(nftPerLevel);
   }
 
   const convert = prettyBn(
@@ -56,7 +63,7 @@ const init = createInitiator(async (address: string, rank: number) => {
 
   setState(e => ({
     ...e,
-    listNft,
+    listNFT,
     totalUser,
     listUser: data,
     totalNFTCirculating,

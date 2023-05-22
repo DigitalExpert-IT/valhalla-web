@@ -4,20 +4,22 @@ import { useEffect } from "react";
 import Axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
-import { toBn } from "evm-bn";
+import { fromBn, toBn } from "evm-bn";
 import { groupBy, toArray } from "lodash";
 interface IDashboard {
+  listNft: {};
+  listUser: {};
   totalUser: number;
   totalNFTSales: string;
-  listUser: {};
-  listNft: {};
+  totalNFTCirculating: number;
 }
 
 const initialState: IDashboard = {
-  totalNFTSales: "",
-  totalUser: 0,
-  listUser: {},
   listNft: {},
+  listUser: {},
+  totalUser: 0,
+  totalNFTSales: "",
+  totalNFTCirculating: 0,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
 
@@ -25,29 +27,39 @@ const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
   const { data } = await Axios.get(`/api/downlines/${address}?rank=${rank}`);
   let listNft = {};
+  let totalUser = 0;
   let totalNFTSales = 0;
-  for (let i = 0; i < 11; i++) {
+  let totalNFTCirculating = 0;
+
+  const hierarchyValue = Object.values(data);
+
+  for (let i = 0; i < hierarchyValue.length; i++) {
+    totalUser += data[i].length;
     for (const level of data[i]) {
-      const nftList = await Axios.get<any[]>(
+      const nftList = await Axios.get<{ address: string; price: number }[]>(
         `/api/address/${level.address}/nft`
       );
+      if (nftList.data.length > 1) {
+        totalNFTCirculating += nftList.data.length;
+      }
       listNft = { ...listNft, [i]: nftList.data };
-
-      nftList.data.map(k => {
-        totalNFTSales += k.price;
+      nftList.data.map((nftItem, keyNft) => {
+        totalNFTSales += nftItem.price;
       });
     }
   }
 
   const convert = prettyBn(
-    getGnetRate(toBn(totalNFTSales.toString(), 9).toString()),
+    getGnetRate(String(toBn(String(totalNFTSales), 9))),
     18
   );
 
   setState(e => ({
     ...e,
-    listUser: data,
     listNft,
+    totalUser,
+    listUser: data,
+    totalNFTCirculating,
     totalNFTSales: `${convert} USDT`,
   }));
 });

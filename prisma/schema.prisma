@@ -34,6 +34,7 @@ model NftMetadata {
   cardId         String
   mintingPrice   Decimal
   mintedAt       DateTime
+  isBlackListed  Boolean  @default(false)
 
   @@index([tokenId])
   @@index([cardId])

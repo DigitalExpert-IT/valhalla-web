@@ -1,27 +1,26 @@
-import create from "zustand";
-import { useValhalla, useWallet, useWalletStore } from "hooks";
-import { useEffect } from "react";
 import Axios from "axios";
-
-import { createInitiator, getGnetRate, prettyBn } from "utils";
+import create from "zustand";
 import { toBn } from "evm-bn";
+import { useEffect } from "react";
 import { User } from "@prisma/client";
+import { useValhalla, useWallet } from "hooks";
+import { createInitiator, getGnetRate, prettyBn } from "utils";
 
 interface INFTItem {
-  tokenId: string;
   id: string;
-  address: string;
-  transactionHash: string;
-  from: string;
   to: string;
-  blockNumber: number;
+  from: string;
   price: number;
-  farmPercentage: number;
+  tokenId: string;
+  address: string;
   mintedAt: string;
   lastFarm: string;
+  farmReward: number;
+  blockNumber: number;
+  farmPercentage: number;
+  transactionHash: string;
   farmRewardPerDay: number;
   farmRewardPerSecond: number;
-  farmReward: number;
 }
 interface IDashboard {
   listNFT: {};

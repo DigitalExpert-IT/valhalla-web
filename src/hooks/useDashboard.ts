@@ -33,7 +33,7 @@ interface IDashboard {
 }
 
 const initialState: IDashboard = {
-  listNFT: [],
+  listNFT: {},
   listUser: [],
   totalUser: 0,
   totalNFTSales: "",
@@ -83,8 +83,10 @@ const init = createInitiator(async (address: string, rank: number) => {
           0
         );
         totalNFTCirculatingSuply += filteredEmptyNFT.length;
-        //@ts-ignore
-        return filteredEmptyNFT.reduce((acc, item) => acc.concat(item), []);
+        return filteredEmptyNFT.reduce(
+          (acc, item: any) => acc.concat(item),
+          []
+        );
       })
     );
 

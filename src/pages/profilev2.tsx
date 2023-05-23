@@ -3,12 +3,8 @@ import { LayoutMainV2 } from "components";
 import { SectionMyNFTV2 } from "components/pages/NFTFarm";
 import { withConnection } from "hoc";
 import { SectionProfileV2 } from "components/pages/Profile";
-import { useDashboard } from "hooks/useDashboard";
 
 const ProfileV2 = () => {
-  const data = useDashboard();
-  console.log(data);
-
   return (
     <LayoutMainV2>
       <Box

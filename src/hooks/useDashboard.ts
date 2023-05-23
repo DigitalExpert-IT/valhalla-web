@@ -1,19 +1,35 @@
 import create from "zustand";
 import { useValhalla, useWallet, useWalletStore } from "hooks";
 import { useEffect } from "react";
-import Axios, { all } from "axios";
-import { useQuery } from "@tanstack/react-query";
+import Axios from "axios";
+
 import { createInitiator, getGnetRate, prettyBn } from "utils";
-import { fromBn, toBn } from "evm-bn";
-import { groupBy, toArray } from "lodash";
-import { current } from "immer";
+import { toBn } from "evm-bn";
+
+interface INFTItem {
+  tokenId?: string;
+  id?: string;
+  address?: string;
+  transactionHash?: string;
+  from?: string;
+  to?: string;
+  blockNumber?: number;
+  price?: number;
+  farmPercentage?: number;
+  mintedAt?: string;
+  lastFarm?: string;
+  farmRewardPerDay?: number;
+  farmRewardPerSecond?: number;
+  farmReward?: number;
+}
 interface IDashboard {
   listNFT: {};
   listUser: {};
   totalUser: number;
   totalNFTSales: string;
-  totalNFTCirculating: number;
+  listProfitePerLevel: {};
   potensialProfite: number;
+  totalNFTCirculatingSuply: number;
 }
 
 const initialState: IDashboard = {
@@ -22,18 +38,22 @@ const initialState: IDashboard = {
   totalUser: 0,
   totalNFTSales: "",
   potensialProfite: 0,
-  totalNFTCirculating: 0,
+  listProfitePerLevel: {},
+  totalNFTCirculatingSuply: 0,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
 
 const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
-  const { data } = await Axios.get(`/api/downlines/${address}?rank=${rank}`);
+  const { data } = await Axios.get<any>(
+    `/api/downlines/${address}?rank=${rank}`
+  );
+
   let listNFT: any[] = [];
   let totalUser = 0;
   let totalNFTSales = 0;
-  let totalNFTCirculating = 0;
   let potensialProfite = 0;
+  let totalNFTCirculatingSuply = 0;
   const hierarchyValue = Object.values(data);
 
   for (let i = 0; i < hierarchyValue.length; i++) {
@@ -41,16 +61,16 @@ const init = createInitiator(async (address: string, rank: number) => {
     let nftUserLevel: any[] = [];
 
     for (const level of data[i]) {
-      const getNFTList = await Axios.get<
-        { address: string; price: number; farmRewardPerDay: number }[]
-      >(`/api/address/${level.address}/nft`);
+      const getNFTList = await Axios.get<INFTItem[]>(
+        `/api/address/${level.address}/nft`
+      );
 
-      totalNFTCirculating += getNFTList.data.length;
-      nftUserLevel.push(getNFTList.data);
+      totalNFTCirculatingSuply += getNFTList.data.length;
+      nftUserLevel.push(getNFTList?.data);
 
-      getNFTList.data.forEach((nftItem, keyNft) => {
-        potensialProfite += (nftItem.farmRewardPerDay * 5) / 100;
-        totalNFTSales += nftItem.price;
+      getNFTList.data.forEach(nftItem => {
+        potensialProfite += (nftItem.farmRewardPerDay! * 5) / 100;
+        totalNFTSales += nftItem.price!;
       });
     }
     const nftPerLevel = nftUserLevel.reduce(
@@ -69,9 +89,9 @@ const init = createInitiator(async (address: string, rank: number) => {
     ...e,
     listNFT,
     totalUser,
-    listUser: data,
     potensialProfite,
-    totalNFTCirculating,
+    listUser: hierarchyValue,
+    totalNFTCirculatingSuply,
     totalNFTSales: `${convert} USDT`,
   }));
 });

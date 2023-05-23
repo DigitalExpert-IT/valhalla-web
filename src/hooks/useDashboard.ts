@@ -113,6 +113,7 @@ export const useDashboard = () => {
   const { address } = useWallet();
   const { account } = useValhalla();
   useEffect(() => {
+    // todo if change wallet, need to refetch data
     init(address, account.rank);
   }, [address, account.rank]);
 

@@ -18,7 +18,6 @@ import {
 
 export default function Home() {
   const { t } = useTranslation();
-
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />

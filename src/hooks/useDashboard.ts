@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
+import { groupBy } from "lodash";
 
 interface INFTItem {
   id: string;
   to: string;
   from: string;
   price: number;
+  cardId: string;
   tokenId: string;
   address: string;
   mintedAt: string;
@@ -101,11 +103,28 @@ const init = createInitiator(async (address: string, rank: number) => {
             const format = getPercentage;
             return acc + format;
           }, 0) / getNftperUser.length;
+        const isNan = !!getPercentageAverage;
+        const withFarmKey = Object.values(groupBy(getNftperUser, "cardId")).map(
+          (k, il) => {
+            return {
+              farm1: k.filter(s => s.cardId === "0"),
+              farm2: k.filter(s => s.cardId === "1"),
+              farm3: k.filter(s => s.cardId === "2"),
+              farm4: k.filter(s => s.cardId === "3"),
+              farm5: k.filter(s => s.cardId === "4"),
+              farm6: k.filter(s => s.cardId === "5"),
+            };
+          }
+        );
 
         return {
           ...j,
           listNFT: getNftperUser,
-          restPercentage: `${getPercentageAverage.toFixed(2)}%`,
+          lastFarmPercentage: `${isNan ? getPercentageAverage.toFixed(2) : 0}%`,
+          restFarmPercentage: `${
+            isNan ? (100 - getPercentageAverage).toFixed(2) : 0
+          }%`,
+          listPerCard: withFarmKey.at(0),
         };
       });
       return withNft;
@@ -136,7 +155,7 @@ export const useDashboard = () => {
   useEffect(() => {
     // todo if change wallet, need to refetch data
     if (address && account.rank) {
-      init(address, account.rank);
+      init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
     }
   }, [address, account.rank]);
 

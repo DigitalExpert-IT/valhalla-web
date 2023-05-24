@@ -59,7 +59,10 @@ const init = createInitiator(async () => {
     const metamask = await detectEthereumProvider();
     if (metamask) {
       metamask.on("accountsChanged", resetAccount);
-      metamask.on("chainChanged", resetAccount);
+      metamask.on("chainChanged", () => {
+        switchChain();
+        resetAccount();
+      });
     }
   } catch (error) {
   } finally {

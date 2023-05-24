@@ -120,8 +120,10 @@ const init = createInitiator(async (address: string, rank: number) => {
         return {
           ...j,
           listNFT: getNftperUser,
-          lastFarmPercentage: `${isNan ? getPercentageAverage.toFixed(2) : 0}%`,
-          restFarmPercentage: `${
+          lastFarmAverageByPercent: `${
+            isNan ? getPercentageAverage.toFixed(2) : 0
+          }%`,
+          restFarmAverageByPercent: `${
             isNan ? (100 - getPercentageAverage).toFixed(2) : 0
           }%`,
           listPerCardFarm: withFarmKey.at(0),

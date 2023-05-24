@@ -124,7 +124,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           restFarmPercentage: `${
             isNan ? (100 - getPercentageAverage).toFixed(2) : 0
           }%`,
-          listPerCard: withFarmKey.at(0),
+          listPerCardFarm: withFarmKey.at(0),
         };
       });
       return withNft;

@@ -7,7 +7,7 @@ import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
 import { groupBy } from "lodash";
 
-interface INFTItem {
+export interface INFTItem {
   id: string;
   to: string;
   from: string;
@@ -49,7 +49,7 @@ const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
   if (!address && rank > 0) return;
   try {
-    const { data } = await Axios.get<any>(
+    const { data } = await Axios.get<User[][]>(
       `/api/downlines/${address}?rank=${rank}`
     );
     let totalUser = 0;
@@ -57,18 +57,20 @@ const init = createInitiator(async (address: string, rank: number) => {
     let potensialProfite = 0;
     let totalNFTCirculatingSuply = 0;
     let listProfitePerLevel: number[] = [];
-    const hierarchyValue: User[][] = Object.values(data);
+    const hierarchyValue = Object.values(data);
 
     const getAllNFT: INFTItem[][] = await Promise.all(
-      hierarchyValue.map(async (userAddress: User[]) => {
+      hierarchyValue.map(async userAddress => {
         totalUser += userAddress.length;
         const nft = await Promise.all(
           userAddress.map(async e => {
-            const getNFtList = await Axios.get(`/api/address/${e.address}/nft`);
+            const getNFtList = await Axios.get<INFTItem[]>(
+              `/api/address/${e.address}/nft`
+            );
             return getNFtList.data;
           })
         );
-        const filteredEmptyNFT: INFTItem[] = nft.filter(e => !!e.length)[0];
+        const filteredEmptyNFT = nft.filter(e => !!e.length)[0];
 
         listProfitePerLevel.push(
           filteredEmptyNFT.reduce(

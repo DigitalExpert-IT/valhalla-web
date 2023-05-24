@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
+import {} from "date-fns";
 
 interface INFTItem {
   id: string;
@@ -92,8 +93,21 @@ const init = createInitiator(async (address: string, rank: number) => {
 
     const hierachyWithNFT = hierarchyValue.map((e, i) => {
       const withNft = e.map(j => {
-        const getNft = getAllNFT[i].filter(l => l.to === j.address);
-        return { ...j, listNFT: getNft };
+        const getNftperUser = getAllNFT[i].filter(l => l.to === j.address);
+        const getPercentageAverage =
+          getNftperUser.reduce((acc, pre) => {
+            const fullRange = Date.parse(pre.mintedAt) * 450;
+            const lasFarm = Date.parse(pre.lastFarm);
+            const getPercentage = (lasFarm * 100) / fullRange;
+            const format = getPercentage;
+            return acc + format;
+          }, 0) / getNftperUser.length;
+
+        return {
+          ...j,
+          listNFT: getNftperUser,
+          restPercentage: `${getPercentageAverage.toFixed(2)}%`,
+        };
       });
       return withNft;
     });

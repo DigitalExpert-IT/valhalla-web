@@ -25,15 +25,15 @@ export interface INFTItem {
   farmRewardPerSecond: number;
 }
 interface IDashboard {
-  listNFT: INFTItem[][];
-  listUser: User[][];
   totalUser: number;
+  listUser: User[][];
+  isLoading: boolean;
+  isEligible: boolean;
+  listNFT: INFTItem[][];
   totalNFTSales: string;
   listProfitePerLevel: {};
   potensialProfite: string;
   totalNFTCirculatingSuply: number;
-  isLoading: boolean;
-  isEligible: boolean;
 }
 
 const initialState: IDashboard = {

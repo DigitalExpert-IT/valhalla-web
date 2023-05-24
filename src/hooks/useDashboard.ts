@@ -32,12 +32,16 @@ interface IDashboard {
   listProfitePerLevel: {};
   potensialProfite: string;
   totalNFTCirculatingSuply: number;
+  isLoading: boolean;
+  isEligible: boolean;
 }
 
 const initialState: IDashboard = {
   listNFT: [],
   listUser: [],
   totalUser: 0,
+  isLoading: false,
+  isEligible: false,
   totalNFTSales: "",
   potensialProfite: "",
   listProfitePerLevel: {},
@@ -47,7 +51,7 @@ const useDashoardStore = create<IDashboard>(() => initialState);
 
 const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
-  if (!address && rank > 0) return;
+  setState({ isLoading: true });
   try {
     const { data } = await Axios.get<User[][]>(
       `/api/downlines/${address}?rank=${rank}`
@@ -137,8 +141,7 @@ const init = createInitiator(async (address: string, rank: number) => {
     const toBignum = toBn(totalNFTSales.toString(), 9).toString();
     const toUSDTCalculation = prettyBn(getGnetRate(toBignum), 18);
 
-    setState(e => ({
-      ...e,
+    setState({
       totalUser,
       listNFT: getAllNFT,
       listProfitePerLevel,
@@ -146,9 +149,12 @@ const init = createInitiator(async (address: string, rank: number) => {
       totalNFTCirculatingSuply,
       totalNFTSales: `${toUSDTCalculation} USDT`,
       potensialProfite: `${potensialProfite} GNET`,
-    }));
+      isEligible: rank > 0 && true,
+    });
   } catch (e) {
     console.log(e);
+  } finally {
+    setState({ isLoading: false });
   }
 });
 
@@ -157,10 +163,9 @@ export const useDashboard = () => {
   const { address } = useWallet();
   const { account } = useValhalla();
   useEffect(() => {
-    // todo if change wallet, need to refetch data
-    if (address && account.rank) {
-      init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
-    }
+    if (!address && !account.rank) return;
+    init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
+    // }
   }, [address, account.rank]);
 
   return { ...store };

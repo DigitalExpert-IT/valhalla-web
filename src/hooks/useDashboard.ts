@@ -1,11 +1,11 @@
 import Axios from "axios";
 import create from "zustand";
 import { toBn } from "evm-bn";
+import { groupBy } from "lodash";
 import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
-import { groupBy } from "lodash";
 
 export interface INFTItem {
   id: string;
@@ -106,8 +106,7 @@ const init = createInitiator(async (address: string, rank: number) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
             const lasFarm = Date.parse(pre.lastFarm);
             const getPercentage = (lasFarm * 100) / fullRange;
-            const format = getPercentage;
-            return acc + format;
+            return acc + getPercentage;
           }, 0) / getNftperUser.length;
         const isNan = !!getPercentageAverage;
         const withFarmKey = Object.values(groupBy(getNftperUser, "cardId")).map(

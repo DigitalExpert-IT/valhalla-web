@@ -23,8 +23,8 @@ interface INFTItem {
   farmRewardPerSecond: number;
 }
 interface IDashboard {
-  listNFT: {};
-  listUser: {};
+  listNFT: INFTItem[][];
+  listUser: User[][];
   totalUser: number;
   totalNFTSales: string;
   listProfitePerLevel: {};
@@ -33,7 +33,7 @@ interface IDashboard {
 }
 
 const initialState: IDashboard = {
-  listNFT: {},
+  listNFT: [],
   listUser: [],
   totalUser: 0,
   totalNFTSales: "",
@@ -55,9 +55,9 @@ const init = createInitiator(async (address: string, rank: number) => {
     let potensialProfite = 0;
     let totalNFTCirculatingSuply = 0;
     let listProfitePerLevel: number[] = [];
-    const hierarchyValue: any[] = Object.values(data);
+    const hierarchyValue: User[][] = Object.values(data);
 
-    const getAllNFT = await Promise.all(
+    const getAllNFT: INFTItem[][] = await Promise.all(
       hierarchyValue.map(async (userAddress: User[]) => {
         totalUser += userAddress.length;
         const nft = await Promise.all(
@@ -75,7 +75,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           )
         );
         potensialProfite += filteredEmptyNFT.reduce(
-          (acc, pre) => acc + ((pre.farmReward * 5) / 100) * 450,
+          (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 450,
           0
         );
         totalNFTSales += filteredEmptyNFT.reduce(
@@ -90,6 +90,14 @@ const init = createInitiator(async (address: string, rank: number) => {
       })
     );
 
+    const hierachyWithNFT = hierarchyValue.map((e, i) => {
+      const withNft = e.map(j => {
+        const getNft = getAllNFT[i].filter(l => l.to === j.address);
+        return { ...j, listNFT: getNft };
+      });
+      return withNft;
+    });
+
     const toBignum = toBn(totalNFTSales.toString(), 9).toString();
     const toUSDTCalculation = prettyBn(getGnetRate(toBignum), 18);
 
@@ -98,7 +106,7 @@ const init = createInitiator(async (address: string, rank: number) => {
       totalUser,
       listNFT: getAllNFT,
       listProfitePerLevel,
-      listUser: hierarchyValue,
+      listUser: hierachyWithNFT,
       totalNFTCirculatingSuply,
       totalNFTSales: `${toUSDTCalculation} USDT`,
       potensialProfite: `${potensialProfite} GNET`,
@@ -114,7 +122,7 @@ export const useDashboard = () => {
   const { account } = useValhalla();
   useEffect(() => {
     // todo if change wallet, need to refetch data
-    init(address, account.rank);
+    init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
   }, [address, account.rank]);
 
   return { ...store };

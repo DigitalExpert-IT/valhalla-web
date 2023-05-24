@@ -151,7 +151,6 @@ const init = createInitiator(async (address: string, rank: number) => {
       isEligible: rank > 0 && true,
     });
   } catch (e) {
-    console.log(e);
   } finally {
     setState({ isLoading: false });
   }

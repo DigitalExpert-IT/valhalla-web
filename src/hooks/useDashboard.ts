@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
-import {} from "date-fns";
 
 interface INFTItem {
   id: string;
@@ -136,7 +135,9 @@ export const useDashboard = () => {
   const { account } = useValhalla();
   useEffect(() => {
     // todo if change wallet, need to refetch data
-    init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
+    if (address && account.rank) {
+      init(address, account.rank);
+    }
   }, [address, account.rank]);
 
   return { ...store };

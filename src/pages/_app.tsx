@@ -8,6 +8,13 @@ import NiceModal from "@ebay/nice-modal-react";
 import axios from "axios";
 import "locales";
 import { PROJECT_NAME } from "constant/siteConfig";
+import {
+  ThirdwebProvider,
+  metamaskWallet,
+  coinbaseWallet,
+  walletConnect,
+} from "@thirdweb-dev/react";
+import { Polygon } from "@thirdweb-dev/chains";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -24,13 +31,19 @@ const queryClient = new QueryClient({
 
 export default function App(props: AppProps) {
   return (
-    <ChakraProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <NiceModal.Provider>
-          <Main {...props} />
-        </NiceModal.Provider>
-      </QueryClientProvider>
-    </ChakraProvider>
+    <ThirdwebProvider
+      supportedChains={[Polygon]}
+      supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
+      activeChain="polygon"
+    >
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <NiceModal.Provider>
+            <Main {...props} />
+          </NiceModal.Provider>
+        </QueryClientProvider>
+      </ChakraProvider>
+    </ThirdwebProvider>
   );
 }
 

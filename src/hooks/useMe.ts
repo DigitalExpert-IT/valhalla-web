@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useWallet } from "./useWallet";
+import { useAddress } from "@thirdweb-dev/react";
 import { User } from "@prisma/client";
 
 export const useMe = () => {
-  const { address } = useWallet();
+  const address = useAddress() ?? "0x0";
   return useQuery(["User"], async () => {
     const axiosResponse = await axios.get<User[]>(`/api/address/${address}`);
     return axiosResponse.data;

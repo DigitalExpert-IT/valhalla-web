@@ -15,6 +15,7 @@ import {
   walletConnect,
 } from "@thirdweb-dev/react";
 import { Polygon } from "@thirdweb-dev/chains";
+import { getActiveChain } from "lib/chain";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -29,12 +30,14 @@ const queryClient = new QueryClient({
   },
 });
 
+const chain = getActiveChain();
+
 export default function App(props: AppProps) {
   return (
     <ThirdwebProvider
-      supportedChains={[Polygon]}
+      supportedChains={[chain]}
       supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
-      activeChain="polygon"
+      activeChain={chain}
     >
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>

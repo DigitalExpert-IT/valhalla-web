@@ -1,8 +1,9 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
+import { useAddress } from "@thirdweb-dev/react";
 import { CopiableText } from "components/CopiableText";
 import { WidgetProfileBalace } from "components/Widget/WidgetProfile";
 import { GNET_CONTRACT } from "constant/address";
-import { useValhalla, useWallet } from "hooks";
+import { useAccountMap } from "hooks/valhalla";
 import { t } from "i18next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,8 +13,8 @@ import { CardProfileV2 } from "./CardProfileV2";
 export const CardProfileAddress = () => {
   const router = useRouter();
   const [defaultHost, setDefaultHost] = useState("");
-  const { account } = useValhalla();
-  const { address, balance } = useWallet();
+  const accountMap = useAccountMap();
+  const address = useAddress() ?? "0x0";
   const ContractGnet =
     GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
@@ -93,7 +94,7 @@ export const CardProfileAddress = () => {
               >
                 {t("common.myReferrer")}
               </Text>
-              {account.referrer.toUpperCase()}
+              {accountMap.data?.referrer.toUpperCase()}
             </Text>
           </Center>
         </WidgetProfileBalace>

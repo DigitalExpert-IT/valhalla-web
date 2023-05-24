@@ -348,6 +348,15 @@
       "stopRankReward": "Stop Rank Reward"
     }
   },
+  "dashboard": {
+    "title": {
+      "members": "Members"
+    },
+    "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
+    "placeholder": {
+      "search": "Search items, collection, accounts"
+    }
+  },
   "shareToEarn": {
     "title": "Share To Earn",
     "share": "Share"

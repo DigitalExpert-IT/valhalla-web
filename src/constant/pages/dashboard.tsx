@@ -15,7 +15,7 @@ export const DASHBOARD_CATEGORY = [
         key: "dashboard",
         name: "dashboard",
         icon: <BsFillHouseDoorFill size={24} />,
-        href: (address: string) => `/dashboard/admin/${address}`,
+        href: (address: string) => `/dashboard/${address}`,
       },
       {
         key: "event",

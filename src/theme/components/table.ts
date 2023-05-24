@@ -323,12 +323,43 @@ const variantBasic = definePartsStyle(props => {
   };
 });
 
+const variantDashboard = definePartsStyle(props => {
+  return {
+    table: {
+      border: "1px solid #000",
+      borderRadius: "xl",
+      borderSpacing: 0,
+      borderCollapse: "separate",
+    },
+    th: {
+      color: "#000",
+      borderBottom: "1px solid #000",
+      ...numericStyles,
+    },
+    td: {
+      color: "#000",
+      ...numericStyles,
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
 const variants = {
   simple: variantSimple,
   striped: variantStripe,
   valhalla: variantValhalla,
   valhallaV2: variantValhallaV2,
   gradient: variantGradient,
+  dashboard: variantDashboard,
   basic: variantBasic,
   unstyled: defineStyle({}),
 };

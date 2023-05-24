@@ -1,6 +1,8 @@
 import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system";
 
-const baseStyle = defineStyle({});
+const baseStyle = defineStyle({
+  color: "chakra-body-text",
+});
 
 const variantGradient = defineStyle(props => {
   const { colorScheme: c = "purple:pink" } = props;

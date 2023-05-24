@@ -1,4 +1,5 @@
 import {
+  DarkMode,
   Box,
   Stack,
   UnorderedList,
@@ -14,8 +15,10 @@ import { DASHBOARD_CATEGORY } from "constant/pages/dashboard";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
+import { useWallet } from "hooks";
 
 export const Sidebar = () => {
+  const { address } = useWallet();
   const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const router = useRouter();
 
@@ -45,7 +48,7 @@ export const Sidebar = () => {
     let href = null;
 
     if (typeof menu.href == "function") {
-      href = menu.href("0x0");
+      href = menu.href(address);
     } else href = menu.href;
 
     return (
@@ -55,47 +58,51 @@ export const Sidebar = () => {
           {...MenuItemStyles}
         >
           {menu.icon}
-          <Text ms="6">{t(`common.sidebar.${menu.name}`)}</Text>
+          <Text ms="6" color="inherit">
+            {t(`common.sidebar.${menu.name}`)}
+          </Text>
         </ListItem>
       </Link>
     );
   };
 
   return (
-    <Box {...WrapperStyle}>
-      <Link href="/">
-        <AspectRatio
-          w={isLargethan800 ? 140 : 50}
-          ratio={isLargethan800 ? 4 / 1 : 1}
-        >
-          <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
-        </AspectRatio>
-      </Link>
-      <Stack flex={1} pt="12">
-        {DASHBOARD_CATEGORY.map(kategoryItem => (
-          <Box key={kategoryItem.name} mb="24">
-            <Text mb="4" textTransform="uppercase">
-              {kategoryItem.name}
-            </Text>
-            <UnorderedList {...MenuStyles}>
-              {kategoryItem.menus.map((menu, mIdx) => (
-                <MenuItem key={mIdx} menu={menu} />
-              ))}
-            </UnorderedList>
-          </Box>
-        ))}
-
-        <Box pos="absolute" bottom="20">
-          <Link href="/logout">
-            <Button variant="link" {...MenuItemStyles}>
-              <BiLogOut size="24" />
-              <Text ms="6" fontWeight="medium">
-                {t(`common.sidebar.logOut`)}
+    <DarkMode>
+      <Box {...WrapperStyle}>
+        <Link href="/">
+          <AspectRatio
+            w={isLargethan800 ? 140 : 50}
+            ratio={isLargethan800 ? 4 / 1 : 1}
+          >
+            <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
+          </AspectRatio>
+        </Link>
+        <Stack flex={1} pt="12">
+          {DASHBOARD_CATEGORY.map(kategoryItem => (
+            <Box key={kategoryItem.name} mb="24">
+              <Text mb="4" textTransform="uppercase">
+                {kategoryItem.name}
               </Text>
-            </Button>
-          </Link>
-        </Box>
-      </Stack>
-    </Box>
+              <UnorderedList {...MenuStyles}>
+                {kategoryItem.menus.map((menu, mIdx) => (
+                  <MenuItem key={mIdx} menu={menu} />
+                ))}
+              </UnorderedList>
+            </Box>
+          ))}
+
+          <Box pos="absolute" bottom="20">
+            <Link href="/logout">
+              <Button variant="link" {...MenuItemStyles}>
+                <BiLogOut size="24" />
+                <Text ms="6" fontWeight="medium">
+                  {t(`common.sidebar.logOut`)}
+                </Text>
+              </Button>
+            </Link>
+          </Box>
+        </Stack>
+      </Box>
+    </DarkMode>
   );
 };

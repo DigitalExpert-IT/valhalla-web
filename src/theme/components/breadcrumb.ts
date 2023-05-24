@@ -14,7 +14,7 @@ const baseStyleLink = defineStyle({
   cursor: "pointer",
   textDecoration: "none",
   outline: "none",
-  color: "inherit",
+  color: "chakra-body-text",
   _hover: {
     textDecoration: "underline",
   },

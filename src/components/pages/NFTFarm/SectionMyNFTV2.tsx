@@ -15,7 +15,6 @@ import { useOwnedNFTList } from "hooks/useOwnedNFTList";
 
 export const SectionMyNFTV2 = () => {
   const { data: nftList, isLoading } = useOwnedNFTList();
-  useOwnedNFTList();
   const { t } = useTranslation();
 
   return (

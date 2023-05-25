@@ -1,6 +1,7 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
-import { useAsyncCall, useNFT } from "hooks";
+import { useAsyncCall } from "hooks";
+import { useCardList } from "hooks/useCardList";
 import { useTranslation } from "react-i18next";
 
 interface CardNFTV2Props {
@@ -12,7 +13,7 @@ interface CardNFTV2Props {
 
 export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
   const { t } = useTranslation();
-  const { buy } = useNFT();
+  const { buy } = useCardList();
   const buyAsync = useAsyncCall(buy);
 
   const handleBuy = () => {

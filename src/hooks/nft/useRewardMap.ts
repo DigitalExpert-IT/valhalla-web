@@ -1,12 +1,12 @@
 import { useContractRead, useAddress } from "@thirdweb-dev/react";
-import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+import { NFT } from "@warmbyte/valhalla/typechain-types";
 import { ZERO_ADDRESS } from "constant/address";
-import { useValhallaContract } from "hooks/useValhallaContract";
+import { useNFTContract } from "hooks/useNFTContract";
 
-type RewardMapType = Awaited<ReturnType<Valhalla["rewardMap"]>>;
+type RewardMapType = Awaited<ReturnType<NFT["rewardMap"]>>;
 
 export const useRewardMap = () => {
-  const contract = useValhallaContract();
+  const contract = useNFTContract();
   const address = useAddress();
 
   const { data, ...rest } = useContractRead(contract.contract, "rewardMap", [

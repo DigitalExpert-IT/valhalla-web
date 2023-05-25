@@ -11,25 +11,29 @@ import {
   Text,
   Grid,
 } from "@chakra-ui/react";
+import { useContractWrite } from "@thirdweb-dev/react";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
-import { useAsyncCall, useNFT, useValhalla } from "hooks";
+import { useAsyncCall } from "hooks";
+import { useGlobalPool, useRankReward, useRewardMap } from "hooks/nft";
+import { useNFTContract } from "hooks/useNFTContract";
+import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
-import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
-  const {
-    rankReward,
-    claimRankReward,
-    claimReward,
-    personalReward,
-    globalPool,
-  } = useNFT();
 
-  const { account, isRankRewardClaimable } = useValhalla();
-  const claimNftRankRewardAsync = useAsyncCall(claimRankReward);
-  const claimRewardGnetAsync = useAsyncCall(claimReward);
+  const nft = useNFTContract();
+  const rankReward = useRankReward();
+  const reward = useRewardMap();
+  const globalPool = useGlobalPool();
+  const accountMap = useAccountMap();
+  const account = accountMap.data;
+  const isRankRewardClaimable = useIsRankRewardClaimable();
+  const claimReward = useContractWrite(nft.contract, "claimReward");
+  const claimRankReward = useContractWrite(nft.contract, "claimRankReward");
+  const claimNftRankRewardAsync = useAsyncCall(claimRankReward.mutateAsync);
+  const claimRewardGnetAsync = useAsyncCall(claimReward.mutateAsync);
 
   return (
     <Box position="relative" zIndex={1}>
@@ -77,8 +81,8 @@ export const SectionGnetProject = () => {
           >
             <AspectRatio w="100px" ratio={15 / 17}>
               <Image
-                src={RANK_SYMBOL_MAP[account.rank]}
-                alt={rankMap[account.rank]}
+                src={RANK_SYMBOL_MAP[account?.rank ?? 0]}
+                alt={rankMap[account?.rank ?? 0]}
                 objectFit="cover"
               />
             </AspectRatio>
@@ -97,7 +101,7 @@ export const SectionGnetProject = () => {
             >
               <Text>{t("pages.nftFarming.networkMembers")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {account.downlineCount.toNumber()}
+                {account?.downlineCount.toNumber()}
               </Badge>
             </Stack>
           </GridItem>
@@ -115,9 +119,10 @@ export const SectionGnetProject = () => {
             >
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {isRankRewardClaimable
-                  ? fromBn(globalPool.valueLeft, 9)
-                  : fromBn(globalPool.claimable, 9)}{" "}
+                {isRankRewardClaimable.data
+                  ? globalPool.data && fromBn(globalPool.data.valueLeft, 9)
+                  : globalPool.data &&
+                    fromBn(globalPool.data.claimable, 9)}{" "}
                 GNET
               </Badge>
             </Stack>
@@ -137,11 +142,12 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.rankReward")}</Text>
               <Button
                 variant="swag"
-                onClick={claimNftRankRewardAsync.exec}
+                onClick={() => claimNftRankRewardAsync.exec({ args: [] })}
                 isLoading={claimNftRankRewardAsync.isLoading}
-                disabled={rankReward.isZero()}
+                disabled={rankReward.data?.isZero()}
               >
-                {fromBn(rankReward, 9) + " " + t("common.claim")}
+                {rankReward.data &&
+                  fromBn(rankReward.data, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>
@@ -156,11 +162,12 @@ export const SectionGnetProject = () => {
               <Button
                 variant="swag"
                 color="white"
-                onClick={claimRewardGnetAsync.exec}
+                onClick={() => claimRewardGnetAsync.exec({ args: [] })}
                 isLoading={claimRewardGnetAsync.isLoading}
-                disabled={personalReward.isZero()}
+                disabled={reward.data?.isZero()}
               >
-                {fromBn(personalReward, 9) + " " + t("common.claim")}
+                {reward.data &&
+                  fromBn(reward.data, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
           </GridItem>

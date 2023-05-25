@@ -8,11 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { CardFarmNFTV2 } from "components/Card";
 
-import { useNFT } from "hooks";
+import { useCardList } from "hooks/useCardList";
 import { prettyBn } from "utils";
 
 export const SectionNFTList = () => {
-  const { cardList, isLoading } = useNFT();
+  const { data, isLoading } = useCardList();
 
   return (
     <Box
@@ -61,7 +61,7 @@ export const SectionNFTList = () => {
           align="center"
           justify="center"
         >
-          {cardList.map((e, idx) => (
+          {data.map((e, idx) => (
             <WrapItem w={{ md: "25%", sm: "45%", base: "100%" }} key={idx}>
               <CardFarmNFTV2
                 contentTitle={e.halfingPercentage.toString()}

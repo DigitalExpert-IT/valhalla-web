@@ -78,7 +78,8 @@ const init = createInitiator(async (address: string, rank: number) => {
 
         listProfitePerLevel.push(
           filteredEmptyNFT.reduce(
-            (acc, e) => acc + e.farmRewardPerDay * e.farmPercentage,
+            (acc, e) =>
+              acc + ((e.farmRewardPerDay * e.farmPercentage) / 100) * 450,
             0
           )
         );

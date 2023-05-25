@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { ButtonConnectWallet, DrawerMobileNav, NavbarMenu } from "components";
+import { DrawerMobileNav, NavbarMenu, ButtonConnectWallet } from "components";
+
 import {
   Box,
   Flex,
@@ -42,25 +43,47 @@ export const Navbar = () => {
       pt={{ base: "2", lg: "2" }}
       pb="2"
       w="full"
-      zIndex={5}
-      bg={isOpen ? "gray.800" : scrolled ? "gray.800" : "transparent"}
+      zIndex={1000}
+      bg={isOpen ? "#191272" : scrolled ? "#191272" : "transparent"}
       boxShadow={scrolled ? "dark-lg" : "none"}
       pos="fixed"
       transition="0.5s"
     >
-      <Container maxW="container.xl">
+      <Container maxW="container.xxl">
         <Flex alignItems="center" justify="space-around">
           <Stack
             direction="row"
             align="center"
             flex={1}
             justify="space-between"
+            pos={"relative"}
           >
             <DrawerMobileNav
               data={NAVIGATION}
               isOpen={isOpen}
               onClose={onClose}
             />
+            <Link href="/">
+              <AspectRatio
+                w={{ base: 200, lg: 250 }}
+                ratio={16 / 3}
+                my={2}
+                mx={{ sm: "auto" }}
+                pos={{ base: "absolute", lg: "sticky" }}
+                right={"0"}
+                left={"0"}
+                top={"-2"}
+              >
+                <Image
+                  src={
+                    isLargethan800
+                      ? "/assets/logo/gnLogo.png"
+                      : "/assets/logo/gnLogo.png"
+                  }
+                  alt="logo-image"
+                />
+              </AspectRatio>
+            </Link>
             <IconButton
               variant="ghost"
               fontSize="xl"
@@ -69,21 +92,6 @@ export const Navbar = () => {
               display={{ md: "flex", lg: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Link href="/">
-              <AspectRatio
-                w={isLargethan800 ? 150 : 50}
-                ratio={isLargethan800 ? 5 / 2 : 1}
-              >
-                <Image
-                  src={
-                    isLargethan800
-                      ? "/assets/logo/logo-gn.png"
-                      : "/assets/logo/logo.png"
-                  }
-                  alt="logo-image"
-                />
-              </AspectRatio>
-            </Link>
           </Stack>
           <Stack
             direction="row"

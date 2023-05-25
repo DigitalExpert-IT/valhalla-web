@@ -8,12 +8,12 @@ import { useContractWrite } from "@thirdweb-dev/react";
 import { t } from "i18next";
 import { CardProfileV2 } from "./CardProfileV2";
 import { fromBn } from "evm-bn";
-import { useRewardMap } from "hooks/valhalla/useRewardMap";
-import { useRankReward } from "hooks/valhalla/useRankReward";
+import { useRankReward, useRewardMap, useGlobalPool } from "hooks/valhalla";
 import { useValhallaContract } from "hooks/useValhallaContract";
 
 export const CardProfileBonus = () => {
-  const { claimRankReward, globalPool, isRankRewardClaimable } = useValhalla();
+  // const { claimRankReward, globalPool, isRankRewardClaimable } = useValhalla();
+  const globalPool = useGlobalPool();
   const rewardMap = useRewardMap();
   const rankReward = useRankReward();
   const valhalla = useValhallaContract();
@@ -31,7 +31,11 @@ export const CardProfileBonus = () => {
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.globalBonus")}</Text>
-            <Text textAlign={"end"}>{fromBn(globalPool.claimable)} MATIC</Text>
+            <Text textAlign={"end"}>
+              {globalPool?.data?.claimable &&
+                fromBn(globalPool?.data?.claimable)}{" "}
+              MATIC
+            </Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace>
@@ -55,9 +59,9 @@ export const CardProfileBonus = () => {
               <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
-              // onClick={claimRankRewardAsync.exec}
-              // isLoading={claimRankRewardAsync.isLoading}
-              isDisabled={!isRankRewardClaimable}
+            // onClick={claimRankRewardAsync.exec}
+            // isLoading={claimRankRewardAsync.isLoading}
+            // isDisabled={!isRankRewardClaimable}
             >
               {t("common.claim")}
             </WidgetProfileBtn>

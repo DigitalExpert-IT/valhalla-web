@@ -7,23 +7,27 @@ import {
   SimpleGrid,
   AspectRatio,
 } from "@chakra-ui/react";
-import { fromBn } from "evm-bn";
+import { fromBn, toBn } from "evm-bn";
 import { useForm } from "react-hook-form";
-import { useAsyncCall, useSwap } from "hooks";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ClipPathImage } from "./ClipPathImage";
-import { getGnetRate, getUsdtRate } from "utils";
-import { useEffect, useMemo, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { ButtonConnectWrapper } from "components/Button";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { FormInput, FormSelect } from "components/FormUtils";
+import { ButtonConnectWrapper } from "components/Button";
+import { getGnetRate, getUsdtRate } from "utils";
+import { SWAP_CONTRACT } from "constant/address";
+import { BigNumber } from "ethers";
 import {
-  useSwapGnetPair,
-  useSwapUsdtPair,
+  useSwapContract,
+  CURRENT_CHAIN_ID,
+  useUSDTBalance,
   useGNETBalance,
-} from "hooks/useSwapContract";
-import { useGNETContract } from "hooks/useGNETContract";
-import { useAddress } from "@thirdweb-dev/react";
+  useUSDTContract,
+  useAsyncCall,
+  useGNETContract,
+} from "hooks";
 
 interface ISwapToken {
   price: string;
@@ -31,32 +35,95 @@ interface ISwapToken {
   currency: string;
 }
 
+const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
+
 export const FormSwap = () => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
   const { handleSubmit, control, watch, reset } = useForm<ISwapToken>();
-  const { currency, initialized, swapCurrency } = useSwap();
 
-  const { data } = useSwapUsdtPair();
-  const { data: gnetData } = useSwapGnetPair();
-  const { data: balance } = useGNETBalance();
-  console.log(balance);
+  const swap = useSwapContract();
+  const gnet = useGNETContract();
+  const usdt = useUSDTContract();
+  const address = useAddress();
+
+  const swapToUSDT = useContractWrite(swap.contract, "swapGnet");
+  const approveUSDT = useContractWrite(usdt.contract, "approve");
+
+  const swapToGNET = useContractWrite(swap.contract, "swapUsdt");
+  const approveGNET = useContractWrite(gnet.contract, "approve");
+
+  const { data: balanceGNET } = useGNETBalance();
+  const { data: balanceUSDT } = useUSDTBalance();
+
+  const approveGNETMutate = async (value: BigNumber) => {
+    const allowance: BigNumber = await gnet.contract?.call("allowance", [
+      address,
+      addressSwap,
+    ]);
+
+    if (balanceGNET.lt(value)) {
+      throw {
+        code: "NotEnoughBalance",
+      };
+    }
+
+    if (allowance.lt(value)) {
+      const approve = await approveGNET.mutateAsync({
+        args: [addressSwap, value],
+      });
+      return approve.receipt;
+    }
+  };
+
+  const approveUSDTMutate = async (value: BigNumber) => {
+    const allowance: BigNumber = await usdt.contract?.call("allowance", [
+      address,
+      addressSwap,
+    ]);
+
+    if (balanceUSDT.lt(value)) {
+      throw {
+        code: "NotEnoughBalance",
+      };
+    }
+
+    if (allowance.lt(value)) {
+      const approve = await approveUSDT.mutateAsync({
+        args: [addressSwap, value],
+      });
+      return approve.receipt;
+    }
+  };
+
+  const swapCurrency = async (data: { currency: string; amount: string }) => {
+    const swapToGnet = data.currency === "GNET";
+
+    if (swapToGnet) {
+      const USDValue = toBn(data.amount, 6);
+      await approveUSDTMutate(USDValue);
+
+      const swap = await swapToGNET.mutateAsync({
+        args: [USDValue],
+      });
+      const receipt = swap.receipt;
+      return receipt;
+    }
+    // default swap to USDT
+    const GNETValue = toBn(data.amount, 9);
+    await approveGNETMutate(GNETValue);
+    const swap = await swapToUSDT.mutateAsync({
+      args: [GNETValue],
+    });
+    const receipt = swap.receipt;
+    return receipt;
+  };
+
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
     swapCurrency,
     t("form.message.swapSucces")
   );
-
-  const normalizeCurrencies = useMemo(() => {
-    return Object.values(currency).map(c => {
-      const USDTPair = c.pair.name === "USDT";
-      return {
-        ...c,
-        value: c.pair.name,
-        label: USDTPair ? "USDT" : "GNET",
-      };
-    });
-  }, [currency]);
 
   useEffect(() => {
     const subscription = watch(value => {
@@ -71,7 +138,7 @@ export const FormSwap = () => {
       setSymbol(false);
     });
     return () => subscription.unsubscribe();
-  }, [watch, currency]);
+  }, [watch]);
 
   const onSubmit = handleSubmit(async data => {
     await exec({
@@ -79,6 +146,8 @@ export const FormSwap = () => {
       amount: data.price,
     });
     reset();
+    gnet.refetch();
+    usdt.refetch();
   });
 
   return (
@@ -127,7 +196,7 @@ export const FormSwap = () => {
                 name="price"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled={!initialized}
+                // isDisabled={!initialized}
               />
             </Box>
             <Text
@@ -138,8 +207,8 @@ export const FormSwap = () => {
             >
               {t("form.helperText.balance", {
                 balanceOf: symbol
-                  ? fromBn(currency.usdt.balance, 6)
-                  : fromBn(currency.gnet.balance, 9),
+                  ? fromBn(balanceUSDT ?? 0, 6)
+                  : fromBn(balanceGNET ?? 0, 9),
                 symbol: symbol ? "USDT" : "GNET",
               })}
             </Text>
@@ -172,8 +241,12 @@ export const FormSwap = () => {
                   bg: "whiteAlpha.100",
                 }}
                 name="currency"
-                option={normalizeCurrencies}
-                isDisabled={!initialized}
+                // option={normalizeCurrencies}
+                option={[
+                  { value: "USDT", label: "USDT" },
+                  { value: "GNET", label: "GNET" },
+                ]}
+                // isDisabled={!initialized}
                 defaultValue="USDT"
               />
             </SimpleGrid>
@@ -221,7 +294,7 @@ export const FormSwap = () => {
                 value={price}
               />
             </Box>
-            {/* <Text
+            <Text
               as={"span"}
               fontSize={"sm"}
               color={"whiteAlpha.700"}
@@ -229,18 +302,18 @@ export const FormSwap = () => {
             >
               {t("form.helperText.balance", {
                 balanceOf: symbol
-                  ? fromBn(currency.gnet.balance, 9)
-                  : fromBn(currency.usdt.balance, 6),
+                  ? fromBn(balanceGNET ?? 0, 9)
+                  : fromBn(balanceUSDT ?? 0, 6),
                 symbol: symbol ? "GNET" : "USDT",
               })}
-            </Text> */}
+            </Text>
           </Stack>
         </Stack>
         <ButtonConnectWrapper>
           <Button
             type="submit"
             w={{ base: "70%", md: "100%" }}
-            isLoading={isSwapLoading || !initialized}
+            isLoading={isSwapLoading}
             loadingText={t("common.isConnectingToBlockChain")!}
             color={"purple.900"}
             bg={"white"}

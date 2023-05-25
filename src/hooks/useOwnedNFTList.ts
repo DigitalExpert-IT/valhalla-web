@@ -47,7 +47,7 @@ export const useOwnedNFTList = () => {
   useEffect(() => {
     if (!address) return;
     init();
-  }, [address]);
+  }, [address, nft.contract]);
 
   return { isLoading: isLoading || nft.isLoading, data };
 };

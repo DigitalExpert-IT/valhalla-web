@@ -19,6 +19,7 @@ import { validateRequired, validateAddress } from "utils";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { ZERO_ADDRESS } from "constant/address";
+import { useRegistrationFee } from "hooks/valhalla";
 
 type FormType = {
   referrer: string;
@@ -28,9 +29,11 @@ export const FormRegister = () => {
   const valhalla = useValhallaContract();
   const { t } = useTranslation();
   const valhallaRegister = useContractWrite(valhalla.contract, "register");
+  const registrationFee = useRegistrationFee();
   const register = useAsyncCall(
     valhallaRegister.mutateAsync,
-    t("form.message.registrationSuccess")
+    t("form.message.registrationSuccess"),
+    () => router.replace("/profile")
   );
   const { control, setValue, handleSubmit } = useForm<FormType>();
   const address = useAddress() ?? ZERO_ADDRESS;
@@ -43,8 +46,10 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
-      await register.exec({ args: [data.referrer] });
-      router.replace("/profile");
+      await register.exec({
+        args: [data.referrer],
+        overrides: { value: registrationFee.data },
+      });
     });
   });
 
@@ -104,7 +109,7 @@ export const FormRegister = () => {
       <Center pt={"10"}>
         <ButtonConnectWrapper type="submit" border={"1px"} px={"16"}>
           <Button
-            isLoading={register.isLoading}
+            isLoading={register.isLoading || registrationFee.isLoading}
             type="submit"
             border={"1px"}
             px={"16"}

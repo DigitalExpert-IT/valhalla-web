@@ -17,6 +17,13 @@ import { useEffect, useMemo, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { ButtonConnectWrapper } from "components/Button";
 import { FormInput, FormSelect } from "components/FormUtils";
+import {
+  useSwapGnetPair,
+  useSwapUsdtPair,
+  useGNETBalance,
+} from "hooks/useSwapContract";
+import { useGNETContract } from "hooks/useGNETContract";
+import { useAddress } from "@thirdweb-dev/react";
 
 interface ISwapToken {
   price: string;
@@ -29,8 +36,12 @@ export const FormSwap = () => {
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
   const { handleSubmit, control, watch, reset } = useForm<ISwapToken>();
-  const { currency, swapCurrency, initialized } = useSwap();
+  const { currency, initialized, swapCurrency } = useSwap();
 
+  const { data } = useSwapUsdtPair();
+  const { data: gnetData } = useSwapGnetPair();
+  const { data: balance } = useGNETBalance();
+  console.log(balance);
   const { exec, isLoading: isSwapLoading } = useAsyncCall(
     swapCurrency,
     t("form.message.swapSucces")
@@ -210,7 +221,7 @@ export const FormSwap = () => {
                 value={price}
               />
             </Box>
-            <Text
+            {/* <Text
               as={"span"}
               fontSize={"sm"}
               color={"whiteAlpha.700"}
@@ -222,7 +233,7 @@ export const FormSwap = () => {
                   : fromBn(currency.usdt.balance, 6),
                 symbol: symbol ? "GNET" : "USDT",
               })}
-            </Text>
+            </Text> */}
           </Stack>
         </Stack>
         <ButtonConnectWrapper>

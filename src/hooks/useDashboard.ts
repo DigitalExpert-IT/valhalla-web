@@ -112,14 +112,20 @@ const init = createInitiator(async (address: string, rank: number) => {
         const isNan = !!getPercentageAverage;
         const withFarmKey = Object.values(groupBy(getNftperUser, "cardId")).map(
           (k, il) => {
-            return {
-              farm1: k.filter(s => s.cardId === "0"),
-              farm2: k.filter(s => s.cardId === "1"),
-              farm3: k.filter(s => s.cardId === "2"),
-              farm4: k.filter(s => s.cardId === "3"),
-              farm5: k.filter(s => s.cardId === "4"),
-              farm6: k.filter(s => s.cardId === "5"),
-            };
+            const nftPerType = new Array(6).fill(null).map((e, i) => {
+              const groupNft = k.filter(s => s.cardId === `${i}`);
+              if (groupNft.length === 0) return;
+              const gachaAverage = (
+                groupNft.reduce((acc, pre) => acc + pre.farmPercentage, 0) /
+                groupNft.length
+              ).toFixed(2);
+              return {
+                list: groupNft,
+                name: `farm${i}`,
+                gachaAverage,
+              };
+            });
+            return nftPerType.filter((e, i) => e !== undefined);
           }
         );
 

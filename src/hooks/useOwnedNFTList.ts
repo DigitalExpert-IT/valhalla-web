@@ -16,37 +16,36 @@ export const useOwnedNFTList = () => {
   const [data, setData] = useState<OwnedNftType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
+  const init = async () => {
+    if (!nft.contract) return;
+    try {
+      setLoading(true);
+      const balance = await nft.contract.call("balanceOf", [address]);
+      const tokenIds = await Promise.all(
+        Array(balance.toNumber())
+          .fill(null)
+          .map((_, idx) => {
+            return nft.contract!.call("tokenOfOwnerByIndex", [address, idx]);
+          })
+      );
+
+      const nfts = await Promise.all(
+        tokenIds.reverse().map(async tokenId => {
+          const ownedNft = await nft.contract!.call("ownedTokenMap", [tokenId]);
+          const cardId = ownedNft.cardId.toNumber();
+          const tokenUri = `/api/image/${cardId}`;
+          return { ...ownedNft, id: tokenId, tokenUri } as OwnedNftType;
+        })
+      );
+      setData(nfts);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!address) return;
-    const init = async () => {
-      if (!nft.contract) return;
-      try {
-        setLoading(true);
-        const balance = await nft.contract.call("balanceOf", [address]);
-        const tokenIds = await Promise.all(
-          Array(balance.toNumber())
-            .fill(null)
-            .map((_, idx) => {
-              return nft.contract!.call("tokenOfOwnerByIndex", [address, idx]);
-            })
-        );
-
-        const nfts = await Promise.all(
-          tokenIds.reverse().map(async tokenId => {
-            const ownedNft = await nft.contract!.call("ownedTokenMap", [
-              tokenId,
-            ]);
-            const cardId = ownedNft.cardId.toNumber();
-            const tokenUri = `/api/image/${cardId}`;
-            return { ...ownedNft, id: tokenId, tokenUri } as OwnedNftType;
-          })
-        );
-        setData(nfts);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    };
     init();
   }, [address]);
 

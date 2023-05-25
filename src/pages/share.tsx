@@ -11,7 +11,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 import { LayoutMainV2 } from "components";
-import { FormShareToEarnV2 } from "components/Form/FormShareToEarnV2";
+import { FormShareToEarn } from "components/Form/FormShareToEarn";
 import { SHARE_MEDIA } from "constant/pages/share";
 import { useTranslation } from "react-i18next";
 
@@ -104,7 +104,7 @@ const ShareV2 = () => {
                     </CardBody>
                   </Box>
                   <Box p="2">
-                    <FormShareToEarnV2 mediaName={item.mediaName} />
+                    <FormShareToEarn mediaName={item.mediaName} />
                   </Box>
                 </Card>
               ))}

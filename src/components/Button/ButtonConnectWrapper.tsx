@@ -1,26 +1,14 @@
-import { Button, ButtonProps } from "@chakra-ui/react";
-import { useWallet, useAsyncCall } from "hooks";
-import { useTranslation } from "react-i18next";
+import { ButtonProps } from "@chakra-ui/react";
+import { ConnectWallet, useWallet } from "@thirdweb-dev/react";
 
 type Props = ButtonProps & {
   children?: React.ReactElement;
 };
 
 export const ButtonConnectWrapper = (props: Props) => {
-  const { children, ...rest } = props;
-  const { isConnected, connect } = useWallet();
-  const { t } = useTranslation();
-  const connectAsync = useAsyncCall(connect);
+  const wallet = useWallet();
 
-  if (isConnected) return props.children ?? null;
+  if (wallet) return props.children ?? null;
 
-  return (
-    <Button
-      {...rest}
-      isLoading={connectAsync.isLoading}
-      onClick={connectAsync.exec}
-    >
-      {t("common.connectWallet")}
-    </Button>
-  );
+  return <ConnectWallet theme="dark" />;
 };

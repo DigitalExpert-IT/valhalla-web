@@ -12,24 +12,28 @@ import {
 } from "@chakra-ui/react";
 import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
-import { useAsyncCall, useValhalla, useWallet } from "hooks";
+import { useAsyncCall } from "hooks";
 import { shortenAddress } from "utils";
 import { FormInput, ModalDiscalimer, ButtonConnectWrapper } from "components";
 import { validateRequired, validateAddress } from "utils";
+import { useValhallaContract } from "hooks/useValhallaContract";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { ZERO_ADDRESS } from "constant/address";
 
 type FormType = {
   referrer: string;
 };
 
 export const FormRegister = () => {
-  const valhalla = useValhalla();
+  const valhalla = useValhallaContract();
   const { t } = useTranslation();
+  const valhallaRegister = useContractWrite(valhalla.contract, "register");
   const register = useAsyncCall(
-    valhalla.register,
+    valhallaRegister.mutateAsync,
     t("form.message.registrationSuccess")
   );
   const { control, setValue, handleSubmit } = useForm<FormType>();
-  const wallet = useWallet();
+  const address = useAddress() ?? ZERO_ADDRESS;
   const router = useRouter();
   const disclaimerModal = useModal(ModalDiscalimer);
 
@@ -39,7 +43,7 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
-      await register.exec(data.referrer);
+      await register.exec({ args: [data.referrer] });
       router.replace("/profile");
     });
   });
@@ -58,7 +62,7 @@ export const FormRegister = () => {
           roundedRight={"50px"}
           roundedLeft={"0"}
         >
-          {shortenAddress(wallet.address)}
+          {shortenAddress(address)}
         </Badge>
       </Box>
       <FormLabel

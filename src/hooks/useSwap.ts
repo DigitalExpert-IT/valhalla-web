@@ -126,7 +126,7 @@ const init = createInitiator(async () => {
   );
 });
 
-export const useSwap = () => {
+export const useSwapDEll = () => {
   const store = useStore();
   const { address } = useWallet();
 

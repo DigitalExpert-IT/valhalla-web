@@ -27,21 +27,21 @@ export const NAVIGATION: Array<INavigation> = [
     children: [
       {
         title: "nftFarming",
-        link: "/nft-farming-v2",
+        link: "/nft-farming",
       },
       {
         title: "sharetoearn",
-        link: "/sharev2",
+        link: "/share",
       },
     ],
   },
   {
     name: "swap",
-    href: "/swapv2",
+    href: "/swap",
   },
   {
     name: "profile",
-    href: "/profilev2",
+    href: "/profile",
   },
 ];
 

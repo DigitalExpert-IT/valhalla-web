@@ -13,7 +13,7 @@ export const withConnection = (Component: () => JSX.Element | null) => {
     const connectionStatus = useConnectionStatus();
 
     if (connectionStatus === "connecting") return <LayoutLoading />;
-    if (!wallet) {
+    if (!wallet && connectionStatus === "disconnected") {
       return <ConnectWalletRequred />;
     }
 

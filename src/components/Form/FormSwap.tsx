@@ -62,7 +62,7 @@ export const FormSwap = () => {
       address,
       addressSwap,
     ]);
-    const poolBalance: BigNumber = await swap.contract?.call("getGnetRate", [
+    const poolBalance: BigNumber = await swap.contract?.call("getUsdtRate", [
       value,
     ]);
 
@@ -92,7 +92,7 @@ export const FormSwap = () => {
       addressSwap,
     ]);
 
-    const poolBalance: BigNumber = await swap.contract?.call("getUsdtRate", [
+    const poolBalance: BigNumber = await swap.contract?.call("getGnetRate", [
       value,
     ]);
 

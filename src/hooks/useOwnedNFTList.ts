@@ -3,6 +3,9 @@ import { useAddress } from "@thirdweb-dev/react";
 import { NFT } from "@warmbyte/valhalla/typechain-types";
 import { useNFTContract } from "./useNFTContract";
 import { BigNumber } from "ethers";
+import { ZERO_ADDRESS } from "constant/address";
+import ee from "ee";
+import { compareAddress } from "utils";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {
@@ -11,12 +14,12 @@ export type OwnedNftType = OwnedTokenMapType & {
 };
 
 export const useOwnedNFTList = () => {
-  const address = useAddress();
+  const address = useAddress() ?? ZERO_ADDRESS;
   const nft = useNFTContract();
   const [data, setData] = useState<OwnedNftType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
-  const init = async () => {
+  const fetch = async () => {
     if (!nft.contract) return;
     try {
       setLoading(true);
@@ -45,8 +48,24 @@ export const useOwnedNFTList = () => {
   };
 
   useEffect(() => {
+    const refetch = (data: any) => {
+      if (
+        compareAddress(data.from, address) ||
+        compareAddress(data.to, address)
+      ) {
+        fetch();
+      }
+    };
+    ee.addListener("nft-Transfer", refetch);
+
+    return () => {
+      ee.removeListener("nft-Transfer", refetch);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!address) return;
-    init();
+    fetch();
   }, [address, nft.contract]);
 
   return { isLoading: isLoading || nft.isLoading, data };

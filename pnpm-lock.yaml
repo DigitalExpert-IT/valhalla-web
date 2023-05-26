@@ -82,6 +82,9 @@ dependencies:
   ethers:
     specifier: ^5.7.2
     version: 5.7.2
+  eventemitter3:
+    specifier: ^5.0.1
+    version: 5.0.1
   evm-bn:
     specifier: ^1.1.2
     version: 1.1.2(@ethersproject/bignumber@5.7.0)

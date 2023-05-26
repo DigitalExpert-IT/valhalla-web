@@ -16,6 +16,10 @@ import {
 } from "@thirdweb-dev/react";
 import { Polygon } from "@thirdweb-dev/chains";
 import { getActiveChain } from "lib/chain";
+import { useNFTContract } from "hooks/useNFTContract";
+import ee from "ee";
+import { useValhallaContract } from "hooks/useValhallaContract";
+import { useSwapContract } from "hooks";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -52,6 +56,34 @@ export default function App(props: AppProps) {
 
 const Main = ({ Component, pageProps }: AppProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const nft = useNFTContract();
+  const valhalla = useValhallaContract();
+  const swap = useSwapContract();
+
+  useEffect(() => {
+    if (!nft.contract || !valhalla.contract || !swap.contract) return;
+    const unsubscribeNftEvents = nft.contract.events?.listenToAllEvents(
+      event => {
+        ee.emit(`nft-${event.eventName}`, event.data);
+      }
+    );
+    const unsubscribeValhallaEvents =
+      valhalla.contract.events?.listenToAllEvents(event => {
+        ee.emit(`valhalla-${event.eventName}`, event.data);
+      });
+
+    const unsubscribeSwapEvents = swap.contract.events?.listenToAllEvents(
+      event => {
+        ee.emit(`swap-${event.eventName}`, event.data);
+      }
+    );
+
+    return () => {
+      unsubscribeNftEvents();
+      unsubscribeValhallaEvents();
+      unsubscribeSwapEvents();
+    };
+  }, [nft.contract, valhalla.contract, swap.contract]);
 
   // enforce dark mode
   useEffect(() => {

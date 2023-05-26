@@ -62,10 +62,19 @@ export const FormSwap = () => {
       address,
       addressSwap,
     ]);
+    const poolBalance: BigNumber = await swap.contract?.call("getGnetRate", [
+      value,
+    ]);
 
     if (balanceGNET.lt(value)) {
       throw {
         code: "NotEnoughBalance",
+      };
+    }
+
+    if (poolBalance.lt(value)) {
+      throw {
+        code: "NotEnoughPool",
       };
     }
 
@@ -83,9 +92,19 @@ export const FormSwap = () => {
       addressSwap,
     ]);
 
+    const poolBalance: BigNumber = await swap.contract?.call("getUsdtRate", [
+      value,
+    ]);
+
     if (balanceUSDT.lt(value)) {
       throw {
         code: "NotEnoughBalance",
+      };
+    }
+
+    if (poolBalance.lt(value)) {
+      throw {
+        code: "NotEnoughPool",
       };
     }
 
@@ -141,13 +160,15 @@ export const FormSwap = () => {
   }, [watch]);
 
   const onSubmit = handleSubmit(async data => {
-    await exec({
+    const swap = await exec({
       currency: data.currency,
       amount: data.price,
     });
-    reset();
-    gnet.refetch();
-    usdt.refetch();
+    if (swap.status === 1) {
+      reset();
+      gnet.refetch();
+      usdt.refetch();
+    }
   });
 
   return (
@@ -157,7 +178,7 @@ export const FormSwap = () => {
       pos={"relative"}
     >
       <Stack as="form" onSubmit={onSubmit} align="center">
-        <Stack alignItems="center" mb="5">
+        <Stack alignItems="center" mb="5" spacing={"3"}>
           <Stack w={"full"}>
             <Box
               position={"relative"}
@@ -196,7 +217,7 @@ export const FormSwap = () => {
                 name="price"
                 placeholder={"0.0"}
                 type="number"
-                // isDisabled={!initialized}
+                isDisabled={swap.isLoading}
               />
             </Box>
             <Text
@@ -246,7 +267,7 @@ export const FormSwap = () => {
                   { value: "USDT", label: "USDT" },
                   { value: "GNET", label: "GNET" },
                 ]}
-                // isDisabled={!initialized}
+                isDisabled={swap.isLoading}
                 defaultValue="USDT"
               />
             </SimpleGrid>
@@ -308,22 +329,23 @@ export const FormSwap = () => {
               })}
             </Text>
           </Stack>
+          <ButtonConnectWrapper>
+            <Button
+              type="submit"
+              // w={{ base: "70%", md: "100%" }}
+              w="100%"
+              isLoading={isSwapLoading}
+              loadingText={t("common.isConnectingToBlockChain")!}
+              color={"purple.900"}
+              bg={"white"}
+              _hover={{
+                bg: "whiteAlpha.500",
+              }}
+            >
+              {t("common.swap")}
+            </Button>
+          </ButtonConnectWrapper>
         </Stack>
-        <ButtonConnectWrapper>
-          <Button
-            type="submit"
-            w={{ base: "70%", md: "100%" }}
-            isLoading={isSwapLoading}
-            loadingText={t("common.isConnectingToBlockChain")!}
-            color={"purple.900"}
-            bg={"white"}
-            _hover={{
-              bg: "whiteAlpha.500",
-            }}
-          >
-            {t("common.swap")}
-          </Button>
-        </ButtonConnectWrapper>
       </Stack>
       <Box
         display={{ base: "none", md: "block" }}

@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import {
   Tr,
   Th,
@@ -21,7 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { CopiableText, HeaderDashboard, Sidebar } from "components";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useWallet } from "hooks";
+import { useValhalla, useWallet } from "hooks";
 import { useTranslation } from "react-i18next";
 import { jsNumberForAddress } from "react-jazzicon";
 import Jazzicon from "react-jazzicon/dist/Jazzicon";
@@ -34,150 +35,204 @@ import {
 } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
-import { Pagination } from "components/PaginationUtils";
-import { useState } from "react";
+import { PaginationV2 as Pagination } from "components/PaginationUtils";
+import { useDashboard } from "hooks/useDashboard";
+import { withConnection } from "hoc";
 
-const TableDownlineLevel = () => {
-  return (
-    <TableContainer>
-      <Table variant="dashboard" color="gray.800">
-        <Thead>
-          <Tr>
-            <Th>Lv</Th>
-            <Th>Total Member</Th>
-            <Th>Profit</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td fontWeight="600">1</Td>
-            <Td display="flex">
-              <BsFillPersonFill size="20" />
-              <Text ms="2">74</Text>
-            </Td>
-            <Td>96%</Td>
-          </Tr>
-          <Tr>
-            <Td fontWeight="600">1</Td>
-            <Td display="flex">
-              <BsFillPersonFill size="20" />
-              <Text ms="2">74</Text>
-            </Td>
-            <Td>85%</Td>
-          </Tr>
-        </Tbody>
-      </Table>
-    </TableContainer>
-  );
-};
-
-const TableMember = () => {
-  return (
-    <TableContainer>
-      <Table variant="dashboard" color="gray.800">
-        <Thead>
-          <Tr>
-            <Th>Member</Th>
-            <Th>Rank</Th>
-            <Th>NFT</Th>
-            <Th>Profit</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>
-              <HStack>
-                <BsFillPersonFill size="20" color="#000" />
-                <Text fontSize="sm">
-                  0x9ee5C130f81A3c3f000Ce1815E397B43b2c24808
-                </Text>
-              </HStack>
-            </Td>
-            <Td>
-              <AspectRatio w="18px" ratio={15 / 17}>
-                <Image src={"/" + RANK_SYMBOL_MAP[2]} alt={rankMap[2]} />
-              </AspectRatio>
-            </Td>
-            <Td>110</Td>
-            <Td>100%</Td>
-          </Tr>
-          <Tr>
-            <Td>
-              <HStack>
-                <BsFillPersonFill size="20" color="#000" />
-                <Text fontSize="sm">
-                  0x9ee5C130f81A3c3f000Ce1815E397B43b2c24808
-                </Text>
-              </HStack>
-            </Td>
-            <Td>
-              <AspectRatio w="18px" ratio={15 / 17}>
-                <Image src={"/" + RANK_SYMBOL_MAP[2]} alt={rankMap[2]} />
-              </AspectRatio>
-            </Td>
-            <Td>110</Td>
-            <Td>100%</Td>
-          </Tr>
-        </Tbody>
-      </Table>
-    </TableContainer>
-  );
-};
-
-const mock = [
-  {
-    addres: "0x01",
-    rank: 1,
-    profit: 20000,
-  },
-  {
-    addres: "0x02",
-    rank: 5,
-    profit: 20000,
-  },
-  {
-    addres: "0x0",
-    rank: 0,
-    profit: 300,
-  },
-];
+const PAGE_SIZE = 10;
 
 const Dashboard = () => {
-  const { address } = useWallet();
+  // const { address } = useWallet();
+  const address = "0x458aE247679f92BeD7Cbd56DF323121520Ef02c2";
+  const user = useValhalla();
   const { t } = useTranslation();
+  const {
+    listNFT,
+    listUser,
+    totalUser,
+    listProfitePerLevel,
+    potensialProfite,
+    totalNFTCirculatingSuply,
+  } = useDashboard(address, 1);
 
-  const itemsPage = 5;
+  // Start Pagination
+  const [selectedLevel, setLevel] = useState(1);
+  const [selectedAddressList, setSelectAddressList] = useState<string[]>([]);
   const [page, setPage] = useState(1);
-  const [itemOffset, setItemOffset] = useState(0);
-  const [prev, setPrev] = useState<number[]>([]);
-  const [next, setNext] = useState<number[]>([2]);
+  const [startOffset, setStartOffset] = useState(0);
 
-  const handlePageClick = (event: number) => {
-    const n = event - 1;
-    const newOffset = (n * itemsPage) % 10;
-    setItemOffset(newOffset);
-    setPage(event);
-    if (n < Math.ceil(10 / itemsPage)) {
-      setNext([event + 1]);
+  const downlinesByAddress = useMemo(() => {
+    const newUser = listUser[
+      selectedLevel + selectedAddressList.length
+    ]?.filter(address => address.upline === selectedAddressList.at(-1));
+
+    return newUser;
+  }, [listUser, selectedLevel, selectedAddressList]);
+
+  const currentItems = useMemo(() => {
+    const endOffset = startOffset + PAGE_SIZE;
+
+    if (selectedAddressList.length > 0) {
+      return downlinesByAddress?.slice(startOffset, endOffset);
     }
-    if (event >= Math.ceil(10 / itemsPage)) {
-      setNext([]);
-    }
-    if (n >= 1) {
-      setPrev([event - 1]);
-    }
-    if (event <= 1) {
-      setPrev([]);
-    }
+
+    return listUser[selectedLevel]?.slice(startOffset, endOffset);
+  }, [
+    listUser,
+    selectedLevel,
+    startOffset,
+    downlinesByAddress,
+    selectedAddressList,
+  ]);
+
+  const totalPage = useMemo(() => {
+    if (selectedAddressList.length > 0)
+      return Math.ceil(downlinesByAddress?.length / PAGE_SIZE);
+
+    return Math.ceil(listUser[selectedLevel]?.length / PAGE_SIZE);
+  }, [listUser, selectedAddressList, downlinesByAddress]);
+
+  const handlePageClick = (num: number) => {
+    const newStartItem = PAGE_SIZE * num - PAGE_SIZE;
+
+    setStartOffset(newStartItem);
+    setPage(num);
   };
-  const endOffset = itemOffset + itemsPage;
-  const currentItems = mock.slice(itemOffset, endOffset);
+  // End Pagination
+
+  const handleClickLevel = useCallback((level: number) => {
+    setLevel(level);
+    setSelectAddressList([]);
+
+    handlePageClick(1);
+  }, []);
+
+  const handleClickAddress = useCallback(
+    (address: string) => {
+      const downlines = listUser[
+        selectedLevel + selectedAddressList.length + 1
+      ]?.filter(user => user.upline === address);
+
+      if (!downlines || downlines.length === 0) return;
+
+      setSelectAddressList(state => [...state, address]);
+    },
+    [listUser, selectedLevel, selectedAddressList]
+  );
+
+  const handleJumpToAddress = useCallback(
+    (address: string) => {
+      const sliceIdx = selectedAddressList.findIndex(addr => addr == address);
+      const slicedAddress = selectedAddressList.slice(0, sliceIdx + 1);
+
+      setSelectAddressList(slicedAddress);
+    },
+    [selectedAddressList]
+  );
+
+  const TableDownlineLevel = useMemo(() => {
+    return (
+      <TableContainer border="1px solid #000" borderRadius="xl">
+        <Table variant="dashboard" color="gray.800">
+          <Thead>
+            <Tr>
+              <Th>Lv</Th>
+              <Th>Total Member</Th>
+              <Th>Profit</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {listUser.map((userLevel, idx) => {
+              if (idx > 0)
+                return (
+                  <Tr
+                    bg={selectedLevel === idx ? "white" : ""}
+                    boxShadow={selectedLevel === idx ? "lg" : ""}
+                    key={`level.${idx}`}
+                    onClick={() => handleClickLevel(idx)}
+                  >
+                    <Td fontWeight="600">{idx}</Td>
+                    <Td display="flex">
+                      <BsFillPersonFill size="20" />
+                      <Text ms="2">{userLevel.length}</Text>
+                    </Td>
+                    <Td>{listProfitePerLevel[idx]}</Td>
+                  </Tr>
+                );
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    );
+  }, [listUser, selectedLevel]);
+
+  const TableMember = useMemo(() => {
+    return (
+      <>
+        <TableContainer border="1px solid #000" borderRadius="xl">
+          <Table variant="dashboard" color="gray.800">
+            <Thead>
+              <Tr>
+                <Th>Member</Th>
+
+                <Th>Rank</Th>
+                <Th>NFT</Th>
+                <Th>Profit</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {currentItems?.map((user, idx) => (
+                <Tr
+                  key={`user.${idx}`}
+                  onClick={() => handleClickAddress(user.address)}
+                >
+                  <Td>
+                    <HStack>
+                      <BsFillPersonFill size="20" color="#000" />
+                      <Text fontSize="sm">{user.address}</Text>
+                    </HStack>
+                  </Td>
+                  <Td>
+                    <AspectRatio w="18px" ratio={15 / 17}>
+                      <Image src={"/" + RANK_SYMBOL_MAP[0]} alt={rankMap[0]} />
+                    </AspectRatio>
+                  </Td>
+                  <Td>{user.listNFT.length ?? 0}</Td>
+                  <Td>
+                    {user.listNFT.reduce(
+                      (acc, nft) =>
+                        acc + nft.farmRewardPerDay * nft.farmPercentage,
+                      0
+                    ) ?? 0}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <Pagination
+          justifyPage="flex-end"
+          currentPage={page}
+          totalPage={totalPage}
+          onPageChange={handlePageClick}
+          colorScheme={"valhalla"}
+        />
+      </>
+    );
+  }, [currentItems]);
 
   return (
     <LayoutDashboard>
       <HeaderDashboard address={address} />
 
-      <HStack flex={4} alignItems="flex-start" bg="#f6f7ff">
+      <HStack
+        minH="calc(100vh-112px)"
+        flex={4}
+        width="fit-content"
+        alignItems="streetch"
+        bg="#f6f7ff"
+        pb="32 "
+      >
         <Box flex={2} px="4">
           <HStack
             minH="220px"
@@ -214,11 +269,11 @@ const Dashboard = () => {
                   {t("pages.dashboard.title.members")}
                 </Heading>
                 <Text fontSize="xs" color="gray.400">
-                  Total: 2.345 Member
+                  {`Total: ${totalUser} Member`}
                 </Text>
               </HStack>
 
-              <TableDownlineLevel />
+              {TableDownlineLevel}
             </Box>
 
             <Box flex="2">
@@ -230,35 +285,29 @@ const Dashboard = () => {
                 >
                   <BreadcrumbItem>
                     <BreadcrumbLink href="#" fontSize="xs">
-                      0x3ae...4508
+                      {shortenAddress(address)}
                     </BreadcrumbLink>
                   </BreadcrumbItem>
 
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#" fontSize="xs">
-                      0x3ae...4508
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
+                  {selectedAddressList.map(addr => (
+                    <BreadcrumbItem key={`address.${addr}`}>
+                      <BreadcrumbLink
+                        fontSize="xs"
+                        onClick={() => handleJumpToAddress(addr)}
+                      >
+                        {shortenAddress(addr)}
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                  ))}
                 </Breadcrumb>
               </HStack>
 
-              <TableMember />
-              <Pagination
-                justifyPage="flex-end"
-                currentPage={page}
-                lastPage={Math.ceil(mock.length / itemsPage)}
-                siblingsCount={1}
-                previousPages={[...prev]}
-                nextPages={[...next]}
-                onPageChange={handlePageClick}
-                colorScheme={"valhalla"}
-              />
+              {TableMember}
             </Box>
           </HStack>
         </Box>
 
         <Box
-          minH="100vh"
           maxW="453px"
           minW="453px"
           flex={1}
@@ -302,7 +351,7 @@ const Dashboard = () => {
                   bg="white"
                   borderRadius="md"
                 >
-                  20.000
+                  {totalUser}
                 </Box>
               </HStack>
 
@@ -330,7 +379,7 @@ const Dashboard = () => {
                   bg="white"
                   borderRadius="md"
                 >
-                  200%
+                  {potensialProfite}
                 </Box>
               </HStack>
 
@@ -358,7 +407,7 @@ const Dashboard = () => {
                   bg="white"
                   borderRadius="md"
                 >
-                  15
+                  {listUser.length - 1}
                 </Box>
               </HStack>
             </Stack>
@@ -396,4 +445,5 @@ const Dashboard = () => {
   );
 };
 
+// export default withConnection(Dashboard);
 export default Dashboard;

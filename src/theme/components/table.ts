@@ -326,10 +326,19 @@ const variantBasic = definePartsStyle(props => {
 const variantDashboard = definePartsStyle(props => {
   return {
     table: {
-      border: "1px solid #000",
-      borderRadius: "xl",
       borderSpacing: 0,
       borderCollapse: "separate",
+    },
+    tr: {
+      padding: "8px",
+      borderRadius: "9px",
+      margin: "4",
+      justifyContent: "space-between",
+      _selected: {
+        bg: "white",
+        boxShadow: "md",
+      },
+      _hover: { cursor: "pointer", boxShadow: "md" },
     },
     th: {
       color: "#000",

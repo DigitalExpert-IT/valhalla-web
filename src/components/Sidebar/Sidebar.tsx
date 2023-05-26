@@ -45,16 +45,10 @@ export const Sidebar = () => {
   };
 
   const MenuItem = ({ menu }: any) => {
-    let href = null;
-
-    if (typeof menu.href == "function") {
-      href = menu.href(address);
-    } else href = menu.href;
-
     return (
-      <Link href={href}>
+      <Link href={menu.href}>
         <ListItem
-          color={router.asPath === href ? "#D987FD" : "white"}
+          color={router.asPath === menu.href ? "#D987FD" : "white"}
           {...MenuItemStyles}
         >
           {menu.icon}

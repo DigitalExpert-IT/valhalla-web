@@ -62,9 +62,12 @@ export const FormSwap = () => {
       address,
       addressSwap,
     ]);
-    const poolBalance: BigNumber = await swap.contract?.call("getUsdtRate", [
+
+    // getUsdtRate to check how much USDT exchange with GNET
+    const getRatio: BigNumber = await swap.contract?.call("getUsdtRate", [
       value,
     ]);
+    const poolBalance = await usdt.contract?.call("balanceOf", [addressSwap]);
 
     if (balanceGNET.lt(value)) {
       throw {
@@ -72,7 +75,7 @@ export const FormSwap = () => {
       };
     }
 
-    if (poolBalance.lt(value)) {
+    if (poolBalance.lt(getRatio)) {
       throw {
         code: "NotEnoughPool",
       };
@@ -92,9 +95,11 @@ export const FormSwap = () => {
       addressSwap,
     ]);
 
-    const poolBalance: BigNumber = await swap.contract?.call("getGnetRate", [
+    // getGnetRate to check how much gnet exchange with USDT
+    const getRatio: BigNumber = await swap.contract?.call("getGnetRate", [
       value,
     ]);
+    const poolBalance = await gnet.contract?.call("balanceOf", [addressSwap]);
 
     if (balanceUSDT.lt(value)) {
       throw {
@@ -102,7 +107,7 @@ export const FormSwap = () => {
       };
     }
 
-    if (poolBalance.lt(value)) {
+    if (poolBalance.lt(getRatio)) {
       throw {
         code: "NotEnoughPool",
       };
@@ -335,7 +340,7 @@ export const FormSwap = () => {
               // w={{ base: "70%", md: "100%" }}
               w="100%"
               isLoading={isSwapLoading}
-              loadingText={t("common.isConnectingToBlockChain")!}
+              // loadingText={t("common.isConnectingToBlockChain")!}
               color={"purple.900"}
               bg={"white"}
               _hover={{

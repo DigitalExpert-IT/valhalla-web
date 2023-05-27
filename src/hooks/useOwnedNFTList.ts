@@ -61,7 +61,7 @@ export const useOwnedNFTList = () => {
     return () => {
       ee.removeListener("nft-Transfer", refetch);
     };
-  }, []);
+  }, [address]);
 
   useEffect(() => {
     if (!address) return;

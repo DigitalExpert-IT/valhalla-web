@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
-import { ChakraProvider, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
 import theme from "theme";
@@ -13,12 +19,15 @@ import {
   metamaskWallet,
   coinbaseWallet,
   walletConnect,
+  useChain,
+  useSwitchChain,
 } from "@thirdweb-dev/react";
 import { getActiveChain } from "lib/chain";
 import { useNFTContract } from "hooks/useNFTContract";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useSwapContract } from "hooks";
 import ee from "ee";
+import { useTranslation } from "react-i18next";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -33,14 +42,14 @@ const queryClient = new QueryClient({
   },
 });
 
-const chain = getActiveChain();
+const targetChain = getActiveChain();
 
 export default function App(props: AppProps) {
   return (
     <ThirdwebProvider
-      supportedChains={[chain]}
+      supportedChains={[targetChain]}
       supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
-      activeChain={chain}
+      activeChain={targetChain}
     >
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
@@ -55,9 +64,20 @@ export default function App(props: AppProps) {
 
 const Main = ({ Component, pageProps }: AppProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { t } = useTranslation();
   const nft = useNFTContract();
   const valhalla = useValhallaContract();
   const swap = useSwapContract();
+  const chain = useChain();
+  const switchChain = useSwitchChain();
+  const isConnectThroughIncorrectChain =
+    chain && chain?.chainId !== targetChain?.chainId;
+
+  const handleSwitchChain = () => {
+    try {
+      switchChain(targetChain?.chainId);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     if (!nft.contract || !valhalla.contract || !swap.contract) return;
@@ -98,7 +118,28 @@ const Main = ({ Component, pageProps }: AppProps) => {
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <title>{PROJECT_NAME}</title>
       </Head>
-      <Component {...pageProps} />
+      <>
+        <Component {...pageProps} />
+        {isConnectThroughIncorrectChain ? (
+          <Box
+            bg="gray.800"
+            w="full"
+            py="4"
+            textAlign="center"
+            position="fixed"
+            bottom="0"
+            left="0"
+            zIndex={99999}
+          >
+            <Text textAlign="center">
+              {t("common.banner.invalidChainMessage")}
+            </Text>{" "}
+            <Button onClick={handleSwitchChain} mt="2">
+              {t("common.banner.switchChain", { name: targetChain?.name })}
+            </Button>
+          </Box>
+        ) : null}
+      </>
     </>
   );
 };

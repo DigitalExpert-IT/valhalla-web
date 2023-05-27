@@ -7,6 +7,10 @@
     "sharetoearn": "Share To Earn",
     "project": "Project"
   },
+  "banner": {
+    "invalidChainMessage": "You are connected through Invalid chain!",
+    "switchChain": "Switch to {{name}}"
+  },
   "footer": {
     "description": "The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications",
     "listedOn": "Listen On",
@@ -59,5 +63,5 @@
   "percentage": "Percentage",
   "claim": "Claim",
   "buy": "Buy",
-  "isConnectingToBlockChain":"Connecting to BlockChain"
+  "isConnectingToBlockChain": "Connecting to BlockChain"
 }

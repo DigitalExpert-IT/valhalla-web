@@ -112,11 +112,12 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             h="30%"
             alignItems={"center"}
           >
-            <ButtonConnectWallet />
+            <ButtonConnectWallet direction="column" />
           </Stack>
           <Stack align={"center"}>
             <Box>
               <Image
+                alt="Global Network"
                 src="/assets/logo/logo-type-big.svg"
                 w="100%"
                 objectFit="cover"

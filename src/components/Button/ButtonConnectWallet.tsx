@@ -21,7 +21,7 @@ export const ButtonConnectWallet = (props: Props) => {
     <Stack spacing="4" direction={props.direction ?? "row"} align="center">
       {accountMap.data?.isRegistered ? null : (
         <Button
-          isLoading={accountMap.isLoading}
+          isLoading={accountMap.isLoading && !accountMap.isFetched}
           px="6"
           size="sm"
           variant="outline"

@@ -14,12 +14,11 @@ import {
   coinbaseWallet,
   walletConnect,
 } from "@thirdweb-dev/react";
-import { Polygon } from "@thirdweb-dev/chains";
 import { getActiveChain } from "lib/chain";
 import { useNFTContract } from "hooks/useNFTContract";
-import ee from "ee";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useSwapContract } from "hooks";
+import ee from "ee";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);

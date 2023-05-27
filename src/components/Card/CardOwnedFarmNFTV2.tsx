@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { useAsyncCall } from "hooks";
 import { OwnedNftType } from "hooks/useOwnedNFTList";
 import { prettyBn } from "utils";
-import { TextAnimation } from "components";
 import { useTranslation } from "react-i18next";
 import {
   Stack,
@@ -12,19 +11,42 @@ import {
   Button,
   Heading,
 } from "@chakra-ui/react";
+import { differenceInSeconds } from "date-fns";
 import { useContractWrite } from "@thirdweb-dev/react";
 import { useNFTContract } from "hooks/useNFTContract";
 
 export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
-  const { id, mintingPrice, cardId, percentage, tokenUri } = props;
+  const { id, mintingPrice, cardId, percentage, tokenUri, lastFarmedAt } =
+    props;
   const { t } = useTranslation();
   const nft = useNFTContract();
   const farm = useContractWrite(nft.contract, "farm");
   const farmAsync = useAsyncCall(farm.mutateAsync);
+  const intervalRef = useRef<NodeJS.Timer>();
+  const farmTextRef = useRef<HTMLParagraphElement>(null);
 
   const handleFarm = async () => {
     await farmAsync.exec({ args: [id] });
   };
+
+  useLayoutEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (!farmTextRef.current) return;
+
+      const farmPerDay = mintingPrice.mul(percentage).div(1000);
+      const farmPerSec = farmPerDay.div(86400);
+      const secDiff = differenceInSeconds(
+        new Date(),
+        new Date(lastFarmedAt.toNumber() * 1000)
+      );
+      const farmValue = farmPerSec.mul(secDiff);
+      farmTextRef.current.innerText = prettyBn(farmValue, 9);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <Box>
@@ -84,7 +106,9 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
             onClick={handleFarm}
             isLoading={farmAsync.isLoading}
           >
-            <TextAnimation mr="1">{0}</TextAnimation>
+            <Text ref={farmTextRef} mr="1" as="span">
+              0
+            </Text>
             Gnet Claim
           </Button>
         </Box>

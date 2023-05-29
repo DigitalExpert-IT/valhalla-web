@@ -21,6 +21,7 @@ import {
   walletConnect,
   useChain,
   useSwitchChain,
+  useWallet,
 } from "@thirdweb-dev/react";
 import { getActiveChain } from "lib/chain";
 import { useNFTContract } from "hooks/useNFTContract";
@@ -70,8 +71,9 @@ const Main = ({ Component, pageProps }: AppProps) => {
   const swap = useSwapContract();
   const chain = useChain();
   const switchChain = useSwitchChain();
+  const wallet = useWallet();
   const isConnectThroughIncorrectChain =
-    chain && chain?.chainId !== targetChain?.chainId;
+    wallet && chain?.chainId !== targetChain?.chainId;
 
   const handleSwitchChain = () => {
     try {

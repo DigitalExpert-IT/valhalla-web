@@ -35,9 +35,8 @@ interface ISwapToken {
   currency: string;
 }
 
-const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
-
 export const FormSwap = () => {
+  const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
@@ -94,7 +93,6 @@ export const FormSwap = () => {
       address,
       addressSwap,
     ]);
-
     // getUsdtRate to check how much gnet exchange with USDT
     const getRatio: BigNumber = await swap.contract?.call("getUsdtRate", [
       value,

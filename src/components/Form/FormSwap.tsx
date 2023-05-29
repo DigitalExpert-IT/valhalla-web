@@ -63,8 +63,8 @@ export const FormSwap = () => {
       addressSwap,
     ]);
 
-    // getUsdtRate to check how much USDT exchange with GNET
-    const getRatio: BigNumber = await swap.contract?.call("getUsdtRate", [
+    // getGnetRate to check how much USDT exchange with GNET
+    const getRatio: BigNumber = await swap.contract?.call("getGnetRate", [
       value,
     ]);
     const poolBalance = await usdt.contract?.call("balanceOf", [addressSwap]);
@@ -95,8 +95,8 @@ export const FormSwap = () => {
       addressSwap,
     ]);
 
-    // getGnetRate to check how much gnet exchange with USDT
-    const getRatio: BigNumber = await swap.contract?.call("getGnetRate", [
+    // getUsdtRate to check how much gnet exchange with USDT
+    const getRatio: BigNumber = await swap.contract?.call("getUsdtRate", [
       value,
     ]);
     const poolBalance = await gnet.contract?.call("balanceOf", [addressSwap]);

@@ -326,6 +326,7 @@ const variantBasic = definePartsStyle(props => {
 const variantDashboard = definePartsStyle(props => {
   return {
     table: {
+      bg: "#f6f7ff",
       borderSpacing: 0,
       borderCollapse: "separate",
     },

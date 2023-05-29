@@ -29,7 +29,9 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
 
   const handleFarm = async () => {
     await farmAsync.exec({ args: [id] });
-    lastFarmedAtRef.current = BigNumber.from(new Date().getTime() / 1000);
+    lastFarmedAtRef.current = BigNumber.from(
+      Math.round(new Date().getTime() / 1000)
+    );
   };
 
   useLayoutEffect(() => {

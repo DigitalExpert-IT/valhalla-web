@@ -1,5 +1,9 @@
 import EventEmitter from "eventemitter3";
 
-let EE = new EventEmitter();
+(() => {
+  if (!(global as any).ee) {
+    (global as any).ee = new EventEmitter();
+  }
+})();
 
-export default EE;
+export default (global as any).ee as EventEmitter;

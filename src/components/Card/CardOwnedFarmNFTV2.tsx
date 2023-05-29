@@ -14,6 +14,7 @@ import {
 import { differenceInSeconds } from "date-fns";
 import { useContractWrite } from "@thirdweb-dev/react";
 import { useNFTContract } from "hooks/useNFTContract";
+import { BigNumber } from "ethers";
 
 export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const { id, mintingPrice, cardId, percentage, tokenUri, lastFarmedAt } =
@@ -24,9 +25,11 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const farmAsync = useAsyncCall(farm.mutateAsync);
   const intervalRef = useRef<NodeJS.Timer>();
   const farmTextRef = useRef<HTMLParagraphElement>(null);
+  const lastFarmedAtRef = useRef<BigNumber>(lastFarmedAt);
 
   const handleFarm = async () => {
     await farmAsync.exec({ args: [id] });
+    lastFarmedAtRef.current = BigNumber.from(new Date().getTime() / 1000);
   };
 
   useLayoutEffect(() => {
@@ -37,7 +40,7 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
       const farmPerSec = farmPerDay.div(86400);
       const secDiff = differenceInSeconds(
         new Date(),
-        new Date(lastFarmedAt.toNumber() * 1000)
+        new Date(lastFarmedAtRef.current.toNumber() * 1000)
       );
       const farmValue = farmPerSec.mul(secDiff);
       farmTextRef.current.innerText = prettyBn(farmValue, 9);

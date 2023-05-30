@@ -10,7 +10,6 @@ import {
   Stack,
   useDisclosure,
   IconButton,
-  useMediaQuery,
   Container,
   Image,
   AspectRatio,
@@ -20,7 +19,6 @@ export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrolled, setScrolled] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,14 +72,7 @@ export const Navbar = () => {
                 left={"0"}
                 top={"-2"}
               >
-                <Image
-                  src={
-                    isLargethan800
-                      ? "/assets/logo/gnLogo.png"
-                      : "/assets/logo/gnLogo.png"
-                  }
-                  alt="logo-image"
-                />
+                <Image src="/assets/logo/gnLogo.png" alt="logo-image" />
               </AspectRatio>
             </Link>
             <IconButton
@@ -89,8 +80,8 @@ export const Navbar = () => {
               fontSize="xl"
               icon={<GiHamburgerMenu />}
               aria-label="open-menu"
-              display={{ md: "flex", lg: "none" }}
-              onClick={isOpen ? onClose : onOpen}
+              display={{ base: "flex", md: "flex", lg: "none" }}
+              onClick={onOpen}
             />
           </Stack>
           <Stack

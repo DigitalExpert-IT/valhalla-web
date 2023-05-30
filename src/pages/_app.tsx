@@ -18,6 +18,8 @@ import {
   ThirdwebProvider,
   metamaskWallet,
   coinbaseWallet,
+  safeWallet,
+  localWallet,
   walletConnect,
   useChain,
   useSwitchChain,
@@ -49,7 +51,13 @@ export default function App(props: AppProps) {
   return (
     <ThirdwebProvider
       supportedChains={[targetChain]}
-      supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
+      supportedWallets={[
+        metamaskWallet(),
+        coinbaseWallet(),
+        walletConnect(),
+        safeWallet(),
+        localWallet(),
+      ]}
       activeChain={targetChain}
     >
       <ChakraProvider theme={theme}>

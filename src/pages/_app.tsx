@@ -94,7 +94,7 @@ const Main = ({ Component, pageProps }: AppProps) => {
   const switchChain = useSwitchChain();
   const wallet = useWallet();
   const isConnectThroughIncorrectChain =
-    wallet && chain?.chainId !== targetChain?.chainId;
+    wallet && chain && chain.chainId && chain.chainId !== targetChain?.chainId;
 
   const handleSwitchChain = () => {
     try {

@@ -9,7 +9,8 @@ const toFixed = (num: number, symbol = "") => {
   return `${formatted}${symbol}`;
 };
 
-export const prettyBn = (bn: BigNumber, baseNumber = 18): string => {
+export const prettyBn = (bn?: BigNumber, baseNumber = 18): string => {
+  if (!bn) return "0";
   const value = +fromBn(bn, baseNumber);
   if (value === 0) return "0";
 

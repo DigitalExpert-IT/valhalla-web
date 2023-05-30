@@ -1,0 +1,27 @@
+{
+  "chainIds": [
+    137
+  ],
+  "contracts": [
+    {
+      "address": "0xd2B6f1e58064BB8a0EeA5eC400BcD808e13a7e73",
+      "chainId": 137
+    },
+    {
+      "address": "0x957f6dE5184C3E2892776a9A0c4A45308abBAfba",
+      "chainId": 137
+    },
+    {
+      "address": "0x9ee5C130f81A3c3f000Ce1815E397B43b2c24808",
+      "chainId": 137
+    },
+    {
+      "address": "0x7e7D7EaA50489713d6b1e4C547D804af60BC0Ef3",
+      "chainId": 137
+    },
+    {
+      "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+      "chainId": 137
+    }
+  ]
+}

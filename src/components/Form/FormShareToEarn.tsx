@@ -13,9 +13,14 @@ export const FormShareToEarn = (props: { mediaName: string }) => {
   const { t } = useTranslation();
 
   return (
-    <Flex mt={3} gap={2}>
+    <Flex mt={3} gap={2} align="center">
       <FormInput
+        bg="#006BB4"
+        _hover={{ bg: "#006BB4" }}
+        fill="Background"
         control={control}
+        variant="unstyled"
+        pl="5"
         name={"link"}
         placeholder={
           t(`pages.share.placeholder`, { media: props.mediaName }) ?? ""
@@ -26,7 +31,7 @@ export const FormShareToEarn = (props: { mediaName: string }) => {
           ),
         }}
       />
-      <Button variant={"solid"} colorScheme={"brand"}>
+      <Button variant="ghost" colorScheme={"brand"}>
         <Image src="/assets/icon/send.png" w={5} h={5} alt="send-icon" />
       </Button>
     </Flex>

@@ -8,14 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { NFTMATHCING } from "constant/pages/nftFarming";
 import { AccordionNFTFarm } from "./SectionNFTFarmMatching";
-import {
-  AspectRatio,
-  Box,
-  Container,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 
 export const SectionMatchingRequirment = () => {
   const { t } = useTranslation();

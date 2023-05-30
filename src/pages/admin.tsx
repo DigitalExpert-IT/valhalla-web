@@ -9,18 +9,34 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import { withStaffAbove } from "hoc";
+import { withConnection, withStaffAbove } from "hoc";
 import { LayoutMain } from "components";
-import { useValhalla, useNFT, useAsyncCall } from "hooks";
+import { useAsyncCall } from "hooks";
 import { prettyBn } from "utils";
 import { useTranslation } from "react-i18next";
+import { useGlobalPool as useGlobalNFTPool } from "hooks/nft/useGlobalPool";
+import { useGlobalPool, useIsRankRewardClaimable } from "hooks/valhalla";
+import { useValhallaContract } from "hooks/useValhallaContract";
+import { useContractWrite } from "@thirdweb-dev/react";
 
 const AdminPage = () => {
   const { t } = useTranslation();
-  const valhalla = useValhalla();
-  const nft = useNFT();
-  const startRankRewardAsync = useAsyncCall(valhalla.startClaimingRankReward);
-  const stopRankRewardAsync = useAsyncCall(valhalla.stopClaimingRankReward);
+  const valhalla = useValhallaContract();
+  const startClaimingRankReward = useContractWrite(
+    valhalla.contract,
+    "startClaimingRankReward"
+  );
+  const stopClaimingRankReward = useContractWrite(
+    valhalla.contract,
+    "stopClaimingRankReward"
+  );
+  const nftGlobalPool = useGlobalNFTPool();
+  const globalPool = useGlobalPool();
+  const isRankRewardClaimable = useIsRankRewardClaimable();
+  const startRankRewardAsync = useAsyncCall(
+    startClaimingRankReward.mutateAsync
+  );
+  const stopRankRewardAsync = useAsyncCall(stopClaimingRankReward.mutateAsync);
 
   return (
     <LayoutMain>
@@ -32,17 +48,19 @@ const AdminPage = () => {
               <Stack mt="6">
                 <Box>
                   <Text fontSize="5xl" fontWeight="bold">
-                    {valhalla.isRankRewardClaimable
-                      ? prettyBn(valhalla.globalPool.valueLeft)
-                      : prettyBn(valhalla.globalPool.claimable)}
+                    {isRankRewardClaimable?.data
+                      ? globalPool.data && prettyBn(globalPool.data.valueLeft)
+                      : globalPool.data && prettyBn(globalPool.data.claimable)}
                   </Text>
                   <Text>MATIC</Text>
                 </Box>
                 <Box>
                   <Text fontSize="5xl" fontWeight="bold">
-                    {valhalla.isRankRewardClaimable
-                      ? prettyBn(nft.globalPool.valueLeft, 9)
-                      : prettyBn(nft.globalPool.claimable, 9)}
+                    {isRankRewardClaimable?.data
+                      ? nftGlobalPool.data &&
+                        prettyBn(nftGlobalPool.data.valueLeft, 9)
+                      : nftGlobalPool.data &&
+                        prettyBn(nftGlobalPool.data.claimable, 9)}
                   </Text>
                   <Text>GNET</Text>
                 </Box>
@@ -50,18 +68,18 @@ const AdminPage = () => {
             </CardBody>
             <CardFooter justifyContent="center">
               <Button
-                colorScheme={valhalla.isRankRewardClaimable ? "red" : "green"}
+                colorScheme={isRankRewardClaimable?.data ? "red" : "green"}
                 isLoading={
                   startRankRewardAsync.isLoading ||
                   stopRankRewardAsync.isLoading
                 }
                 onClick={
-                  valhalla.isRankRewardClaimable
-                    ? stopRankRewardAsync.exec
-                    : startRankRewardAsync.exec
+                  isRankRewardClaimable?.data
+                    ? () => stopRankRewardAsync.exec({ args: [] })
+                    : () => startRankRewardAsync.exec({ args: [] })
                 }
               >
-                {valhalla.isRankRewardClaimable
+                {isRankRewardClaimable?.data
                   ? t("pages.admin.label.stopRankReward")
                   : t("pages.admin.label.startRankReward")}
               </Button>
@@ -74,4 +92,4 @@ const AdminPage = () => {
   );
 };
 
-export default withStaffAbove(AdminPage);
+export default withConnection(withStaffAbove(AdminPage));

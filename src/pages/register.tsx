@@ -7,7 +7,7 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
-import { FormRegisterV2, LayoutMainV2 } from "components";
+import { FormRegister, LayoutMainV2 } from "components";
 import { Trans } from "react-i18next";
 
 const Registerv2 = () => {
@@ -99,7 +99,7 @@ const Registerv2 = () => {
                 pos={"relative"}
                 justifyContent={"center"}
               >
-                <FormRegisterV2 />
+                <FormRegister />
               </Stack>
             </CardBody>
           </Card>

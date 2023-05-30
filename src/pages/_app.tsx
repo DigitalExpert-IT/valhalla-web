@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import {
   Box,
@@ -31,6 +31,7 @@ import { useValhallaContract } from "hooks/useValhallaContract";
 import { useSwapContract } from "hooks";
 import ee from "ee";
 import { useTranslation } from "react-i18next";
+import { getTrustWalletFromWindow } from "utils/wallet";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -48,16 +49,28 @@ const queryClient = new QueryClient({
 const targetChain = getActiveChain();
 
 export default function App(props: AppProps) {
+  const [walletType, setWalletType] = useState<"trust" | "unknown">("unknown");
+
+  useEffect(() => {
+    if (getTrustWalletFromWindow()) {
+      setWalletType("trust");
+    }
+  }, []);
+
   return (
     <ThirdwebProvider
       supportedChains={[targetChain]}
-      supportedWallets={[
-        metamaskWallet(),
-        walletConnectV1(),
-        coinbaseWallet(),
-        safeWallet(),
-        localWallet(),
-      ]}
+      supportedWallets={
+        walletType === "trust"
+          ? [walletConnectV1()]
+          : [
+              metamaskWallet(),
+              walletConnectV1(),
+              coinbaseWallet(),
+              safeWallet(),
+              localWallet(),
+            ]
+      }
       activeChain={targetChain}
     >
       <ChakraProvider theme={theme}>

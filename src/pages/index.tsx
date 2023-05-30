@@ -1,4 +1,4 @@
-import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
+import { OURTEAM, PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
 import { Box, Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
@@ -8,6 +8,7 @@ import {
   SectionRoadmapV2,
   SectionFeaturedPopulationV2,
   SectionMatchingBonusV2,
+  SectionTeamV2,
   SectionTeamV3,
   SectionPartnershipV2,
   TableRankBonusV2,

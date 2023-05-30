@@ -1,42 +1,30 @@
+import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
+import { useValhalla, useWallet } from "hooks";
 import { LayoutIllustration, LayoutLoading } from "components";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { useAddress, useContractRead } from "@thirdweb-dev/react";
-import { ZERO_ADDRESS } from "constant/address";
-import { useValhallaContract } from "hooks/useValhallaContract";
 
 export const withStaffAbove = (Component: () => JSX.Element | null) => {
-  const StaffAboveWrapper = () => {
-    const address = useAddress() ?? ZERO_ADDRESS;
-    const valhalla = useValhallaContract();
-    const adminRole = useContractRead(valhalla.contract, "DEFAULT_ADMIN_ROLE");
-    const staffRole = useContractRead(valhalla.contract, "STAFF_ROLE");
-    const isAdmin = useContractRead(valhalla.contract, "hasRole", [
-      adminRole.data ?? "",
-      address,
-    ]);
-    const isStaff = useContractRead(valhalla.contract, "hasRole", [
-      staffRole.data ?? "",
-      address,
-    ]);
+  const RegistrationWrapper = () => {
+    const valhalla = useValhalla();
+    const wallet = useWallet();
+    const [isReady, setReady] = useState(valhalla.initialized);
+    useEffect(() => {
+      if (valhalla.initialized) {
+        setReady(true);
+      }
+    }, [valhalla, wallet]);
 
-    const isLoading =
-      valhalla.isLoading ||
-      adminRole.isLoading ||
-      staffRole.isLoading ||
-      isAdmin.isLoading ||
-      staffRole.isLoading;
-
-    if (isLoading) return <LayoutLoading />;
-    if (!isAdmin.data && !isStaff.data) {
+    if (!isReady) return <LayoutLoading />;
+    if (!valhalla.isAdmin && !valhalla.isStaff) {
       return <StaffRequired />;
     }
 
     return <Component />;
   };
 
-  return StaffAboveWrapper;
+  return RegistrationWrapper;
 };
 
 const StaffRequired = () => {

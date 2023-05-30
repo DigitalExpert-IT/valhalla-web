@@ -1,19 +1,14 @@
 import { HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { useBalance } from "@thirdweb-dev/react";
 import { WidgetProfileBalace } from "components/Widget/WidgetProfile";
-import { GNET_CONTRACT, USDT_CONTRACT } from "constant/address";
+import { fromBn } from "evm-bn";
+import { useSwap, useWallet } from "hooks";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
 
-const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
-const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
-
 export const CardProfileBalanceV2 = () => {
-  const balance = useBalance();
-  const gnetBalance = useBalance(GNETContract);
-  const usdtBalance = useBalance(USDTContract);
-
+  const { balance } = useWallet();
+  const { currency } = useSwap();
   return (
     <CardProfileV2>
       <Text fontSize={"xl"} textAlign={"center"}>
@@ -29,9 +24,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>
-              {prettyBn(gnetBalance.data?.value, 9)} {gnetBalance.data?.symbol}
-            </Text>
+            <Text>{prettyBn(currency.gnet.balance, 9)} GNET</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace pos={"relative"}>
@@ -43,9 +36,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>
-              {prettyBn(balance.data?.value, 18)} {balance.data?.symbol}
-            </Text>
+            <Text>{prettyBn(balance, 18)} MATIC</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace pos={"relative"}>
@@ -57,9 +48,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>
-              {prettyBn(usdtBalance.data?.value, 6)} {usdtBalance.data?.symbol}
-            </Text>
+            <Text>{prettyBn(currency.usdt.balance, 6)} USDT</Text>
           </HStack>
         </WidgetProfileBalace>
       </Stack>

@@ -12,14 +12,13 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
+import { useValhalla } from "hooks";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { LazyVideo } from "components/LazyVideo";
-import { useAccountMap } from "hooks/valhalla";
-import { ButtonConnectWrapper } from "components/Button";
 
 export const SectionHeaderV2 = () => {
   const { t } = useTranslation();
-  const accountMap = useAccountMap();
+  const valhalla = useValhalla();
 
   return (
     <Flex
@@ -83,20 +82,18 @@ export const SectionHeaderV2 = () => {
           mt="6"
           spacing={{ base: "2", sm: "4" }}
         >
-          {accountMap?.data?.isRegistered === false ? (
-            <ButtonConnectWrapper>
-              <Link href="/register">
-                <Button
-                  variant={"outline"}
-                  fontWeight={"thin"}
-                  border={"2px"}
-                  borderColor={"white"}
-                >
-                  {t("common.register").toUpperCase()}
-                </Button>
-              </Link>
-            </ButtonConnectWrapper>
-          ) : null}
+          {valhalla.account.isRegistered ? null : (
+            <Link href="/register">
+              <Button
+                variant={"outline"}
+                fontWeight={"thin"}
+                border={"2px"}
+                borderColor={"white"}
+              >
+                {t("common.register").toUpperCase()}
+              </Button>
+            </Link>
+          )}
         </HStack>
       </Stack>
       <VStack

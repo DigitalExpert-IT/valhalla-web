@@ -1,19 +1,25 @@
+import { useState, useEffect } from "react";
+import { useWallet } from "hooks";
 import {
-  useConnectedWallet,
-  useConnectionStatus,
-  ConnectWallet,
-} from "@thirdweb-dev/react";
-import { LayoutIllustration, LayoutLoading } from "components";
-import { Box } from "@chakra-ui/react";
+  ButtonConnectWrapper,
+  LayoutIllustration,
+  LayoutLoading,
+} from "components";
 import { useTranslation } from "react-i18next";
 
 export const withConnection = (Component: () => JSX.Element | null) => {
   const ConnectionWrapper = () => {
-    const wallet = useConnectedWallet();
-    const connectionStatus = useConnectionStatus();
+    const wallet = useWallet();
+    const [isReady, setReady] = useState(wallet.initialized);
 
-    if (connectionStatus === "connecting") return <LayoutLoading />;
-    if (!wallet && connectionStatus === "disconnected") {
+    useEffect(() => {
+      if (wallet.initialized) {
+        setReady(true);
+      }
+    }, [wallet.initialized]);
+
+    if (!isReady) return <LayoutLoading />;
+    if (!wallet.isConnected) {
       return <ConnectWalletRequred />;
     }
 
@@ -32,9 +38,7 @@ const ConnectWalletRequred = () => {
       title={t("hoc.connection.title")}
       description={t("hoc.connection.description")}
     >
-      <Box mt={2}>
-        <ConnectWallet />
-      </Box>
+      <ButtonConnectWrapper variant="outline" mt="3" />
     </LayoutIllustration>
   );
 };

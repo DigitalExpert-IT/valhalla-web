@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { LayoutFooterV2, Metadata, Navbar } from "components";
+import { LayoutFooterV2, Metadata, NavbarV2 } from "components";
 
 interface MainProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export const LayoutMainV2: React.FC<MainProps> = ({ children }) => {
         author="Global Network"
         description="The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications"
       />
-      <Navbar />
+      <NavbarV2 />
       {children}
       <LayoutFooterV2 />
     </Box>

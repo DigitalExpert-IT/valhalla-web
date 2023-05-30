@@ -2,7 +2,7 @@ import { Card, CardBody, Flex, Heading, Image, Stack } from "@chakra-ui/react";
 import { FormSwapV2, LayoutMainV2 } from "components";
 import { t } from "i18next";
 
-const Swap = () => {
+const SwapV2 = () => {
   return (
     <LayoutMainV2>
       <Flex
@@ -13,27 +13,34 @@ const Swap = () => {
         pb={"10"}
         placeContent={"center"}
         bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)"
+        overflow="hidden"
       >
         <Heading
-          mt={"24"}
-          textAlign={"center"}
+          fontWeight="black"
+          fontSize={{ base: "3xl", md: "7xl" }}
+          textAlign="center"
+          textTransform="uppercase"
+          mt={"40"}
           zIndex={"1"}
           _after={{
             content: `'${t("common.swap").toUpperCase()}'`,
             alignSelf: "center",
             display: "block",
             fontWeight: "black",
-            fontSize: { lg: "180", md: "130", xs: "100", base: "80" },
-            mt: { lg: "-24", md: "-20", xs: "-20", base: "-16" },
+            transform: {
+              md: "scale(3.5) translateY(-1rem)",
+              base: "scale(3) translateY(-8px)",
+            },
             color: "whiteAlpha.100",
             textAlign: "center",
             textTransform: "uppercase",
           }}
+          mb={{ md: "2rem", base: "1rem" }}
         >
           {t("common.swap").toUpperCase()}
         </Heading>
         <Card
-          bg={"#6D02C9BF"}
+          bg={"#6d02c9eb"}
           mx="auto"
           py={"8"}
           w={"full"}
@@ -50,6 +57,7 @@ const Swap = () => {
         <Stack
           justifyContent={"center"}
           pos={"absolute"}
+          top={"40"}
           bottom={"0"}
           right={"0"}
           left={"0"}
@@ -59,7 +67,8 @@ const Swap = () => {
             src="/images/BgSwap.png"
             alt="Bg Swap"
             w={"full"}
-            minH={"2xl"}
+            h={"full"}
+            minH={"xl"}
             objectFit={"cover"}
           />
         </Stack>
@@ -68,4 +77,4 @@ const Swap = () => {
   );
 };
 
-export default Swap;
+export default SwapV2;

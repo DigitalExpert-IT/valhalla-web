@@ -11,17 +11,15 @@ import { User } from "@prisma/client";
 import { getWallet } from "lib/contractFactory";
 import { useModal } from "@ebay/nice-modal-react";
 import { ModalBindTelegram } from "components/Modal";
-import { useMe } from "hooks";
+import { useMe, useValhalla, useWallet } from "hooks";
 import { getTelegramBindingSignatureMessage } from "utils";
 import { Heading, Stack, Flex, Box } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { WidgetProfileMember } from "components/Widget/WidgetProfile";
-import { useAddress } from "@thirdweb-dev/react";
-import { useAccountMap } from "hooks/valhalla";
 
 export const SectionProfileV2 = () => {
-  const address = useAddress() ?? "0x0";
-  const accountMap = useAccountMap();
+  const { address } = useWallet();
+  const { account } = useValhalla();
   const { data, isLoading } = useMe();
   const user = useMemo<User>(() => {
     const convert = data
@@ -52,7 +50,7 @@ export const SectionProfileV2 = () => {
       linkToTelegram.target = "_blank";
       const { data } = await telegramInvite.refetch();
       if (!data) return;
-      if (!accountMap.data?.isRegistered) {
+      if (!account.isRegistered) {
         linkToTelegram.click();
         return;
       }
@@ -76,7 +74,6 @@ export const SectionProfileV2 = () => {
       window.open(process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK, "_blank");
     }
   };
-
   return (
     <Stack maxW="container.xl" mx={{ base: "4", lg: "auto" }}>
       <Heading
@@ -139,11 +136,11 @@ export const SectionProfileV2 = () => {
       >
         <WidgetProfileMember
           label={"common.networkMembers"}
-          value={accountMap.data?.downlineCount.toString() ?? "0"}
+          value={account.downlineCount.toString()}
         />
         <WidgetProfileMember
           label={"common.directReferrals"}
-          value={accountMap.data?.directDownlineCount.toString() ?? "0"}
+          value={account.directDownlineCount.toString()}
         />
         <WidgetProfileMember
           isLoading={

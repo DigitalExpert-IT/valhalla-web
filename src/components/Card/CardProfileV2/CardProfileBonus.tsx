@@ -4,48 +4,40 @@ import {
   WidgetProfileBtn,
 } from "components/Widget/WidgetProfile";
 import { useAsyncCall, useValhalla } from "hooks";
-import { useContractWrite } from "@thirdweb-dev/react";
 import { t } from "i18next";
+import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
 import { fromBn } from "evm-bn";
-import { useRankReward, useRewardMap, useGlobalPool } from "hooks/valhalla";
-import { useValhallaContract } from "hooks/useValhallaContract";
 
 export const CardProfileBonus = () => {
-  // const { claimRankReward, globalPool, isRankRewardClaimable } = useValhalla();
-  const globalPool = useGlobalPool();
-  const rewardMap = useRewardMap();
-  const rankReward = useRankReward();
-  const valhalla = useValhallaContract();
-  const claimReward = useContractWrite(valhalla.contract, "claimReward");
-  const claimRewardAsync = useAsyncCall(claimReward.mutateAsync);
-
-  const handleClaimReward = async () => {
-    await claimRewardAsync.exec({ args: [] });
-    await rewardMap.refetch();
-  };
-
+  const {
+    personalReward,
+    rankReward,
+    claimReward,
+    claimRankReward,
+    ipoPool,
+    globalPool,
+    isRankRewardClaimable,
+  } = useValhalla();
+  const claimRewardAsync = useAsyncCall(claimReward);
+  const claimRankRewardAsync = useAsyncCall(claimRankReward);
   return (
     <CardProfileV2>
       <Stack gap={"3"} px={"4"} mx={"auto"} w={"full"} maxW={"2xl"}>
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.globalBonus")}</Text>
-            <Text textAlign={"end"}>
-              {globalPool?.data?.claimable &&
-                fromBn(globalPool?.data?.claimable)}{" "}
-              MATIC
-            </Text>
+            <Text textAlign={"end"}>{fromBn(globalPool.claimable)} MATIC</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace>
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.referralBonus")}</Text>
-              <Text>{rewardMap.data && fromBn(rewardMap.data)} MATIC</Text>
+              <Text>{fromBn(personalReward)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
-              onClick={handleClaimReward}
+              onClick={claimRewardAsync.exec}
               isLoading={claimRewardAsync.isLoading}
             >
               {t("common.claim")}
@@ -56,12 +48,12 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.rankReward")}</Text>
-              <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text>
+              <Text>{fromBn(rankReward)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
-            // onClick={claimRankRewardAsync.exec}
-            // isLoading={claimRankRewardAsync.isLoading}
-            // isDisabled={!isRankRewardClaimable}
+              onClick={claimRankRewardAsync.exec}
+              isLoading={claimRankRewardAsync.isLoading}
+              isDisabled={!isRankRewardClaimable}
             >
               {t("common.claim")}
             </WidgetProfileBtn>

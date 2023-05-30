@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { IOwnedNFT, useNFT } from "hooks";
 import {
   Box,
   Heading,
@@ -11,10 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { CardOwnedFarmNFTV2 } from "components/Card";
-import { useOwnedNFTList } from "hooks/useOwnedNFTList";
 
 export const SectionMyNFTV2 = () => {
-  const { data: nftList, isLoading } = useOwnedNFTList();
+  const { nftList, isLoading } = useNFT();
   const { t } = useTranslation();
 
   return (
@@ -71,7 +71,7 @@ export const SectionMyNFTV2 = () => {
                 <Heading>{t("error.notOwnedNft")}</Heading>
               </Box>
             ) : (
-              nftList.map((item: any) => (
+              nftList.map(item => (
                 <WrapItem key={item.id.toNumber()}>
                   <CardOwnedFarmNFTV2 {...item} />
                 </WrapItem>

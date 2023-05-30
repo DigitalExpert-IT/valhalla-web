@@ -12,8 +12,7 @@ import { DefaultTFuncReturn, t } from "i18next";
  */
 export const useAsyncCall = <T, A extends any[]>(
   fn: (...args: A) => Promise<T>,
-  successMessage?: string | null | DefaultTFuncReturn,
-  successCb?: () => any
+  successMessage?: string | null | DefaultTFuncReturn
 ) => {
   const [state, setState] = useState<{
     isLoading: boolean;
@@ -31,7 +30,6 @@ export const useAsyncCall = <T, A extends any[]>(
       setState(prev => ({ ...prev, data }));
       if (successMessage)
         toast({ status: "success", description: successMessage });
-      successCb?.();
       return data as T;
     } catch (error: any) {
       const formattedErrorMessage = getErrorMessage(error);

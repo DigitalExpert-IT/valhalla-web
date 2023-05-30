@@ -20,7 +20,7 @@ import {
   coinbaseWallet,
   safeWallet,
   localWallet,
-  walletConnect,
+  walletConnectV1,
   useChain,
   useSwitchChain,
   useWallet,
@@ -53,8 +53,8 @@ export default function App(props: AppProps) {
       supportedChains={[targetChain]}
       supportedWallets={[
         metamaskWallet(),
+        walletConnectV1(),
         coinbaseWallet(),
-        walletConnect(),
         safeWallet(),
         localWallet(),
       ]}

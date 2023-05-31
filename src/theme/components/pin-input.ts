@@ -51,5 +51,5 @@ export const pinInputTheme = defineStyleConfig({
   baseStyle,
   sizes,
   variants,
-  defaultProps: inputTheme.defaultProps,
+  defaultProps: inputTheme.defaultProps as any,
 });

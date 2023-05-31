@@ -15,17 +15,15 @@ import { DASHBOARD_CATEGORY } from "constant/pages/dashboard";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
-import { useWallet } from "hooks";
 
 export const Sidebar = () => {
-  const { address } = useWallet();
   const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const router = useRouter();
 
   const { t } = useTranslation();
 
   const WrapperStyle = {
-    position: "relative",
+    position: "relative" as any,
     height: "100vh",
     pt: "8",
     pr: "16",

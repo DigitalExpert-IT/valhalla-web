@@ -3,7 +3,6 @@ import create from "zustand";
 import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { User } from "@prisma/client";
-import { useValhalla, useWallet } from "hooks";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
 
 interface INFTItem {
@@ -120,16 +119,19 @@ const init = createInitiator(async (address: string, rank: number) => {
     const toBignum = toBn(totalNFTSales.toString(), 9).toString();
     const toUSDTCalculation = prettyBn(getGnetRate(toBignum), 18);
 
-    setState(e => ({
-      ...e,
-      totalUser,
-      listNFT: getAllNFT,
-      listProfitePerLevel,
-      listUser: hierachyWithNFT,
-      totalNFTCirculatingSuply,
-      totalNFTSales: `${toUSDTCalculation} USDT`,
-      potensialProfite: `${potensialProfite} GNET`,
-    }));
+    setState(
+      e =>
+        ({
+          ...e,
+          totalUser,
+          listNFT: getAllNFT,
+          listProfitePerLevel,
+          listUser: hierachyWithNFT,
+          totalNFTCirculatingSuply,
+          totalNFTSales: `${toUSDTCalculation} USDT`,
+          potensialProfite: `${potensialProfite} GNET`,
+        } as any)
+    );
   } catch (e) {
     console.log(e);
   }

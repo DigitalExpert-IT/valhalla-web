@@ -11,6 +11,7 @@ interface PaginationProps {
   previousPages: number[];
   siblingsCount: number;
   colorScheme?: ThemeTypings["colorSchemes"];
+  justifyPage?: "center" | "flex-start" | "flex-end";
 }
 
 export function Pagination({
@@ -21,9 +22,16 @@ export function Pagination({
   siblingsCount,
   onPageChange,
   colorScheme,
+  justifyPage,
 }: PaginationProps) {
   return (
-    <Stack direction="row" mt="8" justify="center" align="center" spacing="6">
+    <Stack
+      direction="row"
+      mt="8"
+      justify={justifyPage ?? "center"}
+      align="center"
+      spacing="6"
+    >
       <Stack direction="row" spacing={{ base: 1.5, md: 4 }} align="center">
         {currentPage > 1 + siblingsCount ? (
           <>

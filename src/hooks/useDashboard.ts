@@ -22,12 +22,17 @@ interface INFTItem {
   farmRewardPerDay: number;
   farmRewardPerSecond: number;
 }
+
+interface IUser extends User {
+  listNFT: INFTItem[];
+}
+
 interface IDashboard {
   listNFT: INFTItem[][];
-  listUser: User[][];
+  listUser: IUser[][];
   totalUser: number;
   totalNFTSales: string;
-  listProfitePerLevel: {};
+  listProfitePerLevel: [][];
   potensialProfite: string;
   totalNFTCirculatingSuply: number;
 }
@@ -38,7 +43,7 @@ const initialState: IDashboard = {
   totalUser: 0,
   totalNFTSales: "",
   potensialProfite: "",
-  listProfitePerLevel: {},
+  listProfitePerLevel: [],
   totalNFTCirculatingSuply: 0,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
@@ -66,24 +71,24 @@ const init = createInitiator(async (address: string, rank: number) => {
             return getNFtList.data;
           })
         );
-        const filteredEmptyNFT: INFTItem[] = nft.filter(e => !!e.length)[0];
+        const filteredEmptyNFT: INFTItem[] =
+          nft?.filter(e => !!e.length)[0] ?? [];
 
         listProfitePerLevel.push(
-          filteredEmptyNFT.reduce(
+          filteredEmptyNFT?.reduce(
             (acc, e) => acc + e.farmRewardPerDay * e.farmPercentage,
             0
-          )
+          ) ?? 0
         );
-        potensialProfite += filteredEmptyNFT.reduce(
-          (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 450,
-          0
-        );
-        totalNFTSales += filteredEmptyNFT.reduce(
-          (acc, pre) => acc + pre.price,
-          0
-        );
-        totalNFTCirculatingSuply += filteredEmptyNFT.length;
-        return filteredEmptyNFT.reduce(
+        potensialProfite +=
+          filteredEmptyNFT?.reduce(
+            (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 450,
+            0
+          ) ?? 0;
+        totalNFTSales +=
+          filteredEmptyNFT?.reduce((acc, pre) => acc + pre.price, 0) ?? 0;
+        totalNFTCirculatingSuply += filteredEmptyNFT?.length ?? 0;
+        return filteredEmptyNFT?.reduce(
           (acc, item: any) => acc.concat(item),
           []
         );
@@ -92,15 +97,16 @@ const init = createInitiator(async (address: string, rank: number) => {
 
     const hierachyWithNFT = hierarchyValue.map((e, i) => {
       const withNft = e.map(j => {
-        const getNftperUser = getAllNFT[i].filter(l => l.to === j.address);
+        const getNftperUser =
+          getAllNFT[i]?.filter(l => l.to === j.address) ?? [];
         const getPercentageAverage =
-          getNftperUser.reduce((acc, pre) => {
+          getNftperUser?.reduce((acc, pre) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
             const lasFarm = Date.parse(pre.lastFarm);
             const getPercentage = (lasFarm * 100) / fullRange;
             const format = getPercentage;
             return acc + format;
-          }, 0) / getNftperUser.length;
+          }, 0) ?? 0 / getNftperUser.length;
 
         return {
           ...j,
@@ -129,16 +135,21 @@ const init = createInitiator(async (address: string, rank: number) => {
   }
 });
 
-export const useDashboard = () => {
+export const useDashboard = (address: string, rank: number) => {
   const store = useDashoardStore();
-  const { address } = useWallet();
-  const { account } = useValhalla();
+  // temporary commented for bypass wallet address
+  // const { address } = useWallet();
+  // const { account } = useValhalla();
   useEffect(() => {
     // todo if change wallet, need to refetch data
-    if (address && account.rank) {
-      init(address, account.rank);
+    //   if (address && account.rank) {
+    //     init(address, account.rank);
+    //   }
+    // }, [address, account.rank]);
+    if (address && rank) {
+      init(address, rank);
     }
-  }, [address, account.rank]);
+  }, [address, rank]);
 
   return { ...store };
 };

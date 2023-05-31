@@ -323,12 +323,53 @@ const variantBasic = definePartsStyle(props => {
   };
 });
 
+const variantDashboard = definePartsStyle(props => {
+  return {
+    table: {
+      bg: "#f6f7ff",
+      borderSpacing: 0,
+      borderCollapse: "separate",
+    },
+    tr: {
+      padding: "8px",
+      borderRadius: "9px",
+      margin: "4",
+      justifyContent: "space-between",
+      _selected: {
+        bg: "white",
+        boxShadow: "md",
+      },
+      _hover: { cursor: "pointer", boxShadow: "md" },
+    },
+    th: {
+      color: "#000",
+      borderBottom: "1px solid #000",
+      ...numericStyles,
+    },
+    td: {
+      color: "#000",
+      ...numericStyles,
+    },
+    caption: {
+      color: mode("gray.600", "gray.100")(props),
+    },
+    tfoot: {
+      tr: {
+        "&:last-of-type": {
+          th: { borderBottomWidth: 0 },
+        },
+      },
+    },
+  };
+});
+
 const variants = {
   simple: variantSimple,
   striped: variantStripe,
   valhalla: variantValhalla,
   valhallaV2: variantValhallaV2,
   gradient: variantGradient,
+  dashboard: variantDashboard,
   basic: variantBasic,
   unstyled: defineStyle({}),
 };

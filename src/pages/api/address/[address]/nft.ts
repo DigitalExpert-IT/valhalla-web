@@ -48,6 +48,7 @@ const handler: NextApiHandler = async (req, res) => {
     };
   });
   const result = await Promise.all(promises);
+
   res.json(result);
 };
 

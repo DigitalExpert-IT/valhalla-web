@@ -36,7 +36,7 @@ export function PaginationItem({
       size="sm"
       fontSize="xs"
       width="4"
-      bg="blackAlpha.400"
+      bg="#130521"
       _hover={{
         bg: "blackAlpha.600",
       }}

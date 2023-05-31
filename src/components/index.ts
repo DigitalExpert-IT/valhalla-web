@@ -7,6 +7,7 @@ export * from "./Modal";
 export * from "./Navbar";
 export * from "./Drawer";
 export * from "./Layout";
+export * from "./Sidebar";
 export * from "./Svg";
 export * from "./Card";
 export * from "./Image";

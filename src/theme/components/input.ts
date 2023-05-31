@@ -194,10 +194,44 @@ const variantUnstyled = definePartsStyle({
   },
 });
 
+const variantDahsboard = definePartsStyle(props => {
+  const { theme } = props;
+  const { focusBorderColor: fc, errorBorderColor: ec } = getDefaults(props);
+
+  return {
+    field: {
+      height: "12",
+      borderColor: "black",
+      color: "black",
+      bg: "white",
+      boxShadow: "md",
+      border: "none",
+      pt: "6",
+      pb: "6",
+      _readOnly: {
+        boxShadow: "none !important",
+        userSelect: "all",
+      },
+      _invalid: {
+        borderColor: getColor(theme, ec),
+      },
+      _placeholder: {
+        color: "gray.300",
+      },
+    },
+    addon: {
+      border: "2px solid",
+      borderColor: "black",
+      color: "black",
+    },
+  };
+});
+
 const variants = {
   outline: variantOutline,
   filled: variantFilled,
   flushed: variantFlushed,
+  dashboard: variantDahsboard,
   unstyled: variantUnstyled,
 };
 

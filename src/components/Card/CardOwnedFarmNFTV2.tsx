@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { useAsyncCall } from "hooks";
 import { OwnedNftType } from "hooks/useOwnedNFTList";
-import { prettyBn } from "utils";
 import { useTranslation } from "react-i18next";
 import {
   Stack,
@@ -15,6 +14,7 @@ import { differenceInSeconds } from "date-fns";
 import { useContractWrite } from "@thirdweb-dev/react";
 import { useNFTContract } from "hooks/useNFTContract";
 import { BigNumber } from "ethers";
+import { fromBn } from "evm-bn";
 
 export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const { id, mintingPrice, cardId, percentage, tokenUri, lastFarmedAt } =
@@ -28,9 +28,9 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const lastFarmedAtRef = useRef<BigNumber>(lastFarmedAt);
 
   const handleFarm = async () => {
-    const farm = await farmAsync.exec({ args: [id] })
+    const farm = await farmAsync.exec({ args: [id] });
     const isSuccesFarm = farm.receipt?.status === 1;
-    if(isSuccesFarm){
+    if (isSuccesFarm) {
       lastFarmedAtRef.current = BigNumber.from(
         Math.round(new Date().getTime() / 1000)
       );
@@ -48,7 +48,7 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
         new Date(lastFarmedAtRef.current.toNumber() * 1000)
       );
       const farmValue = farmPerSec.mul(secDiff);
-      farmTextRef.current.innerText = prettyBn(farmValue, 9);
+      farmTextRef.current.innerText = fromBn(farmValue, 9);
     }, 1000);
 
     return () => {
@@ -83,7 +83,7 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
           <Stack my="5">
             <Stack direction="row" spacing={1} justify="space-between">
               <Text fontWeight="bold" fontSize="16px">
-                Minting: {prettyBn(mintingPrice, 9)}
+                Minting: {fromBn(mintingPrice, 9)}
               </Text>
               <Text fontWeight="bold" fontSize="lg">
                 {percentage.toNumber() / 10 + "%"}

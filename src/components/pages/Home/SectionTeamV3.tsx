@@ -1,12 +1,15 @@
-import React, { ReactComponentElement } from "react";
-import { Stack, Box, Image, Text, Icon, useMediaQuery } from "@chakra-ui/react";
-import {
-  AiOutlineLinkedin,
-  AiOutlineInstagram,
-  AiOutlineTwitter,
-} from "react-icons/ai";
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { IconType } from "react-icons";
+import {
+  Stack,
+  Box,
+  Image as Kontol,
+  Text,
+  Icon,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
 interface ISocial {
   link: string;
@@ -26,19 +29,33 @@ export const SectionTeamV3: React.FC<IOurTeamV3> = props => {
   return (
     <Stack direction={{ base: "column", md: "row" }} mb="10" align="center">
       <Stack
+        mt="10rem"
+        w={{ base: "100%", md: "sm" }}
         flex={1}
         position="relative"
-        w={{ base: "100%", md: "sm" }}
-        mt="10rem"
         justifyContent="center"
       >
-        <Image src="/assets/artboard.png" alt="art-board" />
         <Image
-          src="/assets/ourteam/yusuf-new.png"
-          alt="ourteam"
-          pos="absolute"
-          alignSelf="center"
-          w={{ base: "xs", md: "xl" }}
+          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685711127/global-network/artboard1_pgpebn.avif"
+          alt="art-board"
+          width={700}
+          height={700}
+          loading="lazy"
+          style={{
+            alignSelf: "center",
+          }}
+        />
+
+        <Image
+          src={props.image}
+          alt={`image-${props.name}`}
+          width={500}
+          height={500}
+          loading="lazy"
+          style={{
+            position: "absolute",
+            alignSelf: "center",
+          }}
         />
       </Stack>
       <Stack

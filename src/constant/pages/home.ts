@@ -82,7 +82,8 @@ export const OURTEAM = [
 
 export const OURTEAMV3 = {
   name: "Yusuf Kenan Can",
-  image: "/assets/ourteam/yusuf-new.png",
+  image:
+    "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685711101/global-network/yusuf-new_oeteta.png",
   occupation: "Founder & President",
   social: [
     {

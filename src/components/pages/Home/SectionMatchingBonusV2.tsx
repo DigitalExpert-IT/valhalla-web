@@ -1,6 +1,7 @@
 import React from "react";
-import { Flex, Image, Box, Heading, Text, Stack } from "@chakra-ui/react";
+import Image from "next/image";
 import { Trans, useTranslation } from "react-i18next";
+import { Flex, Box, Heading, Text, Stack } from "@chakra-ui/react";
 
 export const SectionMatchingBonusV2 = () => {
   const { t } = useTranslation();
@@ -12,16 +13,24 @@ export const SectionMatchingBonusV2 = () => {
       flexDir={{ base: "column", md: "row" }}
       minH={{ base: "sm", sm: "md", md: "xl" }}
       py={{ base: "0", lg: "80", xl: "96" }}
+      position="relative"
     >
-      <Box position={"absolute"} w={"full"}>
+      <Box
+        position={"absolute"}
+        height={{ base: "50%", md: "60%", xl: "70%" }}
+        w="full"
+      >
         <Image
-          src="/images/BgMatchingBonus.png"
-          alt="matching-image"
-          mx={"auto"}
-          objectFit="cover"
-          w={"full"}
-          minH={"60"}
-          maxW={"7xl"}
+          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685693152/BgMatchingBonus_lwzgbp.png"
+          alt="matching-bonus"
+          loading="lazy"
+          object-fit="cover"
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            maxWidth: "70%",
+          }}
+          fill
         />
       </Box>
       <Stack

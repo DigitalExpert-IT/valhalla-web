@@ -20,10 +20,10 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/react";
-import { CopiableText, HeaderDashboard } from "components";
-import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useTranslation } from "react-i18next";
 import { shortenAddress } from "utils";
+import { HeaderDashboard } from "components";
+import { useTranslation } from "react-i18next";
+import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import {
   BsFillDiagram2Fill,
   BsFillPeopleFill,
@@ -35,7 +35,6 @@ import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { PaginationV2 as Pagination } from "components/PaginationUtils";
 import { useDashboard } from "hooks/useDashboard";
 import { useAddress } from "@thirdweb-dev/react";
-import { useAccountMap } from "hooks/valhalla";
 
 const PAGE_SIZE = 10;
 

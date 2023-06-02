@@ -4,6 +4,8 @@ import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
+import { useAddress } from "@thirdweb-dev/react";
+import { useAccountMap } from "./valhalla";
 
 interface INFTItem {
   id: string;
@@ -137,21 +139,15 @@ const init = createInitiator(async (address: string, rank: number) => {
   }
 });
 
-export const useDashboard = (address: string, rank: number) => {
+export const useDashboard = () => {
   const store = useDashoardStore();
-  // temporary commented for bypass wallet address
-  // const { address } = useWallet();
-  // const { account } = useValhalla();
+  const address = useAddress();
+  const { data: account } = useAccountMap();
   useEffect(() => {
-    // todo if change wallet, need to refetch data
-    //   if (address && account.rank) {
-    //     init(address, account.rank);
-    //   }
-    // }, [address, account.rank]);
-    if (address && rank) {
-      init(address, rank);
+    if (address && account?.rank) {
+      init(address, account?.rank);
     }
-  }, [address, rank]);
+  }, [address, account?.rank]);
 
   return { ...store };
 };

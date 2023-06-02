@@ -41,7 +41,6 @@ const PAGE_SIZE = 10;
 
 const Dashboard = () => {
   const address = useAddress();
-  const { data: account } = useAccountMap();
   const { t } = useTranslation();
   const {
     listNFT,
@@ -50,7 +49,7 @@ const Dashboard = () => {
     listProfitePerLevel,
     potensialProfite,
     totalNFTCirculatingSuply,
-  } = useDashboard(address ?? "0x0", account?.rank ?? 0);
+  } = useDashboard();
 
   // Start Pagination
   const [selectedLevel, setLevel] = useState(1);

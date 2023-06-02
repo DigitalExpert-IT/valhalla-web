@@ -5,6 +5,7 @@ import {
   defineStyle,
 } from "@chakra-ui/styled-system";
 import { inputTheme } from "./input";
+import { getColor, mode } from "@chakra-ui/theme-tools";
 
 const { defineMultiStyleConfig, definePartsStyle } =
   createMultiStyleConfigHelpers(parts.keys);
@@ -81,9 +82,41 @@ const sizes = {
   },
 };
 
+const variantDahsboard = definePartsStyle(() => {
+  return {
+    field: {
+      borderColor: "black",
+      color: "black",
+      boxShadow: "md",
+      border: "1px solid black",
+      pt: "6",
+      pb: "6",
+      _readOnly: {
+        boxShadow: "none !important",
+        userSelect: "all",
+      },
+      _placeholder: {
+        color: "gray.300",
+      },
+    },
+    addon: {
+      border: "2px solid",
+      borderColor: "black",
+      color: "black",
+    },
+  };
+});
+
+const defaultVariants = inputTheme.variants;
+
+const variants = {
+  ...defaultVariants,
+  dashboard: variantDahsboard
+};
+
 export const selectTheme = defineMultiStyleConfig({
   baseStyle,
   sizes,
-  variants: inputTheme.variants,
+  variants,
   defaultProps: inputTheme.defaultProps,
 });

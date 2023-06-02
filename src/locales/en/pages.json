@@ -350,12 +350,22 @@
   },
   "dashboard": {
     "title": {
-      "members": "Members"
+      "members": "Members",
+      "downlinesNotFound": "Downlines Not Found"
     },
-    "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
     "placeholder": {
       "search": "Search items, collection, accounts"
-    }
+    },
+    "alert": {
+      "downlinesNotFound": "{{address}} doesn't have any downlines or already reach max level."
+    },
+    "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
+    "summary": "Summary",
+    "totalMember": "Total Member",
+    "totalEstimateProfit": "Total Estimate Profit",
+    "maxTotalLevel": "Max Total Level",
+    "bestNetwork": "Best Network",
+    "revenue": "Revenue"
   },
   "shareToEarn": {
     "title": "Share To Earn",

@@ -16,9 +16,11 @@ import {
   AspectRatio,
   Divider,
   Center,
+  Select,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  useToast
 } from "@chakra-ui/react";
 import { shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
@@ -31,7 +33,7 @@ import {
   BsGraphUp,
 } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
+import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
 import { PaginationV2 as Pagination } from "components/PaginationUtils";
 import { useDashboard } from "hooks/useDashboard";
 import { useAddress } from "@thirdweb-dev/react";
@@ -48,7 +50,8 @@ const Dashboard = () => {
     listProfitePerLevel,
     potensialProfite,
     totalNFTCirculatingSuply,
-  } = useDashboard();
+  } = useDashboard(address, 1);
+  const toast = useToast();
 
   // Start Pagination
   const [selectedLevel, setLevel] = useState(1);
@@ -108,7 +111,13 @@ const Dashboard = () => {
         selectedLevel + selectedAddressList.length + 1
       ]?.filter(user => user.upline === address);
 
-      if (!downlines || downlines.length === 0) return;
+      if (!downlines || downlines.length === 0) return toast({
+        title: t('pages.dashboard.title.downlinesNotFound'),
+        description: t('pages.dashboard.alert.downlinesNotFound', { address }),
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
 
       setSelectAddressList(state => [...state, address]);
     },
@@ -169,7 +178,6 @@ const Dashboard = () => {
             <Thead>
               <Tr>
                 <Th>Member</Th>
-
                 <Th>Rank</Th>
                 <Th>NFT</Th>
                 <Th>Profit</Th>
@@ -272,6 +280,7 @@ const Dashboard = () => {
             </Box>
 
             <Box flex="2">
+              <HStack minH="46px" pb="4" justifyContent="space-between">
               <HStack minH="46px" pb="4">
                 <BsFillPersonFill size="20" color="#000" />
                 <Breadcrumb
@@ -293,8 +302,13 @@ const Dashboard = () => {
                         {shortenAddress(addr)}
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                  ))}
-                </Breadcrumb>
+                    ))}
+                  </Breadcrumb>
+                </HStack>
+                <Select variant="dashboard" maxW="40" placeholder='Rank'>
+                  <option value={-1}>None</option>
+                  {rankMap.map((rank, idx) => <option key={`${rank}.${idx}`} value={idx}>{rank}</option>)}
+                </Select>
               </HStack>
 
               {TableMember}
@@ -320,7 +334,7 @@ const Dashboard = () => {
               rounded="lg"
             >
               <Heading as="h2" fontSize="2xl" mb="4">
-                Summary
+                {t('pages.dashboard.summary')}
               </Heading>
               <HStack
                 w="full"
@@ -334,7 +348,7 @@ const Dashboard = () => {
                 <HStack justifyContent="space-between">
                   <BsFillPeopleFill />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Member
+                    {t('pages.dashboard.totalMember')}
                   </Text>
                 </HStack>
 
@@ -362,7 +376,7 @@ const Dashboard = () => {
                 <HStack justifyContent="space-between">
                   <BsGraphUp />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Estimate Profit
+                    {t('pages.dashboard.totalEstimateProfit')}
                   </Text>
                 </HStack>
 
@@ -390,7 +404,7 @@ const Dashboard = () => {
                 <HStack>
                   <BsFillDiagram2Fill />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Level
+                    {t('pages.dashboard.maxTotalLevel')}
                   </Text>
                 </HStack>
 
@@ -402,7 +416,7 @@ const Dashboard = () => {
                   bg="white"
                   borderRadius="md"
                 >
-                  {listUser.length - 1}
+                  {RANK_MAX_LEVEL[user.account.rank]}
                 </Box>
               </HStack>
             </Stack>
@@ -415,7 +429,7 @@ const Dashboard = () => {
               alignItems="center"
             >
               <Heading as="h2" fontSize="2xl" mb="4">
-                Best Network
+                {t('pages.dashboard.bestNetwork')}
               </Heading>
               <HStack
                 w="full"
@@ -430,7 +444,7 @@ const Dashboard = () => {
                   <Text fontWeight="semibold">0x9ee...4808</Text>
                 </HStack>
 
-                <Text fontSize="sm">$1.4m Revenue</Text>
+                <Text fontSize="sm">$1.4m {t('pages.dashboard.revenue')}</Text>
               </HStack>
             </Stack>
           </Stack>

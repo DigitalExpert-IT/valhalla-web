@@ -4,6 +4,7 @@ import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
+import { useWallet } from "@thirdweb-dev/react";
 
 interface INFTItem {
   id: string;

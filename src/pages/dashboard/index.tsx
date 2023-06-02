@@ -20,12 +20,9 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@chakra-ui/react";
-import { CopiableText, HeaderDashboard, Sidebar } from "components";
+import { CopiableText, HeaderDashboard } from "components";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useValhalla, useWallet } from "hooks";
 import { useTranslation } from "react-i18next";
-import { jsNumberForAddress } from "react-jazzicon";
-import Jazzicon from "react-jazzicon/dist/Jazzicon";
 import { shortenAddress } from "utils";
 import {
   BsFillDiagram2Fill,
@@ -37,14 +34,14 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { PaginationV2 as Pagination } from "components/PaginationUtils";
 import { useDashboard } from "hooks/useDashboard";
-import { withConnection } from "hoc";
+import { useAddress } from "@thirdweb-dev/react";
+import { useAccountMap } from "hooks/valhalla";
 
 const PAGE_SIZE = 10;
 
 const Dashboard = () => {
-  // const { address } = useWallet();
-  const address = "0x458aE247679f92BeD7Cbd56DF323121520Ef02c2";
-  const user = useValhalla();
+  const address = useAddress();
+  const { data: account } = useAccountMap();
   const { t } = useTranslation();
   const {
     listNFT,
@@ -53,7 +50,7 @@ const Dashboard = () => {
     listProfitePerLevel,
     potensialProfite,
     totalNFTCirculatingSuply,
-  } = useDashboard(address, 1);
+  } = useDashboard(address ?? "0x0", account?.rank ?? 0);
 
   // Start Pagination
   const [selectedLevel, setLevel] = useState(1);
@@ -223,7 +220,7 @@ const Dashboard = () => {
 
   return (
     <LayoutDashboard>
-      <HeaderDashboard address={address} />
+      <HeaderDashboard address={address ?? ""} />
 
       <HStack
         minH="calc(100vh-112px)"
@@ -285,7 +282,7 @@ const Dashboard = () => {
                 >
                   <BreadcrumbItem>
                     <BreadcrumbLink href="#" fontSize="xs">
-                      {shortenAddress(address)}
+                      {shortenAddress(address ?? "")}
                     </BreadcrumbLink>
                   </BreadcrumbItem>
 

@@ -18,7 +18,7 @@ const baseStyleField = defineStyle({
   paddingBottom: "1px",
   lineHeight: "normal",
   bg: $bg.reference,
-  [$bg.variable]: "colors.white",
+  // [$bg.variable]: "colors.white",
   _dark: {
     [$bg.variable]: "colors.gray.700",
   },
@@ -85,6 +85,8 @@ const sizes = {
 const variantDahsboard = definePartsStyle(() => {
   return {
     field: {
+      maxH: "30px",
+      bg: "transparent",
       borderColor: "black",
       color: "black",
       boxShadow: "md",
@@ -96,7 +98,7 @@ const variantDahsboard = definePartsStyle(() => {
         userSelect: "all",
       },
       _placeholder: {
-        color: "gray.300",
+        color: "black",
       },
     },
     addon: {
@@ -111,7 +113,7 @@ const defaultVariants = inputTheme.variants;
 
 const variants = {
   ...defaultVariants,
-  dashboard: variantDahsboard
+  "table-filter": variantDahsboard
 };
 
 export const selectTheme = defineMultiStyleConfig({

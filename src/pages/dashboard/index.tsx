@@ -174,7 +174,7 @@ const Dashboard = () => {
     return (
       <>
         <TableContainer border="1px solid #000" borderRadius="xl">
-          <Table variant="dashboard" color="gray.800">
+          <Table variant="dashboard" maxW="687px" color="gray.800">
             <Thead>
               <Tr>
                 <Th>Member</Th>
@@ -229,7 +229,7 @@ const Dashboard = () => {
       <HeaderDashboard address={address ?? ""} />
 
       <HStack
-        minH="calc(100vh-112px)"
+        minH="calc(100vh - 129px)"
         flex={4}
         width="fit-content"
         alignItems="streetch"
@@ -279,7 +279,7 @@ const Dashboard = () => {
               {TableDownlineLevel}
             </Box>
 
-            <Box flex="2">
+            <Box flex="2" maxW="70%">
               <HStack minH="46px" pb="4" justifyContent="space-between">
               <HStack minH="46px" pb="4">
                 <BsFillPersonFill size="20" color="#000" />
@@ -305,7 +305,7 @@ const Dashboard = () => {
                     ))}
                   </Breadcrumb>
                 </HStack>
-                <Select variant="dashboard" maxW="40" placeholder='Rank'>
+                <Select variant="table-filter" maxW="40" placeholder='Rank'>
                   <option value={-1}>None</option>
                   {rankMap.map((rank, idx) => <option key={`${rank}.${idx}`} value={idx}>{rank}</option>)}
                 </Select>

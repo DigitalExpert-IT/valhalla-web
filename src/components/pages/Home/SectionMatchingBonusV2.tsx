@@ -21,11 +21,11 @@ export const SectionMatchingBonusV2 = () => {
         w="full"
       >
         <Image
-          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685693152/BgMatchingBonus_lwzgbp.png"
+          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685693152/global-network/BgMatchingBonus_lwzgbp.png"
           alt="matching-bonus"
           loading="lazy"
-          object-fit="cover"
           style={{
+            objectFit: "contain",
             marginLeft: "auto",
             marginRight: "auto",
             maxWidth: "70%",

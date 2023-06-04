@@ -37,29 +37,30 @@ export const PROMOTION_IMAGE_DATA = [
 
 export const PROMOTION_IMAGE_DATAV2 = [
   {
-    uri: "/images/imgHomeFeatures5.png",
+    uri: "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685876067/global-network/imgHomeFeatures5_vkse09.png",
     title: t("pages.home.sectionFeature.fullTransparency.title"),
     subtitle: t("pages.home.sectionFeature.fullTransparency.subtitle"),
     bgColor: "#1A192B",
     imgCenter: false,
   },
   {
-    uri: "/images/imgHomeFeatures6.png",
+    uri: "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685876067/global-network/imgHomeFeatures6_pjaw33.png",
     title: t("pages.home.sectionFeature.fullAutomation.title"),
     subtitle: t("pages.home.sectionFeature.fullAutomation.subtitle"),
     bgColor: "#6D2076",
     imgCenter: false,
-    bgImg: "/images/imgHomeFeatures6-bg.png",
+    bgImg:
+      "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685876067/global-network/imgHomeFeatures6-bg_bmq44h.png",
   },
   {
-    uri: "/images/imgHomeFeatures7.png",
+    uri: "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685876067/global-network/imgHomeFeatures7_hmqcos.png",
     title: t("pages.home.sectionFeature.smartContract.title"),
     subtitle: t("pages.home.sectionFeature.smartContract.subtitle"),
     bgColor: "#080058",
     imgCenter: true,
   },
   {
-    uri: "/images/imgHomeFeatures8.png",
+    uri: "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685876067/global-network/imgHomeFeatures8_lbbssi.png",
     title: t("pages.home.sectionFeature.decentralized.title"),
     subtitle: t("pages.home.sectionFeature.decentralized.subtitle"),
     bgColor: "#8E59FF",
@@ -104,15 +105,18 @@ export const OURTEAMV3 = {
 export const PARTNERSHIP = [
   {
     name: "partner1",
-    image: "/assets/partnership/polygon.png",
+    image:
+      "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874147/global-network/polygon_y33scc.png",
   },
   {
     name: "partner2",
-    image: "/assets/partnership/solidproofv2.svg",
+    image:
+      "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874148/global-network/solidproofv2_jhjwba.svg",
   },
   {
     name: "partner3",
-    image: "/assets/partnership/global-network.png",
+    image:
+      "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874147/global-network/global-network_c3risy.png",
   },
 ];
 

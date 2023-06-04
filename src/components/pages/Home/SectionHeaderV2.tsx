@@ -25,7 +25,7 @@ export const SectionHeaderV2 = () => {
     <Flex
       h="100vh"
       pos="relative"
-      bgImage="url('/images/bgHeader_home.png')"
+      bgImage="url('https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874722/global-network/bgHeader_home_fq0gqx.png')"
       align="center"
       justify="center"
       gap="10"

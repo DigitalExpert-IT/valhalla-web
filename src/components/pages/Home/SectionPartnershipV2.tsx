@@ -1,6 +1,14 @@
 import React from "react";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { Wrap, WrapItem, Image, Box, Stack, Heading } from "@chakra-ui/react";
+import {
+  Wrap,
+  WrapItem,
+  Image as Chakra,
+  Box,
+  Stack,
+  Heading,
+} from "@chakra-ui/react";
 
 interface IPartnershipV2 {
   name: string;
@@ -36,33 +44,50 @@ export const SectionPartnershipV2: React.FC<
       >
         {t("pages.home.partnershipSection")}
       </Heading>
-      <Box display="flex" position="relative">
+      <Stack
+        alignContent="center"
+        justifyItems="center"
+        w="full"
+        h="30vh"
+        position="relative"
+      >
         <Image
-          top="41"
-          opacity="0.7"
-          position="absolute"
+          src="/assets/partnership/bg-partnership.png"
           alt="background partnership"
-          src="assets/partnership/bg-partnership.png"
+          loading="lazy"
+          style={{
+            position: "absolute",
+            opacity: "0.5",
+            top: "20%",
+            objectFit: "fill",
+          }}
+          fill
         />
         <Image
-          src="assets/partnership/bg-support.png"
+          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685785265/global-network/bg-support_ae6y7o.png"
           alt="background partnership"
-          position="absolute"
-          opacity="0.5"
-          top="-15"
+          loading="lazy"
+          style={{
+            position: "absolute",
+            opacity: "0.5",
+            top: "-35px",
+            objectFit: "cover",
+          }}
+          fill
         />
-      </Box>
-      <Wrap spacing="5" justify="center" zIndex={1}>
-        {props.data.map((item, idx) => (
-          <WrapItem key={idx} w={{ base: "5rem", md: "10rem", lg: "15rem" }}>
-            <Image
-              src={item.image}
-              alt={`partner-${item.name}`}
-              objectFit="cover"
-            />
-          </WrapItem>
-        ))}
-      </Wrap>
+        <Wrap spacing="5" justify="center" zIndex={1} m="auto">
+          {props.data.map((item, idx) => (
+            <WrapItem key={idx} w={{ base: "5rem", md: "10rem", lg: "15rem" }}>
+              <Image
+                src={item.image}
+                alt={`partner-${item.name}`}
+                width={500}
+                height={500}
+              />
+            </WrapItem>
+          ))}
+        </Wrap>
+      </Stack>
     </Stack>
   );
 };

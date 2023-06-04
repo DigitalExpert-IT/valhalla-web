@@ -1,4 +1,5 @@
-import { Card, Image, Text, Flex } from "@chakra-ui/react";
+import { Card, Image as Chakra, Text, Flex } from "@chakra-ui/react";
+import Image from "next/image";
 import React from "react";
 
 export type CardData = {
@@ -46,7 +47,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
           {subtitle}
         </Text>
       </Flex>
-      <Image
+      {/* <Chakra
         src={uri}
         alt={title}
         mx={"auto"}
@@ -62,9 +63,20 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
         mt={"auto"}
         mb={imgCenter ? "auto" : "0.5"}
         pb={id == 3 || id == 2 ? "4" : "0.5"}
+      /> */}
+      <Image
+        src={uri}
+        alt={title}
+        style={{
+          marginRight: "auto",
+          marginLeft: "auto",
+          marginTop: "auto",
+          marginBottom: `${imgCenter ? "auto" : 0.5}`,
+        }}
+        fill
       />
       {bgImg ? (
-        <Image
+        <Chakra
           src={bgImg}
           alt={title}
           objectFit={"cover"}

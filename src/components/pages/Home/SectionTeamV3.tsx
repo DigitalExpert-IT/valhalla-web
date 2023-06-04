@@ -2,14 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconType } from "react-icons";
-import {
-  Stack,
-  Box,
-  Image as Kontol,
-  Text,
-  Icon,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Stack, Box, Text, Icon, useMediaQuery } from "@chakra-ui/react";
 
 interface ISocial {
   link: string;
@@ -45,7 +38,6 @@ export const SectionTeamV3: React.FC<IOurTeamV3> = props => {
             alignSelf: "center",
           }}
         />
-
         <Image
           src={props.image}
           alt={`image-${props.name}`}

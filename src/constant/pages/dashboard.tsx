@@ -5,6 +5,8 @@ import {
   BsFillWalletFill,
   BsClockHistory,
   BsFillGearFill,
+  BsPeopleFill,
+  BsTropicalStorm
 } from "react-icons/bs";
 
 export const DASHBOARD_CATEGORY = [
@@ -23,6 +25,18 @@ export const DASHBOARD_CATEGORY = [
         icon: <BsFillCalendarEventFill size={20} />,
         href: "/event",
       },
+      {
+        key: "nft",
+        name: "nft",
+        icon: <BsTropicalStorm size={20} />,
+        href: "/nft",
+      },
+      {
+        key: "user",
+        name: "user",
+        icon: <BsPeopleFill size={20} />,
+        href: "/user",
+      }
     ],
   },
   {

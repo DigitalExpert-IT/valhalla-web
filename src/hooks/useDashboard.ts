@@ -6,12 +6,14 @@ import { User } from "@prisma/client";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
 import { useAddress } from "@thirdweb-dev/react";
 import { useAccountMap } from "./valhalla";
+import { groupBy } from "lodash";
 
 interface INFTItem {
   id: string;
   to: string;
   from: string;
   price: number;
+  cardId: string;
   tokenId: string;
   address: string;
   mintedAt: string;
@@ -96,10 +98,10 @@ const init = createInitiator(async (address: string, rank: number) => {
       })
     );
 
-    const hierachyWithNFT = hierarchyValue.map((e, i) => {
-      const withNft = e.map(j => {
+    const hierachyWithNFT = hierarchyValue.map((user, level) => {
+      const withNft = user.map(j => {
         const getNftperUser =
-          getAllNFT[i]?.filter(l => l.to === j.address) ?? [];
+          getAllNFT.at(level)?.filter(l => l.to === j.address) ?? [];
         const getPercentageAverage =
           getNftperUser?.reduce((acc, pre) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
@@ -112,6 +114,7 @@ const init = createInitiator(async (address: string, rank: number) => {
         return {
           ...j,
           listNFT: getNftperUser,
+          listNFTPerType: groupBy(getNftperUser, "cardId"),
           restPercentage: `${getPercentageAverage.toFixed(2)}%`,
         };
       });

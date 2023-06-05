@@ -61,6 +61,7 @@ export const SectionPartnershipV2: React.FC<
             top: "20%",
             objectFit: "fill",
           }}
+          priority={false}
           fill
         />
         <Image

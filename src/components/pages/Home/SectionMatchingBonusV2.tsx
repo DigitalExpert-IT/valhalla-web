@@ -30,7 +30,8 @@ export const SectionMatchingBonusV2 = () => {
             marginRight: "auto",
             maxWidth: "70%",
           }}
-          fill
+          priority={false}
+          fill={true}
         />
       </Box>
       <Stack

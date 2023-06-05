@@ -1,28 +1,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Container,
-  Box,
-  Text,
-  Flex,
-  HStack,
-  Icon,
-  Image as Chakra,
-} from "@chakra-ui/react";
+import { Container, Box, Text, Flex, HStack, Icon } from "@chakra-ui/react";
 import Image from "next/image";
 import { ICONS_FOOTER } from "constant/icon";
 import Link from "next/link";
+import pattern from "../../../public/assets/pattern.png";
 
 export const LayoutFooterV2 = () => {
   const { t } = useTranslation();
 
   return (
     <Box as="footer" w="full" position={"relative"} bg={"#6D02C9"}>
-      <Box bg="#370065" overflow={"hidden"}>
+      <Box bg="#370065" w="full" h="full" position="static" overflow={"hidden"}>
         <Image
-          src={"/assets/pattern.png"}
+          src={pattern}
           alt="background-footer"
+          loading="lazy"
+          placeholder="blur"
           style={{ objectFit: "cover" }}
+          priority={false}
           fill
         />
         <Container maxW="container.lg" py={"2rem"} px={30}>

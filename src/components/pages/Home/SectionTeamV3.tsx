@@ -37,6 +37,7 @@ export const SectionTeamV3: React.FC<IOurTeamV3> = props => {
           style={{
             alignSelf: "center",
           }}
+          priority={false}
         />
         <Image
           src={props.image}

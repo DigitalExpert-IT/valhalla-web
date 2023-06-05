@@ -73,7 +73,6 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
           alt={title}
           loading="lazy"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          // style={{ objectFit: "cover", zIndex: "base", position: "absolute" }}
           fill
         />
       ) : null}

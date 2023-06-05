@@ -89,12 +89,14 @@ const initCrawler = async () => {
         const existingUser = await prisma.user.findFirst({
           where: { address: lowerCase(user) },
         });
+        const { rank } = await valhalla.accountMap(user);
         if (!existingUser) {
           await prisma.user.create({
             data: {
               address: lowerCase(user),
               upline: lowerCase(referrer),
               blockNumber: Number(registrationEvent.blockNumber),
+              rank: rank,
             },
           });
         }

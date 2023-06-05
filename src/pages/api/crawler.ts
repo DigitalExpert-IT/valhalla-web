@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { PrismaClient } from "@prisma/client";
+import { getValhallaContract } from "lib/contractFactory";
 import { getMainProvider } from "lib/contractFactory";
 import type { NextApiHandler } from "next";
 import addressCrawler from "worker/addressCrawler";
@@ -32,10 +33,37 @@ const timestampPatcher = async () => {
   }
 };
 
+const rankPatcher = async () => {
+  try {
+    const valhalla = await getValhallaContract();
+    const userWithNorank = await prisma.user.findMany({
+      where: {
+        rank: undefined,
+      },
+    });
+    if (!userWithNorank.length) return;
+    await Promise.all(
+      userWithNorank.map(async e => {
+        const account = await valhalla.accountMap(e.address);
+        await prisma.user.update({
+          where: {
+            address: e.address,
+          },
+          data: {
+            rank: account.rank,
+          },
+        });
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};
 const handler: NextApiHandler = async (_, res) => {
   eventCrawler();
   addressCrawler();
   timestampPatcher();
+  rankPatcher();
   return res.send("OK");
 };
 

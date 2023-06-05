@@ -114,7 +114,7 @@ const init = createInitiator(async (address: string, rank: number) => {
         return {
           ...j,
           listNFT: getNftperUser,
-          listNFTPerType: groupBy(getNftperUser, "cardId"),
+          listNFTPerType: Object.values(groupBy(getNftperUser, "cardId")),
           restPercentage: `${getPercentageAverage.toFixed(2)}%`,
         };
       });

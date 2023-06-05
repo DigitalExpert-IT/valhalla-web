@@ -1,6 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Box, Text, Flex, HStack, Icon } from "@chakra-ui/react";
+import {
+  Container,
+  Box,
+  Text,
+  Flex,
+  HStack,
+  Icon,
+  AspectRatio,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { ICONS_FOOTER } from "constant/icon";
 import Link from "next/link";
@@ -12,7 +20,7 @@ export const LayoutFooterV2 = () => {
   return (
     <Box as="footer" w="full" position={"relative"} bg={"#6D02C9"}>
       <Box bg="#370065" w="full" h="full" position="static" overflow={"hidden"}>
-        <Image
+        {/* <Image
           src={pattern}
           alt="background-footer"
           loading="lazy"
@@ -20,7 +28,7 @@ export const LayoutFooterV2 = () => {
           style={{ objectFit: "cover" }}
           priority={false}
           fill
-        />
+        /> */}
         <Container maxW="container.lg" py={"2rem"} px={30}>
           <Flex
             justify={"center"}
@@ -51,13 +59,19 @@ export const LayoutFooterV2 = () => {
               justifyContent={{ base: "center", md: "start" }}
               w={{ base: "full", md: 0 }}
             >
-              <Image
-                width={220}
-                height={220}
-                loading="lazy"
-                src={"/assets/logo/gnLogo-2.png"}
-                alt="logo-image"
-              />
+              <AspectRatio ratio={{ base: 2 / 0.5, md: 1 }} minWidth="250">
+                <Image
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  sizes="(max-width: 768px) 100vw,"
+                  fill
+                  loading="lazy"
+                  src={"/assets/logo/gnLogo-2.png"}
+                  alt="logo-image"
+                  priority={false}
+                />
+              </AspectRatio>
             </Box>
           </Flex>
         </Container>

@@ -48,7 +48,7 @@ export const SectionPartnershipV2: React.FC<
         alignContent="center"
         justifyItems="center"
         w="full"
-        h="30vh"
+        h="auto"
         position="relative"
       >
         <Image
@@ -72,8 +72,9 @@ export const SectionPartnershipV2: React.FC<
             position: "absolute",
             opacity: "0.5",
             top: "-35px",
-            objectFit: "cover",
+            objectFit: "fill",
           }}
+          priority={false}
           fill
         />
         <Wrap spacing="5" justify="center" zIndex={1} m="auto">

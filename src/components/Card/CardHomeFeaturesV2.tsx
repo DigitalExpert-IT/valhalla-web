@@ -25,7 +25,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
       position={"relative"}
       overflow={"hidden"}
       bg={bgColor}
-      minH={{ base: "36", sm: "25rem" }}
+      minH={{ base: "36", sm: "22rem" }}
       maxH={{ base: "full", md: "20rem" }}
       rounded={"3xl"}
     >
@@ -50,7 +50,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
         w="full"
         h="full"
         minH="10rem"
-        maxH="60%"
+        maxH="50%"
         opacity={{ base: "0.2", md: "unset" }}
         position="absolute"
         bottom="0"
@@ -64,6 +64,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
           style={{
             objectFit: "contain",
           }}
+          priority={false}
           fill
         />
       </Box>
@@ -74,6 +75,7 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
           loading="lazy"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
+          priority={false}
         />
       ) : null}
     </Card>

@@ -30,6 +30,7 @@ export const SectionHeaderV2 = () => {
         loading="lazy"
         sizes="100vw"
         style={{ objectFit: "cover" }}
+        priority={false}
         fill
       />
       <Box

@@ -2,7 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconType } from "react-icons";
-import { Stack, Box, Text, Icon, useMediaQuery } from "@chakra-ui/react";
+import {
+  Stack,
+  Box,
+  Text,
+  Icon,
+  useMediaQuery,
+  AspectRatio,
+} from "@chakra-ui/react";
 
 interface ISocial {
   link: string;
@@ -23,32 +30,40 @@ export const SectionTeamV3: React.FC<IOurTeamV3> = props => {
     <Stack direction={{ base: "column", md: "row" }} mb="10" align="center">
       <Stack
         mt="10rem"
-        w={{ base: "100%", md: "sm" }}
+        w={{ base: "100%", md: "xs" }}
         flex={1}
         position="relative"
         justifyContent="center"
+        alignContent="center"
       >
-        <Image
-          src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685711127/global-network/artboard1_pgpebn.avif"
-          alt="art-board"
-          width={700}
-          height={700}
-          loading="lazy"
-          style={{
-            alignSelf: "center",
-          }}
-          priority={false}
-        />
+        <AspectRatio ratio={1} w="full" h="auto">
+          <Image
+            src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685711127/global-network/artboard1_pgpebn.avif"
+            alt="art-board"
+            loading="lazy"
+            style={{
+              alignSelf: "center",
+              position: "absolute",
+              objectFit: "contain",
+            }}
+            // priority={false}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 20vw, 33vw"
+            fill
+          />
+        </AspectRatio>
+
         <Image
           src={props.image}
           alt={`image-${props.name}`}
-          width={500}
-          height={500}
-          loading="lazy"
           style={{
             position: "absolute",
             alignSelf: "center",
+            objectFit: "contain",
           }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 20vw, 33vw"
+          loading="lazy"
+          priority={false}
+          fill
         />
       </Stack>
       <Stack

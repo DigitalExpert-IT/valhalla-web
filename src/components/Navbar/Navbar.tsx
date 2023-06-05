@@ -3,7 +3,7 @@ import Link from "next/link";
 import { NAVIGATION } from "constant/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { DrawerMobileNav, NavbarMenu, ButtonConnectWallet } from "components";
-
+import Image from "next/image";
 import {
   Box,
   Flex,
@@ -11,7 +11,6 @@ import {
   useDisclosure,
   IconButton,
   Container,
-  Image,
   AspectRatio,
 } from "@chakra-ui/react";
 
@@ -72,7 +71,12 @@ export const Navbar = () => {
                 left={"0"}
                 top={"-2"}
               >
-                <Image src="/assets/logo/gnLogo.png" alt="logo-image" />
+                <Image
+                  src="/assets/logo/gnLogo.png"
+                  alt="logo-image"
+                  width={500}
+                  height={500}
+                />
               </AspectRatio>
             </Link>
             <IconButton

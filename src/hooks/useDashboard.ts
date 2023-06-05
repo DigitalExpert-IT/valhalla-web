@@ -147,9 +147,9 @@ export const useDashboard = () => {
   const address = useAddress();
   const { data: account } = useAccountMap();
   useEffect(() => {
-    // if (address && account?.rank) {
-    init("0x458aE247679f92BeD7Cbd56DF323121520Ef02c2", 1);
-    // }
+    if (address && account?.rank) {
+      init(address, account?.rank);
+    }
   }, [address, account?.rank]);
 
   return { ...store };

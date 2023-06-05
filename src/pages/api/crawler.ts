@@ -36,14 +36,14 @@ const timestampPatcher = async () => {
 const rankPatcher = async () => {
   try {
     const valhalla = await getValhallaContract();
-    const userWithNorank = await prisma.user.findMany({
+    const userWithNoRank = await prisma.user.findMany({
       where: {
         rank: undefined,
       },
     });
-    if (!userWithNorank.length) return;
+    if (!userWithNoRank.length) return;
     await Promise.all(
-      userWithNorank.map(async e => {
+      userWithNoRank.map(async e => {
         const account = await valhalla.accountMap(e.address);
         await prisma.user.update({
           where: {

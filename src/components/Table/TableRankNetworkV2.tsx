@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  Box,
-  Heading,
-  Text,
-  Icon,
-  Stack,
-  Container,
-  Image,
-} from "@chakra-ui/react";
+import { Heading, Text, Icon, Stack } from "@chakra-ui/react";
 import { IRankNetwork, RANKNETWORK } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
 import { MdOutlineDoubleArrow } from "react-icons/md";
+import Image from "next/image";
 import { t } from "i18next";
 
 const columnHelper = createColumnHelper<IRankNetwork>();
@@ -79,8 +72,14 @@ export const TableRankNetworkV2 = () => {
       pos="relative"
       overflow="hidden"
     >
-      <Stack pos="absolute" h="full" zIndex="1">
-        <Image src="/assets/project/pattern2.png" alt="pattern2" my={"auto"} />
+      <Stack pos="absolute" w="full" h="full" zIndex="1">
+        <Image
+          src="/assets/project/pattern2.png"
+          loading="lazy"
+          alt="pattern2"
+          style={{ objectFit: "contain" }}
+          fill
+        />
       </Stack>
       <Heading
         fontWeight="black"

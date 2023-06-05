@@ -3,7 +3,8 @@ import { IRankBonusV2, RANKBONUSV2 } from "constant/pages/home";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
-import { Stack, Image, Heading, Text, Box } from "@chakra-ui/react";
+import { Stack, Image as Chakra, Heading, Text } from "@chakra-ui/react";
+import Image from "next/image";
 import { t } from "i18next";
 import { WidgetSwipe } from "components/Widget";
 
@@ -23,8 +24,9 @@ const columns = [
           <Image
             src={info.getValue().image}
             alt="rank-image"
-            maxH={12}
-            maxW={12}
+            loading="lazy"
+            width={35}
+            height={35}
           />
         ) : null}
         <Text
@@ -91,11 +93,19 @@ export const TableRankBonusV2 = () => {
       textAlign="center"
       pos="relative"
       pt={40}
-      bgImage="url('/assets/project/pattern2.png')"
       overflow="hidden"
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
     >
+      <Stack pos="absolute" w="full" h="full" zIndex="1">
+        <Image
+          src="/assets/project/pattern2.png"
+          alt="pattern2"
+          loading="lazy"
+          style={{ objectFit: "contain" }}
+          fill
+        />
+      </Stack>
       <Heading
         fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}

@@ -24,7 +24,7 @@ export default function Home() {
         <SectionProject />
         <SectionFeaturesV2 />
       </Container>
-      <SectionFeaturedPopulationV2 />
+      {/* <SectionFeaturedPopulationV2 /> */}
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <TableRankNetworkV2 />
       </Box>

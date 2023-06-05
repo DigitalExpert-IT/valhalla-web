@@ -4,12 +4,16 @@ import { toBn } from "evm-bn";
 import { useEffect } from "react";
 import { User } from "@prisma/client";
 import { createInitiator, getGnetRate, prettyBn } from "utils";
+import { useAddress } from "@thirdweb-dev/react";
+import { useAccountMap } from "./valhalla";
+import { groupBy } from "lodash";
 
 interface INFTItem {
   id: string;
   to: string;
   from: string;
   price: number;
+  cardId: string;
   tokenId: string;
   address: string;
   mintedAt: string;
@@ -94,10 +98,10 @@ const init = createInitiator(async (address: string, rank: number) => {
       })
     );
 
-    const hierachyWithNFT = hierarchyValue.map((e, i) => {
-      const withNft = e.map(j => {
+    const hierachyWithNFT = hierarchyValue.map((user, level) => {
+      const withNft = user.map(j => {
         const getNftperUser =
-          getAllNFT[i]?.filter(l => l.to === j.address) ?? [];
+          getAllNFT.at(level)?.filter(l => l.to === j.address) ?? [];
         const getPercentageAverage =
           getNftperUser?.reduce((acc, pre) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
@@ -110,6 +114,7 @@ const init = createInitiator(async (address: string, rank: number) => {
         return {
           ...j,
           listNFT: getNftperUser,
+          listNFTPerType: Object.values(groupBy(getNftperUser, "cardId")),
           restPercentage: `${getPercentageAverage.toFixed(2)}%`,
         };
       });
@@ -137,21 +142,15 @@ const init = createInitiator(async (address: string, rank: number) => {
   }
 });
 
-export const useDashboard = (address: string, rank: number) => {
+export const useDashboard = () => {
   const store = useDashoardStore();
-  // temporary commented for bypass wallet address
-  // const { address } = useWallet();
-  // const { account } = useValhalla();
+  const address = useAddress();
+  const { data: account } = useAccountMap();
   useEffect(() => {
-    // todo if change wallet, need to refetch data
-    //   if (address && account.rank) {
-    //     init(address, account.rank);
-    //   }
-    // }, [address, account.rank]);
-    if (address && rank) {
-      init(address, rank);
+    if (address && account?.rank) {
+      init(address, account?.rank);
     }
-  }, [address, rank]);
+  }, [address, account?.rank]);
 
   return { ...store };
 };

@@ -40,7 +40,7 @@ const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
 
   if (!page && !limit) return;
-  const take = Number(limit) == 0 ? 10 : Number(limit);
+  const take = Number(limit) === 0 ? 10 : Number(limit);
   const skip = take * (Number(page) == 0 ? 0 : Number(page) - 1);
   const getUserInRow: User[] = await prisma.$queryRaw`
   SELECT * FROM "User" 
@@ -60,8 +60,8 @@ const handler: NextApiHandler = async (req, res) => {
   const getTotalUser: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT 
-    CAST(COUNT(*) / ${Number(limit)}  as int) as "totalPage", 
-    CAST(COUNT(*) as int) as "totalData" 
+      CAST(COUNT(*) / ${take}  as int) as "totalPage", 
+      CAST(COUNT(*) as int) as "totalData" 
     FROM "User"`;
 
   return res.status(200).json({

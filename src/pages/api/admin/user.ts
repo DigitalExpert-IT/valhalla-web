@@ -10,7 +10,7 @@ export interface IUser extends User {
 export interface IAdminDashboard {
   totalItemPerPage: number;
   totalPage: number;
-  totalData: number;
+  totalItem: number;
   items: IUser[];
 }
 
@@ -52,7 +52,7 @@ const handler: NextApiHandler = async (req, res) => {
   const template: IAdminDashboard = {
     totalItemPerPage: userWithNFT.length,
     totalPage: getTotalItem.at(0)?.totalPage as number,
-    totalData: getTotalItem.at(0)?.totalData as number,
+    totalItem: getTotalItem.at(0)?.totalData as number,
     items: userWithNFT,
   };
 

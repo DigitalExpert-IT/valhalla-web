@@ -9,7 +9,7 @@ export interface IAdminDashboard {
   data: User[];
 }
 
-// prepare url host/api/admin/user?page=1&limit=10'
+// example url host/api/admin/user?page=1&limit=10'
 
 export const getNFTByAddress = async (address: string) => {
   const nftList: any[] = await prisma.$queryRaw`

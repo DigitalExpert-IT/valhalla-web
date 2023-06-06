@@ -1,5 +1,9 @@
 import { NextApiHandler } from "next";
-import { INFTItem, getNFTsByTypeInRow, getTotalPagesNFTByType } from "utils";
+import {
+  INFTItem,
+  getNFTsByTypeInRow,
+  getTotalPagesNFTByType,
+} from "./controller/query";
 import { IAdminDashboard } from "./user";
 
 export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "data"> {

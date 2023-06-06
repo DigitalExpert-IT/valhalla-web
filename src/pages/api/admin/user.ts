@@ -1,6 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { NextApiHandler, NextApiResponse } from "next";
-import { INFTItem, getNFTByAddress } from "utils";
+import { INFTItem, getNFTByAddress } from "./controller/query";
 const prisma = new PrismaClient();
 
 export interface IUser extends User {

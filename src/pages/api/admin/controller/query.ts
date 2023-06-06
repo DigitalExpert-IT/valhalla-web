@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { NextApiHandler } from "next";
 
 export interface INFTItem {
   id: string;
@@ -119,3 +120,9 @@ export const getNFTsByTypeInRow = async (
 
   return nftList;
 };
+
+const handler: NextApiHandler = async (_, res) => {
+  return res.status(403).send("forbidden");
+};
+
+export default handler;

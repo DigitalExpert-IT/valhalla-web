@@ -2,14 +2,14 @@ import { PrismaClient, User } from "@prisma/client";
 import { NextApiHandler, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 
-interface IAdminDashboard {
-  page: number;
-  limit: number;
+export interface IAdminDashboard {
   totalPage: number;
   totalItem: number;
   totalData: number;
   data: User[];
 }
+
+// prepare url host/api/admin/user?page=1&limit=10'
 
 export const getNFTByAddress = async (address: string) => {
   const nftList: any[] = await prisma.$queryRaw`
@@ -38,36 +38,41 @@ export const getNFTByAddress = async (address: string) => {
 
 const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
-  const take = Number(limit) < 1 ? 10 : Number(limit);
-  const skip = take * (Number(page) < 1 ? 0 : Number(page) - 1);
+
+  const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
+  const isTakeNumOrNan = Number(page) < 1 || !Number(page);
+
+  const take = isLimitNumOrNan ? 10 : Number(limit);
+  const skip = take * (isTakeNumOrNan ? 0 : Number(page) - 1);
 
   const getUserInRow: User[] = await prisma.$queryRaw`
-      SELECT * FROM "User" 
-      ORDER BY "id" ASC 
-      LIMIT ${take} 
+      SELECT * FROM "User"
+      ORDER BY "id" ASC
       OFFSET ${skip} ROWS
+      FETCH NEXT ${take} ROWS ONLY
+      ;
     `;
 
+  // add NFT to Every address
   const collectNFT = getUserInRow.map(async user => {
     const userNFTs = await getNFTByAddress(user.address);
     return { ...user, NFTs: userNFTs };
   });
-
   const userWithNFT = await Promise.all(collectNFT);
-  const getTotalUser: { totalPage: number; totalData: number }[] =
+
+  // calculate the page
+  const getTotalItem: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
-    SELECT 
-      CEIL(CAST(COUNT(*)  as float) / ${take}) as "totalPage", 
-      CAST(COUNT(*) as int) as "totalData" 
+    SELECT
+      CEIL(CAST(COUNT(*)  as float) / ${take}) as "totalPage",
+      CAST(COUNT(*) as int) as "totalData"
     FROM "User"`;
 
   return res.status(200).json({
-    page: Number(page),
-    limit: Number(limit),
-    totalPage: getTotalUser.at(0)?.totalPage,
-    totalItem: getUserInRow.length,
-    totalData: getTotalUser.at(0)?.totalData,
-    data: userWithNFT,
+    totalItemPerPage: userWithNFT.length,
+    totalPage: getTotalItem.at(0)?.totalPage,
+    totalData: getTotalItem.at(0)?.totalData,
+    datas: userWithNFT,
   });
 };
 

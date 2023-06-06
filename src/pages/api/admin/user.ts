@@ -52,7 +52,6 @@ const handler: NextApiHandler = async (req, res) => {
 
   const promises = getUserInRow.map(async user => {
     const userNFTs = await getNFT(user.address);
-    console.log(userNFTs);
     return { ...user, NFTs: userNFTs };
   });
 

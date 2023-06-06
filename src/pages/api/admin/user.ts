@@ -1,5 +1,5 @@
 import { PrismaClient, User } from "@prisma/client";
-import { NextApiHandler } from "next";
+import { NextApiHandler, NextApiResponse } from "next";
 import { INFTItem, getNFTByAddress } from "utils";
 const prisma = new PrismaClient();
 
@@ -16,15 +16,6 @@ export interface IAdminDashboard {
 
 /**
  *
- * @param req with query { page, limit }
- * @param res
- * @returns
- * {
- *    totalItemPerPage: userWithNFT.length,
- *    totalPage: getTotalItem.at(0)?.totalPage,
- *    totalData: getTotalItem.at(0)?.totalData,
- *    datas: userWithNFT,
- * }
  * @example host/api/admin/user?page=1&limit=10'
  */
 const handler: NextApiHandler = async (req, res) => {

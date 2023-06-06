@@ -1,5 +1,5 @@
 import { PrismaClient, User } from "@prisma/client";
-import { NextApiHandler } from "next";
+import { NextApiHandler, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 
 interface IAdminDashboard {
@@ -39,14 +39,13 @@ export const getNFT = async (address: string) => {
 const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
 
-  if (!page && !limit) return;
-  const take = Number(limit) === 0 ? 10 : Number(limit);
-  const skip = take * (Number(page) == 0 ? 0 : Number(page) - 1);
+  const take = Number(limit) < 1 ? 10 : Number(limit);
+  const skip = take * (Number(page) < 1 ? 0 : Number(page) - 1);
   const getUserInRow: User[] = await prisma.$queryRaw`
   SELECT * FROM "User" 
     ORDER BY 
       "id" ASC 
-    LIMIT ${take} 
+    LIMIT ${take}
     OFFSET ${skip} ROWS
   `;
 
@@ -60,7 +59,7 @@ const handler: NextApiHandler = async (req, res) => {
   const getTotalUser: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT 
-      CAST(COUNT(*) / ${take}  as int) as "totalPage", 
+      CEIL(CAST(COUNT(*)  as float) / ${take}) as "totalPage", 
       CAST(COUNT(*) as int) as "totalData" 
     FROM "User"`;
 

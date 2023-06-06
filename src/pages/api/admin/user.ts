@@ -16,7 +16,7 @@ export interface IAdminDashboard {
 
 /**
  *
- * @example host/api/admin/user?page=1&limit=10'
+ * @example ```host/api/admin/user?page=1&limit=10'```
  */
 const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
@@ -49,11 +49,11 @@ const handler: NextApiHandler = async (req, res) => {
       CAST(COUNT(*) as int) as "totalData"
     FROM "User"`;
 
-  const template = {
+  const template: IAdminDashboard = {
     totalItemPerPage: userWithNFT.length,
-    totalPage: getTotalItem.at(0)?.totalPage,
-    totalData: getTotalItem.at(0)?.totalData,
-    datas: userWithNFT,
+    totalPage: getTotalItem.at(0)?.totalPage as number,
+    totalData: getTotalItem.at(0)?.totalData as number,
+    data: userWithNFT,
   };
 
   return res.status(200).json(template);

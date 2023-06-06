@@ -23,8 +23,8 @@ const prisma = new PrismaClient();
 /**
  *
  * @param address
- * @returns Promises<NFTList[]>
- * @example getNFTByAddress(address)
+ * @returns A Promise that resolve with list NFTs
+ * @example ```getNFTByAddress('0x0126563456d34d')```
  */
 export const getNFTByAddress = async (address: string) => {
   const nftList: INFTItem[] = await prisma.$queryRaw`
@@ -79,11 +79,11 @@ export const getTotalPagesNFTByType = async (cardId: string, take: number) => {
 /**
  *
  * @param cardId type of card (0,1,2,3,4,5)
- * @param skip is position OFFSET
- * @param take is how much row to get the item
+ * @param skip OFFSET Position
+ * @param take how much row
  * @returns A Promise that resolve with list NFTs in a row
  *
- * ```getNFTsByTypeInRow(1, 100, 10)```
+ * ```getNFTsByTypeInRow('1', 100, 10)```
  *
  * it means the first param is a type of card, the second's params are index position,
  * and lastly how much you take the item in a row

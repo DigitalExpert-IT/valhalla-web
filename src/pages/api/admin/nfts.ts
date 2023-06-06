@@ -9,7 +9,7 @@ export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "data"> {
 
 /**
  *
- * @example host/api/admin/nfts?type=1&page=1&limit=10
+ * @example ```host/api/admin/nfts?type=1&page=1&limit=10```
  */
 
 const handler: NextApiHandler = async (req, res) => {

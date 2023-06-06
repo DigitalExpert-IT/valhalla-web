@@ -11,7 +11,7 @@ export interface IAdminDashboard {
   totalItemPerPage: number;
   totalPage: number;
   totalData: number;
-  data: IUser[];
+  items: IUser[];
 }
 
 /**
@@ -53,7 +53,7 @@ const handler: NextApiHandler = async (req, res) => {
     totalItemPerPage: userWithNFT.length,
     totalPage: getTotalItem.at(0)?.totalPage as number,
     totalData: getTotalItem.at(0)?.totalData as number,
-    data: userWithNFT,
+    items: userWithNFT,
   };
 
   return res.status(200).json(template);

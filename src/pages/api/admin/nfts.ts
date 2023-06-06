@@ -6,9 +6,9 @@ import {
 } from "./controller/query";
 import { IAdminDashboard } from "./user";
 
-export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "data"> {
+export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
   cardType?: number | string | string[];
-  data: INFTItem[];
+  items: INFTItem[];
 }
 
 /**
@@ -39,7 +39,7 @@ const handler: NextApiHandler = async (req, res) => {
     totalPage: totalNfts?.totalPage as number,
     totalData: totalNfts?.totalData as number,
     cardType: !type ? 0 : type,
-    data: NFTs,
+    items: NFTs,
   };
 
   return res.status(200).json(template);

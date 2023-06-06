@@ -76,11 +76,25 @@ export const getTotalPagesNFTByType = async (cardId: string, take: number) => {
   return totalNFT.at(0);
 };
 
+/**
+ *
+ * @param cardId type of card (0,1,2,3,4,5)
+ * @param skip is position OFFSET
+ * @param take is how much row to get the item
+ * @returns A Promise that resolve with list NFTs in a row
+ *
+ * ```getNFTsByTypeInRow(1, 100, 10)```
+ * it means the first param is a type of card, the second's params are index position, and lastly how much you take the item in a row
+ *
+ *
+ *
+ */
+
 export const getNFTsByTypeInRow = async (
   cardId: string,
   skip: number,
   take: number
-) => {
+): Promise<INFTItem[]> => {
   const nftList: INFTItem[] = await prisma.$queryRaw`
         SELECT * FROM (SELECT * from (
           SELECT distinct on ("tokenId") "tokenId", * from (

@@ -3,8 +3,8 @@ import {
   INFTItem,
   getNFTsByTypeInRow,
   getTotalPagesNFTByType,
-} from "./controller/query";
-import { IAdminDashboard } from "./user";
+} from "../controller/query";
+import { IAdminDashboard } from "../user";
 
 export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
   cardType?: number | string | string[];

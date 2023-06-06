@@ -69,7 +69,7 @@ export const CardProfile = () => {
             >
               {widthMob
                 ? shortenAddress(ContractGnet)
-                : ContractGnet.toUpperCase()}
+                : ContractGnet?.toUpperCase()}
               <IoCopyOutline />
             </CopiableText>
           </Box>
@@ -82,7 +82,7 @@ export const CardProfile = () => {
               gap={2}
               value={defaultHost + address}
             >
-              {widthMob ? shortenAddress(address) : address.toUpperCase()}{" "}
+              {widthMob ? shortenAddress(address) : address?.toUpperCase()}{" "}
               <IoCopyOutline />
             </CopiableText>
           </Box>
@@ -94,7 +94,7 @@ export const CardProfile = () => {
             <Text color={"brand.300"}>
               {widthMob
                 ? shortenAddress(account.referrer)
-                : account.referrer.toUpperCase()}
+                : account.referrer?.toUpperCase()}
             </Text>
           </Box>
         </Stack>

@@ -25,6 +25,7 @@ const handler: NextApiHandler = async (req, res) => {
       blockNumber: firstUser?.blockNumber ?? 0,
       telegramUsername: firstUser?.telegramUsername ?? "",
       level: 0,
+      rank: firstUser?.rank ?? 0,
     },
   ];
 

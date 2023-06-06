@@ -18,6 +18,7 @@ const handler: NextApiHandler = async (req, res) => {
       upline: "",
       blockNumber: firstUser?.blockNumber ?? 0,
       telegramUsername: firstUser?.telegramUsername ?? "",
+      rank: firstUser?.rank ?? 0,
     },
   ];
   let upperList = [address];

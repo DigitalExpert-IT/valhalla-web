@@ -1,5 +1,11 @@
 import { NextApiHandler } from "next";
 import { INFTItem, getNFTsByTypeInRow, getTotalPagesNFTByType } from "utils";
+import { IAdminDashboard } from "./user";
+
+export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "data"> {
+  cardType?: number | string | string[];
+  data: INFTItem[];
+}
 
 const handler: NextApiHandler = async (req, res) => {
   const { type, page, limit } = req.query;
@@ -19,14 +25,15 @@ const handler: NextApiHandler = async (req, res) => {
     String(!type ? 0 : type),
     take
   );
-
-  return res.status(200).json({
-    totalItemPerPage: NFTs.length,
-    totalPage: totalNfts?.totalPage,
-    totalData: totalNfts?.totalData,
+  const template: IDashboardNFTsPerType = {
+    totalItemPerPage: NFTs.length as number,
+    totalPage: totalNfts?.totalPage as number,
+    totalData: totalNfts?.totalData as number,
     cardType: !type ? 0 : type,
     data: NFTs,
-  });
+  };
+
+  return res.status(200).json(template);
 };
 
 export default handler;

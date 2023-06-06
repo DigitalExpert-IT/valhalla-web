@@ -8,8 +8,8 @@ export interface IUser extends User {
 }
 
 export interface IAdminDashboard {
+  totalItemPerPage: number;
   totalPage: number;
-  totalItem: number;
   totalData: number;
   data: IUser[];
 }
@@ -58,12 +58,14 @@ const handler: NextApiHandler = async (req, res) => {
       CAST(COUNT(*) as int) as "totalData"
     FROM "User"`;
 
-  return res.status(200).json({
+  const template = {
     totalItemPerPage: userWithNFT.length,
     totalPage: getTotalItem.at(0)?.totalPage,
     totalData: getTotalItem.at(0)?.totalData,
     datas: userWithNFT,
-  });
+  };
+
+  return res.status(200).json(template);
 };
 
 export default handler;

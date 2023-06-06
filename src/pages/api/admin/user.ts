@@ -11,7 +11,7 @@ interface IAdminDashboard {
   data: User[];
 }
 
-export const getNFT = async (address: string) => {
+export const getNFTByAddress = async (address: string) => {
   const nftList: any[] = await prisma.$queryRaw`
     SELECT * from (
       SELECT distinct on ("tokenId") "tokenId", * from (
@@ -38,24 +38,22 @@ export const getNFT = async (address: string) => {
 
 const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
-
   const take = Number(limit) < 1 ? 10 : Number(limit);
   const skip = take * (Number(page) < 1 ? 0 : Number(page) - 1);
-  const getUserInRow: User[] = await prisma.$queryRaw`
-  SELECT * FROM "User" 
-    ORDER BY 
-      "id" ASC 
-    LIMIT ${take}
-    OFFSET ${skip} ROWS
-  `;
 
-  const promises = getUserInRow.map(async user => {
-    const userNFTs = await getNFT(user.address);
+  const getUserInRow: User[] = await prisma.$queryRaw`
+      SELECT * FROM "User" 
+      ORDER BY "id" ASC 
+      LIMIT ${take} 
+      OFFSET ${skip} ROWS
+    `;
+
+  const collectNFT = getUserInRow.map(async user => {
+    const userNFTs = await getNFTByAddress(user.address);
     return { ...user, NFTs: userNFTs };
   });
 
-  const userWithNFT = await Promise.all(promises);
-
+  const userWithNFT = await Promise.all(collectNFT);
   const getTotalUser: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT 

@@ -8,7 +8,11 @@ export const useBasicDashboardInfo = () => {
   const { data: dataUser } = useUsersDasboard(1, 1);
   const { data: NFTs } = useNFTsDashboard(1, 1, 1);
   const { data, ...rest } = useQuery(["NFT-Value"], async () => {
-    const axiosResponse = await Axios.get("/api/admin/nfts/total-nft-value");
+    const axiosResponse = await Axios.get<{
+      totalSales: number;
+      totalProfit: number;
+      totalActiveNFT: number;
+    }>("/api/admin/nfts/total-nft-value");
     return axiosResponse.data;
   });
 
@@ -17,6 +21,9 @@ export const useBasicDashboardInfo = () => {
       ...data,
       totalUser: dataUser?.totalItem,
       totalNFTOnUser: NFTs?.totalItem,
+      totalBlackListedNFT: Math.abs(
+        Number(NFTs?.totalItem) - Number(data?.totalActiveNFT)
+      ),
     };
   }, [dataUser, data]);
 

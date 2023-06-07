@@ -121,10 +121,11 @@ export const getNFTsByTypeInRow = async (
   return nftList;
 };
 
-export const getNFTsTotalProfit = async () => {
-  const totalNFT: { totalProfit: number }[] = await prisma.$queryRaw`
+export const getNFTTotalActiveProfit = async () => {
+  const totalNFT: { totalProfit: number; totalActiveNFT: number }[] =
+    await prisma.$queryRaw`
     SELECT 
-      CAST(SUM((("price" * "farmPercentage") / 100) * 450)as int) as "totalProfit" 
+      CAST(SUM((("price" * "farmPercentage") / 100) * 450)as int) as "totalProfit", CAST(COUNT(*) as int) as "totalActiveNFT"
       from (
         SELECT distinct on ("tokenId") "tokenId", * from (
           SELECT 

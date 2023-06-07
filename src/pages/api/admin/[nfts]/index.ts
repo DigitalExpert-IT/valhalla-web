@@ -1,10 +1,12 @@
 import { NextApiHandler } from "next";
 import {
   INFTItem,
+  getNFTs,
   getNFTsByTypeInRow,
   getTotalPagesNFTByType,
 } from "../controller/query";
 import { IAdminDashboard } from "../user";
+import { groupBy } from "lodash";
 
 export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
   cardType?: number | string | string[];
@@ -18,6 +20,14 @@ export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
 
 const handler: NextApiHandler = async (req, res) => {
   const { type, page, limit } = req.query;
+
+  if (!type && !page && !limit) {
+    const getAllNFT = await getNFTs();
+
+    return res.status(200).json({
+      typeList: getAllNFT,
+    });
+  }
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isTakeNumOrNan = Number(page) < 1 || !Number(page);

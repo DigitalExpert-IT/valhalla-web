@@ -59,7 +59,7 @@ const Dashboard = () => {
   const downlinesByAddress = useMemo(() => {
     const newUser = listUser[
       selectedLevel + selectedAddressList.length
-    ]?.filter(address => address.upline === selectedAddressList.at(-1));
+    ]?.filter(address => address?.upline === selectedAddressList.at(-1));
 
     return newUser;
   }, [listUser, selectedLevel, selectedAddressList]);

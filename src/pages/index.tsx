@@ -41,8 +41,6 @@ export default function Home() {
         textAlign="center"
         bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"
       >
-        {/* <SectionTeamV2 data={OURTEAM} /> */}
-
         <SectionTeamV3
           image={OURTEAMV3.image}
           name={OURTEAMV3.name}

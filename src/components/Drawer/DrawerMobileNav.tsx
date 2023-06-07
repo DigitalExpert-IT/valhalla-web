@@ -4,6 +4,7 @@ import { INavigation } from "constant/navigation";
 import { ButtonConnectWallet } from "components";
 import { useTranslation } from "react-i18next";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import Image from "next/image";
 import {
   Drawer,
   DrawerBody,
@@ -14,7 +15,6 @@ import {
   Stack,
   Text,
   AspectRatio,
-  Image,
   Flex,
   Icon,
   useDisclosure,
@@ -43,7 +43,11 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             <Image
               src={"/assets/logo/gnLogo.png"}
               alt="logo-image"
-              objectFit="cover"
+              style={{
+                objectFit: "cover",
+              }}
+              sizes="(max-width: 768px) 100vw,"
+              fill
             />
           </AspectRatio>
         </DrawerHeader>
@@ -115,15 +119,17 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
             <ButtonConnectWallet direction="column" />
           </Stack>
           <Stack align={"center"}>
-            <Box>
+            <AspectRatio ratio={1} minWidth="190">
               <Image
                 alt="Global Network"
                 src="/assets/logo/logo-type-big.svg"
-                w="100%"
-                objectFit="cover"
-                loading="lazy"
-              ></Image>
-            </Box>
+                style={{
+                  objectFit: "contain",
+                }}
+                sizes="(max-width: 768px) 100vw,"
+                fill
+              />
+            </AspectRatio>
           </Stack>
         </DrawerBody>
       </DrawerContent>

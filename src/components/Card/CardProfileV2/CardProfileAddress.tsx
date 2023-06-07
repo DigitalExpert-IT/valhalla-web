@@ -48,7 +48,7 @@ export const CardProfileAddress = () => {
                 {t("common.contractGnet")}
                 <IoCopyOutline />
               </Text>
-              {ContractGnet.toUpperCase()}
+              {ContractGnet?.toUpperCase()}
             </CopiableText>
           </Center>
         </WidgetProfileBalace>
@@ -72,7 +72,7 @@ export const CardProfileAddress = () => {
                 {t("common.referralLink")}
                 <IoCopyOutline />
               </Text>
-              {address.toUpperCase()}
+              {address?.toUpperCase()}
             </CopiableText>
           </Center>
         </WidgetProfileBalace>

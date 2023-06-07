@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Heading,
   Text,
@@ -22,14 +23,16 @@ export const SectionHeaderV2 = () => {
   const accountMap = useAccountMap();
 
   return (
-    <Flex
-      h="100vh"
-      pos="relative"
-      bgImage="url('/images/bgHeader_home.png')"
-      align="center"
-      justify="center"
-      gap="10"
-    >
+    <Flex h="100vh" pos="relative" align="center" justify="center" gap="10">
+      <Image
+        src="https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874722/global-network/bgHeader_home_fq0gqx.png"
+        alt="img-header"
+        loading="lazy"
+        sizes="100vw"
+        style={{ objectFit: "cover" }}
+        priority={false}
+        fill
+      />
       <Box
         display={{
           base: "none",

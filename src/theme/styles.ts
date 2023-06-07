@@ -1,12 +1,17 @@
 import { Styles } from "@chakra-ui/theme-tools";
-import "@fontsource/poppins/200.css";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/700.css";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  weight: ["200", "400", "700"],
+  subsets: ["latin-ext"],
+  style: ["normal", "italic"],
+  variable: "--font-poppins",
+});
 
 export const styles: Styles = {
   global: {
     body: {
-      fontFamily: "poppins",
+      fontFamily: `${poppins.style.fontFamily}`,
       color: "chakra-body-text",
       bg: "chakra-body-bg",
       transitionProperty: "background-color",

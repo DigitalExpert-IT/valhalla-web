@@ -1,4 +1,5 @@
-import { Card, Image, Text, Flex } from "@chakra-ui/react";
+import { Card, Text, Flex, Box } from "@chakra-ui/react";
+import Image from "next/image";
 import React from "react";
 
 export type CardData = {
@@ -18,15 +19,14 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
     <Card
       px={6}
       py={4}
-      w={"full"}
-      maxW={"xs"}
+      w="full"
+      maxW={"sm"}
       mx={"auto"}
-      h={"full"}
       position={"relative"}
       overflow={"hidden"}
       bg={bgColor}
-      minH={{ base: "36", sm: "72" }}
-      maxH={{ base: "full", md: "44" }}
+      minH={{ base: "36", sm: "22rem" }}
+      maxH={{ base: "full", md: "20rem" }}
       rounded={"3xl"}
     >
       <Flex
@@ -46,37 +46,36 @@ export const CardHomeFeaturesV2 = (props: CardData) => {
           {subtitle}
         </Text>
       </Flex>
-      <Image
-        src={uri}
-        alt={title}
-        mx={"auto"}
-        zIndex={"base"}
-        h={{ base: id == 1 ? "full" : "70%", sm: "60%" }}
-        w={"fit-content"}
-        objectFit="cover"
-        position={"absolute"}
-        right={"0"}
-        left={{ base: "auto", sm: imgCenter ? "0" : "full" }}
-        top={{ base: "0", sm: "auto" }}
-        bottom={"0"}
-        mt={"auto"}
-        mb={imgCenter ? "auto" : "0.5"}
-        pb={id == 3 || id == 2 ? "4" : "0.5"}
-      />
+      <Box
+        w="full"
+        h="full"
+        minH="10rem"
+        maxH="50%"
+        opacity={{ base: "0.2", md: "unset" }}
+        position="absolute"
+        bottom="0"
+        right={{ base: "-2rem", md: "0" }}
+      >
+        <Image
+          src={uri}
+          alt={title}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{
+            objectFit: "contain",
+          }}
+          priority={false}
+          fill
+        />
+      </Box>
       {bgImg ? (
         <Image
           src={bgImg}
           alt={title}
-          objectFit={"cover"}
-          mx={"auto"}
-          zIndex={"base"}
-          h={"full"}
-          w={"full"}
-          position={"absolute"}
-          right={"0"}
-          left={"0"}
-          top={"0"}
-          bottom={"0"}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill
+          priority={false}
         />
       ) : null}
     </Card>

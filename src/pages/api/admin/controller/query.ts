@@ -148,9 +148,10 @@ export const getNFTTotalActiveProfit = async () => {
   return totalNFT.at(0);
 };
 export const getNFTsTotalSales = async () => {
-  const totalNFT: { totalSales: number }[] = await prisma.$queryRaw`
+  const totalNFT: { totalSales: number; totalNFTOnUser: number }[] =
+    await prisma.$queryRaw`
     SELECT 
-      CAST(SUM("price") as int) as "totalSales" 
+      CAST(SUM("price") as int) as "totalSales", CAST(COUNT(*) as int) as "totalNFTOnUser" 
       from (
         SELECT distinct on ("tokenId") "tokenId", * from (
           SELECT 

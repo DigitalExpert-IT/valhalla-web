@@ -17,8 +17,6 @@ import {
 import { useUsersDasboard } from "hooks/admin";
 
 export default function Home() {
-  const dashboard = useUsersDasboard(1, 100);
-  console.log(dashboard);
   const { t } = useTranslation();
   return (
     <LayoutMainV2>

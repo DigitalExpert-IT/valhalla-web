@@ -45,7 +45,6 @@ const handler: NextApiHandler = async (req, res) => {
     pageSize
   );
   const template: IDashboardNFTsPerType = {
-    totalItemPerPage: NFTs.length as number,
     totalPage: totalNfts?.totalPage as number,
     totalItem: totalNfts?.totalData as number,
     cardType: !type ? 0 : type,

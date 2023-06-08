@@ -30,19 +30,19 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
-  const isTakeNumOrNan = Number(page) < 1 || !Number(page);
+  const isPageNumOrNan = Number(page) < 1 || !Number(page);
 
-  const take = isLimitNumOrNan ? 10 : Number(limit);
-  const skip = take * (isTakeNumOrNan ? 0 : Number(page) - 1);
+  const pageSize = isLimitNumOrNan ? 10 : Number(limit);
+  const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   const NFTs: INFTItem[] = await getNFTsByTypeInRow(
     String(!type ? 0 : type),
-    skip,
-    take
+    offset,
+    pageSize
   );
   const totalNfts = await getTotalPagesNFTByType(
     String(!type ? 0 : type),
-    take
+    pageSize
   );
   const template: IDashboardNFTsPerType = {
     totalItemPerPage: NFTs.length as number,

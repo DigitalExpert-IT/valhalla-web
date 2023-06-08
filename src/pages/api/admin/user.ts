@@ -22,16 +22,16 @@ const handler: NextApiHandler = async (req, res) => {
   const { page, limit } = req.query;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
-  const isTakeNumOrNan = Number(page) < 1 || !Number(page);
+  const isPageNumOrNan = Number(page) < 1 || !Number(page);
 
-  const take = isLimitNumOrNan ? 10 : Number(limit);
-  const skip = take * (isTakeNumOrNan ? 0 : Number(page) - 1);
+  const pageSize = isLimitNumOrNan ? 10 : Number(limit);
+  const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   const getUserInRow: User[] = await prisma.$queryRaw`
       SELECT * FROM "User"
       ORDER BY "id" ASC
-      OFFSET ${skip} ROWS
-      FETCH NEXT ${take} ROWS ONLY;
+      OFFSET ${offset} ROWS
+      FETCH NEXT ${pageSize} ROWS ONLY;
     `;
 
   // add NFT to Every address
@@ -45,7 +45,7 @@ const handler: NextApiHandler = async (req, res) => {
   const getTotalItem: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT
-      CEIL(CAST(COUNT(*)  as float) / ${take}) as "totalPage",
+      CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage",
       CAST(COUNT(*) as int) as "totalData"
     FROM "User"`;
 

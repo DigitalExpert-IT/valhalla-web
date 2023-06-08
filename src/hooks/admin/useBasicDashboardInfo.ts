@@ -13,7 +13,7 @@ interface IBasicDashboardInfo {
 export const useBasicDashboardInfo = () => {
   return useQuery(["NFT-Value"], async () => {
     const axiosResponse = await Axios.get<IBasicDashboardInfo>(
-      "/api/admin/nfts/total-nft-value"
+      "/api/admin/dashboard-basic-info"
     );
     return axiosResponse.data;
   });

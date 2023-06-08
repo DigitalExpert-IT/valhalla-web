@@ -1,8 +1,5 @@
 import { NextApiHandler } from "next";
-import {
-  getNFTTotalActiveProfit,
-  getNFTsTotalSales,
-} from "../controller/query";
+import { getNFTTotalActiveProfit, getNFTsTotalSales } from "./controller/query";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

@@ -1,6 +1,16 @@
 import React from "react";
 import { CardGenesisNFT, LayoutMainV2 } from "components";
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Flex,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Text,
+} from "@chakra-ui/react";
 import { t } from "i18next";
 
 const Genesis = () => {
@@ -9,12 +19,13 @@ const Genesis = () => {
       <Flex
         pos={"relative"}
         flexDir={"column"}
-        minH={"80vh"}
+        minH={"90vh"}
         px={"4"}
         pb={"10"}
         placeContent={"center"}
         bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)"
         overflow="hidden"
+        align="center"
       >
         <Heading
           fontWeight="black"
@@ -40,7 +51,44 @@ const Genesis = () => {
         >
           {t("common.genesis").toUpperCase()}
         </Heading>
-        <CardGenesisNFT />
+
+        <Box w={{ base: "100%", md: "85vw" }}>
+          <Box textAlign="center" my="5rem">
+            <Heading textTransform={"capitalize"}>
+              {t("pages.genesis.getYourGenesis")}
+            </Heading>
+            <Text>{t("pages.genesis.getYourGenesisSubs")}</Text>
+          </Box>
+          <Tabs isFitted variant="globalNetwork" mt="2rem" isLazy>
+            <TabList>
+              <Tab>
+                <Text
+                  textTransform="uppercase"
+                  fontSize="xl"
+                  color="valhallaPink.300"
+                >
+                  Buy NFT
+                </Text>
+              </Tab>
+              <Tab>
+                <Text
+                  textTransform="uppercase"
+                  fontSize="xl"
+                  color="valhallaPink.300"
+                >
+                  Claim NFT
+                </Text>
+              </Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <CardGenesisNFT />
+              </TabPanel>
+              <TabPanel>YOu Get Nothing!</TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
       </Flex>
     </LayoutMainV2>
   );

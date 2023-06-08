@@ -41,15 +41,13 @@ export const CardGenesisNFT: React.FC = props => {
   // };
   return (
     <Stack align="center" rounded="xl" overflow="hidden">
-      <Heading textTransform="uppercase" py="1">
-        nft genesis card
-      </Heading>
       <Stack
         rounded="xl"
         color="white"
+        mt="4rem"
         bgGradient="linear(130deg, purple, blue.500)"
         p="3px"
-        maxW="30%"
+        maxW={{ base: "100%", md: "50%", xl: "30rem" }}
       >
         <Stack
           bgGradient="linear-gradient(360deg, #2C1FA7 0%, #6D02C9 100%)"
@@ -70,15 +68,15 @@ export const CardGenesisNFT: React.FC = props => {
               <Text color="#FF00FF">Item Supply</Text>
               <Text>2000</Text>
               <Stack
-                direction="row"
-                maxW="500px"
+                direction={{ base: "column", md: "row" }}
+                maxW="100%"
                 align="center"
                 flex={1}
                 pt="2rem"
               >
                 <Stack
                   direction="row"
-                  w="50%"
+                  w={{ base: "100%", md: "50%" }}
                   bgColor="#1F227D"
                   border="1px"
                   borderColor="#FF00FF"
@@ -86,7 +84,7 @@ export const CardGenesisNFT: React.FC = props => {
                   align="center"
                   justify="center"
                 >
-                  <Button variant="ghost" {...inc}>
+                  <Button variant="ghost" size="sm" {...inc}>
                     +
                   </Button>
                   <Input
@@ -95,13 +93,13 @@ export const CardGenesisNFT: React.FC = props => {
                     variant="unstyled"
                     {...input}
                   />
-                  <Button variant="ghost" {...dec}>
+                  <Button variant="ghost" size="sm" {...dec}>
                     -
                   </Button>
                 </Stack>
                 <Box
                   flex={1}
-                  w="50%"
+                  w={{ base: "100%", md: "50%" }}
                   border="1px"
                   borderColor="#FF00FF"
                   rounded="xl"
@@ -110,6 +108,7 @@ export const CardGenesisNFT: React.FC = props => {
                     w="100%"
                     rounded="xl"
                     variant="ghost"
+                    size="sm"
                     bgColor="#1F227D"
                   >
                     BUY 100 USDT

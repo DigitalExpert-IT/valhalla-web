@@ -290,6 +290,18 @@ const colors = {
     800: "#002e50",
     900: "#000d20",
   },
+  valhallaPink: {
+    50: "#ffe2ff",
+    100: "#ffb1ff",
+    200: "#fe7fff",
+    300: "#fd4cff",
+    400: "#fb1aff",
+    500: "#e200e6",
+    600: "#b100b4",
+    700: "#7e0081",
+    800: "#4d004f",
+    900: "#1d001e",
+  },
 };
 
 export default colors;

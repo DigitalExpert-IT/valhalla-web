@@ -58,6 +58,7 @@ const Dashboard = () => {
     _.debounce(key => {
       setSearchKey(key);
       setPage(1);
+      setSelectAddressList([]);
     }, 500),
     []
   );
@@ -76,11 +77,13 @@ const Dashboard = () => {
   }, [listUser, selectedLevel, selectedAddressList]);
 
   const searchResult = useMemo(() => {
-    const result = listUser
-      .map(level =>
-        _.filter(level, item => item.address.indexOf(searchKey) > -1)
-      )
-      .reduce((acc, userPerLevel) => [...acc, ...userPerLevel], []);
+    const result = listUser.reduce((acc, userLevel, idx) => {
+      if(idx === 0) return acc;
+
+      const users = _.filter(userLevel, (item) => item.address.indexOf(searchKey) > -1);
+
+      return [...acc, ...users];
+    }, []);
 
     return result;
   }, [listUser, searchKey]);
@@ -374,16 +377,16 @@ const Dashboard = () => {
                         {shortenAddress(address ?? "")}
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                    
-                  {selectedAddressList.map(addr => (
-                    <BreadcrumbItem key={`address.${addr}`}>
-                      <BreadcrumbLink
-                        fontSize="xs"
-                        onClick={() => handleJumpToAddress(addr)}
-                      >
-                        {shortenAddress(addr)}
+
+                    {selectedAddressList.map(addr => (
+                      <BreadcrumbItem key={`address.${addr}`}>
+                        <BreadcrumbLink
+                          fontSize="xs"
+                          onClick={() => handleJumpToAddress(addr)}
+                        >
+                          {shortenAddress(addr)}
                         </BreadcrumbLink>
-                        </BreadcrumbItem>
+                      </BreadcrumbItem>
                     ))}
                   </Breadcrumb>
                 </HStack>

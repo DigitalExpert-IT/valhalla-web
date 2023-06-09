@@ -8,7 +8,6 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { BsSearch } from "react-icons/bs";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";

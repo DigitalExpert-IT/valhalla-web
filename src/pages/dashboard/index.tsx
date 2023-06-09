@@ -513,33 +513,6 @@ const Dashboard = () => {
                 </Box>
               </HStack>
             </Stack>
-
-            {/* <Stack
-              w="full"
-              bg="gray.100"
-              p="5"
-              rounded="lg"
-              alignItems="center"
-            >
-              <Heading as="h2" fontSize="2xl" mb="4">
-                {t("pages.dashboard.bestNetwork")}
-              </Heading>
-              <HStack
-                w="full"
-                p="1"
-                rounded="md"
-                justifyContent="space-between "
-              >
-                <HStack>
-                  <AspectRatio w="25px" ratio={15 / 17}>
-                    <Image src={"/" + RANK_SYMBOL_MAP[2]} alt={rankMap[2]} />
-                  </AspectRatio>
-                  <Text fontWeight="semibold">0x9ee...4808</Text>
-                </HStack>
-
-                <Text fontSize="sm">$1.4m {t("pages.dashboard.revenue")}</Text>
-              </HStack>
-            </Stack> */}
           </Stack>
         </Box>
       </HStack>

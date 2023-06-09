@@ -44,7 +44,7 @@ export const SectionHeaderV2 = () => {
       >
         <AspectRatio w={{ base: "none", md: "md", xl: " xl" }} ratio={1}>
           <LazyVideo
-            src="https://res.cloudinary.com/do5ykudx9/video/upload/v1680114199/intro.mp4"
+            src="https://ik.imagekit.io/msxxxaegj/video_gn/LOGO_I%CC%87NTRO.mp4?updatedAt=1686299614129"
             objectFit="cover"
           />
         </AspectRatio>

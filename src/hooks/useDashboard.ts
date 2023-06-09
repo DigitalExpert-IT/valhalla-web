@@ -26,7 +26,7 @@ interface INFTItem {
   farmRewardPerSecond: number;
 }
 
-interface IUser extends User {
+export interface IUser extends User {
   listNFT: INFTItem[];
 }
 

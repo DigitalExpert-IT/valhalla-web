@@ -91,8 +91,6 @@ const variantDahsboard = definePartsStyle(() => {
       color: "black",
       boxShadow: "md",
       border: "1px solid black",
-      pt: "6",
-      pb: "6",
       _readOnly: {
         boxShadow: "none !important",
         userSelect: "all",

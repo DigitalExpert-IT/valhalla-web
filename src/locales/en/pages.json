@@ -354,10 +354,13 @@
       "downlinesNotFound": "Downlines Not Found"
     },
     "placeholder": {
-      "search": "Search items, collection, accounts"
+      "search": "Search member by address"
     },
     "alert": {
       "downlinesNotFound": "{{address}} doesn't have any downlines or already reach max level."
+    },
+    "messages": {
+      "memberNotFound": "Member not found"
     },
     "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
     "summary": "Summary",

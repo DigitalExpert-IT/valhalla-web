@@ -16,153 +16,108 @@ import {
   AspectRatio,
   Divider,
   Center,
-  Select,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  useToast,
 } from "@chakra-ui/react";
-import { useValhalla } from "hooks";
-import { shortenAddress } from "utils";
-import { HeaderDashboard } from "components";
-import { useTranslation } from "react-i18next";
+import { CopiableText, HeaderDashboard, Sidebar } from "components";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
+import { useValhalla, useWallet } from "hooks";
+import { useTranslation } from "react-i18next";
+import { jsNumberForAddress } from "react-jazzicon";
+import Jazzicon from "react-jazzicon/dist/Jazzicon";
+import { shortenAddress } from "utils";
 import {
   BsFillDiagram2Fill,
   BsFillPeopleFill,
   BsFillPersonFill,
-  BsFilter,
   BsGraphUp,
 } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
+import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { PaginationV2 as Pagination } from "components/PaginationUtils";
-import { IUser, useDashboard } from "hooks/useDashboard";
-import _ from "lodash";
+import { useDashboard } from "hooks/useDashboard";
 import { withConnection } from "hoc";
-import { useAddress } from "@thirdweb-dev/react";
 
 const PAGE_SIZE = 10;
 
 const Dashboard = () => {
-  const address = useAddress();
+  // const { address } = useWallet();
+  const address = "0xb2f5f18ee989e6241e297f7598068832a4e0e2c9";
   const user = useValhalla();
   const { t } = useTranslation();
-  const { listUser, totalUser, listProfitePerLevel, potensialProfite } =
-    useDashboard();
-  const toast = useToast();
-  const [filterRank, setFitlerRank] = useState<number | null>(-1);
-  const [searchKey, setSearchKey] = useState("");
-
-  const searchDebounce = useCallback(
-    _.debounce(key => {
-      setSearchKey(key);
-      setPage(1);
-      setSelectAddressList([]);
-    }, 500),
-    []
-  );
+  const {
+    listNFT,
+    listUser,
+    totalUser,
+    listProfitePerLevel,
+    potensialProfite,
+    totalNFTCirculatingSuply,
+  } = useDashboard(address, 1);
 
   // Start Pagination
   const [selectedLevel, setLevel] = useState(1);
   const [selectedAddressList, setSelectAddressList] = useState<string[]>([]);
   const [page, setPage] = useState(1);
+  const [startOffset, setStartOffset] = useState(0);
 
-  const lastCrumbDownlines = useMemo(() => {
+  const downlinesByAddress = useMemo(() => {
     const newUser = listUser[
       selectedLevel + selectedAddressList.length
-    ]?.filter(address => address?.upline === selectedAddressList.at(-1));
+    ]?.filter(address => address.upline === selectedAddressList.at(-1));
 
     return newUser;
   }, [listUser, selectedLevel, selectedAddressList]);
 
-  const searchResult = useMemo(() => {
-    const result = listUser.reduce((acc, userLevel, idx) => {
-      if(idx === 0) return acc;
-
-      const users = _.filter(userLevel, (item) => item.address.indexOf(searchKey) > -1);
-
-      return [...acc, ...users];
-    }, []);
-
-    return result;
-  }, [listUser, searchKey]);
-
   const currentItems = useMemo(() => {
-    const startOffset = PAGE_SIZE * page - PAGE_SIZE;
     const endOffset = startOffset + PAGE_SIZE;
-    let items: IUser[] = [];
 
-    if (searchKey.replace(/ /g, "") !== "") {
-      items = searchResult;
-    } else {
-      if (selectedAddressList.length > 0) {
-        items = lastCrumbDownlines;
-      } else {
-        items = listUser[selectedLevel];
-      }
+    if (selectedAddressList.length > 0) {
+      return downlinesByAddress?.slice(startOffset, endOffset);
     }
 
-    items = items?.slice(startOffset, endOffset);
-
-    if (filterRank !== -1) {
-      items = items?.filter(item =>
-        !item.rank && filterRank === 0 ? true : item.rank === filterRank
-      );
-    }
-
-    return items;
+    return listUser[selectedLevel]?.slice(startOffset, endOffset);
   }, [
-    page,
     listUser,
     selectedLevel,
-    lastCrumbDownlines,
+    startOffset,
+    downlinesByAddress,
     selectedAddressList,
-    filterRank,
-    searchResult,
   ]);
 
   const totalPage = useMemo(() => {
-    if (searchKey.replace(/ /g, "") !== "")
-      return Math.ceil(searchResult?.length / PAGE_SIZE);
-
     if (selectedAddressList.length > 0)
-      return Math.ceil(lastCrumbDownlines?.length / PAGE_SIZE);
+      return Math.ceil(downlinesByAddress?.length / PAGE_SIZE);
 
     return Math.ceil(listUser[selectedLevel]?.length / PAGE_SIZE);
-  }, [listUser, selectedAddressList, lastCrumbDownlines, searchResult]);
+  }, [listUser, selectedAddressList, downlinesByAddress]);
+
+  const handlePageClick = (num: number) => {
+    const newStartItem = PAGE_SIZE * num - PAGE_SIZE;
+
+    setStartOffset(newStartItem);
+    setPage(num);
+  };
   // End Pagination
 
   const handleClickLevel = useCallback((level: number) => {
     setLevel(level);
     setSelectAddressList([]);
 
-    setPage(1);
+    handlePageClick(1);
   }, []);
 
   const handleClickAddress = useCallback(
     (address: string) => {
-      if (searchKey.replace(/ /g, "") !== "") return;
-
       const downlines = listUser[
         selectedLevel + selectedAddressList.length + 1
       ]?.filter(user => user.upline === address);
 
-      if (!downlines || downlines.length === 0) {
-        return toast({
-          title: t("pages.dashboard.title.downlinesNotFound"),
-          description: t("pages.dashboard.alert.downlinesNotFound", {
-            address,
-          }),
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+      if (!downlines || downlines.length === 0) return;
 
       setSelectAddressList(state => [...state, address]);
     },
-    [listUser, selectedLevel, selectedAddressList, searchKey]
+    [listUser, selectedLevel, selectedAddressList]
   );
 
   const handleJumpToAddress = useCallback(
@@ -176,30 +131,13 @@ const Dashboard = () => {
   );
 
   const TableDownlineLevel = useMemo(() => {
-    if (searchKey.replace(/ /g, "") !== "")
-      return (
-        <Box
-          pos="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
-          <Text fontSize="2xl" color="gray.400" textAlign="center">
-            Search Result:
-          </Text>
-        </Box>
-      );
-
     return (
       <TableContainer border="1px solid #000" borderRadius="xl">
         <Table variant="dashboard" color="gray.800">
           <Thead>
             <Tr>
               <Th>Lv</Th>
-              <Th>Total</Th>
+              <Th>Total Member</Th>
               <Th>Profit</Th>
             </Tr>
           </Thead>
@@ -226,26 +164,9 @@ const Dashboard = () => {
         </Table>
       </TableContainer>
     );
-  }, [listUser, selectedLevel, searchKey]);
+  }, [listUser, selectedLevel]);
 
   const TableMember = useMemo(() => {
-    if (!currentItems?.length)
-      return (
-        <Box
-          pos="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
-          <Text color="gray.400" textAlign="center">
-            {t("pages.dashboard.messages.memberNotFound")}
-          </Text>
-        </Box>
-      );
-
     return (
       <>
         <TableContainer border="1px solid #000" borderRadius="xl">
@@ -253,6 +174,7 @@ const Dashboard = () => {
             <Thead>
               <Tr>
                 <Th>Member</Th>
+
                 <Th>Rank</Th>
                 <Th>NFT</Th>
                 <Th>Profit</Th>
@@ -272,10 +194,7 @@ const Dashboard = () => {
                   </Td>
                   <Td>
                     <AspectRatio w="18px" ratio={15 / 17}>
-                      <Image
-                        src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
-                        alt={rankMap[0]}
-                      />
+                      <Image src={"/" + RANK_SYMBOL_MAP[0]} alt={rankMap[0]} />
                     </AspectRatio>
                   </Td>
                   <Td>{user.listNFT.length ?? 0}</Td>
@@ -295,7 +214,7 @@ const Dashboard = () => {
           justifyPage="flex-end"
           currentPage={page}
           totalPage={totalPage}
-          onPageChange={setPage}
+          onPageChange={handlePageClick}
           colorScheme={"valhalla"}
         />
       </>
@@ -304,14 +223,10 @@ const Dashboard = () => {
 
   return (
     <LayoutDashboard>
-      <HeaderDashboard
-        address={address ?? ""}
-        isShowSearch
-        onSearchChange={searchDebounce}
-      />
+      <HeaderDashboard address={address} />
 
       <HStack
-        minH="calc(100vh - 129px)"
+        minH="calc(100vh-112px)"
         flex={4}
         width="fit-content"
         alignItems="streetch"
@@ -342,8 +257,8 @@ const Dashboard = () => {
             </Box>
           </HStack>
 
-          <HStack mt="8" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="1" minW="260px" maxW="260px" minH="160px">
+          <HStack mt="8" gap="2" alignItems="flex-start">
+            <Box flex="1">
               <HStack minH="46px" pb="4" gap="4" alignItems="center">
                 <Heading
                   as="h2"
@@ -361,50 +276,30 @@ const Dashboard = () => {
               {TableDownlineLevel}
             </Box>
 
-            <Box pos="relative" flex="2" minW="692px" maxW="692px" minH="160px">
-              <HStack minH="46px" pb="4" justifyContent="space-between">
-                <HStack maxW="60%" overflowX="auto">
-                  <BsFillPersonFill size="20" color="#000" />
-                  <Breadcrumb
-                    spacing="4px"
-                    separator={<ChevronRightIcon color="gray.500" />}
-                  >
-                    <BreadcrumbItem>
+            <Box flex="2">
+              <HStack minH="46px" pb="4">
+                <BsFillPersonFill size="20" color="#000" />
+                <Breadcrumb
+                  spacing="4px"
+                  separator={<ChevronRightIcon color="gray.500" />}
+                >
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#" fontSize="xs">
+                      {shortenAddress(address)}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+
+                  {selectedAddressList.map(addr => (
+                    <BreadcrumbItem key={`address.${addr}`}>
                       <BreadcrumbLink
                         fontSize="xs"
-                        onClick={() => setSelectAddressList([])}
+                        onClick={() => handleJumpToAddress(addr)}
                       >
-                        {shortenAddress(address ?? "")}
+                        {shortenAddress(addr)}
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-
-                    {selectedAddressList.map(addr => (
-                      <BreadcrumbItem key={`address.${addr}`}>
-                        <BreadcrumbLink
-                          fontSize="xs"
-                          onClick={() => handleJumpToAddress(addr)}
-                        >
-                          {shortenAddress(addr)}
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                    ))}
-                  </Breadcrumb>
-                </HStack>
-                <HStack>
-                  <BsFilter size="20" color="000" />
-                  <Select
-                    variant="table-filter"
-                    maxW="40"
-                    placeholder="Rank"
-                    onChange={e => setFitlerRank(+e.target.value - 1)}
-                  >
-                    {rankMap.map((rank, idx) => (
-                      <option key={`${rank}.${idx}`} value={idx + 1}>
-                        {rank}
-                      </option>
-                    ))}
-                  </Select>
-                </HStack>
+                  ))}
+                </Breadcrumb>
               </HStack>
 
               {TableMember}
@@ -430,7 +325,7 @@ const Dashboard = () => {
               rounded="lg"
             >
               <Heading as="h2" fontSize="2xl" mb="4">
-                {t("pages.dashboard.summary")}
+                Summary
               </Heading>
               <HStack
                 w="full"
@@ -444,7 +339,7 @@ const Dashboard = () => {
                 <HStack justifyContent="space-between">
                   <BsFillPeopleFill />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.totalMember")}
+                    Total Member
                   </Text>
                 </HStack>
 
@@ -472,7 +367,7 @@ const Dashboard = () => {
                 <HStack justifyContent="space-between">
                   <BsGraphUp />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.totalEstimateProfit")}
+                    Total Estimate Profit
                   </Text>
                 </HStack>
 
@@ -500,7 +395,7 @@ const Dashboard = () => {
                 <HStack>
                   <BsFillDiagram2Fill />
                   <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.maxTotalLevel")}
+                    Total Level
                   </Text>
                 </HStack>
 
@@ -512,8 +407,35 @@ const Dashboard = () => {
                   bg="white"
                   borderRadius="md"
                 >
-                  {RANK_MAX_LEVEL[user.account.rank]}
+                  {listUser.length - 1}
                 </Box>
+              </HStack>
+            </Stack>
+
+            <Stack
+              w="full"
+              bg="gray.100"
+              p="5"
+              rounded="lg"
+              alignItems="center"
+            >
+              <Heading as="h2" fontSize="2xl" mb="4">
+                Best Network
+              </Heading>
+              <HStack
+                w="full"
+                p="1"
+                rounded="md"
+                justifyContent="space-between "
+              >
+                <HStack>
+                  <AspectRatio w="25px" ratio={15 / 17}>
+                    <Image src={"/" + RANK_SYMBOL_MAP[2]} alt={rankMap[2]} />
+                  </AspectRatio>
+                  <Text fontWeight="semibold">0x9ee...4808</Text>
+                </HStack>
+
+                <Text fontSize="sm">$1.4m Revenue</Text>
               </HStack>
             </Stack>
           </Stack>
@@ -523,4 +445,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(Dashboard);
+// export default withConnection(Dashboard);
+export default Dashboard;

@@ -142,15 +142,21 @@ const init = createInitiator(async (address: string, rank: number) => {
   }
 });
 
-export const useDashboard = () => {
+export const useDashboard = (address: string, rank: number) => {
   const store = useDashoardStore();
-  const address = useAddress();
-  const { data: account } = useAccountMap();
+  // temporary commented for bypass wallet address
+  // const { address } = useWallet();
+  // const { account } = useValhalla();
   useEffect(() => {
-    if (address && account?.rank) {
-      init(address, account?.rank);
+    // todo if change wallet, need to refetch data
+    //   if (address && account.rank) {
+    //     init(address, account.rank);
+    //   }
+    // }, [address, account.rank]);
+    if (address && rank) {
+      init(address, rank);
     }
-  }, [address, account?.rank]);
+  }, [address, rank]);
 
   return { ...store };
 };

@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
 import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
+import { RANK_MAX_LEVEL } from "constant/rank";
 import _ from "lodash";
 
 const prisma = new PrismaClient();
@@ -29,10 +30,9 @@ const handler: NextApiHandler = async (req, res) => {
     },
   ];
 
-  const maxDownline = [0, 10, 20, 40, 60, 80, 100];
   let upperList = [address];
 
-  for (let i = 0; i < maxDownline[+rank]; i++) {
+  for (let i = 0; i < RANK_MAX_LEVEL[+rank]; i++) {
     const userList = await prisma.user.findMany({
       where: {
         upline: { in: upperList },

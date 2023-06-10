@@ -15,10 +15,12 @@ import { shortenAddress } from "utils";
 
 interface PropsType {
   address: string;
+  isShowSearch?: boolean;
+  onSearchChange?: (e: any) => void;
 }
 
 export const HeaderDashboard = (props: PropsType) => {
-  const { address } = props;
+  const { address, isShowSearch, onSearchChange } = props;
   const { t } = useTranslation();
 
   return (
@@ -30,18 +32,21 @@ export const HeaderDashboard = (props: PropsType) => {
       py="8"
       bgColor="#f6f7ff"
     >
-      <FormControl flex={4} px="4">
-        <InputGroup>
-          <InputLeftElement pointerEvents="none" top="3px">
-            <BsSearch size="20" color="#000" />
-          </InputLeftElement>
-          <Input
-            variant="dashboard"
-            type="search"
-            placeholder={t("pages.dashboard.placeholder.search") ?? ""}
-          />
-        </InputGroup>
-      </FormControl>
+      {isShowSearch && onSearchChange ? (
+        <FormControl flex={4} px="4">
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" top="3px">
+              <BsSearch size="20" color="#000" />
+            </InputLeftElement>
+            <Input
+              variant="dashboard"
+              type="search"
+              onKeyUp={(e:any) => onSearchChange(e.target.value)}
+              placeholder={t("pages.dashboard.placeholder.search") ?? ""}
+            />
+          </InputGroup>
+        </FormControl>
+      ) : null}
       <Stack
         direction="row"
         maxW="453px"

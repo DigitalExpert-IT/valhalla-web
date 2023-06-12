@@ -4,7 +4,6 @@ import ee from "ee";
 import theme from "theme";
 import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useSwapContract } from "hooks";
 import type { AppProps } from "next/app";
 import { getActiveChain } from "lib/chain";
@@ -76,7 +75,6 @@ export default function App(props: AppProps) {
 }
 
 const Main = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
   const { t } = useTranslation();
   const nft = useNFTContract();

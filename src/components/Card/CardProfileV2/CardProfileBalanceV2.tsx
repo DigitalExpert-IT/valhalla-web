@@ -5,6 +5,7 @@ import { GNET_CONTRACT, USDT_CONTRACT } from "constant/address";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
+import { useMemo } from "react";
 
 const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
@@ -13,6 +14,10 @@ export const CardProfileBalanceV2 = () => {
   const balance = useBalance();
   const gnetBalance = useBalance(GNETContract);
   const usdtBalance = useBalance(USDTContract);
+
+  const ERC20 = useMemo(() => {
+    return { gnetBalance, usdtBalance };
+  }, [GNETContract, USDTContract]);
 
   return (
     <CardProfileV2>
@@ -30,7 +35,8 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(gnetBalance.data?.value, 9)} {gnetBalance.data?.symbol}
+              {prettyBn(ERC20.gnetBalance.data?.value, 9)}{" "}
+              {gnetBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -58,7 +64,8 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(usdtBalance.data?.value, 6)} {usdtBalance.data?.symbol}
+              {prettyBn(ERC20.usdtBalance.data?.value, 6)}{" "}
+              {usdtBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>

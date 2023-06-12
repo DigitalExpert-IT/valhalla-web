@@ -1,6 +1,6 @@
 import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
-import { Box, Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Box, Container } from "@chakra-ui/react";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -13,14 +13,16 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
+  ModalAnnouncement,
 } from "components";
-import { useUsersDasboard } from "hooks/admin";
 
 export default function Home() {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
+      <ModalAnnouncement />
       <SectionHeaderV2 />
+
       <Container maxW="container.xxl">
         <SectionProject />
         <SectionFeaturesV2 />

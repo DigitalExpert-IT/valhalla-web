@@ -1,10 +1,11 @@
 import { Card, CardBody, Flex, Heading, Image, Stack } from "@chakra-ui/react";
-import { FormSwap, LayoutMainV2 } from "components";
+import { FormSwap, LayoutMainV2, ModalAnnouncement } from "components";
 import { t } from "i18next";
 
 const SwapV2 = () => {
   return (
     <LayoutMainV2>
+      <ModalAnnouncement />
       <Flex
         pos={"relative"}
         flexDir={"column"}

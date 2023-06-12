@@ -16,7 +16,7 @@ export const CardProfileAddress = () => {
   const accountMap = useAccountMap();
   const address = useAddress() ?? "0x0";
   const ContractGnet =
-    GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+    GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x89"];
 
   useEffect(() => {
     if (router.isReady) {

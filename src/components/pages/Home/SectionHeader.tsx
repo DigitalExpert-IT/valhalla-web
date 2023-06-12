@@ -19,9 +19,8 @@ import { getTelegramBindingSignatureMessage, shortenAddress } from "utils";
 import { GNET_CONTRACT } from "constant/address";
 import { IoCopyOutline } from "react-icons/io5";
 import { CopiableText } from "components/CopiableText";
-import { CURRENT_CHAIN_ID } from "hooks/useValhallaContract";
 
-const ContractGnet = GNET_CONTRACT[CURRENT_CHAIN_ID];
+const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
 export const SectionHeader = () => {
   const { t } = useTranslation();

@@ -9,9 +9,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import { CardProfileV2 } from "./CardProfileV2";
-import { CURRENT_CHAIN_ID } from "hooks";
 
-const ContractGnet = GNET_CONTRACT[CURRENT_CHAIN_ID];
+const ContractGnet = GNET_CONTRACT["0x89"];
 export const CardProfileAddress = () => {
   const router = useRouter();
   const [defaultHost, setDefaultHost] = useState("");

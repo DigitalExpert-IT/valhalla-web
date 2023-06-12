@@ -6,9 +6,10 @@ import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
 import { useMemo } from "react";
+import { CURRENT_CHAIN_ID } from "hooks";
 
-const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
-const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+const GNETContract = GNET_CONTRACT[CURRENT_CHAIN_ID];
+const USDTContract = USDT_CONTRACT[CURRENT_CHAIN_ID];
 
 export const CardProfileBalanceV2 = () => {
   const balance = useBalance();

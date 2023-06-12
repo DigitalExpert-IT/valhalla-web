@@ -1,5 +1,5 @@
 import React from "react";
-import { CardGenesisNFT, LayoutMainV2 } from "components";
+import { CardClaimGenesisNFT, CardGenesisNFT, LayoutMainV2 } from "components";
 import {
   Box,
   Heading,
@@ -85,7 +85,9 @@ const Genesis = () => {
               <TabPanel>
                 <CardGenesisNFT />
               </TabPanel>
-              <TabPanel>YOu Get Nothing!</TabPanel>
+              <TabPanel>
+                <CardClaimGenesisNFT />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>

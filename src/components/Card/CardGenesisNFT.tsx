@@ -57,7 +57,7 @@ export const CardGenesisNFT: React.FC = props => {
           <Stack>
             <Box as="video" autoPlay loop muted rounded="xl">
               <source
-                src="https://res.cloudinary.com/do5ykudx9/video/upload/v1686141971/global-network/GENESIS_NFT_2_ruhecy.mp4"
+                src="https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611"
                 type="video/mp4"
               />
             </Box>

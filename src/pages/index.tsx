@@ -1,20 +1,6 @@
 import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
-import {
-  Box,
-  Button,
-  Container,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  Image,
-  Stack,
-} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Box, Container } from "@chakra-ui/react";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -27,37 +13,14 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
+  ModalAnnouncement,
 } from "components";
-import maintanance from "";
-
-const TemporaryModal = () => {
-  return (
-    <Modal onClose={() => {}} isOpen={true} isCentered>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Announcment</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Stack align="center" justify="center" spacing="3rem">
-            <Image src={"/maintenance.svg"} alt="under-maintance" />
-            <Text fontWeight="bold" fontSize="xl" textTransform="uppercase">
-              UNDER MAINTENANCE, Thank you!
-            </Text>
-          </Stack>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={() => {}}>Close</Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
-};
 
 export default function Home() {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
-      <TemporaryModal />
+      <ModalAnnouncement />
       <SectionHeaderV2 />
 
       <Container maxW="container.xxl">

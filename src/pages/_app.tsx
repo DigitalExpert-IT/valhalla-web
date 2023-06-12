@@ -1,5 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import "locales";
+import ee from "ee";
+import theme from "theme";
+import axios from "axios";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useSwapContract } from "hooks";
 import type { AppProps } from "next/app";
+import { getActiveChain } from "lib/chain";
+import { trustWallet } from "wallets/Trust";
+import NiceModal from "@ebay/nice-modal-react";
+import { useTranslation } from "react-i18next";
+import { PROJECT_NAME } from "constant/siteConfig";
+import { useNFTContract } from "hooks/useNFTContract";
+import { useValhallaContract } from "hooks/useValhallaContract";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import {
   Box,
   Button,
@@ -7,13 +23,6 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Head from "next/head";
-import theme from "theme";
-import NiceModal from "@ebay/nice-modal-react";
-import axios from "axios";
-import "locales";
-import { PROJECT_NAME } from "constant/siteConfig";
 import {
   ThirdwebProvider,
   metamaskWallet,
@@ -25,13 +34,7 @@ import {
   useSwitchChain,
   useWallet,
 } from "@thirdweb-dev/react";
-import { getActiveChain } from "lib/chain";
-import { useNFTContract } from "hooks/useNFTContract";
-import { useValhallaContract } from "hooks/useValhallaContract";
-import { useSwapContract } from "hooks";
-import ee from "ee";
-import { useTranslation } from "react-i18next";
-import { trustWallet } from "wallets/Trust";
+import { ModalAnnouncement } from "components";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -74,6 +77,7 @@ export default function App(props: AppProps) {
 }
 
 const Main = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
   const { t } = useTranslation();
   const nft = useNFTContract();
@@ -122,6 +126,12 @@ const Main = ({ Component, pageProps }: AppProps) => {
       toggleColorMode();
     }
   }, [colorMode]);
+
+  useEffect(() => {
+    if (router.pathname === "/profile" || router.pathname === "/swap") {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <>

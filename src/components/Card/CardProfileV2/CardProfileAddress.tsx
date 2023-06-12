@@ -10,13 +10,12 @@ import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import { CardProfileV2 } from "./CardProfileV2";
 
+const ContractGnet = GNET_CONTRACT["0x89"];
 export const CardProfileAddress = () => {
   const router = useRouter();
   const [defaultHost, setDefaultHost] = useState("");
   const accountMap = useAccountMap();
   const address = useAddress() ?? "0x0";
-  const ContractGnet =
-    GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
   useEffect(() => {
     if (router.isReady) {

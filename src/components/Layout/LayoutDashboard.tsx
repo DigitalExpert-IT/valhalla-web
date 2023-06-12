@@ -13,7 +13,7 @@ export const LayoutDashboard: React.FC<MainProps> = ({ children }) => {
         <GridItem w="100%" h="100%">
           <Sidebar />
         </GridItem>
-        <GridItem w="100%" h="100vh" overflowY="scroll">
+        <GridItem w="100%" h="100vh" overflowY="auto">
           {children}
         </GridItem>
       </Grid>

@@ -1,8 +1,8 @@
 export const CARD_IMAGE_MAP = {
-  "0": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680603932/nft-globalnetwork/nft-1_mwjv0v.mp4",
-  "1": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680604399/nft-globalnetwork/nft-2_ca6a0c.mp4",
-  "2": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680604399/nft-globalnetwork/nft_3_r13jv2.mp4",
-  "3": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680604399/nft-globalnetwork/nft-4_cvyart.mp4",
-  "4": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680604399/nft-globalnetwork/nft-5_rrzvv7.mp4",
-  "5": "https://res.cloudinary.com/do5ykudx9/video/upload/v1680604399/nft-globalnetwork/nft-6_rzyvke.mp4",
+  "0": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_1.mp4?updatedAt=1686300088938",
+  "1": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_2.mp4?updatedAt=1686300071070",
+  "2": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_3.mp4?updatedAt=1686300110047",
+  "3": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_4.mp4?updatedAt=1686300143381",
+  "4": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_5.mp4?updatedAt=1686300167411",
+  "5": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_6.mp4?updatedAt=1686300188144",
 };

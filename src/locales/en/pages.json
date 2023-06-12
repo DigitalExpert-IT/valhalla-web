@@ -1,7 +1,8 @@
 {
   "genesis": {
     "getYourGenesis": "Get your NFT genesis",
-    "getYourGenesisSubs": "For every NFT you buy on the NFTGenesis, you automatically receive a generous 2% share of the marketing revenues generated from subsequent NFT Farm sales. That's right, simply by being an NFTShare investor, you become an active contributor to the growth and promotion of the entire NFT marketplace."
+    "getYourGenesisSubs": "For every NFT you buy on the NFTGenesis, you automatically receive a generous 2% share of the marketing revenues generated from subsequent NFT Farm sales. That's right, simply by being an NFTShare investor, you become an active contributor to the growth and promotion of the entire NFT marketplace.",
+    "youDontOwn": "You don't own any NFT Genesis"
   },
   "register": {
     "title": "Join Us",

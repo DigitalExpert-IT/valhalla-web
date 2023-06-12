@@ -1,13 +1,4 @@
-import {
-  Box,
-  Heading,
-  Stack,
-  Text,
-  useNumberInput,
-  Button,
-  Input,
-} from "@chakra-ui/react";
-import { UglyButton } from "components/Button";
+import { Box, Stack, Text, Button } from "@chakra-ui/react";
 import { useAsyncCall } from "hooks";
 import { useCardList } from "hooks/useCardList";
 import { useState } from "react";
@@ -39,7 +30,7 @@ export const CardClaimGenesisNFT: React.FC = props => {
   // };
   return (
     <Stack align="center" rounded="xl" overflow="hidden">
-      <Button onClick={changeStatus}>setState</Button>
+      <Button onClick={changeStatus}>check</Button>
       <Stack
         rounded="xl"
         color="white"
@@ -98,10 +89,11 @@ export const CardClaimGenesisNFT: React.FC = props => {
               textAlign="center"
               align="center"
               justify="center"
-              h="30rem"
-              w="full"
+              h={{ base: "55vh", md: "65vh", xl: "50vh" }}
             >
-              <Text fontSize="xl">You dont own any NFT Genesis</Text>
+              <Box w="85%">
+                <Text fontSize="xl">{t("pages.genesis.youDontOwn")}</Text>
+              </Box>
             </Stack>
           )}
         </Stack>

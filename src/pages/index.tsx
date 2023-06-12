@@ -1,5 +1,19 @@
 import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
-import { Box, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  Image,
+  Stack,
+} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import {
   SectionHeaderV2,
@@ -14,13 +28,38 @@ import {
   TableRankNetworkV2,
   SectionFeaturesV2,
 } from "components";
-import { useUsersDasboard } from "hooks/admin";
+import maintanance from "";
+
+const TemporaryModal = () => {
+  return (
+    <Modal onClose={() => {}} isOpen={true} isCentered>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Announcment</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Stack align="center" justify="center" spacing="3rem">
+            <Image src={"/maintenance.svg"} alt="under-maintance" />
+            <Text fontWeight="bold" fontSize="xl" textTransform="uppercase">
+              UNDER MAINTENANCE, Thank you!
+            </Text>
+          </Stack>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => {}}>Close</Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export default function Home() {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
+      <TemporaryModal />
       <SectionHeaderV2 />
+
       <Container maxW="container.xxl">
         <SectionProject />
         <SectionFeaturesV2 />

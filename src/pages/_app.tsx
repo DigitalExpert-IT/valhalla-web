@@ -34,7 +34,6 @@ import {
   useSwitchChain,
   useWallet,
 } from "@thirdweb-dev/react";
-import { ModalAnnouncement } from "components";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
@@ -126,12 +125,6 @@ const Main = ({ Component, pageProps }: AppProps) => {
       toggleColorMode();
     }
   }, [colorMode]);
-
-  useEffect(() => {
-    if (router.pathname === "/profile" || router.pathname === "/swap") {
-      router.push("/");
-    }
-  }, []);
 
   return (
     <>

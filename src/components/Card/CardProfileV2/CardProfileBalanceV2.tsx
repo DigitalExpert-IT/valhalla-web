@@ -1,23 +1,39 @@
 import { HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { useBalance } from "@thirdweb-dev/react";
+import { useAddress, useBalance } from "@thirdweb-dev/react";
 import { WidgetProfileBalace } from "components/Widget/WidgetProfile";
-import { GNET_CONTRACT, USDT_CONTRACT } from "constant/address";
+import {
+  // GNET_CONTRACT, USDT_CONTRACT,
+  ZERO_ADDRESS,
+} from "constant/address";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useGNETContract, useUSDTContract } from "hooks";
+import { BigNumber } from "ethers";
 
-const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
-const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+// const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+// const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
 
 export const CardProfileBalanceV2 = () => {
   const balance = useBalance();
-  const gnetBalance = useBalance(GNETContract);
-  const usdtBalance = useBalance(USDTContract);
+  const address = useAddress() ?? ZERO_ADDRESS;
+  const usdt = useUSDTContract();
+  const gnet = useGNETContract();
 
-  const ERC20 = useMemo(() => {
-    return { gnetBalance, usdtBalance };
-  }, [GNETContract, USDTContract]);
+  const [gnetBalance, setGnetBalance] = useState<BigNumber>();
+  const [usdtBalance, setUsdtBalance] = useState<BigNumber>();
+
+  const getBalance = async () => {
+    setGnetBalance((await gnet.contract?.call("balanceOf", [address])) ?? 0);
+    setUsdtBalance((await usdt.contract?.call("balanceOf", [address])) ?? 0);
+  };
+
+  useEffect(() => {
+    if (address !== ZERO_ADDRESS) {
+      getBalance();
+    }
+  }, [address]);
 
   return (
     <CardProfileV2>
@@ -35,8 +51,8 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(ERC20.gnetBalance.data?.value, 9)}{" "}
-              {ERC20.gnetBalance.data?.symbol}
+              {prettyBn(gnetBalance, 9)}
+              {/* {gnetBalance.data?.symbol} */} GNET
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -50,7 +66,8 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(balance.data?.value, 18)} {balance.data?.symbol}
+              {prettyBn(balance.data?.value, 18)}
+              {balance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -64,8 +81,8 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(ERC20.usdtBalance.data?.value, 6)}{" "}
-              {ERC20.usdtBalance.data?.symbol}
+              {prettyBn(usdtBalance, 6)}
+              {/* {usdtBalance.data?.symbol} */} USDT
             </Text>
           </HStack>
         </WidgetProfileBalace>

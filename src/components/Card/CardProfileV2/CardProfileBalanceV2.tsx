@@ -36,7 +36,7 @@ export const CardProfileBalanceV2 = () => {
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
               {prettyBn(ERC20.gnetBalance.data?.value, 9)}{" "}
-              {gnetBalance.data?.symbol}
+              {ERC20.gnetBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -65,7 +65,7 @@ export const CardProfileBalanceV2 = () => {
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
               {prettyBn(ERC20.usdtBalance.data?.value, 6)}{" "}
-              {usdtBalance.data?.symbol}
+              {ERC20.usdtBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>

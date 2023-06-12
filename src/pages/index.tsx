@@ -20,7 +20,7 @@ export default function Home() {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
-      <ModalAnnouncement />
+      {/* <ModalAnnouncement /> */}
       <SectionHeaderV2 />
 
       <Container maxW="container.xxl">

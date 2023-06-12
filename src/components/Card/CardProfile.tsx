@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { CopiableText } from "components/CopiableText";
-import { useWallet, useValhalla } from "hooks";
+import { useWallet, useValhalla, CURRENT_CHAIN_ID } from "hooks";
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { IoCopyOutline } from "react-icons/io5";
@@ -31,8 +31,7 @@ export const CardProfile = () => {
   const { account } = useValhalla();
   const [widthMob] = useMediaQuery("(max-width: 500px)");
 
-  const ContractGnet =
-    GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+  const ContractGnet = GNET_CONTRACT[CURRENT_CHAIN_ID];
 
   useEffect(() => {
     if (router.isReady) {

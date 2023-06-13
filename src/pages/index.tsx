@@ -13,14 +13,12 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
-  ModalAnnouncement,
 } from "components";
 
 export default function Home() {
   const { t } = useTranslation();
   return (
     <LayoutMainV2>
-      <ModalAnnouncement />
       <SectionHeaderV2 />
 
       <Container maxW="container.xxl">

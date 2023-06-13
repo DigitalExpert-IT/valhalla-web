@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import { LayoutMainV2, ModalAnnouncement } from "components";
+import { LayoutMainV2 } from "components";
 import { SectionMyNFTV2 } from "components/pages/NFTFarm";
 import { withConnection } from "hoc";
 import { SectionProfileV2 } from "components/pages/Profile";
@@ -7,7 +7,6 @@ import { SectionProfileV2 } from "components/pages/Profile";
 const ProfileV2 = () => {
   return (
     <LayoutMainV2>
-      <ModalAnnouncement />
       <Box
         pt="40"
         bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"

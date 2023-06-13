@@ -15,10 +15,6 @@ export const CardProfileBalanceV2 = () => {
   const gnetBalance = useBalance(GNETContract);
   const usdtBalance = useBalance(USDTContract);
 
-  const ERC20 = useMemo(() => {
-    return { gnetBalance, usdtBalance };
-  }, [GNETContract, USDTContract]);
-
   return (
     <CardProfileV2>
       <Text fontSize={"xl"} textAlign={"center"}>
@@ -35,8 +31,7 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(ERC20.gnetBalance.data?.value, 9)}{" "}
-              {ERC20.gnetBalance.data?.symbol}
+              {prettyBn(gnetBalance.data?.value, 9)} {gnetBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -64,8 +59,7 @@ export const CardProfileBalanceV2 = () => {
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
             <Text>
-              {prettyBn(ERC20.usdtBalance.data?.value, 6)}{" "}
-              {ERC20.usdtBalance.data?.symbol}
+              {prettyBn(usdtBalance.data?.value, 6)} {usdtBalance.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>

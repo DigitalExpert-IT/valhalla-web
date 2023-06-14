@@ -10,6 +10,7 @@ interface ISummaryDashboard {
 }
 
 const handler: NextApiHandler = async (req, res) => {
+  const { start, end } = req.body;
   const nfts = await getSummary(
     new Date("2023-05-24T09:33:42.000Z"),
     new Date("2023-05-24T20:33:42.000Z")

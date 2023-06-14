@@ -1,21 +1,12 @@
 import { NextApiHandler } from "next";
-import {
-  getNFTTotalActiveProfit,
-  getNFTs,
-  getNFTsTotalSales,
-  getSummary,
-} from "./controller/query";
-import { PrismaClient } from "@prisma/client";
+import { getSummary } from "./controller/query";
 
 interface ISummaryDashboard {
   NFTOnUser: number;
   claimNFT: number;
-  totalNFTValue: number;
   activeNFT: number;
   blacklistNFT: number;
 }
-
-// const prisma = new PrismaClient();
 
 const handler: NextApiHandler = async (req, res) => {
   const nfts = await getSummary(
@@ -26,12 +17,10 @@ const handler: NextApiHandler = async (req, res) => {
   const summary = nfts.reduce(
     (acc, item) => {
       const addBlacklist = item.isBlackListed
-        ? acc.totalBlacklist + 1
-        : acc.totalBlacklist;
+        ? acc.blacklistNFT + 1
+        : acc.blacklistNFT;
 
-      const addActive = !item.isBlackListed
-        ? acc.totalActive + 1
-        : acc.totalActive;
+      const addActive = !item.isBlackListed ? acc.activeNFT + 1 : acc.activeNFT;
 
       const rewardInSec = item.baseReward / 86400;
       const lastFarmNum = +new Date(item.lastFarm);
@@ -42,17 +31,17 @@ const handler: NextApiHandler = async (req, res) => {
       return {
         NFTOnUser: acc.NFTOnUser + 1,
         totalProfite: acc.totalProfite + claimReward,
-        totalActive: addActive,
-        totalBlacklist: addBlacklist,
-        totalClaimedNft: acc.totalClaimedNft + nftClaim,
+        activeNFT: addActive,
+        blacklistNFT: addBlacklist,
+        claimNFT: acc.claimNFT + nftClaim,
       };
     },
     {
       NFTOnUser: 0,
       totalProfite: 0,
-      totalBlacklist: 0,
-      totalActive: 0,
-      totalClaimedNft: 0,
+      blacklistNFT: 0,
+      activeNFT: 0,
+      claimNFT: 0,
     }
   );
 

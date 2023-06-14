@@ -3,7 +3,7 @@ import { getSummary } from "./controller/query";
 
 interface ISummaryDashboard {
   NFTOnUser: number;
-  totalProfite: number;
+  totalProfit: number;
   claimNFT: number;
   activeNFT: number;
   blacklistNFT: number;

@@ -10,7 +10,7 @@ export interface INFTItem {
   cardId: string;
   tokenId: string;
   address: string;
-  mintedAt: string;
+  mintedAt: Date;
   lastFarm: Date;
   farmReward: number;
   blockNumber: number;

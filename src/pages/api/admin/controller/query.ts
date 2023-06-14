@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { differenceInSeconds } from "date-fns";
 import { NextApiHandler } from "next";
 
 export interface INFTItem {
@@ -10,12 +11,14 @@ export interface INFTItem {
   tokenId: string;
   address: string;
   mintedAt: string;
-  lastFarm: string;
+  lastFarm: Date;
   farmReward: number;
   blockNumber: number;
   farmPercentage: number;
   transactionHash: string;
   farmRewardPerDay: number;
+  baseReward: number;
+  isBlackListed: boolean;
   farmRewardPerSecond: number;
 }
 
@@ -197,6 +200,63 @@ export const getNFTs = async () => {
   `;
 
   return NFTs;
+};
+
+// interface ISummaryDashboard {
+//   NFTOnUser: number;
+//   claimNFT: number;
+//   totalNFTValue: number;
+//   activeNFT: number;
+//   blacklistNFT: number;
+// }
+
+export const getSummary = async (start: Date, end: Date) => {
+  const NFTs: INFTItem[] = await prisma.$queryRaw`
+    SELECT 
+      *
+    from (
+      SELECT distinct on ("tokenId") "tokenId", * from (
+        SELECT 
+          "Event"."id",
+          "Event"."address",
+          "Event"."transactionHash",
+          "Event"."args"->>'tokenId' as "tokenId",
+          "Event"."args"->>'from' as "from",
+          "Event"."args"->>'to' as "to",
+          "Event"."blockNumber",
+          cast("NftMetadata"."mintingPrice"/1e9 as int) as "price",
+          cast(cast("NftMetadata"."farmPercentage" as DECIMAL)/10 as float) as "farmPercentage",
+          "NftMetadata"."mintedAt" as "mintedAt",  "NftMetadata"."isBlackListed" as "isBlackListed",
+          "NftMetadata"."cardId" as "cardId"
+        from "Event"
+          INNER JOIN "NftMetadata" 
+            ON "args"->>'tokenId'="NftMetadata"."tokenId"
+        where 
+          "Event"."createdAt" >= ${start}
+          AND 
+          "Event"."createdAt" <= ${end}
+      ) "transList" order by "transList"."tokenId", "transList"."blockNumber" DESC
+    ) "filteredTransList" 
+  `;
+
+  const promise = NFTs.map(async e => {
+    const farm: { createdAt: string }[] = await prisma.$queryRaw`
+      SELECT "createdAt"
+        FROM "Event"
+        WHERE "args"->>'_tokenId'=${e.tokenId} AND "Event"."event"='Farm'
+        ORDER BY "createdAt" DESC
+        LIMIT 1
+      `;
+
+    const lastFarm = farm.at(0)?.createdAt ?? e.mintedAt;
+    const baseReward = (e.price * e.farmPercentage) / 100;
+    const rewardInSec = baseReward / 86400;
+    const diffInSec = differenceInSeconds(new Date(), new Date(lastFarm));
+    return { ...e, lastFarm, baseReward, rewardInSec, diffInSec };
+  });
+  const nfts = await Promise.all(promise);
+
+  return nfts;
 };
 
 const handler: NextApiHandler = async (_, res) => {

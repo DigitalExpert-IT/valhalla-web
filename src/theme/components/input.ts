@@ -200,6 +200,7 @@ const variantDahsboard = definePartsStyle(props => {
 
   return {
     field: {
+      boxSizing: "box",
       height: "12",
       borderColor: "black",
       color: "black",
@@ -218,6 +219,9 @@ const variantDahsboard = definePartsStyle(props => {
       _placeholder: {
         color: "gray.300",
       },
+    },
+    icon: {
+      color: "black"
     },
     addon: {
       border: "2px solid",

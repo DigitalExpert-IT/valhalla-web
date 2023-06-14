@@ -351,7 +351,9 @@
   "dashboard": {
     "title": {
       "members": "Members",
-      "downlinesNotFound": "Downlines Not Found"
+      "downlinesNotFound": "Downlines Not Found",
+      "users": "Users",
+      "summary": "Summary"
     },
     "placeholder": {
       "search": "Search member by address"
@@ -362,12 +364,20 @@
     "messages": {
       "memberNotFound": "Member not found"
     },
+    "labels": {
+      "totalSales": "Total Sales",
+      "totalUser": "Total User",
+      "totalProfit": "Total Profit",
+      "NFTOnUsers": "NFT On Users",
+      "claimedNFT": "Claimed NFT",
+      "totalNFTValue": "Total NFT Value",
+      "activeNFT": "Active NFT",
+      "blacklistNFT": "Blacklist NFT",
+      "totalMember": "Total Member",
+      "totalEstimateProfit": "Total Estimate Profit",
+      "maxTotalLevel": "Max Total Level"
+    },
     "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
-    "summary": "Summary",
-    "totalMember": "Total Member",
-    "totalEstimateProfit": "Total Estimate Profit",
-    "maxTotalLevel": "Max Total Level",
-    "bestNetwork": "Best Network",
     "revenue": "Revenue"
   },
   "shareToEarn": {

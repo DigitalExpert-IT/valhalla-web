@@ -78,9 +78,12 @@ const Dashboard = () => {
 
   const searchResult = useMemo(() => {
     const result = listUser.reduce((acc, userLevel, idx) => {
-      if(idx === 0) return acc;
+      if (idx === 0) return acc;
 
-      const users = _.filter(userLevel, (item) => item.address.indexOf(searchKey) > -1);
+      const users = _.filter(
+        userLevel,
+        item => item.address.indexOf(searchKey) > -1
+      );
 
       return [...acc, ...users];
     }, []);
@@ -318,7 +321,7 @@ const Dashboard = () => {
         bg="#f6f7ff"
         pb="32 "
       >
-        <Box flex={2} px="4">
+        <Box flex={2} px="6">
           <HStack
             minH="220px"
             bgImage="/assets/dashboard/bg-billboard.png"
@@ -430,7 +433,7 @@ const Dashboard = () => {
               rounded="lg"
             >
               <Heading as="h2" fontSize="2xl" mb="4">
-                {t("pages.dashboard.summary")}
+                {t("pages.dashboard.title.summary")}
               </Heading>
               <HStack
                 w="full"
@@ -441,10 +444,10 @@ const Dashboard = () => {
                 justifyContent="space-between"
                 rounded="md"
               >
-                <HStack justifyContent="space-between">
+                <HStack justifyContent="space-between" gap="4">
                   <BsFillPeopleFill />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.totalMember")}
+                  <Text fontSize="sm" fontWeight="400" color="inherit">
+                    {t("pages.dashboard.labels.totalMember")}
                   </Text>
                 </HStack>
 
@@ -469,10 +472,10 @@ const Dashboard = () => {
                 justifyContent="space-between"
                 rounded="md"
               >
-                <HStack justifyContent="space-between">
+                <HStack justifyContent="space-between" gap="4">
                   <BsGraphUp />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.totalEstimateProfit")}
+                  <Text fontSize="sm" fontWeight="400" color="inherit">
+                    {t("pages.dashboard.labels.totalEstimateProfit")}
                   </Text>
                 </HStack>
 
@@ -497,10 +500,10 @@ const Dashboard = () => {
                 justifyContent="space-between"
                 rounded="md"
               >
-                <HStack>
+                <HStack justifyContent="space-between" gap="4">
                   <BsFillDiagram2Fill />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    {t("pages.dashboard.maxTotalLevel")}
+                  <Text fontSize="sm" fontWeight="400" color="inherit">
+                    {t("pages.dashboard.labels.maxTotalLevel")}
                   </Text>
                 </HStack>
 

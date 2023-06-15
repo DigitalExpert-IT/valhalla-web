@@ -31,7 +31,7 @@ const prisma = new PrismaClient();
  * @example ```getNFTByAddress('0x0126563456d34d')```
  */
 export const queryGetNFTByAddress = async (address: string) => {
-  const nftList: INFTItem[] = await prisma.$queryRaw`
+  const getNft: INFTItem[] = await prisma.$queryRaw`
       SELECT * from (
         SELECT distinct on ("tokenId") "tokenId", * from (
           SELECT 
@@ -52,7 +52,38 @@ export const queryGetNFTByAddress = async (address: string) => {
         ) "transList" order by "transList"."tokenId", "transList"."blockNumber" desc
       ) "filteredTransList" where "filteredTransList"."from" <> ${address}`;
 
-  return nftList;
+  const promise = getNft.map(async e => {
+    const farm: { createdAt: string }[] = await prisma.$queryRaw`
+      SELECT "createdAt"
+        FROM "Event"
+        WHERE "args"->>'_tokenId'=${e.tokenId} AND "Event"."event"='Farm'
+        ORDER BY "createdAt" DESC
+        LIMIT 1
+      `;
+
+    const lastFarm = new Date(farm.at(0)?.createdAt ?? e.mintedAt);
+    const baseReward = (e.price * e.farmPercentage) / 100;
+    const rewardInSec = baseReward / 86400;
+    const rewardInMilSec = baseReward / 86400_000;
+    const farmRuntime =
+      Number(new Date(lastFarm)) - Number(new Date(e.mintedAt));
+    const diffInSec = differenceInSeconds(new Date(), new Date(lastFarm));
+    const claimNFT = farmRuntime * rewardInMilSec;
+    return {
+      ...e,
+      lastFarm,
+      baseReward,
+      rewardInSec,
+      diffInSec,
+      rewardInMilSec,
+      farmRuntime,
+      claimNFT,
+    };
+  });
+
+  const nftsList = await Promise.all(promise);
+
+  return nftsList;
 };
 
 export const queryGetTotalPagesNFTByType = async (

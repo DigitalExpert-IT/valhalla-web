@@ -1,20 +1,17 @@
 import { NextApiHandler } from "next";
-import { getSummary } from "./controller/query";
+import { queryGetSummary } from "./query";
 
-interface ISummaryDashboard {
-  NFTOnUser: number;
-  totalProfit: number;
-  claimNFT: number;
-  activeNFT: number;
-  blacklistNFT: number;
-}
+const getSummary = async (start: string, end: string) => {
+  if (!start) throw Error("start undefined");
+  if (!end) throw Error("start undefined");
 
-const handler: NextApiHandler = async (req, res) => {
-  const { start, end } = req.body;
-  const nfts = await getSummary(
-    new Date("2023-05-24T09:33:42.000Z"),
-    new Date("2023-05-24T20:33:42.000Z")
-  );
+  if (
+    new Date(start).toString() === "Invalid Date" ||
+    new Date(end).toString() === "Invalid Date"
+  )
+    throw Error("Invalid Date");
+
+  const nfts = await queryGetSummary(new Date(start), new Date(end));
 
   const summary = nfts.reduce(
     (acc, item) => {
@@ -23,8 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
         : acc.blacklistNFT;
 
       const addActive = !item.isBlackListed ? acc.activeNFT + 1 : acc.activeNFT;
-
-      const rewardInSec = item.baseReward / 86400;
+      const rewardInSec = item.baseReward / 86400000;
       const lastFarmNum = +new Date(item.lastFarm);
       const minttedNum = +new Date(item.mintedAt);
       const claimReward = item.baseReward * 450;
@@ -46,8 +42,25 @@ const handler: NextApiHandler = async (req, res) => {
       claimNFT: 0,
     }
   );
+  return summary;
+};
 
-  return res.json(summary);
+const handler: NextApiHandler = async (req, res) => {
+  if (req.method !== "POST") {
+    res.status(403).json({
+      message: "wrong method",
+    });
+  }
+  const { start, end } = req.body;
+  try {
+    const summary = await getSummary(start, end);
+
+    return res.status(200).json({
+      ...summary,
+    });
+  } catch (e: any) {
+    res.status(500).json(e.message);
+  }
 };
 
 export default handler;

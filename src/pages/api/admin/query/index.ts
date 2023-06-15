@@ -30,7 +30,7 @@ const prisma = new PrismaClient();
  * @returns A Promise that resolve with list NFTs
  * @example ```getNFTByAddress('0x0126563456d34d')```
  */
-export const getNFTByAddress = async (address: string) => {
+export const queryGetNFTByAddress = async (address: string) => {
   const nftList: INFTItem[] = await prisma.$queryRaw`
       SELECT * from (
         SELECT distinct on ("tokenId") "tokenId", * from (
@@ -55,7 +55,10 @@ export const getNFTByAddress = async (address: string) => {
   return nftList;
 };
 
-export const getTotalPagesNFTByType = async (cardId: string, take: number) => {
+export const queryGetTotalPagesNFTByType = async (
+  cardId: string,
+  take: number
+) => {
   const totalNFT: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT CEIL(CAST(COUNT(*)  as float) / ${take}) as "totalPage", CAST(COUNT(*) as int) as "totalData" from (
@@ -96,7 +99,7 @@ export const getTotalPagesNFTByType = async (cardId: string, take: number) => {
  *
  */
 
-export const getNFTsByTypeInRow = async (
+export const queryGetNFTsByTypeInRow = async (
   cardId: string,
   skip: number,
   take: number
@@ -124,7 +127,7 @@ export const getNFTsByTypeInRow = async (
   return nftList;
 };
 
-export const getNFTTotalActiveProfit = async () => {
+export const queryGetNFTTotalActiveProfit = async () => {
   const totalNFT: { totalProfit: number; totalActiveNFT: number }[] =
     await prisma.$queryRaw`
     SELECT 
@@ -150,7 +153,7 @@ export const getNFTTotalActiveProfit = async () => {
 
   return totalNFT.at(0);
 };
-export const getNFTsTotalSales = async () => {
+export const queryGetNFTsTotalSales = async () => {
   const totalNFT: { totalSales: number; totalNFTOnUser: number }[] =
     await prisma.$queryRaw`
     SELECT 
@@ -177,7 +180,7 @@ export const getNFTsTotalSales = async () => {
   return totalNFT.at(0);
 };
 
-export const getNFTs = async () => {
+export const queryGetNFTs = async () => {
   const NFTs: { totalPage: number; totalData: number }[] =
     await prisma.$queryRaw`
     SELECT * from (
@@ -210,7 +213,7 @@ export const getNFTs = async () => {
 //   blacklistNFT: number;
 // }
 
-export const getSummary = async (start: Date, end: Date) => {
+export const queryGetSummary = async (start: Date, end: Date) => {
   const NFTs: INFTItem[] = await prisma.$queryRaw`
     SELECT 
       *

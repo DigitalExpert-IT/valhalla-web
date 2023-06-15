@@ -1,6 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { NextApiHandler, NextApiResponse } from "next";
-import { INFTItem, getNFTByAddress } from "./controller/query";
+import { INFTItem, queryGetNFTByAddress } from "./query";
 const prisma = new PrismaClient();
 
 export interface IUser extends User {
@@ -35,7 +35,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   // add NFT to Every address
   const collectNFT = getUserInRow.map(async user => {
-    const userNFTs = await getNFTByAddress(user.address);
+    const userNFTs = await queryGetNFTByAddress(user.address);
     return { ...user, NFTs: userNFTs };
   });
   const userWithNFT: IUser[] = await Promise.all(collectNFT);

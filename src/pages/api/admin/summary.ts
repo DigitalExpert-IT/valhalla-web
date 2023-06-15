@@ -3,7 +3,7 @@ import { queryGetSummary } from "./query";
 
 const getSummary = async (start: string, end: string) => {
   if (!start) throw Error("start undefined");
-  if (!end) throw Error("start undefined");
+  if (!end) throw Error("end undefined");
 
   if (
     new Date(start).toString() === "Invalid Date" ||

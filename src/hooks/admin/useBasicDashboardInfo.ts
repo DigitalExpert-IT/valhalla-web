@@ -10,8 +10,8 @@ interface IBasicDashboardInfo {
   totalUser: number;
 }
 
-export const useBasicDashboardInfo = (data: { start: Date; end: Date }) => {
-  return useQuery(["NFT-Value", data], async () => {
+export const useBasicDashboardInfo = () => {
+  return useQuery(["NFT-Value"], async () => {
     const axiosResponse = await Axios.get<IBasicDashboardInfo>(
       "/api/admin/dashboard-basic-info"
     );

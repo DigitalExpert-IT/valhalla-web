@@ -14,7 +14,6 @@ import {
   TableRankNetworkV2,
   SectionFeaturesV2,
 } from "components";
-import { useBasicDashboardInfo, useUsersDasboard } from "hooks/admin";
 
 export default function Home() {
   const { t } = useTranslation();

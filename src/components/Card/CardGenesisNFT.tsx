@@ -1,28 +1,21 @@
+import { useAsyncCall, useGenesis } from "hooks";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Box,
-  Heading,
   Stack,
   Text,
   useNumberInput,
   Button,
   Input,
+  useToast,
 } from "@chakra-ui/react";
-import { UglyButton } from "components/Button";
-import { useAsyncCall } from "hooks";
-import { useCardList } from "hooks/useCardList";
-import { useTranslation } from "react-i18next";
-
-interface CardNFTV2Props {
-  title: string;
-  contentTitle: string;
-  price: string;
-  id: string;
-}
 
 export const CardGenesisNFT: React.FC = props => {
+  const toast = useToast();
   const { t } = useTranslation();
-  const { buy } = useCardList();
-  const buyAsync = useAsyncCall(buy);
+  const { buyGenesis, data } = useGenesis();
+  const { exec, isLoading, data: res } = useAsyncCall(buyGenesis);
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -31,14 +24,23 @@ export const CardGenesisNFT: React.FC = props => {
       max: 100,
       precision: 0,
     });
-
   const inc = getIncrementButtonProps();
   const dec = getDecrementButtonProps();
   const input = getInputProps();
 
-  // const handleBuy = () => {
-  //   buyAsync.exec(props.id);
-  // };
+  useEffect(() => {
+    if (res && res.receipt.status === 1) {
+      toast({
+        status: "success",
+        description: "Success! Thank you for your purchase",
+      });
+    }
+  }, [res]);
+
+  const handleBuy = async () => {
+    await exec(0, input.value);
+  };
+
   return (
     <Stack align="center" rounded="xl" overflow="hidden">
       <Stack
@@ -66,7 +68,7 @@ export const CardGenesisNFT: React.FC = props => {
                 nft genesis card
               </Text>
               <Text color="#FF00FF">Item Supply</Text>
-              <Text>2000</Text>
+              <Text>{data?.totalSupply ?? 0}</Text>
               <Stack
                 direction={{ base: "column", md: "row" }}
                 maxW="100%"
@@ -109,9 +111,11 @@ export const CardGenesisNFT: React.FC = props => {
                     rounded="xl"
                     variant="ghost"
                     size="sm"
+                    isLoading={isLoading}
                     bgColor="#1F227D"
+                    onClick={handleBuy}
                   >
-                    BUY 100 USDT
+                    BUY USDT
                   </Button>
                 </Box>
               </Stack>

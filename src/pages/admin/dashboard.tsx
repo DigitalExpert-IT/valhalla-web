@@ -41,7 +41,10 @@ import _ from "lodash";
 import { withConnection } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
 import { useBasicDashboardInfo, useUsersDasboard } from "hooks/admin";
-import moment from 'moment';
+import moment from "moment";
+import SummaryDashboard, {
+  IDataItem,
+} from "components/pages/Dashboard/SummaryDashboard";
 
 const PAGE_SIZE = 10;
 
@@ -58,7 +61,7 @@ const Dashboard = () => {
     startDate: Date;
     endDate: Date;
   }>({
-    startDate: new Date(),
+    startDate: new Date("-"),
     endDate: new Date(),
   });
   const { data: basicDashboardInfo } = useBasicDashboardInfo();
@@ -72,12 +75,12 @@ const Dashboard = () => {
     []
   );
 
-  const handleSelectDate = (val: string, type: string) => {
+  const handleSelectDate = (key: string, val: string) => {
     const date = new Date(val);
 
     setSelectedDateRange(state => ({
-      startDate: type === "start-date" ? date : state.startDate,
-      endDate: type === "end-date" ? date : state.endDate,
+      startDate: key === "start-date" ? date : state.startDate,
+      endDate: key === "end-date" ? date : state.endDate,
     }));
   };
 
@@ -167,6 +170,41 @@ const Dashboard = () => {
       </>
     );
   }, [listUser?.items]);
+
+  const summaryData: IDataItem[] = useMemo(() => {
+    return [
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.NFTOnUsers"),
+        icon: BsUnity,
+        value: totalUser,
+      },
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.claimedNFT"),
+        icon: BsFillFileEarmarkCheckFill,
+        value: totalUser,
+      },
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.totalNFTValue"),
+        icon: BsGraphUp,
+        value: totalUser,
+      },
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.activeNFT"),
+        icon: BsMeta,
+        value: totalUser,
+      },
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.blacklistNFT"),
+        icon: BsFileEarmarkExcelFill,
+        value: RANK_MAX_LEVEL[user.account.rank],
+      },
+    ];
+  }, [totalUser, user]);
 
   return (
     <LayoutDashboard>
@@ -303,179 +341,13 @@ const Dashboard = () => {
           px="6"
           bg="white"
         >
-          <Stack gap="5" alignItems="center">
-            <Stack
-              alignItems="center"
-              bg="gray.100"
-              w="full"
-              p="8"
-              rounded="lg"
-            >
-              <Heading as="h2" fontSize="2xl" mb="4">
-                {t("pages.dashboard.title.summary")}
-              </Heading>{" "}
-              <HStack pb="3">
-                <Input
-                  css={{"&::-webkit-calendar-picker-indicator": {
-                    filter: "invert(1)"
-                  }}}
-                  p="2"
-                  type="date"
-                  variant="dashboard"
-                  value={moment(selectedDateRange.startDate).format("YYYY-MM-DD")}
-                  onChange={e =>
-                    handleSelectDate(e.target?.value, "start-date")
-                  }
-                />
-                <Text>-</Text>
-                <Input
-                  css={{"&::-webkit-calendar-picker-indicator": {
-                    filter: "invert(1)"
-                  }}}
-                  p="2"
-                  type="date"
-                  variant="dashboard"                  
-                  value={moment(selectedDateRange.endDate).format("YYYY-MM-DD")}
-                  onChange={e => handleSelectDate(e.target?.value, "end-date")}
-                />
-              </HStack>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsUnity />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.NFTOnUsers")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {totalUser}
-                </Box>
-              </HStack>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsFillFileEarmarkCheckFill />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.claimedNFT")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {potensialProfite}
-                </Box>
-              </HStack>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsGraphUp />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.totalNFTValue")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {RANK_MAX_LEVEL[user.account.rank]}
-                </Box>
-              </HStack>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsMeta />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.activeNFT")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {RANK_MAX_LEVEL[user.account.rank]}
-                </Box>
-              </HStack>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsFileEarmarkExcelFill />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.blacklistNFT")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {RANK_MAX_LEVEL[user.account.rank]}
-                </Box>
-              </HStack>
-            </Stack>
-          </Stack>
+          <SummaryDashboard
+            data={summaryData}
+            isLoading={true}
+            isShowFilterDate
+            dateValue={selectedDateRange}
+            onDateChange={handleSelectDate}
+          />
         </Box>
       </HStack>
     </LayoutDashboard>

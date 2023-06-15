@@ -41,6 +41,9 @@ import { IUser, useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
 import { withConnection } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
+import SummaryDashboard, {
+  IDataItem,
+} from "components/pages/Dashboard/SummaryDashboard";
 
 const PAGE_SIZE = 10;
 
@@ -305,6 +308,29 @@ const Dashboard = () => {
     );
   }, [currentItems]);
 
+  const summaryData: IDataItem[] = useMemo(() => {
+    return [
+      {
+        key: "totalMember",
+        text: t("pages.dashboard.labels.totalMember"),
+        icon: BsFillPeopleFill,
+        value: totalUser,
+      },
+      {
+        key: "totalEstimateProfit",
+        text: t("pages.dashboard.labels.totalEstimateProfit"),
+        icon: BsGraphUp,
+        value: potensialProfite,
+      },
+      {
+        key: "maxTotalLevel",
+        text: t("pages.dashboard.labels.maxTotalLevel"),
+        icon: BsGraphUp,
+        value: RANK_MAX_LEVEL[user.account.rank],
+      },
+    ];
+  }, [totalUser, potensialProfite, user]);
+
   return (
     <LayoutDashboard>
       <HeaderDashboard
@@ -424,102 +450,7 @@ const Dashboard = () => {
           px="6"
           bg="white"
         >
-          <Stack gap="5" alignItems="center">
-            <Stack
-              alignItems="center"
-              bg="gray.100"
-              w="full"
-              p="8"
-              rounded="lg"
-            >
-              <Heading as="h2" fontSize="2xl" mb="4">
-                {t("pages.dashboard.title.summary")}
-              </Heading>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsFillPeopleFill />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.totalMember")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {totalUser}
-                </Box>
-              </HStack>
-
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsGraphUp />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.totalEstimateProfit")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {potensialProfite}
-                </Box>
-              </HStack>
-
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between" gap="4">
-                  <BsFillDiagram2Fill />
-                  <Text fontSize="sm" fontWeight="400" color="inherit">
-                    {t("pages.dashboard.labels.maxTotalLevel")}
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {RANK_MAX_LEVEL[user.account.rank]}
-                </Box>
-              </HStack>
-            </Stack>
-          </Stack>
+          <SummaryDashboard data={summaryData} isLoading={false} />
         </Box>
       </HStack>
     </LayoutDashboard>

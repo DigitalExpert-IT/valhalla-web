@@ -4,7 +4,7 @@ import Axios from "axios";
 export const useSummary = (date: { start: Date; end: Date }) => {
   return useQuery(["summary", date], async () => {
     const axiosResponse = await Axios.post("/api/admin/summary", {
-      date,
+      data: date,
     });
     return axiosResponse.data;
   });

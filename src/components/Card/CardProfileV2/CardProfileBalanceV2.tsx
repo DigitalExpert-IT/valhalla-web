@@ -1,18 +1,33 @@
 import { HStack, Image, Stack, Text } from "@chakra-ui/react";
-import { useBalance } from "@thirdweb-dev/react";
+import { useAddress, useBalance } from "@thirdweb-dev/react";
 import { WidgetProfileBalace } from "components/Widget/WidgetProfile";
-import { GNET_CONTRACT, USDT_CONTRACT } from "constant/address";
+import { GNET_CONTRACT, USDT_CONTRACT, ZERO_ADDRESS } from "constant/address";
 import { Trans } from "react-i18next";
 import { prettyBn } from "utils";
 import { CardProfileV2 } from "./CardProfileV2";
-
-const GNETContract = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
-const USDTContract = USDT_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+import { useEffect, useState } from "react";
+import { useGNETContract, useUSDTContract } from "hooks";
+import { BigNumber } from "ethers";
 
 export const CardProfileBalanceV2 = () => {
   const balance = useBalance();
-  const gnetBalance = useBalance(GNETContract);
-  const usdtBalance = useBalance(USDTContract);
+  const address = useAddress() ?? ZERO_ADDRESS;
+  const usdt = useUSDTContract();
+  const gnet = useGNETContract();
+
+  const [gnetBalance, setGnetBalance] = useState<BigNumber>();
+  const [usdtBalance, setUsdtBalance] = useState<BigNumber>();
+
+  const getBalance = async () => {
+    setGnetBalance((await gnet.contract?.call("balanceOf", [address])) ?? 0);
+    setUsdtBalance((await usdt.contract?.call("balanceOf", [address])) ?? 0);
+  };
+
+  useEffect(() => {
+    if (address !== ZERO_ADDRESS) {
+      getBalance();
+    }
+  }, [address]);
 
   return (
     <CardProfileV2>
@@ -29,9 +44,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>
-              {prettyBn(gnetBalance.data?.value, 9)} {gnetBalance.data?.symbol}
-            </Text>
+            <Text>{prettyBn(gnetBalance, 9)} GNET</Text>
           </HStack>
         </WidgetProfileBalace>
         <WidgetProfileBalace pos={"relative"}>
@@ -57,9 +70,7 @@ export const CardProfileBalanceV2 = () => {
             left={"0"}
           />
           <HStack w={"full"} justifyContent={{ base: "end", xs: "center" }}>
-            <Text>
-              {prettyBn(usdtBalance.data?.value, 6)} {usdtBalance.data?.symbol}
-            </Text>
+            <Text>{prettyBn(usdtBalance, 6)} USDT</Text>
           </HStack>
         </WidgetProfileBalace>
       </Stack>

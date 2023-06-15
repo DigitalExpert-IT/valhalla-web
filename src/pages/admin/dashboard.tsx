@@ -81,8 +81,6 @@ const Dashboard = () => {
     }));
   };
 
-  console.log("selected date: ", selectedDateRange);
-
   const TableUser = useMemo(() => {
     if (!listUser?.items?.length)
       return (
@@ -318,6 +316,9 @@ const Dashboard = () => {
               </Heading>{" "}
               <HStack pb="3">
                 <Input
+                  css={{"&::-webkit-calendar-picker-indicator": {
+                    filter: "invert(1)"
+                  }}}
                   p="2"
                   type="date"
                   variant="dashboard"
@@ -328,6 +329,9 @@ const Dashboard = () => {
                 />
                 <Text>-</Text>
                 <Input
+                  css={{"&::-webkit-calendar-picker-indicator": {
+                    filter: "invert(1)"
+                  }}}
                   p="2"
                   type="date"
                   variant="dashboard"                  

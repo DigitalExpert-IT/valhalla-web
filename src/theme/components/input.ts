@@ -220,9 +220,6 @@ const variantDahsboard = definePartsStyle(props => {
         color: "gray.300",
       },
     },
-    icon: {
-      color: "black"
-    },
     addon: {
       border: "2px solid",
       borderColor: "black",

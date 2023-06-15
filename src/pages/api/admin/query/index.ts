@@ -205,14 +205,6 @@ export const queryGetNFTs = async () => {
   return NFTs;
 };
 
-// interface ISummaryDashboard {
-//   NFTOnUser: number;
-//   claimNFT: number;
-//   totalNFTValue: number;
-//   activeNFT: number;
-//   blacklistNFT: number;
-// }
-
 export const queryGetSummary = async (start: Date, end: Date) => {
   const NFTs: INFTItem[] = await prisma.$queryRaw`
     SELECT 

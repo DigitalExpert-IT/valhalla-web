@@ -12,11 +12,8 @@ interface IBasicDashboardInfo {
 
 export const useBasicDashboardInfo = (data: { start: Date; end: Date }) => {
   return useQuery(["NFT-Value", data], async () => {
-    const axiosResponse = await Axios.post<IBasicDashboardInfo>(
-      "/api/admin/dashboard-basic-info",
-      {
-        data,
-      }
+    const axiosResponse = await Axios.get<IBasicDashboardInfo>(
+      "/api/admin/dashboard-basic-info"
     );
     return axiosResponse.data;
   });

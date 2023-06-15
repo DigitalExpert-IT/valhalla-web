@@ -4,8 +4,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// @todo need body, to get date, to calculate response
-
 const handler: NextApiHandler = async (req, res) => {
   const totalProfit = await queryGetNFTTotalActiveProfit();
   const totalSales = await queryGetNFTsTotalSales();

@@ -301,32 +301,6 @@ const Dashboard = () => {
 
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px">
-              <HStack minH="46px" pb="4" justifyContent="space-between">
-                <Heading
-                  as="h2"
-                  fontSize="xl"
-                  fontWeight="600"
-                  color="gray.800"
-                >
-                  {t("pages.dashboard.title.users")}
-                </Heading>
-                <HStack>
-                  <BsFilter size="20" color="000" />
-                  <Select
-                    variant="table-filter"
-                    maxW="40"
-                    placeholder="Rank"
-                    onChange={e => setFitlerRank(+e.target.value - 1)}
-                  >
-                    {rankMap.map((rank, idx) => (
-                      <option key={`${rank}.${idx}`} value={idx + 1}>
-                        {rank}
-                      </option>
-                    ))}
-                  </Select>
-                </HStack>
-              </HStack>
-
               {TableUser}
             </Box>
           </HStack>
@@ -343,7 +317,7 @@ const Dashboard = () => {
         >
           <SummaryDashboard
             data={summaryData}
-            isLoading={true}
+            isLoading={false}
             isShowFilterDate
             dateValue={selectedDateRange}
             onDateChange={handleSelectDate}

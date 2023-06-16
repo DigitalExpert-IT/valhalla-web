@@ -1,7 +1,5 @@
 import { Box, Stack, Text, Button } from "@chakra-ui/react";
-import { useContractWrite } from "@thirdweb-dev/react";
 import { useAsyncCall, useOwnedGenesis } from "hooks";
-import { useGenesisContract } from "hooks/useGenesisContract";
 import { useTranslation } from "react-i18next";
 
 export const CardClaimGenesisNFT = () => {

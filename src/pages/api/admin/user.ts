@@ -1,5 +1,5 @@
 import { PrismaClient, User } from "@prisma/client";
-import { NextApiHandler, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 import { INFTItem, queryGetNFTByAddress } from "./query";
 const prisma = new PrismaClient();
 
@@ -18,7 +18,7 @@ export interface IAdminDashboard {
  * @example ```host/api/admin/user?page=1&limit=10'```
  */
 const handler: NextApiHandler = async (req, res) => {
-  const { page, limit } = req.query;
+  const { page, limit, address } = req.query;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -28,9 +28,11 @@ const handler: NextApiHandler = async (req, res) => {
 
   const getUserInRow: User[] = await prisma.$queryRaw`
       SELECT * FROM "User"
+      WHERE "User"."upline" LIKE ${`%${address ?? "0x"}%`}
       ORDER BY "id" ASC
       OFFSET ${offset} ROWS
-      FETCH NEXT ${pageSize} ROWS ONLY;
+      FETCH NEXT ${pageSize} ROWS ONLY
+      ;
     `;
 
   // add NFT to Every address
@@ -46,7 +48,9 @@ const handler: NextApiHandler = async (req, res) => {
     SELECT
       CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage",
       CAST(COUNT(*) as int) as "totalData"
-    FROM "User"`;
+    FROM "User"
+    WHERE "User"."upline" LIKE ${`%${address ?? "0x"}%`}
+    `;
 
   const template: IAdminDashboard = {
     totalPage: getTotalItem.at(0)?.totalPage as number,

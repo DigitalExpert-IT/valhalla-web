@@ -1,36 +1,21 @@
 import { Box, Stack, Text, Button } from "@chakra-ui/react";
-import { useAsyncCall } from "hooks";
-import { useCardList } from "hooks/useCardList";
-import { useState } from "react";
+import { useContractWrite } from "@thirdweb-dev/react";
+import { useAsyncCall, useOwnedGenesis } from "hooks";
+import { useGenesisContract } from "hooks/useGenesisContract";
 import { useTranslation } from "react-i18next";
 
-interface CardNFTV2Props {
-  title: string;
-  contentTitle: string;
-  price: string;
-  id: string;
-}
-
-export const CardClaimGenesisNFT: React.FC = props => {
+export const CardClaimGenesisNFT = () => {
   const { t } = useTranslation();
-  const [status, setStatus] = useState(0);
-  const { buy } = useCardList();
-  const buyAsync = useAsyncCall(buy);
+  const { data, claimRewardAsync } = useOwnedGenesis();
 
-  const changeStatus = () => {
-    if (status === 0) {
-      setStatus(1);
-    } else {
-      setStatus(0);
-    }
+  const { exec: claim, isLoading, data: res } = useAsyncCall(claimRewardAsync);
+
+  const handleClaim = async () => {
+    claim(0);
   };
 
-  // const handleBuy = () => {
-  //   buyAsync.exec(props.id);
-  // };
   return (
     <Stack align="center" rounded="xl" overflow="hidden">
-      <Button onClick={changeStatus}>check</Button>
       <Stack
         rounded="xl"
         color="white"
@@ -44,7 +29,7 @@ export const CardClaimGenesisNFT: React.FC = props => {
           p="1.4rem"
           rounded="xl"
         >
-          {status !== 0 ? (
+          {data?.ownedNfts.toNumber() !== 0 ? (
             <Stack>
               <Box as="video" autoPlay loop muted rounded="xl">
                 <source
@@ -56,8 +41,8 @@ export const CardClaimGenesisNFT: React.FC = props => {
                 <Text fontWeight="600" fontSize="2xl" textTransform="uppercase">
                   nft genesis card
                 </Text>
-                <Text color="#FF00FF">Amount</Text>
-                <Text>30</Text>
+                <Text color="valhallPink.700">Amount</Text>
+                <Text>{data?.ownedNfts.toNumber()}</Text>
                 <Stack
                   direction={{ base: "column", md: "row" }}
                   maxW="100%"
@@ -77,8 +62,10 @@ export const CardClaimGenesisNFT: React.FC = props => {
                       rounded="xl"
                       variant="ghost"
                       bgColor="#1F227D"
+                      onClick={handleClaim}
+                      isLoading={isLoading}
                     >
-                      23.99 GNET Claim
+                      {data?.currentRewards.toNumber() ?? 0} GNET Claim
                     </Button>
                   </Box>
                 </Stack>

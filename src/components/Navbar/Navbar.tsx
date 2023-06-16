@@ -75,6 +75,7 @@ export const Navbar = () => {
                   src="/assets/logo/gnLogo.png"
                   alt="logo-image"
                   width={500}
+                  loading="lazy"
                   height={500}
                 />
               </AspectRatio>

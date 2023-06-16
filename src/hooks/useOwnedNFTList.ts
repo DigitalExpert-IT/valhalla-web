@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useAddress } from "@thirdweb-dev/react";
-import { NFT } from "@warmbyte/valhalla/typechain-types";
-import { useNFTContract } from "./useNFTContract";
-import { BigNumber } from "ethers";
-import { ZERO_ADDRESS } from "constant/address";
 import ee from "ee";
+import { BigNumber } from "ethers";
 import { compareAddress } from "utils";
+import { useEffect, useState } from "react";
+import { ZERO_ADDRESS } from "constant/address";
+import { useAddress } from "@thirdweb-dev/react";
+import { useNFTContract } from "./useNFTContract";
+import { NFT } from "@warmbyte/valhalla/typechain-types";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {

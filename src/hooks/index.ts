@@ -9,3 +9,4 @@ export * from "./useUSDTContract";
 export * from "./useGNETContract";
 export * from "./swap";
 export * from "./useGenesis";
+export * from "./useOwnedGenesis";

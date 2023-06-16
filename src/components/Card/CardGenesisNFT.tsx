@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-export const CardGenesisNFT: React.FC = props => {
+export const CardGenesisNFT = () => {
   const toast = useToast();
   const { t } = useTranslation();
   const { buyGenesis, data } = useGenesis();
@@ -115,7 +115,7 @@ export const CardGenesisNFT: React.FC = props => {
                     bgColor="#1F227D"
                     onClick={handleBuy}
                   >
-                    BUY USDT
+                    BUY {Number(data?.price) ?? 0} USDT
                   </Button>
                 </Box>
               </Stack>

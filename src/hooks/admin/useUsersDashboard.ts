@@ -11,10 +11,14 @@ import { IAdminDashboard, IUser } from "pages/api/admin/user";
  * @example ```useUsersDasboard(1, 10)```
  */
 
-export const useUsersDasboard = (page: number, limit: number) => {
-  return useQuery(["Users", page, limit], async () => {
+export const useUsersDasboard = (
+  page: number,
+  limit: number,
+  address: string
+) => {
+  return useQuery(["Users", page, limit, address], async () => {
     const axiosResponse = await Axios.get<IAdminDashboard>(
-      `/api/admin/user?page=${page}&limit=${limit}`
+      `/api/admin/user?page=${page}&limit=${limit}&address=${address}`
     );
     return axiosResponse.data;
   });

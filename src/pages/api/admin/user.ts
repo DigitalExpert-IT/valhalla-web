@@ -28,7 +28,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const getUserInRow: User[] = await prisma.$queryRaw`
       SELECT * FROM "User"
-      WHERE "User"."upline" LIKE ${`%${address ?? "0x"}%`}
+      WHERE "User"."address" LIKE ${`%${address ?? "0x"}%`}
       ORDER BY "id" ASC
       OFFSET ${offset} ROWS
       FETCH NEXT ${pageSize} ROWS ONLY
@@ -49,7 +49,7 @@ const handler: NextApiHandler = async (req, res) => {
       CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage",
       CAST(COUNT(*) as int) as "totalData"
     FROM "User"
-    WHERE "User"."upline" LIKE ${`%${address ?? "0x"}%`}
+    WHERE "User"."address" LIKE ${`%${address ?? "0x"}%`}
     `;
 
   const template: IAdminDashboard = {

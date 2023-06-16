@@ -18,7 +18,7 @@ export interface IAdminDashboard {
  * @example ```host/api/admin/user?page=1&limit=10'```
  */
 const handler: NextApiHandler = async (req, res) => {
-  const { page, limit, address } = req.query;
+  const { page, limit, address, rank } = req.query;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -28,7 +28,8 @@ const handler: NextApiHandler = async (req, res) => {
 
   const getUserInRow: User[] = await prisma.$queryRaw`
       SELECT * FROM "User"
-      WHERE "User"."address" LIKE ${`%${address ?? "0x"}%`}
+      WHERE ("User"."address" LIKE ${`%${address ?? "0x"}%`}) 
+        AND ("User"."rank" IS NULL OR "User"."rank"=${Number(rank)})
       ORDER BY "id" ASC
       OFFSET ${offset} ROWS
       FETCH NEXT ${pageSize} ROWS ONLY
@@ -49,7 +50,10 @@ const handler: NextApiHandler = async (req, res) => {
       CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage",
       CAST(COUNT(*) as int) as "totalData"
     FROM "User"
-    WHERE "User"."address" LIKE ${`%${address ?? "0x"}%`}
+    WHERE 
+        ("User"."address" LIKE ${`%${address ?? "0x"}%`})
+      AND 
+        ("User"."rank" IS NULL OR "User"."rank"=${Number(rank)})
     `;
 
   const template: IAdminDashboard = {

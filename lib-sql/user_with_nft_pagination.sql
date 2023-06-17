@@ -36,11 +36,11 @@ FROM
 				"from",
 				'rewardPerDay',
 				cast(
-					cast("price" * "farmPercentage" as DEC) / 100 as int
+					cast("price" * "farmPercentage" AS DEC) / 100 AS int
 				),
 				'maxReward',
 				cast(
-					cast("price" * "farmPercentage" as DEC) / 100 as int
+					cast("price" * "farmPercentage" AS DEC) / 100 AS int
 				) * 450
 			) AS "NftDetail"
 		FROM
@@ -82,4 +82,4 @@ GROUP BY
 	"price",
 	"User"."upline"
 ORDER BY
-	"profit" DESC OFFSET 1183 ROWS FETCH NEXT 10 ROWS ONLY;
+	"profit" DESC NULLS LAST OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;

@@ -4,7 +4,7 @@ import {
   WidgetProfileBtn,
 } from "components/Widget/WidgetProfile";
 import { useAsyncCall, useValhalla } from "hooks";
-import { useContractWrite } from "@thirdweb-dev/react";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { t } from "i18next";
 import { CardProfileV2 } from "./CardProfileV2";
 import { fromBn } from "evm-bn";
@@ -18,7 +18,17 @@ export const CardProfileBonus = () => {
   const rankReward = useRankReward();
   const valhalla = useValhallaContract();
   const claimReward = useContractWrite(valhalla.contract, "claimReward");
+  const claimRankReward = useContractWrite(
+    valhalla.contract,
+    "claimRankReward"
+  );
   const claimRewardAsync = useAsyncCall(claimReward.mutateAsync);
+  const claimRankRewardAsync = useAsyncCall(claimRankReward.mutateAsync);
+
+  const handleClaimRankReward = async () => {
+    await claimRankRewardAsync.exec({ args: [] });
+    await rewardMap.refetch();
+  };
 
   const handleClaimReward = async () => {
     await claimRewardAsync.exec({ args: [] });
@@ -59,9 +69,8 @@ export const CardProfileBonus = () => {
               <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text>
             </Stack>
             <WidgetProfileBtn
-            // onClick={claimRankRewardAsync.exec}
-            // isLoading={claimRankRewardAsync.isLoading}
-            // isDisabled={!isRankRewardClaimable}
+              onClick={handleClaimRankReward}
+              isLoading={claimRankRewardAsync.isLoading}
             >
               {t("common.claim")}
             </WidgetProfileBtn>

@@ -9,12 +9,13 @@ import {
   Button,
   Input,
   useToast,
+  Spinner,
 } from "@chakra-ui/react";
 
 export const CardGenesisNFT = () => {
   const toast = useToast();
   const { t } = useTranslation();
-  const { buyGenesis, data } = useGenesis();
+  const { buyGenesis, data, isInitialize } = useGenesis();
   const { exec, isLoading, data: res } = useAsyncCall(buyGenesis);
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
@@ -68,7 +69,7 @@ export const CardGenesisNFT = () => {
                 nft genesis card
               </Text>
               <Text color="#FF00FF">Item Supply</Text>
-              <Text>{data?.totalSupply ?? 0}</Text>
+              <Text>{data?.totalSupply}</Text>
               <Stack
                 direction={{ base: "column", md: "row" }}
                 maxW="100%"
@@ -111,11 +112,11 @@ export const CardGenesisNFT = () => {
                     rounded="xl"
                     variant="ghost"
                     size="sm"
-                    isLoading={isLoading}
+                    isLoading={isLoading || isInitialize}
                     bgColor="#1F227D"
                     onClick={handleBuy}
                   >
-                    BUY {Number(data?.price) ?? 0} USDT
+                    BUY {data?.price.toString()} USDT
                   </Button>
                 </Box>
               </Stack>

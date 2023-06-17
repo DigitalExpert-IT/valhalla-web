@@ -1,15 +1,15 @@
-import { Box, Stack, Text, Button } from "@chakra-ui/react";
+import { Box, Stack, Text, Button, Spinner } from "@chakra-ui/react";
 import { useAsyncCall, useOwnedGenesis } from "hooks";
 import { useTranslation } from "react-i18next";
 
 export const CardClaimGenesisNFT = () => {
   const { t } = useTranslation();
-  const { data, claimRewardAsync } = useOwnedGenesis();
+  const { data, claimRewardAsync, isLoading: fetchLoading } = useOwnedGenesis();
 
-  const { exec: claim, isLoading, data: res } = useAsyncCall(claimRewardAsync);
+  const { exec: claim, isLoading } = useAsyncCall(claimRewardAsync);
 
   const handleClaim = async () => {
-    claim(0);
+    await claim(0);
   };
 
   return (
@@ -27,7 +27,9 @@ export const CardClaimGenesisNFT = () => {
           p="1.4rem"
           rounded="xl"
         >
-          {data?.ownedNfts.toNumber() !== 0 ? (
+          {fetchLoading ? (
+            <Spinner />
+          ) : data?.ownedNfts.toNumber() !== 0 ? (
             <Stack>
               <Box as="video" autoPlay loop muted rounded="xl">
                 <source

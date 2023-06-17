@@ -1,10 +1,15 @@
-import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 import { NFTGenesis } from "@warmbyte/valhalla/typechain-types/contracts/NFTGenesis";
 import { useGenesisContract } from "./useGenesisContract";
 import { useUSDTContract } from "./useUSDTContract";
 import { useEffect, useState } from "react";
 import { prettyBn } from "utils";
 import { useGNETContract } from "./useGNETContract";
+import ee from "ee";
 
 type BaseCardType = Awaited<ReturnType<NFTGenesis["cardMap"]>>;
 type GenesisType = BaseCardType & {
@@ -15,14 +20,20 @@ export const useGenesis = () => {
   const genesis = useGenesisContract();
   const address = useAddress();
   const usdt = useUSDTContract();
-  const gnet = useGNETContract();
   const approveUsdt = useContractWrite(usdt.contract, "approve");
-  const approveGnet = useContractWrite(gnet.contract, "approve");
   const buyNft = useContractWrite(genesis.contract, "buyMultipleNFT");
-  const [data, setData] = useState<GenesisType>();
+  const [data, setData] = useState<GenesisType | undefined>();
+  const [isInitialize, setIsInitialize] = useState(false);
 
   const init = async () => {
-    if (!genesis.contract) return;
+    setIsInitialize(true);
+    setTimeout(async () => {
+      await getDataGenesis();
+      setIsInitialize(false);
+    }, 2000);
+  };
+
+  const getDataGenesis = async () => {
     const genesisCard = await genesis.contract!.call("cardMap", [0]);
     const genesisPrice = prettyBn(genesisCard.price, 6);
     const totalSupply =
@@ -35,15 +46,21 @@ export const useGenesis = () => {
   };
 
   useEffect(() => {
+    if (!genesis.contract) return;
     init();
-  }, [genesis.contract, data]);
+    ee.addListener("genesis-BuyMultipleNFT", getDataGenesis);
+
+    return () => {
+      ee.removeListener("genesis-BuyMultipleNFT", getDataGenesis);
+    };
+  }, [genesis.contract]);
 
   const buyGenesis = async (cardId: number, amount: number) => {
     if (!usdt.contract || !genesis.contract || !address) return;
     const card = await genesis.contract!.call("cardMap", [cardId]);
     const cardPrice = card.price;
-    const usdtBalance = await gnet.contract!.call("balanceOf", [address]);
-    const allowance = await gnet.contract!.call("allowance", [
+    const usdtBalance = await usdt.contract!.call("balanceOf", [address]);
+    const allowance = await usdt.contract!.call("allowance", [
       address,
       genesis.contract.getAddress(),
     ]);
@@ -55,7 +72,7 @@ export const useGenesis = () => {
     }
 
     if (cardPrice.gt(allowance)) {
-      await approveGnet.mutateAsync({
+      await approveUsdt.mutateAsync({
         args: [genesis.contract.getAddress(), cardPrice.mul(10)],
       });
     }
@@ -64,5 +81,5 @@ export const useGenesis = () => {
     return receipt;
   };
 
-  return { data, buyGenesis };
+  return { data, buyGenesis, isInitialize };
 };

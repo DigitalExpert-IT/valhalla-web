@@ -18,7 +18,7 @@ export const GENESIS_CONTRACT = {
   "0x89": "",
   "0x13881": "",
   "0x539": "",
-  "0x29a": "0xA335855DceDE7D38a7e669f95229C4722162Bcc3",
+  "0x29a": "0x67D065626e0F0049C738b24D571c1126d3650fbA",
 };
 
 export const GNET_CONTRACT = {

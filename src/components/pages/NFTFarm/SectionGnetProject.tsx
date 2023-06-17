@@ -164,7 +164,6 @@ export const SectionGnetProject = () => {
                 color="white"
                 onClick={() => claimRewardGnetAsync.exec({ args: [] })}
                 isLoading={claimRewardGnetAsync.isLoading}
-                disabled={reward.data?.isZero()}
               >
                 {reward.data &&
                   fromBn(reward.data, 9) + " " + t("common.claim")}

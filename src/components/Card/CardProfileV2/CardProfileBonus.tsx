@@ -42,8 +42,10 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.globalBonus")}</Text>
             <Text textAlign={"end"}>
-              {globalPool?.data?.claimable &&
-                fromBn(globalPool?.data?.claimable)}{" "}
+              {globalPool?.data?.claimable
+                ? fromBn(globalPool?.data?.claimable)
+                : globalPool?.data?.valueLeft &&
+                  fromBn(globalPool?.data?.valueLeft)}{" "}
               MATIC
             </Text>
           </HStack>
@@ -66,7 +68,7 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.rankReward")}</Text>
-              <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text>
+              {/* <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text> */}
             </Stack>
             <WidgetProfileBtn
               onClick={handleClaimRankReward}

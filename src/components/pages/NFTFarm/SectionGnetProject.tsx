@@ -145,8 +145,12 @@ export const SectionGnetProject = () => {
                 onClick={() => claimNftRankRewardAsync.exec({ args: [] })}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
-                {rankReward.data &&
-                  fromBn(rankReward.data, 9) + " " + t("common.claim")}
+                {
+                  // rankReward.data &&
+                  //   fromBn(rankReward.data, 9) + " " +
+                  // todo need to fix
+                  t("common.claim")
+                }
               </Button>
             </Stack>
           </GridItem>

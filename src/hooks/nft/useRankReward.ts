@@ -20,10 +20,6 @@ export const useRankReward = () => {
     }
   );
 
-  const rankReward = contract.contract?.call("getMyRankReward", [], {
-    from: address,
-  });
-
   useEffect(() => {
     ee.addListener("valhalla-RankRewardOpened", rest.refetch);
     ee.addListener("valhalla-RankRewardClosed", rest.refetch);
@@ -35,7 +31,7 @@ export const useRankReward = () => {
   }, []);
 
   return {
-    data: rankReward as undefined | RewardType,
+    data: data as undefined | RewardType,
     ...rest,
   };
 };

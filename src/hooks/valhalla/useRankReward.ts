@@ -1,5 +1,6 @@
-import { useContractRead } from "@thirdweb-dev/react";
+import { useAddress, useContractRead } from "@thirdweb-dev/react";
 import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+import { ZERO_ADDRESS } from "constant/address";
 import ee from "ee";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useEffect } from "react";
@@ -8,10 +9,15 @@ type RankRewardType = Awaited<ReturnType<Valhalla["getMyRankReward"]>>;
 
 export const useRankReward = () => {
   const contract = useValhallaContract();
+  const address = useAddress() ?? ZERO_ADDRESS;
 
   const { data, ...rest } = useContractRead(
     contract.contract,
-    "getMyRankReward"
+    "getMyRankReward",
+    [],
+    {
+      from: address,
+    }
   );
 
   useEffect(() => {

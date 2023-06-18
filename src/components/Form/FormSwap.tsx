@@ -181,7 +181,8 @@ export const FormSwap = () => {
         amountTop: currency === "GNET" ? "USDT" : "GNET",
         amountBottom: currency === "GNET" ? "GNET" : "USDT",
       };
-      const currencyTarget = fieldCurrency[field];
+      const currencyTarget =
+        fieldCurrency[field === "amountTop" ? "amountBottom" : "amountTop"];
 
       let swapResult = "";
 

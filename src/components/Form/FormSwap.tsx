@@ -181,8 +181,8 @@ export const FormSwap = () => {
         amountTop: currency === "GNET" ? "USDT" : "GNET",
         amountBottom: currency === "GNET" ? "GNET" : "USDT",
       };
-      const currencyTarget =
-        fieldCurrency[field === "amountTop" ? "amountBottom" : "amountTop"];
+      const fieldTarget = field === "amountTop" ? "amountBottom" : "amountTop";
+      const currencyTarget = fieldCurrency[fieldTarget];
 
       let swapResult = "";
 
@@ -193,9 +193,7 @@ export const FormSwap = () => {
         swapResult = fromBn(getGnetRate(value ? value : "0"), 6);
       }
 
-      field === "amountTop"
-        ? setValue("amountBottom", swapResult)
-        : setValue("amountTop", swapResult);
+      setValue(fieldTarget, swapResult);
     }, 200),
     []
   );

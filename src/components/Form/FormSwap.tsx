@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { fromBn, toBn } from "evm-bn";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ClipPathImage } from "./ClipPathImage";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -28,19 +28,32 @@ import {
   useAsyncCall,
   useGNETContract,
 } from "hooks";
+import _ from "lodash";
 
 interface ISwapToken {
-  price: string;
-  amount: string;
+  amountTop: string;
+  amountBottom: string;
   currency: string;
+}
+
+interface IFieldCurrency {
+  [key: string]: string;
 }
 
 export const FormSwap = () => {
   const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
   const { t } = useTranslation();
-  const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { handleSubmit, control, watch, reset } = useForm<ISwapToken>();
+  const {
+    handleSubmit,
+    control,
+    watch,
+    getValues,
+    setValue,
+    reset,
+    resetField,
+  } = useForm<ISwapToken>();
+  const watchCurrency = watch("currency");
 
   const swap = useSwapContract();
   const gnet = useGNETContract();
@@ -148,24 +161,48 @@ export const FormSwap = () => {
   );
 
   useEffect(() => {
-    const subscription = watch(value => {
-      if (value.currency === "GNET") {
-        const format = fromBn(getUsdtRate(value.price ? value.price : "0"), 9);
-        setPrice(format);
-        setSymbol(true);
-        return;
+    const currency = watchCurrency;
+    if (currency === "GNET") setSymbol(true);
+    else setSymbol(false);
+
+    // should reset amountTop and amountBottom
+    // after change the currency
+    resetField("amountTop");
+    resetField("amountBottom");
+  }, [watchCurrency]);
+
+  const handleChangeInput = useCallback(
+    _.debounce((field: string) => {
+      const { amountTop, amountBottom, currency } = getValues();
+      const value = field === "amountTop" ? amountTop : amountBottom;
+
+      // define what the top and bottom fields are
+      const fieldCurrency: IFieldCurrency = {
+        amountTop: currency === "GNET" ? "USDT" : "GNET",
+        amountBottom: currency === "GNET" ? "GNET" : "USDT",
+      };
+      const currencyTarget = fieldCurrency[field];
+
+      let swapResult = "";
+
+      if (currencyTarget === "GNET") {
+        swapResult = fromBn(getUsdtRate(value ? value : "0"), 9);
       }
-      const format = fromBn(getGnetRate(value.price ? value.price : "0"), 6);
-      setPrice(format);
-      setSymbol(false);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+      if (currencyTarget === "USDT") {
+        swapResult = fromBn(getGnetRate(value ? value : "0"), 6);
+      }
+
+      field === "amountTop"
+        ? setValue("amountBottom", swapResult)
+        : setValue("amountTop", swapResult);
+    }, 200),
+    []
+  );
 
   const onSubmit = handleSubmit(async data => {
     const swap = await exec({
       currency: data.currency,
-      amount: data.price,
+      amount: data.amountBottom,
     });
     if (swap.status === 1) {
       reset();
@@ -217,7 +254,8 @@ export const FormSwap = () => {
                   bg: "whiteAlpha.300",
                 }}
                 control={control}
-                name="price"
+                onKeyUp={() => handleChangeInput("amountTop")}
+                name="amountTop"
                 placeholder={"0.0"}
                 type="number"
                 isDisabled={swap.isLoading}
@@ -248,7 +286,9 @@ export const FormSwap = () => {
               textColor={"purple.900"}
               pos={"relative"}
             >
-              <Text fontWeight={"bold"}>{t("form.label.swap")}</Text>
+              <Text fontWeight={"bold"} color="black">
+                {t("form.label.swap")}
+              </Text>
               <Icon pos={"absolute"} zIndex={"3"} fontSize={"xl"}>
                 <AiOutlineArrowRight />
               </Icon>
@@ -311,11 +351,11 @@ export const FormSwap = () => {
                   bg: "whiteAlpha.300",
                 }}
                 control={control}
-                name="price"
+                onKeyUp={() => handleChangeInput("amountBottom")}
+                name="amountBottom"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled
-                value={price}
+                isDisabled={swap.isLoading}
               />
             </Box>
             <Text

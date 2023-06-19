@@ -144,10 +144,13 @@ export const SectionGnetProject = () => {
                 variant="swag"
                 onClick={() => claimNftRankRewardAsync.exec({ args: [] })}
                 isLoading={claimNftRankRewardAsync.isLoading}
-                disabled={rankReward.data?.isZero()}
               >
-                {rankReward.data &&
-                  fromBn(rankReward.data, 9) + " " + t("common.claim")}
+                {
+                  // rankReward.data &&
+                  //   fromBn(rankReward.data, 9) + " " +
+                  // todo need to fix
+                  t("common.claim")
+                }
               </Button>
             </Stack>
           </GridItem>
@@ -164,7 +167,6 @@ export const SectionGnetProject = () => {
                 color="white"
                 onClick={() => claimRewardGnetAsync.exec({ args: [] })}
                 isLoading={claimRewardGnetAsync.isLoading}
-                disabled={reward.data?.isZero()}
               >
                 {reward.data &&
                   fromBn(reward.data, 9) + " " + t("common.claim")}

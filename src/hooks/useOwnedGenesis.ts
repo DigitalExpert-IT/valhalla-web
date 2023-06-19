@@ -27,9 +27,7 @@ export const useOwnedGenesis = () => {
   };
 
   const claimRewardAsync = async (cardId: number) => {
-    const claimAsync = await claimReward.mutateAsync({
-      args: [cardId],
-    });
+    const claimAsync = await claimReward.mutateAsync({ args: [cardId] });
     return claimAsync;
   };
 

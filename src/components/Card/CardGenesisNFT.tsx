@@ -69,7 +69,12 @@ export const CardGenesisNFT = () => {
                 nft genesis card
               </Text>
               <Text color="#FF00FF">Item Supply</Text>
-              <Text>{data?.totalSupply}</Text>
+              {isInitialize ? (
+                <Spinner size="sm" />
+              ) : (
+                <Text>{data?.totalSupply}</Text>
+              )}
+
               <Stack
                 direction={{ base: "column", md: "row" }}
                 maxW="100%"

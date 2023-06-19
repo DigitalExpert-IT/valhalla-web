@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
-import { IAdminDashboard, IUser } from "pages/api/admin/user";
+import { IAdminDashboard } from "pages/api/admin/user";
 
 /**
  *
@@ -17,8 +17,8 @@ export const useUsersDasboard = (
   address: string
 ) => {
   return useQuery(["Users", page, limit, address], async () => {
-    const axiosResponse = await Axios.get<IAdminDashboard>(
-      `/api/admin/user?page=${page}&limit=${limit}&address=${address}`
+    const axiosResponse = await Axios.post<IAdminDashboard>(
+      `/api/admin/user?page=${page}&limit=${limit}`
     );
     return axiosResponse.data;
   });

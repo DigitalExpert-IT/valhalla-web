@@ -285,7 +285,7 @@ export const queryGetSummary = async (start: Date, end: Date) => {
   return nfts;
 };
 
-export const getAllUserWithNFTs = async (
+export const queryGetAllUserWithNFTs = async (
   offset: number,
   limit: number,
   address?: string,
@@ -300,6 +300,7 @@ export const getAllUserWithNFTs = async (
 
   const listUsers = await prisma.$queryRawUnsafe(`
   SELECT
+  "User"."id",
 	"User"."address",
 	"upline",
 	"rank",
@@ -357,6 +358,7 @@ from
 	) "NFT" ON "NFT"."to" = "User"."address" WHERE "User"."address" LIKE '%${address}%' ${rankTemplate}
 GROUP BY
 	"User"."address",
+	"User"."id",
 	"upline",
 	"rank",
 	"telegramUsername"
@@ -365,6 +367,86 @@ GROUP BY
   `);
 
   return listUsers;
+};
+
+export const queryGetUserWithNftPage = async (
+  pageSize: number,
+  address: string,
+  rank: string
+) => {
+  const rankTemplate = rank
+    ? `AND "User"."rank"=${rank}`
+    : `AND "User"."rank" IS NOT NULL`;
+  const pageDetail: [{ totalItem: number; totalPage: number }] =
+    await prisma.$queryRawUnsafe(`
+  SELECT 
+      CAST(COUNT(*)as int) as "totalItem", 
+      CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage" 
+  from (
+    SELECT 
+      "User"."address",
+      "upline",
+      "rank",
+      "telegramUsername",
+      json_agg("NFT"."nftDetail") as "NFTs",
+      cast(COUNT("NFT"."nftDetail") as int) "totalNft",
+      cast(
+        SUM(cast("NFT"."nftDetail" ->> 'price' as int)) as int
+      ) as "totalInvest",
+      cast(
+        SUM(
+          CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
+        ) * 450 as int
+      ) as "profit"
+from
+	"User"
+	LEFT JOIN (
+		SELECT distinct on ("tokenId") "tokenId",
+			*
+		from
+			(
+				SELECT
+					"Event"."id",
+					"Event"."address",
+					"Event"."transactionHash",
+					"Event"."args" ->> 'tokenId' as "tokenId",
+					"Event"."args" ->> 'from' as "from",
+					"Event"."args" ->> 'to' as "to",
+					"Event"."blockNumber",
+					json_build_object(
+						'tokenId', "args" ->> 'tokenId',
+						'price', cast("NftMetadata"."mintingPrice" / 1e9 as int),
+						'farmPercentage',cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						),
+						'mintedAt',"mintedAt",
+						'cardId',"cardId",
+						'from',"args" ->> 'from',
+						'to',"args" ->> 'to',
+						'blockNumber',"Event"."blockNumber",
+						'isBlackListed',"NftMetadata"."isBlackListed",
+						'rewardPerDay',
+						cast("NftMetadata"."mintingPrice" / 1e9 as int) * cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						) / 100
+					) as "nftDetail"
+				from
+					"Event"
+					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+			) "transList"
+		order by
+			"transList"."tokenId",
+			"transList"."blockNumber" desc
+	) "NFT" ON "NFT"."to" = "User"."address" WHERE "User"."address" LIKE '%${address}%' ${rankTemplate}
+    GROUP BY
+      "User"."address",
+      "upline",
+      "rank",
+      "telegramUsername"
+  ) "UserWithNFt"
+  `);
+
+  return pageDetail.at(0);
 };
 
 const handler: NextApiHandler = async (_, res) => {

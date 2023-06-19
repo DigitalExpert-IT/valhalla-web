@@ -201,7 +201,7 @@ export const FormSwap = () => {
   const onSubmit = handleSubmit(async data => {
     const swap = await exec({
       currency: data.currency,
-      amount: data.amountBottom,
+      amount: data.amountTop,
     });
     if (swap.status === 1) {
       reset();

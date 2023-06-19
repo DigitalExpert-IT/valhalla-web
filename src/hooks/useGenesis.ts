@@ -1,14 +1,9 @@
-import {
-  useAddress,
-  useContractRead,
-  useContractWrite,
-} from "@thirdweb-dev/react";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { NFTGenesis } from "@warmbyte/valhalla/typechain-types/contracts/NFTGenesis";
 import { useGenesisContract } from "./useGenesisContract";
 import { useUSDTContract } from "./useUSDTContract";
 import { useEffect, useState } from "react";
 import { prettyBn } from "utils";
-import { useGNETContract } from "./useGNETContract";
 import ee from "ee";
 
 type BaseCardType = Awaited<ReturnType<NFTGenesis["cardMap"]>>;
@@ -27,10 +22,8 @@ export const useGenesis = () => {
 
   const init = async () => {
     setIsInitialize(true);
-    setTimeout(async () => {
-      await getDataGenesis();
-      setIsInitialize(false);
-    }, 2000);
+    await getDataGenesis();
+    setIsInitialize(false);
   };
 
   const getDataGenesis = async () => {

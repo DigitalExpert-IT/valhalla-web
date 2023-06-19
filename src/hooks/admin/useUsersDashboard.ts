@@ -14,11 +14,17 @@ import { IAdminDashboard } from "pages/api/admin/user";
 export const useUsersDasboard = (
   page: number,
   limit: number,
-  orderBy: string
+  orderBy: string,
+  option?: { address: string; rank: string }
 ) => {
-  return useQuery(["Users", page, limit, orderBy], async () => {
+  return useQuery(["Users", page, limit, orderBy, option], async () => {
     const axiosResponse = await Axios.post<IAdminDashboard>(
-      `/api/admin/user?page=${page}&limit=${limit}&orderBy=${orderBy}`
+      `/api/admin/user?page=${page}&limit=${limit}&orderBy=${orderBy}`,
+      {
+        data: {
+          option,
+        },
+      }
     );
     return axiosResponse.data;
   });

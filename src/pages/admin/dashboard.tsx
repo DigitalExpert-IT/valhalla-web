@@ -45,6 +45,7 @@ import moment from "moment";
 import SummaryDashboard, {
   IDataItem,
 } from "components/pages/Dashboard/SummaryDashboard";
+import TableDashboard from "components/pages/Dashboard/TableDashboard";
 
 const PAGE_SIZE = 10;
 
@@ -85,90 +86,66 @@ const Dashboard = () => {
   };
 
   const TableUser = useMemo(() => {
-    if (!listUser?.items?.length)
-      return (
-        <Box
-          pos="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
-          <Text color="gray.400" textAlign="center">
-            {t("pages.dashboard.messages.memberNotFound")}
-          </Text>
-        </Box>
-      );
+    const data = {
+      head: [
+        { text: "User" },
+        { text: "Rank" },
+        { text: "NFT" },
+        { text: "Claimed NFT" },
+        { text: "NFT Left" },
+        { text: "Profit", isSortAble: true },
+      ],
+      body: listUser?.items?.map(user => [
+        <>
+          <HStack>
+            <BsFillPersonFill size="20" color="#000" />
+            <Text fontSize="sm">{user.address}</Text>
+          </HStack>
+        </>,
+        <>
+          <AspectRatio w="18px" ratio={15 / 17}>
+            <Image
+              src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
+              alt={rankMap[0]}
+            />
+          </AspectRatio>
+        </>,
+        user.NFTs?.length ?? 0,
+        user.NFTs?.reduce(
+          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
+          0
+        ) ?? 0,
+        user.NFTs?.reduce(
+          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
+          0
+        ) ?? 0,
+        user.NFTs?.reduce(
+          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
+          0
+        ) ?? 0,
+      ]),
+    };
 
-    return (
-      <>
-        <TableContainer border="1px solid #000" borderRadius="xl">
-          <Table variant="dashboard" color="gray.800">
-            <Thead>
-              <Tr>
-                <Th>User</Th>
-                <Th>Rank</Th>
-                <Th>NFT</Th>
-                <Th>Claimed NFT</Th>
-                <Th>NFT Left</Th>
-                <Th>Profit</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {listUser?.items?.map((user, idx) => (
-                <Tr key={`user.${idx}`}>
-                  <Td>
-                    <HStack>
-                      <BsFillPersonFill size="20" color="#000" />
-                      <Text fontSize="sm">{user.address}</Text>
-                    </HStack>
-                  </Td>
-                  <Td>
-                    <AspectRatio w="18px" ratio={15 / 17}>
-                      <Image
-                        src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
-                        alt={rankMap[0]}
-                      />
-                    </AspectRatio>
-                  </Td>
-                  <Td>{user.NFTs?.length ?? 0}</Td>
-                  <Td>
-                    {user.NFTs?.reduce(
-                      (acc, nft) =>
-                        acc + nft.farmRewardPerDay * nft.farmPercentage,
-                      0
-                    ) ?? 0}
-                  </Td>
-                  <Td>
-                    {user.NFTs?.reduce(
-                      (acc, nft) =>
-                        acc + nft.farmRewardPerDay * nft.farmPercentage,
-                      0
-                    ) ?? 0}
-                  </Td>
-                  <Td>
-                    {user.NFTs?.reduce(
-                      (acc, nft) =>
-                        acc + nft.farmRewardPerDay * nft.farmPercentage,
-                      0
-                    ) ?? 0}
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-        <Pagination
-          justifyPage="flex-end"
-          currentPage={page}
-          totalPage={listUser?.totalPage}
-          onPageChange={setPage}
-          colorScheme={"valhalla"}
-        />
-      </>
-    );
+    const options = {
+      filter: [
+        {
+          name: "rank",
+          options: rankMap.map((rank, idx) => ({
+            key: rank.toLowerCase().replace(" ", "."),
+            text: rank,
+            value: idx,
+          })),
+          onChange: (val: string) => console.log("filter: ", val),
+        },
+      ],
+      pagination: {
+        page,
+        totalPage: listUser?.totalPage ?? 0,
+        onPageChange: setPage,
+      },
+    };
+
+    return { data, options };
   }, [listUser?.items]);
 
   const summaryData: IDataItem[] = useMemo(() => {
@@ -301,7 +278,11 @@ const Dashboard = () => {
 
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px">
-              {TableUser}
+              <TableDashboard
+                title={t("pages.dashboard.title.users") ?? ""}
+                data={TableUser.data}
+                options={TableUser.options}
+              />
             </Box>
           </HStack>
         </Box>

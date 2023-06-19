@@ -27,6 +27,11 @@
     "listedOn": "Listen On",
     "social": "Social"
   },
+  "table": {
+    "messages": {
+      "notFound": "Data Not Found."
+    }
+  },
   "back": "Back",
   "balance": "Balance",
   "discover": "Discover",

@@ -361,9 +361,6 @@
     "alert": {
       "downlinesNotFound": "{{address}} doesn't have any downlines or already reach max level."
     },
-    "messages": {
-      "memberNotFound": "Member not found"
-    },
     "labels": {
       "totalSales": "Total Sales",
       "totalUser": "Total User",

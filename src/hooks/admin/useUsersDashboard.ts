@@ -14,7 +14,7 @@ import { IAdminDashboard } from "pages/api/admin/user";
 export const useUsersDasboard = (
   page: number,
   limit: number,
-  orderBy: string,
+  orderBy?: string,
   option?: { address: string; rank: string }
 ) => {
   return useQuery(["Users", page, limit, orderBy, option], async () => {

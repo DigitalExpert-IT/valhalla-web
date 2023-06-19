@@ -37,15 +37,15 @@ const handler: NextApiHandler = async (req, res) => {
     String(rank ?? ""),
     String(orderBy ?? "")
   );
-  const userPage = await queryGetUserWithNftPage(
+  const pageCalculate = await queryGetUserWithNftPage(
     pageSize,
     String(address ?? "0x"),
     String(rank ?? "")
   );
 
   const template: IAdminDashboard = {
-    totalItem: userPage?.totalItem ?? 0,
-    totalPage: userPage?.totalPage ?? 0,
+    totalItem: pageCalculate?.totalItem ?? 0,
+    totalPage: pageCalculate?.totalPage ?? 0,
     items: userWithNFT,
   };
 

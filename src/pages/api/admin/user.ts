@@ -1,6 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { NextApiHandler } from "next";
-import { INFTItem, queryGetNFTByAddress } from "./query";
+import { INFTItem, getAllUserWithNFTs, queryGetNFTByAddress } from "./query";
 const prisma = new PrismaClient();
 
 export interface IUser extends User {
@@ -10,7 +10,7 @@ export interface IUser extends User {
 export interface IAdminDashboard {
   totalPage: number;
   totalItem: number;
-  items: IUser[];
+  items: any;
 }
 
 /**
@@ -18,7 +18,7 @@ export interface IAdminDashboard {
  * @example ```host/api/admin/user?page=1&limit=10'```
  */
 const handler: NextApiHandler = async (req, res) => {
-  const { page, limit, address, rank } = req.query;
+  const { page, limit, address, rank, orderBy } = req.query;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -26,22 +26,19 @@ const handler: NextApiHandler = async (req, res) => {
   const pageSize = isLimitNumOrNan ? 10 : Number(limit);
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
-  const getUserInRow: User[] = await prisma.$queryRaw`
-      SELECT * FROM "User"
-      WHERE ("User"."address" LIKE ${`%${address ?? "0x"}%`}) 
-        AND ("User"."rank" IS NULL OR "User"."rank"=${Number(rank)})
-      ORDER BY "id" ASC
-      OFFSET ${offset} ROWS
-      FETCH NEXT ${pageSize} ROWS ONLY
-      ;
-    `;
+  console.log(
+    String(address ?? "0x"),
+    rank ? Number(rank) : "",
+    orderBy ? String(orderBy) : ""
+  );
 
-  // add NFT to Every address
-  const collectNFT = getUserInRow.map(async user => {
-    const userNFTs = await queryGetNFTByAddress(user.address);
-    return { ...user, NFTs: userNFTs };
-  });
-  const userWithNFT: IUser[] = await Promise.all(collectNFT);
+  const userWithNFT = await getAllUserWithNFTs(
+    offset,
+    pageSize,
+    String(address ?? "0x"),
+    String(rank ?? ""),
+    String(orderBy ?? "")
+  );
 
   // calculate the page
   const getTotalItem: { totalPage: number; totalData: number }[] =

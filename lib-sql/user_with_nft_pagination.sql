@@ -3,7 +3,7 @@ SELECT
 	"upline",
 	"rank",
 	"telegramUsername",
-	json_agg("NFT"."nftDetail"),
+	json_agg("NFT"."nftDetail") as "NFTs",
 	cast(COUNT("NFT"."nftDetail") as int) "totalNft",
 	cast(
 		SUM(cast("NFT"."nftDetail" ->> 'price' as int)) as int
@@ -63,10 +63,12 @@ from
 			"transList"."tokenId",
 			"transList"."blockNumber" desc
 	) "NFT" ON "NFT"."to" = "User"."address"
+WHERE
+	"User"."address" LIKE '%${address}%' $ { rankTemplate }
 GROUP BY
 	"User"."address",
 	"upline",
 	"rank",
-	"telegramUsername"
-ORDER BY
-	"profit" DESC NULLS LAST OFFSET 9 FETCH NEXT 10 ROWS ONLY;
+	"telegramUsername" $ { orderBy ? orderByTemplate: "" } OFFSET $ { offset } FETCH NEXT $ {
+limit
+	} ROWS ONLY

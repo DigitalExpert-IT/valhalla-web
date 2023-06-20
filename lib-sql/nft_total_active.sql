@@ -23,7 +23,7 @@ from
             cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
           ) as "farmPercentage",
           "NftMetadata"."mintedAt" as "mintedAt",
-          "NftMetadata"."isBlackListed" as "isBlackListed",
+          "NftMetadata"."isBlackListed" as "isBlacklisted",
           "NftMetadata"."cardId" as "cardId"
         from
           "Event"

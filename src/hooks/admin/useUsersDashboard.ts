@@ -17,16 +17,16 @@ export const useUsersDasboard = (
   page: number,
   limit: number,
   orderBy?: string,
-  option?: { address?: string; rank?: string }
+  filter?: { address?: string; rank?: string }
 ) => {
-  return useQuery(["Users", page, limit, orderBy, option], async () => {
+  return useQuery(["Users", page, limit, orderBy, filter], async () => {
     const axiosResponse = await Axios.post<IAdminDashboard>(
       `/api/admin/user?page=${page}&limit=${limit}${
         orderBy && `orderBy=${orderBy}`
       }`,
       {
         data: {
-          option,
+          ...filter,
         },
       }
     );

@@ -19,7 +19,7 @@ import { BsFilter } from "react-icons/bs";
 interface ITableData {
   head: {
     text: string;
-    isSortAble?: Boolean;
+    isSortAble?: boolean;
   }[];
   body: (string | number | JSX.Element | null)[][] | undefined;
 }
@@ -112,8 +112,8 @@ const TableDashboard = (props: ITableProps) => {
             <Tbody>
               {data.body?.map((row, idx) => (
                 <Tr key={idx}>
-                  {row?.map(col => (
-                    <Td>{col}</Td>
+                  {row?.map((col, idx) => (
+                    <Td key={idx}>{col}</Td>
                   ))}
                 </Tr>
               ))}

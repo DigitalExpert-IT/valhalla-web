@@ -1,47 +1,35 @@
 import { useState, useCallback, useMemo } from "react";
 import {
-  Tr,
-  Th,
-  Td,
   Box,
   Text,
-  Tbody,
-  Thead,
   Image,
-  Stack,
-  Table,
-  Heading,
-  TableContainer,
-  Input,
   HStack,
   AspectRatio,
-  Select,
   useToast,
 } from "@chakra-ui/react";
 import { useValhalla } from "hooks";
-import { prettyBn, shortenAddress } from "utils";
+import { prettyBn } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import {
-  BsFillDiagram2Fill,
   BsUnity,
   BsMeta,
   BsFillPersonFill,
-  BsFilter,
   BsGraphUp,
   BsFillFileEarmarkCheckFill,
   BsFileEarmarkExcelFill,
 } from "react-icons/bs";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
-import { PaginationV2 as Pagination } from "components/PaginationUtils";
-import { IUser, useDashboard } from "hooks/useDashboard";
+import { useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
 import { withConnection } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
-import { useBasicDashboardInfo, useUsersDasboard } from "hooks/admin";
-import moment from "moment";
+import {
+  useBasicDashboardInfo,
+  useSummary,
+  useUsersDasboard,
+} from "hooks/admin";
 import SummaryDashboard, {
   IDataItem,
 } from "components/pages/Dashboard/SummaryDashboard";
@@ -53,20 +41,20 @@ const Dashboard = () => {
   const address = useAddress();
   const user = useValhalla();
   const { t } = useTranslation();
-  const { totalUser, listProfitePerLevel, potensialProfite } = useDashboard();
   const toast = useToast();
   const [page, setPage] = useState(1);
   const [filterRank, setFitlerRank] = useState<number | null>(-1);
   const [searchKey, setSearchKey] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState<{
-    startDate: Date;
-    endDate: Date;
+    start: Date;
+    end: Date;
   }>({
-    startDate: new Date("-"),
-    endDate: new Date(),
+    start: new Date(),
+    end: new Date(),
   });
   const { data: basicDashboardInfo } = useBasicDashboardInfo();
   const { data: listUser } = useUsersDasboard(page, 10);
+  const { data: summaryDashboard } = useSummary(selectedDateRange);
 
   const searchDebounce = useCallback(
     _.debounce(key => {
@@ -80,8 +68,8 @@ const Dashboard = () => {
     const date = new Date(val);
 
     setSelectedDateRange(state => ({
-      startDate: key === "start-date" ? date : state.startDate,
-      endDate: key === "end-date" ? date : state.endDate,
+      start: key === "start-date" ? date : state.start,
+      end: key === "end-date" ? date : state.end,
     }));
   };
 
@@ -149,42 +137,51 @@ const Dashboard = () => {
   }, [listUser?.items]);
 
   const summaryData: IDataItem[] = useMemo(() => {
+    const { NFTOnUser, claimNFT, totalProfit, activeNFT, blacklistNFT } =
+      summaryDashboard ?? {
+        NFTOnUser: 0,
+        claimNFT: 0,
+        totalProfit: 0,
+        activeNFT: 0,
+        blacklistNFT: 0,
+      };
+
     return [
       {
         key: "NFTOnUsers",
         text: t("pages.dashboard.labels.NFTOnUsers"),
         icon: BsUnity,
-        value: totalUser,
+        value: NFTOnUser,
       },
       {
-        key: "NFTOnUsers",
+        key: "claimedNFT",
         text: t("pages.dashboard.labels.claimedNFT"),
         icon: BsFillFileEarmarkCheckFill,
-        value: totalUser,
+        value: claimNFT,
       },
       {
-        key: "NFTOnUsers",
-        text: t("pages.dashboard.labels.totalNFTValue"),
+        key: "totalProfitValue",
+        text: t("pages.dashboard.labels.totalProfitValue"),
         icon: BsGraphUp,
-        value: totalUser,
+        value: totalProfit,
       },
       {
-        key: "NFTOnUsers",
+        key: "activeNFT",
         text: t("pages.dashboard.labels.activeNFT"),
         icon: BsMeta,
-        value: totalUser,
+        value: activeNFT,
       },
       {
-        key: "NFTOnUsers",
+        key: "blacklistNFT",
         text: t("pages.dashboard.labels.blacklistNFT"),
         icon: BsFileEarmarkExcelFill,
-        value: RANK_MAX_LEVEL[user.account.rank],
+        value: blacklistNFT,
       },
     ];
-  }, [totalUser, user]);
+  }, [summaryDashboard]);
 
   return (
-    <LayoutDashboard>
+    <LayoutDashboard isAdminPage>
       <HeaderDashboard
         address={address ?? ""}
         isShowSearch
@@ -196,7 +193,7 @@ const Dashboard = () => {
         flex={4}
         width="fit-content"
         alignItems="streetch"
-        bg="#f6f7ff"
+        bg="dashboard.gray"
         pb="32 "
       >
         <Box flex={2} px="6">

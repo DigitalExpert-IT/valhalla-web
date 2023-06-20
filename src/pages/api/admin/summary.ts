@@ -1,9 +1,14 @@
 import { NextApiHandler } from "next";
 import { queryGetSummary } from "./query";
+import { formatRelative, subDays } from "date-fns";
 
 const getSummary = async (start: string, end: string) => {
   if (!start) throw Error("start undefined");
   if (!end) throw Error("end undefined");
+
+  if (start === end) {
+    start = formatRelative(subDays(new Date(), 7), new Date());
+  }
 
   if (
     new Date(start).toString() === "Invalid Date" ||
@@ -28,7 +33,7 @@ const getSummary = async (start: string, end: string) => {
 
       return {
         NFTOnUser: acc.NFTOnUser + 1,
-        totalProfite: acc.totalProfite + claimReward,
+        totalProfit: acc.totalProfit + claimReward,
         activeNFT: addActive,
         blacklistNFT: addBlacklist,
         claimNFT: acc.claimNFT + nftClaim,
@@ -36,7 +41,7 @@ const getSummary = async (start: string, end: string) => {
     },
     {
       NFTOnUser: 0,
-      totalProfite: 0,
+      totalProfit: 0,
       blacklistNFT: 0,
       activeNFT: 0,
       claimNFT: 0,

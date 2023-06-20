@@ -122,9 +122,6 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
-  moment:
-    specifier: ^2.29.4
-    version: 2.29.4
   next:
     specifier: 13.4.4
     version: 13.4.4(@babel/core@7.20.5)(react-dom@18.2.0)(react@18.2.0)
@@ -7451,10 +7448,6 @@ packages:
       yargs: 16.2.0
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
-    dev: false
-
-  /moment@2.29.4:
-    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
     dev: false
 
   /motion@10.15.5:

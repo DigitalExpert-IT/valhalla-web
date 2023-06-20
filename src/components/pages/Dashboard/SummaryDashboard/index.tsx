@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
+import { format } from "date-fns";
 import { useMemo } from "react";
 import { IconType } from "react-icons";
 
@@ -20,8 +20,8 @@ export interface IDataItem {
 }
 
 interface IDateRangeValue {
-  startDate: Date;
-  endDate: Date;
+  start: Date;
+  end: Date;
 }
 
 interface ISummaryProps {
@@ -72,11 +72,11 @@ const SummaryDashboard = (props: ISummaryProps) => {
   }, [data, isLoading]);
 
   return (
-    <Stack alignItems="center" bg="gray.100" w="full" p="8" rounded="lg">
+    <Stack alignItems="center" bg="dashboard.gray" w="full" p="8" rounded="lg">
       <Heading as="h2" fontSize="2xl" mb="4">
         {t("pages.dashboard.title.summary")}
       </Heading>{" "}
-      {isShowFilterDate && onDateChange ? (
+      {isShowFilterDate && onDateChange && dateValue ? (
         <HStack pb="3">
           <Input
             css={{
@@ -87,7 +87,7 @@ const SummaryDashboard = (props: ISummaryProps) => {
             p="2"
             type="date"
             variant="dashboard"
-            value={moment(dateValue?.startDate).format("YYYY-MM-DD")}
+            value={format(dateValue?.start, "yyyy-MM-dd")}
             onChange={e => onDateChange("start-date", e.target?.value)}
           />
           <Text>-</Text>
@@ -100,7 +100,7 @@ const SummaryDashboard = (props: ISummaryProps) => {
             p="2"
             type="date"
             variant="dashboard"
-            value={moment(dateValue?.endDate).format("YYYY-MM-DD")}
+            value={format(dateValue?.end, "yyyy-MM-dd")}
             onChange={e => onDateChange("end-date", e.target?.value)}
           />
         </HStack>

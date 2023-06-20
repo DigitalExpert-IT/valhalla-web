@@ -4,16 +4,20 @@ import Axios from "axios";
 export interface ISummaryDashboard {
   NFTOnUser: number;
   claimNFT: number;
-  totalNFTValue: number;
+  totalProfit: number;
   activeNFT: number;
   blacklistNFT: number;
 }
 
-export const useSummary = (date: { start: Date; end: Date }) => {
-  return useQuery(["summary", date], async () => {
-    const axiosResponse = await Axios.post("/api/admin/summary", {
-      data: date,
-    });
+export const useSummary = ({ start, end }: { start: Date; end: Date }) => {
+  return useQuery(["summary", { start, end }], async () => {
+    const axiosResponse = await Axios.post<ISummaryDashboard>(
+      "/api/admin/summary",
+      {
+        start,
+        end,
+      }
+    );
     return axiosResponse.data;
   });
 };

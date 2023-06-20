@@ -31,7 +31,7 @@ const prisma = new PrismaClient();
  * @example ```getNFTByAddress('0x0126563456d34d')```
  */
 export const queryGetNFTByAddress = async (address: string) => {
-  const nftList: INFTItem[] = await prisma.$queryRaw`
+  const getNft: INFTItem[] = await prisma.$queryRaw`
       SELECT * from (
         SELECT distinct on ("tokenId") "tokenId", * from (
           SELECT 
@@ -52,7 +52,38 @@ export const queryGetNFTByAddress = async (address: string) => {
         ) "transList" order by "transList"."tokenId", "transList"."blockNumber" desc
       ) "filteredTransList" where "filteredTransList"."from" <> ${address}`;
 
-  return nftList;
+  const promise = getNft.map(async e => {
+    const farm: { createdAt: string }[] = await prisma.$queryRaw`
+      SELECT "createdAt"
+        FROM "Event"
+        WHERE "args"->>'_tokenId'=${e.tokenId} AND "Event"."event"='Farm'
+        ORDER BY "createdAt" DESC
+        LIMIT 1
+      `;
+
+    const lastFarm = new Date(farm.at(0)?.createdAt ?? e.mintedAt);
+    const baseReward = (e.price * e.farmPercentage) / 100;
+    const rewardInSec = baseReward / 86400;
+    const rewardInMilSec = baseReward / 86400_000;
+    const farmRuntime =
+      Number(new Date(lastFarm)) - Number(new Date(e.mintedAt));
+    const diffInSec = differenceInSeconds(new Date(), new Date(lastFarm));
+    const claimNFT = farmRuntime * rewardInMilSec;
+    return {
+      ...e,
+      lastFarm,
+      baseReward,
+      rewardInSec,
+      diffInSec,
+      rewardInMilSec,
+      farmRuntime,
+      claimNFT,
+    };
+  });
+
+  const nftsList = await Promise.all(promise);
+
+  return nftsList;
 };
 
 export const queryGetTotalPagesNFTByType = async (
@@ -252,6 +283,170 @@ export const queryGetSummary = async (start: Date, end: Date) => {
   const nfts = await Promise.all(promise);
 
   return nfts;
+};
+
+export const queryGetAllUserWithNFTs = async (
+  offset: number,
+  limit: number,
+  address?: string,
+  rank?: string,
+  orderBy?: string
+) => {
+  const orderByTemplate = `ORDER BY
+	"profit" ${orderBy} NULLS LAST`;
+  const rankTemplate = rank
+    ? `AND "User"."rank"=${rank}`
+    : `AND "User"."rank" IS NOT NULL`;
+
+  const listUsers = await prisma.$queryRawUnsafe(`
+  SELECT
+  "User"."id",
+	"User"."address",
+	"upline",
+	"rank",
+	"telegramUsername",
+	json_agg("NFT"."nftDetail") as "NFTs",
+	cast(COUNT("NFT"."nftDetail") as int) "totalNft",
+	cast(
+		SUM(cast("NFT"."nftDetail" ->> 'price' as int)) as int
+	) as "totalInvest",
+	cast(
+		SUM(
+			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
+		) * 450 as int
+	) as "profit"
+from
+	"User"
+	LEFT JOIN (
+		SELECT
+			distinct on ("tokenId") "tokenId",
+			*
+		from
+			(
+				SELECT
+					"Event"."id",
+					"Event"."address",
+					"Event"."transactionHash",
+					"Event"."args" ->> 'tokenId' as "tokenId",
+					"Event"."args" ->> 'from' as "from",
+					"Event"."args" ->> 'to' as "to",
+					"Event"."blockNumber",
+					json_build_object(
+						'tokenId', "args" ->> 'tokenId',
+						'price', cast("NftMetadata"."mintingPrice" / 1e9 as int),
+						'farmPercentage',cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						),
+						'mintedAt',"mintedAt",
+						'cardId',"cardId",
+						'from',"args" ->> 'from',
+						'to',"args" ->> 'to',
+						'blockNumber',"Event"."blockNumber",
+						'isBlackListed',"NftMetadata"."isBlackListed",
+						'rewardPerDay',
+						cast("NftMetadata"."mintingPrice" / 1e9 as int) * cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						) / 100
+					) as "nftDetail"
+				from
+					"Event"
+					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+			) "transList"
+		order by
+			"transList"."tokenId",
+			"transList"."blockNumber" desc
+	) "NFT" ON "NFT"."to" = "User"."address" WHERE "User"."address" LIKE '%${address}%' ${rankTemplate}
+GROUP BY
+	"User"."address",
+	"User"."id",
+	"upline",
+	"rank",
+	"telegramUsername"
+  ${orderBy ? orderByTemplate : ""}
+ OFFSET ${offset} FETCH NEXT ${limit} ROWS ONLY
+  `);
+
+  return listUsers;
+};
+
+export const queryGetUserWithNftPage = async (
+  pageSize: number,
+  address: string,
+  rank: string
+) => {
+  const rankTemplate = rank
+    ? `AND "User"."rank"=${rank}`
+    : `AND "User"."rank" IS NOT NULL`;
+  const pageDetail: [{ totalItem: number; totalPage: number }] =
+    await prisma.$queryRawUnsafe(`
+  SELECT 
+      CAST(COUNT(*)as int) as "totalItem", 
+      CEIL(CAST(COUNT(*)  as float) / ${pageSize}) as "totalPage" 
+  from (
+    SELECT 
+      "User"."address",
+      "upline",
+      "rank",
+      "telegramUsername",
+      json_agg("NFT"."nftDetail") as "NFTs",
+      cast(COUNT("NFT"."nftDetail") as int) "totalNft",
+      cast(
+        SUM(cast("NFT"."nftDetail" ->> 'price' as int)) as int
+      ) as "totalInvest",
+      cast(
+        SUM(
+          CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
+        ) * 450 as int
+      ) as "profit"
+from
+	"User"
+	LEFT JOIN (
+		SELECT distinct on ("tokenId") "tokenId",
+			*
+		from
+			(
+				SELECT
+					"Event"."id",
+					"Event"."address",
+					"Event"."transactionHash",
+					"Event"."args" ->> 'tokenId' as "tokenId",
+					"Event"."args" ->> 'from' as "from",
+					"Event"."args" ->> 'to' as "to",
+					"Event"."blockNumber",
+					json_build_object(
+						'tokenId', "args" ->> 'tokenId',
+						'price', cast("NftMetadata"."mintingPrice" / 1e9 as int),
+						'farmPercentage',cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						),
+						'mintedAt',"mintedAt",
+						'cardId',"cardId",
+						'from',"args" ->> 'from',
+						'to',"args" ->> 'to',
+						'blockNumber',"Event"."blockNumber",
+						'isBlackListed',"NftMetadata"."isBlackListed",
+						'rewardPerDay',
+						cast("NftMetadata"."mintingPrice" / 1e9 as int) * cast(
+							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
+						) / 100
+					) as "nftDetail"
+				from
+					"Event"
+					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+			) "transList"
+		order by
+			"transList"."tokenId",
+			"transList"."blockNumber" desc
+	) "NFT" ON "NFT"."to" = "User"."address" WHERE "User"."address" LIKE '%${address}%' ${rankTemplate}
+    GROUP BY
+      "User"."address",
+      "upline",
+      "rank",
+      "telegramUsername"
+  ) "UserWithNFt"
+  `);
+
+  return pageDetail.at(0);
 };
 
 const handler: NextApiHandler = async (_, res) => {

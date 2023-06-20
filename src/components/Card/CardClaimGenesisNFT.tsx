@@ -13,7 +13,7 @@ export const CardClaimGenesisNFT = () => {
   };
 
   return (
-    <Stack align="center" rounded="xl" overflow="hidden">
+    <Box display="flex" justifyContent="center" rounded="xl" overflow="hidden">
       <Stack
         rounded="xl"
         color="white"
@@ -85,6 +85,6 @@ export const CardClaimGenesisNFT = () => {
           )}
         </Stack>
       </Stack>
-    </Stack>
+    </Box>
   );
 };

@@ -43,8 +43,8 @@ export const CardGenesisNFT = () => {
   };
 
   return (
-    <Stack align="center" rounded="xl" overflow="hidden">
-      <Stack
+    <Box display="flex" justifyContent="center" rounded="xl" overflow="hidden">
+      <Box
         rounded="xl"
         color="white"
         mt="4rem"
@@ -128,7 +128,7 @@ export const CardGenesisNFT = () => {
             </Box>
           </Stack>
         </Stack>
-      </Stack>
-    </Stack>
+      </Box>
+    </Box>
   );
 };

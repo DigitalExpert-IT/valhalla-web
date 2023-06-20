@@ -33,6 +33,10 @@ export const NAVIGATION: Array<INavigation> = [
         title: "sharetoearn",
         link: "/share",
       },
+      {
+        title: "nftDao",
+        link: "/genesis",
+      }
     ],
   },
   {

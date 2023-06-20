@@ -15,6 +15,12 @@ export interface IAdminDashboard {
   totalItem: number;
   items: any;
 }
+const syntaxList: { [key: string]: boolean } = {
+  ["ASC"]: true,
+  ["DESC"]: true,
+  ["asc"]: true,
+  ["desc"]: true,
+};
 
 /**
  *
@@ -29,6 +35,19 @@ const handler: NextApiHandler = async (req, res) => {
 
   const pageSize = isLimitNumOrNan ? 10 : Number(limit);
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
+
+  // protect unsafe query raw from sql syntax injection
+  if (orderBy && !syntaxList[orderBy.toString()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+  if (rank && rank.length > 2) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+
+  // @todo address not safe
+  // if(address){
+  //   return res.status(403).json({ status: 403, message: "method not allowed" });
+  // }
 
   const userWithNFT = await queryGetAllUserWithNFTs(
     offset,

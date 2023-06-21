@@ -34,10 +34,6 @@ import {
   useWallet,
 } from "@thirdweb-dev/react";
 
-// date range picker styles
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
-
 const defaultQueryFn = async ({ queryKey }: any) => {
   const { data } = await axios.get(`/api/${queryKey[0]}`);
   return data;

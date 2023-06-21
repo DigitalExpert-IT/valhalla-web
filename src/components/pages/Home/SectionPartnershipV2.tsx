@@ -12,9 +12,9 @@ import {
 } from "@chakra-ui/react";
 
 interface IPartnershipV2 {
-  link: string;
   name: string;
   image: string;
+  link?: string;
 }
 
 interface SectionPartnershipV2Props {

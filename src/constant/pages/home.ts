@@ -107,7 +107,7 @@ export const PARTNERSHIP = [
     name: "partner1",
     image:
       "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874147/global-network/polygon_y33scc.png",
-    link:"#"
+    link:""
   },
   {
     name: "partner2",
@@ -119,7 +119,7 @@ export const PARTNERSHIP = [
     name: "partner3",
     image:
       "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874147/global-network/global-network_c3risy.png",
-    link:"#"
+    link:""
   },
 ];
 

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import { differenceInSeconds } from "date-fns";
 import { NextApiHandler } from "next";
 
@@ -11,15 +11,24 @@ export interface INFTItem {
   tokenId: string;
   address: string;
   mintedAt: Date;
-  lastFarm: Date;
+  lastFarm?: Date;
   farmReward: number;
   blockNumber: number;
   farmPercentage: number;
   transactionHash: string;
   farmRewardPerDay: number;
+  rewardPerDay: number;
   baseReward: number;
   isBlackListed: boolean;
   farmRewardPerSecond: number;
+}
+
+export interface IUserWithNft extends User {
+  NFTs: INFTItem[];
+  totalNft: number;
+  totalInvest: number;
+  profit: number;
+  claimedNFT: number;
 }
 
 const prisma = new PrismaClient();
@@ -298,7 +307,7 @@ export const queryGetAllUserWithNFTs = async (
     ? `AND "User"."rank"=${rank}`
     : `AND "User"."rank" IS NOT NULL`;
 
-  const listUsers = await prisma.$queryRawUnsafe(`
+  const listUsers: IUserWithNft[] = await prisma.$queryRawUnsafe(`
   SELECT
   "User"."id",
 	"User"."address",
@@ -346,11 +355,23 @@ from
 						'rewardPerDay',
 						cast("NftMetadata"."mintingPrice" / 1e9 as int) * cast(
 							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
-						) / 100
+						) / 100,
+            'lastFarm',"lastFarm"
 					) as "nftDetail"
 				from
 					"Event"
 					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+          FULL JOIN (
+						SELECT DISTINCT ON ("tokenId") * from (
+							SELECT 
+								"args"->>'_tokenId' as "tokenId", 
+								"createdAt" as "lastFarm", "blockNumber" 
+							from "Event" 
+							WHERE 
+								"Event"."event" = 'Farm' 
+							ORDER BY "blockNumber" DESC
+							)"farmList"
+					)"farmList" ON "Event"."args"->>'tokenId' = "farmList"."tokenId"
 			) "transList"
 		order by
 			"transList"."tokenId",

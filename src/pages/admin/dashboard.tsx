@@ -1,308 +1,293 @@
 import { useState, useCallback, useMemo } from "react";
-import {
-  Tr,
-  Th,
-  Td,
-  Box,
-  Text,
-  Tbody,
-  Thead,
-  Image,
-  Stack,
-  Table,
-  Heading,
-  TableContainer,
-  HStack,
-  AspectRatio,
-  Divider,
-  Center,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from "@chakra-ui/react";
-import { CopiableText, HeaderDashboard, Sidebar } from "components";
-import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useValhalla, useWallet } from "hooks";
+import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
+import { prettyBn } from "utils";
+import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
-import { jsNumberForAddress } from "react-jazzicon";
-import Jazzicon from "react-jazzicon/dist/Jazzicon";
-import { shortenAddress } from "utils";
+import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import {
-  BsFillDiagram2Fill,
-  BsFillPeopleFill,
+  BsUnity,
+  BsMeta,
   BsFillPersonFill,
   BsGraphUp,
+  BsFillFileEarmarkCheckFill,
+  BsFileEarmarkExcelFill,
 } from "react-icons/bs";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
-import { PaginationV2 as Pagination } from "components/PaginationUtils";
-import { useDashboard } from "hooks/useDashboard";
+import _ from "lodash";
 import { withConnection } from "hoc";
+import { useAddress } from "@thirdweb-dev/react";
+import {
+  useBasicDashboardInfo,
+  useSummary,
+  useUsersDasboard,
+} from "hooks/admin";
+import { IDataItem } from "components/pages/Dashboard/SummaryDashboard";
+import { TableDashboard, SummaryDashboard } from "components/pages/Dashboard";
+import { subDays } from "date-fns";
 
 const PAGE_SIZE = 10;
 
-const User = () => {
-  // const { address } = useWallet();
-  const address = "0x458aE247679f92BeD7Cbd56DF323121520Ef02c2";
-  const user = useValhalla();
+const Dashboard = () => {
+  const address = useAddress();
   const { t } = useTranslation();
-  const {
-    listNFT,
-    listUser,
-    totalUser,
-    listProfitePerLevel,
-    potensialProfite,
-    totalNFTCirculatingSuply,
-  } = useDashboard(address, 1);
-
-  // Start Pagination
-  const [selectedLevel, setLevel] = useState(1);
-  const [selectedAddressList, setSelectAddressList] = useState<string[]>([]);
   const [page, setPage] = useState(1);
-  const [startOffset, setStartOffset] = useState(0);
-
-  const downlinesByAddress = useMemo(() => {
-    const newUser = listUser[
-      selectedLevel + selectedAddressList.length
-    ]?.filter(address => address.upline === selectedAddressList.at(-1));
-
-    return newUser;
-  }, [listUser, selectedLevel, selectedAddressList]);
-
-  const currentItems = useMemo(() => {
-    const endOffset = startOffset + PAGE_SIZE;
-
-    if (selectedAddressList.length > 0) {
-      return downlinesByAddress?.slice(startOffset, endOffset);
+  const [sortByProfit, setSortByProfit] = useState("ASC");
+  const [filterRank, setFitlerRank] = useState<string>("");
+  const [searchKey, setSearchKey] = useState("");
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    start: Date;
+    end: Date;
+  }>({
+    start: subDays(new Date(), 7),
+    end: new Date(),
+  });
+  const { data: basicDashboardInfo } = useBasicDashboardInfo();
+  const { data: listUser, isLoading: listUserLoading } = useUsersDasboard(
+    page,
+    PAGE_SIZE,
+    sortByProfit,
+    {
+      address: searchKey,
+      rank: filterRank,
     }
+  );
+  const {
+    data: summaryDashboard,
+    isLoading: summaryLoading,
+    error,
+  } = useSummary(selectedDateRange);
 
-    return listUser[selectedLevel]?.slice(startOffset, endOffset);
-  }, [
-    listUser,
-    selectedLevel,
-    startOffset,
-    downlinesByAddress,
-    selectedAddressList,
-  ]);
+  const searchDebounce = useCallback(
+    _.debounce(key => {
+      setSearchKey(key);
+      setPage(1);
+    }, 500),
+    []
+  );
 
-  const totalPage = useMemo(() => {
-    if (selectedAddressList.length > 0)
-      return Math.ceil(downlinesByAddress?.length / PAGE_SIZE);
+  const handleSelectDate = (key: string, val: string) => {
+    const date = new Date(val);
 
-    return Math.ceil(listUser[selectedLevel]?.length / PAGE_SIZE);
-  }, [listUser, selectedAddressList, downlinesByAddress]);
-
-  const handlePageClick = (num: number) => {
-    const newStartItem = PAGE_SIZE * num - PAGE_SIZE;
-
-    setStartOffset(newStartItem);
-    setPage(num);
+    setSelectedDateRange(state => ({
+      start: key === "start-date" ? date : state.start,
+      end: key === "end-date" ? date : state.end,
+    }));
   };
-  // End Pagination
 
-  const handleClickLevel = useCallback((level: number) => {
-    setLevel(level);
-    setSelectAddressList([]);
+  const TableUser = useMemo(() => {
+    const data = {
+      head: [
+        { text: "User" },
+        { text: "Rank" },
+        { text: "NFT" },
+        { text: "Claimed NFT" },
+        { text: "NFT Left" },
+        {
+          text: "Profit",
+          isSortAble: true,
+          onClickSort: (sortBy: string) => setSortByProfit(sortBy),
+        },
+      ],
+      body: listUser?.items?.map(user => [
+        <>
+          <HStack>
+            <BsFillPersonFill size="20" color="#000" />
+            <Text fontSize="sm">{user.address}</Text>
+          </HStack>
+        </>,
+        <>
+          <AspectRatio w="18px" ratio={15 / 17}>
+            <Image
+              src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
+              alt={rankMap[0]}
+            />
+          </AspectRatio>
+        </>,
+        user.totalNft,
+        // for temporary if the NFTs is empty, API return array of null
+        user.NFTs[0]
+          ? user.NFTs?.reduce(
+              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
+              0
+            )
+          : 0,
+        user.NFTs[0]
+          ? user.NFTs?.reduce(
+              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
+              0
+            )
+          : 0,
+        user.profit ?? 0,
+      ]),
+    };
 
-    handlePageClick(1);
-  }, []);
+    const options = {
+      filter: [
+        {
+          name: "rank",
+          options: rankMap.map((rank, idx) => ({
+            key: rank.toLowerCase().replace(" ", "."),
+            text: rank,
+            value: idx,
+          })),
+          onFilterChange: (val: string) => setFitlerRank(val),
+        },
+      ],
+      pagination: {
+        page,
+        totalPage: listUser?.totalPage ?? 0,
+        onPageChange: setPage,
+      },
+    };
 
-  const handleClickAddress = useCallback(
-    (address: string) => {
-      const downlines = listUser[
-        selectedLevel + selectedAddressList.length + 1
-      ]?.filter(user => user.upline === address);
+    return { data, options };
+  }, [listUser?.items]);
 
-      if (!downlines || downlines.length === 0) return;
+  const summaryData: IDataItem[] = useMemo(() => {
+    const { NFTOnUser, claimNFT, totalProfit, activeNFT, blacklistNFT } =
+      summaryDashboard ?? {
+        NFTOnUser: 0,
+        claimNFT: 0,
+        totalProfit: 0,
+        activeNFT: 0,
+        blacklistNFT: 0,
+      };
 
-      setSelectAddressList(state => [...state, address]);
-    },
-    [listUser, selectedLevel, selectedAddressList]
-  );
-
-  const handleJumpToAddress = useCallback(
-    (address: string) => {
-      const sliceIdx = selectedAddressList.findIndex(addr => addr == address);
-      const slicedAddress = selectedAddressList.slice(0, sliceIdx + 1);
-
-      setSelectAddressList(slicedAddress);
-    },
-    [selectedAddressList]
-  );
-
-  const TableDownlineLevel = useMemo(() => {
-    return (
-      <TableContainer border="1px solid #000" borderRadius="xl">
-        <Table variant="dashboard" color="gray.800">
-          <Thead>
-            <Tr>
-              <Th>Lv</Th>
-              <Th>Total Member</Th>
-              <Th>Profit</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {listUser.map((userLevel, idx) => {
-              if (idx > 0)
-                return (
-                  <Tr
-                    bg={selectedLevel === idx ? "white" : ""}
-                    boxShadow={selectedLevel === idx ? "lg" : ""}
-                    key={`level.${idx}`}
-                    onClick={() => handleClickLevel(idx)}
-                  >
-                    <Td fontWeight="600">{idx}</Td>
-                    <Td display="flex">
-                      <BsFillPersonFill size="20" />
-                      <Text ms="2">{userLevel.length}</Text>
-                    </Td>
-                    <Td>{listProfitePerLevel[idx]}</Td>
-                  </Tr>
-                );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    );
-  }, [listUser, selectedLevel]);
-
-  const TableMember = useMemo(() => {
-    return (
-      <>
-        <TableContainer border="1px solid #000" borderRadius="xl">
-          <Table variant="dashboard" color="gray.800">
-            <Thead>
-              <Tr>
-                <Th>Member</Th>
-
-                <Th>Rank</Th>
-                <Th>NFT</Th>
-                <Th>Profit</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {currentItems?.map((user, idx) => (
-                <Tr
-                  key={`user.${idx}`}
-                  onClick={() => handleClickAddress(user.address)}
-                >
-                  <Td>
-                    <HStack>
-                      <BsFillPersonFill size="20" color="#000" />
-                      <Text fontSize="sm">{user.address}</Text>
-                    </HStack>
-                  </Td>
-                  <Td>
-                    <AspectRatio w="18px" ratio={15 / 17}>
-                      <Image src={"/" + RANK_SYMBOL_MAP[0]} alt={rankMap[0]} />
-                    </AspectRatio>
-                  </Td>
-                  <Td>{user.listNFT.length ?? 0}</Td>
-                  <Td>
-                    {user.listNFT.reduce(
-                      (acc, nft) =>
-                        acc + nft.farmRewardPerDay * nft.farmPercentage,
-                      0
-                    ) ?? 0}
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-        <Pagination
-          justifyPage="flex-end"
-          currentPage={page}
-          totalPage={totalPage}
-          onPageChange={handlePageClick}
-          colorScheme={"valhalla"}
-        />
-      </>
-    );
-  }, [currentItems]);
+    return [
+      {
+        key: "NFTOnUsers",
+        text: t("pages.dashboard.labels.NFTOnUsers"),
+        icon: BsUnity,
+        value: NFTOnUser,
+      },
+      {
+        key: "claimedNFT",
+        text: t("pages.dashboard.labels.claimedNFT"),
+        icon: BsFillFileEarmarkCheckFill,
+        value: claimNFT,
+      },
+      {
+        key: "totalProfitValue",
+        text: t("pages.dashboard.labels.totalProfitValue"),
+        icon: BsGraphUp,
+        value: totalProfit,
+      },
+      {
+        key: "activeNFT",
+        text: t("pages.dashboard.labels.activeNFT"),
+        icon: BsMeta,
+        value: activeNFT,
+      },
+      {
+        key: "blacklistNFT",
+        text: t("pages.dashboard.labels.blacklistNFT"),
+        icon: BsFileEarmarkExcelFill,
+        value: blacklistNFT,
+      },
+    ];
+  }, [summaryDashboard]);
 
   return (
-    <LayoutDashboard>
-      <HeaderDashboard address={address} />
+    <LayoutDashboard isAdminPage>
+      <HeaderDashboard
+        address={address ?? ""}
+        isShowSearch
+        onSearchChange={searchDebounce}
+      />
 
       <HStack
-        minH="calc(100vh-112px)"
+        minH="calc(100vh - 129px)"
         flex={4}
         width="fit-content"
         alignItems="streetch"
-        bg="#f6f7ff"
+        bg="dashboard.gray"
         pb="32 "
       >
-        <Box flex={2} px="4">
+        <Box flex={2} px="6">
           <HStack
             minH="220px"
-            bgImage="/assets/dashboard/bg-billboard.png"
             bgSize="100%"
             bgRepeat="no-repeat"
             bgPos="bottom"
-            bgColor="global-brand-bg"
-            p="6"
+            bg="white"
+            borderRadius="xl"
+            px="6"
+            py="4"
             rounded="md"
+            justifyContent="space-around"
           >
-            <Text flex={4} fontSize="lg" p="4" color="whiteAlpha.900">
-              {t("pages.dashboard.billboard")}
-            </Text>
-            <Center flex={1} height="156px">
-              <Divider orientation="vertical" borderColor="white" />
-            </Center>
-            <Box p={4}>
-              <AspectRatio flex={2} w="240px" ratio={471 / 134}>
-                <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
-              </AspectRatio>
+            <Box>
+              <Text as="h2" fontWeight="bold" fontSize="2xl">
+                {t("pages.dashboard.labels.totalSales")}
+              </Text>
+              <HStack
+                minW="200px"
+                mt="2"
+                py="2"
+                px="3"
+                bg="#37006566"
+                color="white"
+                borderRadius="lg"
+                justifyContent="center"
+              >
+                <Text fontWeight="bold" fontSize="3xl" color="inherit">
+                  {prettyBn(basicDashboardInfo?.totalSales, 6)}{" "}
+                </Text>
+                <Text color="inherit">USDT</Text>
+              </HStack>
+            </Box>
+
+            <Box>
+              <Text as="h2" fontWeight="bold" fontSize="2xl">
+                {t("pages.dashboard.labels.totalUser")}
+              </Text>
+              <HStack
+                minW="200px"
+                mt="2"
+                py="2"
+                px="3"
+                bg="#37006566"
+                color="white"
+                borderRadius="lg"
+                justifyContent="center"
+              >
+                <Text fontWeight="bold" fontSize="3xl" color="inherit">
+                  {basicDashboardInfo?.totalUser}{" "}
+                </Text>
+                <Text color="inherit">Users</Text>
+              </HStack>
+            </Box>
+
+            <Box>
+              <Text as="h2" fontWeight="bold" fontSize="2xl">
+                {t("pages.dashboard.labels.totalProfit")}
+              </Text>
+              <HStack
+                minW="200px"
+                mt="2"
+                py="2"
+                px="3"
+                bg="#37006566"
+                color="white"
+                borderRadius="lg"
+                justifyContent="center"
+              >
+                <Text fontWeight="bold" fontSize="3xl" color="inherit">
+                  {prettyBn(basicDashboardInfo?.totalProfit, 6)}{" "}
+                </Text>
+                <Text color="inherit">USDT</Text>
+              </HStack>
             </Box>
           </HStack>
 
-          <HStack mt="8" gap="2" alignItems="flex-start">
-            <Box flex="1">
-              <HStack minH="46px" pb="4" gap="4" alignItems="center">
-                <Heading
-                  as="h2"
-                  fontSize="xl"
-                  fontWeight="600"
-                  color="gray.800"
-                >
-                  {t("pages.dashboard.title.members")}
-                </Heading>
-                <Text fontSize="xs" color="gray.400">
-                  {`Total: ${totalUser} Member`}
-                </Text>
-              </HStack>
-
-              {TableDownlineLevel}
-            </Box>
-
-            <Box flex="2">
-              <HStack minH="46px" pb="4">
-                <BsFillPersonFill size="20" color="#000" />
-                <Breadcrumb
-                  spacing="4px"
-                  separator={<ChevronRightIcon color="gray.500" />}
-                >
-                  <BreadcrumbItem>
-                    <BreadcrumbLink href="#" fontSize="xs">
-                      {shortenAddress(address)}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-
-                  {selectedAddressList.map(addr => (
-                    <BreadcrumbItem key={`address.${addr}`}>
-                      <BreadcrumbLink
-                        fontSize="xs"
-                        onClick={() => handleJumpToAddress(addr)}
-                      >
-                        {shortenAddress(addr)}
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                  ))}
-                </Breadcrumb>
-              </HStack>
-
-              {TableMember}
+          <HStack mt="16" gap="2" alignItems="streetch">
+            <Box pos="relative" flex="2" minH="160px">
+              <TableDashboard
+                title={t("pages.dashboard.title.users") ?? ""}
+                data={TableUser.data}
+                options={TableUser.options}
+                isLoading={listUserLoading}
+              />
             </Box>
           </HStack>
         </Box>
@@ -316,134 +301,18 @@ const User = () => {
           px="6"
           bg="white"
         >
-          <Stack gap="5" alignItems="center">
-            <Stack
-              alignItems="center"
-              bg="gray.100"
-              w="full"
-              p="8"
-              rounded="lg"
-            >
-              <Heading as="h2" fontSize="2xl" mb="4">
-                Summary
-              </Heading>
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between">
-                  <BsFillPeopleFill />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Member
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {totalUser}
-                </Box>
-              </HStack>
-
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack justifyContent="space-between">
-                  <BsGraphUp />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Estimate Profit
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {potensialProfite}
-                </Box>
-              </HStack>
-
-              <HStack
-                w="full"
-                pos="relative"
-                bg="purple.400"
-                color="white"
-                p="3"
-                justifyContent="space-between"
-                rounded="md"
-              >
-                <HStack>
-                  <BsFillDiagram2Fill />
-                  <Text fontSize="sm" fontWeight="300" color="inherit">
-                    Total Level
-                  </Text>
-                </HStack>
-
-                <Box
-                  p="1"
-                  py="0"
-                  fontSize="sm"
-                  color="purple.400"
-                  bg="white"
-                  borderRadius="md"
-                >
-                  {listUser.length - 1}
-                </Box>
-              </HStack>
-            </Stack>
-
-            <Stack
-              w="full"
-              bg="gray.100"
-              p="5"
-              rounded="lg"
-              alignItems="center"
-            >
-              <Heading as="h2" fontSize="2xl" mb="4">
-                Best Network
-              </Heading>
-              <HStack
-                w="full"
-                p="1"
-                rounded="md"
-                justifyContent="space-between "
-              >
-                <HStack>
-                  <AspectRatio w="25px" ratio={15 / 17}>
-                    <Image src={"/" + RANK_SYMBOL_MAP[2]} alt={rankMap[2]} />
-                  </AspectRatio>
-                  <Text fontWeight="semibold">0x9ee...4808</Text>
-                </HStack>
-
-                <Text fontSize="sm">$1.4m Revenue</Text>
-              </HStack>
-            </Stack>
-          </Stack>
+          <SummaryDashboard
+            data={summaryData}
+            isLoading={summaryLoading}
+            error={error}
+            isShowFilterDate
+            dateValue={selectedDateRange}
+            onDateChange={handleSelectDate}
+          />
         </Box>
       </HStack>
     </LayoutDashboard>
   );
 };
 
-// export default withConnection(Dashboard);
-export default User;
+export default withConnection(Dashboard);

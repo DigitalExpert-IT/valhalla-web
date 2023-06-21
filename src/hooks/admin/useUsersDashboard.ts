@@ -22,12 +22,10 @@ export const useUsersDasboard = (
   return useQuery(["Users", page, limit, orderBy, filter], async () => {
     const axiosResponse = await Axios.post<IAdminDashboard>(
       `/api/admin/user?page=${page}&limit=${limit}${
-        orderBy && `orderBy=${orderBy}`
+        orderBy && `&orderBy=${orderBy}`
       }`,
       {
-        data: {
-          ...filter,
-        },
+        ...filter,
       }
     );
     return axiosResponse.data;

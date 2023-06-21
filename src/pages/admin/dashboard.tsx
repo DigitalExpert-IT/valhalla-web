@@ -1,13 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import {
-  Box,
-  Text,
-  Image,
-  HStack,
-  AspectRatio,
-  useToast,
-} from "@chakra-ui/react";
-import { useValhalla } from "hooks";
+import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
 import { prettyBn } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
@@ -20,8 +12,7 @@ import {
   BsFillFileEarmarkCheckFill,
   BsFileEarmarkExcelFill,
 } from "react-icons/bs";
-import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
-import { useDashboard } from "hooks/useDashboard";
+import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import _ from "lodash";
 import { withConnection } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
@@ -30,31 +21,38 @@ import {
   useSummary,
   useUsersDasboard,
 } from "hooks/admin";
-import SummaryDashboard, {
-  IDataItem,
-} from "components/pages/Dashboard/SummaryDashboard";
-import TableDashboard from "components/pages/Dashboard/TableDashboard";
+import { IDataItem } from "components/pages/Dashboard/SummaryDashboard";
+import { TableDashboard, SummaryDashboard } from "components/pages/Dashboard";
+import { subDays } from "date-fns";
 
 const PAGE_SIZE = 10;
 
 const Dashboard = () => {
   const address = useAddress();
-  const user = useValhalla();
   const { t } = useTranslation();
-  const toast = useToast();
   const [page, setPage] = useState(1);
-  const [filterRank, setFitlerRank] = useState<number | null>(-1);
+  const [sortByProfit, setSortByProfit] = useState("ASC");
+  const [filterRank, setFitlerRank] = useState<string>("");
   const [searchKey, setSearchKey] = useState("");
   const [selectedDateRange, setSelectedDateRange] = useState<{
     start: Date;
     end: Date;
   }>({
-    start: new Date(),
+    start: subDays(new Date(), 7),
     end: new Date(),
   });
   const { data: basicDashboardInfo } = useBasicDashboardInfo();
-  const { data: listUser } = useUsersDasboard(page, 10);
-  const { data: summaryDashboard } = useSummary(selectedDateRange);
+  const { data: listUser, isLoading: listUserLoading } = useUsersDasboard(
+    page,
+    PAGE_SIZE,
+    sortByProfit,
+    {
+      address: searchKey,
+      rank: filterRank,
+    }
+  );
+  const { data: summaryDashboard, isLoading: summaryLoading } =
+    useSummary(selectedDateRange);
 
   const searchDebounce = useCallback(
     _.debounce(key => {
@@ -81,7 +79,11 @@ const Dashboard = () => {
         { text: "NFT" },
         { text: "Claimed NFT" },
         { text: "NFT Left" },
-        { text: "Profit", isSortAble: true },
+        {
+          text: "Profit",
+          isSortAble: true,
+          onClickSort: (sortBy: string) => setSortByProfit(sortBy),
+        },
       ],
       body: listUser?.items?.map(user => [
         <>
@@ -98,19 +100,21 @@ const Dashboard = () => {
             />
           </AspectRatio>
         </>,
-        user.NFTs?.length ?? 0,
-        user.NFTs?.reduce(
-          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
-          0
-        ) ?? 0,
-        user.NFTs?.reduce(
-          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
-          0
-        ) ?? 0,
-        user.NFTs?.reduce(
-          (acc, nft) => acc + nft.farmRewardPerDay * nft.farmPercentage,
-          0
-        ) ?? 0,
+        user.totalNft,
+        // for temporary if the NFTs is empty, API return array of null
+        user.NFTs[0]
+          ? user.NFTs?.reduce(
+              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
+              0
+            )
+          : 0,
+        user.NFTs[0]
+          ? user.NFTs?.reduce(
+              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
+              0
+            )
+          : 0,
+        user.profit ?? 0,
       ]),
     };
 
@@ -123,7 +127,7 @@ const Dashboard = () => {
             text: rank,
             value: idx,
           })),
-          onChange: (val: string) => console.log("filter: ", val),
+          onFilterChange: (val: string) => setFitlerRank(val),
         },
       ],
       pagination: {
@@ -279,6 +283,7 @@ const Dashboard = () => {
                 title={t("pages.dashboard.title.users") ?? ""}
                 data={TableUser.data}
                 options={TableUser.options}
+                isLoading={listUserLoading}
               />
             </Box>
           </HStack>
@@ -295,7 +300,7 @@ const Dashboard = () => {
         >
           <SummaryDashboard
             data={summaryData}
-            isLoading={false}
+            isLoading={summaryLoading}
             isShowFilterDate
             dateValue={selectedDateRange}
             onDateChange={handleSelectDate}

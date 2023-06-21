@@ -1,14 +1,9 @@
 import { NextApiHandler } from "next";
 import { queryGetSummary } from "./query";
-import { formatRelative, subDays } from "date-fns";
 
 const getSummary = async (start: string, end: string) => {
   if (!start) throw Error("start undefined");
   if (!end) throw Error("end undefined");
-
-  if (start === end) {
-    start = formatRelative(subDays(new Date(), 7), new Date());
-  }
 
   if (
     new Date(start).toString() === "Invalid Date" ||

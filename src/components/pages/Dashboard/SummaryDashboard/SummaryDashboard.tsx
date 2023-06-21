@@ -32,7 +32,7 @@ interface ISummaryProps {
   onDateChange?: (key: string, val: string) => void;
 }
 
-const SummaryDashboard = (props: ISummaryProps) => {
+export const SummaryDashboard = (props: ISummaryProps) => {
   const { data, isShowFilterDate, dateValue, isLoading, onDateChange } = props;
   const { t } = useTranslation();
 
@@ -109,5 +109,3 @@ const SummaryDashboard = (props: ISummaryProps) => {
     </Stack>
   );
 };
-
-export default SummaryDashboard;

@@ -16,7 +16,7 @@ export interface INFTItem {
   blockNumber: number;
   farmPercentage: number;
   transactionHash: string;
-  farmRewardPerDay: number;
+  rewardPerDay: number;
   baseReward: number;
   isBlackListed: boolean;
   farmRewardPerSecond: number;
@@ -285,20 +285,20 @@ export const queryGetSummary = async (start: Date, end: Date) => {
   return nfts;
 };
 
-export const queryGetAllUserWithNFTs = async (
+export const queryGetAllUserWithNFTs = async <IUser>(
   offset: number,
   limit: number,
   address?: string,
   rank?: string,
   orderBy?: string
-) => {
+): Promise<IUser[]> => {
   const orderByTemplate = `ORDER BY
 	"profit" ${orderBy} NULLS LAST`;
   const rankTemplate = rank
     ? `AND "User"."rank"=${rank}`
     : `AND "User"."rank" IS NOT NULL`;
 
-  const listUsers = await prisma.$queryRawUnsafe(`
+  const listUsers: IUser[] = await prisma.$queryRawUnsafe(`
   SELECT
   "User"."id",
 	"User"."address",

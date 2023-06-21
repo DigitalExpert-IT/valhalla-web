@@ -65,7 +65,7 @@ export const CardClaimGenesisNFT = () => {
                       onClick={handleClaim}
                       isLoading={isLoading}
                     >
-                      {data?.currentRewards.toNumber() ?? 0} GNET Claim
+                      {data?.nftreward ?? 0} GNET Claim
                     </Button>
                   </Box>
                 </Stack>

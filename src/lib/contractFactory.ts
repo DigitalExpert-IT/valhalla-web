@@ -6,14 +6,22 @@ import globalExchangeJson from "global-swap/artifacts/contracts/globalExchange.s
 import nftJson from "@warmbyte/valhalla/artifacts/contracts/NFT.sol/NFT.json";
 import gnetJson from "@warmbyte/valhalla/artifacts/contracts/GNET.sol/GNET.json";
 import erc20Json from "@warmbyte/valhalla/artifacts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json";
+import genesisJson from "@warmbyte/valhalla/artifacts/contracts/NFTGenesis.sol/NFTGenesis.json";
 import {
   VALHALLA_CONTRACT,
   NFT_CONTRACT,
   GNET_CONTRACT,
   SWAP_CONTRACT,
   USDT_CONTRACT,
+  GENESIS_CONTRACT,
 } from "constant/address";
-import { Valhalla, NFT, GNET, ERC20 } from "@warmbyte/valhalla/typechain-types";
+import {
+  Valhalla,
+  NFT,
+  GNET,
+  ERC20,
+  NFTGenesis,
+} from "@warmbyte/valhalla/typechain-types";
 import { GlobalExchange } from "global-swap/typechain-types";
 
 declare module globalThis {
@@ -95,6 +103,28 @@ export const getNFTSignerContract = async () => {
     nftJson.abi,
     wallet.getSigner()
   ) as NFT;
+};
+
+export const getNFTGenesisContract = async () => {
+  const provider = await getMainProvider();
+  const contract = await getFromCache(
+    async () =>
+      new ethers.Contract(
+        GENESIS_CONTRACT[CURRENT_CHAIN_ID],
+        genesisJson.abi,
+        provider
+      ) as NFTGenesis
+  );
+  return contract;
+};
+
+export const getNFTGenesisSignerContract = async () => {
+  const wallet = await getWallet();
+  return new ethers.Contract(
+    GENESIS_CONTRACT[CURRENT_CHAIN_ID],
+    genesisJson.abi,
+    wallet.getSigner()
+  ) as NFTGenesis;
 };
 
 export const getGNETContract = async () => {

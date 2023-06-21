@@ -11,6 +11,8 @@ export interface ISummaryDashboard {
 
 export const useSummary = ({ start, end }: { start: Date; end: Date }) => {
   return useQuery(["summary", { start, end }], async () => {
+    if (start > end) throw Error("Start date must be smaller than end date");
+
     const axiosResponse = await Axios.post<ISummaryDashboard>(
       "/api/admin/summary",
       {

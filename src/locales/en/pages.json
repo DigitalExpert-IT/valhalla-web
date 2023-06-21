@@ -374,6 +374,9 @@
       "totalEstimateProfit": "Total Estimate Profit",
       "maxTotalLevel": "Max Total Level"
     },
+    "errors": {
+      "invalidDate": "Invalid Date"
+    },
     "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
     "revenue": "Revenue"
   },

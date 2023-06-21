@@ -29,11 +29,13 @@ interface ISummaryProps {
   isShowFilterDate?: boolean;
   dateValue?: IDateRangeValue;
   isLoading: boolean;
+  error: any | unknown;
   onDateChange?: (key: string, val: string) => void;
 }
 
 export const SummaryDashboard = (props: ISummaryProps) => {
-  const { data, isShowFilterDate, dateValue, isLoading, onDateChange } = props;
+  const { data, isShowFilterDate, dateValue, isLoading, error, onDateChange } =
+    props;
   const { t } = useTranslation();
 
   const renderData = useMemo(() => {
@@ -105,6 +107,9 @@ export const SummaryDashboard = (props: ISummaryProps) => {
           />
         </HStack>
       ) : null}
+      <Text variant="error" display={error?.message ? "block" : "none"}>
+        {error?.message}
+      </Text>
       {renderData}
     </Stack>
   );

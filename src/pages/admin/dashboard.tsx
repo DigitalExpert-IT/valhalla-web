@@ -51,8 +51,11 @@ const Dashboard = () => {
       rank: filterRank,
     }
   );
-  const { data: summaryDashboard, isLoading: summaryLoading } =
-    useSummary(selectedDateRange);
+  const {
+    data: summaryDashboard,
+    isLoading: summaryLoading,
+    error,
+  } = useSummary(selectedDateRange);
 
   const searchDebounce = useCallback(
     _.debounce(key => {
@@ -301,6 +304,7 @@ const Dashboard = () => {
           <SummaryDashboard
             data={summaryData}
             isLoading={summaryLoading}
+            error={error}
             isShowFilterDate
             dateValue={selectedDateRange}
             onDateChange={handleSelectDate}

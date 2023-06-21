@@ -53,11 +53,30 @@ from
 						'rewardPerDay',
 						cast("NftMetadata"."mintingPrice" / 1e9 as int) * cast(
 							cast("NftMetadata"."farmPercentage" as DECIMAL) / 10 as float
-						) / 100
+						) / 100,
+						'lastFarm',
+						"lastFarm"
 					) as "nftDetail"
 				from
 					"Event"
-					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+					INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId" FULL
+					JOIN (
+						SELECT
+							DISTINCT ON ("tokenId") *
+						from
+							(
+								SELECT
+									"args" ->> '_tokenId' as "tokenId",
+									"createdAt" as "lastFarm",
+									"blockNumber"
+								from
+									"Event"
+								WHERE
+									"Event"."event" = 'Farm'
+								ORDER BY
+									"blockNumber" DESC
+							) "farmList"
+					) "farmList" ON "Event"."args" ->> 'tokenId' = "farmList"."tokenId"
 			) "transList"
 		order by
 			"transList"."tokenId",

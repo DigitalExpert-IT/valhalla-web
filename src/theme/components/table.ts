@@ -344,10 +344,12 @@ const variantDashboard = definePartsStyle(props => {
     th: {
       color: "#000",
       borderBottom: "1px solid #000",
+      px: "4",
       ...numericStyles,
     },
     td: {
       color: "#000",
+      px: "4",
       ...numericStyles,
     },
     caption: {

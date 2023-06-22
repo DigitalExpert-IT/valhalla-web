@@ -16,7 +16,6 @@ export interface INFTItem {
   blockNumber: number;
   farmPercentage: number;
   transactionHash: string;
-  farmRewardPerDay: number;
   rewardPerDay: number;
   baseReward: number;
   isBlackListed: boolean;
@@ -294,13 +293,13 @@ export const queryGetSummary = async (start: Date, end: Date) => {
   return nfts;
 };
 
-export const queryGetAllUserWithNFTs = async (
+export const queryGetAllUserWithNFTs = async <IUser>(
   offset: number,
   limit: number,
   address?: string,
   rank?: string,
   orderBy?: string
-) => {
+): Promise<IUserWithNft[]> => {
   const orderByTemplate = `ORDER BY
 	"profit" ${orderBy} NULLS LAST`;
   const rankTemplate = rank

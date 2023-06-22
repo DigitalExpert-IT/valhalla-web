@@ -7,9 +7,11 @@ import { useEffect } from "react";
 
 type AccountMapType = Awaited<ReturnType<Valhalla["accountMap"]>>;
 
-export const useAccountMap = () => {
+export const useAccountMap = (byPasAddress?: string | null) => {
   const contract = useValhallaContract();
-  const address = useAddress();
+  let address = useAddress();
+
+  if (byPasAddress) address = byPasAddress;
 
   const { data, ...rest } = useContractRead(contract.contract, "accountMap", [
     address ?? ZERO_ADDRESS,

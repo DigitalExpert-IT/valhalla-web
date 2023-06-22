@@ -2,18 +2,27 @@ import { PrismaClient, User } from "@prisma/client";
 import { NextApiHandler } from "next";
 import {
   INFTItem,
+  IUserWithNft,
   queryGetAllUserWithNFTs,
   queryGetUserWithNftPage,
 } from "./query";
 
 export interface IUser extends Omit<User, "blockNumber"> {
+  id: number;
+  address: string;
+  upline: string;
+  rank: number;
+  telegramUsername: string;
+  totalNft: number;
+  totalInvest: number;
+  profit: number;
   NFTs: INFTItem[];
 }
 
 export interface IAdminDashboard {
   totalPage: number;
   totalItem: number;
-  items: any;
+  items: IUserWithNft[];
 }
 const syntaxList: { [key: string]: boolean } = {
   ["ASC"]: true,
@@ -49,7 +58,7 @@ const handler: NextApiHandler = async (req, res) => {
   //   return res.status(403).json({ status: 403, message: "method not allowed" });
   // }
 
-  const userWithNFT = await queryGetAllUserWithNFTs(
+  const userWithNFT: IUserWithNft[] = await queryGetAllUserWithNFTs(
     offset,
     pageSize,
     String(address ?? "0x"),

@@ -1,10 +1,8 @@
 import {
   BsFillHouseDoorFill,
   BsFillCalendarEventFill,
-  BsFillCollectionFill,
-  BsFillWalletFill,
-  BsClockHistory,
-  BsFillGearFill,
+  BsPeopleFill,
+  BsTropicalStorm,
 } from "react-icons/bs";
 
 export const DASHBOARD_CATEGORY = [
@@ -23,34 +21,43 @@ export const DASHBOARD_CATEGORY = [
         icon: <BsFillCalendarEventFill size={20} />,
         href: "/event",
       },
+      {
+        key: "nft",
+        name: "nft",
+        icon: <BsTropicalStorm size={20} />,
+        href: "/nft",
+      },
+      {
+        key: "user",
+        name: "user",
+        icon: <BsPeopleFill size={20} />,
+        href: "/user",
+      },
     ],
   },
+];
+
+export const DASHBOARD_ADMIN_CATEGORY = [
   {
-    name: "Setting",
+    name: "Menu",
     menus: [
       {
-        key: "my-collection",
-        name: "myCollection",
-        icon: <BsFillCollectionFill size={24} />,
-        href: "/my-collection",
+        key: "dashboard",
+        name: "dashboard",
+        icon: <BsFillHouseDoorFill size={24} />,
+        href: "/admin/dashboard",
       },
       {
-        key: "wallet",
-        name: "wallet",
-        icon: <BsFillWalletFill size={24} />,
-        href: "/wallet",
+        key: "nft",
+        name: "nft",
+        icon: <BsTropicalStorm size={20} />,
+        href: "/admin/nft",
       },
       {
-        key: "history",
-        name: "history",
-        icon: <BsClockHistory size={24} />,
-        href: "/history",
-      },
-      {
-        key: "settings",
-        name: "settings",
-        icon: <BsFillGearFill size={24} />,
-        href: "/settings",
+        key: "user",
+        name: "user",
+        icon: <BsPeopleFill size={20} />,
+        href: "/admin/user",
       },
     ],
   },

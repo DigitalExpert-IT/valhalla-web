@@ -302,6 +302,10 @@ const colors = {
     800: "#4d004f",
     900: "#1d001e",
   },
+
+  dashboard: {
+    gray: "#f6f7ff",
+  },
 };
 
 export default colors;

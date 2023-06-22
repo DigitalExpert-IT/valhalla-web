@@ -30,7 +30,8 @@ export const HeaderDashboard = (props: PropsType) => {
       left="0"
       zIndex="10"
       py="8"
-      bgColor="#f6f7ff"
+      px="2"
+      bgColor="dashboard.gray"
     >
       {isShowSearch && onSearchChange ? (
         <FormControl flex={4} px="4">
@@ -41,7 +42,7 @@ export const HeaderDashboard = (props: PropsType) => {
             <Input
               variant="dashboard"
               type="search"
-              onKeyUp={(e:any) => onSearchChange(e.target.value)}
+              onKeyUp={(e: any) => onSearchChange(e.target.value)}
               placeholder={t("pages.dashboard.placeholder.search") ?? ""}
             />
           </InputGroup>

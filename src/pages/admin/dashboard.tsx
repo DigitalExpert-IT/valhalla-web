@@ -24,11 +24,13 @@ import {
 import { IDataItem } from "components/pages/Dashboard/SummaryDashboard";
 import { TableDashboard, SummaryDashboard } from "components/pages/Dashboard";
 import { subDays } from "date-fns";
+import { useRouter } from "next/router";
 
 const PAGE_SIZE = 10;
 
 const Dashboard = () => {
   const address = useAddress();
+  const router = useRouter();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [sortByProfit, setSortByProfit] = useState("ASC");
@@ -73,6 +75,15 @@ const Dashboard = () => {
       end: key === "end-date" ? date : state.end,
     }));
   };
+
+  const handleClickAddress = useCallback(
+    (idx: number) => {
+      const address = listUser?.items[idx].address;
+
+      router.push(`/dashboard/${address}`);
+    },
+    [listUser]
+  );
 
   const TableUser = useMemo(() => {
     const data = {
@@ -119,6 +130,7 @@ const Dashboard = () => {
           : 0,
         user.profit ?? 0,
       ]),
+      onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
 
     const options = {

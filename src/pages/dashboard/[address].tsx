@@ -1,22 +1,13 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import {
-  Tr,
-  Th,
-  Td,
   Box,
   Text,
-  Tbody,
-  Thead,
   Image,
-  Stack,
-  Table,
   Heading,
-  TableContainer,
   HStack,
   AspectRatio,
   Divider,
   Center,
-  Select,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -27,38 +18,41 @@ import { shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import {
-  BsFillDiagram2Fill,
-  BsFillPeopleFill,
-  BsFillPersonFill,
-  BsFilter,
-  BsGraphUp,
-} from "react-icons/bs";
+import { BsFillPeopleFill, BsFillPersonFill, BsGraphUp } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
-import { PaginationV2 as Pagination } from "components/PaginationUtils";
 import { IUser, useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
 import { withConnection } from "hoc";
-import { useAddress } from "@thirdweb-dev/react";
 import {
   SummaryDashboard,
   IDataItem,
   TableDashboard,
 } from "components/pages/Dashboard";
+import { useRouter } from "next/router";
 
 const PAGE_SIZE = 10;
 
 const Dashboard = () => {
-  const address = useAddress();
+  const router = useRouter();
+  const queryAddress = router.query.address;
+  const address = useRef<string>("0x0");
   const user = useValhalla();
   const { t } = useTranslation();
-  const { listUser, totalUser, listProfitePerLevel, potensialProfite } =
-    useDashboard();
+  const { listUser, totalUser, potensialProfite, isLoading } = useDashboard(
+    address.current
+  );
   const toast = useToast();
   const [sortByProfit, setSortByProfit] = useState("ASC");
   const [filterRank, setFitlerRank] = useState<number | null>(-1);
   const [searchKey, setSearchKey] = useState("");
+
+  useEffect(() => {
+    if (typeof queryAddress === "string") address.current = queryAddress;
+    else if (Array.isArray(queryAddress) && queryAddress.length > 0) {
+      address.current = queryAddress[0];
+    }
+  }, []);
 
   const searchDebounce = useCallback(
     _.debounce(key => {
@@ -112,13 +106,24 @@ const Dashboard = () => {
       }
     }
 
-    items = items?.slice(startOffset, endOffset);
-
     if (filterRank !== -1) {
       items = items?.filter(item =>
         !item.rank && filterRank === 0 ? true : item.rank === filterRank
       );
     }
+
+    if (sortByProfit === "ASC") {
+      items = items?.sort((a, b) => {
+        return a.profit - b.profit;
+      });
+    }
+    if (sortByProfit === "DESC") {
+      items = items?.sort((a, b) => {
+        return b.profit - a.profit;
+      });
+    }
+
+    items = items?.slice(startOffset, endOffset);
 
     return items;
   }, [
@@ -129,6 +134,7 @@ const Dashboard = () => {
     selectedAddressList,
     filterRank,
     searchResult,
+    sortByProfit,
   ]);
 
   const totalPage = useMemo(() => {
@@ -138,8 +144,22 @@ const Dashboard = () => {
     if (selectedAddressList.length > 0)
       return Math.ceil(lastCrumbDownlines?.length / PAGE_SIZE);
 
+    if (filterRank !== -1) {
+      const items = listUser[selectedLevel]?.filter(item =>
+        !item.rank && filterRank === 0 ? true : item.rank === filterRank
+      );
+
+      return Math.ceil(items?.length / PAGE_SIZE);
+    }
+
     return Math.ceil(listUser[selectedLevel]?.length / PAGE_SIZE);
-  }, [listUser, selectedAddressList, lastCrumbDownlines, searchResult]);
+  }, [
+    listUser,
+    selectedAddressList,
+    lastCrumbDownlines,
+    searchResult,
+    filterRank,
+  ]);
   // End Pagination
 
   const handleClickLevel = useCallback((level: number) => {
@@ -150,7 +170,9 @@ const Dashboard = () => {
   }, []);
 
   const handleClickAddress = useCallback(
-    (address: string) => {
+    (idx: number) => {
+      const address = currentItems[idx].address;
+
       if (searchKey.replace(/ /g, "") !== "") return;
 
       const downlines = listUser[
@@ -171,7 +193,7 @@ const Dashboard = () => {
 
       setSelectAddressList(state => [...state, address]);
     },
-    [listUser, selectedLevel, selectedAddressList, searchKey]
+    [listUser, currentItems, selectedLevel, selectedAddressList, searchKey]
   );
 
   const handleJumpToAddress = useCallback(
@@ -187,8 +209,8 @@ const Dashboard = () => {
   const tableDownlineLevel = useMemo(() => {
     const levelMap = [];
 
-    for (let i = 0; i < 15; i++) {
-      levelMap.push({ lv: i + 1, total: 0, sharedValue: 0 });
+    for (let i = 1; i <= 15; i++) {
+      levelMap.push({ lvl: i, total: 0, sharedValue: 0 });
     }
 
     const data = {
@@ -197,16 +219,23 @@ const Dashboard = () => {
         { text: "Total Member" },
         { text: "Shared Value" },
       ],
-      body: levelMap.map((level, idx) => [
-        level.lv,
+      body: levelMap.map(level => [
+        level.lvl,
         <>
           <HStack>
             <BsFillPersonFill size="20" color="#000" />
-            <Text fontSize="sm">{listUser[idx]?.length ?? level.total}</Text>
+            <Text fontSize="sm">
+              {listUser[level.lvl]?.length ?? level.total}
+            </Text>
           </HStack>
         </>,
-        listProfitePerLevel[idx] ?? level.sharedValue,
+        listUser[level.lvl]?.reduce(
+          (acc, user) => acc + user.profiteShare,
+          0
+        ) ?? 0,
       ]),
+      activeRow: selectedLevel - 1,
+      onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
     };
 
     return { data };
@@ -228,7 +257,7 @@ const Dashboard = () => {
       ],
       body: currentItems?.map(user => [
         <>
-          <HStack onClick={() => handleClickAddress(user.address)}>
+          <HStack>
             <BsFillPersonFill size="20" color="#000" />
             <Text fontSize="sm">{shortenAddress(user.address)}</Text>
           </HStack>
@@ -241,8 +270,12 @@ const Dashboard = () => {
             />
           </AspectRatio>
         </>,
-        user.listNFT.length,
+        user.listNFT?.length,
+        user.claimedNFT,
+        user.profit - user.claimedNFT,
+        user.profit,
       ]),
+      onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
 
     const options = {
@@ -254,7 +287,7 @@ const Dashboard = () => {
             text: rank,
             value: idx,
           })),
-          onFilterChange: (val: string) => setFitlerRank(+val - 1),
+          onFilterChange: (val: string) => setFitlerRank(+val),
         },
       ],
       pagination: {
@@ -293,7 +326,7 @@ const Dashboard = () => {
   return (
     <LayoutDashboard>
       <HeaderDashboard
-        address={address ?? ""}
+        address={address.current}
         isShowSearch
         onSearchChange={searchDebounce}
       />
@@ -350,10 +383,11 @@ const Dashboard = () => {
                   </HStack>
                 }
                 data={tableDownlineLevel.data}
+                isLoading={isLoading}
               />
             </Box>
 
-            <Box pos="relative" flex="2" minW="692px" maxW="750px" minH="160px">
+            <Box pos="relative" flex="2" minW="724px" maxW="750px" minH="160px">
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
@@ -367,7 +401,7 @@ const Dashboard = () => {
                           fontSize="xs"
                           onClick={() => setSelectAddressList([])}
                         >
-                          {shortenAddress(address ?? "")}
+                          {shortenAddress(address.current)}
                         </BreadcrumbLink>
                       </BreadcrumbItem>
 
@@ -386,6 +420,7 @@ const Dashboard = () => {
                 }
                 data={tableMember.data}
                 options={tableMember.options}
+                isLoading={isLoading}
               />
             </Box>
           </HStack>
@@ -400,7 +435,7 @@ const Dashboard = () => {
           px="6"
           bg="white"
         >
-          <SummaryDashboard data={summaryData} isLoading={false} />
+          <SummaryDashboard data={summaryData} isLoading={isLoading} />
         </Box>
       </HStack>
     </LayoutDashboard>

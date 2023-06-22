@@ -27,6 +27,11 @@ interface ITableHead {
 interface ITableData {
   head: ITableHead[];
   body: (string | number | JSX.Element | null | [])[][] | undefined;
+  activeRow?: number;
+  onClickRow: (
+    row: (string | number | JSX.Element | null | [])[],
+    rowIdx: number
+  ) => void;
 }
 
 interface IPagination {
@@ -156,7 +161,12 @@ export const TableDashboard = (props: ITableProps) => {
                   </Tr>
                 ))
               : data.body?.map((row, idx) => (
-                  <Tr key={idx}>
+                  <Tr
+                    bg={data?.activeRow === idx ? "white" : "unset"}
+                    boxShadow={data?.activeRow === idx ? "lg" : "unset"}
+                    key={idx}
+                    onClick={() => data.onClickRow(row, idx)}
+                  >
                     {row?.map((col, idx) => (
                       <Td key={idx}>{col}</Td>
                     ))}

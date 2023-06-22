@@ -28,7 +28,7 @@ const getSummary = async (start: string, end: string) => {
 
       return {
         NFTOnUser: acc.NFTOnUser + 1,
-        totalProfite: acc.totalProfite + claimReward,
+        totalProfit: acc.totalProfit + claimReward,
         activeNFT: addActive,
         blacklistNFT: addBlacklist,
         claimNFT: acc.claimNFT + nftClaim,
@@ -36,7 +36,7 @@ const getSummary = async (start: string, end: string) => {
     },
     {
       NFTOnUser: 0,
-      totalProfite: 0,
+      totalProfit: 0,
       blacklistNFT: 0,
       activeNFT: 0,
       claimNFT: 0,

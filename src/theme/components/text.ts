@@ -24,8 +24,17 @@ const variantHoverGradient = defineStyle(props => {
   };
 });
 
+const ErrorVariant = defineStyle(props => {
+  return {
+    color: "red",
+    mt: "0",
+    mb: "10",
+  };
+});
+
 const variants = {
   gradient: variantGradient,
+  error: ErrorVariant,
   hoverGradient: variantHoverGradient,
 };
 

@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
+import { BigNumber } from "ethers";
 
 interface IBasicDashboardInfo {
   totalBlacklistNFT: number;
-  totalSales: number;
+  totalSales: BigNumber;
   totalNFTOnUser: number;
-  totalProfit: number;
+  totalProfit: BigNumber;
   totalActiveNFT: number;
   totalUser: number;
 }

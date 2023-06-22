@@ -14,6 +14,8 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "event": "Event",
+    "nft": "Nft",
+    "user": "User",
     "myCollection": "My Collection",
     "wallet": "Wallet",
     "history": "History",
@@ -24,6 +26,11 @@
     "description": "The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications",
     "listedOn": "Listen On",
     "social": "Social"
+  },
+  "table": {
+    "messages": {
+      "notFound": "Data Not Found."
+    }
   },
   "back": "Back",
   "balance": "Balance",

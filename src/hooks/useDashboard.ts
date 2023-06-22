@@ -28,6 +28,17 @@ interface INFTItem {
 
 export interface IUser extends User {
   listNFT: INFTItem[];
+  listNFTPerType: INFTItem[][];
+  restPercentage: string;
+  claimedNFT: number;
+  id: number;
+  address: string;
+  telegramUsername: string | null;
+  upline: string;
+  blockNumber: number;
+  rank: number | null;
+  profit: number;
+  profiteShare: number;
 }
 
 interface IDashboard {
@@ -38,6 +49,7 @@ interface IDashboard {
   listProfitePerLevel: [][];
   potensialProfite: string;
   totalNFTCirculatingSuply: number;
+  isLoading: boolean;
 }
 
 const initialState: IDashboard = {
@@ -48,12 +60,14 @@ const initialState: IDashboard = {
   potensialProfite: "",
   listProfitePerLevel: [],
   totalNFTCirculatingSuply: 0,
+  isLoading: false,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
 
 const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
   if (!address && rank > 0) return;
+  setState(state => ({ ...state, isLoading: true }));
   try {
     const { data } = await Axios.get<any>(
       `/api/downlines/${address}?rank=${rank}`
@@ -102,20 +116,48 @@ const init = createInitiator(async (address: string, rank: number) => {
       const withNft = user.map(j => {
         const getNftperUser =
           getAllNFT.at(level)?.filter(l => l.to === j.address) ?? [];
-        const getPercentageAverage =
-          getNftperUser?.reduce((acc, pre) => {
+        const getCalc = getNftperUser?.reduce(
+          (acc, pre) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
             const lasFarm = Date.parse(pre.lastFarm);
             const getPercentage = (lasFarm * 100) / fullRange;
             const format = getPercentage;
-            return acc + format;
-          }, 0) ?? 0 / getNftperUser.length;
+
+            const getTotalClaimed =
+              +new Date(pre.lastFarm) - +new Date(pre.mintedAt);
+            const getRewardPerMS = pre.farmRewardPerDay / 86_400_000;
+            const getClaimed = getTotalClaimed * getRewardPerMS;
+            const profite = acc.profit + pre.farmRewardPerDay;
+            const fisrtFiveLevel = level <= 5;
+
+            return {
+              percentage: acc.percentage + format,
+              claimedNFT: acc.claimedNFT + getClaimed,
+              profit: profite,
+              profiteSharing: fisrtFiveLevel
+                ? ((acc.profiteSharing + profite) * 5) / 100
+                : ((acc.profiteSharing + profite) * 1) / 100,
+            };
+          },
+          {
+            profit: 0,
+            percentage: 0,
+            claimedNFT: 0,
+            profiteSharing: 0,
+          }
+        );
 
         return {
           ...j,
           listNFT: getNftperUser,
           listNFTPerType: Object.values(groupBy(getNftperUser, "cardId")),
-          restPercentage: `${getPercentageAverage.toFixed(2)}%`,
+          restPercentage: `${
+            getCalc.percentage ? getCalc.percentage / getNftperUser.length : 0
+          }%`,
+          profit: getCalc.profit ? getCalc.profit * 450 : 0,
+          // gnet value
+          claimedNFT: getCalc.claimedNFT,
+          profiteShare: getCalc.profiteSharing ? getCalc.profiteSharing : 0,
         };
       });
       return withNft;
@@ -139,14 +181,21 @@ const init = createInitiator(async (address: string, rank: number) => {
     );
   } catch (e) {
     console.log(e);
+  } finally {
+    setState(state => ({ ...state, isLoading: false }));
   }
 });
 
-export const useDashboard = () => {
+export const useDashboard = (byPasAddress?: string) => {
   const store = useDashoardStore();
-  const address = useAddress();
-  const { data: account } = useAccountMap();
+  let address = useAddress();
+  let { data: account } = useAccountMap(byPasAddress ? byPasAddress : null);
+
   useEffect(() => {
+    if (byPasAddress) {
+      address = byPasAddress;
+    }
+
     if (address && account?.rank) {
       init(address, account?.rank);
     }

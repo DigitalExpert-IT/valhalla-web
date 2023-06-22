@@ -11,12 +11,20 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { DASHBOARD_CATEGORY } from "constant/pages/dashboard";
+import {
+  DASHBOARD_ADMIN_CATEGORY,
+  DASHBOARD_CATEGORY,
+} from "constant/pages/dashboard";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
 
-export const Sidebar = () => {
+interface ISidebarProps {
+  isAdminPage?: boolean;
+}
+
+export const Sidebar = (props: ISidebarProps) => {
+  const { isAdminPage } = props;
   const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const router = useRouter();
 
@@ -70,18 +78,31 @@ export const Sidebar = () => {
           </AspectRatio>
         </Link>
         <Stack flex={1} pt="12">
-          {DASHBOARD_CATEGORY.map(kategoryItem => (
-            <Box key={kategoryItem.name} mb="24">
-              <Text mb="4" textTransform="uppercase">
-                {kategoryItem.name}
-              </Text>
-              <UnorderedList {...MenuStyles}>
-                {kategoryItem.menus.map((menu, mIdx) => (
-                  <MenuItem key={mIdx} menu={menu} />
-                ))}
-              </UnorderedList>
-            </Box>
-          ))}
+          {isAdminPage
+            ? DASHBOARD_ADMIN_CATEGORY.map(kategoryItem => (
+                <Box key={kategoryItem.name} mb="24">
+                  <Text mb="4" textTransform="uppercase">
+                    {kategoryItem.name}
+                  </Text>
+                  <UnorderedList {...MenuStyles}>
+                    {kategoryItem.menus.map((menu, mIdx) => (
+                      <MenuItem key={mIdx} menu={menu} />
+                    ))}
+                  </UnorderedList>
+                </Box>
+              ))
+            : DASHBOARD_CATEGORY.map(kategoryItem => (
+                <Box key={kategoryItem.name} mb="24">
+                  <Text mb="4" textTransform="uppercase">
+                    {kategoryItem.name}
+                  </Text>
+                  <UnorderedList {...MenuStyles}>
+                    {kategoryItem.menus.map((menu, mIdx) => (
+                      <MenuItem key={mIdx} menu={menu} />
+                    ))}
+                  </UnorderedList>
+                </Box>
+              ))}
 
           <Box pos="absolute" bottom="20">
             <Link href="/logout">

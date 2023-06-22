@@ -82,8 +82,8 @@ const sizes = {
   },
 };
 
-const variantDahsboard = definePartsStyle(() => {
-  return {
+const variantFilter = defineStyle(() => ({
+    ...inputTheme.baseStyle?.field,
     field: {
       maxH: "30px",
       bg: "transparent",
@@ -99,19 +99,21 @@ const variantDahsboard = definePartsStyle(() => {
         color: "black",
       },
     },
+    icon: {
+      color: "black"
+    },
     addon: {
       border: "2px solid",
       borderColor: "black",
       color: "black",
-    },
-  };
-});
+    }
+}));
 
 const defaultVariants = inputTheme.variants;
 
 const variants = {
-  ...defaultVariants,
-  "table-filter": variantDahsboard
+  "table-filter": variantFilter,
+  ...defaultVariants
 };
 
 export const selectTheme = defineMultiStyleConfig({

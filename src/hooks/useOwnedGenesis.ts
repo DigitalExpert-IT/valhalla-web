@@ -12,6 +12,7 @@ import {
   getNFTGenesisSignerContract,
 } from "lib/contractFactory";
 import { prettyBn } from "utils";
+import ee from "ee";
 
 type BaseCardType = Awaited<ReturnType<NFTGenesis["nftGenesis"]>>;
 type NFTOwnedType = BaseCardType & {
@@ -23,11 +24,16 @@ export const useOwnedGenesis = () => {
   const genesis = useGenesisContract();
   const claimReward = useContractWrite(genesis.contract, "claimRewards");
   const [data, setData] = useState<NFTOwnedType>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialize, setIsInitialize] = useState(false);
+
+  const init = async () => {
+    setIsInitialize(true);
+    await fetch();
+    setIsInitialize(false);
+  };
 
   const fetch = async () => {
     if (!genesis.contract) return;
-    setIsLoading(true);
     const nftRewards = await genesis.contract!.call("myNftRewards", [
       0,
       address,
@@ -40,7 +46,6 @@ export const useOwnedGenesis = () => {
       ...nftGenesisOwned,
       nftreward: prettyBn(nftRewards, 9),
     });
-    setIsLoading(false);
   };
 
   const claimRewardAsync = async (cardId: number) => {
@@ -50,7 +55,12 @@ export const useOwnedGenesis = () => {
 
   useEffect(() => {
     if (!address) return;
-    fetch();
+    init();
+    ee.addListener("nft-Buy", init);
+
+    return () => {
+      ee.removeListener("nft-Buy", init);
+    };
   }, [address, genesis.contract]);
-  return { data, claimRewardAsync, isLoading };
+  return { data, claimRewardAsync, isInitialize, fetch };
 };

@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next";
 
 export const CardClaimGenesisNFT = () => {
   const { t } = useTranslation();
-  const { data, claimRewardAsync, isLoading: fetchLoading } = useOwnedGenesis();
+  const { data, claimRewardAsync, isInitialize, fetch } = useOwnedGenesis();
 
   const { exec: claim, isLoading } = useAsyncCall(claimRewardAsync);
 
   const handleClaim = async () => {
     await claim(0);
+    await fetch();
   };
 
   return (
@@ -27,7 +28,7 @@ export const CardClaimGenesisNFT = () => {
           p="1.4rem"
           rounded="xl"
         >
-          {fetchLoading ? (
+          {isInitialize ? (
             <Spinner />
           ) : data?.ownedNfts.toNumber() !== 0 ? (
             <Stack>

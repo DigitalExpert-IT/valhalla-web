@@ -51,22 +51,22 @@ export const useGenesis = () => {
   const buyGenesis = async (cardId: number, amount: number) => {
     if (!usdt.contract || !genesis.contract || !address) return;
     const card = await genesis.contract!.call("cardMap", [cardId]);
-    const cardPrice = card.price;
+    const cardPrice = card.price * amount;
     const usdtBalance = await usdt.contract!.call("balanceOf", [address]);
     const allowance = await usdt.contract!.call("allowance", [
       address,
       genesis.contract.getAddress(),
     ]);
 
-    if (cardPrice.gt(usdtBalance)) {
+    if (cardPrice > usdtBalance) {
       throw {
         code: "NotEnoughUsdtBalance",
       };
     }
 
-    if (cardPrice.gt(allowance)) {
+    if (cardPrice > allowance) {
       await approveUsdt.mutateAsync({
-        args: [genesis.contract.getAddress(), cardPrice.mul(10)],
+        args: [genesis.contract.getAddress(), cardPrice * 10],
       });
     }
 

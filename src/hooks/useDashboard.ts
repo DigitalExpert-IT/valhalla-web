@@ -113,16 +113,23 @@ const init = createInitiator(async (address: string, rank: number) => {
               +new Date(pre.lastFarm) - +new Date(pre.mintedAt);
             const getRewardPerMS = pre.farmRewardPerDay / 86_400_000;
             const getClaimed = getTotalClaimed * getRewardPerMS;
+            const profite = acc.profit + pre.farmRewardPerDay;
+            const fisrtFiveLevel = level <= 5;
+
             return {
               percentage: acc.percentage + format,
               claimedNFT: acc.claimedNFT + getClaimed,
-              profit: acc.profit + pre.farmRewardPerDay,
+              profit: profite,
+              profiteSharing: fisrtFiveLevel
+                ? ((acc.profiteSharing + profite) * 5) / 100
+                : ((acc.profiteSharing + profite) * 1) / 100,
             };
           },
           {
             profit: 0,
             percentage: 0,
             claimedNFT: 0,
+            profiteSharing: 0,
           }
         );
 
@@ -136,6 +143,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           profite: getCalc.profit ? getCalc.profit * 450 : 0,
           // gnet value
           claimedNFT: getCalc.claimedNFT,
+          profiteShare: getCalc.profiteSharing ? getCalc.profiteSharing : 0,
         };
       });
       return withNft;

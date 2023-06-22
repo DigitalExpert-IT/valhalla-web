@@ -1,18 +1,10 @@
+import ee from "ee";
+import { prettyBn } from "utils";
 import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
-import {
-  useAddress,
-  useContractWrite,
-  useContractRead,
-} from "@thirdweb-dev/react";
 import { useGenesisContract } from "./useGenesisContract";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { NFTGenesis } from "@warmbyte/valhalla/typechain-types/contracts/NFTGenesis";
-import {
-  getNFTGenesisContract,
-  getNFTGenesisSignerContract,
-} from "lib/contractFactory";
-import { prettyBn } from "utils";
-import ee from "ee";
 
 type BaseCardType = Awaited<ReturnType<NFTGenesis["nftGenesis"]>>;
 type NFTOwnedType = BaseCardType & {

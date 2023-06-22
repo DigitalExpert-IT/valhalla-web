@@ -69,8 +69,8 @@ dependencies:
     specifier: 18.0.9
     version: 18.0.9
   '@warmbyte/valhalla':
-    specifier: 1.19.0
-    version: 1.19.0(@ethersproject/bignumber@5.7.0)
+    specifier: 1.20.0
+    version: 1.20.0(@ethersproject/bignumber@5.7.0)
   axios:
     specifier: ^1.2.1
     version: 1.2.1
@@ -4356,8 +4356,8 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@warmbyte/valhalla@1.19.0(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-6xKN/P5STwFploqAT/G8hGgtTsOTVa1T47k8XBaL8U36WCEPDjdWMFOWJjqmwOPGtTbU3r8b6CYJrFjbeqRb6Q==}
+  /@warmbyte/valhalla@1.20.0(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-gdesAcxtdN2ug+uHSPG+WzZzTq4gbPVO8L6XO0KHDkSILRu19FofnhyRNMZLAyC1hbJGAxCvyLBmbmhG7jXidg==}
     dependencies:
       '@openzeppelin/contracts': 4.8.0
       '@openzeppelin/contracts-upgradeable': 4.8.0

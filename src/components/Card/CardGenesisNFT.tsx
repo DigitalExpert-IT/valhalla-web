@@ -1,5 +1,4 @@
 import { useAsyncCall, useGenesis } from "hooks";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Box,
@@ -8,15 +7,18 @@ import {
   useNumberInput,
   Button,
   Input,
-  useToast,
   Spinner,
 } from "@chakra-ui/react";
 
 export const CardGenesisNFT = () => {
-  const toast = useToast();
   const { t } = useTranslation();
   const { buyGenesis, data, isInitialize } = useGenesis();
-  const { exec, isLoading, data: res } = useAsyncCall(buyGenesis);
+  const { exec, isLoading } = useAsyncCall(
+    buyGenesis,
+    t("pages.genesis.successMessage")
+  );
+
+  // this config for set incremenet & decrement input
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -28,15 +30,6 @@ export const CardGenesisNFT = () => {
   const inc = getIncrementButtonProps();
   const dec = getDecrementButtonProps();
   const input = getInputProps();
-
-  useEffect(() => {
-    if (res && res.receipt.status === 1) {
-      toast({
-        status: "success",
-        description: "Success! Thank you for your purchase",
-      });
-    }
-  }, [res]);
 
   const handleBuy = async () => {
     await exec(0, input.value);

@@ -6,7 +6,7 @@
     "nftFarming": "Nft Farming",
     "sharetoearn": "Share To Earn",
     "project": "Project",
-    "nftDao": "Nft Dao"
+    "genesis": "Nft Genesis"
   },
   "banner": {
     "invalidChainMessage": "You are connected through Invalid chain!",

@@ -34,9 +34,9 @@ export const NAVIGATION: Array<INavigation> = [
         link: "/share",
       },
       {
-        title: "nftDao",
+        title: "genesis",
         link: "/genesis",
-      }
+      },
     ],
   },
   {

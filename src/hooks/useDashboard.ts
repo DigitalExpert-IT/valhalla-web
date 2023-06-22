@@ -102,20 +102,37 @@ const init = createInitiator(async (address: string, rank: number) => {
       const withNft = user.map(j => {
         const getNftperUser =
           getAllNFT.at(level)?.filter(l => l.to === j.address) ?? [];
-        const getPercentageAverage =
-          getNftperUser?.reduce((acc, pre) => {
+        const getCalc = getNftperUser?.reduce(
+          (acc, pre) => {
             const fullRange = Date.parse(pre.mintedAt) * 450;
             const lasFarm = Date.parse(pre.lastFarm);
             const getPercentage = (lasFarm * 100) / fullRange;
             const format = getPercentage;
-            return acc + format;
-          }, 0) ?? 0 / getNftperUser.length;
+
+            const getTotalClaimed =
+              +new Date(pre.lastFarm) - +new Date(pre.mintedAt);
+            const getRewardPerMS = pre.farmRewardPerDay / 86_400_000;
+            const getClaimed = getTotalClaimed * getRewardPerMS;
+            return {
+              percentage: acc.percentage + format,
+              claimedNFT: acc.claimedNFT + getClaimed,
+            };
+          },
+          {
+            percentage: 0,
+            claimedNFT: 0,
+          }
+        );
 
         return {
           ...j,
           listNFT: getNftperUser,
           listNFTPerType: Object.values(groupBy(getNftperUser, "cardId")),
-          restPercentage: `${getPercentageAverage.toFixed(2)}%`,
+          restPercentage: `${
+            getCalc.percentage ? getCalc.percentage / getNftperUser.length : 0
+          }%`,
+          // gnet value
+          claimedNFT: getCalc.claimedNFT,
         };
       });
       return withNft;

@@ -56,6 +56,28 @@ const handler: NextApiHandler = async (req, res) => {
     String(rank ?? ""),
     String(orderBy ?? "")
   );
+
+  const userWithCalculatedFarm = userWithNFT.map(elUs => {
+    const NFTCalc = elUs.NFTs.reduce(
+      (acc, curr) => {
+        if (!curr)
+          return {
+            claimedNFT: 0,
+          };
+        const succesMinted =
+          +new Date(!!curr?.lastFarm ? curr.lastFarm : curr.mintedAt) -
+          +new Date(curr.mintedAt);
+        const farmRewardPerMilSec = curr.rewardPerDay / 86_400_000;
+        const gnetGet = succesMinted * farmRewardPerMilSec;
+        return { ...acc, claimedNFT: acc.claimedNFT + gnetGet };
+      },
+      {
+        claimedNFT: 0,
+      }
+    );
+
+    return { ...elUs, ...NFTCalc };
+  });
   const pageCalculate = await queryGetUserWithNftPage(
     pageSize,
     String(address ?? "0x"),
@@ -65,7 +87,7 @@ const handler: NextApiHandler = async (req, res) => {
   const template: IAdminDashboard = {
     totalItem: pageCalculate?.totalItem ?? 0,
     totalPage: pageCalculate?.totalPage ?? 0,
-    items: userWithNFT,
+    items: userWithCalculatedFarm,
   };
 
   return res.status(200).json(template);

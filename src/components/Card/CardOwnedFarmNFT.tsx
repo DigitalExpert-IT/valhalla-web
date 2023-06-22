@@ -13,9 +13,9 @@ export const CardOwnedFarmNFT = (props: IOwnedNFT) => {
     props;
   const intervalRef = useRef<any>();
   const { t } = useTranslation();
+  const { farm } = useNFT();
   const lastFarmedAtRef = useRef<BigNumber>(props.lastFarmedAt);
   const [farmValue, setFarmValue] = useState(0);
-  const { farm } = useNFT();
   const farmAsync = useAsyncCall(farm);
 
   const calculateFarmValue = () => {

@@ -56,10 +56,10 @@ export const useOwnedGenesis = () => {
   useEffect(() => {
     if (!address) return;
     init();
-    ee.addListener("nft-Buy", init);
+    ee.addListener("nft-Buy", fetch);
 
     return () => {
-      ee.removeListener("nft-Buy", init);
+      ee.removeListener("nft-Buy", fetch);
     };
   }, [address, genesis.contract]);
   return { data, claimRewardAsync, isInitialize, fetch };

@@ -133,7 +133,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           restPercentage: `${
             getCalc.percentage ? getCalc.percentage / getNftperUser.length : 0
           }%`,
-          profite: getCalc.profit * 450,
+          profite: getCalc.profit ? getCalc.profit * 450 : 0,
           // gnet value
           claimedNFT: getCalc.claimedNFT,
         };

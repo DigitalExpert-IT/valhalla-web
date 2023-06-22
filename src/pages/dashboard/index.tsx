@@ -41,9 +41,11 @@ import { IUser, useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
 import { withConnection } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
-import SummaryDashboard, {
+import {
+  SummaryDashboard,
   IDataItem,
-} from "components/pages/Dashboard/SummaryDashboard";
+  TableDashboard,
+} from "components/pages/Dashboard";
 
 const PAGE_SIZE = 10;
 
@@ -54,6 +56,7 @@ const Dashboard = () => {
   const { listUser, totalUser, listProfitePerLevel, potensialProfite } =
     useDashboard();
   const toast = useToast();
+  const [sortByProfit, setSortByProfit] = useState("ASC");
   const [filterRank, setFitlerRank] = useState<number | null>(-1);
   const [searchKey, setSearchKey] = useState("");
 
@@ -181,131 +184,78 @@ const Dashboard = () => {
     [selectedAddressList]
   );
 
-  const TableDownlineLevel = useMemo(() => {
-    if (searchKey.replace(/ /g, "") !== "")
-      return (
-        <Box
-          pos="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
-          <Text fontSize="2xl" color="gray.400" textAlign="center">
-            Search Result:
-          </Text>
-        </Box>
-      );
+  const tableDownlineLevel = useMemo(() => {
+    const levelMap = [];
 
-    return (
-      <TableContainer border="1px solid #000" borderRadius="xl">
-        <Table variant="dashboard" color="gray.800">
-          <Thead>
-            <Tr>
-              <Th>Lv</Th>
-              <Th>Total</Th>
-              <Th>Profit</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {listUser.map((userLevel, idx) => {
-              if (idx > 0)
-                return (
-                  <Tr
-                    bg={selectedLevel === idx ? "white" : ""}
-                    boxShadow={selectedLevel === idx ? "lg" : ""}
-                    key={`level.${idx}`}
-                    onClick={() => handleClickLevel(idx)}
-                  >
-                    <Td fontWeight="600">{idx}</Td>
-                    <Td display="flex">
-                      <BsFillPersonFill size="20" />
-                      <Text ms="2">{userLevel.length}</Text>
-                    </Td>
-                    <Td>{listProfitePerLevel[idx]}</Td>
-                  </Tr>
-                );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    );
-  }, [listUser, selectedLevel, searchKey]);
+    for (let i = 0; i < 15; i++) {
+      levelMap.push({ lv: i + 1, total: 0, sharedValue: 0 });
+    }
 
-  const TableMember = useMemo(() => {
-    if (!currentItems?.length)
-      return (
-        <Box
-          pos="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
-          <Text color="gray.400" textAlign="center">
-            {t("pages.dashboard.messages.memberNotFound")}
-          </Text>
-        </Box>
-      );
+    const data = {
+      head: [{ text: "Lv" }, { text: "Total" }, { text: "Shared Value" }],
+      body: levelMap.map((level, idx) => [
+        level.lv,
+        listUser[idx]?.length ?? level.total,
+        listProfitePerLevel[idx] ?? level.sharedValue,
+      ]),
+    };
 
-    return (
-      <>
-        <TableContainer border="1px solid #000" borderRadius="xl">
-          <Table variant="dashboard" color="gray.800">
-            <Thead>
-              <Tr>
-                <Th>Member</Th>
-                <Th>Rank</Th>
-                <Th>NFT</Th>
-                <Th>Profit</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {currentItems?.map((user, idx) => (
-                <Tr
-                  key={`user.${idx}`}
-                  onClick={() => handleClickAddress(user.address)}
-                >
-                  <Td>
-                    <HStack>
-                      <BsFillPersonFill size="20" color="#000" />
-                      <Text fontSize="sm">{user.address}</Text>
-                    </HStack>
-                  </Td>
-                  <Td>
-                    <AspectRatio w="18px" ratio={15 / 17}>
-                      <Image
-                        src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
-                        alt={rankMap[0]}
-                      />
-                    </AspectRatio>
-                  </Td>
-                  <Td>{user.listNFT.length ?? 0}</Td>
-                  <Td>
-                    {user.listNFT.reduce(
-                      (acc, nft) =>
-                        acc + nft.farmRewardPerDay * nft.farmPercentage,
-                      0
-                    ) ?? 0}
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-        <Pagination
-          justifyPage="flex-end"
-          currentPage={page}
-          totalPage={totalPage}
-          onPageChange={setPage}
-          colorScheme={"valhalla"}
-        />
-      </>
-    );
+    return { data };
+  }, [listUser, selectedLevel]);
+
+  const tableMember = useMemo(() => {
+    const data = {
+      head: [
+        { text: "Member" },
+        { text: "Rank" },
+        { text: "Total NFT" },
+        { text: "Claimed NFT" },
+        { text: "Claimable NFT" },
+        {
+          text: "Potensial Profit",
+          isSortAble: true,
+          onClickSort: (sortBy: string) => setSortByProfit(sortBy),
+        },
+      ],
+      body: currentItems?.map(user => [
+        <>
+          <HStack onClick={() => handleClickAddress(user.address)}>
+            <BsFillPersonFill size="20" color="#000" />
+            <Text fontSize="sm">{shortenAddress(user.address)}</Text>
+          </HStack>
+        </>,
+        <>
+          <AspectRatio w="18px" ratio={15 / 17}>
+            <Image
+              src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
+              alt={rankMap[0]}
+            />
+          </AspectRatio>
+        </>,
+        user.listNFT.length,
+      ]),
+    };
+
+    const options = {
+      filter: [
+        {
+          name: "rank",
+          options: rankMap.map((rank, idx) => ({
+            key: rank.toLowerCase().replace(" ", "."),
+            text: rank,
+            value: idx,
+          })),
+          onFilterChange: (val: string) => setFitlerRank(+val - 1),
+        },
+      ],
+      pagination: {
+        page,
+        totalPage: totalPage ?? 0,
+        onPageChange: setPage,
+      },
+    };
+
+    return { data, options };
   }, [currentItems]);
 
   const summaryData: IDataItem[] = useMemo(() => {
@@ -340,9 +290,10 @@ const Dashboard = () => {
       />
 
       <HStack
+        minW="fit-content"
+        width="full"
         minH="calc(100vh - 129px)"
         flex={4}
-        width="fit-content"
         alignItems="streetch"
         bg="#f6f7ff"
         pb="32 "
@@ -372,71 +323,61 @@ const Dashboard = () => {
           </HStack>
 
           <HStack mt="8" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="1" minW="260px" maxW="260px" minH="160px">
-              <HStack minH="46px" pb="4" gap="4" alignItems="center">
-                <Heading
-                  as="h2"
-                  fontSize="xl"
-                  fontWeight="600"
-                  color="gray.800"
-                >
-                  {t("pages.dashboard.title.members")}
-                </Heading>
-                <Text fontSize="xs" color="gray.400">
-                  {`Total: ${totalUser} Member`}
-                </Text>
-              </HStack>
-
-              {TableDownlineLevel}
+            <Box pos="relative" flex="1" minW="260px" maxW="320px" minH="160px">
+              <TableDashboard
+                title={
+                  <HStack minH="46px" gap="4" alignItems="center">
+                    <Heading
+                      as="h2"
+                      fontSize="xl"
+                      fontWeight="600"
+                      color="gray.800"
+                    >
+                      {t("pages.dashboard.title.members")}
+                    </Heading>
+                    <Text fontSize="xs" color="gray.400">
+                      {`Total: ${totalUser} Member`}
+                    </Text>
+                  </HStack>
+                }
+                data={tableDownlineLevel.data}
+              />
             </Box>
 
-            <Box pos="relative" flex="2" minW="692px" maxW="692px" minH="160px">
-              <HStack minH="46px" pb="4" justifyContent="space-between">
-                <HStack maxW="60%" overflowX="auto">
-                  <BsFillPersonFill size="20" color="#000" />
-                  <Breadcrumb
-                    spacing="4px"
-                    separator={<ChevronRightIcon color="gray.500" />}
-                  >
-                    <BreadcrumbItem>
-                      <BreadcrumbLink
-                        fontSize="xs"
-                        onClick={() => setSelectAddressList([])}
-                      >
-                        {shortenAddress(address ?? "")}
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-
-                    {selectedAddressList.map(addr => (
-                      <BreadcrumbItem key={`address.${addr}`}>
+            <Box pos="relative" flex="2" minW="692px" maxW="750px" minH="160px">
+              <TableDashboard
+                title={
+                  <HStack maxW="60%" overflowX="auto">
+                    <BsFillPersonFill size="20" color="#000" />
+                    <Breadcrumb
+                      spacing="4px"
+                      separator={<ChevronRightIcon color="gray.500" />}
+                    >
+                      <BreadcrumbItem>
                         <BreadcrumbLink
                           fontSize="xs"
-                          onClick={() => handleJumpToAddress(addr)}
+                          onClick={() => setSelectAddressList([])}
                         >
-                          {shortenAddress(addr)}
+                          {shortenAddress(address ?? "")}
                         </BreadcrumbLink>
                       </BreadcrumbItem>
-                    ))}
-                  </Breadcrumb>
-                </HStack>
-                <HStack>
-                  <BsFilter size="20" color="000" />
-                  <Select
-                    variant="table-filter"
-                    maxW="40"
-                    placeholder="Rank"
-                    onChange={e => setFitlerRank(+e.target.value - 1)}
-                  >
-                    {rankMap.map((rank, idx) => (
-                      <option key={`${rank}.${idx}`} value={idx + 1}>
-                        {rank}
-                      </option>
-                    ))}
-                  </Select>
-                </HStack>
-              </HStack>
 
-              {TableMember}
+                      {selectedAddressList.map(addr => (
+                        <BreadcrumbItem key={`address.${addr}`}>
+                          <BreadcrumbLink
+                            fontSize="xs"
+                            onClick={() => handleJumpToAddress(addr)}
+                          >
+                            {shortenAddress(addr)}
+                          </BreadcrumbLink>
+                        </BreadcrumbItem>
+                      ))}
+                    </Breadcrumb>
+                  </HStack>
+                }
+                data={tableMember.data}
+                options={tableMember.options}
+              />
             </Box>
           </HStack>
         </Box>

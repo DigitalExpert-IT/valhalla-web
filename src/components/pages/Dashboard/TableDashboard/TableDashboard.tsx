@@ -26,7 +26,7 @@ interface ITableHead {
 
 interface ITableData {
   head: ITableHead[];
-  body: (string | number | JSX.Element | null)[][] | undefined;
+  body: (string | number | JSX.Element | null | [])[][] | undefined;
 }
 
 interface IPagination {
@@ -46,13 +46,13 @@ interface IFilter {
 }
 
 interface ITableProps {
-  title?: string;
+  title?: string | number | JSX.Element | null;
   data: ITableData;
   options?: {
     pagination?: IPagination;
     filter?: IFilter[];
   };
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export const TableDashboard = (props: ITableProps) => {
@@ -86,11 +86,15 @@ export const TableDashboard = (props: ITableProps) => {
 
   return (
     <>
-      <HStack minH="46px" pb="4" justifyContent="space-between">
+      <HStack minH="62px" maxH="62px" pb="4" justifyContent="space-between">
         {title ? (
-          <Heading as="h2" fontSize="xl" fontWeight="600" color="gray.800">
-            {title}
-          </Heading>
+          typeof title === "string" ? (
+            <Heading as="h2" fontSize="xl" fontWeight="600" color="gray.800">
+              {title}
+            </Heading>
+          ) : (
+            <>{title}</>
+          )
         ) : null}
 
         {options?.filter

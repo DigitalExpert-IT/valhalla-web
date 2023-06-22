@@ -196,9 +196,9 @@ const Dashboard = () => {
       />
 
       <HStack
+        width="full"
         minH="calc(100vh - 129px)"
         flex={4}
-        width="fit-content"
         alignItems="streetch"
         bg="dashboard.gray"
         pb="32 "

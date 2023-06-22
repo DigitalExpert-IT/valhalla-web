@@ -29,7 +29,7 @@ interface ISummaryProps {
   isShowFilterDate?: boolean;
   dateValue?: IDateRangeValue;
   isLoading: boolean;
-  error: any | unknown;
+  error?: any | unknown;
   onDateChange?: (key: string, val: string) => void;
 }
 

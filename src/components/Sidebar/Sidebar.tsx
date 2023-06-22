@@ -51,6 +51,7 @@ export const Sidebar = (props: ISidebarProps) => {
   };
 
   const MenuItem = ({ menu }: any) => {
+    console.log("path", router.asPath);
     return (
       <Link href={menu.href}>
         <ListItem

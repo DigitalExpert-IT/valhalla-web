@@ -30,6 +30,7 @@ export const HeaderDashboard = (props: PropsType) => {
       left="0"
       zIndex="10"
       py="8"
+      px="2"
       bgColor="dashboard.gray"
     >
       {isShowSearch && onSearchChange ? (

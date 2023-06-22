@@ -201,7 +201,7 @@ const Dashboard = () => {
         flex={4}
         alignItems="streetch"
         bg="dashboard.gray"
-        pb="32 "
+        pb="32"
       >
         <Box flex={2} px="6">
           <HStack

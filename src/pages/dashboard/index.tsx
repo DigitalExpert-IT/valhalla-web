@@ -192,10 +192,19 @@ const Dashboard = () => {
     }
 
     const data = {
-      head: [{ text: "Lv" }, { text: "Total" }, { text: "Shared Value" }],
+      head: [
+        { text: "Lv" },
+        { text: "Total Member" },
+        { text: "Shared Value" },
+      ],
       body: levelMap.map((level, idx) => [
         level.lv,
-        listUser[idx]?.length ?? level.total,
+        <>
+          <HStack>
+            <BsFillPersonFill size="20" color="#000" />
+            <Text fontSize="sm">{listUser[idx]?.length ?? level.total}</Text>
+          </HStack>
+        </>,
         listProfitePerLevel[idx] ?? level.sharedValue,
       ]),
     };

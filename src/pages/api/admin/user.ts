@@ -57,7 +57,7 @@ const handler: NextApiHandler = async (req, res) => {
     String(orderBy ?? "")
   );
 
-  const userWithCalculateFarm = userWithNFT.map(elUs => {
+  const userWithCalculatedFarm = userWithNFT.map(elUs => {
     const NFTCalc = elUs.NFTs.reduce(
       (acc, curr) => {
         if (!curr)
@@ -87,7 +87,7 @@ const handler: NextApiHandler = async (req, res) => {
   const template: IAdminDashboard = {
     totalItem: pageCalculate?.totalItem ?? 0,
     totalPage: pageCalculate?.totalPage ?? 0,
-    items: userWithCalculateFarm,
+    items: userWithCalculatedFarm,
   };
 
   return res.status(200).json(template);

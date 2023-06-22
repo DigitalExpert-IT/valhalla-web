@@ -43,7 +43,7 @@ export const useOwnedGenesis = () => {
   const claimRewardAsync = async (cardId: number) => {
     if (data?.nftreward == 0) {
       throw {
-        code: "NotEnoughPool",
+        code: "NoReward",
       };
     }
     const claimAsync = await claimReward.mutateAsync({ args: [cardId] });

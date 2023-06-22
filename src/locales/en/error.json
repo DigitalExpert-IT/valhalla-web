@@ -10,6 +10,7 @@
     "NotEnoughGnetBalance": "Not Enough GNET Balances",
     "NotEnoughPool": "Not Enough Pool",
     "NotEnoughUsdtBalance": "Not Enough USDT Balances",
-    "TokenFrozen": "Token Frozen"
+    "TokenFrozen": "Token Frozen",
+    "NoReward": "No Rewards Yet"
   }
 }

@@ -8,11 +8,13 @@ import {
   Box,
   Stack,
   Heading,
+  Link,
 } from "@chakra-ui/react";
 
 interface IPartnershipV2 {
   name: string;
   image: string;
+  link?: string;
 }
 
 interface SectionPartnershipV2Props {
@@ -80,12 +82,23 @@ export const SectionPartnershipV2: React.FC<
         <Wrap spacing="5" justify="center" zIndex={1} m="auto">
           {props.data.map((item, idx) => (
             <WrapItem key={idx} w={{ base: "5rem", md: "10rem", lg: "15rem" }}>
-              <Image
-                src={item.image}
-                alt={`partner-${item.name}`}
-                width={500}
-                height={500}
-              />
+              {item.link ? (
+              <Link href={item.link} isExternal>
+                <Image
+                  src={item.image}
+                  alt={`partner-${item.name}`}
+                  width={500}
+                  height={500}
+                />
+              </Link>
+              ) : (
+                <Image
+                  src={item.image}
+                  alt={`partner-${item.name}`}
+                  width={500}
+                  height={500}
+                />
+              )}
             </WrapItem>
           ))}
         </Wrap>

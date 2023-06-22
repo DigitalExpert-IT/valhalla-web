@@ -112,6 +112,7 @@ export const PARTNERSHIP = [
     name: "partner2",
     image:
       "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874148/global-network/solidproofv2_jhjwba.svg",
+    link:"https://github.com/solidproof/projects/tree/main/GNET"
   },
   {
     name: "partner3",

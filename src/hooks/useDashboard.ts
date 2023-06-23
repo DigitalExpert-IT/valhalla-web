@@ -38,7 +38,7 @@ export interface IUser extends User {
   blockNumber: number;
   rank: number | null;
   profit: number;
-  profiteShare: number;
+  profitShare: number;
 }
 
 interface IDashboard {
@@ -46,8 +46,8 @@ interface IDashboard {
   listUser: IUser[][];
   totalUser: number;
   totalNFTSales: string;
-  listProfitePerLevel: [][];
-  potensialProfite: string;
+  listProfitPerLevel: [][];
+  potensialProfit: string;
   totalNFTCirculatingSuply: number;
   isLoading: boolean;
 }
@@ -57,8 +57,8 @@ const initialState: IDashboard = {
   listUser: [],
   totalUser: 0,
   totalNFTSales: "",
-  potensialProfite: "",
-  listProfitePerLevel: [],
+  potensialProfit: "",
+  listProfitPerLevel: [],
   totalNFTCirculatingSuply: 0,
   isLoading: false,
 };
@@ -68,15 +68,16 @@ const { setState } = useDashoardStore;
 const init = createInitiator(async (address: string, rank: number) => {
   if (!address && rank > 0) return;
   setState(state => ({ ...state, isLoading: true }));
+
   try {
     const { data } = await Axios.get<any>(
       `/api/downlines/${address}?rank=${rank}`
     );
     let totalUser = 0;
     let totalNFTSales = 0;
-    let potensialProfite = 0;
+    let potensialProfit = 0;
     let totalNFTCirculatingSuply = 0;
-    let listProfitePerLevel: number[] = [];
+    let listProfitPerLevel: number[] = [];
     const hierarchyValue: User[][] = Object.values(data);
 
     const getAllNFT: INFTItem[][] = await Promise.all(
@@ -91,13 +92,13 @@ const init = createInitiator(async (address: string, rank: number) => {
         const filteredEmptyNFT: INFTItem[] =
           nft?.filter(e => !!e.length)[0] ?? [];
 
-        listProfitePerLevel.push(
+        listProfitPerLevel.push(
           filteredEmptyNFT?.reduce(
             (acc, e) => acc + e.farmRewardPerDay * e.farmPercentage,
             0
           ) ?? 0
         );
-        potensialProfite +=
+        potensialProfit +=
           filteredEmptyNFT?.reduce(
             (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 450,
             0
@@ -127,23 +128,23 @@ const init = createInitiator(async (address: string, rank: number) => {
               +new Date(pre.lastFarm) - +new Date(pre.mintedAt);
             const getRewardPerMS = pre.farmRewardPerDay / 86_400_000;
             const getClaimed = getTotalClaimed * getRewardPerMS;
-            const profite = acc.profit + pre.farmRewardPerDay;
+            const profit = acc.profit + pre.farmRewardPerDay;
             const fisrtFiveLevel = level <= 5;
 
             return {
               percentage: acc.percentage + format,
               claimedNFT: acc.claimedNFT + getClaimed,
-              profit: profite,
-              profiteSharing: fisrtFiveLevel
-                ? ((acc.profiteSharing + profite) * 5) / 100
-                : ((acc.profiteSharing + profite) * 1) / 100,
+              profit: profit,
+              profitSharing: fisrtFiveLevel
+                ? ((acc.profitSharing + profit) * 5) / 100
+                : ((acc.profitSharing + profit) * 1) / 100,
             };
           },
           {
             profit: 0,
             percentage: 0,
             claimedNFT: 0,
-            profiteSharing: 0,
+            profitSharing: 0,
           }
         );
 
@@ -157,7 +158,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           profit: getCalc.profit ? getCalc.profit * 450 : 0,
           // gnet value
           claimedNFT: getCalc.claimedNFT,
-          profiteShare: getCalc.profiteSharing ? getCalc.profiteSharing : 0,
+          profitShare: getCalc.profitSharing ? getCalc.profitSharing * 450 : 0,
         };
       });
       return withNft;
@@ -172,11 +173,11 @@ const init = createInitiator(async (address: string, rank: number) => {
           ...e,
           totalUser,
           listNFT: getAllNFT,
-          listProfitePerLevel,
+          listProfitPerLevel,
           listUser: hierachyWithNFT,
           totalNFTCirculatingSuply,
           totalNFTSales: `${toUSDTCalculation} USDT`,
-          potensialProfite: `${potensialProfite} GNET`,
+          potensialProfit: `${potensialProfit} GNET`,
         } as any)
     );
   } catch (e) {

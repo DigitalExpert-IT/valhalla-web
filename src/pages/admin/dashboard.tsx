@@ -114,20 +114,9 @@ const Dashboard = () => {
             />
           </AspectRatio>
         </>,
-        user.totalNft,
-        // for temporary if the NFTs is empty, API return array of null
-        user.NFTs[0]
-          ? user.NFTs?.reduce(
-              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
-              0
-            )
-          : 0,
-        user.NFTs[0]
-          ? user.NFTs?.reduce(
-              (acc, nft) => acc + nft?.rewardPerDay * nft?.farmPercentage,
-              0
-            )
-          : 0,
+        user.totalNft ?? 0,
+        user.claimedNFT ?? 0,
+        user.profit - user.claimedNFT ?? 0,
         user.profit ?? 0,
       ]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),

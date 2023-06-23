@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useAddress } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import { useHasRoleAdmin } from "hooks/admin/useHasRoleAdmin";
 
 export const withCorrectAddress = (Component: () => JSX.Element | null) => {
   const AdminWrapper = () => {
     const router = useRouter();
     const address = useAddress();
     const queryAddress = router.query.address;
+    const { data: isHasRoleAdmin, isLoading } = useHasRoleAdmin();
 
     const isCorrectAddress = useMemo(() => {
       let addrQuery = "";
@@ -23,8 +25,8 @@ export const withCorrectAddress = (Component: () => JSX.Element | null) => {
       return addrQuery === address;
     }, [address, queryAddress]);
 
-    if (!address) return <LayoutLoading />;
-    if (!isCorrectAddress) {
+    if (!address || isLoading) return <LayoutLoading />;
+    if (!isCorrectAddress && !isHasRoleAdmin) {
       return <CorrectAddress />;
     }
 

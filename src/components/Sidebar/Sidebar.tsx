@@ -105,7 +105,7 @@ export const Sidebar = (props: ISidebarProps) => {
               ))}
 
           <Box pos="absolute" bottom="20">
-            <Link href="/logout">
+            <Link href="/">
               <Button variant="link" {...MenuItemStyles}>
                 <BiLogOut size="24" />
                 <Text ms="6" fontWeight="medium">

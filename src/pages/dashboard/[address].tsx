@@ -36,10 +36,10 @@ const PAGE_SIZE = 10;
 const Dashboard = () => {
   const router = useRouter();
   const queryAddress = router.query.address;
-  const address = useRef<string>("0x0");
+  const address = useRef<string>("");
   const user = useValhalla();
   const { t } = useTranslation();
-  const { listUser, totalUser, potensialProfite, isLoading } = useDashboard(
+  const { listUser, totalUser, potensialProfit, isLoading } = useDashboard(
     address.current
   );
   const toast = useToast();
@@ -52,7 +52,7 @@ const Dashboard = () => {
     else if (Array.isArray(queryAddress) && queryAddress.length > 0) {
       address.current = queryAddress[0];
     }
-  }, []);
+  }, [queryAddress]);
 
   const searchDebounce = useCallback(
     _.debounce(key => {
@@ -229,10 +229,8 @@ const Dashboard = () => {
             </Text>
           </HStack>
         </>,
-        listUser[level.lvl]?.reduce(
-          (acc, user) => acc + user.profiteShare,
-          0
-        ) ?? 0,
+        listUser[level.lvl]?.reduce((acc, user) => acc + user.profitShare, 0) ??
+          0,
       ]),
       activeRow: selectedLevel - 1,
       onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
@@ -312,7 +310,7 @@ const Dashboard = () => {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
         icon: BsGraphUp,
-        value: potensialProfite,
+        value: potensialProfit,
       },
       {
         key: "maxTotalLevel",
@@ -321,7 +319,7 @@ const Dashboard = () => {
         value: MAX_DOWNLINES_LEVEL,
       },
     ];
-  }, [totalUser, potensialProfite, user]);
+  }, [totalUser, potensialProfit, user]);
 
   return (
     <LayoutDashboard>

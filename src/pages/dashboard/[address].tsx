@@ -23,7 +23,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
 import { IUser, useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
-import { withConnection } from "hoc";
+import { withConnection, withCorrectAddress } from "hoc";
 import {
   SummaryDashboard,
   IDataItem,
@@ -442,4 +442,4 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(Dashboard);
+export default withConnection(withCorrectAddress(Dashboard));

@@ -43,6 +43,10 @@ export const NAVIGATION: Array<INavigation> = [
     name: "profile",
     href: "/profile",
   },
+  {
+    name: "dashboard",
+    href: "/dashboard/[address]",
+  },
 ];
 
 export const SOCIAL: Array<ISocial> = [

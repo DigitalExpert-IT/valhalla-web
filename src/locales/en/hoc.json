@@ -10,5 +10,13 @@
   "staffAbove": {
     "title": "Admin & Staff Only",
     "description": "You need at least has STAFF role to access this page"
+  },
+  "adminRole": {
+    "title": "Admin Only",
+    "description": "You need has ADMIN role to access this page. Refresh this page if you have changed to ADMIN account"
+  },
+  "correctAddress": {
+    "title": "Doesn't Match Account",
+    "description": "You need to connect with correct wallet account to access this page"
   }
 }

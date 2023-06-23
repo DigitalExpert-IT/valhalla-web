@@ -14,7 +14,7 @@ import {
 } from "react-icons/bs";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import _ from "lodash";
-import { withConnection } from "hoc";
+import { withConnection, withAdminRole } from "hoc";
 import { useAddress } from "@thirdweb-dev/react";
 import {
   useBasicDashboardInfo,
@@ -327,4 +327,4 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(Dashboard);
+export default withConnection(withAdminRole(Dashboard));

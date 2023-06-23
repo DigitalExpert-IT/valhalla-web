@@ -16,9 +16,8 @@ export const NFT_CONTRACT = {
 };
 
 export const GENESIS_CONTRACT = {
-  "0x89": "",
+  "0x89": "0xd90EBefb468d78dd9d092389269484CC5f563304",
   "0x13881": "0xc6295704f92b4f653Ab2A75207E55aE22B4bc914",
-  "0x539": "",
   "0x29a": "0x484Cd8F93ef2E945258Fe5dAE3058aF2C93dE7cB",
 };
 

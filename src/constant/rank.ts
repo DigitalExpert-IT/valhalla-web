@@ -18,4 +18,4 @@ export const RANK_SYMBOL_MAP = [
   "assets/rank/super-legend.svg",
 ];
 
-export const RANK_MAX_LEVEL = [0, 10, 20, 40, 60, 80, 100];
+export const MAX_DOWNLINES_LEVEL = 15;

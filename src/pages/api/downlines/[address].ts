@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
 import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
-import { RANK_MAX_LEVEL } from "constant/rank";
+import { MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
 
 const prisma = new PrismaClient();
@@ -12,7 +12,6 @@ interface Downlines extends User {
 
 const handler: NextApiHandler = async (req, res) => {
   const address = lowerCase(req.query.address as string);
-  const rank = req.query.rank as string;
   const firstUser = await prisma.user.findUnique({
     where: {
       address,
@@ -32,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   let upperList = [address];
 
-  for (let i = 0; i < RANK_MAX_LEVEL[+rank]; i++) {
+  for (let i = 0; i < MAX_DOWNLINES_LEVEL; i++) {
     const userList = await prisma.user.findMany({
       where: {
         upline: { in: upperList },

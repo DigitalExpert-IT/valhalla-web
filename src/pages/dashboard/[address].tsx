@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import { BsFillPeopleFill, BsFillPersonFill, BsGraphUp } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { rankMap, RANK_SYMBOL_MAP, RANK_MAX_LEVEL } from "constant/rank";
+import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import { IUser, useDashboard } from "hooks/useDashboard";
 import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
@@ -209,7 +209,7 @@ const Dashboard = () => {
   const tableDownlineLevel = useMemo(() => {
     const levelMap = [];
 
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= MAX_DOWNLINES_LEVEL; i++) {
       levelMap.push({ lvl: i, total: 0, sharedValue: 0 });
     }
 
@@ -318,7 +318,7 @@ const Dashboard = () => {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
         icon: BsGraphUp,
-        value: RANK_MAX_LEVEL[user.account.rank],
+        value: MAX_DOWNLINES_LEVEL,
       },
     ];
   }, [totalUser, potensialProfite, user]);

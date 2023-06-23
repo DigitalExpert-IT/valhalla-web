@@ -61,7 +61,7 @@ const handler: NextApiHandler = async (req, res) => {
   const userWithNFT: IUserWithNft[] = await queryGetAllUserWithNFTs(
     offset,
     pageSize,
-    String(address ?? "0x"),
+    String(address ?? "0x").toLowerCase(),
     String(rank ?? ""),
     String(orderBy ?? "")
   );
@@ -89,7 +89,7 @@ const handler: NextApiHandler = async (req, res) => {
   });
   const pageCalculate = await queryGetUserWithNftPage(
     pageSize,
-    String(address ?? "0x"),
+    String(address ?? "0x").toLowerCase(),
     String(rank ?? "")
   );
 

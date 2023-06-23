@@ -6,13 +6,13 @@ import { useContractRead, useAddress } from "@thirdweb-dev/react";
 
 type HasRoleType = Awaited<ReturnType<Valhalla["hasRole"]>>;
 
-export const useHasRole = () => {
+export const useHasRoleAdmin = () => {
   const valhalla = useValhallaContract();
   const address = useAddress();
-  const admin = useDefaultAdminRole();
+  const { data: ROLE } = useDefaultAdminRole();
 
   const { data, ...rest } = useContractRead(valhalla.contract, "hasRole", [
-    admin.data,
+    ROLE,
     address ?? ZERO_ADDRESS,
   ]);
 

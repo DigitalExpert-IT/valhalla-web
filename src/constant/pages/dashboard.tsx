@@ -15,24 +15,24 @@ export const DASHBOARD_CATEGORY = [
         icon: <BsFillHouseDoorFill size={24} />,
         href: "/dashboard",
       },
-      {
-        key: "event",
-        name: "event",
-        icon: <BsFillCalendarEventFill size={20} />,
-        href: "/event",
-      },
-      {
-        key: "nft",
-        name: "nft",
-        icon: <BsTropicalStorm size={20} />,
-        href: "/nft",
-      },
-      {
-        key: "user",
-        name: "user",
-        icon: <BsPeopleFill size={20} />,
-        href: "/user",
-      },
+      // {
+      //   key: "event",
+      //   name: "event",
+      //   icon: <BsFillCalendarEventFill size={20} />,
+      //   href: "/event",
+      // },
+      // {
+      //   key: "nft",
+      //   name: "nft",
+      //   icon: <BsTropicalStorm size={20} />,
+      //   href: "/nft",
+      // },
+      // {
+      //   key: "user",
+      //   name: "user",
+      //   icon: <BsPeopleFill size={20} />,
+      //   href: "/user",
+      // },
     ],
   },
 ];
@@ -47,18 +47,18 @@ export const DASHBOARD_ADMIN_CATEGORY = [
         icon: <BsFillHouseDoorFill size={24} />,
         href: "/admin/dashboard",
       },
-      {
-        key: "nft",
-        name: "nft",
-        icon: <BsTropicalStorm size={20} />,
-        href: "/admin/nft",
-      },
-      {
-        key: "user",
-        name: "user",
-        icon: <BsPeopleFill size={20} />,
-        href: "/admin/user",
-      },
+      // {
+      //   key: "nft",
+      //   name: "nft",
+      //   icon: <BsTropicalStorm size={20} />,
+      //   href: "/admin/nft",
+      // },
+      // {
+      //   key: "user",
+      //   name: "user",
+      //   icon: <BsPeopleFill size={20} />,
+      //   href: "/admin/user",
+      // },
     ],
   },
 ];

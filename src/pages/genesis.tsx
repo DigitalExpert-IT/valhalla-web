@@ -70,7 +70,7 @@ const Genesis = () => {
                     fontSize="xl"
                     color="valhallaPink.300"
                   >
-                    Buy NFT
+                    Buy Genesis
                   </Text>
                 </Tab>
                 <Tab>
@@ -79,7 +79,7 @@ const Genesis = () => {
                     fontSize="xl"
                     color="valhallaPink.300"
                   >
-                    Claim NFT
+                    Claim Genesis
                   </Text>
                 </Tab>
               </TabList>

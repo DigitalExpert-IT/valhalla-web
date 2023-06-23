@@ -9,13 +9,10 @@ import {
   Input,
   Spinner,
 } from "@chakra-ui/react";
-import { useGenesisCardMap } from "hooks/genesis";
 
 export const CardGenesisNFT = () => {
   const { t } = useTranslation();
   const { buyGenesis, data, isInitialize } = useGenesis();
-  // const { data: koplek } = useGenesisCardMap();
-  // console.log(koplek?.price.toNumber());
   const { exec, isLoading } = useAsyncCall(
     buyGenesis,
     t("pages.genesis.successMessage")
@@ -37,6 +34,8 @@ export const CardGenesisNFT = () => {
   const handleBuy = async () => {
     await exec(0, input.value);
   };
+
+  const totalBuy = input.value * Number(data?.price);
 
   return (
     <Box display="flex" justifyContent="center" rounded="xl" overflow="hidden">
@@ -88,17 +87,18 @@ export const CardGenesisNFT = () => {
                   align="center"
                   justify="center"
                 >
-                  <Button variant="ghost" size="sm" {...inc}>
-                    +
+                  <Button variant="ghost" size="sm" {...dec}>
+                    -
                   </Button>
+
                   <Input
                     bgColor="#1F227D"
                     textAlign="center"
                     variant="unstyled"
                     {...input}
                   />
-                  <Button variant="ghost" size="sm" {...dec}>
-                    -
+                  <Button variant="ghost" size="sm" {...inc}>
+                    +
                   </Button>
                 </Stack>
                 <Box
@@ -117,7 +117,7 @@ export const CardGenesisNFT = () => {
                     bgColor="#1F227D"
                     onClick={handleBuy}
                   >
-                    BUY {data?.price.toString()} USDT
+                    BUY {totalBuy} USDT
                   </Button>
                 </Box>
               </Stack>

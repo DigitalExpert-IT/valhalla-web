@@ -12,6 +12,7 @@ import NiceModal from "@ebay/nice-modal-react";
 import { useTranslation } from "react-i18next";
 import { PROJECT_NAME } from "constant/siteConfig";
 import { useNFTContract } from "hooks/useNFTContract";
+import { useGenesisContract } from "hooks/useGenesisContract";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -80,6 +81,7 @@ const Main = ({ Component, pageProps }: AppProps) => {
   const nft = useNFTContract();
   const valhalla = useValhallaContract();
   const swap = useSwapContract();
+  const genesis = useGenesisContract();
   const chain = useChain();
   const switchChain = useSwitchChain();
   const wallet = useWallet();
@@ -93,7 +95,18 @@ const Main = ({ Component, pageProps }: AppProps) => {
   };
 
   useEffect(() => {
-    if (!nft.contract || !valhalla.contract || !swap.contract) return;
+    if (
+      !nft.contract ||
+      !valhalla.contract ||
+      !swap.contract ||
+      !genesis.contract
+    )
+      return;
+    const unsubscribeGenesisEvents = genesis.contract.events?.listenToAllEvents(
+      event => {
+        ee.emit(`genesis-${event.eventName}`, event.data);
+      }
+    );
     const unsubscribeNftEvents = nft.contract.events?.listenToAllEvents(
       event => {
         ee.emit(`nft-${event.eventName}`, event.data);
@@ -111,6 +124,7 @@ const Main = ({ Component, pageProps }: AppProps) => {
     );
 
     return () => {
+      unsubscribeGenesisEvents();
       unsubscribeNftEvents();
       unsubscribeValhallaEvents();
       unsubscribeSwapEvents();

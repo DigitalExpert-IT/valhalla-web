@@ -78,7 +78,7 @@ const Dashboard = () => {
 
   const handleClickAddress = useCallback(
     (idx: number) => {
-      const address = listUser?.items[idx].address;
+      const address = listUser?.items[idx]?.address;
 
       router.push(`/dashboard/${address}`);
     },

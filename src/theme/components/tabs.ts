@@ -155,6 +155,45 @@ const variantEnclosed = definePartsStyle(props => {
   };
 });
 
+const variantGlobalNetwork = definePartsStyle(props => {
+  const { orientation } = props;
+  const c = "valhallaPink";
+  const isVertical = orientation === "vertical";
+  const borderProp =
+    orientation === "vertical" ? "borderStart" : "borderBottom";
+  const marginProp = isVertical ? "marginStart" : "marginBottom";
+
+  return {
+    tablist: {
+      [borderProp]: "2px solid",
+      borderColor: "inherit",
+    },
+    tab: {
+      [borderProp]: "2px solid",
+      borderColor: "transparent",
+      [marginProp]: "-2px",
+      _selected: {
+        [$fg.variable]: `colors.${c}.600`,
+        _dark: {
+          [$fg.variable]: `colors.${c}.300`,
+        },
+        borderColor: "currentColor",
+      },
+      _active: {
+        [$bg.variable]: "colors.gray.200",
+        _dark: {
+          [$bg.variable]: "colors.whiteAlpha.300",
+        },
+      },
+      _disabled: {
+        _active: { bg: "none" },
+      },
+      color: $fg.reference,
+      bg: $bg.reference,
+    },
+  };
+});
+
 const variantEnclosedColored = definePartsStyle(props => {
   const { colorScheme: c } = props;
   return {
@@ -235,6 +274,7 @@ const variantUnstyled = definePartsStyle({});
 const variants = {
   line: variantLine,
   enclosed: variantEnclosed,
+  globalNetwork: variantGlobalNetwork,
   "enclosed-colored": variantEnclosedColored,
   "soft-rounded": variantSoftRounded,
   "solid-rounded": variantSolidRounded,

@@ -20,7 +20,6 @@ export default function Home() {
   return (
     <LayoutMainV2>
       <SectionHeaderV2 />
-
       <Container maxW="container.xxl">
         <SectionProject />
         <SectionFeaturesV2 />

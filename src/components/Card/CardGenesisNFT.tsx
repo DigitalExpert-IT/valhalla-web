@@ -9,10 +9,13 @@ import {
   Input,
   Spinner,
 } from "@chakra-ui/react";
+import { useGenesisCardMap } from "hooks/genesis";
 
 export const CardGenesisNFT = () => {
   const { t } = useTranslation();
   const { buyGenesis, data, isInitialize } = useGenesis();
+  // const { data: koplek } = useGenesisCardMap();
+  // console.log(koplek?.price.toNumber());
   const { exec, isLoading } = useAsyncCall(
     buyGenesis,
     t("pages.genesis.successMessage")

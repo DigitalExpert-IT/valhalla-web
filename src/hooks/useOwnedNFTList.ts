@@ -14,8 +14,8 @@ export type OwnedNftType = OwnedTokenMapType & {
 };
 
 export const useOwnedNFTList = () => {
-  const address = useAddress() ?? ZERO_ADDRESS;
   const nft = useNFTContract();
+  const address = useAddress() ?? ZERO_ADDRESS;
   const [data, setData] = useState<OwnedNftType[]>([]);
   const [isLoading, setLoading] = useState(false);
 

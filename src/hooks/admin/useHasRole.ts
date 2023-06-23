@@ -4,7 +4,7 @@ import { Valhalla } from "@warmbyte/valhalla/typechain-types";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useContractRead, useAddress } from "@thirdweb-dev/react";
 
-type GlobalPoolType = Awaited<ReturnType<Valhalla["hasRole"]>>;
+type HasRoleType = Awaited<ReturnType<Valhalla["hasRole"]>>;
 
 export const useHasRole = () => {
   const valhalla = useValhallaContract();
@@ -16,5 +16,5 @@ export const useHasRole = () => {
     address ?? ZERO_ADDRESS,
   ]);
 
-  return { data: data as GlobalPoolType, ...rest };
+  return { data: data as HasRoleType, ...rest };
 };

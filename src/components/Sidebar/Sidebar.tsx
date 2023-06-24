@@ -109,7 +109,7 @@ export const Sidebar = (props: ISidebarProps) => {
               <Button variant="link" {...MenuItemStyles}>
                 <BiLogOut size="24" />
                 <Text ms="6" fontWeight="medium">
-                  {t(`common.sidebar.logOut`)}
+                  {t(`common.navigation.backToHome`)}
                 </Text>
               </Button>
             </Link>

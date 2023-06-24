@@ -39,6 +39,7 @@ export interface IUser extends User {
   rank: number | null;
   profit: number;
   profitShare: number;
+  potentialProfit: number;
 }
 
 interface IDashboard {
@@ -128,23 +129,23 @@ const init = createInitiator(async (address: string, rank: number) => {
               +new Date(pre.lastFarm) - +new Date(pre.mintedAt);
             const getRewardPerMS = pre.farmRewardPerDay / 86_400_000;
             const getClaimed = getTotalClaimed * getRewardPerMS;
-            const profit = acc.profit + pre.farmRewardPerDay;
+            const profit = (acc.profit + pre.farmRewardPerDay) * 450;
             const fisrtFiveLevel = level <= 5;
 
             return {
               percentage: acc.percentage + format,
               claimedNFT: acc.claimedNFT + getClaimed,
               profit: profit,
-              profitSharing: fisrtFiveLevel
-                ? ((acc.profitSharing + profit) * 5) / 100
-                : ((acc.profitSharing + profit) * 1) / 100,
+              potentialProfit: fisrtFiveLevel
+                ? ((profit - getClaimed) * 5) / 100
+                : ((profit - getClaimed) * 1) / 100,
             };
           },
           {
             profit: 0,
             percentage: 0,
             claimedNFT: 0,
-            profitSharing: 0,
+            potentialProfit: 0,
           }
         );
 
@@ -155,10 +156,10 @@ const init = createInitiator(async (address: string, rank: number) => {
           restPercentage: `${
             getCalc.percentage ? getCalc.percentage / getNftperUser.length : 0
           }%`,
-          profit: getCalc.profit ? getCalc.profit * 450 : 0,
+          profit: getCalc.profit ? getCalc.profit : 0,
           // gnet value
           claimedNFT: getCalc.claimedNFT,
-          profitShare: getCalc.profitSharing ? getCalc.profitSharing * 450 : 0,
+          profitShare: getCalc.potentialProfit ? getCalc.potentialProfit : 0,
         };
       });
       return withNft;
@@ -197,7 +198,9 @@ export const useDashboard = (byPasAddress?: string) => {
       address = byPasAddress;
     }
 
-    if (address && account?.rank) {
+    const rank = account?.rank ? account?.rank : -1;
+
+    if (address && rank >= 0) {
       init(address, account?.rank);
     }
   }, [address, account?.rank]);

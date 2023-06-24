@@ -217,7 +217,7 @@ const Dashboard = () => {
       head: [
         { text: "Lv" },
         { text: "Total Member" },
-        { text: "Shared Value" },
+        { text: "Potential Profit" },
       ],
       body: levelMap.map(level => [
         level.lvl,
@@ -229,10 +229,8 @@ const Dashboard = () => {
             </Text>
           </HStack>
         </>,
-        listUser[level.lvl]?.reduce(
-          (acc, user) => acc + user.potentialProfit,
-          0
-        ) ?? 0,
+        listUser[level.lvl]?.reduce((acc, user) => acc + user.profitShare, 0) ??
+          0,
       ]),
       activeRow: selectedLevel - 1,
       onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
@@ -249,9 +247,8 @@ const Dashboard = () => {
         { text: "Total NFT" },
         { text: "Claimed NFT" },
         { text: "Claimable NFT" },
-        { text: "Maximum Profit" },
         {
-          text: "Potential Profit",
+          text: "Potensial Profit",
           isSortAble: true,
           onClickSort: (sortBy: string) => setSortByProfit(sortBy),
         },
@@ -275,7 +272,6 @@ const Dashboard = () => {
         user.claimedNFT,
         user.profit - user.claimedNFT,
         user.profit,
-        user.potentialProfit,
       ]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };

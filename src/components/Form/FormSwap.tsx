@@ -230,7 +230,12 @@ export const FormSwap = () => {
       gap={{ base: "8", md: "20" }}
       pos={"relative"}
     >
-      <Stack as="form" onSubmit={onSubmit} align="center">
+      <Stack
+        as="form"
+        onSubmit={onSubmit}
+        align="center"
+        order={{ base: 2, md: 1 }}
+      >
         <Stack alignItems="center" mb="5" spacing={"3"}>
           <Stack w={"full"}>
             <Box
@@ -401,10 +406,11 @@ export const FormSwap = () => {
       />
       <Stack
         pos="relative"
-        mt={{ base: 10, md: 0 }}
+        mb={{ base: 10, md: 0 }}
         boxShadow="xl"
         borderRadius="2xl"
         px="3"
+        order={{ base: 1, md: 2 }}
       >
         <Box mt="8" zIndex={1}>
           <Text as="h3" textAlign="center" mb="3">

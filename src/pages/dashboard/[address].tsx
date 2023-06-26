@@ -217,7 +217,7 @@ const Dashboard = () => {
       head: [
         { text: "Lv" },
         { text: "Total Member" },
-        { text: "Potential Profit" },
+        { text: "Sum Potential Profit" },
       ],
       body: levelMap.map(level => [
         level.lvl,
@@ -229,8 +229,14 @@ const Dashboard = () => {
             </Text>
           </HStack>
         </>,
-        listUser[level.lvl]?.reduce((acc, user) => acc + user.profitShare, 0) ??
-          0,
+        listUser[level.lvl]?.reduce(
+          (acc, user) =>
+            acc +
+            (level.lvl <= 5
+              ? ((user.profit - user.claimedNFT) * 5) / 100
+              : ((user.profit - user.claimedNFT) * 1) / 100),
+          0
+        ) ?? 0,
       ]),
       activeRow: selectedLevel - 1,
       onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
@@ -272,6 +278,9 @@ const Dashboard = () => {
         user.claimedNFT,
         user.profit - user.claimedNFT,
         user.profit,
+        selectedLevel <= 5
+          ? ((user.profit - user.claimedNFT) * 5) / 100
+          : ((user.profit - user.claimedNFT) * 1) / 100,
       ]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
@@ -296,7 +305,7 @@ const Dashboard = () => {
     };
 
     return { data, options };
-  }, [currentItems]);
+  }, [currentItems, selectedLevel]);
 
   const summaryData: IDataItem[] = useMemo(() => {
     return [
@@ -363,7 +372,7 @@ const Dashboard = () => {
           </HStack>
 
           <HStack mt="8" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="1" minW="260px" maxW="320px" minH="160px">
+            <Box pos="relative" flex="1" minW="370px" maxW="370px" minH="160px">
               <TableDashboard
                 title={
                   <HStack minH="46px" gap="4" alignItems="center">
@@ -385,7 +394,7 @@ const Dashboard = () => {
               />
             </Box>
 
-            <Box pos="relative" flex="2" minW="724px" maxW="750px" minH="160px">
+            <Box pos="relative" flex="2" minW="800px" maxW="800px" minH="160px">
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
@@ -440,4 +449,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+// export default withConnection(withCorrectAddress(Dashboard));
+export default Dashboard;

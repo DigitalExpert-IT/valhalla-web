@@ -6,10 +6,12 @@ import {
   Button,
   SimpleGrid,
   AspectRatio,
+  Image,
+  HStack,
 } from "@chakra-ui/react";
 import { fromBn, toBn } from "evm-bn";
 import { useForm } from "react-hook-form";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ClipPathImage } from "./ClipPathImage";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -54,6 +56,7 @@ export const FormSwap = () => {
     resetField,
   } = useForm<ISwapToken>();
   const watchCurrency = watch("currency");
+  const watchAmountTop = watch("amountTop");
 
   const swap = useSwapContract();
   const gnet = useGNETContract();
@@ -198,11 +201,22 @@ export const FormSwap = () => {
     []
   );
 
+  const amountAfterFee = useMemo(() => {
+    const { amountTop, currency } = getValues();
+    if (!amountTop) return toBn("0");
+
+    const amountTopBn = toBn(amountTop, 9);
+    const tax = amountTopBn.mul(5).div(1000);
+
+    return amountTopBn.add(tax);
+  }, [watchAmountTop]);
+
   const onSubmit = handleSubmit(async data => {
     const swap = await exec({
       currency: data.currency,
-      amount: data.amountTop,
+      amount: fromBn(amountAfterFee, 9),
     });
+
     if (swap.status === 1) {
       reset();
       gnet.refetch();
@@ -263,13 +277,11 @@ export const FormSwap = () => {
             <Text
               as={"span"}
               fontSize={"sm"}
-              textAlign={"center"}
               color={"whiteAlpha.700"}
+              textAlign={"center"}
             >
-              {t("form.helperText.balance", {
-                balanceOf: symbol
-                  ? fromBn(balanceUSDT ?? 0, 6)
-                  : fromBn(balanceGNET ?? 0, 9),
+              {t("form.helperText.afterFee", {
+                value: fromBn(amountAfterFee, 9),
                 symbol: symbol ? "USDT" : "GNET",
               })}
             </Text>
@@ -357,19 +369,6 @@ export const FormSwap = () => {
                 isDisabled={swap.isLoading}
               />
             </Box>
-            <Text
-              as={"span"}
-              fontSize={"sm"}
-              color={"whiteAlpha.700"}
-              textAlign={"center"}
-            >
-              {t("form.helperText.balance", {
-                balanceOf: symbol
-                  ? fromBn(balanceGNET ?? 0, 9)
-                  : fromBn(balanceUSDT ?? 0, 6),
-                symbol: symbol ? "GNET" : "USDT",
-              })}
-            </Text>
           </Stack>
           <ButtonConnectWrapper>
             <Button
@@ -400,10 +399,66 @@ export const FormSwap = () => {
         mx={"auto"}
         borderRight={"1px"}
       />
-      <Stack justifyContent={"center"} mt={{ base: 10, md: 0 }}>
-        <AspectRatio ratio={1} ml="-5rem" mt="-4rem">
-          <ClipPathImage />
-        </AspectRatio>
+      <Stack
+        pos="relative"
+        mt={{ base: 10, md: 0 }}
+        boxShadow="xl"
+        borderRadius="2xl"
+        px="3"
+      >
+        <Box mt="8" zIndex={1}>
+          <Text as="h3" textAlign="center" mb="3">
+            {t("common.balance")}
+          </Text>
+          <HStack
+            backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
+            px="8"
+            py="2"
+            my="4"
+            boxShadow="lg"
+            justifyContent="space-between"
+          >
+            <AspectRatio ratio={1} width="24px">
+              <Image src="/assets/logo/logo-white.png" alt="logo-image" />
+            </AspectRatio>
+            <Text
+              as={"span"}
+              fontSize={"sm"}
+              color={"whiteAlpha.700"}
+              textAlign={"center"}
+            >
+              {fromBn(balanceGNET ?? 0, 9)} GNET
+            </Text>
+          </HStack>
+          <HStack
+            backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
+            px="8"
+            py="2"
+            my="4"
+            boxShadow="lg"
+            justifyContent="space-between"
+          >
+            <AspectRatio ratio={1} width="24px">
+              <Image
+                src="/assets/logo/tether-logo-white.png"
+                alt="logo-image"
+              />
+            </AspectRatio>
+            <Text
+              as={"span"}
+              fontSize={"sm"}
+              color={"whiteAlpha.700"}
+              textAlign={"center"}
+            >
+              {fromBn(balanceUSDT ?? 0, 6)} USDT
+            </Text>
+          </HStack>
+        </Box>
+        <Box pos="absolute" bottom="-20%" right="-10%" width="325px">
+          <AspectRatio ratio={1}>
+            <ClipPathImage />
+          </AspectRatio>
+        </Box>
       </Stack>
     </SimpleGrid>
   );

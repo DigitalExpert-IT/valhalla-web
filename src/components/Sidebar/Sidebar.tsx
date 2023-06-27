@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
 import { BsGrid } from "react-icons/bs";
+import { useAddress } from "@thirdweb-dev/react";
 
 interface ISidebarDrawerProps {
   isOpen: boolean;
@@ -37,6 +38,7 @@ interface ISidebarDrawerProps {
 
 const SideBardrawer = (props: ISidebarDrawerProps) => {
   const router = useRouter();
+  const address = useAddress();
   const { isOpen, onClose } = props;
   const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const { t } = useTranslation();
@@ -60,9 +62,15 @@ const SideBardrawer = (props: ISidebarDrawerProps) => {
 
   const MenuItem = ({ menu }: any) => {
     return (
-      <Link href={menu.href}>
+      <Link
+        href={
+          menu.name === "dashboard"
+            ? { pathname: menu.href, query: { address: address } }
+            : menu.href
+        }
+      >
         <ListItem
-          color={router.asPath === menu.href ? "#D987FD" : "white"}
+          color={router.pathname === menu.href ? "#D987FD" : "white"}
           {...MenuItemStyles}
         >
           {menu.icon}

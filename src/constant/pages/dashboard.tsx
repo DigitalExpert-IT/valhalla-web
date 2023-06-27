@@ -13,26 +13,8 @@ export const DASHBOARD_CATEGORY = [
         key: "dashboard",
         name: "dashboard",
         icon: <BsFillHouseDoorFill size={24} />,
-        href: "/dashboard",
+        href: "/dashboard/[address]",
       },
-      // {
-      //   key: "event",
-      //   name: "event",
-      //   icon: <BsFillCalendarEventFill size={20} />,
-      //   href: "/event",
-      // },
-      // {
-      //   key: "nft",
-      //   name: "nft",
-      //   icon: <BsTropicalStorm size={20} />,
-      //   href: "/nft",
-      // },
-      // {
-      //   key: "user",
-      //   name: "user",
-      //   icon: <BsPeopleFill size={20} />,
-      //   href: "/user",
-      // },
     ],
   },
 ];

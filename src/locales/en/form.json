@@ -17,6 +17,7 @@
   "helperText": {
     "referrer": "Please enter your referral address",
     "quantity": "please enter Quantity",
-    "balance": "Balance {{balanceOf}} {{symbol}}"
+    "balance": "Balance {{balanceOf}} {{symbol}}",
+    "afterFee": "After Fee {{value}} {{symbol}}"
   }
 }

@@ -6,10 +6,12 @@ import {
   Button,
   SimpleGrid,
   AspectRatio,
+  Image,
+  HStack,
 } from "@chakra-ui/react";
 import { fromBn, toBn } from "evm-bn";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ClipPathImage } from "./ClipPathImage";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -28,19 +30,33 @@ import {
   useAsyncCall,
   useGNETContract,
 } from "hooks";
+import _ from "lodash";
 
 interface ISwapToken {
-  price: string;
-  amount: string;
+  amountTop: string;
+  amountBottom: string;
   currency: string;
+}
+
+interface IFieldCurrency {
+  [key: string]: string;
 }
 
 export const FormSwap = () => {
   const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
   const { t } = useTranslation();
-  const [price, setPrice] = useState("");
   const [symbol, setSymbol] = useState(false);
-  const { handleSubmit, control, watch, reset } = useForm<ISwapToken>();
+  const {
+    handleSubmit,
+    control,
+    watch,
+    getValues,
+    setValue,
+    reset,
+    resetField,
+  } = useForm<ISwapToken>();
+  const watchCurrency = watch("currency");
+  const watchAmountTop = watch("amountTop");
 
   const swap = useSwapContract();
   const gnet = useGNETContract();
@@ -148,25 +164,59 @@ export const FormSwap = () => {
   );
 
   useEffect(() => {
-    const subscription = watch(value => {
-      if (value.currency === "GNET") {
-        const format = fromBn(getUsdtRate(value.price ? value.price : "0"), 9);
-        setPrice(format);
-        setSymbol(true);
-        return;
+    const currency = watchCurrency;
+    if (currency === "GNET") setSymbol(true);
+    else setSymbol(false);
+
+    // should reset amountTop and amountBottom
+    // after change the currency
+    resetField("amountTop");
+    resetField("amountBottom");
+  }, [watchCurrency]);
+
+  const handleChangeInput = useCallback(
+    _.debounce((field: string) => {
+      const { amountTop, amountBottom, currency } = getValues();
+      const value = field === "amountTop" ? amountTop : amountBottom;
+
+      // define what the top and bottom fields are
+      const fieldCurrency: IFieldCurrency = {
+        amountTop: currency === "GNET" ? "USDT" : "GNET",
+        amountBottom: currency === "GNET" ? "GNET" : "USDT",
+      };
+      const fieldTarget = field === "amountTop" ? "amountBottom" : "amountTop";
+      const currencyTarget = fieldCurrency[fieldTarget];
+
+      let swapResult = "";
+
+      if (currencyTarget === "GNET") {
+        swapResult = fromBn(getUsdtRate(value ? value : "0"), 9);
       }
-      const format = fromBn(getGnetRate(value.price ? value.price : "0"), 6);
-      setPrice(format);
-      setSymbol(false);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+      if (currencyTarget === "USDT") {
+        swapResult = fromBn(getGnetRate(value ? value : "0"), 6);
+      }
+
+      setValue(fieldTarget, swapResult);
+    }, 200),
+    []
+  );
+
+  const amountAfterFee = useMemo(() => {
+    const { amountTop, currency } = getValues();
+    if (!amountTop) return toBn("0");
+
+    const amountTopBn = toBn(amountTop, 9);
+    const tax = amountTopBn.mul(5).div(1000);
+
+    return amountTopBn.add(tax);
+  }, [watchAmountTop]);
 
   const onSubmit = handleSubmit(async data => {
     const swap = await exec({
       currency: data.currency,
-      amount: data.price,
+      amount: fromBn(amountAfterFee, 9),
     });
+
     if (swap.status === 1) {
       reset();
       gnet.refetch();
@@ -180,7 +230,12 @@ export const FormSwap = () => {
       gap={{ base: "8", md: "20" }}
       pos={"relative"}
     >
-      <Stack as="form" onSubmit={onSubmit} align="center">
+      <Stack
+        as="form"
+        onSubmit={onSubmit}
+        align="center"
+        order={{ base: 2, md: 1 }}
+      >
         <Stack alignItems="center" mb="5" spacing={"3"}>
           <Stack w={"full"}>
             <Box
@@ -217,7 +272,8 @@ export const FormSwap = () => {
                   bg: "whiteAlpha.300",
                 }}
                 control={control}
-                name="price"
+                onKeyUp={() => handleChangeInput("amountTop")}
+                name="amountTop"
                 placeholder={"0.0"}
                 type="number"
                 isDisabled={swap.isLoading}
@@ -226,13 +282,11 @@ export const FormSwap = () => {
             <Text
               as={"span"}
               fontSize={"sm"}
-              textAlign={"center"}
               color={"whiteAlpha.700"}
+              textAlign={"center"}
             >
-              {t("form.helperText.balance", {
-                balanceOf: symbol
-                  ? fromBn(balanceUSDT ?? 0, 6)
-                  : fromBn(balanceGNET ?? 0, 9),
+              {t("form.helperText.afterFee", {
+                value: fromBn(amountAfterFee, 9),
                 symbol: symbol ? "USDT" : "GNET",
               })}
             </Text>
@@ -248,7 +302,9 @@ export const FormSwap = () => {
               textColor={"purple.900"}
               pos={"relative"}
             >
-              <Text fontWeight={"bold"}>{t("form.label.swap")}</Text>
+              <Text fontWeight={"bold"} color="black">
+                {t("form.label.swap")}
+              </Text>
               <Icon pos={"absolute"} zIndex={"3"} fontSize={"xl"}>
                 <AiOutlineArrowRight />
               </Icon>
@@ -311,26 +367,13 @@ export const FormSwap = () => {
                   bg: "whiteAlpha.300",
                 }}
                 control={control}
-                name="price"
+                onKeyUp={() => handleChangeInput("amountBottom")}
+                name="amountBottom"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled
-                value={price}
+                isDisabled={swap.isLoading}
               />
             </Box>
-            <Text
-              as={"span"}
-              fontSize={"sm"}
-              color={"whiteAlpha.700"}
-              textAlign={"center"}
-            >
-              {t("form.helperText.balance", {
-                balanceOf: symbol
-                  ? fromBn(balanceGNET ?? 0, 9)
-                  : fromBn(balanceUSDT ?? 0, 6),
-                symbol: symbol ? "GNET" : "USDT",
-              })}
-            </Text>
           </Stack>
           <ButtonConnectWrapper>
             <Button
@@ -361,10 +404,67 @@ export const FormSwap = () => {
         mx={"auto"}
         borderRight={"1px"}
       />
-      <Stack justifyContent={"center"} mt={{ base: 10, md: 0 }}>
-        <AspectRatio ratio={1} ml="-5rem" mt="-4rem">
-          <ClipPathImage />
-        </AspectRatio>
+      <Stack
+        pos="relative"
+        mb={{ base: 10, md: 0 }}
+        boxShadow="xl"
+        borderRadius="2xl"
+        px="3"
+        order={{ base: 1, md: 2 }}
+      >
+        <Box mt="8" zIndex={1}>
+          <Text as="h3" textAlign="center" mb="3">
+            {t("common.balance")}
+          </Text>
+          <HStack
+            backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
+            px="8"
+            py="2"
+            my="4"
+            boxShadow="lg"
+            justifyContent="space-between"
+          >
+            <AspectRatio ratio={1} width="24px">
+              <Image src="/assets/logo/logo-white.png" alt="logo-image" />
+            </AspectRatio>
+            <Text
+              as={"span"}
+              fontSize={"sm"}
+              color={"whiteAlpha.700"}
+              textAlign={"center"}
+            >
+              {fromBn(balanceGNET ?? 0, 9)} GNET
+            </Text>
+          </HStack>
+          <HStack
+            backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
+            px="8"
+            py="2"
+            my="4"
+            boxShadow="lg"
+            justifyContent="space-between"
+          >
+            <AspectRatio ratio={1} width="24px">
+              <Image
+                src="/assets/logo/tether-logo-white.png"
+                alt="logo-image"
+              />
+            </AspectRatio>
+            <Text
+              as={"span"}
+              fontSize={"sm"}
+              color={"whiteAlpha.700"}
+              textAlign={"center"}
+            >
+              {fromBn(balanceUSDT ?? 0, 6)} USDT
+            </Text>
+          </HStack>
+        </Box>
+        <Box pos="absolute" bottom="-20%" right="-10%" width="325px">
+          <AspectRatio ratio={1}>
+            <ClipPathImage />
+          </AspectRatio>
+        </Box>
       </Stack>
     </SimpleGrid>
   );

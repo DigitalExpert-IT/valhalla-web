@@ -24,6 +24,7 @@ const baseStyleField = defineStyle({
   },
   "> option, > optgroup": {
     bg: $bg.reference,
+    color: "white",
   },
 });
 
@@ -83,37 +84,37 @@ const sizes = {
 };
 
 const variantFilter = defineStyle(() => ({
-    ...inputTheme.baseStyle?.field,
-    field: {
-      maxH: "30px",
-      bg: "transparent",
-      borderColor: "black",
-      color: "black",
-      boxShadow: "md",
-      border: "1px solid black",
-      _readOnly: {
-        boxShadow: "none !important",
-        userSelect: "all",
-      },
-      _placeholder: {
-        color: "black",
-      },
+  ...inputTheme.baseStyle?.field,
+  field: {
+    maxH: "30px",
+    bg: "transparent",
+    borderColor: "black",
+    color: "black",
+    boxShadow: "md",
+    border: "1px solid black",
+    _readOnly: {
+      boxShadow: "none !important",
+      userSelect: "all",
     },
-    icon: {
-      color: "black"
-    },
-    addon: {
-      border: "2px solid",
-      borderColor: "black",
+    _placeholder: {
       color: "black",
-    }
+    },
+  },
+  icon: {
+    color: "black",
+  },
+  addon: {
+    border: "2px solid",
+    borderColor: "black",
+    color: "black",
+  },
 }));
 
 const defaultVariants = inputTheme.variants;
 
 const variants = {
   "table-filter": variantFilter,
-  ...defaultVariants
+  ...defaultVariants,
 };
 
 export const selectTheme = defineMultiStyleConfig({

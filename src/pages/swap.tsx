@@ -51,6 +51,14 @@ const SwapV2 = () => {
           zIndex={"3"}
         >
           <CardBody>
+            <Image
+              src="/assets/partnership/global-network.png"
+              alt="Bg Swap"
+              width="80px"
+              margin="auto"
+              opacity="0.8"
+              mb="10"
+            />
             <FormSwap />
           </CardBody>
         </Card>

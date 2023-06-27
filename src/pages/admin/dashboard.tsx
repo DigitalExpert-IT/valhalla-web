@@ -189,7 +189,7 @@ const Dashboard = () => {
   }, [summaryDashboard]);
 
   return (
-    <LayoutDashboard isAdminPage>
+    <LayoutDashboard>
       <HeaderDashboard
         address={address ?? ""}
         isShowSearch

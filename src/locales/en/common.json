@@ -22,7 +22,8 @@
     "wallet": "Wallet",
     "history": "History",
     "settings": "Settings",
-    "logOut": "Log Out"
+    "logOut": "Log Out",
+    "backToHome": "Back To Home"
   },
   "footer": {
     "description": "The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications",

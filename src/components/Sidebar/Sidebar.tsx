@@ -9,6 +9,16 @@ import {
   Image,
   AspectRatio,
   Button,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  Divider,
+  Icon,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import {
@@ -18,27 +28,27 @@ import {
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
+import { BsGrid } from "react-icons/bs";
+import { useAddress } from "@thirdweb-dev/react";
 
-interface ISidebarProps {
-  isAdminPage?: boolean;
+interface ISidebarDrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const Sidebar = (props: ISidebarProps) => {
-  const { isAdminPage } = props;
-  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
+const SideBardrawer = (props: ISidebarDrawerProps) => {
   const router = useRouter();
-
+  const address = useAddress();
+  const { isOpen, onClose } = props;
+  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const { t } = useTranslation();
 
-  const WrapperStyle = {
-    position: "relative" as any,
-    height: "100vh",
-    pt: "8",
-    pr: "16",
-    pb: "20",
-    pl: "24",
+  const isAdminPage = router.asPath.includes("admin");
+
+  const DrawerStyles = {
     bg: "global-brand-bg",
   };
+
   const MenuStyles = {
     listStyleType: "none",
     ms: "0",
@@ -52,9 +62,15 @@ export const Sidebar = (props: ISidebarProps) => {
 
   const MenuItem = ({ menu }: any) => {
     return (
-      <Link href={menu.href}>
+      <Link
+        href={
+          menu.name === "dashboard"
+            ? { pathname: menu.href, query: { address: address } }
+            : menu.href
+        }
+      >
         <ListItem
-          color={router.asPath === menu.href ? "#D987FD" : "white"}
+          color={router.pathname === menu.href ? "#D987FD" : "white"}
           {...MenuItemStyles}
         >
           {menu.icon}
@@ -67,54 +83,93 @@ export const Sidebar = (props: ISidebarProps) => {
   };
 
   return (
+    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent {...DrawerStyles}>
+        <DrawerCloseButton />
+        <DrawerHeader p="8">
+          <Link href="/">
+            <AspectRatio
+              w={isLargethan800 ? 140 : 50}
+              ratio={isLargethan800 ? 4 / 1 : 1}
+            >
+              <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
+            </AspectRatio>
+          </Link>
+        </DrawerHeader>
+
+        <DrawerBody p="8">
+          <Stack flex={1}>
+            {isAdminPage
+              ? DASHBOARD_ADMIN_CATEGORY.map(kategoryItem => (
+                  <Box key={kategoryItem.name} mb="24">
+                    <Text mb="4" textTransform="uppercase">
+                      {kategoryItem.name}
+                    </Text>
+                    <UnorderedList {...MenuStyles}>
+                      {kategoryItem.menus.map((menu, mIdx) => (
+                        <MenuItem key={mIdx} menu={menu} />
+                      ))}
+                    </UnorderedList>
+                  </Box>
+                ))
+              : DASHBOARD_CATEGORY.map(kategoryItem => (
+                  <Box key={kategoryItem.name} mb="24">
+                    <Text mb="4" textTransform="uppercase">
+                      {kategoryItem.name}
+                    </Text>
+                    <UnorderedList {...MenuStyles}>
+                      {kategoryItem.menus.map((menu, mIdx) => (
+                        <MenuItem key={mIdx} menu={menu} />
+                      ))}
+                    </UnorderedList>
+                  </Box>
+                ))}
+          </Stack>
+        </DrawerBody>
+
+        <DrawerFooter justifyContent="flex-start">
+          <Link href="/">
+            <Button variant="link" {...MenuItemStyles}>
+              <Icon as={BiLogOut} width="6" height="6" />
+              <Text ms="6" fontWeight="medium">
+                {t(`common.sidebar.backToHome`)}
+              </Text>
+            </Button>
+          </Link>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export const Sidebar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const WrapperStyle = {
+    position: "relative" as any,
+    height: "100vh",
+    p: "2",
+    pt: "8",
+    bg: "global-brand-bg",
+  };
+
+  return (
     <DarkMode>
       <Box {...WrapperStyle}>
-        <Link href="/">
-          <AspectRatio
-            w={isLargethan800 ? 140 : 50}
-            ratio={isLargethan800 ? 4 / 1 : 1}
-          >
-            <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
-          </AspectRatio>
-        </Link>
-        <Stack flex={1} pt="12">
-          {isAdminPage
-            ? DASHBOARD_ADMIN_CATEGORY.map(kategoryItem => (
-                <Box key={kategoryItem.name} mb="24">
-                  <Text mb="4" textTransform="uppercase">
-                    {kategoryItem.name}
-                  </Text>
-                  <UnorderedList {...MenuStyles}>
-                    {kategoryItem.menus.map((menu, mIdx) => (
-                      <MenuItem key={mIdx} menu={menu} />
-                    ))}
-                  </UnorderedList>
-                </Box>
-              ))
-            : DASHBOARD_CATEGORY.map(kategoryItem => (
-                <Box key={kategoryItem.name} mb="24">
-                  <Text mb="4" textTransform="uppercase">
-                    {kategoryItem.name}
-                  </Text>
-                  <UnorderedList {...MenuStyles}>
-                    {kategoryItem.menus.map((menu, mIdx) => (
-                      <MenuItem key={mIdx} menu={menu} />
-                    ))}
-                  </UnorderedList>
-                </Box>
-              ))}
-
-          <Box pos="absolute" bottom="20">
-            <Link href="/">
-              <Button variant="link" {...MenuItemStyles}>
-                <BiLogOut size="24" />
-                <Text ms="6" fontWeight="medium">
-                  {t(`common.sidebar.logOut`)}
-                </Text>
-              </Button>
-            </Link>
-          </Box>
+        <Stack direction="column" justifyContent="center" alignItems="center">
+          <Link href="/">
+            <AspectRatio ratio={1} w="8">
+              <Image src={"/assets/logo/globalN.png"} alt="logo-image" />
+            </AspectRatio>
+          </Link>
+          <Divider orientation="horizontal" />
+          <Button variant="unstyled" px="0" onClick={onOpen}>
+            <Icon as={BsGrid} width="24px" height="24px" />
+          </Button>
         </Stack>
+
+        <SideBardrawer isOpen={isOpen} onClose={onClose} />
       </Box>
     </DarkMode>
   );

@@ -99,6 +99,9 @@ const variantFilter = defineStyle(() => ({
     _placeholder: {
       color: "black",
     },
+    "> option, > optgroup": {
+      color: "black",
+    },
   },
   icon: {
     color: "black",

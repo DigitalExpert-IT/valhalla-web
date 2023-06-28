@@ -16,7 +16,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { LazyVideo } from "components/LazyVideo";
 import { useAccountMap } from "hooks/valhalla";
-import { ButtonConnectWrapper } from "components/Button";
+import { ButtonConnectWallet, ButtonConnectWrapper } from "components/Button";
 
 export const SectionHeaderV2 = () => {
   const { t } = useTranslation();
@@ -31,6 +31,7 @@ export const SectionHeaderV2 = () => {
         sizes="100vw"
         style={{ objectFit: "cover" }}
         priority={false}
+        z-index="0"
         fill
       />
       <Box
@@ -53,6 +54,7 @@ export const SectionHeaderV2 = () => {
         maxW={"xl"}
         textAlign={{ base: "center", lg: "left" }}
         fontWeight="black"
+        zIndex={1}
       >
         <Heading
           fontWeight="black"

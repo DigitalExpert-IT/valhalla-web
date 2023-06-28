@@ -30,7 +30,7 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
   return (
     <>
       {data.map((item, idx) => {
-        if (connectionStatus === "disconnected" && item.name === "dashboard")
+        if (item.name === "dashboard" && connectionStatus !== "connected")
           return null;
 
         return (

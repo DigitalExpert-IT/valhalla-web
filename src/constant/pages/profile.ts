@@ -31,7 +31,6 @@ export const NETWORK_STATUS = [
   },
 ];
 
-
 export interface INetworkStatus {
   levelBonus: string;
   user: number;

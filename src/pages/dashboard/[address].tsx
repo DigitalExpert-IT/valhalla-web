@@ -242,13 +242,13 @@ const Dashboard = () => {
   const tableMember = useMemo(() => {
     const data = {
       head: [
-        { text: "Member" },
-        { text: "Rank" },
-        { text: "Total NFT" },
-        { text: "Claimed NFT" },
-        { text: "Claimable NFT" },
+        { text: `${t("pages.dashboard.tableField.member")}` },
+        { text: `${t("pages.dashboard.tableField.rank")}` },
+        { text: `${t("pages.dashboard.tableField.totalNFT")}` },
+        { text: `${t("pages.dashboard.tableField.claimedNFT")}` },
+        { text: `${t("pages.dashboard.tableField.claimableNFT")}` },
         {
-          text: "Potensial Profit",
+          text: `${t("pages.dashboard.tableField.potentialProfit")}`,
           isSortAble: true,
           onClickSort: (sortBy: string) => setSortByProfit(sortBy),
         },

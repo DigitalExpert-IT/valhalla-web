@@ -216,9 +216,9 @@ const Dashboard = () => {
 
     const data = {
       head: [
-        { text: "Lv" },
-        { text: "Total Member" },
-        { text: "Sum Potential Profit" },
+        { text: t("pages.dashboard.tableField.lv") },
+        { text: t("pages.dashboard.tableField.totalMember") },
+        { text: t("pages.dashboard.tableField.sumPotentialProfit") },
       ],
       body: levelMap.map(level => [
         level.lvl,
@@ -296,7 +296,7 @@ const Dashboard = () => {
             text: rank,
             value: idx + 1,
           })),
-          placeholder: "Rank",
+          placeholder: t("pages.dashboard.tableField.rank"),
           onFilterChange: (val: string) => setFitlerRank(+val - 1),
         },
       ],
@@ -429,5 +429,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withCorrectAddress(Dashboard));
-export default Dashboard;
+export default withConnection(withCorrectAddress(Dashboard));

@@ -368,7 +368,10 @@
       "claimedNFT": "Claimed NFT",
       "totalNFT": "Total NFT",
       "rank": "Rank",
-      "member": "Member"
+      "member": "Member",
+      "lv": "Lv",
+      "totalMember": "Total Member",
+      "sumPotentialProfit": "Sum Potential Profit"
     },
     "placeholder": {
       "search": "Search member by address"

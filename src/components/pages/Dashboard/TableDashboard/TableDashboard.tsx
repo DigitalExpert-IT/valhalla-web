@@ -14,6 +14,7 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { PaginationV2 as Pagination } from "components/PaginationUtils";
+import _ from "lodash";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BsChevronDown, BsChevronUp, BsFilter } from "react-icons/bs";
@@ -25,7 +26,7 @@ interface ITableHead {
 }
 
 interface ITableData {
-  head: ITableHead[];
+  head: (ITableHead | null)[];
   body: (string | number | JSX.Element | null | [])[][] | undefined;
   activeRow?: number;
   onClickRow: (
@@ -61,6 +62,22 @@ interface ITableProps {
   isLoading?: boolean;
 }
 
+/**
+ * Note: Table Body must an array of array (2D Array).
+ * Because, the body need a multiple row and column
+ * Example: Body: [
+ *  [1, 2, 3, 4],
+ *  [5, 6, 7, 8]
+ * ]
+ * Or You can create body data by mapping the data then return the array
+ * foreach element.
+ * Example: Body: array.map((e) => [
+ *  e.name,
+ *  e.rank,
+ *  e.profit
+ * ]);
+ */
+
 export const TableDashboard = (props: ITableProps) => {
   const { title, data, options, isLoading } = props;
   const { t } = useTranslation();
@@ -69,6 +86,8 @@ export const TableDashboard = (props: ITableProps) => {
   // init sortState
   useEffect(() => {
     const sortStateMap = data.head?.reduce((acc, h) => {
+      if (!h?.isSortAble) return acc;
+
       if (h.isSortAble) {
         const key = h.text.toLowerCase().replace(" ", ".");
         return { ...acc, [key]: false };
@@ -132,6 +151,8 @@ export const TableDashboard = (props: ITableProps) => {
           <Thead>
             <Tr>
               {data.head?.map(item => {
+                if (_.isNull(item)) return null;
+
                 const key = item.text.toLowerCase().replace(" ", ".");
                 return (
                   <Th key={key} onClick={() => handleClickSort(item)}>
@@ -168,9 +189,10 @@ export const TableDashboard = (props: ITableProps) => {
                     key={idx}
                     onClick={() => data.onClickRow(row, idx)}
                   >
-                    {row?.map((col, idx) => (
-                      <Td key={idx}>{col}</Td>
-                    ))}
+                    {row?.map((col, idx) => {
+                      if (_.isNull(col)) return null;
+                      return <Td key={idx}>{col}</Td>;
+                    })}
                   </Tr>
                 ))}
           </Tbody>

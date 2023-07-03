@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, GridItem, LightMode } from "@chakra-ui/react";
 import { Sidebar } from "components";
 
@@ -9,8 +9,8 @@ interface MainProps {
 export const LayoutDashboard: React.FC<MainProps> = ({ children }) => {
   return (
     <LightMode>
-      <Grid templateColumns="64px 1fr">
-        <GridItem w="100%" h="100%">
+      <Grid templateColumns={{ base: "1fr", sm: "64px 1fr" }}>
+        <GridItem w="100%" h="100%" display={{ base: "none", sm: "block" }}>
           <Sidebar />
         </GridItem>
         <GridItem w="100%" h="100vh" overflowY="auto">

@@ -1,23 +1,46 @@
--- basic tree user 
-
 WITH RECURSIVE "hierarchy" AS (
     SELECT
         address,
         upline,
         rank,
         "telegramUsername",
-        1 AS "level"
+        1 AS "level",
+        json_build_object(
+            'address',
+            address,
+            'upline',
+            upline,
+            'telegram_username',
+            "telegramUsername",
+            'rank',
+            rank,
+            'level',
+            1
+        ) as listUser
     FROM
         "User"
     WHERE
-        upline = '0x458ae247679f92bed7cbd56df323121520ef02c2' --at this point root address it means cape or the first top tree root
-    UNION ALL
+        upline = '0x458ae247679f92bed7cbd56df323121520ef02c2'
+    UNION
+    ALL
     SELECT
         parent.address,
         parent.upline,
         parent.rank,
         parent."telegramUsername",
-        "level" + 1
+        "level" + 1,
+        json_build_object(
+            'address',
+            parent.address,
+            'upline',
+            parent.upline,
+            'telegram_username',
+            parent."telegramUsername",
+            'rank',
+            parent.rank,
+            'level',
+            "level" + 1
+        ) as listUser
     FROM
         "User" parent
         JOIN "hierarchy" child ON parent.upline = child.address
@@ -25,10 +48,12 @@ WITH RECURSIVE "hierarchy" AS (
         "level" < 15
 )
 SELECT
-    address,
-    upline,
-    "telegramUsername",
-    rank,
-    level
+    "level",
+    json_agg(listUser) as users_per_level,
+    COUNT(listUser) as totalUser
 FROM
     "hierarchy"
+GROUP BY
+    "level"
+ORDER BY
+    "level" ASC

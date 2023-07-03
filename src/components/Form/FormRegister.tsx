@@ -41,8 +41,8 @@ export const FormRegister = () => {
   const disclaimerModal = useModal(ModalDiscalimer);
 
   useEffect(() => {
-    setValue("referrer", router.query.referrer as string);
-  }, [router.query.referrer]);
+    setValue("referrer", router.query.ref as string);
+  }, [router.query.ref]);
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {

@@ -363,6 +363,7 @@
     },
     "tableField": {
       "potentialProfit": "Potential Profit",
+      "maximumProfit": "Maximum Profit",
       "claimableNFT": "Claimable NFT",
       "claimedNFT": "Claimed NFT",
       "totalNFT": "Total NFT",

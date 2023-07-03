@@ -47,6 +47,7 @@ interface IFilter {
     text: string;
     value: string | number;
   }[];
+  placeholder?: string;
   onFilterChange: (val: string) => void;
 }
 
@@ -109,7 +110,7 @@ export const TableDashboard = (props: ITableProps) => {
                 <Select
                   variant="table-filter"
                   maxW="40"
-                  placeholder="Rank"
+                  placeholder={filter?.placeholder ?? ""}
                   onChange={e => filter?.onFilterChange(e.target.value)}
                 >
                   {filter?.options?.map((item, idx) => (

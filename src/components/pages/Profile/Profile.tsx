@@ -1,10 +1,10 @@
+import { t } from "i18next";
+import { prettyBn } from "utils";
+import { Trans } from "react-i18next";
+import { useAsyncCall, useValhalla } from "hooks";
+import { WidgetProfileChile } from "components/Widget";
 import { Box, SimpleGrid, Heading, Button } from "@chakra-ui/react";
 import { CardProfile, CardProfileBalance } from "components/Card";
-import { WidgetProfileChile } from "components/Widget";
-import { useAsyncCall, useValhalla } from "hooks";
-import { t } from "i18next";
-import { Trans } from "react-i18next";
-import { prettyBn } from "utils";
 
 export const SectionProfile = () => {
   const {
@@ -72,6 +72,7 @@ export const SectionProfile = () => {
               {t("common.claim")}
             </Button>
           </WidgetProfileChile>
+
           <WidgetProfileChile
             variant={"gradient"}
             colorScheme={"purple:pink"}

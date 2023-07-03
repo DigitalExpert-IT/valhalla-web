@@ -1,8 +1,8 @@
-import { Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
-import { WidgetProfileMember } from "components/Widget/WidgetProfile";
-import { NETWORK_STATUS } from "constant/pages/profile";
-import { t } from "i18next";
 import React from "react";
+import { t } from "i18next";
+import { NETWORK_STATUS } from "constant/pages/profile";
+import { Container, Flex, Heading } from "@chakra-ui/react";
+import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 
 export const SectionNetworkStatusV2 = () => {
   return (

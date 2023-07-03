@@ -191,6 +191,7 @@ const Dashboard = () => {
         });
       }
 
+      setPage(1);
       setSelectAddressList(state => [...state, address]);
     },
     [listUser, currentItems, selectedLevel, selectedAddressList, searchKey]
@@ -215,9 +216,9 @@ const Dashboard = () => {
 
     const data = {
       head: [
-        { text: "Lv" },
-        { text: "Total Member" },
-        { text: "Potential Profit" },
+        { text: t("pages.dashboard.tableField.lv") },
+        { text: t("pages.dashboard.tableField.totalMember") },
+        { text: t("pages.dashboard.tableField.sumPotentialProfit") },
       ],
       body: levelMap.map(level => [
         level.lvl,
@@ -229,8 +230,14 @@ const Dashboard = () => {
             </Text>
           </HStack>
         </>,
-        listUser[level.lvl]?.reduce((acc, user) => acc + user.profitShare, 0) ??
-          0,
+        listUser[level.lvl]?.reduce(
+          (acc, user) =>
+            acc +
+            (level.lvl <= 5
+              ? ((user.profit - user.claimedNFT) * 5) / 100
+              : ((user.profit - user.claimedNFT) * 1) / 100),
+          0
+        ) ?? 0,
       ]),
       activeRow: selectedLevel - 1,
       onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
@@ -247,6 +254,7 @@ const Dashboard = () => {
         { text: `${t("pages.dashboard.tableField.totalNFT")}` },
         { text: `${t("pages.dashboard.tableField.claimedNFT")}` },
         { text: `${t("pages.dashboard.tableField.claimableNFT")}` },
+        { text: `${t("pages.dashboard.tableField.maximumProfit")}` },
         {
           text: `${t("pages.dashboard.tableField.potentialProfit")}`,
           isSortAble: true,
@@ -272,6 +280,9 @@ const Dashboard = () => {
         user.claimedNFT,
         user.profit - user.claimedNFT,
         user.profit,
+        selectedLevel + selectedAddressList.length <= 5
+          ? ((user.profit - user.claimedNFT) * 5) / 100
+          : ((user.profit - user.claimedNFT) * 1) / 100,
       ]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
@@ -283,9 +294,10 @@ const Dashboard = () => {
           options: rankMap.map((rank, idx) => ({
             key: rank.toLowerCase().replace(" ", "."),
             text: rank,
-            value: idx,
+            value: idx + 1,
           })),
-          onFilterChange: (val: string) => setFitlerRank(+val),
+          placeholder: t("pages.dashboard.tableField.rank"),
+          onFilterChange: (val: string) => setFitlerRank(+val - 1),
         },
       ],
       pagination: {
@@ -296,7 +308,7 @@ const Dashboard = () => {
     };
 
     return { data, options };
-  }, [currentItems]);
+  }, [currentItems, selectedLevel]);
 
   const summaryData: IDataItem[] = useMemo(() => {
     return [
@@ -339,31 +351,8 @@ const Dashboard = () => {
         pb="32 "
       >
         <Box flex={2} px="6">
-          <HStack
-            minH="220px"
-            bgImage="/assets/dashboard/bg-billboard.png"
-            bgSize="100%"
-            bgRepeat="no-repeat"
-            bgPos="bottom"
-            bgColor="global-brand-bg"
-            p="6"
-            rounded="md"
-          >
-            <Text flex={4} fontSize="lg" p="4" color="whiteAlpha.900">
-              {t("pages.dashboard.billboard")}
-            </Text>
-            <Center flex={1} height="156px">
-              <Divider orientation="vertical" borderColor="white" />
-            </Center>
-            <Box p={4}>
-              <AspectRatio flex={2} w="240px" ratio={471 / 134}>
-                <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
-              </AspectRatio>
-            </Box>
-          </HStack>
-
           <HStack mt="8" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="1" minW="260px" maxW="320px" minH="160px">
+            <Box pos="relative" flex="1" minW="370px" maxW="370px" minH="160px">
               <TableDashboard
                 title={
                   <HStack minH="46px" gap="4" alignItems="center">
@@ -385,7 +374,7 @@ const Dashboard = () => {
               />
             </Box>
 
-            <Box pos="relative" flex="2" minW="724px" maxW="750px" minH="160px">
+            <Box pos="relative" flex="2" minW="900px" maxW="900px" minH="160px">
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">

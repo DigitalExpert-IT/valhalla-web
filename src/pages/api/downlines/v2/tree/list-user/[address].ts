@@ -2,6 +2,7 @@ import { NextApiHandler } from "next";
 import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
 import { MAX_DOWNLINES_LEVEL } from "constant/rank";
+import { SYNTAX_LIST } from "constant/querySyntax";
 
 const prisma = new PrismaClient();
 
@@ -13,9 +14,13 @@ const getUserListUserPerLevel = async (
   address: string,
   level: number,
   offset: number,
-  limit: number
+  limit: number,
+  rank: string,
+  orderBy: string
 ) => {
-  const list = await prisma.$queryRaw`
+  const orderByTemplate = `ORDER BY "potentialProfit" ${orderBy} NULLS LAST`;
+  const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
+  const list = await prisma.$queryRawUnsafe(`
  SELECT
 	"User"."address",
 	"User"."upline",
@@ -36,7 +41,7 @@ const getUserListUserPerLevel = async (
 		(SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
 		) * 450) * 5 as float
-	)/ 100 as "potentialProfite"
+	)/ 100 as "potentialProfit"
 from
 	"User"
 	LEFT JOIN (
@@ -131,7 +136,7 @@ WITH RECURSIVE "hierarchy" AS (
 	FROM
 		"User"
 	WHERE
-		upline = ${address}
+		upline = '${address}'
 	UNION ALL
 	SELECT
 		parent.address,
@@ -150,15 +155,16 @@ SELECT
 FROM
 	"hierarchy"
 	WHERE
-	"level" = ${level}
+	"level" = ${level} ${rankTemplate}
 	) "hierarcyUser" ON "hierarcyUser"."address" = "User"."address" 
 GROUP BY
 	"User"."address",
 	"User"."upline",
 	"User"."rank",
 	"User"."telegramUsername"
+	${orderBy ? orderByTemplate : ""}
 OFFSET ${offset} FETCH NEXT ${limit} ROWS ONLY
-`;
+`);
 
   return list;
 };
@@ -166,10 +172,12 @@ OFFSET ${offset} FETCH NEXT ${limit} ROWS ONLY
 const getPagesFromListUser = async (
   address: string,
   level: number,
-  limit: number
+  limit: number,
+  rank: string
 ) => {
+  const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
   const list: [{ totalItem: number; totalPage: number }] =
-    await prisma.$queryRaw`
+    await prisma.$queryRawUnsafe(`
     WITH RECURSIVE "hierarchy" AS (
       SELECT
           address,
@@ -180,7 +188,7 @@ const getPagesFromListUser = async (
       FROM
           "User"
       WHERE
-          upline = ${address}
+          upline = '${address}'
       UNION
       ALL
       SELECT
@@ -197,11 +205,13 @@ const getPagesFromListUser = async (
   )
   SELECT
     CAST(COUNT(*)as int) as "totalItem", 
-    CEIL(CAST(COUNT(*)  as float) / ${limit}) as "totalPage" 
+    CEIL(CAST(COUNT(*)  as float) / ${limit}) as "totalPage",
+		"rank"
   FROM
       "hierarchy"
-  WHERE "level" = ${level}
-  `;
+  WHERE "level" = ${level} ${rankTemplate}
+	GROUP BY "rank"
+  `);
 
   return list.at(0);
 };
@@ -212,10 +222,16 @@ const getPagesFromListUser = async (
  */
 
 const handler: NextApiHandler = async (req, res) => {
+  if (req.method === "GET") {
+    return res.status(405).json({ status: 405, message: "wrong method" });
+  }
   const address = lowerCase(req.query.address);
-  const level = req.query.level ? Number(req.query.level) : 1;
+  const level = req.body.level ? Number(req.body.level) : 1;
+  const rank = req.body.rank ? Number(req.body.rank) : "";
+
   const page = req.query.page;
   const limit = req.query.limit;
+  const orderBy = req.query.orderBy;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -223,18 +239,31 @@ const handler: NextApiHandler = async (req, res) => {
   const pageSize = isLimitNumOrNan ? 5 : Number(limit);
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
+  // protect unsafe sql injection
+  if (orderBy && !SYNTAX_LIST[orderBy.toString()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+
   try {
     const getUser = await getUserListUserPerLevel(
       address,
       level,
       offset,
-      pageSize
+      pageSize,
+      String(rank ?? ""),
+      String(orderBy ?? "")
     );
 
-    const getPage = await getPagesFromListUser(address, level, pageSize);
+    const getPage = await getPagesFromListUser(
+      address,
+      level,
+      pageSize,
+      String(rank ?? "")
+    );
     return res.status(200).json({
       totalItem: getPage?.totalItem,
       totalPage: getPage?.totalPage,
+      level,
       items: getUser,
     });
   } catch (e: any) {

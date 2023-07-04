@@ -3,6 +3,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
 import { MAX_DOWNLINES_LEVEL } from "constant/rank";
 import { SYNTAX_LIST } from "constant/querySyntax";
+import { isNaN } from "lodash";
 
 const prisma = new PrismaClient();
 
@@ -241,6 +242,17 @@ const handler: NextApiHandler = async (req, res) => {
 
   // protect unsafe sql injection
   if (orderBy && !SYNTAX_LIST[orderBy.toString()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+  if (rank && rank.toString().length > 2) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+
+  if (isNaN(rank)) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+
+  if (rank && Number(rank) > 5) {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
 

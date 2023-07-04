@@ -6,6 +6,8 @@ import { MAX_DOWNLINES_LEVEL } from "constant/rank";
 const prisma = new PrismaClient();
 
 // todo if level < 5 must be 5% and > must be 1%;
+// filter by rank
+// sort by potentialProfit
 
 const getUserListUserPerLevel = async (
   address: string,

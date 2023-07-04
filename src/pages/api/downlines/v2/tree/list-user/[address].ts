@@ -256,6 +256,15 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
 
+  if (level && Number(level) > 15) {
+    return res.status(400).json({ status: 400, message: "out of bound" });
+  }
+  if (isNaN(level)) {
+    return res
+      .status(403)
+      .json({ status: 403, message: "character doesn't allow" });
+  }
+
   try {
     const getUser = await getUserListUserPerLevel(
       address,

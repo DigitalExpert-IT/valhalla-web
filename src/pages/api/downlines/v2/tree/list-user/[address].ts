@@ -27,7 +27,12 @@ const getUserListUserPerLevel = async (
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
 		) * 450 as int
 	) as "maxProfit",
-  cast(SUM(CAST("NFT"."nftDetail" ->> 'claimedPerNFT' as float)) as float) as "claimedNFT"
+  cast(SUM(CAST("NFT"."nftDetail" ->> 'claimedPerNFT' as float)) as float) as "claimedNFT",
+	cast(
+		(SUM(
+			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
+		) * 450) * 5 as float
+	)/ 100 as "potentialProfite"
 from
 	"User"
 	LEFT JOIN (

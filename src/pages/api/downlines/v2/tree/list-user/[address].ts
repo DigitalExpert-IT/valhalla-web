@@ -114,6 +114,7 @@ from
 									"blockNumber" DESC
 							) "farmList"
 					) "farmList" ON "Event"."args" ->> 'tokenId' = "farmList"."tokenId"
+					WHERE "NftMetadata"."isBlackListed" = false
 			) "transList"
 		order by
 			"transList"."tokenId",

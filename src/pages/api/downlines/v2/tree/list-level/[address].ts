@@ -5,7 +5,7 @@ import { MAX_DOWNLINES_LEVEL } from "constant/rank";
 
 const prisma = new PrismaClient();
 
-const getListLevel = async (address: string) => {
+const getListLevel = async (addressRoot: string) => {
   const list = await prisma.$queryRaw`
   WITH RECURSIVE hierarchy AS (
 	SELECT
@@ -17,86 +17,104 @@ const getListLevel = async (address: string) => {
 	FROM
 		"User"
 	WHERE
-		upline = ${address}
+		upline = ${addressRoot} -- root address
 	UNION ALL
 	SELECT
 		parent.address,
 		parent.upline,
 		parent.rank,
-		parent."telegramUsername",
+		parent. "telegramUsername",
 		"hierarchy"."level" + 1
 	FROM
 		"User" parent
 		JOIN hierarchy ON parent.upline = hierarchy.address
 	WHERE
-		"hierarchy"."level" < ${MAX_DOWNLINES_LEVEL}
+		"hierarchy"."level" < 15
 )
 SELECT
-	SUM(CASE
-		WHEN hierarchy."level" < 5 THEN CAST("maxProfit" AS float) * 5 / 100
-		ELSE CAST("maxProfit" AS float) * 1 / 100
-	END) AS "sumProfit",
-	hierarchy."level", 
-	totalUser
+	"hierarchy"."level", 
+  CAST("userHierarchyList"."totalUser" as int) as "userCount",
+  CAST(COUNT("tokenId") as int) as "totalNFT",
+  SUM(
+		CASE WHEN "hierarchy"."level" <= 5 THEN
+			(cast("nftDetail" ->> 'maxReward' AS float) * 5) / 100
+		ELSE
+			(cast("nftDetail" ->> 'maxReward' AS float) * 1) / 100
+		END) AS "potentialProfit",
+		SUM(CAST("nftDetail" ->> 'price' as float)) as "totalValue"
 FROM
 	hierarchy
-	INNER JOIN (
-		SELECT DISTINCT ON ("tokenId")
+	LEFT JOIN ( SELECT DISTINCT ON ("tokenId")
 			*
 		FROM (
 			SELECT
-				*,
-				"args" ->> 'to' AS "userAddress",
-				"args" ->> 'from' AS "from",
-				CAST("mintingPrice" / 1e9 AS INT) AS "price",
-				CAST(CAST("mintingPrice" / 1e9 AS INT) * (CAST("farmPercentage" AS float) / 10) / 100 AS float) AS "rewardPerday",
-				CAST(CAST("mintingPrice" / 1e9 AS INT) * (CAST("farmPercentage" AS float) / 10) / 100 AS float) * 450 AS "maxProfit"
+				"Event"."id",
+				"Event"."address",
+				"Event"."transactionHash",
+				"Event"."args" ->> 'tokenId' AS "tokenId",
+				"Event"."args" ->> 'from' AS "from",
+				"Event"."args" ->> 'to' AS "to",
+				"Event"."blockNumber",
+				"isBlackListed",
+				json_build_object('tokenId', "args" ->> 'tokenId', 'price', cast("NftMetadata"."mintingPrice" / 1e9 AS int), 'farmPercentage', cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float), 'mintedAt', "mintedAt", 'cardId', "cardId", 'from', "args" ->> 'from', 'to', "args" ->> 'to', 'blockNumber', "Event"."blockNumber", 'isBlackListed', "NftMetadata"."isBlackListed", 'rewardPerDay', cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100, 'maxReward', (cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100) * 450, 'lastFarm', "lastFarm") AS "nftDetail"
 			FROM
 				"Event"
-				INNER JOIN "NftMetadata" ON "NftMetadata"."tokenId" = "Event"."args" ->> 'tokenId'
+				INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"
+				FULL JOIN ( SELECT DISTINCT ON ("tokenId")
+						*
+					FROM (
+						SELECT
+							"args" ->> '_tokenId' AS "tokenId",
+							"createdAt" AS "lastFarm",
+							"blockNumber"
+						FROM
+							"Event"
+						WHERE
+							"Event"."event" = 'Farm'
+						ORDER BY
+							"blockNumber" DESC) "farmList") "farmList" ON "Event"."args" ->> 'tokenId' = "farmList"."tokenId") "transList"
 			WHERE
 				"isBlackListed" = FALSE
 			ORDER BY
-				"blockNumber" DESC
-		) "filterNFT"
-	) "nftWithUserList" ON hierarchy."address" = "nftWithUserList"."userAddress"
-	INNER JOIN (
-	
-	WITH RECURSIVE "hierarchy" AS (
-    SELECT
-        address,
-        upline,
-        rank,
-        "telegramUsername",
-        1 AS "level"
-    FROM
-        "User"
-    WHERE
-        upline = ${address}
-    UNION
-    ALL
-    SELECT
-        parent.address,
-        parent.upline,
-        parent.rank,
-        parent."telegramUsername",
-        "level" + 1
-    FROM
-        "User" parent
-        JOIN "hierarchy" child ON parent.upline = child.address
-    WHERE
-        "level" < ${MAX_DOWNLINES_LEVEL}
+				"transList"."tokenId",
+				"transList"."blockNumber" DESC) "userHaveNft" ON "userHaveNft"."to" = "hierarchy"."address"
+	LEFT JOIN (WITH RECURSIVE "hierarchy" AS (
+			SELECT
+				address,
+				upline,
+				rank,
+				"telegramUsername",
+				1 AS "level"
+			FROM
+				"User"
+			WHERE
+				upline = ${addressRoot} -- root address
+			UNION ALL
+			SELECT
+				parent.address,
+				parent.upline,
+				parent.rank,
+				parent. "telegramUsername",
+				"level" + 1
+			FROM
+				"User" parent
+				JOIN "hierarchy" child ON parent.upline = child.address
+			WHERE
+				"level" < 15
 )
-SELECT
-    "level",
-    1 as "sumPotentialProfit",
-    CAST(COUNT(*) as int) as totalUser
-FROM
-    "hierarchy"
-GROUP BY "level"	
-	) "hieraryWithTotalUser" ON "hierarchy"."level" = "hieraryWithTotalUser"."level"
-GROUP BY hierarchy."level", "hieraryWithTotalUser"."totaluser"
-ORDER BY "level" ASC;
+		SELECT
+			level,
+			COUNT(address) AS "totalUser"
+		FROM
+			"hierarchy"
+		GROUP BY
+			"level"
+) "userHierarchyList" ON "userHierarchyList"."level" = "hierarchy"."level"
+GROUP BY
+	"hierarchy"."level",
+	"userHierarchyList"."totalUser"
+ORDER BY
+	"hierarchy"."level" ASC
   `;
 
   return list;

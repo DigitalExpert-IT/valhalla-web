@@ -4,19 +4,7 @@ WITH RECURSIVE "hierarchy" AS (
         upline,
         rank,
         "telegramUsername",
-        1 AS "level",
-        json_build_object(
-            'address',
-            address,
-            'upline',
-            upline,
-            'telegram_username',
-            "telegramUsername",
-            'rank',
-            rank,
-            'level',
-            1
-        ) as listUser
+        1 AS "level"
     FROM
         "User"
     WHERE
@@ -28,19 +16,7 @@ WITH RECURSIVE "hierarchy" AS (
         parent.upline,
         parent.rank,
         parent."telegramUsername",
-        "level" + 1,
-        json_build_object(
-            'address',
-            parent.address,
-            'upline',
-            parent.upline,
-            'telegram_username',
-            parent."telegramUsername",
-            'rank',
-            parent.rank,
-            'level',
-            "level" + 1
-        ) as listUser
+        "level" + 1
     FROM
         "User" parent
         JOIN "hierarchy" child ON parent.upline = child.address
@@ -49,8 +25,8 @@ WITH RECURSIVE "hierarchy" AS (
 )
 SELECT
     "level",
-    json_agg(listUser) as users_per_level,
-    COUNT(listUser) as totalUser
+    json_agg("address") as "userList",
+    COUNT("address") as totalUser
 FROM
     "hierarchy"
 GROUP BY

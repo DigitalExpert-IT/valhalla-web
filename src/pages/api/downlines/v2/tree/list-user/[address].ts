@@ -41,8 +41,9 @@ const getUserListUserPerLevel = async (
 	cast(
 		(SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-		) * 450) * 5 as float
-	)/ 100 as "potentialProfit"
+		) * 450) * ${level <= 5 ? 5 : 1} as float
+	)/ 100 as "potentialProfit",
+	cast(${level <= 5 ? 5 : 1} as int) as "percentage"
 from
 	"User"
 	LEFT JOIN (
@@ -253,7 +254,7 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   if (rank && Number(rank) > 5) {
-    return res.status(403).json({ status: 403, message: "method not allowed" });
+    return res.status(403).json({ status: 403, message: "out of bound" });
   }
 
   if (level && Number(level) > 15) {

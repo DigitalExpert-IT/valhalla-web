@@ -1,5 +1,4 @@
 export * from "./CardNFT";
-export * from "./CardProfile";
 export * from "./CardFarmNFTv2";
 export * from "./CardProfileV2";
 export * from "./CardGenesisNFT";

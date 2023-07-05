@@ -1,4 +1,3 @@
-export * from "./SectionFeaturedPopulation";
 export * from "./SectionMatchingBonus";
 export * from "./SectionPartnership";
 export * from "./SectionFeatures";

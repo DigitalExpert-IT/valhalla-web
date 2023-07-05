@@ -29,7 +29,7 @@ const getListLevel = async (addressRoot: string) => {
 		"User" parent
 		JOIN hierarchy ON parent.upline = hierarchy.address
 	WHERE
-		"hierarchy"."level" < 15
+		"hierarchy"."level" < ${MAX_DOWNLINES_LEVEL}
 )
 SELECT
 	"hierarchy"."level", 
@@ -100,7 +100,7 @@ FROM
 				"User" parent
 				JOIN "hierarchy" child ON parent.upline = child.address
 			WHERE
-				"level" < 15
+				"level" < ${MAX_DOWNLINES_LEVEL} -- stop level
 )
 		SELECT
 			level,

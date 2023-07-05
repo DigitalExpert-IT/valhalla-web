@@ -250,7 +250,9 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   if (isNaN(rank)) {
-    return res.status(403).json({ status: 403, message: "method not allowed" });
+    return res
+      .status(403)
+      .json({ status: 403, message: "character doesn't allow" });
   }
 
   if (rank && Number(rank) > 5) {
@@ -260,6 +262,7 @@ const handler: NextApiHandler = async (req, res) => {
   if (level && Number(level) > 15) {
     return res.status(400).json({ status: 400, message: "out of bound" });
   }
+
   if (isNaN(level)) {
     return res
       .status(403)

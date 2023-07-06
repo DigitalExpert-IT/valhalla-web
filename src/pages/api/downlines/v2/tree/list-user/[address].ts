@@ -2,7 +2,7 @@ import { NextApiHandler } from "next";
 import { PrismaClient, User } from "@prisma/client";
 import { lowerCase } from "utils";
 import { MAX_DOWNLINES_LEVEL } from "constant/rank";
-import { SYNTAX_LIST } from "constant/querySyntax";
+import { ORDER_KEY } from "constant/queryOrderKey";
 import { isNaN } from "lodash";
 
 const prisma = new PrismaClient();
@@ -242,7 +242,7 @@ const handler: NextApiHandler = async (req, res) => {
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   // protect unsafe sql injection
-  if (orderBy && !SYNTAX_LIST[orderBy.toString()]) {
+  if (orderBy && !ORDER_KEY[orderBy.toString().toLowerCase()]) {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
   if (rank && rank.toString().length > 2) {

@@ -24,7 +24,7 @@ SELECT
         CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
       ) * 450
     ) * 5 as float
-  ) / 100 as "potentialProfite"
+  ) / 100 as "potentialProfit"
 from
   "User"
   LEFT JOIN (

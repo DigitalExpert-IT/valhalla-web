@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-import { Text, TextProps, Tooltip, useClipboard, useToast } from "@chakra-ui/react";
+import {
+  Text,
+  TextProps,
+  Tooltip,
+  useClipboard,
+  useToast,
+} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 type Props = TextProps & {

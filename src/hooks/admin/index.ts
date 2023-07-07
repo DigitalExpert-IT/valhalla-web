@@ -1,4 +1,4 @@
 export * from "./useUsersDashboard";
-export * from "./useNFTsDashboard";
+export * from "./useUserNFTsDashboardByType";
 export * from "./useBasicDashboardInfo";
 export * from "./useSummary";

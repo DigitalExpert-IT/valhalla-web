@@ -3,19 +3,28 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export interface IListDashboard {
+  NFT: "0";
+  amount: 151;
+  price: 5000;
+  totalAverage: "0.5";
+}
+
 const getNFTList = async () => {
   const list = prisma.$queryRaw`
     SELECT
       "cardId" as "NFT",
-      COUNT("tokenId") AS "amount", 
+      CAST(COUNT("tokenId") as int) AS "amount",
       CAST(AVG("mintingPrice") as float) / 1e9 as "price",
-      ROUND(AVG("farmPercentage") / 10, 1)as "totalAverage",
-      json_agg(
-        json_build_object(
-          'tokenId', "tokenId", 
-          'gacha', CAST("farmPercentage" as float) / 10
-        )
-      ) as "nftList"
+      ROUND(AVG("farmPercentage") / 10, 1)as "totalAverage"
+      -- ,
+      -- json_agg(
+      --   json_build_object(
+      --     'tokenId', "tokenId", 
+      --     'cardId', "cardId",
+      --     'gacha', CAST("farmPercentage" as float) / 10
+      --   )
+      -- ) as "nftList"
     FROM "NftMetadata"
     WHERE
       "isBlackListed" = FALSE

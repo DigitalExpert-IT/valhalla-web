@@ -1,5 +1,6 @@
 import { PrismaClient, User } from "@prisma/client";
 import { differenceInSeconds } from "date-fns";
+import { ta } from "date-fns/locale";
 import { NextApiHandler } from "next";
 
 export interface INFTItem {
@@ -28,6 +29,11 @@ export interface IUserWithNft extends User {
   totalInvest: number;
   profit: number;
   claimedNFT: number;
+}
+export interface IUserTotalCard {
+  address: string;
+  amount: number;
+  gachaAVG: number;
 }
 
 const prisma = new PrismaClient();
@@ -120,6 +126,100 @@ export const queryGetTotalPagesNFTByType = async (
   `;
 
   return totalNFT.at(0);
+};
+
+export const queryGetUserHaveNFTsByTypeInRow = async (
+  cardId: string,
+  skip: number,
+  take: number,
+  orderByAVG?: string
+) => {
+  const orderByTemplate = `ORDER BY "gachaAVG" ${orderByAVG} `;
+  const userLIst: IUserTotalCard[] = await prisma.$queryRawUnsafe(`
+  SELECT
+	"to",
+	CAST(COUNT("cardId") as int) AS "amount",
+  CAST( ROUND( AVG( CAST("farmPercentage" as DECIMAL) ), 1 ) as float )as  "gachaAVG"
+FROM ( 
+	SELECT 
+		DISTINCT 
+		ON ("tokenId")
+		*
+	FROM (
+      SELECT
+        "Event"."id",
+        "Event"."address",
+        "Event"."transactionHash",
+        "Event"."args" ->> 'tokenId' AS "tokenId",
+        "Event"."args" ->> 'from' AS "from",
+        "Event"."args" ->> 'to' AS "to",
+        "Event"."blockNumber",
+        cast("NftMetadata"."mintingPrice" / 1e9 AS int) AS "price",
+        cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) AS "farmPercentage",
+        "NftMetadata"."mintedAt" AS "mintedAt",
+        "NftMetadata"."isBlackListed" AS "isBlackListed",
+        "NftMetadata"."cardId" AS "cardId"
+      FROM
+        "Event"
+        INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId") "transList"
+      ORDER BY
+        "tokenId",
+        "transList"."blockNumber" DESC
+  ) "NFT"
+  WHERE "cardId" = '${cardId}'
+	  AND "to" != '0x000000000000000000000000000000000000dead'
+	  AND "isBlackListed" = FALSE
+	GROUP BY "to"
+	${orderByAVG ? orderByTemplate : ""}
+	OFFSET ${skip} ROWS FETCH NEXT ${take} ROWS ONLY 
+  `);
+  return userLIst;
+};
+
+export const queryGetUserHaveNFTByTypeWithNFTPages = async (
+  cardId: string,
+  take: number
+) => {
+  const pages: [{ totalPage: number; totalData: number }] =
+    await prisma.$queryRaw`
+  SELECT
+	CEIL(CAST(COUNT(*) AS float) / ${take}) AS "totalPage",
+	CAST(COUNT(*) AS int) AS "totalData"
+FROM (
+	SELECT
+		"to" AS "address",
+		COUNT("cardId") AS "amount",
+		ROUND(AVG(CAST("farmPercentage" AS DECIMAL)), 1) "gachaAVG"
+	FROM ( SELECT DISTINCT ON ("tokenId")
+			*
+		FROM (
+			SELECT
+				"Event"."id",
+				"Event"."address",
+				"Event"."transactionHash",
+				"Event"."args" ->> 'tokenId' AS "tokenId",
+				"Event"."args" ->> 'from' AS "from",
+				"Event"."args" ->> 'to' AS "to",
+				"Event"."blockNumber",
+				cast("NftMetadata"."mintingPrice" / 1e9 AS int) AS "price",
+				cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) AS "farmPercentage",
+				"NftMetadata"."mintedAt" AS "mintedAt",
+				"NftMetadata"."isBlackListed" AS "isBlackListed",
+				"NftMetadata"."cardId" AS "cardId"
+			FROM
+				"Event"
+				INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId") "transList"
+		ORDER BY
+			"tokenId",
+			"transList"."blockNumber" DESC) "NFT"
+	WHERE
+		"cardId" = ${cardId}
+		AND "to" != '0x000000000000000000000000000000000000dead'
+		AND "isBlackListed" = FALSE
+	GROUP BY
+		"to") "userNftWithType"
+  `;
+  return pages.at(0);
 };
 
 /**

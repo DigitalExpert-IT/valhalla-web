@@ -46,3 +46,8 @@ export interface IAdminDashboard {
   totalItem: number;
   items: IUserWithNft[];
 }
+
+export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
+  cardType?: number | string | string[];
+  items: IUserTotalCard[];
+}

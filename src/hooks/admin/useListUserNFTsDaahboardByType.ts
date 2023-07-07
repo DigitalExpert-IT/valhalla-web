@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
-import { IDashboardNFTsPerType } from "pages/api/admin/[nfts]";
+import { IDashboardNFTsPerType } from "interface";
 
 /**
  *

@@ -5,12 +5,7 @@ import {
   queryGetUserHaveNFTsByTypeInRow,
 } from "../query";
 import { ORDER_KEY } from "constant/queryOrderKey";
-import { IAdminDashboard, IUserTotalCard } from "interface";
-
-export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
-  cardType?: number | string | string[];
-  items: IUserTotalCard[];
-}
+import { IDashboardNFTsPerType } from "interface";
 
 /**
  *

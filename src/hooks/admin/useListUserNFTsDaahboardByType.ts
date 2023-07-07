@@ -12,7 +12,7 @@ import { IDashboardNFTsPerType } from "pages/api/admin/[nfts]";
  * @example ``` useNFTsDashboard(1, 2, 10) ```
  */
 
-export const useUserNFTsDashboardByType = (
+export const useListUserNFTsDaahboardByType = (
   type: number,
   page: number,
   limit: number,

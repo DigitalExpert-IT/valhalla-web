@@ -1,16 +1,11 @@
 import { NextApiHandler } from "next";
 import {
-  INFTItem,
   queryGetNFTs,
-  queryGetNFTsByTypeInRow,
-  queryGetTotalPagesNFTByType,
+  queryGetUserHaveNFTByTypeWithNFTPages,
+  queryGetUserHaveNFTsByTypeInRow,
 } from "../query";
-import { IAdminDashboard } from "../user";
-
-export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
-  cardType?: number | string | string[];
-  items: INFTItem[];
-}
+import { ORDER_KEY } from "constant/queryOrderKey";
+import { IDashboardNFTsPerType } from "interface";
 
 /**
  *
@@ -18,7 +13,7 @@ export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
  */
 
 const handler: NextApiHandler = async (req, res) => {
-  const { type, page, limit } = req.query;
+  const { type, page, limit, orderBy } = req.query;
 
   if (!type && !page && !limit) {
     const getAllNFT = await queryGetNFTs();
@@ -34,12 +29,18 @@ const handler: NextApiHandler = async (req, res) => {
   const pageSize = isLimitNumOrNan ? 10 : Number(limit);
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
-  const NFTs: INFTItem[] = await queryGetNFTsByTypeInRow(
+  // protect unsafe sql injection
+  if (orderBy && !ORDER_KEY[orderBy.toString().toLowerCase()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+
+  const NFTs = await queryGetUserHaveNFTsByTypeInRow(
     String(!type ? 0 : type),
     offset,
-    pageSize
+    pageSize,
+    String(orderBy ? orderBy : "")
   );
-  const totalNfts = await queryGetTotalPagesNFTByType(
+  const totalNfts = await queryGetUserHaveNFTByTypeWithNFTPages(
     String(!type ? 0 : type),
     pageSize
   );

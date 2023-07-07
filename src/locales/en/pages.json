@@ -361,6 +361,18 @@
       "users": "Users",
       "summary": "Summary"
     },
+    "tableField": {
+      "potentialProfit": "Potential Profit",
+      "maximumProfit": "Maximum Profit",
+      "claimableNFT": "Claimable NFT",
+      "claimedNFT": "Claimed NFT",
+      "totalNFT": "Total NFT",
+      "rank": "Rank",
+      "member": "Member",
+      "lv": "Lv",
+      "totalMember": "Total Member",
+      "sumPotentialProfit": "Sum Potential Profit"
+    },
     "placeholder": {
       "search": "Search member by address"
     },

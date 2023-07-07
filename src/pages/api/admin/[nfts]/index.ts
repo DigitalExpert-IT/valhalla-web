@@ -4,9 +4,8 @@ import {
   queryGetUserHaveNFTByTypeWithNFTPages,
   queryGetUserHaveNFTsByTypeInRow,
 } from "../query";
-import { IAdminDashboard } from "../user";
 import { ORDER_KEY } from "constant/queryOrderKey";
-import { IUserTotalCard } from "interface";
+import { IAdminDashboard, IUserTotalCard } from "interface";
 
 export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
   cardType?: number | string | string[];

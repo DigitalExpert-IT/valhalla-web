@@ -1,10 +1,10 @@
 import { User } from "@prisma/client";
 import { NextApiHandler } from "next";
 import { queryGetAllUserWithNFTs, queryGetUserWithNftPage } from "./query";
-import { INFTItem, IUserWithNft } from "interface";
+import { IAdminDashboard, INFTItem, IUserWithNft } from "interface";
 import { ORDER_KEY } from "constant/queryOrderKey";
 
-export interface IUser extends Omit<User, "blockNumber"> {
+interface IUser extends Omit<User, "blockNumber"> {
   id: number;
   address: string;
   upline: string;
@@ -14,12 +14,6 @@ export interface IUser extends Omit<User, "blockNumber"> {
   totalInvest: number;
   profit: number;
   NFTs: INFTItem[];
-}
-
-export interface IAdminDashboard {
-  totalPage: number;
-  totalItem: number;
-  items: IUserWithNft[];
 }
 
 /**

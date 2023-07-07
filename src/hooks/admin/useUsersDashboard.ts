@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
-import { IAdminDashboard } from "pages/api/admin/user";
+import { IAdminDashboard } from "interface";
 
 /**
  *

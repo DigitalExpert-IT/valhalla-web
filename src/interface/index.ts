@@ -40,3 +40,9 @@ export interface IListDashboard {
   price: 5000;
   totalAverage: "0.5";
 }
+
+export interface IAdminDashboard {
+  totalPage: number;
+  totalItem: number;
+  items: IUserWithNft[];
+}

@@ -3,13 +3,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export interface IListDashboard {
-  NFT: "0";
-  amount: 151;
-  price: 5000;
-  totalAverage: "0.5";
-}
-
 const getNFTList = async () => {
   const list = prisma.$queryRaw`
     SELECT

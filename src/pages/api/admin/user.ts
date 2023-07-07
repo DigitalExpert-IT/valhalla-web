@@ -1,11 +1,8 @@
-import { PrismaClient, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import { NextApiHandler } from "next";
-import {
-  INFTItem,
-  IUserWithNft,
-  queryGetAllUserWithNFTs,
-  queryGetUserWithNftPage,
-} from "./query";
+import { queryGetAllUserWithNFTs, queryGetUserWithNftPage } from "./query";
+import { INFTItem, IUserWithNft } from "interface";
+import { ORDER_KEY } from "constant/queryOrderKey";
 
 export interface IUser extends Omit<User, "blockNumber"> {
   id: number;
@@ -24,12 +21,6 @@ export interface IAdminDashboard {
   totalItem: number;
   items: IUserWithNft[];
 }
-const syntaxList: { [key: string]: boolean } = {
-  ["ASC"]: true,
-  ["DESC"]: true,
-  ["asc"]: true,
-  ["desc"]: true,
-};
 
 /**
  *
@@ -46,7 +37,7 @@ const handler: NextApiHandler = async (req, res) => {
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   // protect unsafe query raw from sql syntax injection
-  if (orderBy && !syntaxList[orderBy.toString()]) {
+  if (orderBy && !ORDER_KEY[orderBy.toString().toLowerCase()]) {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
   if (rank && rank.length > 2) {

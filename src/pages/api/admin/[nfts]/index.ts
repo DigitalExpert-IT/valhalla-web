@@ -1,12 +1,12 @@
 import { NextApiHandler } from "next";
 import {
-  IUserTotalCard,
   queryGetNFTs,
   queryGetUserHaveNFTByTypeWithNFTPages,
   queryGetUserHaveNFTsByTypeInRow,
 } from "../query";
 import { IAdminDashboard } from "../user";
 import { ORDER_KEY } from "constant/queryOrderKey";
+import { IUserTotalCard } from "interface";
 
 export interface IDashboardNFTsPerType extends Omit<IAdminDashboard, "items"> {
   cardType?: number | string | string[];

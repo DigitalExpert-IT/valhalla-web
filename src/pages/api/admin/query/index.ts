@@ -1,40 +1,7 @@
 import { PrismaClient, User } from "@prisma/client";
 import { differenceInSeconds } from "date-fns";
-import { ta } from "date-fns/locale";
+import { INFTItem, IUserTotalCard, IUserWithNft } from "interface";
 import { NextApiHandler } from "next";
-
-export interface INFTItem {
-  id: string;
-  to: string;
-  from: string;
-  price: number;
-  cardId: string;
-  tokenId: string;
-  address: string;
-  mintedAt: Date;
-  lastFarm?: Date;
-  farmReward: number;
-  blockNumber: number;
-  farmPercentage: number;
-  transactionHash: string;
-  rewardPerDay: number;
-  baseReward: number;
-  isBlackListed: boolean;
-  farmRewardPerSecond: number;
-}
-
-export interface IUserWithNft extends User {
-  NFTs: INFTItem[];
-  totalNft: number;
-  totalInvest: number;
-  profit: number;
-  claimedNFT: number;
-}
-export interface IUserTotalCard {
-  address: string;
-  amount: number;
-  gachaAVG: number;
-}
 
 const prisma = new PrismaClient();
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
-import { IListDashboard } from "pages/api/admin/[nfts]/list";
+import { IListDashboard } from "interface";
 
 export const useUserNFTsDashboardByType = () => {
   return useQuery(["NFTsListType"], async () => {

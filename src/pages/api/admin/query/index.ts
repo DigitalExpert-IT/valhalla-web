@@ -137,7 +137,7 @@ export const queryGetUserHaveNFTsByTypeInRow = async (
   const orderByTemplate = `ORDER BY "gachaAVG" ${orderByAVG} `;
   const userLIst: IUserTotalCard[] = await prisma.$queryRawUnsafe(`
   SELECT
-	"to",
+	"to" as "address",
 	CAST(COUNT("cardId") as int) AS "amount",
   CAST( ROUND( AVG( CAST("farmPercentage" as DECIMAL) ), 1 ) as float )as  "gachaAVG"
 FROM ( 

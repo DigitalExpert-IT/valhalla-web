@@ -7,7 +7,8 @@
     "build": "next build",
     "build:static": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@chakra-ui/anatomy": "^2.1.0",
@@ -81,6 +82,7 @@
     "@chakra-ui/shared-utils": "^2.0.3",
     "@chakra-ui/styled-system": "^2.5.0",
     "@chakra-ui/theme-tools": "^2.0.14",
+    "@playwright/test": "^1.35.1",
     "@types/d3-org-chart": "^2.6.2",
     "@types/keccak": "^3.0.1",
     "@types/lodash": "^4.14.191",

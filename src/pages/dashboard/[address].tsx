@@ -15,7 +15,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useScreen, useValhalla } from "hooks";
-import { shortenAddress } from "utils";
+import { prettyBn, shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
@@ -31,6 +31,7 @@ import {
   TableDashboard,
 } from "components/pages/Dashboard";
 import { useRouter } from "next/router";
+import { toBn } from "evm-bn";
 
 const PAGE_SIZE = 10;
 
@@ -210,6 +211,13 @@ const Dashboard = () => {
     [selectedAddressList]
   );
 
+  const simplifyBn = (val: number) => {
+    if (!val) return 0;
+    const stringVal = String(val);
+
+    return prettyBn(toBn(stringVal));
+  };
+
   const tableDownlineLevel = useMemo(() => {
     const levelMap = [];
 
@@ -237,13 +245,15 @@ const Dashboard = () => {
         </>,
         isMobileScreen
           ? null
-          : listUser[level.lvl]?.reduce(
-              (acc, user) =>
-                acc +
-                (level.lvl <= 5
-                  ? ((user.profit - user.claimedNFT) * 5) / 100
-                  : ((user.profit - user.claimedNFT) * 1) / 100),
-              0
+          : simplifyBn(
+              listUser[level.lvl]?.reduce(
+                (acc, user) =>
+                  acc +
+                  (level.lvl <= 5
+                    ? ((user.profit - user.claimedNFT) * 5) / 100
+                    : ((user.profit - user.claimedNFT) * 1) / 100),
+                0
+              )
             ) ?? 0,
       ]),
       activeRow: selectedLevel - 1,
@@ -282,9 +292,9 @@ const Dashboard = () => {
         if (isMobileScreen)
           return [
             <>
-              <HStack>
+              <HStack fontSize={{ base: "xs", sm: "sm" }}>
                 <BsFillPersonFill size="20" color="#000" />
-                <Text fontSize="sm">{shortenAddress(user.address)}</Text>
+                <Text>{shortenAddress(user.address)}</Text>
               </HStack>
             </>,
             <>
@@ -295,14 +305,20 @@ const Dashboard = () => {
                 />
               </AspectRatio>
             </>,
-            user.profit,
+            simplifyBn(
+              selectedLevel + selectedAddressList.length <= 5
+                ? ((user.profit - user.claimedNFT) * 5) / 100
+                : ((user.profit - user.claimedNFT) * 1) / 100
+            ),
           ];
 
         return [
           <>
             <HStack>
               <BsFillPersonFill size="20" color="#000" />
-              <Text fontSize="sm">{shortenAddress(user.address)}</Text>
+              <Text fontSize={{ base: "xs", sm: "sm" }}>
+                {shortenAddress(user.address)}
+              </Text>
             </HStack>
           </>,
           <>
@@ -314,12 +330,14 @@ const Dashboard = () => {
             </AspectRatio>
           </>,
           user.listNFT?.length,
-          user.claimedNFT,
-          user.profit - user.claimedNFT,
-          user.profit,
-          selectedLevel + selectedAddressList.length <= 5
-            ? ((user.profit - user.claimedNFT) * 5) / 100
-            : ((user.profit - user.claimedNFT) * 1) / 100,
+          simplifyBn(user.claimedNFT),
+          simplifyBn(user.profit - user.claimedNFT),
+          simplifyBn(user.profit),
+          simplifyBn(
+            selectedLevel + selectedAddressList.length <= 5
+              ? ((user.profit - user.claimedNFT) * 5) / 100
+              : ((user.profit - user.claimedNFT) * 1) / 100
+          ),
         ];
       }),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
@@ -398,6 +416,7 @@ const Dashboard = () => {
             direction={{ base: "column", sm: "row" }}
           >
             <Box
+              display={!searchKey.length ? "block" : "none"}
               pos="relative"
               flex="1"
               minW={{ base: "full", sm: "370px" }}
@@ -421,6 +440,7 @@ const Dashboard = () => {
                   </HStack>
                 }
                 data={tableDownlineLevel.data}
+                maxTableHeight={isMobileScreen ? "330px" : "unset"}
                 isLoading={isLoading}
               />
             </Box>
@@ -472,7 +492,7 @@ const Dashboard = () => {
 
         <Box
           maxW="453px"
-          minW="453px"
+          minW={{ base: "full", sm: "453px" }}
           flex={1}
           color="gray.800"
           py="6"
@@ -487,4 +507,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+// export default withConnection(withCorrectAddress(Dashboard));
+export default Dashboard;

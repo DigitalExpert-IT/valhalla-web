@@ -60,6 +60,7 @@ interface ITableProps {
     filter?: IFilter[];
   };
   isLoading?: boolean;
+  maxTableHeight?: string;
 }
 
 /**
@@ -79,7 +80,7 @@ interface ITableProps {
  */
 
 export const TableDashboard = (props: ITableProps) => {
-  const { title, data, options, isLoading } = props;
+  const { title, data, options, isLoading, maxTableHeight } = props;
   const { t } = useTranslation();
   const [sortState, setSortState] = useState<{ [x: string]: boolean }>({});
 
@@ -146,7 +147,12 @@ export const TableDashboard = (props: ITableProps) => {
           : null}
       </HStack>
 
-      <TableContainer border="1px solid #000" borderRadius="xl">
+      <TableContainer
+        border="1px solid #000"
+        borderRadius="xl"
+        maxH={maxTableHeight ? maxTableHeight : "unset"}
+        overflowY={maxTableHeight ? "scroll" : "unset"}
+      >
         <Table variant="dashboard" color="gray.800">
           <Thead>
             <Tr>
@@ -157,7 +163,9 @@ export const TableDashboard = (props: ITableProps) => {
                 return (
                   <Th key={key} onClick={() => handleClickSort(item)}>
                     <HStack>
-                      <Text>{item.text}</Text>
+                      <Text fontSize={{ base: "xs", sm: "sm" }}>
+                        {item.text}
+                      </Text>
                       {item.isSortAble ? (
                         sortState[key] ? (
                           <BsChevronUp />
@@ -191,7 +199,11 @@ export const TableDashboard = (props: ITableProps) => {
                   >
                     {row?.map((col, idx) => {
                       if (_.isNull(col)) return null;
-                      return <Td key={idx}>{col}</Td>;
+                      return (
+                        <Td key={idx} fontSize={{ base: "xs", sm: "sm" }}>
+                          {col}
+                        </Td>
+                      );
                     })}
                   </Tr>
                 ))}

@@ -9,7 +9,6 @@ import {
   Image,
   AspectRatio,
   Button,
-  useDisclosure,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -30,6 +29,8 @@ import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
 import { BsGrid } from "react-icons/bs";
 import { useAddress } from "@thirdweb-dev/react";
+import { useContext } from "react";
+import { DashboardContext as Context } from "components/Layout/context/LayoutDashboardContext";
 
 interface ISidebarDrawerProps {
   isOpen: boolean;
@@ -40,7 +41,6 @@ const SideBardrawer = (props: ISidebarDrawerProps) => {
   const router = useRouter();
   const address = useAddress();
   const { isOpen, onClose } = props;
-  const [isLargethan800] = useMediaQuery("(min-width: 800px)");
   const { t } = useTranslation();
 
   const isAdminPage = router.asPath.includes("admin");
@@ -89,10 +89,7 @@ const SideBardrawer = (props: ISidebarDrawerProps) => {
         <DrawerCloseButton />
         <DrawerHeader p="8">
           <Link href="/">
-            <AspectRatio
-              w={isLargethan800 ? 140 : 50}
-              ratio={isLargethan800 ? 4 / 1 : 1}
-            >
+            <AspectRatio w={140} ratio={4 / 1}>
               <Image src={"/assets/logo/gnLogo-2.png"} alt="logo-image" />
             </AspectRatio>
           </Link>
@@ -144,7 +141,8 @@ const SideBardrawer = (props: ISidebarDrawerProps) => {
 };
 
 export const Sidebar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const DashboardContext = useContext(Context);
+  const { isOpenSidebar, onOpenSidebar, onCloseSidebar } = DashboardContext;
 
   const WrapperStyle = {
     position: "relative" as any,
@@ -164,12 +162,12 @@ export const Sidebar = () => {
             </AspectRatio>
           </Link>
           <Divider orientation="horizontal" />
-          <Button variant="unstyled" px="0" onClick={onOpen}>
+          <Button variant="unstyled" px="0" onClick={onOpenSidebar}>
             <Icon as={BsGrid} width="24px" height="24px" />
           </Button>
         </Stack>
 
-        <SideBardrawer isOpen={isOpen} onClose={onClose} />
+        <SideBardrawer isOpen={isOpenSidebar} onClose={onCloseSidebar} />
       </Box>
     </DarkMode>
   );

@@ -60,7 +60,7 @@ const initialState: IDashboard = {
   potensialProfit: "",
   listProfitPerLevel: [],
   totalNFTCirculatingSuply: 0,
-  isLoading: false,
+  isLoading: true,
 };
 const useDashoardStore = create<IDashboard>(() => initialState);
 

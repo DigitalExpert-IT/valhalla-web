@@ -21,7 +21,7 @@ import { BsSearch, BsList } from "react-icons/bs";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { shortenAddress } from "utils";
 
-interface IPropsType extends BoxProps {
+interface IPropsType {
   address: string;
   isShowSearch?: boolean;
   onSearchChange?: (e: any) => void;
@@ -130,7 +130,14 @@ export const HeaderDashboard = (props: IPropsType) => {
           </Link>
         ) : null}
 
-        <HStack w="full" pos="absolute" right="2" justifyContent="end">
+        <HStack
+          w="full"
+          pos="absolute"
+          right="2"
+          justifyContent="end"
+          mx={{ base: "unset", sm: "-8px" }}
+          mt={{ base: "unset", sm: "6" }}
+        >
           {isShowSearch && onSearchChange ? (
             <SearchComponent
               onSearchChange={onSearchChange}

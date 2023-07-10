@@ -392,7 +392,6 @@ const Dashboard = () => {
   return (
     <LayoutDashboard>
       <HeaderDashboard
-        display={{ base: "none", sm: "block" }}
         address={address.current}
         isShowSearch
         onSearchChange={searchDebounce}
@@ -440,7 +439,7 @@ const Dashboard = () => {
                   </HStack>
                 }
                 data={tableDownlineLevel.data}
-                maxTableHeight={isMobileScreen ? "330px" : "unset"}
+                maxTableHeight={isMobileScreen ? "330px" : undefined}
                 isLoading={isLoading}
               />
             </Box>
@@ -507,5 +506,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withCorrectAddress(Dashboard));
-export default Dashboard;
+export default withConnection(withCorrectAddress(Dashboard));

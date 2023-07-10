@@ -101,6 +101,10 @@ const variantFilter = defineStyle(() => ({
     },
     "> option, > optgroup": {
       color: "black",
+      fontSize: {
+        base: "xs",
+        sm: "md",
+      },
     },
   },
   icon: {

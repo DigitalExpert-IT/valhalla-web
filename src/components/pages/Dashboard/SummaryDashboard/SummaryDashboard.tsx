@@ -74,7 +74,13 @@ export const SummaryDashboard = (props: ISummaryProps) => {
   }, [data, isLoading]);
 
   return (
-    <Stack alignItems="center" bg="dashboard.gray" w="full" p="8" rounded="lg">
+    <Stack
+      alignItems="center"
+      bg="dashboard.gray"
+      w="full"
+      p={{ base: "0", sm: "8" }}
+      rounded="lg"
+    >
       <Heading as="h2" fontSize="2xl" mb="4">
         {t("pages.dashboard.title.summary")}
       </Heading>{" "}

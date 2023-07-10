@@ -8,7 +8,11 @@ const handler: NextApiHandler = async (req, res) => {
     return res.status(404).send("404");
   }
 
-  return res.redirect(image);
+  return res.json({
+    name: "NFT Genesis",
+    description: "automatically receive a generous 2% share of the marketing revenues generated from subsequent NFT Farm sales.",
+    video: image,
+  });
 };
 
 export default handler;

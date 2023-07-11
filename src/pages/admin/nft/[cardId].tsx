@@ -66,6 +66,7 @@ const CardId = () => {
               <TableDashboard
                 title={"{{farm type}}"}
                 data={NFTCardById.data}
+                options={NFTCardById.options}
                 isLoading={isLoading}
               />
             </Box>

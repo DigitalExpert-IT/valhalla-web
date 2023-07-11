@@ -19,9 +19,10 @@ import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 import { useAddress } from "@thirdweb-dev/react";
 import { useAccountMap } from "hooks/valhalla";
 import { useSummary } from "hooks/user";
+import { ZERO_ADDRESS } from "constant/address";
 
 export const SectionProfileV2 = () => {
-  const address = useAddress() ?? "0x0";
+  const address = useAddress() ?? ZERO_ADDRESS;
   const {
     data: summaryData,
     isLoading: summaryLoading,

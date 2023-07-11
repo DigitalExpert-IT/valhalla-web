@@ -50,6 +50,7 @@ const SearchComponent = (props: ISearchComponent) => {
       <HStack width="full" justifyContent="end">
         <Button
           px="0"
+          pe={isCollapsed ? "5" : "0"}
           variant="unstyle"
           onClick={handleCollapse}
           transform={isCollapsed ? "translateX(270px)" : "translateX(0px)"}
@@ -60,12 +61,12 @@ const SearchComponent = (props: ISearchComponent) => {
         <Box overflow="hidden">
           <FormControl
             flex={1}
-            me="4"
-            transform={isCollapsed ? "translateX(270px)" : "translateX(0px)"}
+            transform={isCollapsed ? "translateX(350px)" : "translateX(0px)"}
             {...collapseTransition}
           >
             <InputGroup>
               <Input
+                maxW="300px"
                 variant="dashboard"
                 type="search"
                 borderBottom="1px"
@@ -125,7 +126,7 @@ export const HeaderDashboard = (props: IPropsType) => {
         {isMobileScreen ? (
           <Link href="/" opacity={isCollapsed ? 1 : 0}>
             <AspectRatio w={179} ratio={6 / 1}>
-              <Image src={"/assets/logo/gnlogo-black.png"} alt="logo-image" />
+              <Image src={"/assets/logo/gnLogo-black.png"} alt="logo-image" />
             </AspectRatio>
           </Link>
         ) : null}

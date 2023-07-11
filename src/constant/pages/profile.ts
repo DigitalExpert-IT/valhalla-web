@@ -4,6 +4,7 @@ export const PROFILE_MEMBER = [
   { label: t("common.referrer"), value: 5 },
   { label: t("common.directReferrals"), value: 5 },
   { label: t("common.telegramOnlyMember"), value: "telegram" },
+  { label: t("common.totalPotentialProfit"), value: 5 }
 ];
 
 export const PROFILE_BALANCE = [

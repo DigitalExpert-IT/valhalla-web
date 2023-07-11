@@ -18,9 +18,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { WidgetProfileMember } from "components/Widget/WidgetProfile";
 import { useAddress } from "@thirdweb-dev/react";
 import { useAccountMap } from "hooks/valhalla";
+import { useSummary } from "hooks/user";
+import { ZERO_ADDRESS } from "constant/address";
 
 export const SectionProfileV2 = () => {
-  const address = useAddress() ?? "0x0";
+  const address = useAddress() ?? ZERO_ADDRESS;
+  const {
+    data: summaryData,
+    isLoading: summaryLoading,
+    error,
+  } = useSummary(address);
   const accountMap = useAccountMap();
   const { data, isLoading } = useMe();
   const user = useMemo<User>(() => {
@@ -134,7 +141,7 @@ export const SectionProfileV2 = () => {
         py={"6"}
         justify={{ base: "center", xl: "space-between" }}
         wrap={"wrap"}
-        gap={{ base: "4", lg: "8" }}
+        gap={{ base: "2", lg: "8" }}
         zIndex={"1"}
       >
         <WidgetProfileMember
@@ -144,6 +151,12 @@ export const SectionProfileV2 = () => {
         <WidgetProfileMember
           label={"common.directReferrals"}
           value={accountMap.data?.directDownlineCount.toString() ?? "0"}
+        />
+        <WidgetProfileMember
+          label={"common.totalPotentialProfit"}
+          isLoading={summaryLoading}
+          value={ summaryData?.totalPotentialProfit ?? "0"}
+
         />
         <WidgetProfileMember
           isLoading={

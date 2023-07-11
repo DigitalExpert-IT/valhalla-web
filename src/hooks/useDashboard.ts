@@ -7,6 +7,7 @@ import { createInitiator, getGnetRate, prettyBn } from "utils";
 import { useAddress } from "@thirdweb-dev/react";
 import { useAccountMap } from "./valhalla";
 import { groupBy } from "lodash";
+import _ from "lodash";
 
 interface INFTItem {
   id: string;
@@ -197,10 +198,10 @@ export const useDashboard = (byPasAddress?: string) => {
       address = byPasAddress;
     }
 
-    if (address && account?.rank) {
+    if (address && !_.isNull(account?.rank)) {
       init(address, account?.rank);
     }
-  }, [address, account?.rank]);
+  }, [address, account?.rank, byPasAddress]);
 
   return { ...store };
 };

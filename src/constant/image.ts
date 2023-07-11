@@ -8,5 +8,5 @@ export const CARD_IMAGE_MAP = {
 };
 
 export const CARD_IMAGE_GENESIS_MAP = {
-  "0": "https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611"
-}
+  "0": "https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611",
+};

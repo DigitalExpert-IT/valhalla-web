@@ -10,7 +10,8 @@ const handler: NextApiHandler = async (req, res) => {
 
   return res.json({
     name: "NFT Genesis",
-    description: "automatically receive a generous 2% share of the marketing revenues generated from subsequent NFT Farm sales.",
+    description:
+      "automatically receive a generous 2% share of the marketing revenues generated from subsequent NFT Farm sales.",
     video: image,
   });
 };

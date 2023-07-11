@@ -126,7 +126,7 @@ export const HeaderDashboard = (props: IPropsType) => {
         {isMobileScreen ? (
           <Link href="/" opacity={isCollapsed ? 1 : 0}>
             <AspectRatio w={179} ratio={6 / 1}>
-              <Image src={"/assets/logo/gnlogo-black.png"} alt="logo-image" />
+              <Image src={"/assets/logo/gnLogo-black.png"} alt="logo-image" />
             </AspectRatio>
           </Link>
         ) : null}

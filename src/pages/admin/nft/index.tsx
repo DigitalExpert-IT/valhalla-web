@@ -40,7 +40,7 @@ const NFT = () => {
     [listNFT]
   );
 
-  const TableUser = useMemo(() => {
+  const TableNFTList = useMemo(() => {
     const data = {
       head: [
         { text: "NFT" },
@@ -76,7 +76,7 @@ const NFT = () => {
             <Box pos="relative" flex="2" minH="160px">
               <TableDashboard
                 title={t("pages.dashboard.title.users") ?? ""}
-                data={TableUser.data}
+                data={TableNFTList.data}
                 isLoading={isLoadingListNFT}
               />
             </Box>

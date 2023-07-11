@@ -47,7 +47,7 @@ export const WidgetProfileMember = (props: IPropsMember) => {
   const { label, value, isLoading, children, ...rest } = props;
   return (
     <HStack
-      w={"96"}
+      w={{base: "96", lg: "60"}}
       h={"14"}
       bg={"#33056C"}
       justify={"center"}

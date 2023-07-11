@@ -12,9 +12,10 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   useToast,
+  Stack,
 } from "@chakra-ui/react";
-import { useValhalla } from "hooks";
-import { shortenAddress } from "utils";
+import { useScreen, useValhalla } from "hooks";
+import { prettyBn, shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
@@ -30,6 +31,7 @@ import {
   TableDashboard,
 } from "components/pages/Dashboard";
 import { useRouter } from "next/router";
+import { toBn } from "evm-bn";
 
 const PAGE_SIZE = 10;
 
@@ -46,6 +48,8 @@ const Dashboard = () => {
   const [sortByProfit, setSortByProfit] = useState("ASC");
   const [filterRank, setFitlerRank] = useState<number | null>(-1);
   const [searchKey, setSearchKey] = useState("");
+
+  const { isMobileScreen } = useScreen();
 
   useEffect(() => {
     if (typeof queryAddress === "string") address.current = queryAddress;
@@ -207,6 +211,13 @@ const Dashboard = () => {
     [selectedAddressList]
   );
 
+  const simplifyBn = (val: number) => {
+    if (!val) return 0;
+    const stringVal = String(val);
+
+    return prettyBn(toBn(stringVal));
+  };
+
   const tableDownlineLevel = useMemo(() => {
     const levelMap = [];
 
@@ -218,7 +229,9 @@ const Dashboard = () => {
       head: [
         { text: t("pages.dashboard.tableField.lv") },
         { text: t("pages.dashboard.tableField.totalMember") },
-        { text: t("pages.dashboard.tableField.sumPotentialProfit") },
+        isMobileScreen
+          ? null
+          : { text: t("pages.dashboard.tableField.sumPotentialProfit") },
       ],
       body: levelMap.map(level => [
         level.lvl,
@@ -230,60 +243,103 @@ const Dashboard = () => {
             </Text>
           </HStack>
         </>,
-        listUser[level.lvl]?.reduce(
-          (acc, user) =>
-            acc +
-            (level.lvl <= 5
-              ? ((user.profit - user.claimedNFT) * 5) / 100
-              : ((user.profit - user.claimedNFT) * 1) / 100),
-          0
-        ) ?? 0,
+        isMobileScreen
+          ? null
+          : simplifyBn(
+              listUser[level.lvl]?.reduce(
+                (acc, user) =>
+                  acc +
+                  (level.lvl <= 5
+                    ? ((user.profit - user.claimedNFT) * 5) / 100
+                    : ((user.profit - user.claimedNFT) * 1) / 100),
+                0
+              )
+            ) ?? 0,
       ]),
       activeRow: selectedLevel - 1,
       onClickRow: (_: any, rowIdx: number) => handleClickLevel(rowIdx + 1),
     };
 
     return { data };
-  }, [listUser, selectedLevel]);
+  }, [listUser, selectedLevel, isMobileScreen]);
 
   const tableMember = useMemo(() => {
     const data = {
-      head: [
-        { text: `${t("pages.dashboard.tableField.member")}` },
-        { text: `${t("pages.dashboard.tableField.rank")}` },
-        { text: `${t("pages.dashboard.tableField.totalNFT")}` },
-        { text: `${t("pages.dashboard.tableField.claimedNFT")}` },
-        { text: `${t("pages.dashboard.tableField.claimableNFT")}` },
-        { text: `${t("pages.dashboard.tableField.maximumProfit")}` },
-        {
-          text: `${t("pages.dashboard.tableField.potentialProfit")}`,
-          isSortAble: true,
-          onClickSort: (sortBy: string) => setSortByProfit(sortBy),
-        },
-      ],
-      body: currentItems?.map(user => [
-        <>
-          <HStack>
-            <BsFillPersonFill size="20" color="#000" />
-            <Text fontSize="sm">{shortenAddress(user.address)}</Text>
-          </HStack>
-        </>,
-        <>
-          <AspectRatio w="18px" ratio={15 / 17}>
-            <Image
-              src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
-              alt={rankMap[0]}
-            />
-          </AspectRatio>
-        </>,
-        user.listNFT?.length,
-        user.claimedNFT,
-        user.profit - user.claimedNFT,
-        user.profit,
-        selectedLevel + selectedAddressList.length <= 5
-          ? ((user.profit - user.claimedNFT) * 5) / 100
-          : ((user.profit - user.claimedNFT) * 1) / 100,
-      ]),
+      head: isMobileScreen
+        ? [
+            { text: `${t("pages.dashboard.tableField.member")}` },
+            { text: `${t("pages.dashboard.tableField.rank")}` },
+            {
+              text: `${t("pages.dashboard.tableField.potentialProfit")}`,
+              isSortAble: true,
+              onClickSort: (sortBy: string) => setSortByProfit(sortBy),
+            },
+          ]
+        : [
+            { text: `${t("pages.dashboard.tableField.member")}` },
+            { text: `${t("pages.dashboard.tableField.rank")}` },
+            { text: `${t("pages.dashboard.tableField.totalNFT")}` },
+            { text: `${t("pages.dashboard.tableField.claimedNFT")}` },
+            { text: `${t("pages.dashboard.tableField.claimableNFT")}` },
+            { text: `${t("pages.dashboard.tableField.maximumProfit")}` },
+            {
+              text: `${t("pages.dashboard.tableField.potentialProfit")}`,
+              isSortAble: true,
+              onClickSort: (sortBy: string) => setSortByProfit(sortBy),
+            },
+          ],
+      body: currentItems?.map(user => {
+        if (isMobileScreen)
+          return [
+            <>
+              <HStack fontSize={{ base: "xs", sm: "sm" }}>
+                <BsFillPersonFill size="20" color="#000" />
+                <Text>{shortenAddress(user.address)}</Text>
+              </HStack>
+            </>,
+            <>
+              <AspectRatio w="18px" ratio={15 / 17}>
+                <Image
+                  src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
+                  alt={rankMap[0]}
+                />
+              </AspectRatio>
+            </>,
+            simplifyBn(
+              selectedLevel + selectedAddressList.length <= 5
+                ? ((user.profit - user.claimedNFT) * 5) / 100
+                : ((user.profit - user.claimedNFT) * 1) / 100
+            ),
+          ];
+
+        return [
+          <>
+            <HStack>
+              <BsFillPersonFill size="20" color="#000" />
+              <Text fontSize={{ base: "xs", sm: "sm" }}>
+                {shortenAddress(user.address)}
+              </Text>
+            </HStack>
+          </>,
+          <>
+            <AspectRatio w="18px" ratio={15 / 17}>
+              <Image
+                src={"/" + RANK_SYMBOL_MAP[user.rank ?? 0]}
+                alt={rankMap[0]}
+              />
+            </AspectRatio>
+          </>,
+          user.listNFT?.length,
+          simplifyBn(user.claimedNFT),
+          simplifyBn(user.profit - user.claimedNFT),
+          simplifyBn(user.profit),
+          simplifyBn(
+            selectedLevel + selectedAddressList.length <= 5
+              ? ((user.profit - user.claimedNFT) * 5) / 100
+              : ((user.profit - user.claimedNFT) * 1) / 100
+          ),
+        ];
+      }),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
 
@@ -308,7 +364,7 @@ const Dashboard = () => {
     };
 
     return { data, options };
-  }, [currentItems, selectedLevel]);
+  }, [currentItems, selectedLevel, isMobileScreen]);
 
   const summaryData: IDataItem[] = useMemo(() => {
     return [
@@ -341,18 +397,31 @@ const Dashboard = () => {
         onSearchChange={searchDebounce}
       />
 
-      <HStack
+      <Stack
         minW="fit-content"
         width="full"
         minH="calc(100vh - 129px)"
         flex={4}
         alignItems="streetch"
         bg="#f6f7ff"
-        pb="32 "
+        pb="32"
+        direction={{ base: "column", sm: "row" }}
       >
-        <Box flex={2} px="6">
-          <HStack mt="8" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="1" minW="370px" maxW="370px" minH="160px">
+        <Box flex={2} px="6" order={{ base: 2, sm: 1 }}>
+          <Stack
+            mt="8"
+            gap="2"
+            alignItems="streetch"
+            direction={{ base: "column", sm: "row" }}
+          >
+            <Box
+              display={!searchKey.length ? "block" : "none"}
+              pos="relative"
+              flex="1"
+              minW={{ base: "full", sm: "370px" }}
+              maxW={{ base: "full", sm: "370px" }}
+              minH="160px"
+            >
               <TableDashboard
                 title={
                   <HStack minH="46px" gap="4" alignItems="center">
@@ -370,11 +439,18 @@ const Dashboard = () => {
                   </HStack>
                 }
                 data={tableDownlineLevel.data}
+                maxTableHeight={isMobileScreen ? "330px" : undefined}
                 isLoading={isLoading}
               />
             </Box>
 
-            <Box pos="relative" flex="2" minW="900px" maxW="900px" minH="160px">
+            <Box
+              pos="relative"
+              flex="2"
+              minW={{ base: "full", sm: "900px" }}
+              maxW={{ base: "full", sm: "900px" }}
+              minH="160px"
+            >
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
@@ -410,21 +486,22 @@ const Dashboard = () => {
                 isLoading={isLoading}
               />
             </Box>
-          </HStack>
+          </Stack>
         </Box>
 
         <Box
           maxW="453px"
-          minW="453px"
+          minW={{ base: "full", sm: "453px" }}
           flex={1}
           color="gray.800"
           py="6"
           px="6"
           bg="white"
+          order={{ base: 1, sm: 2 }}
         >
           <SummaryDashboard data={summaryData} isLoading={isLoading} />
         </Box>
-      </HStack>
+      </Stack>
     </LayoutDashboard>
   );
 };

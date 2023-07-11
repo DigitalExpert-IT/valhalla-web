@@ -75,7 +75,7 @@ const NFT = () => {
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px">
               <TableDashboard
-                title={t("pages.dashboard.title.users") ?? ""}
+                title={"{{List NFT}}"}
                 data={TableNFTList.data}
                 isLoading={isLoadingListNFT}
               />

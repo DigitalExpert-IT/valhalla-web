@@ -62,22 +62,12 @@ const CardId = () => {
       >
         <Box px="6">
           <HStack mt="16" gap="2" alignItems="streetch">
-            <Box pos="relative" flex={1} minH="160px">
+            <Box pos="relative" flex="2" minH="160px" w="100%">
               <TableDashboard
-                title="{{farm type}}"
+                title={"{{farm type}}"}
                 data={NFTCardById.data}
-                options={NFTCardById.options}
                 isLoading={isLoading}
               />
-              <Box
-                maxW="453px"
-                minW="453px"
-                flex={1}
-                color="gray.800"
-                py="6"
-                px="6"
-                bg="white"
-              ></Box>
             </Box>
           </HStack>
         </Box>

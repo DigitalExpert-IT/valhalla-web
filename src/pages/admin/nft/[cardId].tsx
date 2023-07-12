@@ -7,11 +7,13 @@ import { ZERO_ADDRESS } from "constant/address";
 import { useListUserNFTsDaahboardByType } from "hooks/admin";
 import { useRouter } from "next/router";
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const PAGE_SIZE = 10;
 
 const CardId = () => {
   const address = useAddress() ?? ZERO_ADDRESS;
+  const { t } = useTranslation();
   const router = useRouter();
   const [page, setPage] = useState(1);
   const { data: nftByCard, isLoading } = useListUserNFTsDaahboardByType(
@@ -49,6 +51,8 @@ const CardId = () => {
     return { data, options };
   }, [nftByCard?.items]);
 
+  const farmId = Number(router.query?.cardId) + 1;
+
   return (
     <LayoutDashboard>
       <HeaderDashboard address={address ?? ""} isShowSearch />
@@ -64,7 +68,9 @@ const CardId = () => {
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px" w="100%">
               <TableDashboard
-                title={"{{farm type}}"}
+                title={t("pages.admin.dashboard.nft.nftType", {
+                  type: farmId,
+                })}
                 data={NFTCardById.data}
                 options={NFTCardById.options}
                 isLoading={isLoading}

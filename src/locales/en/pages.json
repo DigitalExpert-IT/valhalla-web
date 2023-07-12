@@ -356,7 +356,7 @@
     "dashboard": {
       "nft": {
         "title": "NFT",
-        "nftType": "NFT Farm"
+        "nftType": "NFT Farm {{type}}"
       }
     }
   },

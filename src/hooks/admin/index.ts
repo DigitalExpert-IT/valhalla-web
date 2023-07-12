@@ -4,4 +4,4 @@ export * from "./useHasRoleAdmin";
 export * from "./useListNFTsDashboardByType";
 export * from "./useSummary";
 export * from "./useUsersDashboard";
-export * from "./useListUserNFTsDaahboardByType";
+export * from "./useListUserNFTsDashboardByType";

@@ -42,14 +42,14 @@ const handler: NextApiHandler = async (req, res) => {
     String(address ? address : ""),
     String(orderBy ? orderBy : "")
   );
-  const totalNfts = await queryGetUserHaveNFTByTypeWithNFTPages(
+  const calculatePage = await queryGetUserHaveNFTByTypeWithNFTPages(
     String(!type ? 0 : type),
     pageSize,
     String(address ? address : "")
   );
   const template: IDashboardNFTsPerType = {
-    totalPage: totalNfts?.totalPage as number,
-    totalItem: totalNfts?.totalData as number,
+    totalPage: calculatePage?.totalPage as number,
+    totalItem: calculatePage?.totalData as number,
     cardType: !type ? 0 : type,
     items: NFTs,
   };

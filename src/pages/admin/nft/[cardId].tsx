@@ -7,7 +7,7 @@ import { ZERO_ADDRESS } from "constant/address";
 import { useAddress } from "@thirdweb-dev/react";
 import { useCallback, useMemo, useState } from "react";
 import { TableDashboard } from "components/pages/Dashboard";
-import { useListUserNFTsDaahboardByType } from "hooks/admin";
+import { useListUserNFTsDashboardByType } from "hooks/admin";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 
 const PAGE_SIZE = 10;
@@ -22,7 +22,7 @@ const CardId = () => {
     isLoading,
     isFetching,
     data: nftByCard,
-  } = useListUserNFTsDaahboardByType(
+  } = useListUserNFTsDashboardByType(
     Number(router.query?.cardId),
     page,
     PAGE_SIZE,

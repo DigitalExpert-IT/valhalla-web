@@ -100,10 +100,9 @@ export const queryGetUserHaveNFTsByTypeInRow = async (
   skip: number,
   take: number,
   address: string,
-  orderByAVG?: string
+  orderByAVG?: string,
+  orderByAmount?: string
 ) => {
-  const orderByTemplate = `ORDER BY "gachaAVG" ${orderByAVG} `;
-  // const addressTempate =
   const userLIst: IUserTotalCard[] = await prisma.$queryRawUnsafe(`
   SELECT
 	"to" as "address",
@@ -139,7 +138,7 @@ FROM (
 	  AND "to" != '0x000000000000000000000000000000000000dead'
 	  AND "isBlackListed" = FALSE
 	GROUP BY "to"
-	${orderByAVG ? orderByTemplate : ""}
+	ORDER BY "gachaAVG" ${orderByAVG}, "amount" ${orderByAmount}
 	OFFSET ${skip} ROWS FETCH NEXT ${take} ROWS ONLY 
   `);
   return userLIst;

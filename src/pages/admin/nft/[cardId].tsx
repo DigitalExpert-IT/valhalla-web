@@ -17,6 +17,8 @@ const CardId = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
+  const [sortByGachaAVG, setSortByGachaAVG] = useState("ASC");
+  const [sorByAmount, setSortByAmount] = useState("ASC");
   const address = useAddress() ?? ZERO_ADDRESS;
   const [searchKey, setSearchKey] = useState("");
   const {
@@ -30,6 +32,8 @@ const CardId = () => {
     "",
     {
       address: searchKey,
+      order_by_amount: sorByAmount,
+      order_by_gacha: sortByGachaAVG,
     }
   );
 
@@ -54,8 +58,16 @@ const CardId = () => {
     const data = {
       head: [
         { text: t("pages.dashboard.tableField.user") },
-        { text: t("pages.dashboard.tableField.gachaAvg") },
-        { text: t("pages.dashboard.tableField.amount") },
+        {
+          text: t("pages.dashboard.tableField.gachaAvg"),
+          isSortAble: true,
+          onClickSort: (sortByGacha: string) => setSortByGachaAVG(sortByGacha),
+        },
+        {
+          text: t("pages.dashboard.tableField.amount"),
+          isSortAble: true,
+          onClickSort: (sortByAmount: string) => setSortByAmount(sortByAmount),
+        },
       ],
       body: nftByCard?.items.map(e => [e.address, e.gachaAVG, e.amount]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),

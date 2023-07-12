@@ -68,6 +68,7 @@ const NFT = () => {
                 isLoading={isLoadingListNFT}
               />
             </Box>
+            <Box flex={1}></Box>
           </HStack>
         </Box>
       </HStack>

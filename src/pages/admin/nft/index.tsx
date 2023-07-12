@@ -31,10 +31,10 @@ const NFT = () => {
   const TableNFTList = useMemo(() => {
     const data = {
       head: [
-        { text: "NFT" },
-        { text: "Gacha AVG" },
-        { text: "Price" },
-        { text: "amount" },
+        { text: t("pages.dashboard.tableField.nft") },
+        { text: t("pages.dashboard.tableField.gachaAvg") },
+        { text: t("pages.dashboard.tableField.price") },
+        { text: t("pages.dashboard.tableField.amount") },
       ],
       body: listNFT?.map(e => [
         `Farm ${Number(e.NFT) + 1}`,
@@ -63,7 +63,7 @@ const NFT = () => {
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px">
               <TableDashboard
-                title={t("pages.admin.dashboard.nft.title")}
+                title={t("pages.dashboard.title.nft")}
                 data={TableNFTList.data}
                 isLoading={isLoadingListNFT}
               />

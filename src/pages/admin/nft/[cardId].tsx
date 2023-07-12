@@ -34,7 +34,11 @@ const CardId = () => {
 
   const NFTCardById = useMemo(() => {
     const data = {
-      head: [{ text: "User" }, { text: "Gacha AVG" }, { text: "Amount" }],
+      head: [
+        { text: t("pages.dashboard.tableField.user") },
+        { text: t("pages.dashboard.tableField.gachaAvg") },
+        { text: t("pages.dashboard.tableField.amount") },
+      ],
       body: nftByCard?.items.map(e => [e.address, e.gachaAVG, e.amount]),
       onClickRow: (_: any, idx: number) => handleClickAddress(idx),
     };
@@ -68,7 +72,7 @@ const CardId = () => {
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px" w="100%">
               <TableDashboard
-                title={t("pages.admin.dashboard.nft.nftType", {
+                title={t("pages.dashboard.title.nftType", {
                   type: farmId,
                 })}
                 data={NFTCardById.data}

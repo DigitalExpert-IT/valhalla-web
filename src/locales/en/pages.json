@@ -352,6 +352,12 @@
     "label": {
       "startRankReward": "Start Rank Reward",
       "stopRankReward": "Stop Rank Reward"
+    },
+    "dashboard": {
+      "nft": {
+        "title": "NFT",
+        "nftType": "NFT Farm"
+      }
     }
   },
   "dashboard": {

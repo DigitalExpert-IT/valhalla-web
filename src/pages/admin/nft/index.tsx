@@ -17,20 +17,8 @@ const NFT = () => {
   const address = useAddress();
   const router = useRouter();
   const { t } = useTranslation();
-  const [page, setPage] = useState(1);
-  const [sortByProfit, setSortByProfit] = useState("ASC");
-  const [filterRank, setFitlerRank] = useState<string>("");
-  const [searchKey, setSearchKey] = useState("");
   const { data: listNFT, isLoading: isLoadingListNFT } =
     useUserNFTsDashboardByType();
-
-  const searchDebounce = useCallback(
-    _.debounce(key => {
-      setSearchKey(key);
-      setPage(1);
-    }, 500),
-    []
-  );
 
   const handleClickCardId = useCallback(
     (idx: number) => {
@@ -65,7 +53,7 @@ const NFT = () => {
       <HeaderDashboard address={address ?? ""} isShowSearch />
       <HStack
         width="full"
-        minH="calc(100vh - 129px)"
+        minH="calc(100vh - 80px)"
         flex={4}
         alignItems="streetch"
         bg="dashboard.gray"
@@ -75,7 +63,7 @@ const NFT = () => {
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px">
               <TableDashboard
-                title={"{{List NFT}}"}
+                title={t("pages.admin.dashboard.nft.title")}
                 data={TableNFTList.data}
                 isLoading={isLoadingListNFT}
               />

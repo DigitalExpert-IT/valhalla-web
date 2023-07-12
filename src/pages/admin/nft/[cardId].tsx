@@ -25,7 +25,7 @@ const CardId = () => {
     (idx: number) => {
       const address = nftByCard?.items[idx]?.address;
 
-      router.push(`/dashboard/${address}`);
+      router.push(`/admin/dashboard?find_address=${address}`);
     },
     [nftByCard]
   );
@@ -54,13 +54,13 @@ const CardId = () => {
       <HeaderDashboard address={address ?? ""} isShowSearch />
       <HStack
         width="full"
-        minH="calc(100vh - 129px)"
+        minH="calc(100vh - 80px)"
         flex={4}
         alignItems="streetch"
         bg="dashboard.gray"
         pb="32"
       >
-        <Box px="6">
+        <Box px="6" w="full">
           <HStack mt="16" gap="2" alignItems="streetch">
             <Box pos="relative" flex="2" minH="160px" w="100%">
               <TableDashboard
@@ -70,6 +70,7 @@ const CardId = () => {
                 isLoading={isLoading}
               />
             </Box>
+            <Box flex={1}></Box>
           </HStack>
         </Box>
       </HStack>

@@ -1,18 +1,17 @@
+import _ from "lodash";
+import { useRouter } from "next/router";
+import { HeaderDashboard } from "components";
+import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Box, HStack } from "@chakra-ui/react";
 import { useAddress } from "@thirdweb-dev/react";
-import { HeaderDashboard } from "components";
-import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useCallback, useMemo } from "react";
-import _ from "lodash";
-import { TableDashboard } from "components/pages/Dashboard";
 import { useUserNFTsDashboardByType } from "hooks/admin";
-
-import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
+import { TableDashboard } from "components/pages/Dashboard";
+import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 
 const NFT = () => {
-  const address = useAddress();
   const router = useRouter();
+  const address = useAddress();
   const { t } = useTranslation();
   const { data: listNFT, isLoading: isLoadingListNFT } =
     useUserNFTsDashboardByType();

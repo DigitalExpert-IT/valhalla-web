@@ -8,6 +8,7 @@ import { useListUserNFTsDaahboardByType } from "hooks/admin";
 import { useRouter } from "next/router";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import _ from "lodash";
 
 const PAGE_SIZE = 10;
 
@@ -16,11 +17,19 @@ const CardId = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const { data: nftByCard, isLoading } = useListUserNFTsDaahboardByType(
+  const [searchKey, setSearchKey] = useState("");
+  const {
+    data: nftByCard,
+    isLoading,
+    isFetching,
+  } = useListUserNFTsDaahboardByType(
     Number(router.query?.cardId),
     page,
     PAGE_SIZE,
-    ""
+    "",
+    {
+      address: searchKey,
+    }
   );
 
   const handleClickAddress = useCallback(
@@ -30,6 +39,14 @@ const CardId = () => {
       router.push(`/admin/dashboard?find_address=${address}`);
     },
     [nftByCard]
+  );
+
+  const searchDebounce = useCallback(
+    _.debounce(key => {
+      setSearchKey(key);
+      setPage(1);
+    }, 500),
+    []
   );
 
   const NFTCardById = useMemo(() => {
@@ -53,13 +70,17 @@ const CardId = () => {
     };
 
     return { data, options };
-  }, [nftByCard?.items]);
+  }, [nftByCard]);
 
   const farmId = Number(router.query?.cardId) + 1;
 
   return (
     <LayoutDashboard>
-      <HeaderDashboard address={address ?? ""} isShowSearch />
+      <HeaderDashboard
+        address={address ?? ""}
+        isShowSearch
+        onSearchChange={searchDebounce}
+      />
       <HStack
         width="full"
         minH="calc(100vh - 80px)"
@@ -77,7 +98,7 @@ const CardId = () => {
                 })}
                 data={NFTCardById.data}
                 options={NFTCardById.options}
-                isLoading={isLoading}
+                isLoading={isLoading || isFetching}
               />
             </Box>
             <Box flex={1}></Box>

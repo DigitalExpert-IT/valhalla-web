@@ -44,7 +44,8 @@ const handler: NextApiHandler = async (req, res) => {
   );
   const totalNfts = await queryGetUserHaveNFTByTypeWithNFTPages(
     String(!type ? 0 : type),
-    pageSize
+    pageSize,
+    String(address ? address : "")
   );
   const template: IDashboardNFTsPerType = {
     totalPage: totalNfts?.totalPage as number,

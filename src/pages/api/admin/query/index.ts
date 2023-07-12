@@ -147,7 +147,8 @@ FROM (
 
 export const queryGetUserHaveNFTByTypeWithNFTPages = async (
   cardId: string,
-  take: number
+  take: number,
+  address: string
 ) => {
   const pages: [{ totalPage: number; totalData: number }] =
     await prisma.$queryRaw`
@@ -182,7 +183,7 @@ FROM (
 			"tokenId",
 			"transList"."blockNumber" DESC) "NFT"
 	WHERE
-		"cardId" = ${cardId}
+		"cardId" = ${cardId} AND "to" like ${"%" + address + "%"}
 		AND "to" != '0x000000000000000000000000000000000000dead'
 		AND "isBlackListed" = FALSE
 	GROUP BY

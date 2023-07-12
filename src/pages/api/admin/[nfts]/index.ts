@@ -14,6 +14,7 @@ import { IDashboardNFTsPerType } from "interface";
 
 const handler: NextApiHandler = async (req, res) => {
   const { type, page, limit, orderBy } = req.query;
+  const { address } = req.body;
 
   if (!type && !page && !limit) {
     const getAllNFT = await queryGetNFTs();
@@ -38,6 +39,7 @@ const handler: NextApiHandler = async (req, res) => {
     String(!type ? 0 : type),
     offset,
     pageSize,
+    String(address ? address : ""),
     String(orderBy ? orderBy : "")
   );
   const totalNfts = await queryGetUserHaveNFTByTypeWithNFTPages(

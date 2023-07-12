@@ -1,27 +1,27 @@
-import { Box, HStack } from "@chakra-ui/react";
-import { useAddress } from "@thirdweb-dev/react";
-import { HeaderDashboard } from "components";
-import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { TableDashboard } from "components/pages/Dashboard";
-import { ZERO_ADDRESS } from "constant/address";
-import { useListUserNFTsDaahboardByType } from "hooks/admin";
-import { useRouter } from "next/router";
-import { useCallback, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
 import _ from "lodash";
+import { useRouter } from "next/router";
+import { HeaderDashboard } from "components";
+import { useTranslation } from "react-i18next";
+import { Box, HStack } from "@chakra-ui/react";
+import { ZERO_ADDRESS } from "constant/address";
+import { useAddress } from "@thirdweb-dev/react";
+import { useCallback, useMemo, useState } from "react";
+import { TableDashboard } from "components/pages/Dashboard";
+import { useListUserNFTsDaahboardByType } from "hooks/admin";
+import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 
 const PAGE_SIZE = 10;
 
 const CardId = () => {
-  const address = useAddress() ?? ZERO_ADDRESS;
-  const { t } = useTranslation();
   const router = useRouter();
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
+  const address = useAddress() ?? ZERO_ADDRESS;
   const [searchKey, setSearchKey] = useState("");
   const {
-    data: nftByCard,
     isLoading,
     isFetching,
+    data: nftByCard,
   } = useListUserNFTsDaahboardByType(
     Number(router.query?.cardId),
     page,

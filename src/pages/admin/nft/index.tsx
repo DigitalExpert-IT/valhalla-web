@@ -1,17 +1,14 @@
-import { AspectRatio, Box, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { HeaderDashboard } from "components";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import _ from "lodash";
 import { TableDashboard } from "components/pages/Dashboard";
-import { useUserNFTsDashboardByType, useUsersDasboard } from "hooks/admin";
-import { BsFillPersonFill } from "react-icons/bs";
-import { RANK_SYMBOL_MAP, rankMap } from "constant/rank";
+import { useUserNFTsDashboardByType } from "hooks/admin";
+
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
-
-const PAGE_SIZE = 10;
 
 const NFT = () => {
   const address = useAddress();

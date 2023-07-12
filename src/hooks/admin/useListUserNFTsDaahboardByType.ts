@@ -22,7 +22,7 @@ export const useListUserNFTsDaahboardByType = (
   }
 ) => {
   return useQuery(
-    ["userListByNftType", type, page, limit, orderBy, filter],
+    ["userListByNftType", type, page, limit, orderBy, filter?.address],
     async () => {
       const axiosResponse = await Axios.post<IDashboardNFTsPerType>(
         `/api/admin/nfts?type=${type}&page=${page}&limit=${limit}${

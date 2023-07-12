@@ -9,6 +9,7 @@ import { useCallback, useMemo, useState } from "react";
 import { TableDashboard } from "components/pages/Dashboard";
 import { useListUserNFTsDashboardByType } from "hooks/admin";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
+import { withAdminRole, withConnection } from "hoc";
 
 const PAGE_SIZE = 10;
 
@@ -108,4 +109,4 @@ const CardId = () => {
     </LayoutDashboard>
   );
 };
-export default CardId;
+export default withConnection(withAdminRole(CardId));

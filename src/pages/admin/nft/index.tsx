@@ -8,6 +8,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { useUserNFTsDashboardByType } from "hooks/admin";
 import { TableDashboard } from "components/pages/Dashboard";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
+import { withAdminRole, withConnection } from "hoc";
 
 const NFT = () => {
   const router = useRouter();
@@ -72,4 +73,4 @@ const NFT = () => {
   );
 };
 
-export default NFT;
+export default withConnection(withAdminRole(NFT));

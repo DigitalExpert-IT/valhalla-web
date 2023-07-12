@@ -359,7 +359,9 @@
       "members": "Members",
       "downlinesNotFound": "Downlines Not Found",
       "users": "Users",
-      "summary": "Summary"
+      "summary": "Summary",
+      "nft": "NFT",
+      "nftType": "NFT Farm {{type}}"
     },
     "tableField": {
       "potentialProfit": "Potential Profit",
@@ -371,7 +373,12 @@
       "member": "Member",
       "lv": "Lv",
       "totalMember": "Total Member",
-      "sumPotentialProfit": "Sum Potential Profit"
+      "sumPotentialProfit": "Sum Potential Profit",
+      "nft": "NFT",
+      "gachaAvg": "Gacha Avg",
+      "price": "Price",
+      "amount": "Amount",
+      "user": "User"
     },
     "placeholder": {
       "search": "Search member by address"

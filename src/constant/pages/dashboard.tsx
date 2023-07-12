@@ -29,12 +29,12 @@ export const DASHBOARD_ADMIN_CATEGORY = [
         icon: <BsFillHouseDoorFill size={24} />,
         href: "/admin/dashboard",
       },
-      // {
-      //   key: "nft",
-      //   name: "nft",
-      //   icon: <BsTropicalStorm size={20} />,
-      //   href: "/admin/nft",
-      // },
+      {
+        key: "nft",
+        name: "nft",
+        icon: <BsTropicalStorm size={20} />,
+        href: "/admin/nft",
+      },
       // {
       //   key: "user",
       //   name: "user",

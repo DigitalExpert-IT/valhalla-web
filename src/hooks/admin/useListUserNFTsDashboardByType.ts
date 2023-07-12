@@ -12,19 +12,23 @@ import { IDashboardNFTsPerType } from "interface";
  * @example ``` useNFTsDashboard(1, 2, 10) ```
  */
 
-export const useListUserNFTsDaahboardByType = (
+export const useListUserNFTsDashboardByType = (
   type: number,
   page: number,
   limit: number,
-  orderBy: string
+  orderBy: string,
+  filter?: {
+    address: string;
+  }
 ) => {
   return useQuery(
-    ["userListByNftType", type, page, limit, orderBy],
+    ["userListByNftType", type, page, limit, orderBy, filter?.address],
     async () => {
-      const axiosResponse = await Axios.get<IDashboardNFTsPerType>(
+      const axiosResponse = await Axios.post<IDashboardNFTsPerType>(
         `/api/admin/nfts?type=${type}&page=${page}&limit=${limit}${
           orderBy && `&orderBy=${orderBy}`
-        }`
+        }`,
+        { ...filter }
       );
       return axiosResponse.data;
     }

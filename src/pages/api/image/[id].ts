@@ -6,7 +6,9 @@ const handler: NextApiHandler = async (req, res) => {
   const animation = CARD_IMAGE_MAP[id as "0"];
   const image = CARD_IMAGE_ASSET[id as "0"];
   if (!animation || !image) {
-    return res.status(404).send("404");
+    return res
+      .status(404)
+      .json({ status: 404, message: "The requested URL was not found." });
   }
   const imageTemplate = {
     name: `Farm ${Number(id) + 1}`,

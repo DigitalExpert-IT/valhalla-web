@@ -32,8 +32,8 @@ const CardId = () => {
     "",
     {
       address: searchKey,
-      order_by_amount: sorByAmount,
-      order_by_gacha: sortByGachaAVG,
+      orderByAmount: sorByAmount,
+      orderByGacha: sortByGachaAVG,
     }
   );
 

@@ -19,8 +19,8 @@ export const useListUserNFTsDashboardByType = (
   orderBy: string,
   filter?: {
     address: string;
-    order_by_gacha: string;
-    order_by_amount: string;
+    orderByGacha: string;
+    orderByAmount: string;
   }
 ) => {
   return useQuery(
@@ -31,8 +31,8 @@ export const useListUserNFTsDashboardByType = (
       limit,
       orderBy,
       filter?.address,
-      filter?.order_by_amount,
-      filter?.order_by_gacha,
+      filter?.orderByAmount,
+      filter?.orderByGacha,
     ],
     async () => {
       const axiosResponse = await Axios.post<IDashboardNFTsPerType>(

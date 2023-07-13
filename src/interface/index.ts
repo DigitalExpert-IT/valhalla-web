@@ -26,6 +26,14 @@ export interface IUserWithNft extends User {
   totalInvest: number;
   profit: number;
   claimedNFT: number;
+  address: string;
+  upline: string;
+  rank: number;
+  telegramUsername: string | null;
+  nftValue: number | null;
+  maxProfit: number | null;
+  potentialProfit: number | null;
+  percentage: number;
 }
 
 export interface IUserTotalCard {

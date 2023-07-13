@@ -123,28 +123,31 @@ export const TableDashboard = (props: ITableProps) => {
           )
         ) : null}
 
-        {options?.filter
-          ? options.filter?.map(filter => (
-              <HStack key={filter?.name}>
-                <BsFilter size="20" color="000" />
-                <Select
-                  variant="table-filter"
-                  maxW="40"
-                  placeholder={filter?.placeholder ?? ""}
-                  onChange={e => filter?.onFilterChange(e.target.value)}
-                >
-                  {filter?.options?.map((item, idx) => (
-                    <option
-                      key={item?.key ? item.key : `${item}.${idx}`}
-                      value={item.value}
-                    >
-                      {item.text}
-                    </option>
-                  ))}
-                </Select>
-              </HStack>
-            ))
-          : null}
+        <HStack>
+          <BsFilter size="20" color="000" />
+          <HStack>
+            {options?.filter
+              ? options.filter?.map(filter => (
+                  <Select
+                    key={filter?.name}
+                    variant="table-filter"
+                    maxW="40"
+                    placeholder={filter?.placeholder ?? ""}
+                    onChange={e => filter?.onFilterChange(e.target.value)}
+                  >
+                    {filter?.options?.map((item, idx) => (
+                      <option
+                        key={item?.key ? item.key : `${item}.${idx}`}
+                        value={item.value}
+                      >
+                        {item.text}
+                      </option>
+                    ))}
+                  </Select>
+                ))
+              : null}
+          </HStack>
+        </HStack>
       </HStack>
 
       <TableContainer

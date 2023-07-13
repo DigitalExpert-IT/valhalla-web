@@ -30,6 +30,12 @@ export const DASHBOARD_ADMIN_CATEGORY = [
         href: "/admin/dashboard",
       },
       {
+        key: "users",
+        name: "users",
+        icon: <BsPeopleFill size={24} />,
+        href: "/admin/users",
+      },
+      {
         key: "nft",
         name: "nft",
         icon: <BsTropicalStorm size={20} />,

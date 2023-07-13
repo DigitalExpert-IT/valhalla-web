@@ -15,6 +15,7 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
+    "users": "Users",
     "event": "Event",
     "nft": "Nft",
     "user": "User",

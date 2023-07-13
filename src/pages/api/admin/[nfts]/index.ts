@@ -13,8 +13,8 @@ import { IDashboardNFTsPerType } from "interface";
  */
 
 const handler: NextApiHandler = async (req, res) => {
-  const { type, page, limit, orderBy } = req.query;
-  const { address } = req.body;
+  const { type, page, limit } = req.query;
+  const { address, orderByAmount, orderByGacha } = req.body;
 
   if (!type && !page && !limit) {
     const getAllNFT = await queryGetNFTs();
@@ -31,7 +31,11 @@ const handler: NextApiHandler = async (req, res) => {
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   // protect unsafe sql injection
-  if (orderBy && !ORDER_KEY[orderBy.toString().toLowerCase()]) {
+
+  if (orderByAmount && !ORDER_KEY[orderByAmount.toString().toLowerCase()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+  if (orderByGacha && !ORDER_KEY[orderByGacha.toString().toLowerCase()]) {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
 
@@ -40,7 +44,8 @@ const handler: NextApiHandler = async (req, res) => {
     offset,
     pageSize,
     String(address ? address : ""),
-    String(orderBy ? orderBy : "")
+    String(orderByGacha ? orderByGacha : ""),
+    String(orderByAmount ? orderByAmount : "")
   );
   const calculatePage = await queryGetUserHaveNFTByTypeWithNFTPages(
     String(!type ? 0 : type),

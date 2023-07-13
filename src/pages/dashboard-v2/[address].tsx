@@ -36,7 +36,6 @@ const PAGE_SIZE = 10;
 const Dashboard = () => {
   const router = useRouter();
   const queryAddress = router.query.address;
-  const [address, setAddress] = useState<string>("");
   const { t } = useTranslation();
 
   const toast = useToast();
@@ -58,14 +57,16 @@ const Dashboard = () => {
     []
   );
 
-  const { data: summary, isLoading } = useSummary(address);
+  const { data: summary, isLoading } = useSummary(`${queryAddress}`);
 
-  const { data: levelList, isLoading: levelLoading } = useListLevel(address);
+  const { data: levelList, isLoading: levelLoading } = useListLevel(
+    `${queryAddress}`
+  );
 
   const { data: downlineList, isLoading: downlineLoading } = useListDownlines(
     selectedAddressList?.length > 0
       ? selectedAddressList.at(-1) ?? ""
-      : address,
+      : `${queryAddress}`,
     page,
     PAGE_SIZE,
     sortByProfit,
@@ -74,14 +75,6 @@ const Dashboard = () => {
       rank: +filterRank >= 0 ? filterRank : undefined,
     }
   );
-
-  useEffect(() => {
-    console.log("query address", queryAddress);
-    if (typeof queryAddress === "string") setAddress(queryAddress);
-    else if (Array.isArray(queryAddress) && queryAddress.length > 0) {
-      setAddress(queryAddress[0]);
-    }
-  }, [queryAddress]);
 
   const handleClickLevel = useCallback((level: number) => {
     setLevel(level);
@@ -92,7 +85,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (downlineLoading) return;
-    if (!downlineList || downlineList.items?.length === 0) {
+    if (
+      selectedAddressList.length > 0 &&
+      (!downlineList || downlineList?.items?.length === 0)
+    ) {
       setSelectAddressList(state => {
         const newState = [...state];
         if (!newState) return [];
@@ -103,7 +99,7 @@ const Dashboard = () => {
       toast({
         title: t("pages.dashboard.title.downlinesNotFound"),
         description: t("pages.dashboard.alert.downlinesNotFound", {
-          address,
+          address: selectedAddressList.pop(),
         }),
         status: "error",
         duration: 3000,
@@ -246,9 +242,9 @@ const Dashboard = () => {
           </>,
           user?.NFTs?.length ?? 0,
           simplifyBn(user?.claimedNFT),
-          user?.maxProfit &&
-            user?.claimedNFT &&
-            simplifyBn(user?.maxProfit - user?.claimedNFT),
+          user?.maxProfit && user?.claimedNFT
+            ? simplifyBn(user?.maxProfit - user?.claimedNFT)
+            : 0,
           simplifyBn(user?.maxProfit),
           simplifyBn(user?.potentialProfit),
         ];

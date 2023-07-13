@@ -8,5 +8,14 @@ export const CARD_IMAGE_MAP = {
 };
 
 export const CARD_IMAGE_GENESIS_MAP = {
-  "0": "https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611"
-}
+  "0": "https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611",
+};
+
+export const CARD_IMAGE_ASSET = {
+  "0": "https://ik.imagekit.io/msxxxaegj/image_gn/farm1.png",
+  "1": "https://ik.imagekit.io/msxxxaegj/image_gn/farm2.png",
+  "2": "https://ik.imagekit.io/msxxxaegj/image_gn/farm3.png",
+  "3": "https://ik.imagekit.io/msxxxaegj/image_gn/farm4.png",
+  "4": "https://ik.imagekit.io/msxxxaegj/image_gn/farm5.png",
+  "5": "https://ik.imagekit.io/msxxxaegj/image_gn/farm6.png",
+};

@@ -18,8 +18,8 @@ const handler: NextApiHandler = async (req, res) => {
     animation_url: animation,
     attributes: [
       {
-        trait_type: "Level",
-        value: id,
+        trait_type: "Farm Type",
+        value: Number(id) + 1,
       },
       {
         trait_type: "Type",

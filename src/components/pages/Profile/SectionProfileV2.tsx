@@ -155,8 +155,7 @@ export const SectionProfileV2 = () => {
         <WidgetProfileMember
           label={"common.totalPotentialProfit"}
           isLoading={summaryLoading}
-          value={ summaryData?.totalPotentialProfit ?? "0"}
-
+          value={summaryData?.totalPotentialProfit ?? "0"}
         />
         <WidgetProfileMember
           isLoading={

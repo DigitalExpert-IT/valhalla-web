@@ -1,7 +1,5 @@
-export * from "./SectionFeaturedPopulation";
 export * from "./SectionMatchingBonus";
 export * from "./SectionPartnership";
-export * from "./SectionFeatures";
 export * from "./SectionHeader";
 export * from "./BackgroundHome";
 export * from "./SectionProject";

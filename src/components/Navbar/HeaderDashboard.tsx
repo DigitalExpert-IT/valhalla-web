@@ -47,39 +47,32 @@ const SearchComponent = (props: ISearchComponent) => {
 
   if (isMobileScreen)
     return (
-      <HStack width="full" justifyContent="end">
-        <Button
-          px="0"
-          pe={isCollapsed ? "5" : "0"}
-          variant="unstyle"
-          onClick={handleCollapse}
-          transform={isCollapsed ? "translateX(270px)" : "translateX(0px)"}
-          {...collapseTransition}
-        >
-          <BsSearch size="20" color="#000" />
-        </Button>
-        <Box overflow="hidden">
-          <FormControl
-            flex={1}
-            transform={isCollapsed ? "translateX(350px)" : "translateX(0px)"}
+      <Box overflow="hidden">
+        <HStack justifyContent="end">
+          <Button
+            px="0"
+            variant="unstyle"
+            onClick={handleCollapse}
+            transform={isCollapsed ? "translateX(50px)" : "translateX(0px)"}
             {...collapseTransition}
           >
-            <InputGroup>
-              <Input
-                maxW="300px"
-                variant="dashboard"
-                type="search"
-                borderBottom="1px"
-                borderRadius="0"
-                boxShadow="unset"
-                background="dashboard.gray"
-                onKeyUp={(e: any) => onSearchChange(e.target.value)}
-                placeholder={t("pages.dashboard.placeholder.search") ?? ""}
-              />
-            </InputGroup>
-          </FormControl>
-        </Box>
-      </HStack>
+            <BsSearch size="20" color="#000" />
+          </Button>
+          <Input
+            flex={isCollapsed ? "0" : "1"}
+            variant="dashboard"
+            type="search"
+            borderBottom="1px"
+            borderRadius="0"
+            boxShadow="unset"
+            background="dashboard.gray"
+            onKeyUp={(e: any) => onSearchChange(e.target.value)}
+            placeholder={t("pages.dashboard.placeholder.search") ?? ""}
+            transform={isCollapsed ? "translateX(248px)" : "translateX(0px)"}
+            {...collapseTransition}
+          />
+        </HStack>
+      </Box>
     );
 
   return (
@@ -124,7 +117,7 @@ export const HeaderDashboard = (props: IPropsType) => {
     >
       <HStack
         justifyContent={{ base: "center", sm: "start" }}
-        pb={{ base: "6", sm: "8" }}
+        pb={{ base: "0", sm: "8" }}
       >
         {isMobileScreen ? (
           <Link href="/" opacity={isCollapsed ? 1 : 0}>

@@ -17,10 +17,13 @@ const getUserListUserPerLevel = async (
   offset: number,
   limit: number,
   rank: string,
-  orderBy: string
+  orderBy: string,
+  downlines?: string
 ) => {
   const orderByTemplate = `ORDER BY "potentialProfit" ${orderBy} NULLS LAST`;
   const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
+  const downlinesTemplate = `"address" LIKE '%${downlines}%'`;
+  const levelTemplate = `"level" = ${level}`;
   const list = await prisma.$queryRawUnsafe(`
  SELECT
 	"User"."address",
@@ -43,7 +46,8 @@ const getUserListUserPerLevel = async (
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
 		) * 450) * ${level <= 5 ? 5 : 1} as float
 	)/ 100 as "potentialProfit",
-	cast(${level <= 5 ? 5 : 1} as int) as "percentage"
+	cast(${level <= 5 ? 5 : 1} as int) as "percentage",
+	"level"
 from
 	"User"
 	LEFT JOIN (
@@ -153,17 +157,22 @@ WITH RECURSIVE "hierarchy" AS (
 		"level" < ${MAX_DOWNLINES_LEVEL}
 )
 SELECT
-	"hierarchy"."address", "hierarchy"."upline", "hierarchy"."rank", "hierarchy"."telegramUsername"
+	"hierarchy"."address", 
+	"hierarchy"."upline", 
+	"hierarchy"."rank", 
+	"hierarchy"."telegramUsername",
+	"level"
 FROM
 	"hierarchy"
 	WHERE
-	"level" = ${level} ${rankTemplate}
+	${downlines ? downlinesTemplate : levelTemplate} ${rankTemplate}
 	) "hierarcyUser" ON "hierarcyUser"."address" = "User"."address" 
 GROUP BY
 	"User"."address",
 	"User"."upline",
 	"User"."rank",
-	"User"."telegramUsername"
+	"User"."telegramUsername",
+	"level"
 	${orderBy ? orderByTemplate : ""}
 OFFSET ${offset} FETCH NEXT ${limit} ROWS ONLY
 `);
@@ -175,9 +184,12 @@ const getPagesFromListUser = async (
   address: string,
   level: number,
   limit: number,
-  rank: string
+  rank: string,
+  downlines?: string
 ) => {
   const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
+  const levelTemplate = `"level" = ${level}`;
+  const downlinesTemplate = `"address" LIKE '%${downlines}%'`;
   const list: [{ totalItem: number; totalPage: number }] =
     await prisma.$queryRawUnsafe(`
     WITH RECURSIVE "hierarchy" AS (
@@ -211,7 +223,7 @@ const getPagesFromListUser = async (
 		"rank"
   FROM
       "hierarchy"
-  WHERE "level" = ${level} ${rankTemplate}
+  WHERE ${downlines ? downlinesTemplate : levelTemplate} ${rankTemplate}
 	GROUP BY "rank"
   `);
 
@@ -234,6 +246,7 @@ const handler: NextApiHandler = async (req, res) => {
   const page = req.query.page;
   const limit = req.query.limit;
   const orderBy = req.query.orderBy;
+  const downlines = req.body.downlines;
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -276,14 +289,16 @@ const handler: NextApiHandler = async (req, res) => {
       offset,
       pageSize,
       String(rank ?? ""),
-      String(orderBy ?? "")
+      String(orderBy ?? ""),
+      String(downlines ?? "")
     );
 
     const getPage = await getPagesFromListUser(
       address,
       level,
       pageSize,
-      String(rank ?? "")
+      String(rank ?? ""),
+      String(downlines ?? "")
     );
     return res.status(200).json({
       totalItem: getPage?.totalItem,

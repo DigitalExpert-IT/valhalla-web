@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 
-interface ISummaryDashboard {
+interface ITreeSummaryDashboard {
   totalUser: number;
   totalNFT: number;
   totalValue: number;
@@ -11,9 +11,9 @@ interface ISummaryDashboard {
 
 export const useSummary = (address: string) => {
   return useQuery(["summary", address], async () => {
-    const axiosResponse = await Axios.get<ISummaryDashboard>(
+    const axiosResponse = await Axios.get<ITreeSummaryDashboard>(
       `/api/downlines/v2/tree/summary/${address}`
     );
-    return axiosResponse.data;
+    return axiosResponse.data as ITreeSummaryDashboard;
   });
 };

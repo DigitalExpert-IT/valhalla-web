@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 import { BigNumber } from "ethers";
 
-interface IListLevel {
+interface ITreeListLevel {
   level: number;
   userCount: number;
   totalNFT: number;
@@ -12,9 +12,9 @@ interface IListLevel {
 
 export const useListLevel = (address: string) => {
   return useQuery(["level", address], async () => {
-    const axiosResponse = await Axios.get<IListLevel[]>(
+    const axiosResponse = await Axios.get<ITreeListLevel[]>(
       `/api/downlines/v2/tree/list-level/${address}`
     );
-    return axiosResponse.data;
+    return axiosResponse.data as ITreeListLevel[];
   });
 };

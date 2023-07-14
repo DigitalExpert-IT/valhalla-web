@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
 import { prettyBn } from "utils";
 import { HeaderDashboard } from "components";
@@ -188,6 +188,14 @@ const Dashboard = () => {
     ];
   }, [summaryDashboard]);
 
+  useEffect(() => {
+    if (router.query.find_address) {
+      setSearchKey(router.query.find_address.toString());
+      setPage(1);
+    }
+    return () => {};
+  }, [router.query.find_address]);
+
   return (
     <LayoutDashboard>
       <HeaderDashboard
@@ -290,6 +298,7 @@ const Dashboard = () => {
                 isLoading={listUserLoading}
               />
             </Box>
+            <Box flex={1}></Box>
           </HStack>
         </Box>
 

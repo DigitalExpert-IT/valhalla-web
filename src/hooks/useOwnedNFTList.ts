@@ -36,7 +36,7 @@ export const useOwnedNFTList = () => {
         tokenIds.reverse().map(async tokenId => {
           const ownedNft = await nft.contract!.call("ownedTokenMap", [tokenId]);
           const cardId = ownedNft.cardId.toNumber();
-          const tokenUri = `/api/image/${cardId}`;
+          const tokenUri = `/api/image/nft/${cardId}`;
           return { ...ownedNft, id: tokenId, tokenUri } as OwnedNftType;
         })
       );

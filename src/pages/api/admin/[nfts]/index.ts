@@ -13,7 +13,8 @@ import { IDashboardNFTsPerType } from "interface";
  */
 
 const handler: NextApiHandler = async (req, res) => {
-  const { type, page, limit, orderBy } = req.query;
+  const { type, page, limit } = req.query;
+  const { address, orderByAmount, orderByGacha } = req.body;
 
   if (!type && !page && !limit) {
     const getAllNFT = await queryGetNFTs();
@@ -30,7 +31,11 @@ const handler: NextApiHandler = async (req, res) => {
   const offset = pageSize * (isPageNumOrNan ? 0 : Number(page) - 1);
 
   // protect unsafe sql injection
-  if (orderBy && !ORDER_KEY[orderBy.toString().toLowerCase()]) {
+
+  if (orderByAmount && !ORDER_KEY[orderByAmount.toString().toLowerCase()]) {
+    return res.status(403).json({ status: 403, message: "method not allowed" });
+  }
+  if (orderByGacha && !ORDER_KEY[orderByGacha.toString().toLowerCase()]) {
     return res.status(403).json({ status: 403, message: "method not allowed" });
   }
 
@@ -38,15 +43,18 @@ const handler: NextApiHandler = async (req, res) => {
     String(!type ? 0 : type),
     offset,
     pageSize,
-    String(orderBy ? orderBy : "")
+    String(address ? address : ""),
+    String(orderByGacha ? orderByGacha : ""),
+    String(orderByAmount ? orderByAmount : "")
   );
-  const totalNfts = await queryGetUserHaveNFTByTypeWithNFTPages(
+  const calculatePage = await queryGetUserHaveNFTByTypeWithNFTPages(
     String(!type ? 0 : type),
-    pageSize
+    pageSize,
+    String(address ? address : "")
   );
   const template: IDashboardNFTsPerType = {
-    totalPage: totalNfts?.totalPage as number,
-    totalItem: totalNfts?.totalData as number,
+    totalPage: calculatePage?.totalPage as number,
+    totalItem: calculatePage?.totalData as number,
     cardType: !type ? 0 : type,
     items: NFTs,
   };

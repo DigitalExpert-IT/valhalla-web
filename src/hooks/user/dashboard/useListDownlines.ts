@@ -4,7 +4,7 @@ import { IAdminDashboard } from "interface";
 
 /**
  *
- * @param address address cape or u can call top root
+ * @param rootAddress address cape or u can call top root
  * @param page page active
  * @param limit limit perPage
  * @param orderBy short by potential profit, u just have to option "ASC" OR "DESC"
@@ -18,20 +18,28 @@ interface ITreeDownlines extends IAdminDashboard {
 }
 
 export const useListDownlines = (
-  address: string,
+  rootAddress: string,
   page: number,
   limit: number,
   orderBy?: string | "asc" | "desc",
-  filter?: { level: string; rank?: string; downlines: string }
+  filter?: { level: string; rank?: string; address: string }
 ) => {
   return useQuery(
     [
       "downlines",
-      { page, limit, orderBy, level: filter?.level, rank: filter?.rank },
+      {
+        rootAddress,
+        page,
+        limit,
+        orderBy,
+        level: filter?.level,
+        rank: filter?.rank,
+        address: filter?.address,
+      },
     ],
     async () => {
       const axiosResponse = await Axios.post<ITreeDownlines>(
-        `/api/downlines/v2/tree/list-user/${address}?page=${page}&limit=${limit}${
+        `/api/downlines/v2/tree/list-user/${rootAddress}?page=${page}&limit=${limit}${
           orderBy && `&orderBy=${orderBy}`
         }`,
         {

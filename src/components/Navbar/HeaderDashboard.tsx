@@ -122,7 +122,10 @@ export const HeaderDashboard = (props: IPropsType) => {
       bgColor="dashboard.gray"
       boxShadow={{ base: "sm", sm: "unset" }}
     >
-      <HStack justifyContent={{ base: "center", sm: "start" }}>
+      <HStack
+        justifyContent={{ base: "center", sm: "start" }}
+        pb={{ base: "6", sm: "8" }}
+      >
         {isMobileScreen ? (
           <Link href="/" opacity={isCollapsed ? 1 : 0}>
             <AspectRatio w={179} ratio={6 / 1}>

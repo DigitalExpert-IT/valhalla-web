@@ -73,13 +73,13 @@ const Dashboard = () => {
     {
       level: String(selectedLevel),
       rank: +filterRank >= 0 ? filterRank : undefined,
+      address: searchKey,
     }
   );
 
   const handleClickLevel = useCallback((level: number) => {
     setLevel(level);
     setSelectAddressList([]);
-
     setPage(1);
   }, []);
 
@@ -89,13 +89,6 @@ const Dashboard = () => {
       selectedAddressList.length > 0 &&
       (!downlineList || downlineList?.items?.length === 0)
     ) {
-      setSelectAddressList(state => {
-        const newState = [...state];
-        if (!newState) return [];
-        newState.pop();
-        return newState;
-      });
-
       toast({
         title: t("pages.dashboard.title.downlinesNotFound"),
         description: t("pages.dashboard.alert.downlinesNotFound", {

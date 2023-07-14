@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
-import { BigNumber } from "ethers";
 
 interface ITreeListLevel {
   level: number;
   userCount: number;
   totalNFT: number;
-  potentialProfit: BigNumber | null;
+  potentialProfit: number | null;
   totalValue: number | null;
 }
 

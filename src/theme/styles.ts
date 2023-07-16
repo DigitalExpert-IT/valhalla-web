@@ -25,5 +25,18 @@ export const styles: Styles = {
       borderColor: "chakra-border-color",
       wordWrap: "break-word",
     },
+
+    '&::-webkit-scrollbar': {
+      height: '10px',
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '6px',
+      background: "#191272"
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#7246fc',
+      borderRadius: '50px',
+    },
   },
 };

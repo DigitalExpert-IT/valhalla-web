@@ -11,7 +11,8 @@ import {
   Text,
   Grid,
 } from "@chakra-ui/react";
-import { useContractWrite } from "@thirdweb-dev/react";
+import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
 import { useAsyncCall } from "hooks";
@@ -19,12 +20,17 @@ import { useGlobalPool, useRankReward, useRewardMap } from "hooks/nft";
 import { useNFTContract } from "hooks/useNFTContract";
 import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
+import { useSummary } from "hooks/user/dashboard/useSummary";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
-
+  const address = useAddress() ?? ZERO_ADDRESS;
+  const {
+    data: summaryData,
+    isLoading: summaryLoading,
+    error,
+  } = useSummary(address);
   const nft = useNFTContract();
-  const rankReward = useRankReward();
   const reward = useRewardMap();
   const globalPool = useGlobalPool();
   const accountMap = useAccountMap();
@@ -71,6 +77,7 @@ export const SectionGnetProject = () => {
           h="200px"
           templateRows="repeat(2, 1fr)"
           templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
+          paddingBottom="16rem"
         >
           <GridItem
             colSpan={1}
@@ -162,6 +169,26 @@ export const SectionGnetProject = () => {
               w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.farmingMatching")}</Text>
+              <Button
+                variant="swag"
+                color="white"
+                onClick={() => claimRewardGnetAsync.exec({ args: [] })}
+                isLoading={claimRewardGnetAsync.isLoading}
+              >
+                {reward.data &&
+                  fromBn(reward.data, 9) + " " + t("common.claim")}
+              </Button>
+            </Stack>
+          </GridItem>
+          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
+            <Stack
+              direction={"row"}
+              justifyContent="space-between"
+              alignItems={"center"}
+              w="full"
+              // w={{ md: "20rem", base: "full" }}
+            >
+              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
               <Button
                 variant="swag"
                 color="white"

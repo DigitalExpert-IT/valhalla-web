@@ -30,6 +30,7 @@ export const SectionGnetProject = () => {
     isLoading: summaryLoading,
     error,
   } = useSummary(address);
+
   const nft = useNFTContract();
   const reward = useRewardMap();
   const globalPool = useGlobalPool();
@@ -189,15 +190,9 @@ export const SectionGnetProject = () => {
               // w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.potentialProfit")}</Text>
-              <Button
-                variant="swag"
-                color="white"
-                onClick={() => claimRewardGnetAsync.exec({ args: [] })}
-                isLoading={claimRewardGnetAsync.isLoading}
-              >
-                {reward.data &&
-                  fromBn(reward.data, 9) + " " + t("common.claim")}
-              </Button>
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
+                {summaryData.totalPotentialProfit ?? 0}
+              </Badge>
             </Stack>
           </GridItem>
         </Grid>

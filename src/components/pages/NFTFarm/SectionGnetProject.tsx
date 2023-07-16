@@ -75,10 +75,9 @@ export const SectionGnetProject = () => {
       <Container maxW="container.xl">
         <Grid
           gap={4}
-          h="200px"
-          templateRows="repeat(2, 1fr)"
+          h="20rem"
+          templateRows="repeat(10, 1fr)"
           templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
-          paddingBottom="16rem"
         >
           <GridItem
             colSpan={1}
@@ -181,17 +180,21 @@ export const SectionGnetProject = () => {
               </Button>
             </Stack>
           </GridItem>
-          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
+          <GridItem
+            colSpan={{ lg: 2, base: 2 }}
+            colStart={{ lg: 2, md: 2, base: 1 }}
+            display="flex"
+            textTransform={"capitalize"}
+          >
             <Stack
               direction={"row"}
               justifyContent="space-between"
               alignItems={"center"}
-              w="full"
-              // w={{ md: "20rem", base: "full" }}
+              w={{ md: "20rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.potentialProfit")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {summaryData.totalPotentialProfit ?? 0}
+                {summaryData?.totalPotentialProfit ?? 0} GNET
               </Badge>
             </Stack>
           </GridItem>

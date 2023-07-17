@@ -21,6 +21,7 @@ import { useNFTContract } from "hooks/useNFTContract";
 import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useSummary } from "hooks/user/dashboard/useSummary";
+import { BigNumber } from "ethers";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
@@ -41,6 +42,11 @@ export const SectionGnetProject = () => {
   const claimRankReward = useContractWrite(nft.contract, "claimRankReward");
   const claimNftRankRewardAsync = useAsyncCall(claimRankReward.mutateAsync);
   const claimRewardGnetAsync = useAsyncCall(claimReward.mutateAsync);
+
+  const removeFloat = (value: BigNumber, decimal: number, remove: number) => {
+    const toNumber = +fromBn(value, decimal);
+    return toNumber.toFixed(remove);
+  };
 
   return (
     <Box position="relative" zIndex={1}>
@@ -79,12 +85,16 @@ export const SectionGnetProject = () => {
           templateRows="repeat(10, 1fr)"
           templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
         >
+          {/* RANK Image */}
+
           <GridItem
             colSpan={1}
             display="flex"
             alignItems="center"
             justifyContent="center"
             rowSpan={{ md: 2, base: 1 }}
+            // border="1px"
+            w={{ md: "15rem", base: "full" }}
           >
             <AspectRatio w="100px" ratio={15 / 17}>
               <Image
@@ -94,17 +104,21 @@ export const SectionGnetProject = () => {
               />
             </AspectRatio>
           </GridItem>
+
+          {/** NFT farming */}
           <GridItem
             colSpan={2}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
+            colStart={1}
+            rowStart={{ md: 3, base: 2 }}
           >
             <Stack
-              w={{ md: "20rem", base: "full" }}
-              justifyContent="space-between"
+              w={{ md: "15rem", base: "full" }}
               alignItems="center"
               direction="row"
+              justifyContent={{ md: "center", base: "space-between" }}
             >
               <Text>{t("pages.nftFarming.networkMembers")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
@@ -112,6 +126,8 @@ export const SectionGnetProject = () => {
               </Badge>
             </Stack>
           </GridItem>
+
+          {/** Global bonus */}
           <GridItem
             colSpan={2}
             display="flex"
@@ -127,15 +143,35 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {isRankRewardClaimable.data
-                  ? globalPool.data && fromBn(globalPool.data.valueLeft, 9)
+                  ? globalPool.data &&
+                    removeFloat(globalPool.data.valueLeft, 9, 1)
                   : globalPool.data &&
-                    fromBn(globalPool.data.claimable, 9)}{" "}
+                    removeFloat(globalPool.data.claimable, 9, 1)}{" "}
                 GNET
               </Badge>
             </Stack>
           </GridItem>
+
+          {/** Potential profit */}
+          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
+            <Stack
+              direction={"row"}
+              justifyContent="space-between"
+              alignItems={"center"}
+              w={{ md: "20rem", base: "full" }}
+            >
+              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
+                {summaryData?.totalPotentialProfit ?? 0} GNET
+              </Badge>
+            </Stack>
+          </GridItem>
+
+          {/** claim rank */}
           <GridItem
             colSpan={2}
+            colStart={{ md: 4, base: 1 }}
+            rowStart={{ md: 3, base: 5 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
@@ -156,12 +192,21 @@ export const SectionGnetProject = () => {
                   // rankReward.data &&
                   //   fromBn(rankReward.data, 9) + " " +
                   // todo need to fix
+
                   t("common.claim")
                 }
               </Button>
             </Stack>
           </GridItem>
-          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
+
+          {/** claim farm matching */}
+          <GridItem
+            colSpan={2}
+            colStart={{ md: 2, base: 1 }}
+            rowStart={{ md: 3, base: 6 }}
+            display="flex"
+            textTransform={"capitalize"}
+          >
             <Stack
               direction={"row"}
               justifyContent="space-between"
@@ -178,24 +223,6 @@ export const SectionGnetProject = () => {
                 {reward.data &&
                   fromBn(reward.data, 9) + " " + t("common.claim")}
               </Button>
-            </Stack>
-          </GridItem>
-          <GridItem
-            colSpan={{ lg: 2, base: 2 }}
-            colStart={{ lg: 3, md: 3, base: 1 }}
-            display="flex"
-            textTransform={"capitalize"}
-          >
-            <Stack
-              direction={"row"}
-              justifyContent="space-between"
-              alignItems={"center"}
-              w={{ md: "20rem", base: "full" }}
-            >
-              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
-              <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {summaryData?.totalPotentialProfit ?? 0} GNET
-              </Badge>
             </Stack>
           </GridItem>
         </Grid>

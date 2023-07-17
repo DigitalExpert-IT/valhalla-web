@@ -182,7 +182,7 @@ export const SectionGnetProject = () => {
           </GridItem>
           <GridItem
             colSpan={{ lg: 2, base: 2 }}
-            colStart={{ lg: 2, md: 2, base: 1 }}
+            colStart={{ lg: 3, md: 3, base: 1 }}
             display="flex"
             textTransform={"capitalize"}
           >

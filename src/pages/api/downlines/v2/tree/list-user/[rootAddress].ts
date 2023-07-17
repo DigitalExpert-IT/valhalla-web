@@ -12,17 +12,17 @@ const prisma = new PrismaClient();
 // sort by potentialProfit
 
 const getUserListUserPerLevel = async (
-  address: string,
+  rootAddress: string,
   level: number,
   offset: number,
   limit: number,
   rank: string,
   orderBy: string,
-  downlines?: string
+  address?: string
 ) => {
   const orderByTemplate = `ORDER BY "potentialProfit" ${orderBy} NULLS LAST`;
   const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
-  const downlinesTemplate = `"address" LIKE '%${downlines}%'`;
+  const findAddressTemplate = `"address" LIKE '%${address}%'`;
   const levelTemplate = `"level" = ${level}`;
   const list = await prisma.$queryRawUnsafe(`
  SELECT
@@ -142,7 +142,7 @@ WITH RECURSIVE "hierarchy" AS (
 	FROM
 		"User"
 	WHERE
-		upline = '${address}'
+		upline = '${rootAddress}'
 	UNION ALL
 	SELECT
 		parent.address,
@@ -165,7 +165,7 @@ SELECT
 FROM
 	"hierarchy"
 	WHERE
-	${downlines ? downlinesTemplate : levelTemplate} ${rankTemplate}
+	${address ? findAddressTemplate : levelTemplate} ${rankTemplate}
 	) "hierarcyUser" ON "hierarcyUser"."address" = "User"."address" 
 GROUP BY
 	"User"."address",
@@ -181,15 +181,15 @@ OFFSET ${offset} FETCH NEXT ${limit} ROWS ONLY
 };
 
 const getPagesFromListUser = async (
-  address: string,
+  rootAddress: string,
   level: number,
   limit: number,
   rank: string,
-  downlines?: string
+  address?: string
 ) => {
   const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
   const levelTemplate = `"level" = ${level}`;
-  const downlinesTemplate = `"address" LIKE '%${downlines}%'`;
+  const findAddressTemplate = `"address" LIKE '%${address}%'`;
   const list: [{ totalItem: number; totalPage: number }] =
     await prisma.$queryRawUnsafe(`
     WITH RECURSIVE "hierarchy" AS (
@@ -202,7 +202,7 @@ const getPagesFromListUser = async (
       FROM
           "User"
       WHERE
-          upline = '${address}'
+          upline = '${rootAddress}'
       UNION
       ALL
       SELECT
@@ -223,7 +223,7 @@ const getPagesFromListUser = async (
 		"rank"
   FROM
       "hierarchy"
-  WHERE ${downlines ? downlinesTemplate : levelTemplate} ${rankTemplate}
+  WHERE ${address ? findAddressTemplate : levelTemplate} ${rankTemplate}
 	GROUP BY "rank"
   `);
 
@@ -239,14 +239,14 @@ const handler: NextApiHandler = async (req, res) => {
   if (req.method === "GET") {
     return res.status(405).json({ status: 405, message: "wrong method" });
   }
-  const address = lowerCase(req.query.address);
+  const rootAddress = lowerCase(req.query.rootAddress);
   const level = req.body.level ? Number(req.body.level) : 1;
   const rank = req.body.rank ? Number(req.body.rank) : "";
 
   const page = req.query.page;
   const limit = req.query.limit;
   const orderBy = req.query.orderBy;
-  const downlines = req.body.downlines;
+  const address = lowerCase(req.body.address);
 
   const isLimitNumOrNan = Number(limit) < 1 || !Number(limit);
   const isPageNumOrNan = Number(page) < 1 || !Number(page);
@@ -284,21 +284,21 @@ const handler: NextApiHandler = async (req, res) => {
 
   try {
     const getUser = await getUserListUserPerLevel(
-      address,
+      rootAddress,
       level,
       offset,
       pageSize,
       String(rank ?? ""),
       String(orderBy ?? ""),
-      String(downlines ?? "")
+      String(address ?? "")
     );
 
     const getPage = await getPagesFromListUser(
-      address,
+      rootAddress,
       level,
       pageSize,
       String(rank ?? ""),
-      String(downlines ?? "")
+      String(address ?? "")
     );
     return res.status(200).json({
       totalItem: getPage?.totalItem,

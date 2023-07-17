@@ -49,7 +49,7 @@ export const NAVIGATION: Array<INavigation> = [
   },
   {
     name: "dashboard",
-    href: "/dashboard/[address]",
+    href: "/dashboard-v2/[address]",
   },
 ];
 

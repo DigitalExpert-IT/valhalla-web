@@ -21,6 +21,8 @@ jobs:
           script: |
             cd /etc/project/valhalla
             git pull origin main
-            export PATH=$PATH:/root/.nvm/versions/node/v18.12.1/bin
-            pnpm install & pnpm build
-            pm2 restart 0
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install --lts
+            node -v
+            npm -v

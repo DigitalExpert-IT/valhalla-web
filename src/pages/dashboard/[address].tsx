@@ -402,7 +402,7 @@ const Dashboard = () => {
         width="full"
         minH="calc(100vh - 129px)"
         flex={4}
-        alignItems="streetch"
+        alignItems="stretch"
         bg="#f6f7ff"
         pb="32"
         direction={{ base: "column", sm: "row" }}
@@ -411,15 +411,14 @@ const Dashboard = () => {
           <Stack
             mt="8"
             gap="2"
-            alignItems="streetch"
+            alignItems="stretch"
             direction={{ base: "column", sm: "row" }}
           >
             <Box
               display={!searchKey.length ? "block" : "none"}
               pos="relative"
               flex="1"
-              minW={{ base: "full", sm: "370px" }}
-              maxW={{ base: "full", sm: "370px" }}
+              w={{ base: "full", sm: "370px" }}
               minH="160px"
             >
               <TableDashboard
@@ -447,8 +446,7 @@ const Dashboard = () => {
             <Box
               pos="relative"
               flex="2"
-              minW={{ base: "full", sm: "900px" }}
-              maxW={{ base: "full", sm: "900px" }}
+              w={{ base: "full", sm: "900px" }}
               minH="160px"
             >
               <TableDashboard

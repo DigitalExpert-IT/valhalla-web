@@ -18,4 +18,4 @@ jobs:
           script: |
             cd /etc/project/valhalla
             git pull
-            pm2 status
+            ls

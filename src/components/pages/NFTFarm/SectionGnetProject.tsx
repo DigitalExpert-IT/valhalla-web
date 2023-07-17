@@ -225,6 +225,24 @@ export const SectionGnetProject = () => {
               </Button>
             </Stack>
           </GridItem>
+          <GridItem
+            colSpan={{ lg: 2, base: 2 }}
+            colStart={{ lg: 3, md: 3, base: 1 }}
+            display="flex"
+            textTransform={"capitalize"}
+          >
+            <Stack
+              direction={"row"}
+              justifyContent="space-between"
+              alignItems={"center"}
+              w={{ md: "20rem", base: "full" }}
+            >
+              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
+                {summaryData?.totalPotentialProfit ?? 0} GNET
+              </Badge>
+            </Stack>
+          </GridItem>
         </Grid>
       </Container>
     </Box>

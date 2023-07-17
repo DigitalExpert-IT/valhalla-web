@@ -1,5 +1,6 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
+import { CARD_IMAGE_MAP } from "constant/image";
 import { useAsyncCall } from "hooks";
 import { useCardList } from "hooks/useCardList";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,7 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
         >
           <Stack>
             <Box as="video" autoPlay loop muted rounded="xl">
-              <source src={`/api/image/${props.id}`} type="video/mp4" />
+              <source src={CARD_IMAGE_MAP[props.id as "0"]} type="video/mp4" />
             </Box>
             <Box py="1rem">
               <Text fontWeight="600">

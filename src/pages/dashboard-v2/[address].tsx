@@ -336,7 +336,7 @@ const Dashboard = () => {
                       {t("pages.dashboard.title.members")}
                     </Heading>
                     <Text fontSize="xs" color="gray.400">
-                      {`Total: ${summary && summary.totalUser} Member`}
+                      {`Total: ${summary ? summary.totalUser : 0} Member`}
                     </Text>
                   </HStack>
                 }

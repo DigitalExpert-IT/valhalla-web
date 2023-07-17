@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 import { IAdminDashboard } from "interface";
+import { INFTItem } from "interface";
 
 /**
  *

@@ -4,10 +4,10 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
-    name: Deploy
+  cd:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: SSH to server
         uses: appleboy/ssh-action@master
         with:
@@ -16,7 +16,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd ~/etc/project/valhalla
+            cd /etc/project/valhalla
             git pull
             pnpm install && pnpm build
             pm2 restart 0

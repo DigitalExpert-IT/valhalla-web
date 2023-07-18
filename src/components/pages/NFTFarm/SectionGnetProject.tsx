@@ -93,7 +93,6 @@ export const SectionGnetProject = () => {
             alignItems="center"
             justifyContent="center"
             rowSpan={{ md: 2, base: 1 }}
-            // border="1px"
             w={{ md: "15rem", base: "full" }}
           >
             <AspectRatio w="100px" ratio={15 / 17}>

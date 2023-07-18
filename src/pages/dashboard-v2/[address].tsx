@@ -408,4 +408,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+// export default withConnection(withCorrectAddress(Dashboard));
+export default Dashboard;

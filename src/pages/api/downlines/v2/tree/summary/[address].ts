@@ -33,7 +33,7 @@ WITH RECURSIVE hierarchy AS (
 	FROM
 		"User"
 	WHERE
-		upline = ${addressRoot} -- root address
+		LOWER(upline) = LOWER(${addressRoot}) -- root address
 	UNION ALL
 	SELECT
 		parent.address,
@@ -104,7 +104,7 @@ FROM
 			FROM
 				"User"
 			WHERE
-				upline = ${addressRoot} -- root address
+					LOWER(upline) = LOWER(${addressRoot}) -- root address
 			UNION ALL
 			SELECT
 				parent.address,

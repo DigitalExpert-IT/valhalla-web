@@ -22,7 +22,7 @@ const getUserListUserPerLevel = async (
 ) => {
   const orderByTemplate = `ORDER BY "potentialProfit" ${orderBy} NULLS LAST`;
   const rankTemplate = rank ? `AND "rank"=${rank}` : `AND "rank" IS NOT NULL`;
-  const findAddressTemplate = `"address" LIKE '%${address}%'`;
+  const findAddressTemplate = `"address" ILIKE '%${address}%'`;
   const levelTemplate = `"level" = ${level}`;
   const list = await prisma.$queryRawUnsafe(`
  SELECT
@@ -142,7 +142,7 @@ WITH RECURSIVE "hierarchy" AS (
 	FROM
 		"User"
 	WHERE
-		upline = '${rootAddress}'
+		LOWER(upline) = LOWER('${rootAddress}')
 	UNION ALL
 	SELECT
 		parent.address,
@@ -166,7 +166,7 @@ FROM
 	"hierarchy"
 	WHERE
 	${address ? findAddressTemplate : levelTemplate} ${rankTemplate}
-	) "hierarcyUser" ON "hierarcyUser"."address" = "User"."address" 
+	) "hierarcyUser" ON LOWER("hierarcyUser"."address") = LOWER("User"."address") 
 GROUP BY
 	"User"."address",
 	"User"."upline",
@@ -202,7 +202,7 @@ const getPagesFromListUser = async (
       FROM
           "User"
       WHERE
-          upline = '${rootAddress}'
+          LOWER(upline) = LOWER('${rootAddress}')
       UNION
       ALL
       SELECT

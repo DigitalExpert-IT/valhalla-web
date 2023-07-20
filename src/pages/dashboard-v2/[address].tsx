@@ -17,7 +17,15 @@ import { prettyBn, shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import { BsFillPeopleFill, BsFillPersonFill, BsGraphUp } from "react-icons/bs";
+import {
+  BsDiagram2Fill,
+  BsFillPeopleFill,
+  BsFillPersonFill,
+  BsFillRocketTakeoffFill,
+  BsGraphUp,
+  BsHurricane,
+  BsPieChartFill,
+} from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
@@ -285,8 +293,20 @@ const Dashboard = () => {
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
-        icon: BsGraphUp,
+        icon: BsDiagram2Fill,
         value: MAX_DOWNLINES_LEVEL,
+      },
+      {
+        key: "totalNFT",
+        text: t("pages.dashboard.labels.totalNft"),
+        icon: BsHurricane,
+        value: summary ? summary?.totalNFT : 0,
+      },
+      {
+        key: "totalSales",
+        text: t("pages.dashboard.labels.totalSales"),
+        icon: BsPieChartFill,
+        value: summary ? summary?.totalValue : 0,
       },
     ];
   }, [summary]);
@@ -408,4 +428,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+// export default withConnection(withCorrectAddress(Dashboard));
+export default Dashboard;

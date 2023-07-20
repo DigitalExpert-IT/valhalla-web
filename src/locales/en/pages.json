@@ -310,7 +310,7 @@
   },
   "nftFarming": {
     "gnetProject": "<strong>Global Network</strong> Project",
-    "networkMembers": "Members",
+    "networkMembers": "Network member",
     "globalBonusGnet": "Global bonus gnet",
     "rankReward": "Rank reward gnet",
     "farmingMatching": "Farming matching bonus",

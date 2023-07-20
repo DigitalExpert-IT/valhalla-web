@@ -80,7 +80,7 @@ export const SectionGnetProject = () => {
 
       <Container maxW="container.xl">
         <Grid
-          gap={4}
+          columnGap={10}
           h="20rem"
           templateRows="repeat(10, 1fr)"
           templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
@@ -88,11 +88,12 @@ export const SectionGnetProject = () => {
           {/* RANK Image */}
 
           <GridItem
-            colSpan={1}
+            colSpan={{ base: 2, md: 1 }}
+            colStart={{ md: 2, base: 1 }}
+            rowSpan={{ md: 2, base: 1 }}
             display="flex"
             alignItems="center"
             justifyContent="center"
-            rowSpan={{ md: 2, base: 1 }}
             w={{ md: "15rem", base: "full" }}
           >
             <AspectRatio w="100px" ratio={15 / 17}>
@@ -104,20 +105,41 @@ export const SectionGnetProject = () => {
             </AspectRatio>
           </GridItem>
 
-          {/** NFT farming */}
+          {/* * Potential profit */}
           <GridItem
             colSpan={2}
+            rowSpan={2}
+            display="flex"
+            textTransform={"capitalize"}
+          >
+            <Stack
+              direction={"row"}
+              justifyContent="space-between"
+              alignItems={"center"}
+              w={{ md: "20rem", base: "full" }}
+            >
+              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
+              <Badge variant="solid" rounded="full" bg="blueOcean.600">
+                {summaryData?.totalPotentialProfit ?? 0} GNET
+              </Badge>
+            </Stack>
+          </GridItem>
+
+          {/** NFT farming */}
+          <GridItem
+            colSpan={{ base: 2, md: 1 }}
+            colStart={{ md: 2, base: 1 }}
+            rowSpan={{ md: 2, base: 1 }}
+            rowStart={{ md: 5, base: 2 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
-            colStart={1}
-            rowStart={{ md: 3, base: 2 }}
           >
             <Stack
               w={{ md: "15rem", base: "full" }}
               alignItems="center"
               direction="row"
-              justifyContent={{ md: "center", base: "space-between" }}
+              justifyContent="space-between"
             >
               <Text>{t("pages.nftFarming.networkMembers")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
@@ -129,6 +151,8 @@ export const SectionGnetProject = () => {
           {/** Global bonus */}
           <GridItem
             colSpan={2}
+            rowSpan={2}
+            rowStart={{ md: 5, base: 5 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
@@ -151,26 +175,12 @@ export const SectionGnetProject = () => {
             </Stack>
           </GridItem>
 
-          {/** Potential profit */}
-          <GridItem colSpan={2} display="flex" textTransform={"capitalize"}>
-            <Stack
-              direction={"row"}
-              justifyContent="space-between"
-              alignItems={"center"}
-              w={{ md: "20rem", base: "full" }}
-            >
-              <Text>{t("pages.nftFarming.potentialProfit")}</Text>
-              <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {summaryData?.totalPotentialProfit ?? 0} GNET
-              </Badge>
-            </Stack>
-          </GridItem>
-
           {/** claim rank */}
           <GridItem
-            colSpan={2}
-            colStart={{ md: 4, base: 1 }}
-            rowStart={{ md: 3, base: 5 }}
+            colSpan={{ base: 2, md: 1 }}
+            colStart={{ md: 2, base: 1 }}
+            rowSpan={{ md: 2, base: 1 }}
+            rowStart={{ md: 7, base: 7 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
@@ -201,8 +211,8 @@ export const SectionGnetProject = () => {
           {/** claim farm matching */}
           <GridItem
             colSpan={2}
-            colStart={{ md: 2, base: 1 }}
-            rowStart={{ md: 3, base: 6 }}
+            rowSpan={2}
+            rowStart={{ md: 7, base: 9 }}
             display="flex"
             textTransform={"capitalize"}
           >

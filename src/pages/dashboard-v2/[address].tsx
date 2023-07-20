@@ -318,30 +318,42 @@ const Dashboard = () => {
         isShowSearch
         onSearchChange={searchDebounce}
       />
-
+      <Box
+        w={"full"}
+        flex={1}
+        position={"relative"}
+        color="gray.800"
+        py="6"
+        px="6"
+        background={"dashboard.gray"}
+      >
+        <SummaryDashboard data={summaryData} isLoading={isLoading} />
+      </Box>
       <Stack
         minW="fit-content"
-        width="full"
+        width={"full"}
         minH="calc(100vh - 129px)"
         flex={4}
-        alignItems="streetch"
+        alignItems="stretch"
         bg="#f6f7ff"
         pb="32"
         direction={{ base: "column", sm: "row" }}
+        overflowX={"auto"}
       >
         <Box flex={2} px="6" order={{ base: 2, sm: 1 }}>
           <Stack
             mt="8"
             gap="2"
-            alignItems="streetch"
+            alignItems="stretch"
             direction={{ base: "column", sm: "row" }}
+            flexWrap={"wrap"}
+            width={{ base: "calc(100vw - 50px)", sm: "calc(100vw - 120px)" }}
           >
             <Box
               display={!searchKey.length ? "block" : "none"}
               pos="relative"
               flex="1"
-              minW={{ base: "full", sm: "370px" }}
-              maxW={{ base: "full", sm: "370px" }}
+              w={"full"}
               minH="160px"
             >
               <TableDashboard
@@ -366,13 +378,7 @@ const Dashboard = () => {
               />
             </Box>
 
-            <Box
-              pos="relative"
-              flex="2"
-              minW={{ base: "full", sm: "900px" }}
-              maxW={{ base: "full", sm: "900px" }}
-              minH="160px"
-            >
+            <Box pos="relative" flex="3" w={"full"} minH="160px">
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
@@ -409,19 +415,6 @@ const Dashboard = () => {
               />
             </Box>
           </Stack>
-        </Box>
-
-        <Box
-          maxW="453px"
-          minW={{ base: "full", sm: "453px" }}
-          flex={1}
-          color="gray.800"
-          py="6"
-          px="6"
-          bg="white"
-          order={{ base: 1, sm: 2 }}
-        >
-          <SummaryDashboard data={summaryData} isLoading={isLoading} />
         </Box>
       </Stack>
     </LayoutDashboard>

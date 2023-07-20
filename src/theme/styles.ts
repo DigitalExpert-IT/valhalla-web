@@ -27,16 +27,16 @@ export const styles: Styles = {
     },
 
     '&::-webkit-scrollbar': {
-      height: '10px',
-      width: '8px',
+      height: { base: "-moz-initial", md: "10px" },
+      width: { base: "-moz-initial", md: "8px" },
     },
     '&::-webkit-scrollbar-track': {
-      width: '6px',
-      background: "#191272"
+      width: { base: '-moz-initial', md: "6px" },
+      background: { base: '-moz-initial', md: "#191272" }
     },
     '&::-webkit-scrollbar-thumb': {
-      background: '#7246fc',
-      borderRadius: '50px',
+      background: { base: '-moz-initial', md: "#7246fc" },
+      borderRadius: { base: '-moz-initial', md: "#50px" },
     },
   },
 };

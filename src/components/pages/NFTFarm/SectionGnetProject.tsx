@@ -80,7 +80,8 @@ export const SectionGnetProject = () => {
 
       <Container maxW="container.xl">
         <Grid
-          columnGap={10}
+          columnGap={5}
+          rowGap={4}
           h="20rem"
           templateRows="repeat(10, 1fr)"
           templateColumns={{ md: "repeat(5, 1fr)", base: "repeat(1, 1fr)" }}
@@ -94,9 +95,9 @@ export const SectionGnetProject = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            w={{ md: "15rem", base: "full" }}
+            w={{ md: "25rem", base: "full" }}
           >
-            <AspectRatio w="100px" ratio={15 / 17}>
+            <AspectRatio w={{ base: "120px", md: "150px" }} ratio={15 / 17}>
               <Image
                 src={RANK_SYMBOL_MAP[account?.rank ?? 0]}
                 alt={rankMap[account?.rank ?? 0]}
@@ -108,15 +109,18 @@ export const SectionGnetProject = () => {
           {/* * Potential profit */}
           <GridItem
             colSpan={2}
-            rowSpan={2}
+            rowSpan={3}
             display="flex"
             textTransform={"capitalize"}
           >
             <Stack
+              p="3"
+              bg="blue.900"
+              rounded="xl"
               direction={"row"}
               justifyContent="space-between"
               alignItems={"center"}
-              w={{ md: "20rem", base: "full" }}
+              w={{ md: "30rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.potentialProfit")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
@@ -130,13 +134,13 @@ export const SectionGnetProject = () => {
             colSpan={{ base: 2, md: 1 }}
             colStart={{ md: 2, base: 1 }}
             rowSpan={{ md: 2, base: 1 }}
-            rowStart={{ md: 5, base: 2 }}
+            rowStart={{ md: 6, base: 4 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
           >
             <Stack
-              w={{ md: "15rem", base: "full" }}
+              w={{ md: "25rem", base: "full" }}
               alignItems="center"
               direction="row"
               justifyContent="space-between"
@@ -152,7 +156,7 @@ export const SectionGnetProject = () => {
           <GridItem
             colSpan={2}
             rowSpan={2}
-            rowStart={{ md: 5, base: 5 }}
+            rowStart={{ md: 6, base: 5 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
@@ -161,7 +165,7 @@ export const SectionGnetProject = () => {
               direction="row"
               alignItems="center"
               justifyContent="space-between"
-              w={{ md: "20rem", base: "full" }}
+              w={{ md: "30rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
@@ -180,7 +184,7 @@ export const SectionGnetProject = () => {
             colSpan={{ base: 2, md: 1 }}
             colStart={{ md: 2, base: 1 }}
             rowSpan={{ md: 2, base: 1 }}
-            rowStart={{ md: 7, base: 7 }}
+            rowStart={{ md: 8, base: 7 }}
             display="flex"
             alignItems="center"
             textTransform={"capitalize"}
@@ -189,7 +193,7 @@ export const SectionGnetProject = () => {
               direction="row"
               alignItems="center"
               justifyContent={"space-between"}
-              w={{ md: "20rem", base: "full" }}
+              w={{ md: "25rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.rankReward")}</Text>
               <Button
@@ -212,7 +216,7 @@ export const SectionGnetProject = () => {
           <GridItem
             colSpan={2}
             rowSpan={2}
-            rowStart={{ md: 7, base: 9 }}
+            rowStart={{ md: 8, base: 9 }}
             display="flex"
             textTransform={"capitalize"}
           >
@@ -220,7 +224,7 @@ export const SectionGnetProject = () => {
               direction={"row"}
               justifyContent="space-between"
               alignItems={"center"}
-              w={{ md: "20rem", base: "full" }}
+              w={{ md: "30rem", base: "full" }}
             >
               <Text>{t("pages.nftFarming.farmingMatching")}</Text>
               <Button

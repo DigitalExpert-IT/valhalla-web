@@ -22,6 +22,7 @@ import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useSummary } from "hooks/user/dashboard/useSummary";
 import { BigNumber } from "ethers";
+import { getUsdtRate } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
@@ -42,6 +43,14 @@ export const SectionGnetProject = () => {
   const claimRankReward = useContractWrite(nft.contract, "claimRankReward");
   const claimNftRankRewardAsync = useAsyncCall(claimRankReward.mutateAsync);
   const claimRewardGnetAsync = useAsyncCall(claimReward.mutateAsync);
+  const usdtRate = fromBn(
+    getUsdtRate(
+      summaryData?.totalPotentialProfit
+        ? summaryData?.totalPotentialProfit.toString()
+        : "0"
+    ),
+    9
+  );
 
   const removeFloat = (value: BigNumber, decimal: number, remove: number) => {
     const toNumber = +fromBn(value, decimal);
@@ -122,7 +131,10 @@ export const SectionGnetProject = () => {
                 </Text>
               </Stack>
               <Text textTransform="uppercase" fontSize="sm">
-                in usdt will be 200 usdt
+                {t("pages.nftFarming.potentialProfitSub", {
+                  amount: usdtRate,
+                  currency: "USDT",
+                })}
               </Text>
             </Box>
           </Stack>

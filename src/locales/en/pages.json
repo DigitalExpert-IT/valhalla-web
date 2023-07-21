@@ -316,7 +316,8 @@
     "farmingMatching": "Farming matching bonus",
     "farmMathcingRequirement": "NFT farm matching requirement",
     "globalnftbonus": "Global Rank NFT Bonus System",
-    "potentialProfit": "Potential Profit"
+    "potentialProfit": "Potential Profit",
+    "potentialProfitSub": "In {{currency}} will be {{amount}} {{currency}} "
   },
   "share": {
     "title": "SHARE TO EARN",

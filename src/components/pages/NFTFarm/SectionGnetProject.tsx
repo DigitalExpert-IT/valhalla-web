@@ -143,7 +143,7 @@ export const SectionGnetProject = () => {
         <Box
           display="flex"
           flexDir="column"
-          alignItems={{ base: "none", md: "center" }}
+          alignItems={{ base: "none", md: "none", lg: "center" }}
         >
           <Stack
             direction={{ base: "column", md: "column", lg: "row", xl: "row" }}

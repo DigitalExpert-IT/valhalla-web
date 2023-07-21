@@ -1,6 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
-import { prettyBn } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
@@ -11,6 +10,7 @@ import {
   BsGraphUp,
   BsFillFileEarmarkCheckFill,
   BsFileEarmarkExcelFill,
+  BsFillPeopleFill,
 } from "react-icons/bs";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import _ from "lodash";
@@ -156,6 +156,24 @@ const Dashboard = () => {
 
     return [
       {
+        key: "totalSales",
+        text: t("pages.dashboard.labels.totalSales"),
+        icon: BsFillPeopleFill,
+        value: Number(basicDashboardInfo?.totalSales) || "0",
+      },
+      {
+        key: "totalUser",
+        text: t("pages.dashboard.labels.totalUser"),
+        icon: BsFillPeopleFill,
+        value: Number(basicDashboardInfo?.totalUser) || "0",
+      },
+      {
+        key: "totalProfitBasic",
+        text: t("pages.dashboard.labels.totalProfit"),
+        icon: BsFillPeopleFill,
+        value: Number(basicDashboardInfo?.totalProfit) || "0",
+      },
+      {
         key: "NFTOnUsers",
         text: t("pages.dashboard.labels.NFTOnUsers"),
         icon: BsUnity,
@@ -203,124 +221,25 @@ const Dashboard = () => {
         isShowSearch
         onSearchChange={searchDebounce}
       />
-
-      <HStack
-        width="full"
-        minH="calc(100vh - 129px)"
-        flex={4}
-        alignItems="streetch"
-        bg="dashboard.gray"
-        pb="32"
-      >
-        <Box flex={2} px="6">
-          <HStack
-            minH="220px"
-            bgSize="100%"
-            bgRepeat="no-repeat"
-            bgPos="bottom"
-            bg="white"
-            borderRadius="xl"
-            px="6"
-            py="4"
-            rounded="md"
-            justifyContent="space-around"
-          >
-            <Box>
-              <Text as="h2" fontWeight="bold" fontSize="2xl">
-                {t("pages.dashboard.labels.totalSales")}
-              </Text>
-              <HStack
-                minW="200px"
-                mt="2"
-                py="2"
-                px="3"
-                bg="#37006566"
-                color="white"
-                borderRadius="lg"
-                justifyContent="center"
-              >
-                <Text fontWeight="bold" fontSize="3xl" color="inherit">
-                  {prettyBn(basicDashboardInfo?.totalSales, 6)}{" "}
-                </Text>
-                <Text color="inherit">USDT</Text>
-              </HStack>
-            </Box>
-
-            <Box>
-              <Text as="h2" fontWeight="bold" fontSize="2xl">
-                {t("pages.dashboard.labels.totalUser")}
-              </Text>
-              <HStack
-                minW="200px"
-                mt="2"
-                py="2"
-                px="3"
-                bg="#37006566"
-                color="white"
-                borderRadius="lg"
-                justifyContent="center"
-              >
-                <Text fontWeight="bold" fontSize="3xl" color="inherit">
-                  {basicDashboardInfo?.totalUser}{" "}
-                </Text>
-                <Text color="inherit">Users</Text>
-              </HStack>
-            </Box>
-
-            <Box>
-              <Text as="h2" fontWeight="bold" fontSize="2xl">
-                {t("pages.dashboard.labels.totalProfit")}
-              </Text>
-              <HStack
-                minW="200px"
-                mt="2"
-                py="2"
-                px="3"
-                bg="#37006566"
-                color="white"
-                borderRadius="lg"
-                justifyContent="center"
-              >
-                <Text fontWeight="bold" fontSize="3xl" color="inherit">
-                  {prettyBn(basicDashboardInfo?.totalProfit, 6)}{" "}
-                </Text>
-                <Text color="inherit">USDT</Text>
-              </HStack>
-            </Box>
-          </HStack>
-
-          <HStack mt="16" gap="2" alignItems="streetch">
-            <Box pos="relative" flex="2" minH="160px">
-              <TableDashboard
-                title={t("pages.dashboard.title.users") ?? ""}
-                data={TableUser.data}
-                options={TableUser.options}
-                isLoading={listUserLoading}
-              />
-            </Box>
-            <Box flex={1}></Box>
-          </HStack>
-        </Box>
-
-        <Box
-          maxW="453px"
-          minW="453px"
-          flex={1}
-          color="gray.800"
-          py="6"
-          px="6"
-          bg="white"
-        >
-          <SummaryDashboard
-            data={summaryData}
-            isLoading={summaryLoading}
-            error={error}
-            isShowFilterDate
-            dateValue={selectedDateRange}
-            onDateChange={handleSelectDate}
+      <Box py="6" px="6" background={"dashboard.gray"}>
+        <SummaryDashboard
+          data={summaryData}
+          isLoading={summaryLoading}
+          error={error}
+          dateValue={selectedDateRange}
+          onDateChange={handleSelectDate}
+        />
+      </Box>
+      <Box px="6" bg="dashboard.gray" pb="32" minH="calc(100vh - 129px)">
+        <Box pos="relative" minH="160px">
+          <TableDashboard
+            title={t("pages.dashboard.title.users") ?? ""}
+            data={TableUser.data}
+            options={TableUser.options}
+            isLoading={listUserLoading}
           />
         </Box>
-      </HStack>
+      </Box>
     </LayoutDashboard>
   );
 };

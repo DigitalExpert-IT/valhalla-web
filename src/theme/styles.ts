@@ -26,17 +26,17 @@ export const styles: Styles = {
       wordWrap: "break-word",
     },
 
-    '&::-webkit-scrollbar': {
-      height: '10px',
-      width: '8px',
+    "&::-webkit-scrollbar": {
+      height: { base: "-moz-initial", md: "10px" },
+      width: { base: "-moz-initial", md: "8px" },
     },
-    '&::-webkit-scrollbar-track': {
-      width: '6px',
-      background: "#191272"
+    "&::-webkit-scrollbar-track": {
+      width: { base: "-moz-initial", md: "6px" },
+      background: { base: "-moz-initial", md: "#191272" },
     },
-    '&::-webkit-scrollbar-thumb': {
-      background: '#7246fc',
-      borderRadius: '50px',
+    "&::-webkit-scrollbar-thumb": {
+      background: { base: "-moz-initial", md: "#7246fc" },
+      borderRadius: { base: "-moz-initial", md: "50px" },
     },
   },
 };

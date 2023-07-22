@@ -1,5 +1,5 @@
 import React from "react";
-import { CardClaimGenesisNFT, CardGenesisNFT, LayoutMainV2 } from "components";
+import { CardClaimGenesisNFT, CardGenesisNFT, LayoutMainV2, ModalAnnouncement } from "components";
 import {
   Box,
   Heading,
@@ -18,6 +18,7 @@ import { t } from "i18next";
 const Genesis = () => {
   return (
     <LayoutMainV2>
+      <ModalAnnouncement/>
       <Flex
         pos={"relative"}
         flexDir={"column"}

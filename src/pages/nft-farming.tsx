@@ -1,5 +1,5 @@
 import React from "react";
-import { LayoutMainV2, TableRankNFTBonusV2 } from "components";
+import { LayoutMainV2, ModalAnnouncement, TableRankNFTBonusV2 } from "components";
 import { withConnection } from "hoc";
 import {
   SectionGnetProject,
@@ -12,6 +12,7 @@ import { Box } from "@chakra-ui/react";
 const NftFarmingV2 = () => {
   return (
     <LayoutMainV2>
+      <ModalAnnouncement/>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <SectionNFTList />
         <SectionGnetProject />

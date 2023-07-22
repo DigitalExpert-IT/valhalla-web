@@ -406,6 +406,7 @@ const Dashboard = () => {
         bg="#f6f7ff"
         pb="32"
         direction={{ base: "column", sm: "row" }}
+        overflowX={"auto"}
       >
         <Box flex={2} px="6" order={{ base: 2, sm: 1 }}>
           <Stack
@@ -496,6 +497,7 @@ const Dashboard = () => {
           px="6"
           bg="white"
           order={{ base: 1, sm: 2 }}
+          width={"calc(100vw - 120px)"}
         >
           <SummaryDashboard data={summaryData} isLoading={isLoading} />
         </Box>

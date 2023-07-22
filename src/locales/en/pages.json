@@ -398,7 +398,8 @@
       "blacklistNFT": "Blacklist NFT",
       "totalMember": "Total Member",
       "totalEstimateProfit": "Total Estimate Profit",
-      "maxTotalLevel": "Max Total Level"
+      "maxTotalLevel": "Max Total Level",
+      "totalNft": "Total NFT"
     },
     "errors": {
       "invalidDate": "Invalid Date"

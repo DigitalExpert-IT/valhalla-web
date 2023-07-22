@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   HStack,
   Heading,
   Input,
@@ -37,12 +38,12 @@ export const SummaryDashboard = (props: ISummaryProps) => {
   const { data, isShowFilterDate, dateValue, isLoading, error, onDateChange } =
     props;
   const { t } = useTranslation();
-
+  const flexBasisValue = data.length === 8 ? "23%" : "31%";
   const renderData = useMemo(() => {
     return data?.map(item => (
       <HStack
+        flex={{ base: "100%", md: flexBasisValue }}
         key={item.key}
-        w="full"
         pos="relative"
         bg="purple.400"
         color="white"
@@ -76,12 +77,23 @@ export const SummaryDashboard = (props: ISummaryProps) => {
   return (
     <Stack
       alignItems="center"
-      bg="dashboard.gray"
+      bgColor="#370065"
+      backgroundPosition={{ base: "center", md: "initial" }}
+      backgroundRepeat={"no-repeat"}
+      backgroundSize={{ base: "cover", md: "100% auto" }}
+      backgroundImage={"/assets/dashboard/bg-billboard-2.png"}
       w="full"
-      p={{ base: "0", sm: "8" }}
+      p={{ base: "4", sm: "8" }}
       rounded="lg"
     >
-      <Heading as="h2" fontSize="2xl" mb="4">
+      <Heading
+        w={"full"}
+        textAlign={{ base: "center", md: "initial" }}
+        as="h2"
+        fontSize="3xl"
+        mb="4"
+        color={"dashboard.gray"}
+      >
         {t("pages.dashboard.title.summary")}
       </Heading>{" "}
       {isShowFilterDate && onDateChange && dateValue ? (
@@ -116,7 +128,9 @@ export const SummaryDashboard = (props: ISummaryProps) => {
       <Text variant="error" display={error?.message ? "block" : "none"}>
         {error?.message}
       </Text>
-      {renderData}
+      <Flex w={"full"} flexWrap={"wrap"} gap={3}>
+        {renderData}
+      </Flex>
     </Stack>
   );
 };

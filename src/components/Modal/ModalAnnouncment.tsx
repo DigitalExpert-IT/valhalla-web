@@ -38,8 +38,7 @@ export const ModalAnnouncement = () => {
               />
             </AspectRatio>
             <Text fontWeight="semiBold" fontSize="md" textTransform="uppercase">
-              There is an update on the Web 3 product global network. Please
-              wait until the update is finished.
+              We are under maintenance to improving our website. We should be back shortly.
             </Text>
           </Stack>
         </ModalBody>

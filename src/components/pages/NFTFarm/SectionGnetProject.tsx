@@ -2,14 +2,13 @@ import {
   Box,
   Badge,
   Button,
-  GridItem,
   Container,
   AspectRatio,
   Heading,
   Image,
   Stack,
   Text,
-  Grid,
+  Flex,
 } from "@chakra-ui/react";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { ZERO_ADDRESS } from "constant/address";
@@ -88,7 +87,7 @@ export const SectionGnetProject = () => {
       </Box>
 
       <Container maxW="container.xl">
-        <Box display="flex" justifyContent="center" mb="4rem">
+        <Flex display="flex" justifyContent="center" mb="4rem">
           <Stack
             direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
             align="center"
@@ -130,7 +129,7 @@ export const SectionGnetProject = () => {
                   {summaryData?.totalPotentialProfit ?? 0} GNET
                 </Text>
               </Stack>
-              <Text textTransform="uppercase" fontSize="sm">
+              <Text textTransform="uppercase" fontSize="sm" mt="1rem">
                 {t("pages.nftFarming.potentialProfitSub", {
                   amount: usdtRate,
                   currency: "USDT",
@@ -138,7 +137,7 @@ export const SectionGnetProject = () => {
               </Text>
             </Box>
           </Stack>
-        </Box>
+        </Flex>
 
         <Box
           display="flex"

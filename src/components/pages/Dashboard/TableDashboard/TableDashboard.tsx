@@ -124,7 +124,7 @@ export const TableDashboard = (props: ITableProps) => {
         ) : null}
 
         <HStack>
-          <BsFilter size="20" color="000" />
+          <BsFilter size="20" />
           <HStack>
             {options?.filter
               ? options.filter?.map(filter => (
@@ -134,6 +134,8 @@ export const TableDashboard = (props: ITableProps) => {
                     maxW="40"
                     placeholder={filter?.placeholder ?? ""}
                     onChange={e => filter?.onFilterChange(e.target.value)}
+                    bgGradient={"linear(to-r, #6785F8, #6E69EF, #AD5BFC)"}
+                    rounded="lg"
                   >
                     {filter?.options?.map((item, idx) => (
                       <option

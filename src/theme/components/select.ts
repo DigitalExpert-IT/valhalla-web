@@ -89,7 +89,7 @@ const variantFilter = defineStyle(() => ({
     maxH: "30px",
     bg: "transparent",
     borderColor: "black",
-    color: "black",
+    color: "white",
     boxShadow: "md",
     border: "1px solid black",
     _readOnly: {
@@ -108,7 +108,7 @@ const variantFilter = defineStyle(() => ({
     },
   },
   icon: {
-    color: "black",
+    color: "white",
   },
   addon: {
     border: "2px solid",

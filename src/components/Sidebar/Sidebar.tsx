@@ -149,7 +149,9 @@ export const Sidebar = () => {
     height: "100vh",
     p: "2",
     pt: "8",
-    bg: "global-brand-bg",
+    bg: "#131526",
+    borderRight: "1px",
+    borderColor: "gray.700",
   };
 
   return (

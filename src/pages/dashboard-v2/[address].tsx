@@ -32,6 +32,7 @@ import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
 import {
   SummaryDashboard,
+  SummaryDashboardV2,
   IDataItem,
   TableDashboard,
 } from "components/pages/Dashboard";
@@ -325,9 +326,10 @@ const Dashboard = () => {
         color="gray.800"
         py="6"
         px="6"
-        background={"dashboard.gray"}
+        background="transparent"
       >
-        <SummaryDashboard data={summaryData} isLoading={isLoading} />
+        <SummaryDashboardV2 />
+        {/* <SummaryDashboard data={summaryData} isLoading={isLoading} /> */}
       </Box>
       <Stack
         minW="fit-content"
@@ -335,7 +337,7 @@ const Dashboard = () => {
         minH="calc(100vh - 129px)"
         flex={4}
         alignItems="stretch"
-        bg="#f6f7ff"
+        bg="transparent"
         pb="32"
         direction={{ base: "column", sm: "row" }}
         overflowX={"auto"}
@@ -359,15 +361,10 @@ const Dashboard = () => {
               <TableDashboard
                 title={
                   <HStack minH="46px" gap="4" alignItems="center">
-                    <Heading
-                      as="h2"
-                      fontSize="xl"
-                      fontWeight="600"
-                      color="gray.800"
-                    >
+                    <Heading as="h2" fontSize="xl" fontWeight="600">
                       {t("pages.dashboard.title.members")}
                     </Heading>
-                    <Text fontSize="xs" color="gray.400">
+                    <Text fontSize="xs" color="white">
                       {`Total: ${summary ? summary.totalUser : 0} Member`}
                     </Text>
                   </HStack>
@@ -382,14 +379,12 @@ const Dashboard = () => {
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
-                    <BsFillPersonFill size="20" color="#000" />
-                    <Breadcrumb
-                      spacing="4px"
-                      separator={<ChevronRightIcon color="gray.500" />}
-                    >
+                    <BsFillPersonFill size="20" />
+                    <Breadcrumb spacing="4px" separator={<ChevronRightIcon />}>
                       <BreadcrumbItem>
                         <BreadcrumbLink
                           fontSize="xs"
+                          color="white"
                           onClick={() => setSelectAddressList([])}
                         >
                           {shortenAddress(`${queryAddress}`)}

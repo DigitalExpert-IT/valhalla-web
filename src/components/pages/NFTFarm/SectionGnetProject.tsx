@@ -21,7 +21,7 @@ import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useSummary } from "hooks/user/dashboard/useSummary";
 import { BigNumber } from "ethers";
-import { getUsdtRate } from "utils";
+import { getUsdtRate, prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
@@ -172,10 +172,9 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
               <Badge variant="solid" rounded="full" bg="blueOcean.600">
                 {isRankRewardClaimable.data
-                  ? globalPool.data &&
-                    removeFloat(globalPool.data.valueLeft, 9, 1)
+                  ? globalPool.data && prettyBn(globalPool.data.valueLeft, 9)
                   : globalPool.data &&
-                    removeFloat(globalPool.data.claimable, 9, 1)}{" "}
+                    prettyBn(globalPool.data.claimable, 9)}{" "}
                 GNET
               </Badge>
             </Stack>

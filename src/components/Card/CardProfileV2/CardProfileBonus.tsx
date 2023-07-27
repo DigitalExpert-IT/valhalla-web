@@ -3,12 +3,7 @@ import {
   WidgetProfileBalace,
   WidgetProfileBtn,
 } from "components/Widget/WidgetProfile";
-import {
-  CURRENT_CHAIN_ID,
-  useAsyncCall,
-  useUSDTBalance,
-  useValhalla,
-} from "hooks";
+import { CURRENT_CHAIN_ID, useAsyncCall } from "hooks";
 import { useBalance, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { t } from "i18next";
 import { CardProfileV2 } from "./CardProfileV2";

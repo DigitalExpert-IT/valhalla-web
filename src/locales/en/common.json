@@ -84,5 +84,6 @@
   "percentage": "Percentage",
   "claim": "Claim",
   "buy": "Buy",
-  "isConnectingToBlockChain": "Connecting to BlockChain"
+  "isConnectingToBlockChain": "Connecting to BlockChain",
+  "succesBuyNft": "Suscces Buy NFT"
 }

@@ -1,4 +1,5 @@
-import { BigNumber, BigNumberish, utils } from "ethers/lib/ethers";
+import { BigNumber } from "ethers/lib/ethers";
+import { moneyUnitConverter } from "constant/pages/nftFarming";
 import { fromBn } from "evm-bn";
 
 const toFixed = (num: number, symbol = "") => {
@@ -10,13 +11,6 @@ const toFixed = (num: number, symbol = "") => {
 };
 
 export const prettyBn = (bn?: BigNumber, baseNumber = 18): string => {
-  const moneyUnitConverter = [
-    { suffix: "T", threshold: 1e12 },
-    { suffix: "B", threshold: 1e9 },
-    { suffix: "M", threshold: 1e6 },
-    { suffix: "K", threshold: 1e3 },
-  ];
-
   if (!bn) return "0";
   const value = +fromBn(bn, baseNumber);
   if (value === 0) return "0";

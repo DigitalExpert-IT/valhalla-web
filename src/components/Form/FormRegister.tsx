@@ -7,19 +7,24 @@ import {
   Badge,
   Box,
   Text,
-  FormLabel,
   Center,
+  FormLabel,
 } from "@chakra-ui/react";
-import { useModal } from "@ebay/nice-modal-react";
-import { useRouter } from "next/router";
-import { CURRENT_CHAIN_ID, useAsyncCall, useUSDTContract } from "hooks";
 import { shortenAddress } from "utils";
-import { FormInput, ModalDiscalimer, ButtonConnectWrapper } from "components";
+import { useRouter } from "next/router";
+import { useModal } from "@ebay/nice-modal-react";
 import { validateRequired, validateAddress } from "utils";
 import { useValhallaContract } from "hooks/useValhallaContract";
-import { useAddress, useContractWrite } from "@thirdweb-dev/react";
-import { VALHALLA_CONTRACT, ZERO_ADDRESS } from "constant/address";
+import { CURRENT_CHAIN_ID, useAsyncCall, useUSDTContract } from "hooks";
+import { FormInput, ModalDiscalimer, ButtonConnectWrapper } from "components";
+import { useAddress, useBalance, useContractWrite } from "@thirdweb-dev/react";
+import {
+  ZERO_ADDRESS,
+  USDT_CONTRACT,
+  VALHALLA_CONTRACT,
+} from "constant/address";
 import { useRegistrationFee } from "hooks/valhalla";
+import { BigNumber } from "ethers";
 
 type FormType = {
   referrer: string;
@@ -28,12 +33,34 @@ type FormType = {
 export const FormRegister = () => {
   const valhalla = useValhallaContract();
   const usdt = useUSDTContract();
+  const address = useAddress() ?? ZERO_ADDRESS;
+  const balanceUsdt = useBalance(USDT_CONTRACT[CURRENT_CHAIN_ID]);
   const { t } = useTranslation();
   const valhallaRegister = useContractWrite(valhalla.contract, "register");
   const usdtApproval = useContractWrite(usdt.contract, "approve");
-  const approve = useAsyncCall(usdtApproval.mutateAsync);
   const registrationFee = useRegistrationFee();
 
+  const approveMutation = async () => {
+    const allowance = (await usdt.contract?.call("allowance", [
+      address,
+      VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
+    ])) as BigNumber;
+    if (!registrationFee.data) {
+      return;
+    }
+    if (balanceUsdt.data?.value.lt(registrationFee?.data)) {
+      throw {
+        code: "NotEnoughBalance",
+      };
+    }
+    if (allowance.lt(registrationFee.data)) {
+      await usdtApproval.mutateAsync({
+        args: [VALHALLA_CONTRACT[CURRENT_CHAIN_ID], registrationFee.data],
+      });
+    }
+  };
+
+  const approve = useAsyncCall(approveMutation);
   const register = useAsyncCall(
     valhallaRegister.mutateAsync,
     t("form.message.registrationSuccess"),
@@ -41,7 +68,6 @@ export const FormRegister = () => {
   );
   const { control, setValue, handleSubmit } = useForm<FormType>();
   const disclaimerModal = useModal(ModalDiscalimer);
-  const address = useAddress() ?? ZERO_ADDRESS;
   const router = useRouter();
 
   useEffect(() => {
@@ -50,9 +76,7 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
-      await approve.exec({
-        args: [VALHALLA_CONTRACT[CURRENT_CHAIN_ID], registrationFee.data],
-      });
+      await approve.exec();
       await register.exec({
         args: [data.referrer],
       });

@@ -12,13 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { useModal } from "@ebay/nice-modal-react";
 import { useRouter } from "next/router";
-import { useAsyncCall } from "hooks";
+import { CURRENT_CHAIN_ID, useAsyncCall, useUSDTContract } from "hooks";
 import { shortenAddress } from "utils";
 import { FormInput, ModalDiscalimer, ButtonConnectWrapper } from "components";
 import { validateRequired, validateAddress } from "utils";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
-import { ZERO_ADDRESS } from "constant/address";
+import { VALHALLA_CONTRACT, ZERO_ADDRESS } from "constant/address";
 import { useRegistrationFee } from "hooks/valhalla";
 
 type FormType = {
@@ -27,9 +27,15 @@ type FormType = {
 
 export const FormRegister = () => {
   const valhalla = useValhallaContract();
+  const usdt = useUSDTContract();
   const { t } = useTranslation();
   const valhallaRegister = useContractWrite(valhalla.contract, "register");
+
+  const usdtApproval = useContractWrite(usdt.contract, "approve");
   const registrationFee = useRegistrationFee();
+
+  const approve = useAsyncCall(usdtApproval.mutateAsync);
+
   const register = useAsyncCall(
     valhallaRegister.mutateAsync,
     t("form.message.registrationSuccess"),
@@ -46,9 +52,11 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit(data => {
     disclaimerModal.show().then(async () => {
+      await approve.exec({
+        args: [VALHALLA_CONTRACT[CURRENT_CHAIN_ID], registrationFee.data],
+      });
       await register.exec({
         args: [data.referrer],
-        overrides: { value: registrationFee.data },
       });
     });
   });

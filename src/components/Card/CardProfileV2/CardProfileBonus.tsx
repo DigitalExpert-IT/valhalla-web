@@ -43,10 +43,10 @@ export const CardProfileBonus = () => {
             <Text>{t("common.globalBonus")}</Text>
             <Text textAlign={"end"}>
               {globalPool?.data?.claimable
-                ? fromBn(globalPool?.data?.claimable)
+                ? fromBn(globalPool?.data?.claimable, 6)
                 : globalPool?.data?.valueLeft &&
-                  fromBn(globalPool?.data?.valueLeft)}{" "}
-              MATIC
+                  fromBn(globalPool?.data?.valueLeft, 6)}{" "}
+              USDT
             </Text>
           </HStack>
         </WidgetProfileBalace>

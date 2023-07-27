@@ -48,6 +48,11 @@ export const SectionGnetProject = () => {
         code: "RankNotYetStart",
       };
     }
+    if (rankReward.data?.isZero()) {
+      throw {
+        code: "NoReward",
+      };
+    }
     const claim = await claimRankReward.mutateAsync({ args: [] });
     return claim;
   };

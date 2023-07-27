@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NFT } from "@warmbyte/valhalla/typechain-types";
+import { NFT } from "valhalla-erc20/typechain-types";
 import { useNFTContract } from "./useNFTContract";
 import { BigNumber, BigNumberish } from "ethers";
 import { useGNETContract } from "./useGNETContract";

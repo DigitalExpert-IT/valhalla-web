@@ -112,7 +112,7 @@ export const HeaderDashboard = (props: IPropsType) => {
       zIndex="10"
       py={{ base: "6", sm: "8" }}
       px="2"
-      bgColor="dashboard.gray"
+      bgColor="transparent"
       boxShadow={{ base: "sm", sm: "unset" }}
     >
       <HStack
@@ -165,7 +165,7 @@ export const HeaderDashboard = (props: IPropsType) => {
                 <Jazzicon diameter={30} seed={jsNumberForAddress(address)} />
               </Box>
               <CopiableText
-                color="black"
+                color="white"
                 fontFamily="mono"
                 display="block"
                 value={address}

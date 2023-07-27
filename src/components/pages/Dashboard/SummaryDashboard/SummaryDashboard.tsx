@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { useMemo } from "react";
 import { IconType } from "react-icons";
 
-export interface IDataItem {
+interface IDataItem {
   key: string;
   text: string;
   value: string | number;

@@ -28,6 +28,7 @@ import {
 } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
+import { SvgMaskGroup } from "components";
 import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
 import {
@@ -282,31 +283,31 @@ const Dashboard = () => {
       {
         key: "totalMember",
         text: t("pages.dashboard.labels.totalMember"),
-        icon: BsFillPeopleFill,
+        icon: <SvgMaskGroup />,
         value: summary ? summary.totalUser : 0,
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
-        icon: BsGraphUp,
+        icon: <SvgMaskGroup />,
         value: summary ? summary.totalPotentialProfit : 0,
       },
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
-        icon: BsDiagram2Fill,
+        icon: <SvgMaskGroup />,
         value: MAX_DOWNLINES_LEVEL,
       },
       {
         key: "totalNFT",
         text: t("pages.dashboard.labels.totalNft"),
-        icon: BsHurricane,
+        icon: <SvgMaskGroup />,
         value: summary ? summary?.totalNFT : 0,
       },
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: BsPieChartFill,
+        icon: <SvgMaskGroup />,
         value: summary ? summary?.totalValue : 0,
       },
     ];
@@ -328,7 +329,7 @@ const Dashboard = () => {
         px="6"
         background="transparent"
       >
-        <SummaryDashboardV2 />
+        <SummaryDashboardV2 data={summaryData} />
         {/* <SummaryDashboard data={summaryData} isLoading={isLoading} /> */}
       </Box>
       <Stack

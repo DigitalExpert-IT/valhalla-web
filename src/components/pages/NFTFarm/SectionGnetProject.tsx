@@ -15,7 +15,7 @@ import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
 import { useAsyncCall } from "hooks";
-import { useGlobalPool, useRewardMap } from "hooks/nft";
+import { useGlobalPool, useRankReward, useRewardMap } from "hooks/nft";
 import { useNFTContract } from "hooks/useNFTContract";
 import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
@@ -34,6 +34,7 @@ export const SectionGnetProject = () => {
 
   const nft = useNFTContract();
   const reward = useRewardMap();
+  const rankReward = useRankReward();
   const globalPool = useGlobalPool();
   const accountMap = useAccountMap();
   const account = accountMap.data;
@@ -198,13 +199,8 @@ export const SectionGnetProject = () => {
                 onClick={() => claimNftRankRewardAsync.exec({ args: [] })}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
-                {
-                  // rankReward.data &&
-                  //   fromBn(rankReward.data, 9) + " " +
-                  // todo need to fix
-
-                  t("common.claim")
-                }
+                {rankReward.data &&
+                  fromBn(rankReward?.data, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
 

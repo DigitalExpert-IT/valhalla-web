@@ -4,6 +4,7 @@ import { useNFTContract } from "./useNFTContract";
 import { BigNumber, BigNumberish } from "ethers";
 import { useGNETContract } from "./useGNETContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { useAccountMap } from "./valhalla";
 
 type BaseCardType = Awaited<ReturnType<NFT["cardMap"]>>;
 type CardType = BaseCardType & {
@@ -18,6 +19,7 @@ export const useCardList = () => {
   const address = useAddress();
   const approveGnet = useContractWrite(gnet.contract, "approve");
   const buyNft = useContractWrite(nft.contract, "buy");
+  const { data: account } = useAccountMap();
   const [data, setData] = useState<CardType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -62,6 +64,11 @@ export const useCardList = () => {
       await approveGnet.mutateAsync({
         args: [nft.contract.getAddress(), cardPrice.mul(10)],
       });
+    }
+    if (!account?.isRegistered) {
+      throw {
+        code: "RegistrationRequired",
+      };
     }
 
     const receipt = await buyNft.mutateAsync({ args: [tokenId] });

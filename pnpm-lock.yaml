@@ -30,7 +30,6 @@ specifiers:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.20.0
   axios: ^1.2.1
   d3-org-chart: ^2.6.0
   date-fns: ^2.30.0
@@ -90,7 +89,6 @@ dependencies:
   '@types/node': 18.11.10
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
-  '@warmbyte/valhalla': 1.20.0_wm2mn6iiawtaxylcfp2vnso5me
   axios: 1.2.1
   d3-org-chart: 2.6.0
   date-fns: 2.30.0
@@ -4289,23 +4287,6 @@ packages:
     dependencies:
       '@walletconnect/window-getters': 1.0.1
       tslib: 1.14.1
-    dev: false
-
-  /@warmbyte/valhalla/1.20.0_wm2mn6iiawtaxylcfp2vnso5me:
-    resolution: {integrity: sha512-gdesAcxtdN2ug+uHSPG+WzZzTq4gbPVO8L6XO0KHDkSILRu19FofnhyRNMZLAyC1hbJGAxCvyLBmbmhG7jXidg==}
-    dependencies:
-      '@openzeppelin/contracts': 4.8.0
-      '@openzeppelin/contracts-upgradeable': 4.8.0
-      dotenv: 16.0.3
-      evm-bn: 1.1.2_wm2mn6iiawtaxylcfp2vnso5me
-      jsonexport: 3.2.0
-      sqlite: 4.2.1
-      sqlite3: 5.1.6
-    transitivePeerDependencies:
-      - '@ethersproject/bignumber'
-      - bluebird
-      - encoding
-      - supports-color
     dev: false
 
   /@web3modal/core/2.4.1_react@18.2.0:

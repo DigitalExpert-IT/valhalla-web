@@ -1,12 +1,12 @@
 import detectEthereumProvider from "@metamask/detect-provider";
 import { RPC_ENDPOINTS } from "constant/endpoint";
 import { ethers } from "ethers";
-import valhallaJson from "@warmbyte/valhalla/artifacts/contracts/Valhalla.sol/Valhalla.json";
+import valhallaJson from "valhalla-erc20/artifacts/contracts/Valhalla.sol/Valhalla.json";
 import globalExchangeJson from "global-swap/artifacts/contracts/globalExchange.sol/GlobalExchange.json";
-import nftJson from "@warmbyte/valhalla/artifacts/contracts/NFT.sol/NFT.json";
-import gnetJson from "@warmbyte/valhalla/artifacts/contracts/GNET.sol/GNET.json";
-import erc20Json from "@warmbyte/valhalla/artifacts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json";
-import genesisJson from "@warmbyte/valhalla/artifacts/contracts/NFTGenesis.sol/NFTGenesis.json";
+import nftJson from "valhalla-erc20/artifacts/contracts/NFT.sol/NFT.json";
+import gnetJson from "valhalla-erc20/artifacts/contracts/GNET.sol/GNET.json";
+import erc20Json from "valhalla-erc20/artifacts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json";
+import genesisJson from "valhalla-erc20/artifacts/contracts/NFTGenesis.sol/NFTGenesis.json";
 import {
   VALHALLA_CONTRACT,
   NFT_CONTRACT,
@@ -21,7 +21,7 @@ import {
   GNET,
   ERC20,
   NFTGenesis,
-} from "@warmbyte/valhalla/typechain-types";
+} from "valhalla-erc20/typechain-types";
 import { GlobalExchange } from "global-swap/typechain-types";
 
 declare module globalThis {

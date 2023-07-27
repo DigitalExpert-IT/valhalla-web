@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
 import { useGenesisContract } from "./useGenesisContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
-import { NFTGenesis } from "@warmbyte/valhalla/typechain-types/contracts/NFTGenesis";
+import { NFTGenesis } from "valhalla-erc20/typechain-types/contracts/NFTGenesis";
 import { fromBn } from "evm-bn";
 
 type BaseCardType = Awaited<ReturnType<NFTGenesis["nftGenesis"]>>;

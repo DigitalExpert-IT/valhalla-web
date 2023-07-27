@@ -13,13 +13,24 @@ export const SummaryDashboardV2 = () => {
       <Stack
         w="full"
         align="center"
-        bg="blue.800"
         rounded="xl"
         h="80%"
         justify="center"
+        bg="#1C1F36"
+        position="relative"
+        overflow="hidden"
       >
-        <SvgMaskGroup />
-        <Text color="white">Total Member</Text>
+        <Box
+          position="absolute"
+          w="full"
+          h="full"
+          zIndex="0"
+          bg="radial-gradient(50% 50.00% at 20% 40%, #684545 0%, #381F7B00 60%);"
+        />
+        <Box zIndex="1" textAlign="center">
+          <SvgMaskGroup />
+          <Text color="white">Total Member</Text>
+        </Box>
       </Stack>
       <Box textAlign="center" mt="1rem">
         <Text color="white" fontSize="xl" fontWeight="bold">

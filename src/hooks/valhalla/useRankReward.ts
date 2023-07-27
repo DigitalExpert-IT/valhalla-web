@@ -14,10 +14,7 @@ export const useRankReward = () => {
   const { data, ...rest } = useContractRead(
     contract.contract,
     "getMyRankReward",
-    [],
-    {
-      from: address,
-    }
+    [address]
   );
 
   useEffect(() => {

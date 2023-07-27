@@ -30,11 +30,9 @@ export const FormRegister = () => {
   const usdt = useUSDTContract();
   const { t } = useTranslation();
   const valhallaRegister = useContractWrite(valhalla.contract, "register");
-
   const usdtApproval = useContractWrite(usdt.contract, "approve");
-  const registrationFee = useRegistrationFee();
-
   const approve = useAsyncCall(usdtApproval.mutateAsync);
+  const registrationFee = useRegistrationFee();
 
   const register = useAsyncCall(
     valhallaRegister.mutateAsync,
@@ -42,9 +40,9 @@ export const FormRegister = () => {
     () => router.replace("/profile")
   );
   const { control, setValue, handleSubmit } = useForm<FormType>();
+  const disclaimerModal = useModal(ModalDiscalimer);
   const address = useAddress() ?? ZERO_ADDRESS;
   const router = useRouter();
-  const disclaimerModal = useModal(ModalDiscalimer);
 
   useEffect(() => {
     setValue("referrer", router.query.ref as string);

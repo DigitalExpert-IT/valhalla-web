@@ -15,7 +15,7 @@ import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
 import { useAsyncCall } from "hooks";
-import { useGlobalPool, useRewardMap } from "hooks/nft";
+import { useGlobalPool, useRankReward, useRewardMap } from "hooks/nft";
 import { useNFTContract } from "hooks/useNFTContract";
 import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
@@ -34,14 +34,40 @@ export const SectionGnetProject = () => {
 
   const nft = useNFTContract();
   const reward = useRewardMap();
+  const rankReward = useRankReward();
   const globalPool = useGlobalPool();
   const accountMap = useAccountMap();
   const account = accountMap.data;
   const isRankRewardClaimable = useIsRankRewardClaimable();
   const claimReward = useContractWrite(nft.contract, "claimReward");
   const claimRankReward = useContractWrite(nft.contract, "claimRankReward");
-  const claimNftRankRewardAsync = useAsyncCall(claimRankReward.mutateAsync);
-  const claimRewardGnetAsync = useAsyncCall(claimReward.mutateAsync);
+
+  const claimRankMutate = async () => {
+    if (!isRankRewardClaimable.data) {
+      throw {
+        code: "RankNotYetStart",
+      };
+    }
+    if (rankReward.data?.isZero()) {
+      throw {
+        code: "NoReward",
+      };
+    }
+    const claim = await claimRankReward.mutateAsync({ args: [] });
+    return claim;
+  };
+  const claimNftRankRewardAsync = useAsyncCall(claimRankMutate);
+
+  const claimRewardMutate = async () => {
+    if (reward.data?.isZero()) {
+      throw {
+        code: "NoReward",
+      };
+    }
+    const claim = await claimReward.mutateAsync({ args: [] });
+    return claim;
+  };
+  const claimRewardGnetAsync = useAsyncCall(claimRewardMutate);
   const usdtRate = fromBn(
     getUsdtRate(
       summaryData?.totalPotentialProfit
@@ -195,16 +221,11 @@ export const SectionGnetProject = () => {
               <Text>{t("pages.nftFarming.rankReward")}</Text>
               <Button
                 variant="swag"
-                onClick={() => claimNftRankRewardAsync.exec({ args: [] })}
+                onClick={() => claimNftRankRewardAsync.exec()}
                 isLoading={claimNftRankRewardAsync.isLoading}
               >
-                {
-                  // rankReward.data &&
-                  //   fromBn(rankReward.data, 9) + " " +
-                  // todo need to fix
-
-                  t("common.claim")
-                }
+                {rankReward.data &&
+                  fromBn(rankReward?.data, 9) + " " + t("common.claim")}
               </Button>
             </Stack>
 
@@ -219,7 +240,7 @@ export const SectionGnetProject = () => {
               <Button
                 variant="swag"
                 color="white"
-                onClick={() => claimRewardGnetAsync.exec({ args: [] })}
+                onClick={() => claimRewardGnetAsync.exec()}
                 isLoading={claimRewardGnetAsync.isLoading}
               >
                 {reward.data &&

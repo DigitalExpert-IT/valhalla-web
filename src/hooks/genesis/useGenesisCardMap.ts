@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { NFTGenesis } from "@warmbyte/valhalla/typechain-types/contracts/NFTGenesis";
+import { NFTGenesis } from "valhalla-erc20/typechain-types/contracts/NFTGenesis";
 import { useGenesisContract } from "hooks/useGenesisContract";
 import { useContractRead } from "@thirdweb-dev/react";
 import ee from "ee";

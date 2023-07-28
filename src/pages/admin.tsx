@@ -51,11 +51,12 @@ const AdminPage = () => {
                   <Box>
                     <Text fontSize="5xl" fontWeight="bold">
                       {isRankRewardClaimable?.data
-                        ? globalPool.data && prettyBn(globalPool.data.valueLeft)
+                        ? globalPool.data &&
+                          prettyBn(globalPool.data.valueLeft, 6)
                         : globalPool.data &&
-                          prettyBn(globalPool.data.claimable)}
+                          prettyBn(globalPool.data.claimable, 6)}
                     </Text>
-                    <Text>MATIC</Text>
+                    <Text>USDT</Text>
                   </Box>
                   <Box>
                     <Text fontSize="5xl" fontWeight="bold">

@@ -1,5 +1,5 @@
 import { useContractRead } from "@thirdweb-dev/react";
-import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+import { Valhalla } from "valhalla-erc20/typechain-types";
 import ee from "ee";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useEffect } from "react";

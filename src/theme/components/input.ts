@@ -204,9 +204,10 @@ const variantDahsboard = definePartsStyle(props => {
       height: "12",
       borderColor: "black",
       color: "black",
-      bg: "white",
+      bg: "#513697",
       boxShadow: "md",
       border: "none",
+      borderRadius: "2xl",
       pt: "6",
       pb: "6",
       _readOnly: {

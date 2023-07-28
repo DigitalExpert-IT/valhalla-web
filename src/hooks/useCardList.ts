@@ -5,6 +5,9 @@ import { BigNumber, BigNumberish } from "ethers";
 import { useGNETContract } from "./useGNETContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { useAccountMap } from "./valhalla";
+import { useMaxBuy } from "./nft/useMaxBuy";
+import { MAX_BUY } from "constant/maxbuy";
+import { toBn } from "evm-bn";
 
 type BaseCardType = Awaited<ReturnType<NFT["cardMap"]>>;
 type CardType = BaseCardType & {
@@ -16,6 +19,7 @@ const CARD_IDS = [0, 1, 2, 3, 4, 5];
 export const useCardList = () => {
   const nft = useNFTContract();
   const gnet = useGNETContract();
+  const maxBuy = useMaxBuy();
   const address = useAddress();
   const approveGnet = useContractWrite(gnet.contract, "approve");
   const buyNft = useContractWrite(nft.contract, "buy");
@@ -70,7 +74,15 @@ export const useCardList = () => {
         code: "RegistrationRequired",
       };
     }
-
+    if (
+      maxBuy.data
+        ?.add(cardPrice)
+        .gt(toBn(MAX_BUY[account?.rank as 0].toString(), 9))
+    ) {
+      throw {
+        code: "MaxBuy",
+      };
+    }
     const receipt = await buyNft.mutateAsync({ args: [tokenId] });
     return receipt;
   };

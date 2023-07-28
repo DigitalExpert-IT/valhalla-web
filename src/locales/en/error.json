@@ -13,6 +13,7 @@
     "TokenFrozen": "Token Frozen",
     "NoReward": "No Rewards Yet",
     "RegistrationRequired": "Registration Required",
-    "RankNotYetStart": "Rank Not Yet Start"
+    "RankNotYetStart": "Rank Not Yet Start",
+    "MaxBuy": "Maximum Buy, Need More Rank To Buy NFT"
   }
 }

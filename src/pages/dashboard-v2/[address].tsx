@@ -14,7 +14,14 @@ import {
 } from "@chakra-ui/react";
 import { useListDownlines, useListLevel, useScreen, useSummary } from "hooks";
 import { prettyBn, shortenAddress } from "utils";
-import { HeaderDashboard } from "components";
+import {
+  HeaderDashboard,
+  IconGroup,
+  IconMaxTotal,
+  IconProfit,
+  IconTotalNFT,
+  IconTotalSales,
+} from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import {
@@ -28,7 +35,6 @@ import {
 } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
-import { SvgMaskGroup } from "components";
 import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
 import {
@@ -283,31 +289,31 @@ const Dashboard = () => {
       {
         key: "totalMember",
         text: t("pages.dashboard.labels.totalMember"),
-        icon: <SvgMaskGroup />,
+        icon: <IconGroup />,
         value: summary ? summary.totalUser : 0,
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
-        icon: <SvgMaskGroup />,
+        icon: <IconProfit />,
         value: summary ? summary.totalPotentialProfit : 0,
       },
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
-        icon: <SvgMaskGroup />,
+        icon: <IconMaxTotal />,
         value: MAX_DOWNLINES_LEVEL,
       },
       {
         key: "totalNFT",
         text: t("pages.dashboard.labels.totalNft"),
-        icon: <SvgMaskGroup />,
+        icon: <IconTotalNFT />,
         value: summary ? summary?.totalNFT : 0,
       },
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: <SvgMaskGroup />,
+        icon: <IconTotalSales />,
         value: summary ? summary?.totalValue : 0,
       },
     ];

@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Text, Stack, Wrap, WrapItem } from "@chakra-ui/react";
-import { SvgMaskGroup } from "components/Svg";
 
 export interface IDataItem {
   key: string;

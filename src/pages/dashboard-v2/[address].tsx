@@ -14,31 +14,15 @@ import {
 } from "@chakra-ui/react";
 import { useListDownlines, useListLevel, useScreen, useSummary } from "hooks";
 import { prettyBn, shortenAddress } from "utils";
-import {
-  HeaderDashboard,
-  IconGroup,
-  IconMaxTotal,
-  IconProfit,
-  IconTotalNFT,
-  IconTotalSales,
-} from "components";
+import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import {
-  BsDiagram2Fill,
-  BsFillPeopleFill,
-  BsFillPersonFill,
-  BsFillRocketTakeoffFill,
-  BsGraphUp,
-  BsHurricane,
-  BsPieChartFill,
-} from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
 import {
-  SummaryDashboard,
   SummaryDashboardV2,
   IDataItem,
   TableDashboard,
@@ -291,30 +275,35 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalMember"),
         icon: "/assets/icon/mask-group.svg",
         value: summary ? summary.totalUser : 0,
+        unit: "usdt",
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
         icon: "/assets/icon/icon-profit.svg",
         value: summary ? summary.totalPotentialProfit : 0,
+        unit: "users",
       },
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
         icon: "/assets/icon/max-total.svg",
         value: MAX_DOWNLINES_LEVEL,
+        unit: "level",
       },
       {
         key: "totalNFT",
         text: t("pages.dashboard.labels.totalNft"),
         icon: "/assets/icon/total-nft.svg",
         value: summary ? summary?.totalNFT : 0,
+        unit: "nft",
       },
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
         icon: "/assets/icon/total-sales.svg",
         value: summary ? summary?.totalValue : 0,
+        unit: "usdt",
       },
     ];
   }, [summary]);

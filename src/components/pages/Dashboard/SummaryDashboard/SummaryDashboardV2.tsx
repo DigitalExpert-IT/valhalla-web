@@ -7,6 +7,7 @@ export interface IDataItem {
   text: string;
   value: string | number;
   icon: string;
+  unit: string;
 }
 
 interface ISummaryProps {
@@ -48,17 +49,29 @@ export const SummaryDashboardV2: React.FC<ISummaryProps> = props => {
                   width={130}
                   height={130}
                 />
-                {/* {item.icon} */}
                 <Text color="white" mt="1rem">
                   {item.text}
                 </Text>
               </Box>
             </Stack>
-            <Box textAlign="center" mt="1rem">
+            <Stack
+              direction="row"
+              textAlign="center"
+              mt="1rem"
+              justify="center"
+            >
               <Text color="white" fontSize="xl" fontWeight="bold">
-                {item.value} USDT
+                {item.value ?? 0}
               </Text>
-            </Box>
+              <Text
+                color="white"
+                fontSize="xl"
+                fontWeight="bold"
+                textTransform="uppercase"
+              >
+                {item.unit}
+              </Text>
+            </Stack>
           </Box>
         </WrapItem>
       ))}

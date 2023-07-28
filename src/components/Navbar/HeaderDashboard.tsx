@@ -112,8 +112,9 @@ export const HeaderDashboard = (props: IPropsType) => {
       zIndex="10"
       py={{ base: "6", sm: "8" }}
       px="2"
-      bgColor="transparent"
-      boxShadow={{ base: "sm", sm: "unset" }}
+      backdropFilter="auto"
+      backdropBlur="10px"
+      boxShadow={{ base: "sm", sm: "lg" }}
     >
       <HStack
         justifyContent={{ base: "center", sm: "start" }}

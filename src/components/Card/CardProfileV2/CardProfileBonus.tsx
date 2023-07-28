@@ -3,17 +3,26 @@ import {
   WidgetProfileBalace,
   WidgetProfileBtn,
 } from "components/Widget/WidgetProfile";
-import { useAsyncCall, useValhalla } from "hooks";
-import { useContract, useContractWrite } from "@thirdweb-dev/react";
+import { CURRENT_CHAIN_ID, useAsyncCall } from "hooks";
+import { useBalance, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { t } from "i18next";
 import { CardProfileV2 } from "./CardProfileV2";
 import { fromBn } from "evm-bn";
-import { useRankReward, useRewardMap, useGlobalPool } from "hooks/valhalla";
+import {
+  useRankReward,
+  useRewardMap,
+  useGlobalPool,
+  useIsRankRewardClaimable,
+} from "hooks/valhalla";
 import { useValhallaContract } from "hooks/useValhallaContract";
+import { USDT_CONTRACT } from "constant/address";
+import { BigNumber } from "ethers";
 
 export const CardProfileBonus = () => {
   // const { claimRankReward, globalPool, isRankRewardClaimable } = useValhalla();
   const globalPool = useGlobalPool();
+  const usdt = useBalance(USDT_CONTRACT[CURRENT_CHAIN_ID]);
+  const isRankRewardClaimable = useIsRankRewardClaimable();
   const rewardMap = useRewardMap();
   const rankReward = useRankReward();
   const valhalla = useValhallaContract();
@@ -42,11 +51,21 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Text>{t("common.globalBonus")}</Text>
             <Text textAlign={"end"}>
-              {globalPool?.data?.claimable
-                ? fromBn(globalPool?.data?.claimable)
+              {!isRankRewardClaimable?.data
+                ? fromBn(
+                    globalPool?.data?.claimable
+                      ? globalPool?.data?.claimable
+                      : BigNumber.from(0),
+                    6
+                  )
                 : globalPool?.data?.valueLeft &&
-                  fromBn(globalPool?.data?.valueLeft)}{" "}
-              MATIC
+                  fromBn(
+                    globalPool?.data?.valueLeft
+                      ? globalPool?.data?.valueLeft
+                      : BigNumber.from(0),
+                    6
+                  )}{" "}
+              {usdt.data?.symbol}
             </Text>
           </HStack>
         </WidgetProfileBalace>
@@ -54,7 +73,10 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.referralBonus")}</Text>
-              <Text>{rewardMap.data && fromBn(rewardMap.data)} MATIC</Text>
+              <Text>
+                {rewardMap.data && fromBn(rewardMap.data, 6)}{" "}
+                {usdt.data?.symbol}
+              </Text>
             </Stack>
             <WidgetProfileBtn
               onClick={handleClaimReward}
@@ -68,7 +90,10 @@ export const CardProfileBonus = () => {
           <HStack w={"full"} justifyContent={"space-between"}>
             <Stack>
               <Text>{t("common.rankReward")}</Text>
-              {/* <Text>{rankReward.data && fromBn(rankReward.data)} MATIC</Text> */}
+              <Text>
+                {rankReward.data && fromBn(rankReward.data, 6)}{" "}
+                {usdt.data?.symbol}
+              </Text>
             </Stack>
             <WidgetProfileBtn
               onClick={handleClaimRankReward}

@@ -1,6 +1,6 @@
 import { ZERO_ADDRESS } from "constant/address";
 import { useDefaultAdminRole } from "./useDefaultAdminRole";
-import { Valhalla } from "@warmbyte/valhalla/typechain-types";
+import { Valhalla } from "valhalla-erc20/typechain-types";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { useContractRead, useAddress } from "@thirdweb-dev/react";
 

@@ -1,5 +1,5 @@
 import { useContractRead, useAddress } from "@thirdweb-dev/react";
-import { NFT } from "@warmbyte/valhalla/typechain-types";
+import { NFT } from "valhalla-erc20/typechain-types";
 import { ZERO_ADDRESS } from "constant/address";
 import ee from "ee";
 import { useNFTContract } from "hooks/useNFTContract";

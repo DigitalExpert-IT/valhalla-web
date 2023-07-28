@@ -110,7 +110,7 @@ export const fetchAccount = async () => {
       await Promise.all([
         valhalla.accountMap(address),
         valhalla.rewardMap(address),
-        valhalla.getMyRankReward(),
+        valhalla.getMyRankReward(address),
         valhalla.DEFAULT_ADMIN_ROLE(),
         valhalla.STAFF_ROLE(),
       ]);
@@ -181,7 +181,7 @@ export const useValhalla = () => {
   const register = async (referrer: string) => {
     const valhalla = await getValhallaSignerContract();
     const registrationFee = await valhalla.getRegistrationFee();
-    const tx = await valhalla.register(referrer, { value: registrationFee });
+    const tx = await valhalla.register(referrer);
     const receipt = await tx.wait();
     return receipt;
   };

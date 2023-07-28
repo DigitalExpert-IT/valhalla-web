@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { NFT } from "@warmbyte/valhalla/typechain-types";
+import { NFT } from "valhalla-erc20/typechain-types";
 import { useNFTContract } from "./useNFTContract";
 import { BigNumber, BigNumberish } from "ethers";
 import { useGNETContract } from "./useGNETContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { useAccountMap, useIsRankRewardClaimable } from "./valhalla";
+import { useMaxBuy } from "./nft/useMaxBuy";
+import { MAX_BUY } from "constant/maxbuy";
+import { toBn } from "evm-bn";
 
 type BaseCardType = Awaited<ReturnType<NFT["cardMap"]>>;
 type CardType = BaseCardType & {
@@ -15,9 +19,12 @@ const CARD_IDS = [0, 1, 2, 3, 4, 5];
 export const useCardList = () => {
   const nft = useNFTContract();
   const gnet = useGNETContract();
+  const maxBuy = useMaxBuy();
   const address = useAddress();
+  const isRankRewardClaimable = useIsRankRewardClaimable();
   const approveGnet = useContractWrite(gnet.contract, "approve");
   const buyNft = useContractWrite(nft.contract, "buy");
+  const { data: account } = useAccountMap();
   const [data, setData] = useState<CardType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -63,7 +70,25 @@ export const useCardList = () => {
         args: [nft.contract.getAddress(), cardPrice.mul(10)],
       });
     }
-
+    if (!account?.isRegistered) {
+      throw {
+        code: "RegistrationRequired",
+      };
+    }
+    if (
+      maxBuy.data
+        ?.add(cardPrice)
+        .gt(toBn(MAX_BUY[account?.rank as 0].toString(), 9))
+    ) {
+      throw {
+        code: "MaxBuy",
+      };
+    }
+    if (isRankRewardClaimable.data) {
+      throw {
+        code: "RankStarted",
+      };
+    }
     const receipt = await buyNft.mutateAsync({ args: [tokenId] });
     return receipt;
   };

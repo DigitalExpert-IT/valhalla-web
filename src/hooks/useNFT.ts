@@ -115,7 +115,7 @@ const fetchAccount = async () => {
     const nftSigner = await getNFTSignerContract();
     const [personalReward, rankReward] = await Promise.all([
       nft.rewardMap(address),
-      nftSigner.getMyRankReward(),
+      nftSigner.getMyRankReward(address),
     ]);
     setState({ personalReward, rankReward });
   } catch (error) {}

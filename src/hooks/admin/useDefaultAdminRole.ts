@@ -1,5 +1,5 @@
 import { useContractRead } from "@thirdweb-dev/react";
-import { Valhalla } from "global-swap/typechain-types";
+import { Valhalla } from "valhalla-erc20/typechain-types";
 import { useValhallaContract } from "hooks/useValhallaContract";
 
 type DEFAULT_ROLE_ADMIN = Awaited<ReturnType<Valhalla["DEFAULT_ADMIN_ROLE"]>>;

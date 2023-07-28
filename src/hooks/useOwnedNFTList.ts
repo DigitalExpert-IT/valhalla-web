@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
 import { useAddress } from "@thirdweb-dev/react";
 import { useNFTContract } from "./useNFTContract";
-import { NFT } from "@warmbyte/valhalla/typechain-types";
+import { NFT } from "valhalla-erc20/typechain-types";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {

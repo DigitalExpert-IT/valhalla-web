@@ -11,6 +11,10 @@
     "NotEnoughPool": "Not Enough Pool",
     "NotEnoughUsdtBalance": "Not Enough USDT Balances",
     "TokenFrozen": "Token Frozen",
-    "NoReward": "No Rewards Yet"
+    "NoReward": "No Rewards Yet",
+    "RegistrationRequired": "Registration Required",
+    "RankNotYetStart": "Rank Not Yet Start",
+    "MaxBuy": "Maximum Buy, Need More Rank To Buy NFT",
+    "RankStarted": "Can't buy at Rank Started"
   }
 }

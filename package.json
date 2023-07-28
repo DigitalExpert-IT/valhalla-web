@@ -31,7 +31,6 @@
     "@types/node": "18.11.10",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
-    "@warmbyte/valhalla": "1.20.0",
     "axios": "^1.2.1",
     "d3-org-chart": "^2.6.0",
     "date-fns": "^2.30.0",
@@ -60,6 +59,7 @@
     "react-use": "^17.4.0",
     "telegraf": "^4.11.2",
     "three": "^0.148.0",
+    "valhalla-erc20": "^1.2.1",
     "zustand": "^4.1.4"
   },
   "husky": {

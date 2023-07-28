@@ -7,7 +7,7 @@ import { SectionProfileV2 } from "components/pages/Profile";
 const ProfileV2 = () => {
   return (
     <LayoutMainV2>
-      <ModalAnnouncement/>
+      {/* <ModalAnnouncement /> */}
       <Box
         pt="40"
         bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"

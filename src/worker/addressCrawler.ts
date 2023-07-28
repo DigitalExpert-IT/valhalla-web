@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { getKeccakHexHash, lowerCase } from "utils";
 import { getValhallaContract, getMainProvider } from "lib/contractFactory";
-import { rootAdressList } from "@warmbyte/valhalla/constant/rootAddress";
+import { rootAdressList } from "valhalla-erc20/constant/rootAddress";
 
 const prisma = new PrismaClient();
 const REGISTRATION_TOPIC = getKeccakHexHash("Registration(address,address)");

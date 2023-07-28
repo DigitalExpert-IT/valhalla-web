@@ -82,7 +82,6 @@ export const TableRankNetworkV2 = () => {
         />
       </Stack>
       <Heading
-        fontWeight="black"
         fontSize={{ base: "3xl", md: "7xl" }}
         textAlign="center"
         textTransform="uppercase"

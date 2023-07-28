@@ -163,53 +163,53 @@ export const RANKNETWORK = [
   {
     levelBonus: "level 1",
     percent: "30%",
-    value: "18 matic",
+    value: "15 USDT",
   },
   {
     levelBonus: "level 2",
     percent: "8%",
-    value: "4.8 matic",
+    value: "4 USDT",
   },
   {
     levelBonus: "level 3",
     percent: "3%",
-    value: "1.8 matic",
+    value: "1.5 USDT",
   },
   {
     levelBonus: "level 4",
     percent: "2%",
-    value: "1.2 matic",
+    value: "1 USDT",
   },
   {
     levelBonus: "level 5",
     percent: "2%",
-    value: "1.2 matic",
+    value: "1 USDT",
   },
   {
     levelBonus: "level 6 - 15",
     percent: "1%",
-    value: "0.6 matic",
+    value: "0.5 USDT",
   },
   {
     levelBonus: "Reserve",
     percent: "3%",
-    value: "1.8 matic",
+    value: "1.5 USDT",
   },
   {
     levelBonus: "Global Bonus",
     percent: "17%",
-    value: "10.2 matic",
+    value: "8.5 USDT",
   },
   {
     levelBonus: "Development / Marketing",
     percent: "25%",
-    value: "15 matic",
+    value: "12.5 USDT",
   },
 
   {
     levelBonus: "Total",
     percent: "100%",
-    value: "60 matic",
+    value: "50 USDT",
   },
 ];
 

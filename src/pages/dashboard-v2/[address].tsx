@@ -289,31 +289,31 @@ const Dashboard = () => {
       {
         key: "totalMember",
         text: t("pages.dashboard.labels.totalMember"),
-        icon: <IconGroup />,
+        icon: "/assets/icon/mask-group.svg",
         value: summary ? summary.totalUser : 0,
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
-        icon: <IconProfit />,
+        icon: "/assets/icon/icon-profit.svg",
         value: summary ? summary.totalPotentialProfit : 0,
       },
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
-        icon: <IconMaxTotal />,
+        icon: "/assets/icon/max-total.svg",
         value: MAX_DOWNLINES_LEVEL,
       },
       {
         key: "totalNFT",
         text: t("pages.dashboard.labels.totalNft"),
-        icon: <IconTotalNFT />,
+        icon: "/assets/icon/total-nft.svg",
         value: summary ? summary?.totalNFT : 0,
       },
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: <IconTotalSales />,
+        icon: "/assets/icon/total-sales.svg",
         value: summary ? summary?.totalValue : 0,
       },
     ];

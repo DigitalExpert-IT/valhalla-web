@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, Text, Stack, Wrap, WrapItem } from "@chakra-ui/react";
+import Image from "next/image";
 
 export interface IDataItem {
   key: string;
   text: string;
   value: string | number;
-  icon: React.ReactElement;
+  icon: string;
 }
 
 interface ISummaryProps {
@@ -41,8 +42,16 @@ export const SummaryDashboardV2: React.FC<ISummaryProps> = props => {
                 bg="radial-gradient(50% 50.00% at 20% 40%, #684545 0%, #381F7B00 60%);"
               />
               <Box zIndex="1" textAlign="center">
-                {item.icon}
-                <Text color="white">{item.text}</Text>
+                <Image
+                  src={item.icon}
+                  alt="icon-profit"
+                  width={130}
+                  height={130}
+                />
+                {/* {item.icon} */}
+                <Text color="white" mt="1rem">
+                  {item.text}
+                </Text>
               </Box>
             </Stack>
             <Box textAlign="center" mt="1rem">

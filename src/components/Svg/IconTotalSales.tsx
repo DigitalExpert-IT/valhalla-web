@@ -2,14 +2,7 @@ import React from "react";
 
 export const IconTotalSales = () => {
   return (
-    <svg
-      width="141"
-      height="141"
-      viewBox="0 0 141 141"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
+    <svg width="141" height="141" viewBox="0 0 141 141" fill="none">
       <mask
         id="mask0_2045_37120"
         style={{ maskType: "alpha" }}

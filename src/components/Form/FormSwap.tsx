@@ -18,9 +18,10 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { ButtonConnectWrapper } from "components/Button";
-import { getGnetRate, getUsdtRate } from "utils";
-import { SWAP_CONTRACT } from "constant/address";
+import { getGnetRate, getUsdtRate, shortenAddress } from "utils";
+import { GNET_CONTRACT, SWAP_CONTRACT, USDT_CONTRACT } from "constant/address";
 import { BigNumber } from "ethers";
+import { IoCopyOutline } from "react-icons/io5";
 import {
   useSwapContract,
   CURRENT_CHAIN_ID,
@@ -31,6 +32,7 @@ import {
   useGNETContract,
 } from "hooks";
 import _ from "lodash";
+import { CopiableText } from "components/CopiableText";
 
 interface ISwapToken {
   amountTop: string;
@@ -44,6 +46,8 @@ interface IFieldCurrency {
 
 export const FormSwap = () => {
   const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
+  const addressGnet = GNET_CONTRACT[CURRENT_CHAIN_ID];
+  const addressUsdt = USDT_CONTRACT[CURRENT_CHAIN_ID];
   const { t } = useTranslation();
   const [symbol, setSymbol] = useState(false);
   const {
@@ -416,49 +420,103 @@ export const FormSwap = () => {
           <Text as="h3" textAlign="center" mb="3">
             {t("common.balance")}
           </Text>
-          <HStack
+          <Stack
+            direction="column"
             backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
-            px="8"
-            py="2"
             my="4"
             boxShadow="lg"
             justifyContent="space-between"
           >
-            <AspectRatio ratio={1} width="24px">
-              <Image src="/assets/logo/logo-white.png" alt="logo-image" />
-            </AspectRatio>
-            <Text
-              as={"span"}
-              fontSize={"sm"}
-              color={"whiteAlpha.700"}
-              textAlign={"center"}
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              w="full"
+              px="8"
+              pt="3"
             >
-              {fromBn(balanceGNET ?? 0, 9)} GNET
-            </Text>
-          </HStack>
-          <HStack
+              <AspectRatio ratio={1} width="24px">
+                <Image src="/assets/logo/logo-white.png" alt="logo-image" />
+              </AspectRatio>
+              <Text
+                as={"span"}
+                fontSize={"sm"}
+                color={"whiteAlpha.700"}
+                textAlign={"center"}
+              >
+                {fromBn(balanceGNET ?? 0, 9)} GNET
+              </Text>
+            </Stack>
+            <HStack
+              borderTop="1px"
+              borderColor="gray.500"
+              textAlign="center"
+              p="3"
+              justifyContent="space-between"
+            >
+              <Text fontSize="sm">Import GNET</Text>
+              <Box display="flex" alignItems="center">
+                <CopiableText
+                  value={addressGnet}
+                  display="flex"
+                  alignItems="center"
+                  gap="2"
+                >
+                  {shortenAddress(addressGnet)}
+                  <IoCopyOutline />
+                </CopiableText>
+              </Box>
+            </HStack>
+          </Stack>
+          <Stack
+            direction="column"
             backgroundImage="linear-gradient(90deg, #6406c4, #7927cd, #6406c4)"
-            px="8"
-            py="2"
             my="4"
             boxShadow="lg"
             justifyContent="space-between"
           >
-            <AspectRatio ratio={1} width="24px">
-              <Image
-                src="/assets/logo/tether-logo-white.png"
-                alt="logo-image"
-              />
-            </AspectRatio>
-            <Text
-              as={"span"}
-              fontSize={"sm"}
-              color={"whiteAlpha.700"}
-              textAlign={"center"}
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              w="full"
+              px="8"
+              pt="3"
             >
-              {fromBn(balanceUSDT ?? 0, 6)} USDT
-            </Text>
-          </HStack>
+              <AspectRatio ratio={1} width="24px">
+                <Image
+                  src="/assets/logo/tether-logo-white.png"
+                  alt="logo-image"
+                />
+              </AspectRatio>
+              <Text
+                as={"span"}
+                fontSize={"sm"}
+                color={"whiteAlpha.700"}
+                textAlign={"center"}
+              >
+                {fromBn(balanceUSDT ?? 0, 6)} USDT
+              </Text>
+            </Stack>
+            <HStack
+              borderTop="1px"
+              borderColor="gray.500"
+              textAlign="center"
+              p="3"
+              justifyContent="space-between"
+            >
+              <Text fontSize="sm">Import USDT</Text>
+              <Box display="flex" alignItems="center">
+                <CopiableText
+                  value={addressUsdt}
+                  display="flex"
+                  alignItems="center"
+                  gap="2"
+                >
+                  {shortenAddress(addressUsdt)}
+                  <IoCopyOutline />
+                </CopiableText>
+              </Box>
+            </HStack>
+          </Stack>
         </Box>
         <Box pos="absolute" bottom="-20%" right="-10%" width="325px">
           <AspectRatio ratio={1}>

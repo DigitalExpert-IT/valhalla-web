@@ -230,7 +230,7 @@ export const TableDashboard = (props: ITableProps) => {
           h="fit-content"
           margin="auto"
         >
-          <Text color="gray.400" textAlign="center">
+          <Text color="white" textAlign="center">
             {t("common.table.messages.notFound")}
           </Text>
         </Box>

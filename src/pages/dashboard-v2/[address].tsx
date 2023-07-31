@@ -200,8 +200,8 @@ const Dashboard = () => {
         if (isMobileScreen)
           return [
             <>
-              <HStack fontSize={{ base: "xs", sm: "sm" }}>
-                <BsFillPersonFill size="20" color="#000" />
+              <HStack fontSize={{ base: "xs", sm: "sm" }} color="white">
+                <BsFillPersonFill size="20" color="white" />
                 <Text>{shortenAddress(user.address)}</Text>
               </HStack>
             </>,
@@ -218,8 +218,8 @@ const Dashboard = () => {
 
         return [
           <>
-            <HStack>
-              <BsFillPersonFill size="20" color="#000" />
+            <HStack color="white">
+              <BsFillPersonFill size="20" />
               <Text fontSize={{ base: "xs", sm: "sm" }}>
                 {shortenAddress(user.address)}
               </Text>

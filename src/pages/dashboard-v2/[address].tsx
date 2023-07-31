@@ -275,14 +275,14 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalMember"),
         icon: "/assets/icon/mask-group.svg",
         value: summary ? summary.totalUser : 0,
-        unit: "usdt",
+        unit: "users",
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
         icon: "/assets/icon/icon-profit.svg",
         value: summary ? summary.totalPotentialProfit : 0,
-        unit: "users",
+        unit: "usdt",
       },
       {
         key: "maxTotalLevel",
@@ -325,8 +325,6 @@ const Dashboard = () => {
         background="transparent"
       >
         <SummaryDashboardV2 data={summaryData} isLoading={isLoading} />
-        {/* TODO: Delete after approve */}
-        {/* <SummaryDashboard data={summaryData} isLoading={isLoading} /> */}
       </Box>
       <Stack
         minW="fit-content"
@@ -413,5 +411,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withCorrectAddress(Dashboard));
-export default Dashboard;
+export default withConnection(withCorrectAddress(Dashboard));

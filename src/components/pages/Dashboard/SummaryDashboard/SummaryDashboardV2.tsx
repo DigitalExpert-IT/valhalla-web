@@ -51,6 +51,7 @@ export const SummaryDashboardV2: React.FC<ISummaryProps> = props => {
                     alt="icon-profit"
                     width={130}
                     height={130}
+                    loading="lazy"
                   />
                   <Text color="white" mt="1rem">
                     {item.text}

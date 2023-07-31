@@ -152,8 +152,8 @@ const Dashboard = () => {
         level.lvl,
         <>
           <HStack>
-            <BsFillPersonFill size="20" color="#000" />
-            <Text fontSize="sm">
+            <BsFillPersonFill size="20" color="white" />
+            <Text fontSize="sm" color="white">
               {levelList ? levelList[level.lvl - 1]?.userCount ?? 0 : 0}
             </Text>
           </HStack>
@@ -324,7 +324,7 @@ const Dashboard = () => {
         px="6"
         background="transparent"
       >
-        <SummaryDashboardV2 data={summaryData} />
+        <SummaryDashboardV2 data={summaryData} isLoading={isLoading} />
         {/* <SummaryDashboard data={summaryData} isLoading={isLoading} /> */}
       </Box>
       <Stack

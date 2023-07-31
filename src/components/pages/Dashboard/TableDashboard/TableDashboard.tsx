@@ -158,7 +158,11 @@ export const TableDashboard = (props: ITableProps) => {
         maxH={maxTableHeight ? maxTableHeight : "unset"}
         overflowY={maxTableHeight ? "scroll" : "unset"}
       >
-        <Table variant="dashboard" color="gray.800">
+        <Table
+          variant="basic"
+          color="gray.800"
+          colorScheme="dashboard.darkPurple"
+        >
           <Thead>
             <Tr>
               {data.head?.map(item => {
@@ -168,7 +172,7 @@ export const TableDashboard = (props: ITableProps) => {
                 return (
                   <Th key={key} onClick={() => handleClickSort(item)}>
                     <HStack>
-                      <Text fontSize={{ base: "xs", sm: "sm" }}>
+                      <Text fontSize={{ base: "xs", sm: "sm" }} color="white">
                         {item.text}
                       </Text>
                       {item.isSortAble ? (
@@ -190,14 +194,14 @@ export const TableDashboard = (props: ITableProps) => {
                   <Tr key={item}>
                     {data.head?.map((_, idx) => (
                       <Td key={idx}>
-                        <Skeleton height="20px"></Skeleton>
+                        <Skeleton height="20px" />
                       </Td>
                     ))}
                   </Tr>
                 ))
               : data.body?.map((row, idx) => (
                   <Tr
-                    bg={data?.activeRow === idx ? "white" : "unset"}
+                    bg={data?.activeRow === idx ? "#363B66" : "#1C1F36"}
                     boxShadow={data?.activeRow === idx ? "lg" : "unset"}
                     key={idx}
                     onClick={() => data.onClickRow(row, idx)}
@@ -206,7 +210,7 @@ export const TableDashboard = (props: ITableProps) => {
                       if (_.isNull(col)) return null;
                       return (
                         <Td key={idx} fontSize={{ base: "xs", sm: "sm" }}>
-                          {col}
+                          <Text color="white">{col}</Text>
                         </Td>
                       );
                     })}

@@ -158,11 +158,7 @@ export const TableDashboard = (props: ITableProps) => {
         maxH={maxTableHeight ? maxTableHeight : "unset"}
         overflowY={maxTableHeight ? "scroll" : "unset"}
       >
-        <Table
-          variant="basic"
-          color="gray.800"
-          colorScheme="dashboard.darkPurple"
-        >
+        <Table variant="basic" colorScheme="dashboard.darkPurple">
           <Thead>
             <Tr>
               {data.head?.map(item => {
@@ -210,7 +206,7 @@ export const TableDashboard = (props: ITableProps) => {
                       if (_.isNull(col)) return null;
                       return (
                         <Td key={idx} fontSize={{ base: "xs", sm: "sm" }}>
-                          <Text color="white">{col}</Text>
+                          {col}
                         </Td>
                       );
                     })}

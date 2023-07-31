@@ -34,6 +34,10 @@ interface ISummaryProps {
   onDateChange?: (key: string, val: string) => void;
 }
 
+/**
+ * @deprecated since version 2.0
+ */
+
 export const SummaryDashboard = (props: ISummaryProps) => {
   const { data, isShowFilterDate, dateValue, isLoading, error, onDateChange } =
     props;

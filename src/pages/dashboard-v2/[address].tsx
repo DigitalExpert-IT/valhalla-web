@@ -151,8 +151,8 @@ const Dashboard = () => {
       body: levelMap.map(level => [
         level.lvl,
         <>
-          <HStack>
-            <BsFillPersonFill size="20" color="white" />
+          <HStack color="white">
+            <BsFillPersonFill size="20" />
             <Text fontSize="sm" color="white">
               {levelList ? levelList[level.lvl - 1]?.userCount ?? 0 : 0}
             </Text>
@@ -220,7 +220,7 @@ const Dashboard = () => {
           <>
             <HStack color="white">
               <BsFillPersonFill size="20" />
-              <Text fontSize={{ base: "xs", sm: "sm" }}>
+              <Text fontSize={{ base: "xs", sm: "sm" }} color="white">
                 {shortenAddress(user.address)}
               </Text>
             </HStack>

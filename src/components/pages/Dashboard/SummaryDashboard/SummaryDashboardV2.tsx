@@ -23,8 +23,8 @@ export const SummaryDashboardV2: React.FC<ISummaryProps> = props => {
         <WrapItem key={item.key}>
           <Skeleton isLoaded={!isLoading}>
             <Box
-              width="250px"
-              height="291px"
+              width="285px"
+              height="330px"
               rounded="xl"
               bgGradient="linear-gradient(131deg, #7C75E8 0%, #A063F9 100%)"
             >

@@ -56,7 +56,7 @@ const SearchComponent = (props: ISearchComponent) => {
             transform={isCollapsed ? "translateX(50px)" : "translateX(0px)"}
             {...collapseTransition}
           >
-            <BsSearch size="20" color="#000" />
+            <BsSearch size="20" />
           </Button>
           <Input
             flex={isCollapsed ? "0" : "1"}
@@ -124,7 +124,7 @@ export const HeaderDashboard = (props: IPropsType) => {
         {isMobileScreen ? (
           <Link href="/" opacity={isCollapsed ? 1 : 0}>
             <AspectRatio w={179} ratio={6 / 1}>
-              <Image src={"/assets/logo/gnLogo-black.png"} alt="logo-image" />
+              <Image src={"/assets/logo/gnLogo.png"} alt="logo-image" />
             </AspectRatio>
           </Link>
         ) : null}
@@ -147,7 +147,7 @@ export const HeaderDashboard = (props: IPropsType) => {
 
           {isMobileScreen ? (
             <Button px="0" variant="unstyle" onClick={onOpenSidebar}>
-              <BsList size="28" color="#000" />
+              <BsList size="28" color="white" />
             </Button>
           ) : (
             <Stack

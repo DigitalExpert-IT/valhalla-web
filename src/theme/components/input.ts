@@ -204,7 +204,7 @@ const variantDahsboard = definePartsStyle(props => {
       height: "12",
       borderColor: "black",
       color: "black",
-      bg: "#513697",
+      bg: "dashboard.darkPurple",
       boxShadow: "md",
       border: "none",
       borderRadius: "2xl",

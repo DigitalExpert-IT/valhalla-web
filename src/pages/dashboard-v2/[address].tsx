@@ -325,6 +325,7 @@ const Dashboard = () => {
         background="transparent"
       >
         <SummaryDashboardV2 data={summaryData} isLoading={isLoading} />
+        {/* TODO: Delete after approve */}
         {/* <SummaryDashboard data={summaryData} isLoading={isLoading} /> */}
       </Box>
       <Stack

@@ -305,6 +305,7 @@ const colors = {
 
   dashboard: {
     gray: "#f6f7ff",
+    darkPurple: "#513697",
   },
 };
 

@@ -17,21 +17,13 @@ import { prettyBn, shortenAddress } from "utils";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import {
-  BsDiagram2Fill,
-  BsFillPeopleFill,
-  BsFillPersonFill,
-  BsFillRocketTakeoffFill,
-  BsGraphUp,
-  BsHurricane,
-  BsPieChartFill,
-} from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
 import { withConnection, withCorrectAddress } from "hoc";
 import {
-  SummaryDashboard,
+  SummaryDashboardV2,
   IDataItem,
   TableDashboard,
 } from "components/pages/Dashboard";
@@ -159,9 +151,9 @@ const Dashboard = () => {
       body: levelMap.map(level => [
         level.lvl,
         <>
-          <HStack>
-            <BsFillPersonFill size="20" color="#000" />
-            <Text fontSize="sm">
+          <HStack color="white">
+            <BsFillPersonFill size="20" />
+            <Text fontSize="sm" color="white">
               {levelList ? levelList[level.lvl - 1]?.userCount ?? 0 : 0}
             </Text>
           </HStack>
@@ -208,8 +200,8 @@ const Dashboard = () => {
         if (isMobileScreen)
           return [
             <>
-              <HStack fontSize={{ base: "xs", sm: "sm" }}>
-                <BsFillPersonFill size="20" color="#000" />
+              <HStack fontSize={{ base: "xs", sm: "sm" }} color="white">
+                <BsFillPersonFill size="20" color="white" />
                 <Text>{shortenAddress(user.address)}</Text>
               </HStack>
             </>,
@@ -226,9 +218,9 @@ const Dashboard = () => {
 
         return [
           <>
-            <HStack>
-              <BsFillPersonFill size="20" color="#000" />
-              <Text fontSize={{ base: "xs", sm: "sm" }}>
+            <HStack color="white">
+              <BsFillPersonFill size="20" />
+              <Text fontSize={{ base: "xs", sm: "sm" }} color="white">
                 {shortenAddress(user.address)}
               </Text>
             </HStack>
@@ -281,32 +273,37 @@ const Dashboard = () => {
       {
         key: "totalMember",
         text: t("pages.dashboard.labels.totalMember"),
-        icon: BsFillPeopleFill,
+        icon: "/assets/icon/mask-group.svg",
         value: summary ? summary.totalUser : 0,
+        unit: "users",
       },
       {
         key: "totalEstimateProfit",
         text: t("pages.dashboard.labels.totalEstimateProfit"),
-        icon: BsGraphUp,
+        icon: "/assets/icon/icon-profit.svg",
         value: summary ? summary.totalPotentialProfit : 0,
+        unit: "usdt",
       },
       {
         key: "maxTotalLevel",
         text: t("pages.dashboard.labels.maxTotalLevel"),
-        icon: BsDiagram2Fill,
+        icon: "/assets/icon/max-total.svg",
         value: MAX_DOWNLINES_LEVEL,
+        unit: "level",
       },
       {
         key: "totalNFT",
         text: t("pages.dashboard.labels.totalNft"),
-        icon: BsHurricane,
+        icon: "/assets/icon/total-nft.svg",
         value: summary ? summary?.totalNFT : 0,
+        unit: "nft",
       },
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: BsPieChartFill,
+        icon: "/assets/icon/total-sales.svg",
         value: summary ? summary?.totalValue : 0,
+        unit: "usdt",
       },
     ];
   }, [summary]);
@@ -325,9 +322,9 @@ const Dashboard = () => {
         color="gray.800"
         py="6"
         px="6"
-        background={"dashboard.gray"}
+        background="transparent"
       >
-        <SummaryDashboard data={summaryData} isLoading={isLoading} />
+        <SummaryDashboardV2 data={summaryData} isLoading={isLoading} />
       </Box>
       <Stack
         minW="fit-content"
@@ -335,7 +332,7 @@ const Dashboard = () => {
         minH="calc(100vh - 129px)"
         flex={4}
         alignItems="stretch"
-        bg="#f6f7ff"
+        bg="transparent"
         pb="32"
         direction={{ base: "column", sm: "row" }}
         overflowX={"auto"}
@@ -359,15 +356,10 @@ const Dashboard = () => {
               <TableDashboard
                 title={
                   <HStack minH="46px" gap="4" alignItems="center">
-                    <Heading
-                      as="h2"
-                      fontSize="xl"
-                      fontWeight="600"
-                      color="gray.800"
-                    >
+                    <Heading as="h2" fontSize="xl" fontWeight="600">
                       {t("pages.dashboard.title.members")}
                     </Heading>
-                    <Text fontSize="xs" color="gray.400">
+                    <Text fontSize="xs" color="white">
                       {`Total: ${summary ? summary.totalUser : 0} Member`}
                     </Text>
                   </HStack>
@@ -382,14 +374,12 @@ const Dashboard = () => {
               <TableDashboard
                 title={
                   <HStack maxW="60%" overflowX="auto">
-                    <BsFillPersonFill size="20" color="#000" />
-                    <Breadcrumb
-                      spacing="4px"
-                      separator={<ChevronRightIcon color="gray.500" />}
-                    >
+                    <BsFillPersonFill size="20" />
+                    <Breadcrumb spacing="4px" separator={<ChevronRightIcon />}>
                       <BreadcrumbItem>
                         <BreadcrumbLink
                           fontSize="xs"
+                          color="white"
                           onClick={() => setSelectAddressList([])}
                         >
                           {shortenAddress(`${queryAddress}`)}
@@ -421,5 +411,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withCorrectAddress(Dashboard));
-export default Dashboard;
+export default withConnection(withCorrectAddress(Dashboard));

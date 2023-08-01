@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { useMemo } from "react";
 import { IconType } from "react-icons";
 
-export interface IDataItem {
+interface IDataItem {
   key: string;
   text: string;
   value: string | number;
@@ -33,6 +33,10 @@ interface ISummaryProps {
   error?: any | unknown;
   onDateChange?: (key: string, val: string) => void;
 }
+
+/**
+ * @deprecated since version 2.0
+ */
 
 export const SummaryDashboard = (props: ISummaryProps) => {
   const { data, isShowFilterDate, dateValue, isLoading, error, onDateChange } =

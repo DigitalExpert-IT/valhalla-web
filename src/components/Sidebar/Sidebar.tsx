@@ -150,6 +150,8 @@ export const Sidebar = () => {
     p: "2",
     pt: "8",
     bg: "global-brand-bg",
+    borderRight: "1px",
+    borderColor: "gray.700",
   };
 
   return (

@@ -5,6 +5,6 @@ export const semanticTokens = {
     "chakra-border-color": { _light: "gray.200", _dark: "whiteAlpha.300" },
     "chakra-subtle-bg": { _light: "gray.100", _dark: "gray.700" },
     "chakra-placeholder-color": { _light: "gray.500", _dark: "whiteAlpha.400" },
-    "global-brand-bg": { _light: "#370065", _dark: "#370065" },
+    "global-brand-bg": { _light: "#370065", _dark: "#131526" },
   },
 };

@@ -89,7 +89,7 @@ const variantFilter = defineStyle(() => ({
     maxH: "30px",
     bg: "transparent",
     borderColor: "black",
-    color: "black",
+    color: "white",
     boxShadow: "md",
     border: "1px solid black",
     _readOnly: {
@@ -100,7 +100,8 @@ const variantFilter = defineStyle(() => ({
       color: "black",
     },
     "> option, > optgroup": {
-      color: "black",
+      color: "white",
+      bg: "global-brand-bg",
       fontSize: {
         base: "xs",
         sm: "md",
@@ -108,7 +109,7 @@ const variantFilter = defineStyle(() => ({
     },
   },
   icon: {
-    color: "black",
+    color: "white",
   },
   addon: {
     border: "2px solid",

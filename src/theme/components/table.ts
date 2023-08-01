@@ -258,41 +258,50 @@ const variantBasic = definePartsStyle(props => {
   return {
     table: {
       borderCollapse: "separate",
-      borderSpacing: "0 15px",
+      borderSpacing: "0 5px",
     },
     th: {
       height: "80px",
-      background: mode(`${c}.100`, `${c}.400`)(props),
+      color: "white",
+      background: c,
       border: "1px",
-      borderColor: mode(`${c}.100`, `${c}.400`)(props),
+      borderColor: c,
       align: "center",
       "&:last-of-type": {
         border: "1px",
-        borderColor: mode(`${c}.100`, `${c}.400`)(props),
+        borderColor: c,
         borderTopRightRadius: "15px",
         borderBottomRightRadius: "15px",
       },
       "&:first-of-type": {
         border: "1px",
-        borderColor: mode(`${c}.100`, `${c}.400`)(props),
+        borderColor: c,
         borderTopLeftRadius: "15px",
         borderBottomLeftRadius: "15px",
       },
       ...numericStyles,
     },
+    tr: {
+      _selected: {
+        bg: "white",
+        boxShadow: "md",
+      },
+    },
     td: {
       height: "80px",
-      background: "transparent",
       borderTop: "1px",
       borderBottom: "1px",
+      borderColor: "#1C1F36",
       "&:last-of-type": {
         border: "1px",
+        borderColor: "#1C1F36",
         borderLeftColor: "transparent",
         borderTopRightRadius: "15px",
         borderBottomRightRadius: "15px",
       },
       "&:first-of-type": {
         border: "1px",
+        borderColor: "#1C1F36",
         borderRightColor: "transparent",
         borderTopLeftRadius: "15px",
         borderBottomLeftRadius: "15px",
@@ -301,6 +310,7 @@ const variantBasic = definePartsStyle(props => {
     },
     tbody: {
       td: {
+        _hover: { cursor: "pointer", boxShadow: "md" },
         "&:last-child": {
           td: {
             border: "1px",

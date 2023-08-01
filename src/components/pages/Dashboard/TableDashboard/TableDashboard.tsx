@@ -124,7 +124,7 @@ export const TableDashboard = (props: ITableProps) => {
         ) : null}
 
         <HStack>
-          <BsFilter size="20" color="000" />
+          <BsFilter size="20" />
           <HStack>
             {options?.filter
               ? options.filter?.map(filter => (
@@ -134,6 +134,8 @@ export const TableDashboard = (props: ITableProps) => {
                     maxW="40"
                     placeholder={filter?.placeholder ?? ""}
                     onChange={e => filter?.onFilterChange(e.target.value)}
+                    bgGradient={"linear(to-r, #6785F8, #6E69EF, #AD5BFC)"}
+                    rounded="lg"
                   >
                     {filter?.options?.map((item, idx) => (
                       <option
@@ -156,7 +158,7 @@ export const TableDashboard = (props: ITableProps) => {
         maxH={maxTableHeight ? maxTableHeight : "unset"}
         overflowY={maxTableHeight ? "scroll" : "unset"}
       >
-        <Table variant="dashboard" color="gray.800">
+        <Table variant="basic" colorScheme="dashboard.darkPurple">
           <Thead>
             <Tr>
               {data.head?.map(item => {
@@ -166,7 +168,7 @@ export const TableDashboard = (props: ITableProps) => {
                 return (
                   <Th key={key} onClick={() => handleClickSort(item)}>
                     <HStack>
-                      <Text fontSize={{ base: "xs", sm: "sm" }}>
+                      <Text fontSize={{ base: "xs", sm: "sm" }} color="white">
                         {item.text}
                       </Text>
                       {item.isSortAble ? (
@@ -188,14 +190,14 @@ export const TableDashboard = (props: ITableProps) => {
                   <Tr key={item}>
                     {data.head?.map((_, idx) => (
                       <Td key={idx}>
-                        <Skeleton height="20px"></Skeleton>
+                        <Skeleton height="20px" />
                       </Td>
                     ))}
                   </Tr>
                 ))
               : data.body?.map((row, idx) => (
                   <Tr
-                    bg={data?.activeRow === idx ? "white" : "unset"}
+                    bg={data?.activeRow === idx ? "#363B66" : "#1C1F36"}
                     boxShadow={data?.activeRow === idx ? "lg" : "unset"}
                     key={idx}
                     onClick={() => data.onClickRow(row, idx)}
@@ -224,7 +226,7 @@ export const TableDashboard = (props: ITableProps) => {
           h="fit-content"
           margin="auto"
         >
-          <Text color="gray.400" textAlign="center">
+          <Text color="white" textAlign="center">
             {t("common.table.messages.notFound")}
           </Text>
         </Box>

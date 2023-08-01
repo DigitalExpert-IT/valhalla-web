@@ -1,6 +1,6 @@
 SELECT
   CAST(
-    SUM((("price" * "farmPercentage") / 100) * 450) as int
+    SUM((("price" * "farmPercentage") / 100) * 200) as int
   ) as "totalProfit",
   CAST(COUNT(*) as int) as "totalActiveNFT"
 from

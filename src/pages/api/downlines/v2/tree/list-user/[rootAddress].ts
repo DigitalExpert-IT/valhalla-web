@@ -38,13 +38,13 @@ const getUserListUserPerLevel = async (
 	cast(
 		SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-		) * 450 as int
+		) * 200 as int
 	) as "maxProfit",
   cast(SUM(CAST("NFT"."nftDetail" ->> 'claimedPerNFT' as float)) as float) as "claimedNFT",
 	cast(
 		(SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-		) * 450) * ${level <= 5 ? 5 : 1} as float
+		) * 200) * ${level <= 5 ? 5 : 1} as float
 	)/ 100 as "potentialProfit",
 	cast(${level <= 5 ? 5 : 1} as int) as "percentage",
 	"level"

@@ -89,7 +89,7 @@ from
                   cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(
                     cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float
                   ) / 100
-                ) * 450,
+                ) * 200,
                 'lastFarm',
                 "lastFarm"
               ) AS "nftDetail"

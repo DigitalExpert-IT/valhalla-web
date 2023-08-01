@@ -101,7 +101,7 @@ const init = createInitiator(async (address: string, rank: number) => {
         );
         potensialProfit +=
           filteredEmptyNFT?.reduce(
-            (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 450,
+            (acc, pre) => acc + ((pre.farmRewardPerDay * 5) / 100) * 200,
             0
           ) ?? 0;
         totalNFTSales +=
@@ -120,7 +120,7 @@ const init = createInitiator(async (address: string, rank: number) => {
           getAllNFT.at(level)?.filter(l => l.to === j.address) ?? [];
         const getCalc = getNftperUser?.reduce(
           (acc, pre) => {
-            const fullRange = Date.parse(pre.mintedAt) * 450;
+            const fullRange = Date.parse(pre.mintedAt) * 200;
             const lasFarm = Date.parse(pre.lastFarm);
             const getPercentage = (lasFarm * 100) / fullRange;
             const format = getPercentage;
@@ -156,10 +156,10 @@ const init = createInitiator(async (address: string, rank: number) => {
           restPercentage: `${
             getCalc.percentage ? getCalc.percentage / getNftperUser.length : 0
           }%`,
-          profit: getCalc.profit ? getCalc.profit * 450 : 0,
+          profit: getCalc.profit ? getCalc.profit * 200 : 0,
           // gnet value
           claimedNFT: getCalc.claimedNFT,
-          profitShare: getCalc.profitSharing ? getCalc.profitSharing * 450 : 0,
+          profitShare: getCalc.profitSharing ? getCalc.profitSharing * 200 : 0,
         };
       });
       return withNft;

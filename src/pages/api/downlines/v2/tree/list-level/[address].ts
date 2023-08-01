@@ -56,7 +56,7 @@ FROM
 				"Event"."args" ->> 'to' AS "to",
 				"Event"."blockNumber",
 				"isBlackListed",
-				json_build_object('tokenId', "args" ->> 'tokenId', 'price', cast("NftMetadata"."mintingPrice" / 1e9 AS int), 'farmPercentage', cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float), 'mintedAt', "mintedAt", 'cardId', "cardId", 'from', "args" ->> 'from', 'to', "args" ->> 'to', 'blockNumber', "Event"."blockNumber", 'isBlackListed', "NftMetadata"."isBlackListed", 'rewardPerDay', cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100, 'maxReward', (cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100) * 450, 'lastFarm', "lastFarm") AS "nftDetail"
+				json_build_object('tokenId', "args" ->> 'tokenId', 'price', cast("NftMetadata"."mintingPrice" / 1e9 AS int), 'farmPercentage', cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float), 'mintedAt', "mintedAt", 'cardId', "cardId", 'from', "args" ->> 'from', 'to', "args" ->> 'to', 'blockNumber', "Event"."blockNumber", 'isBlackListed', "NftMetadata"."isBlackListed", 'rewardPerDay', cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100, 'maxReward', (cast("NftMetadata"."mintingPrice" / 1e9 AS int) * cast(cast("NftMetadata"."farmPercentage" AS DECIMAL) / 10 AS float) / 100) * 200, 'lastFarm', "lastFarm") AS "nftDetail"
 			FROM
 				"Event"
 				INNER JOIN "NftMetadata" ON "Event"."args" ->> 'tokenId' = "NftMetadata"."tokenId"

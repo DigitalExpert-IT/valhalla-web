@@ -23,7 +23,7 @@ const getSummary = async (start: string, end: string) => {
       const rewardInSec = item.baseReward / 86400000;
       const lastFarmNum = +new Date(item.lastFarm);
       const minttedNum = +new Date(item.mintedAt);
-      const claimReward = item.baseReward * 450;
+      const claimReward = item.baseReward * 200;
       const nftClaim = (lastFarmNum - minttedNum) * rewardInSec;
 
       return {

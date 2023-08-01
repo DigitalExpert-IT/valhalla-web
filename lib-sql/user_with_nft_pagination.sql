@@ -11,7 +11,7 @@ SELECT
 	cast(
 		SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-		) * 450 as int
+		) * 200 as int
 	) as "profit"
 from
 	"User"

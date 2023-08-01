@@ -239,7 +239,7 @@ export const queryGetNFTTotalActiveProfit = async () => {
   const totalNFT: { totalProfit: number; totalActiveNFT: number }[] =
     await prisma.$queryRaw`
     SELECT 
-      CAST(SUM((("price" * "farmPercentage") / 100) * 450)as int) as "totalProfit", CAST(COUNT(*) as int) as "totalActiveNFT"
+      CAST(SUM((("price" * "farmPercentage") / 100) * 200)as int) as "totalProfit", CAST(COUNT(*) as int) as "totalActiveNFT"
       from (
         SELECT distinct on ("tokenId") "tokenId", * from (
           SELECT 
@@ -390,7 +390,7 @@ export const queryGetAllUserWithNFTs = async <IUser>(
 	cast(
 		SUM(
 			CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-		) * 450 as int
+		) * 200 as int
 	) as "profit"
 from
 	"User"
@@ -485,7 +485,7 @@ export const queryGetUserWithNftPage = async (
       cast(
         SUM(
           CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-        ) * 450 as int
+        ) * 200 as int
       ) as "profit"
 from
 	"User"

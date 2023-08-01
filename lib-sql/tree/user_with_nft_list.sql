@@ -35,7 +35,7 @@ WITH RECURSIVE "hierarchy" AS (
         cast(
           SUM(
             CAST("NFT"."nftDetail" ->> 'rewardPerDay' AS int)
-          ) * 450 AS int
+          ) * 200 AS int
         ) AS "profit"
       FROM
         "User"
@@ -152,7 +152,7 @@ WITH RECURSIVE "hierarchy" AS (
         cast(
           SUM(
             CAST("NFT"."nftDetail" ->> 'rewardPerDay' AS int)
-          ) * 450 AS int
+          ) * 200 AS int
         ) AS "profit"
       FROM
         "User"

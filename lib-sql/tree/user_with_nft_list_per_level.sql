@@ -11,7 +11,7 @@ SELECT
   cast(
     SUM(
       CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-    ) * 450 as int
+    ) * 200 as int
   ) as "maxProfit",
   cast(
     SUM(
@@ -22,7 +22,7 @@ SELECT
     (
       SUM(
         CAST("NFT"."nftDetail" ->> 'rewardPerDay' as int)
-      ) * 450
+      ) * 200
     ) * 5 as float
   ) / 100 as "potentialProfit"
 from

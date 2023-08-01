@@ -21,7 +21,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
-import { withConnection, withCorrectAddress } from "hoc";
+import { withConnection, withCorrectAddress, withRegistration } from "hoc";
 import {
   SummaryDashboardV2,
   IDataItem,
@@ -411,4 +411,4 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+export default withConnection(withRegistration(withCorrectAddress(Dashboard)));

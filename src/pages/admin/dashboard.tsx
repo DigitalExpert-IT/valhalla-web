@@ -21,7 +21,10 @@ import {
   useSummary,
   useUsersDasboard,
 } from "hooks/admin";
-import { IDataItem } from "components/pages/Dashboard/SummaryDashboard";
+import {
+  IDataItem,
+  SummaryDashboardV2,
+} from "components/pages/Dashboard/SummaryDashboard";
 import { TableDashboard, SummaryDashboard } from "components/pages/Dashboard";
 import { subDays } from "date-fns";
 import { useRouter } from "next/router";
@@ -158,49 +161,49 @@ const Dashboard = () => {
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: BsFillPeopleFill,
+        icon: "",
         value: Number(basicDashboardInfo?.totalSales) || "0",
       },
       {
         key: "totalUser",
         text: t("pages.dashboard.labels.totalUser"),
-        icon: BsFillPeopleFill,
+        icon: "",
         value: Number(basicDashboardInfo?.totalUser) || "0",
       },
       {
         key: "totalProfitBasic",
         text: t("pages.dashboard.labels.totalProfit"),
-        icon: BsFillPeopleFill,
+        icon: "",
         value: Number(basicDashboardInfo?.totalProfit) || "0",
       },
       {
         key: "NFTOnUsers",
         text: t("pages.dashboard.labels.NFTOnUsers"),
-        icon: BsUnity,
+        icon: "",
         value: NFTOnUser,
       },
       {
         key: "claimedNFT",
         text: t("pages.dashboard.labels.claimedNFT"),
-        icon: BsFillFileEarmarkCheckFill,
+        icon: "",
         value: claimNFT,
       },
       {
         key: "totalProfitValue",
         text: t("pages.dashboard.labels.totalProfitValue"),
-        icon: BsGraphUp,
+        icon: "",
         value: totalProfit,
       },
       {
         key: "activeNFT",
         text: t("pages.dashboard.labels.activeNFT"),
-        icon: BsMeta,
+        icon: "",
         value: activeNFT,
       },
       {
         key: "blacklistNFT",
         text: t("pages.dashboard.labels.blacklistNFT"),
-        icon: BsFileEarmarkExcelFill,
+        icon: "",
         value: blacklistNFT,
       },
     ];
@@ -222,13 +225,15 @@ const Dashboard = () => {
         onSearchChange={searchDebounce}
       />
       <Box py="6" px="6" background={"dashboard.gray"}>
-        <SummaryDashboard
+        TODO: Change with SumarryDashboardV2
+        {/* <SummaryDashboard
           data={summaryData}
           isLoading={summaryLoading}
           error={error}
           dateValue={selectedDateRange}
           onDateChange={handleSelectDate}
-        />
+        /> */}
+        <SummaryDashboardV2 data={summaryData} isLoading={summaryLoading} />
       </Box>
       <Box px="6" bg="dashboard.gray" pb="32" minH="calc(100vh - 129px)">
         <Box pos="relative" minH="160px">

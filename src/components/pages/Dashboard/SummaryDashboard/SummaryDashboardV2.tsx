@@ -7,7 +7,7 @@ export interface IDataItem {
   text: string;
   value: string | number;
   icon: string;
-  unit: string;
+  unit?: string;
 }
 
 interface ISummaryProps {

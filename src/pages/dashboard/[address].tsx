@@ -366,7 +366,10 @@ const Dashboard = () => {
     return { data, options };
   }, [currentItems, selectedLevel, isMobileScreen]);
 
-  const summaryData: IDataItem[] = useMemo(() => {
+  // TODO: I Change "any" cause i got error typing in my change
+  // I don't know if this component is still in use or not
+
+  const summaryData: any = useMemo(() => {
     return [
       {
         key: "totalMember",

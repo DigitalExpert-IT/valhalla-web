@@ -100,7 +100,8 @@ const variantFilter = defineStyle(() => ({
       color: "black",
     },
     "> option, > optgroup": {
-      color: "black",
+      color: "white",
+      bg: "global-brand-bg",
       fontSize: {
         base: "xs",
         sm: "md",

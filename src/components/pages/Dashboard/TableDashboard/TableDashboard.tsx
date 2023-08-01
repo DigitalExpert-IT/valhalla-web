@@ -141,7 +141,6 @@ export const TableDashboard = (props: ITableProps) => {
                       <option
                         key={item?.key ? item.key : `${item}.${idx}`}
                         value={item.value}
-                        color="white"
                       >
                         {item.text}
                       </option>

@@ -25,7 +25,7 @@ import {
   IDataItem,
   SummaryDashboardV2,
 } from "components/pages/Dashboard/SummaryDashboard";
-import { TableDashboard, SummaryDashboard } from "components/pages/Dashboard";
+import { TableDashboard } from "components/pages/Dashboard";
 import { subDays } from "date-fns";
 import { useRouter } from "next/router";
 
@@ -83,7 +83,7 @@ const Dashboard = () => {
     (idx: number) => {
       const address = listUser?.items[idx]?.address ?? "";
 
-      router.push(`/dashboard/${address}`);
+      router.push(`/dashboard-v2/${address}`);
     },
     [listUser]
   );
@@ -225,14 +225,6 @@ const Dashboard = () => {
         onSearchChange={searchDebounce}
       />
       <Box py="6" px="6" background={"dashboard.gray"}>
-        TODO: Change with SumarryDashboardV2
-        {/* <SummaryDashboard
-          data={summaryData}
-          isLoading={summaryLoading}
-          error={error}
-          dateValue={selectedDateRange}
-          onDateChange={handleSelectDate}
-        /> */}
         <SummaryDashboardV2 data={summaryData} isLoading={summaryLoading} />
       </Box>
       <Box px="6" bg="dashboard.gray" pb="32" minH="calc(100vh - 129px)">

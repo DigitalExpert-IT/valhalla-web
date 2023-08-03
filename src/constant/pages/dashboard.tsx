@@ -1,9 +1,4 @@
-import {
-  BsFillHouseDoorFill,
-  BsFillCalendarEventFill,
-  BsPeopleFill,
-  BsTropicalStorm,
-} from "react-icons/bs";
+import { BsFillHouseDoorFill, BsTropicalStorm } from "react-icons/bs";
 
 export const DASHBOARD_CATEGORY = [
   {
@@ -11,9 +6,9 @@ export const DASHBOARD_CATEGORY = [
     menus: [
       {
         key: "dashboard",
-        name: "dashboard",
+        name: "myNetwork",
         icon: <BsFillHouseDoorFill size={24} />,
-        href: "/dashboard/[address]",
+        href: "/dashboard-v2/[address]",
       },
     ],
   },
@@ -25,7 +20,7 @@ export const DASHBOARD_ADMIN_CATEGORY = [
     menus: [
       {
         key: "dashboard",
-        name: "dashboard",
+        name: "myNetwork",
         icon: <BsFillHouseDoorFill size={24} />,
         href: "/admin/dashboard",
       },

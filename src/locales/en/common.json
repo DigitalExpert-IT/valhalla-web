@@ -7,7 +7,8 @@
     "sharetoearn": "Share To Earn",
     "project": "Project",
     "genesis": "Nft Genesis",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "myNetwork": "My Network"
   },
   "banner": {
     "invalidChainMessage": "You are connected through Invalid chain!",
@@ -23,7 +24,8 @@
     "history": "History",
     "settings": "Settings",
     "logOut": "Log Out",
-    "backToHome": "Back To Home"
+    "backToHome": "Back To Home",
+    "myNetwork": "My Network"
   },
   "footer": {
     "description": "The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications",

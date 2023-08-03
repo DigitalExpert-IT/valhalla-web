@@ -48,7 +48,7 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/profile",
   },
   {
-    name: "dashboard",
+    name: "myNetwork",
     href: "/dashboard-v2/[address]",
   },
 ];

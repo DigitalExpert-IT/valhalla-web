@@ -30,7 +30,7 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
   return (
     <>
       {data.map((item, idx) => {
-        if (item.name === "dashboard" && connectionStatus !== "connected")
+        if (item.name === "myNetwork" && connectionStatus !== "connected")
           return null;
 
         return (
@@ -39,7 +39,7 @@ export const NavbarMenu: React.FC<NavItemProps> = props => {
               <PopoverTrigger>
                 <Link
                   href={
-                    item.name === "dashboard"
+                    item.name === "myNetwork"
                       ? isHasRoleAdmin
                         ? `/admin/dashboard`
                         : {

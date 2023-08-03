@@ -411,4 +411,4 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withRegistration(withCorrectAddress(Dashboard)));
+export default withConnection(withCorrectAddress(Dashboard));

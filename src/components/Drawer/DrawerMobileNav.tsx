@@ -59,7 +59,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
         <DrawerBody p="0">
           <Stack spacing="5">
             {data.map((item, idx) => {
-              if (item.name === "dashboard" && connectionStatus !== "connected")
+              if (item.name === "myNetwork" && connectionStatus !== "connected")
                 return null;
 
               return (
@@ -72,7 +72,7 @@ export const DrawerMobileNav: React.FC<MobileDrawerProps> = props => {
                   >
                     <Link
                       href={
-                        item.name === "dashboard"
+                        item.name === "myNetwork"
                           ? isHasRoleAdmin
                             ? `/admin/dashboard`
                             : {

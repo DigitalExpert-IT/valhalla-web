@@ -64,7 +64,7 @@ const SideBardrawer = (props: ISidebarDrawerProps) => {
     return (
       <Link
         href={
-          menu.name === "dashboard"
+          menu.key === "dashboard"
             ? { pathname: menu.href, query: { address: address } }
             : menu.href
         }

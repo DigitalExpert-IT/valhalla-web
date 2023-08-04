@@ -14,7 +14,7 @@ export const prettyBn = (bn?: BigNumber, baseNumber = 18): string => {
   if (!bn) return "0";
   const value = +fromBn(bn, baseNumber);
   if (value === 0) return "0";
-  const converter = UNIT_LIST.find(x => Math.abs(value) >= x.threshold);
+  const converter = UNIT_LIST.find(x => value >= x.threshold);
   return converter !== undefined
     ? toFixed(value / converter!.threshold, converter!.suffix)
     : toFixed(value);

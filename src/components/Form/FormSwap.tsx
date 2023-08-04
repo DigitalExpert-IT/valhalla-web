@@ -18,7 +18,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { ButtonConnectWrapper } from "components/Button";
-import { getGnetRate, getUsdtRate, shortenAddress } from "utils";
+import { getGnetRate, getUsdtRate, prettyBn, shortenAddress } from "utils";
 import { GNET_CONTRACT, SWAP_CONTRACT, USDT_CONTRACT } from "constant/address";
 import { BigNumber } from "ethers";
 import { IoCopyOutline } from "react-icons/io5";
@@ -443,7 +443,9 @@ export const FormSwap = () => {
                 color={"whiteAlpha.700"}
                 textAlign={"center"}
               >
-                {fromBn(balanceGNET ?? 0, 9)} GNET
+                {/* TODO: already delete if this calculation good */}
+                {/* {fromBn(balanceGNET ?? 0, 9)} GNET */}
+                {prettyBn(balanceGNET, 9)} GNET
               </Text>
             </Stack>
             <HStack

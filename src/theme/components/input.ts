@@ -203,7 +203,7 @@ const variantDahsboard = definePartsStyle(props => {
       boxSizing: "box",
       height: "12",
       borderColor: "black",
-      color: "black",
+      color: "white",
       bg: "dashboard.darkPurple",
       boxShadow: "md",
       border: "none",

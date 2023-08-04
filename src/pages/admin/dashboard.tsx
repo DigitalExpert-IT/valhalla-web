@@ -242,13 +242,6 @@ const Dashboard = () => {
         background="transparent"
       >
         <SummaryDashboardV2 data={summaryData} isLoading={summaryLoading} />
-        {/* <SummaryDashboard
-          data={summaryData}
-          isLoading={summaryLoading}
-          error={error}
-          dateValue={selectedDateRange}
-          onDateChange={handleSelectDate}
-        /> */}
       </Box>
       <Box px="6" pb="32" minH="calc(100vh - 129px)">
         <Box pos="relative" minH="160px">
@@ -264,5 +257,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withAdminRole(Dashboard));
-export default Dashboard;
+export default withConnection(withAdminRole(Dashboard));

@@ -206,11 +206,16 @@ export const FormSwap = () => {
   );
 
   const amountAfterFee = useMemo(() => {
-    const { amountTop, currency } = getValues();
+    const { amountTop } = getValues();
+    const feePercentage = 5;
+    // This percentage is to provide a swap tolerance range,
+    // in order to avoid a lack of result from swaps
+    const tolerancePercentage = 2;
+
     if (!amountTop) return toBn("0");
 
     const amountTopBn = toBn(amountTop, 9);
-    const tax = amountTopBn.mul(5).div(1000);
+    const tax = amountTopBn.mul(feePercentage+tolerancePercentage).div(1000);
 
     return amountTopBn.add(tax);
   }, [watchAmountTop]);

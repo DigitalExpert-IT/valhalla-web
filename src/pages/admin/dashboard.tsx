@@ -241,7 +241,11 @@ const Dashboard = () => {
         px="6"
         background="transparent"
       >
-        <SummaryDashboardV2 data={summaryData} isLoading={summaryLoading} />
+        <SummaryDashboardV2
+          data={summaryData}
+          isLoading={summaryLoading}
+          width={{ base: "280px", md: "290px", lg: "360px" }}
+        />
       </Box>
       <Box px="6" pb="32" minH="calc(100vh - 129px)">
         <Box pos="relative" minH="160px">

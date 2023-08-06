@@ -56,7 +56,6 @@ export const WidgetTimelineItemV2: React.FC<WidgetTimeline> = props => {
         {props.children}
       </Box>
       <Box
-        // py="2"
         height="3xs"
         position="absolute"
         textAlign="left"

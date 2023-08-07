@@ -65,6 +65,7 @@ const initCrawler = async () => {
     if (isCrawlerInitialized) return;
     isCrawlerInitialized = true;
     await storeRootAddressList();
+    // crawl
     const crawl = async (): Promise<any> => {
       const startingBlock = await getStartingBlock();
       const latestBlock = await provider.getBlockNumber();
@@ -125,6 +126,7 @@ const initCrawler = async () => {
         },
       });
       CRAWLER_BLOCK_SIZE = 1000;
+      // and right here the crawl calling himself
       crawl().catch(e => {
         isCrawlerInitialized = false;
         PICK_RPC_LIST++;
@@ -134,7 +136,9 @@ const initCrawler = async () => {
         initCrawler();
       });
     };
+    // end crawl
 
+    // downbelow here is first calling the crawl
     crawl().catch(e => {
       isCrawlerInitialized = false;
       PICK_RPC_LIST++;

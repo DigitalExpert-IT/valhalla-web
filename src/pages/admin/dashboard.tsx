@@ -253,5 +253,4 @@ const Dashboard = () => {
   );
 };
 
-// export default withConnection(withAdminRole(Dashboard));
-export default Dashboard;
+export default withConnection(withAdminRole(Dashboard));

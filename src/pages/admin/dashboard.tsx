@@ -3,15 +3,7 @@ import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import {
-  BsUnity,
-  BsMeta,
-  BsFillPersonFill,
-  BsGraphUp,
-  BsFillFileEarmarkCheckFill,
-  BsFileEarmarkExcelFill,
-  BsFillPeopleFill,
-} from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import _ from "lodash";
 import { withConnection, withAdminRole } from "hoc";
@@ -261,4 +253,5 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withAdminRole(Dashboard));
+// export default withConnection(withAdminRole(Dashboard));
+export default Dashboard;

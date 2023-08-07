@@ -60,10 +60,10 @@ const rankPatcher = async () => {
   }
 };
 const handler: NextApiHandler = async (_, res) => {
-  eventCrawler();
-  addressCrawler();
-  timestampPatcher();
-  rankPatcher();
+  // eventCrawler();
+  // addressCrawler();
+  // timestampPatcher();
+  // rankPatcher();
   return res.send("OK");
 };
 

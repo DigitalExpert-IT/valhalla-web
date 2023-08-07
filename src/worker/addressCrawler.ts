@@ -1,15 +1,22 @@
 import { PrismaClient } from "@prisma/client";
 import { getKeccakHexHash, lowerCase } from "utils";
-import { getValhallaContract, getMainProvider } from "lib/contractFactory";
+import {
+  CURRENT_CHAIN_ID,
+  getMainProviderWithSwitcher,
+  getValhallaContractWithSwitcher,
+} from "lib/contractFactory";
 import { rootAdressList } from "valhalla-erc20/constant/rootAddress";
+import { RPC_ENDPOINT_LIST } from "constant/endpoint";
 
 const prisma = new PrismaClient();
 const REGISTRATION_TOPIC = getKeccakHexHash("Registration(address,address)");
+const MAX_LIST = RPC_ENDPOINT_LIST[CURRENT_CHAIN_ID].length;
+let PICK_RPC_LIST = 0;
 let CRAWLER_BLOCK_SIZE = 1000;
 
 const getStartingBlock = async () => {
   try {
-    const valhalla = await getValhallaContract();
+    const valhalla = await getValhallaContractWithSwitcher(PICK_RPC_LIST);
     const lastBlock = await prisma.config.findFirst({
       where: { key: "lastBlock" },
     });
@@ -47,13 +54,16 @@ const storeRootAddressList = async () => {
 
 let isCrawlerInitialized = false;
 const initCrawler = async () => {
+  console.log(
+    "\x1b[36m%s\x1b[0m",
+    `Hierarchy Running RPC  ${RPC_ENDPOINT_LIST[CURRENT_CHAIN_ID][PICK_RPC_LIST]}`
+  );
   try {
-    const provider = await getMainProvider();
-    const valhalla = await getValhallaContract();
+    const provider = await getMainProviderWithSwitcher(PICK_RPC_LIST);
+    const valhalla = await getValhallaContractWithSwitcher(PICK_RPC_LIST);
 
     if (isCrawlerInitialized) return;
     isCrawlerInitialized = true;
-
     await storeRootAddressList();
     const crawl = async (): Promise<any> => {
       const startingBlock = await getStartingBlock();
@@ -115,11 +125,25 @@ const initCrawler = async () => {
         },
       });
       CRAWLER_BLOCK_SIZE = 1000;
-      crawl();
+      crawl().catch(e => {
+        isCrawlerInitialized = false;
+        PICK_RPC_LIST++;
+        if (PICK_RPC_LIST === MAX_LIST) {
+          PICK_RPC_LIST = 0;
+        }
+        initCrawler();
+      });
     };
 
-    crawl();
-  } catch (error) {
+    crawl().catch(e => {
+      isCrawlerInitialized = false;
+      PICK_RPC_LIST++;
+      if (PICK_RPC_LIST === MAX_LIST) {
+        PICK_RPC_LIST = 0;
+      }
+      initCrawler();
+    });
+  } catch (error: any) {
     isCrawlerInitialized = false;
     if (CRAWLER_BLOCK_SIZE > 2) {
       CRAWLER_BLOCK_SIZE = CRAWLER_BLOCK_SIZE / 2;

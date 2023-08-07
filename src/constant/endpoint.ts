@@ -11,3 +11,19 @@ export const RPC_ENDPOINTS = {
   "0x539": "http://localhost:8545",
   "0x29a": "https://valhalacoin.cloud",
 };
+
+export const RPC_ENDPOINT_LIST = {
+  "0x89": [
+    "https://polygon-rpc.com",
+    "https://polygon.llamarpc.com",
+    "https://polygon-mainnet.public.blastapi.io",
+    "https://polygon.blockpi.network/v1/rpc/public",
+    "https://rpc.ankr.com/polygon",
+    "https://1rpc.io/matic",
+    "https://rpc-mainnet.matic.quiknode.pro",
+    "https://polygon.meowrpc.com",
+  ],
+  "0x13881": ["https://matic-mumbai.chainstacklabs.com"],
+  "0x539": ["http://localhost:8545"],
+  "0x29a": ["https://valhalacoin.cloud"],
+};

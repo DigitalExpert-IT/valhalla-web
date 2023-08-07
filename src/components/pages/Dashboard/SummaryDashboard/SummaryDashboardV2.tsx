@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Text, Stack, Wrap, WrapItem, Skeleton } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Stack,
+  Wrap,
+  WrapItem,
+  Skeleton,
+  BoxProps,
+} from "@chakra-ui/react";
 import Image from "next/image";
 
 export interface IDataItem {
@@ -10,7 +18,7 @@ export interface IDataItem {
   unit?: string;
 }
 
-interface ISummaryProps {
+interface ISummaryProps extends BoxProps {
   data: IDataItem[];
   isLoading?: boolean;
 }
@@ -23,10 +31,11 @@ export const SummaryDashboardV2: React.FC<ISummaryProps> = props => {
         <WrapItem key={item.key}>
           <Skeleton isLoaded={!isLoading}>
             <Box
-              width="285px"
+              width="280px"
               height="330px"
               rounded="xl"
               bgGradient="linear-gradient(131deg, #7C75E8 0%, #A063F9 100%)"
+              {...props}
             >
               <Stack
                 w="full"

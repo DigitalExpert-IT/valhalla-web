@@ -3,15 +3,7 @@ import { Box, Text, Image, HStack, AspectRatio } from "@chakra-ui/react";
 import { HeaderDashboard } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
-import {
-  BsUnity,
-  BsMeta,
-  BsFillPersonFill,
-  BsGraphUp,
-  BsFillFileEarmarkCheckFill,
-  BsFileEarmarkExcelFill,
-  BsFillPeopleFill,
-} from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import _ from "lodash";
 import { withConnection, withAdminRole } from "hoc";
@@ -105,7 +97,7 @@ const Dashboard = () => {
       body: listUser?.items?.map(user => [
         <>
           <HStack>
-            <BsFillPersonFill size="20" color="#000" />
+            <BsFillPersonFill size="20" />
             <Text fontSize="sm">{user.address}</Text>
           </HStack>
         </>,
@@ -161,50 +153,58 @@ const Dashboard = () => {
       {
         key: "totalSales",
         text: t("pages.dashboard.labels.totalSales"),
-        icon: "",
+        icon: "/assets/icon/total-sales.svg",
         value: Number(basicDashboardInfo?.totalSales) || "0",
+        unit: "usdt",
       },
       {
         key: "totalUser",
         text: t("pages.dashboard.labels.totalUser"),
-        icon: "",
+        icon: "/assets/icon/mask-group.svg",
         value: Number(basicDashboardInfo?.totalUser) || "0",
+        unit: "users",
       },
       {
         key: "totalProfitBasic",
         text: t("pages.dashboard.labels.totalProfit"),
-        icon: "",
+        icon: "/assets/icon/icon-profit.svg",
         value: Number(basicDashboardInfo?.totalProfit) || "0",
+        unit: "usdt",
       },
       {
         key: "NFTOnUsers",
         text: t("pages.dashboard.labels.NFTOnUsers"),
-        icon: "",
+        icon: "/assets/icon/nft-on-user.svg",
         value: NFTOnUser,
+        unit: "nft",
       },
       {
         key: "claimedNFT",
         text: t("pages.dashboard.labels.claimedNFT"),
-        icon: "",
+        icon: "/assets/icon/claimed-nft.svg",
         value: claimNFT,
+        unit: "usdt",
       },
       {
         key: "totalProfitValue",
         text: t("pages.dashboard.labels.totalProfitValue"),
-        icon: "",
+        icon: "/assets/icon/total-profit-value.svg",
         value: totalProfit,
+        unit: "usdt",
       },
       {
         key: "activeNFT",
         text: t("pages.dashboard.labels.activeNFT"),
-        icon: "",
+        icon: "/assets/icon/active-nft.svg",
         value: activeNFT,
+        unit: "nft",
       },
       {
         key: "blacklistNFT",
         text: t("pages.dashboard.labels.blacklistNFT"),
-        icon: "",
+        icon: "/assets/icon/blacklist-nft.svg",
         value: blacklistNFT,
+        unit: "nft",
       },
     ];
   }, [summaryDashboard]);
@@ -224,10 +224,22 @@ const Dashboard = () => {
         isShowSearch
         onSearchChange={searchDebounce}
       />
-      <Box py="6" px="6" background={"dashboard.gray"}>
-        <SummaryDashboardV2 data={summaryData} isLoading={summaryLoading} />
+      <Box
+        w={"full"}
+        flex={1}
+        position={"relative"}
+        color="gray.800"
+        py="6"
+        px="6"
+        background="transparent"
+      >
+        <SummaryDashboardV2
+          data={summaryData}
+          isLoading={summaryLoading}
+          width={{ base: "280px", md: "290px", lg: "360px" }}
+        />
       </Box>
-      <Box px="6" bg="dashboard.gray" pb="32" minH="calc(100vh - 129px)">
+      <Box px="6" pb="32" minH="calc(100vh - 129px)">
         <Box pos="relative" minH="160px">
           <TableDashboard
             title={t("pages.dashboard.title.users") ?? ""}

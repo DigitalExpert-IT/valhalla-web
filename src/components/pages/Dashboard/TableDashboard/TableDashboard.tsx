@@ -115,7 +115,7 @@ export const TableDashboard = (props: ITableProps) => {
       <HStack minH="62px" maxH="62px" pb="4" justifyContent="space-between">
         {title ? (
           typeof title === "string" ? (
-            <Heading as="h2" fontSize="xl" fontWeight="600" color="gray.800">
+            <Heading as="h2" fontSize="xl" fontWeight="600" color="white">
               {title}
             </Heading>
           ) : (
@@ -217,15 +217,7 @@ export const TableDashboard = (props: ITableProps) => {
       </TableContainer>
 
       {!data?.body?.length && !isLoading ? (
-        <Box
-          pos="absolute"
-          top="24"
-          bottom="0"
-          left="0"
-          right="0"
-          h="fit-content"
-          margin="auto"
-        >
+        <Box h="fit-content" margin="auto">
           <Text color="white" textAlign="center">
             {t("common.table.messages.notFound")}
           </Text>

@@ -131,7 +131,7 @@ const initCrawler = async () => {
       crawl().catch(() => {
         isCrawlerInitialized = false;
         PICK_RPC_LIST++;
-        if (PICK_RPC_LIST === MAX_LIST) {
+        if (PICK_RPC_LIST === MAX_LIST - 1) {
           PICK_RPC_LIST = 0;
         }
         initCrawler();
@@ -143,7 +143,7 @@ const initCrawler = async () => {
     crawl().catch(e => {
       isCrawlerInitialized = false;
       PICK_RPC_LIST++;
-      if (PICK_RPC_LIST === MAX_LIST) {
+      if (PICK_RPC_LIST === MAX_LIST - 1) {
         PICK_RPC_LIST = 0;
       }
       initCrawler();

@@ -155,7 +155,7 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalSales"),
         icon: "/assets/icon/total-sales.svg",
         value: Number(basicDashboardInfo?.totalSales) || "0",
-        unit: "usdt",
+        unit: "gnet",
       },
       {
         key: "totalUser",
@@ -169,7 +169,7 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalProfit"),
         icon: "/assets/icon/icon-profit.svg",
         value: Number(basicDashboardInfo?.totalProfit) || "0",
-        unit: "usdt",
+        unit: "gnet",
       },
       {
         key: "NFTOnUsers",
@@ -183,14 +183,14 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.claimedNFT"),
         icon: "/assets/icon/claimed-nft.svg",
         value: claimNFT,
-        unit: "usdt",
+        unit: "gnet",
       },
       {
         key: "totalProfitValue",
         text: t("pages.dashboard.labels.totalProfitValue"),
         icon: "/assets/icon/total-profit-value.svg",
         value: totalProfit,
-        unit: "usdt",
+        unit: "gnet",
       },
       {
         key: "activeNFT",

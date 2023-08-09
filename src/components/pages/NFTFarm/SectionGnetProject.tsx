@@ -21,7 +21,7 @@ import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useSummary } from "hooks/user/dashboard/useSummary";
 import { BigNumber } from "ethers";
-import { getUsdtRate } from "utils";
+import { getGnetRate, prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
@@ -68,14 +68,16 @@ export const SectionGnetProject = () => {
     return claim;
   };
   const claimRewardGnetAsync = useAsyncCall(claimRewardMutate);
-  const usdtRate = fromBn(
-    getUsdtRate(
+  const usdtRate = prettyBn(
+    getGnetRate(
       summaryData?.totalPotentialProfit
         ? summaryData?.totalPotentialProfit.toString()
         : "0"
     ),
     6
   );
+
+  // const usdtRate = prettyBn(getGnetRate
 
   const removeFloat = (value: BigNumber, decimal: number, remove: number) => {
     const toNumber = +fromBn(value, decimal);

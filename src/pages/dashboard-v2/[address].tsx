@@ -282,7 +282,7 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalEstimateProfit"),
         icon: "/assets/icon/icon-profit.svg",
         value: summary ? summary.totalPotentialProfit : 0,
-        unit: "usdt",
+        unit: "gnet",
       },
       {
         key: "maxTotalLevel",
@@ -303,7 +303,7 @@ const Dashboard = () => {
         text: t("pages.dashboard.labels.totalSales"),
         icon: "/assets/icon/total-sales.svg",
         value: summary ? summary?.totalValue : 0,
-        unit: "usdt",
+        unit: "gnet",
       },
     ];
   }, [summary]);

@@ -74,7 +74,7 @@ export const SectionGnetProject = () => {
         ? summaryData?.totalPotentialProfit.toString()
         : "0"
     ),
-    9
+    6
   );
 
   const removeFloat = (value: BigNumber, decimal: number, remove: number) => {

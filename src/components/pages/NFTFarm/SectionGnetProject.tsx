@@ -68,16 +68,9 @@ export const SectionGnetProject = () => {
     return claim;
   };
   const claimRewardGnetAsync = useAsyncCall(claimRewardMutate);
-  const usdtRate = prettyBn(
-    getGnetRate(
-      summaryData?.totalPotentialProfit
-        ? summaryData?.totalPotentialProfit.toString()
-        : "0"
-    ),
-    6
-  );
-
-  // const usdtRate = prettyBn(getGnetRate
+  const usdtRate = summaryData?.totalPotentialProfit
+    ? summaryData?.totalPotentialProfit * 0.015
+    : "0";
 
   const removeFloat = (value: BigNumber, decimal: number, remove: number) => {
     const toNumber = +fromBn(value, decimal);

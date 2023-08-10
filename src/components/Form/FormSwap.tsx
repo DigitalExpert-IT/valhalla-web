@@ -207,20 +207,19 @@ export const FormSwap = () => {
 
   const amountAfterFee = useMemo(() => {
     const { amountTop } = getValues();
-    const feePercentage = 5;
+    const feePercentage = 500;
     // This percentage is to provide a swap tolerance range,
     // in order to avoid a lack of result from swaps
-    const tolerance = 0.098;
+    const tolerancePercentage = 2;
 
     if (!amountTop) return toBn("0");
 
     const amountTopBn = toBn(amountTop, 9);
-    const ratio = getGnetRate(fromBn(amountTopBn, 9)); // usdt get
-    const percent = ratio.mul(feePercentage).div(1000); // get percent from usdt
-    const getTax = getUsdtRate(
-      fromBn(percent.add(toBn(tolerance.toString(), 6)), 6)
-    ); // gnet to add
-    return amountTopBn.add(getTax);
+    // tolerance 502 === 0.00502 or 0.502%
+    // check div 1e5 shouldbe 509 / 1e5
+    const tax = amountTopBn.mul(feePercentage + tolerancePercentage).div(1e5);
+
+    return amountTopBn.add(tax);
   }, [watchAmountTop]);
 
   const onSubmit = handleSubmit(async data => {

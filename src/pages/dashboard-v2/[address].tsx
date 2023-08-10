@@ -350,7 +350,7 @@ const Dashboard = () => {
               display={!searchKey.length ? "block" : "none"}
               pos="relative"
               flex="1"
-              w={"full"}
+              w={"20%"}
               minH="160px"
             >
               <TableDashboard

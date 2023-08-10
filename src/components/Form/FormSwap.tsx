@@ -210,15 +210,17 @@ export const FormSwap = () => {
     const feePercentage = 5;
     // This percentage is to provide a swap tolerance range,
     // in order to avoid a lack of result from swaps
+    const tolerance = 0.098;
 
     if (!amountTop) return toBn("0");
 
     const amountTopBn = toBn(amountTop, 9);
     const ratio = getGnetRate(fromBn(amountTopBn, 9)); // usdt get
     const percent = ratio.mul(feePercentage).div(1000); // get percent from usdt
-    const getTax = getUsdtRate(fromBn(percent, 6)); // gnet to add
-    // add 6.33 to get solid value
-    return amountTopBn.add(getTax.add(toBn("6.33", 9)));
+    const getTax = getUsdtRate(
+      fromBn(percent.add(toBn(tolerance.toString(), 6)), 6)
+    ); // gnet to add
+    return amountTopBn.add(getTax);
   }, [watchAmountTop]);
 
   const onSubmit = handleSubmit(async data => {

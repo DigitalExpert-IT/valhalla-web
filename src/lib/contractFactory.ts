@@ -1,5 +1,5 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { RPC_ENDPOINTS } from "constant/endpoint";
+import { RPC_ENDPOINTS, RPC_ENDPOINT_LIST } from "constant/endpoint";
 import { ethers } from "ethers";
 import valhallaJson from "valhalla-erc20/artifacts/contracts/Valhalla.sol/Valhalla.json";
 import globalExchangeJson from "global-swap/artifacts/contracts/globalExchange.sol/GlobalExchange.json";
@@ -204,5 +204,32 @@ export const getUSDTSignerContract = async () => {
   const contract = await getFromCache(async () =>
     getERC20SignerContract(USDT_CONTRACT[CURRENT_CHAIN_ID])
   );
+  return contract;
+};
+
+export const getMainProviderWithSwitcher = async (pickRpc: number) => {
+  const RPCLIST = RPC_ENDPOINT_LIST[CURRENT_CHAIN_ID][pickRpc as 0];
+  return new ethers.providers.JsonRpcProvider(RPCLIST);
+};
+
+export const getValhallaContractWithSwitcher = async (pickRpc: number) => {
+  const provider = await getMainProviderWithSwitcher(pickRpc);
+  const contract = new ethers.Contract(
+    VALHALLA_CONTRACT[CURRENT_CHAIN_ID],
+    valhallaJson.abi,
+    provider
+  ) as Valhalla;
+
+  return contract;
+};
+
+export const getNFTContractWithSwticher = async (pickRpc: number) => {
+  const provider = await getMainProviderWithSwitcher(pickRpc);
+  const contract = new ethers.Contract(
+    NFT_CONTRACT[CURRENT_CHAIN_ID],
+    nftJson.abi,
+    provider
+  ) as NFT;
+
   return contract;
 };

@@ -22,6 +22,8 @@ export const RPC_ENDPOINT_LIST = {
     "https://1rpc.io/matic",
     "https://rpc-mainnet.matic.quiknode.pro",
     "https://polygon.meowrpc.com",
+    "https://polygon.rpc.blxrbdn.com",
+    "https://polygon-bor.publicnode.com",
   ],
   "0x13881": ["https://matic-mumbai.chainstacklabs.com"],
   "0x539": ["http://localhost:8545"],

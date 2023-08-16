@@ -1,4 +1,12 @@
-import { Card, CardBody, Flex, Heading, Image, Stack } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { FormSwap, LayoutMainV2 } from "components";
 import { t } from "i18next";
 
@@ -51,14 +59,19 @@ const SwapV2 = () => {
           zIndex={"3"}
         >
           <CardBody>
-            <Image
-              src="/assets/partnership/global-network.png"
-              alt="Bg Swap"
-              width="80px"
-              margin="auto"
-              opacity="0.8"
-              mb="10"
-            />
+            <Stack textAlign="center" mb="10" spacing="5">
+              <Image
+                src="/assets/partnership/global-network.png"
+                alt="Bg Swap"
+                width="80px"
+                margin="auto"
+                opacity="0.8"
+              />
+              <Text fontWeight="bold" fontSize={{ base: "sm", md: "lg" }}>
+                1 GNET = 0.015 USDT
+              </Text>
+            </Stack>
+
             <FormSwap />
           </CardBody>
         </Card>

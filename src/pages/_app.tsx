@@ -65,6 +65,7 @@ export default function App(props: AppProps) {
         localWallet(),
       ]}
       activeChain={targetChain}
+      clientId="9558eae656ea7205fa54c206061e3dcd"
     >
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>

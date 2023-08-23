@@ -33,6 +33,7 @@ import {
   useChain,
   useSwitchChain,
   useWallet,
+  walletConnect,
 } from "@thirdweb-dev/react";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
@@ -56,8 +57,9 @@ export default function App(props: AppProps) {
       supportedChains={[targetChain]}
       supportedWallets={[
         metamaskWallet(),
+        walletConnect(),
         trustWallet(),
-        walletConnectV1(),
+        // walletConnectV1(),
         coinbaseWallet(),
         safeWallet(),
         localWallet(),

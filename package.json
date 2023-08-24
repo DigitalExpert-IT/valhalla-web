@@ -41,7 +41,7 @@
     "eventemitter3": "^5.0.1",
     "evm-bn": "^1.1.2",
     "framer-motion": "^7.6.18",
-    "global-swap": "^1.12.0",
+    "global-swap": "^1.14.4",
     "globe.gl": "^2.26.11",
     "i18next": "^22.0.6",
     "immer": "^9.0.16",
@@ -60,7 +60,9 @@
     "telegraf": "^4.11.2",
     "three": "^0.148.0",
     "valhalla-erc20": "^1.2.1",
-    "zustand": "^4.1.4"
+    "zustand": "^4.1.4",
+    "@chakra-ui/styled-system": "^2.5.0",
+    "@chakra-ui/theme-tools": "^2.0.14"
   },
   "husky": {
     "hooks": {

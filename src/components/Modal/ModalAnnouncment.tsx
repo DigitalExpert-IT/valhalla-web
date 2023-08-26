@@ -38,7 +38,8 @@ export const ModalAnnouncement = () => {
               />
             </AspectRatio>
             <Text fontWeight="semiBold" fontSize="md" textTransform="uppercase">
-              We are under maintenance to improve our website. We should be back shortly.
+              We are under maintenance to improve our website. We should be back
+              shortly.
             </Text>
           </Stack>
         </ModalBody>

@@ -7,7 +7,7 @@ import Head from "next/head";
 import { useSwapContract } from "hooks";
 import type { AppProps } from "next/app";
 import { getActiveChain } from "lib/chain";
-import { trustWallet } from "wallets/Trust";
+// import { trustWallet } from "wallets/Trust";
 import NiceModal from "@ebay/nice-modal-react";
 import { useTranslation } from "react-i18next";
 import { PROJECT_NAME } from "constant/siteConfig";
@@ -29,10 +29,11 @@ import {
   coinbaseWallet,
   safeWallet,
   localWallet,
-  walletConnectV1,
+  walletConnect,
   useChain,
   useSwitchChain,
   useWallet,
+  trustWallet,
 } from "@thirdweb-dev/react";
 
 const defaultQueryFn = async ({ queryKey }: any) => {
@@ -49,6 +50,7 @@ const queryClient = new QueryClient({
 });
 
 const targetChain = getActiveChain();
+const CLIENT_ID = process.env.NEXT_PUBLIC_THIRDWEB || "0";
 
 export default function App(props: AppProps) {
   return (
@@ -57,12 +59,13 @@ export default function App(props: AppProps) {
       supportedWallets={[
         metamaskWallet(),
         trustWallet(),
-        walletConnectV1(),
+        walletConnect(),
         coinbaseWallet(),
         safeWallet(),
         localWallet(),
       ]}
       activeChain={targetChain}
+      clientId={CLIENT_ID}
     >
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  CardClaimGenesisNFT,
-  CardGenesisNFT,
-  LayoutMainV2,
-  ModalAnnouncement,
-} from "components";
+import { CardClaimGenesisNFT, CardGenesisNFT, LayoutMainV2 } from "components";
 import {
   Box,
   Heading,

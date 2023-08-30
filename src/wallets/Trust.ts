@@ -19,6 +19,16 @@ export type TrustWalletOption = WalletOptions<MetamaskAdditionalOptions>;
 export class TrustWallet extends AbstractClientWallet<MetamaskAdditionalOptions> {
   connector?: Connector;
   trustConnector?: any;
+  // #private: boolean = true;
+
+  async getBalance(address: string): Promise<any> {
+    // TODO: Logic getBalance
+    // Return the balance data
+  }
+  async transfer(): Promise<any> {
+    // TODO: Logic For Transfer
+    // Return the result or status of the transfer
+  }
 
   static meta = {
     name: "Trust",
@@ -60,18 +70,22 @@ export class TrustWallet extends AbstractClientWallet<MetamaskAdditionalOptions>
   }
 }
 
-export const trustWallet = (): WalletConfig<TrustWallet> => {
-  return {
-    id: TrustWallet.id,
-    meta: TrustWallet.meta,
-    create: (options: WalletOptions) => {
-      return new TrustWallet({ ...options, qrcode: false });
-    },
-    isInstalled() {
-      if (assertWindowEthereum(globalThis.window)) {
-        return globalThis.window.ethereum.isTrust;
-      }
-      return false;
-    },
-  };
-};
+// I commented the code below because there is an error that I can't handle yet
+// it seems like a problem with the "TrustWallet Class" that extends the AbstractClientWallet type. I got the error "missing #private from type AbstractClientWallet".
+// that's why I don't know what #private is.
+
+// export const trustWallet = (): WalletConfig<TrustWallet> => {
+//   return {
+//     id: TrustWallet.id,
+//     meta: TrustWallet.meta,
+//     create: (options: WalletOptions) => {
+//       return new TrustWallet({ ...options, qrcode: false });
+//     },
+//     isInstalled() {
+//       if (assertWindowEthereum(globalThis.window)) {
+//         return globalThis.window.ethereum.isTrust;
+//       }
+//       return false;
+//     },
+//   };
+// };

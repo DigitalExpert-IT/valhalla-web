@@ -50,7 +50,7 @@ const sizes = {
   }),
 };
 
-const variantGradient = defineStyle(props => {
+const variantGradient = definePartsStyle(props => {
   const { colorScheme: c } = props;
   const [c1, c2 = "pink", bg] = c.split(/\:/);
   return definePartsStyle({

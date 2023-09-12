@@ -87,5 +87,6 @@
   "claim": "Claim",
   "buy": "Buy",
   "isConnectingToBlockChain": "Connecting to BlockChain",
-  "succesBuyNft": "Suscces Buy NFT"
+  "succesBuyNft": "Suscces Buy NFT",
+  "max": "Max"
 }

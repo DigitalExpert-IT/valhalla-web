@@ -167,6 +167,41 @@ export const FormSwap = () => {
     t("form.message.swapSucces")
   );
 
+  const getTax = (val: BigNumber) => {
+    const feePercentage = 500;
+    // This percentage is to provide a swap tolerance range,
+    // in order to avoid a lack of result from swaps
+    const tolerancePercentage = 2;
+
+    if (!val) return toBn("0");
+
+    // tolerance 502 === 0.00502 or 0.502%
+    // check div 1e5 shouldbe 509 / 1e5
+    return val.mul(feePercentage + tolerancePercentage).div(1e5);
+  };
+
+  const inputMax = () => {
+    const { currency } = getValues();
+    let result;
+
+    if (currency === "GNET") {
+      if (!balanceUSDT || balanceUSDT.isZero())
+        return setValue("amountTop", "0");
+
+      const tax = getTax(balanceUSDT);
+      result = balanceUSDT.sub(tax);
+    } else {
+      if (!balanceGNET || balanceGNET.isZero())
+        return setValue("amountTop", "0");
+
+      const tax = getTax(balanceGNET);
+      result = balanceGNET.sub(tax);
+    }
+
+    setValue("amountTop", fromBn(result, currency === "GNET" ? 6 : 9));
+    handleChangeInput("amountTop");
+  };
+
   useEffect(() => {
     const currency = watchCurrency;
     if (currency === "GNET") setSymbol(true);
@@ -207,17 +242,12 @@ export const FormSwap = () => {
 
   const amountAfterFee = useMemo(() => {
     const { amountTop } = getValues();
-    const feePercentage = 500;
-    // This percentage is to provide a swap tolerance range,
-    // in order to avoid a lack of result from swaps
-    const tolerancePercentage = 2;
 
     if (!amountTop) return toBn("0");
 
     const amountTopBn = toBn(amountTop, 9);
-    // tolerance 502 === 0.00502 or 0.502%
-    // check div 1e5 shouldbe 509 / 1e5
-    const tax = amountTopBn.mul(feePercentage + tolerancePercentage).div(1e5);
+
+    const tax = getTax(amountTopBn);
 
     return amountTopBn.add(tax);
   }, [watchAmountTop]);
@@ -249,47 +279,60 @@ export const FormSwap = () => {
       >
         <Stack alignItems="center" mb="5" spacing={"3"}>
           <Stack w={"full"}>
-            <Box
-              position={"relative"}
-              border={"1px"}
-              borderRadius={"3xl"}
-              overflow={"hidden"}
-            >
-              <Text
-                position={"absolute"}
-                textAlign={"center"}
-                fontWeight={"bold"}
-                py={"2"}
-                px={"6"}
+            <HStack>
+              <Box
+                position={"relative"}
+                border={"1px"}
                 borderRadius={"3xl"}
-                color={"purple.900"}
-                bg={"white"}
-                zIndex={"3"}
+                overflow={"hidden"}
               >
-                {t("form.label.from")}
-              </Text>
-              <FormInput
-                ml={"10"}
-                textAlign="center"
-                textColor={"gray.100"}
-                borderRadius={"3xl"}
-                bg="whiteAlpha.100"
-                _focus={{
-                  border: "none",
-                  bg: "whiteAlpha.200",
-                }}
+                <Text
+                  position={"absolute"}
+                  textAlign={"center"}
+                  fontWeight={"bold"}
+                  py={"2"}
+                  px={"6"}
+                  borderRadius={"3xl"}
+                  color={"purple.900"}
+                  bg={"white"}
+                  zIndex={"3"}
+                >
+                  {t("form.label.from")}
+                </Text>
+                <FormInput
+                  flex={1}
+                  ml={"10"}
+                  textAlign="center"
+                  textColor={"gray.100"}
+                  borderRadius={"3xl"}
+                  bg="whiteAlpha.100"
+                  _focus={{
+                    border: "none",
+                    bg: "whiteAlpha.200",
+                  }}
+                  _hover={{
+                    border: "none",
+                    bg: "whiteAlpha.300",
+                  }}
+                  control={control}
+                  onKeyUp={() => handleChangeInput("amountTop")}
+                  name="amountTop"
+                  placeholder={"0.0"}
+                  type="number"
+                  isDisabled={swap.isLoading}
+                />
+              </Box>
+              <Button
+                backgroundColor={"#fff"}
+                color={"#6d02c9"}
                 _hover={{
-                  border: "none",
-                  bg: "whiteAlpha.300",
+                  opacity: 0.6,
                 }}
-                control={control}
-                onKeyUp={() => handleChangeInput("amountTop")}
-                name="amountTop"
-                placeholder={"0.0"}
-                type="number"
-                isDisabled={swap.isLoading}
-              />
-            </Box>
+                onClick={inputMax}
+              >
+                {t("common.max")}
+              </Button>
+            </HStack>
             <Text
               as={"span"}
               fontSize={"sm"}
@@ -416,6 +459,7 @@ export const FormSwap = () => {
         borderRight={"1px"}
       />
       <Stack
+        height={"fit-content"}
         pos="relative"
         mb={{ base: 10, md: 0 }}
         boxShadow="xl"
@@ -423,7 +467,7 @@ export const FormSwap = () => {
         px="3"
         order={{ base: 1, md: 2 }}
       >
-        <Box mt="8" zIndex={1}>
+        <Box zIndex={1}>
           <Text as="h3" textAlign="center" mb="3">
             {t("common.balance")}
           </Text>

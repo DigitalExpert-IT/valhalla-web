@@ -13,6 +13,12 @@ const nextConfig = {
       },
     ],
   },
+  publicRuntimeConfig: {
+    chain_id: process.env.NEXT_PUBLIC_CHAIN_ID,
+    thirdweb_id: process.env.NEXT_PUBLIC_THIRDWEB,
+    database_url: process.env.DATABASE_URL,
+    telegram_invite_link: process.env.NEXT_PUBLIC_TELEGRAM_INVITE_LINK,
+  },
 };
 
 module.exports = nextConfig;

@@ -15,6 +15,7 @@ import { useNFTContract } from "hooks/useNFTContract";
 import { useGenesisContract } from "hooks/useGenesisContract";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import getConfig from "next/config";
 
 import {
   Box,
@@ -50,7 +51,11 @@ const queryClient = new QueryClient({
 });
 
 const targetChain = getActiveChain();
-const CLIENT_ID = process.env.NEXT_PUBLIC_THIRDWEB || "0";
+const { publicRuntimeConfig: config } = getConfig();
+const CLIENT_ID =
+  process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_THIRDWEB || "0"
+    : config.thirdweb_id;
 
 export default function App(props: AppProps) {
   return (

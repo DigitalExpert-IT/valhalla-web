@@ -23,13 +23,17 @@ import {
   NFTGenesis,
 } from "valhalla-erc20/typechain-types";
 import { GlobalExchange } from "global-swap/typechain-types";
+import getConfig from "next/config";
 
 declare module globalThis {
   var providerCache: Record<string, any>;
 }
 
-export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
-  "0x89") as "0x89";
+const { publicRuntimeConfig: config } = getConfig();
+export const CURRENT_CHAIN_ID =
+  process.env.NODE_ENV === "development"
+    ? ((process.env.NEXT_PUBLIC_CHAIN_ID || "0x89") as "0x89")
+    : (config.chain_id as "0x89");
 const ENDPOINT = RPC_ENDPOINTS[CURRENT_CHAIN_ID];
 
 /**

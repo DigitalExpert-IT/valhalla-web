@@ -19,8 +19,13 @@ import { getTelegramBindingSignatureMessage, shortenAddress } from "utils";
 import { GNET_CONTRACT } from "constant/address";
 import { IoCopyOutline } from "react-icons/io5";
 import { CopiableText } from "components/CopiableText";
+import getConfig from "next/config";
 
-const ContractGnet = GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+const { publicRuntimeConfig: config } = getConfig();
+const ContractGnet =
+  process.env.NODE_ENV === "development"
+    ? GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"]
+    : config.chain_id;
 
 export const SectionHeader = () => {
   const { t } = useTranslation();

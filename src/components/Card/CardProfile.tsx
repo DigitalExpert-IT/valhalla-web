@@ -22,6 +22,7 @@ import { WidgetProfileChile } from "components/Widget";
 import { rankMap } from "constant/rank";
 import { useRouter } from "next/router";
 import { GNET_CONTRACT } from "constant/address";
+import getConfig from "next/config";
 
 export const CardProfile = () => {
   const router = useRouter();
@@ -30,9 +31,12 @@ export const CardProfile = () => {
   const { address } = useWallet();
   const { account } = useValhalla();
   const [widthMob] = useMediaQuery("(max-width: 500px)");
+  const { publicRuntimeConfig: config } = getConfig();
 
   const ContractGnet =
-    GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"];
+    process.env.NODE_ENV === "development"
+      ? GNET_CONTRACT[process.env.NEXT_PUBLIC_CHAIN_ID as "0x29a"]
+      : config.chain_id;
 
   useEffect(() => {
     if (router.isReady) {

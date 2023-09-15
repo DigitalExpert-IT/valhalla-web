@@ -55,7 +55,7 @@ const { publicRuntimeConfig: config } = getConfig();
 const CLIENT_ID =
   process.env.NODE_ENV === "development"
     ? process.env.NEXT_PUBLIC_THIRDWEB || "0"
-    : config.thirdweb_id;
+    : config.thirdweb_id || "0";
 
 export default function App(props: AppProps) {
   return (

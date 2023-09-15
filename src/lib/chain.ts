@@ -1,6 +1,11 @@
 import { Mumbai, Polygon } from "@thirdweb-dev/chains";
+import getConfig from "next/config";
 
-const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID || "0x89") as "0x89";
+const { publicRuntimeConfig: config } = getConfig();
+export const CURRENT_CHAIN_ID =
+  process.env.NODE_ENV === "development"
+    ? ((process.env.NEXT_PUBLIC_CHAIN_ID || "0x89") as "0x89")
+    : (config.chain_id as "0x89");
 
 const chainMap = {
   "0x13881": Mumbai,

@@ -171,11 +171,11 @@ export const FormSwap = () => {
     const feePercentage = 500;
     // This percentage is to provide a swap tolerance range,
     // in order to avoid a lack of result from swaps
-    const tolerancePercentage = 2;
+    const tolerancePercentage = 3;
 
     if (!val) return toBn("0");
 
-    // tolerance 502 === 0.00502 or 0.502%
+    // tolerance 503 === 0.00503 or 0.503%
     // check div 1e5 shouldbe 509 / 1e5
     return val.mul(feePercentage + tolerancePercentage).div(1e5);
   };

@@ -11,12 +11,13 @@ import {
   Icon,
   VStack,
   AspectRatio,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Trans, useTranslation } from "react-i18next";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { LazyVideo } from "components/LazyVideo";
 import { useAccountMap } from "hooks/valhalla";
-import { ButtonConnectWallet, ButtonConnectWrapper } from "components/Button";
+import { ButtonConnectWrapper } from "components/Button";
 
 export const SectionHeaderV2 = () => {
   const { t } = useTranslation();
@@ -88,20 +89,29 @@ export const SectionHeaderV2 = () => {
           mt="6"
           spacing={{ base: "2", sm: "4" }}
         >
-          {accountMap?.data?.isRegistered === false ? (
+          <ChakraLink href={"https://t.me/globalnetworkweb3"} isExternal>
+            <Button
+              variant={"outline"}
+              fontWeight={"thin"}
+              border={"2px"}
+              borderColor={"white"}
+            >
+              {t("common.community").toUpperCase()}
+            </Button>
+          </ChakraLink>
+          {accountMap?.data?.isRegistered ? null : (
             <ButtonConnectWrapper>
               <Link href="/register">
                 <Button
-                  variant={"outline"}
+                  variant={"gradient"}
+                  colorScheme={"purple.300:purple"}
                   fontWeight={"thin"}
-                  border={"2px"}
-                  borderColor={"white"}
                 >
                   {t("common.register").toUpperCase()}
                 </Button>
               </Link>
             </ButtonConnectWrapper>
-          ) : null}
+          )}
         </HStack>
       </Stack>
       <VStack

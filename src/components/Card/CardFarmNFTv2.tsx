@@ -3,6 +3,7 @@ import { UglyButton } from "components/Button";
 import { CARD_IMAGE_MAP } from "constant/image";
 import { useAsyncCall } from "hooks";
 import { useCardList } from "hooks/useCardList";
+import useClickConnectWallet from "hooks/useClickConnectWallet";
 import { useTranslation } from "react-i18next";
 
 interface CardNFTV2Props {
@@ -15,9 +16,12 @@ interface CardNFTV2Props {
 export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
   const { t } = useTranslation();
   const { buy } = useCardList();
+  const { showModalConnectWallet, loading, isAbleToTransaction } =
+    useClickConnectWallet();
   const buyAsync = useAsyncCall(buy, t("common.succesBuyNft"));
 
   const handleBuy = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
     buyAsync.exec(props.id);
   };
   return (
@@ -52,8 +56,8 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
                   price={props.price}
                   label={t("common.buy")}
                   onClick={handleBuy}
-                  isLoading={buyAsync.isLoading}
-                ></UglyButton>
+                  isLoading={buyAsync.isLoading || loading}
+                />
               </Stack>
             </Box>
           </Stack>

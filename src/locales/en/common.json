@@ -5,10 +5,11 @@
     "profile": "Profile",
     "nftFarming": "Nft Farming",
     "sharetoearn": "Share To Earn",
-    "project": "Project",
+    "projects": "Projects",
     "genesis": "Nft Genesis",
     "dashboard": "Dashboard",
-    "myNetwork": "My Network"
+    "myNetwork": "My Network",
+    "propertyDao": "Property Dao"
   },
   "banner": {
     "invalidChainMessage": "You are connected through Invalid chain!",
@@ -48,6 +49,7 @@
   "copy": "Copy",
   "copied": "Copied!",
   "register": "Register",
+  "community": "Community",
   "referrer": "Referrer",
   "myReferrer": "My Sponsor",
   "accept": "Accept",

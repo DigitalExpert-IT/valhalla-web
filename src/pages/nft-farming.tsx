@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  LayoutMainV2,
-  ModalAnnouncement,
-  TableRankNFTBonusV2,
-} from "components";
-import { withConnection } from "hoc";
+import { LayoutMainV2, TableRankNFTBonusV2 } from "components";
 import {
   SectionGnetProject,
   SectionNFTList,
@@ -30,4 +25,4 @@ const NftFarmingV2 = () => {
   );
 };
 
-export default withConnection(NftFarmingV2);
+export default NftFarmingV2;

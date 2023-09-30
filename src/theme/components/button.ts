@@ -31,13 +31,23 @@ const $fg = cssVar("button-color");
 
 const variantGradient = defineStyle(props => {
   const { colorScheme: c } = props;
-  const [c1, c2 = "pink"] = c.split(/\:/);
+  let [c1, c2 = "pink"] = c.split(/\:/);
+
+  const exacColor1 = c1.split(".");
+  const exacColor2 = c2.split(".");
+
+  c1 = exacColor1[0];
+  c2 = exacColor2[0];
+
+  let mainOpacity = exacColor1[1] ?? 500;
+  let mainOpacity2 = exacColor2[1] ?? 500;
+
   return {
     [$fg.variable]: `colors.white`,
     _dark: {
       [$fg.variable]: `colors.whiteAlpha.800`,
     },
-    bgGradient: `linear(to-r, ${c1}.500, ${c2}.500)`,
+    bgGradient: `linear(to-r, ${c1}.${mainOpacity}, ${c2}.${mainOpacity2})`,
     color: $fg.reference,
     _loading: {
       bgGradient: `linear(to-r, ${c1}.800, ${c2}.900)`,

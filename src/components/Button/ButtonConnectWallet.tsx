@@ -23,9 +23,10 @@ export const ButtonConnectWallet = (props: Props) => {
         <Button
           isLoading={accountMap.isLoading && !accountMap.isFetched}
           px="6"
-          size="sm"
-          variant="outline"
           onClick={handleNavigate}
+          variant={"gradient"}
+          colorScheme={"purple.300:purple"}
+          fontWeight={"thin"}
         >
           {t("common.register")}
         </Button>

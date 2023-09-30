@@ -31,7 +31,7 @@ export const ButtonConnectWallet = (props: Props) => {
           {t("common.register")}
         </Button>
       )}
-      <ConnectWallet theme="dark" />
+      <ConnectWallet theme="dark" className="button-connect-wallet" />
     </Stack>
   );
 };

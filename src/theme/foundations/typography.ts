@@ -1,6 +1,7 @@
 import "@fontsource/roboto";
 import "@fontsource/raleway/700.css";
 import "@fontsource/poppins";
+import "@fontsource/bebas-neue";
 
 const typography = {
   letterSpacings: {

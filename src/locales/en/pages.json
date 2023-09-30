@@ -426,5 +426,9 @@
     "level": "LEVEL",
     "totalUser": "Total User",
     "totalBuy": "Total Buy"
+  },
+  "comingSoon": {
+    "title": "COMING SOON",
+    "description": "Our project is coming very soon!"
   }
 }

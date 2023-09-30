@@ -23,7 +23,7 @@ export const NAVIGATION: Array<INavigation> = [
     href: "/",
   },
   {
-    name: "project",
+    name: "projects",
     children: [
       {
         title: "nftFarming",
@@ -36,6 +36,10 @@ export const NAVIGATION: Array<INavigation> = [
       {
         title: "sharetoearn",
         link: "/share",
+      },
+      {
+        title: "propertyDao",
+        link: "/dao",
       },
     ],
   },

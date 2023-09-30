@@ -57,7 +57,7 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
                   label={t("common.buy")}
                   onClick={handleBuy}
                   isLoading={buyAsync.isLoading || loading}
-                ></UglyButton>
+                />
               </Stack>
             </Box>
           </Stack>

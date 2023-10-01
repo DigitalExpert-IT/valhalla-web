@@ -18,10 +18,12 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { LazyVideo } from "components/LazyVideo";
 import { useAccountMap } from "hooks/valhalla";
 import { ButtonConnectWrapper } from "components/Button";
+import { useScreen } from "hooks/useScreen";
 
 export const SectionHeaderV2 = () => {
   const { t } = useTranslation();
   const accountMap = useAccountMap();
+  const { isMobileScreen } = useScreen();
 
   return (
     <Flex h="100vh" pos="relative" align="center" justify="center" gap="10">
@@ -84,35 +86,34 @@ export const SectionHeaderV2 = () => {
             }}
           />
         </Text>
-        <HStack
-          justify={{ base: "center", lg: "start" }}
-          mt="6"
-          spacing={{ base: "2", sm: "4" }}
-        >
-          <ChakraLink href={"https://t.me/globalnetworkweb3"} isExternal>
-            <Button
-              variant={"outline"}
-              fontWeight={"thin"}
-              border={"2px"}
-              borderColor={"white"}
-            >
-              {t("common.community").toUpperCase()}
-            </Button>
-          </ChakraLink>
-          {accountMap?.data?.isRegistered ? null : (
-            <ButtonConnectWrapper>
-              <Link href="/register">
-                <Button
-                  variant={"gradient"}
-                  colorScheme={"purple.300:purple"}
-                  fontWeight={"thin"}
-                >
-                  {t("common.register").toUpperCase()}
-                </Button>
-              </Link>
-            </ButtonConnectWrapper>
-          )}
-        </HStack>
+        <Box display={{ md: "flex" }}>
+          <Box>
+            <ChakraLink href={"https://t.me/globalnetworkweb3"} isExternal>
+              <Image
+                src={"/assets/icon/telegram-button.png"}
+                alt="telegram community"
+                width={isMobileScreen ? 250 : 300}
+                height={200}
+              />
+            </ChakraLink>
+          </Box>
+          <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
+            {accountMap?.data?.isRegistered ? null : (
+              <ButtonConnectWrapper>
+                <Link href="/register">
+                  <Button
+                    variant={"outline"}
+                    fontWeight={"thin"}
+                    border={"2px"}
+                    borderColor={"white"}
+                  >
+                    {t("common.register").toUpperCase()}
+                  </Button>
+                </Link>
+              </ButtonConnectWrapper>
+            )}
+          </Box>
+        </Box>
       </Stack>
       <VStack
         pb={"4"}

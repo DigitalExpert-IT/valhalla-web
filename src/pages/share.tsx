@@ -10,7 +10,7 @@ import {
   CardHeader,
   Container,
 } from "@chakra-ui/react";
-import { LayoutMainV2 } from "components";
+import { LayoutMainV2, ModalAnnouncement } from "components";
 import ComingSoon from "components/ComingSoon";
 import { FormShareToEarn } from "components/Form/FormShareToEarn";
 import { SHARE_MEDIA } from "constant/pages/share";
@@ -18,13 +18,14 @@ import { useTranslation } from "react-i18next";
 
 const ShareV2 = () => {
   const { t } = useTranslation();
+  // return (
+  //   <LayoutMainV2>
+  //     <ComingSoon />
+  //   </LayoutMainV2>
+  // );
   return (
     <LayoutMainV2>
-      <ComingSoon />
-    </LayoutMainV2>
-  );
-  return (
-    <LayoutMainV2>
+      <ModalAnnouncement isComingSoon={true}/>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <Box
           bgImage="url('/assets/project/pattern2.png')"

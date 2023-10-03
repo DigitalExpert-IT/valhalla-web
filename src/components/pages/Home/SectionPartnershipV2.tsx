@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { Wrap, WrapItem, Stack, Heading, Link } from "@chakra-ui/react";
+import {
+  Wrap,
+  WrapItem,
+  Stack,
+  Heading,
+  Link,
+  Image as Img,
+} from "@chakra-ui/react";
 
 interface IPartnershipV2 {
   name: string;
@@ -73,7 +80,7 @@ export const SectionPartnershipV2: React.FC<
         />
         <Wrap spacing="5" justify="center" zIndex={1} m="auto">
           {props.data.map((item, idx) => (
-            <WrapItem key={idx} w={{ base: "5rem", md: "10rem", lg: "15rem" }}>
+            <WrapItem key={idx} w={{ base: "20rem", md: "10rem", lg: "15rem" }}>
               {item.link ? (
                 <Link href={item.link} isExternal>
                   <Image
@@ -84,11 +91,11 @@ export const SectionPartnershipV2: React.FC<
                   />
                 </Link>
               ) : (
-                <Image
+                <Img
                   src={item.image}
                   alt={`partner-${item.name}`}
-                  width={500}
-                  height={500}
+                  height={200}
+                  width={300}
                 />
               )}
             </WrapItem>

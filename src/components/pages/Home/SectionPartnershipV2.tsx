@@ -80,7 +80,7 @@ export const SectionPartnershipV2: React.FC<
         />
         <Wrap spacing="5" justify="center" zIndex={1} m="auto">
           {props.data.map((item, idx) => (
-            <WrapItem key={idx} w={{ base: "20rem", md: "10rem", lg: "15rem" }}>
+            <WrapItem key={idx} w={{ base: "4rem", md: "10rem", lg: "15rem" }}>
               {item.link ? (
                 <Link href={item.link} isExternal>
                   <Image
@@ -94,7 +94,7 @@ export const SectionPartnershipV2: React.FC<
                 <Img
                   src={item.image}
                   alt={`partner-${item.name}`}
-                  height={200}
+                  height={{ base: "4rem", md: "10rem", lg: "15rem" }}
                   width={300}
                 />
               )}

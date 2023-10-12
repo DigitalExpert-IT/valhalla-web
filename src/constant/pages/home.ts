@@ -119,6 +119,10 @@ export const PARTNERSHIP = [
     image:
       "https://res.cloudinary.com/bangyosh-dev/image/upload/v1685874147/global-network/global-network_c3risy.png",
   },
+  {
+    name: "partner4",
+    image: "/images/golden_real_estate.png",
+  },
 ];
 
 export interface IRankBonusV2 {

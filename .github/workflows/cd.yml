@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /etc/project/valhalla-web
+            cd /var/www/valhalla-web
             git pull origin main
             export PATH=$PATH:/root/.nvm/versions/node/v18.17.0/bin
             pnpm install & pnpm build

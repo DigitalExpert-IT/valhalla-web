@@ -95,7 +95,7 @@ export const SectionPartnershipV2: React.FC<
                   src={item.image}
                   alt={`partner-${item.name}`}
                   height={{ base: "4rem", md: "9rem", lg: "14rem" }}
-                  width={300}
+                  objectFit="contain"
                 />
               )}
             </WrapItem>

@@ -94,7 +94,7 @@ export const SectionPartnershipV2: React.FC<
                 <Img
                   src={item.image}
                   alt={`partner-${item.name}`}
-                  height={{ base: "4rem", md: "10rem", lg: "15rem" }}
+                  height={{ base: "4rem", md: "9rem", lg: "14rem" }}
                   width={300}
                 />
               )}

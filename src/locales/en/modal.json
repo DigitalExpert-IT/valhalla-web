@@ -17,5 +17,9 @@
     "placeholder": {
       "username": "@username"
     }
+  },
+  "rewards": {
+    "title": "Here’s Your Reward",
+    "claimRewards": "Claim Reward"
   }
 }

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useListDownlines, useListLevel, useScreen, useSummary } from "hooks";
 import { prettyBn, shortenAddress } from "utils";
-import { HeaderDashboard } from "components";
+import { HeaderDashboard, ModalReward } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -30,6 +30,7 @@ import {
 import { useRouter } from "next/router";
 import { toBn } from "evm-bn";
 import { BigNumber } from "ethers";
+import { useModal } from "@ebay/nice-modal-react";
 
 const PAGE_SIZE = 10;
 
@@ -37,6 +38,14 @@ const Dashboard = () => {
   const router = useRouter();
   const queryAddress = router.query.address;
   const { t } = useTranslation();
+
+  const rewardModal = useModal(ModalReward, {
+    rewardsAmount: 25000,
+    claimRewards: () => {},
+  });
+  useEffect(() => {
+    rewardModal.show();
+  }, []);
 
   const toast = useToast();
   const [sortByProfit, setSortByProfit] = useState("ASC");

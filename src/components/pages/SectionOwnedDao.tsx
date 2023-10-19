@@ -20,22 +20,23 @@ export const SectionOwnedDao = () => {
     <Box mt="40" pos="relative">
       <Box textAlign="center">
         <Heading
-          _after={{
-            content: `'NFT'`,
-            display: "block",
-            textAlign: "center",
-            alignSelf: "center",
-            color: "whiteAlpha.100",
-            transform: {
-              md: "scale(3) translateY(-20px)",
-              base: "scale(3) translateY(-10px)",
-            },
-          }}
+          fontWeight="black"
+          fontSize={{ base: "3xl", md: "7xl" }}
           textAlign="center"
           textTransform="uppercase"
-          fontSize={{ md: "6xl", base: "4xl" }}
+          mb={{ sm: "8" }}
+          _after={{
+            content: `'${t("pages.dao.dao")}'`,
+            alignSelf: "center",
+            display: "block",
+            fontSize: { xl: "200", lg: "145", md: "110", xs: "60", base: "45" },
+            mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
+            color: "whiteAlpha.100",
+            textAlign: "center",
+            textTransform: "uppercase",
+          }}
         >
-          my nft dao
+          {t("pages.dao.mynftdao")}
         </Heading>
       </Box>
 

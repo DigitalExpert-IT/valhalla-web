@@ -1,3 +1,27 @@
+export interface ISponsorDao {
+  level: string;
+  percentage: string;
+  value: string;
+}
+
+export const SPONSOR_DAO: Array<ISponsorDao> = [
+  {
+    level: "1",
+    percentage: "3%",
+    value: "3 USDT",
+  },
+  {
+    level: "2",
+    percentage: "2%",
+    value: "2 USDT",
+  },
+  {
+    level: "3",
+    percentage: "1%",
+    value: "1 USDT",
+  },
+];
+
 export const DATA_DAO = [
   {
     id: "0",

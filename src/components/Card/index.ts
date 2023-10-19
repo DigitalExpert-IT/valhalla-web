@@ -6,3 +6,5 @@ export * from "./CardHomeFeaturesV2";
 export * from "./CardOwnedFarmNFTV2";
 export * from "./CardProfileBalance";
 export * from "./CardClaimGenesisNFT";
+export * from "./CardDao";
+export * from "./CardOwnedDao";

@@ -12,10 +12,12 @@ import {
   IconButton,
   Icon,
 } from "@chakra-ui/react";
-import { BsBookmark } from "react-icons/bs";
 import { LayoutMainV2 } from "components";
 import { useTranslation } from "react-i18next";
+import { BsBookmark } from "react-icons/bs";
 import { FaRegHandshake } from "react-icons/fa";
+import { BiHome } from "react-icons/bi";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 
 const Detail = () => {
   const { t } = useTranslation();
@@ -24,6 +26,7 @@ const Detail = () => {
       <Box
         px={{ base: "1rem", md: "2rem", lg: "1rem", xl: "5rem" }}
         py={{ base: "5rem", md: "8rem" }}
+        bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)"
       >
         <Stack
           direction={{ base: "column", md: "column", lg: "row" }}
@@ -225,17 +228,17 @@ const Detail = () => {
                 rounded="lg"
               />
               <Icon
-                as={FaRegHandshake}
+                as={BiHome}
                 color="black"
                 w="62px"
                 h="62px"
                 bg="white"
                 p="3"
-                mx="2rem"
+                mx="1rem"
                 rounded="lg"
               />
               <Icon
-                as={FaRegHandshake}
+                as={AiOutlineDollarCircle}
                 color="black"
                 w="62px"
                 h="62px"
@@ -249,7 +252,7 @@ const Detail = () => {
                 <Text fontWeight="bold" fontSize="lg">
                   Contract Address
                 </Text>
-                <Text isTruncated="true">0xef0.....40dbb</Text>
+                <Text>0xef0.....40dbb</Text>
               </Stack>
               <Stack
                 direction="row"

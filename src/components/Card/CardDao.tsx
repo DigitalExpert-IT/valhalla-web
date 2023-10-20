@@ -17,22 +17,59 @@ interface ICardDao {
   value: string;
   image: string;
   countryImage: string;
+  isComingSoon: boolean;
   onClick: () => void;
 }
 
 export const CardDao: React.FC<ICardDao> = props => {
-  const { country, countryImage, name, price, sold, value, image, onClick } =
-    props;
+  const {
+    country,
+    countryImage,
+    name,
+    price,
+    sold,
+    value,
+    image,
+    onClick,
+    isComingSoon,
+  } = props;
+
+  const outerBoxStyle = {
+    bg: "#34177B",
+    rounded: "2xl",
+    w: "100%",
+    overflow: "hidden",
+    position: "relative",
+  };
+
+  const innerBoxStyles = {
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    boxSize: "full",
+    color: "white",
+    textShadow: "0 0 20px black",
+    fontWeight: "bold",
+    fontSize: "2xl",
+    position: "absolute",
+    zIndex: "1",
+  };
 
   return (
     <Box
-      bg="#34177B"
-      rounded="2xl"
-      w="100%"
-      overflow="hidden"
-      cursor="pointer"
-      onClick={onClick}
+      sx={outerBoxStyle}
+      onClick={isComingSoon ? () => {} : onClick}
+      rounded="xl"
+      cursor={isComingSoon ? "not-allowed" : "pointer"}
     >
+      <Box
+        sx={innerBoxStyles}
+        backdropFilter="auto"
+        backdropBlur="10px"
+        display={isComingSoon ? "flex" : "none"}
+      >
+        Coming Soon
+      </Box>
       <Box mb="1rem">
         <Image src={image} alt="villa-image" objectFit="cover" />
       </Box>
@@ -46,7 +83,7 @@ export const CardDao: React.FC<ICardDao> = props => {
           alignContent="center"
           justifyItems="center"
         >
-          <Avatar src={countryImage} size="xs" mt="-1" mr="2" />
+          <Avatar src={countryImage} size="xs" mt="-1" mr="2" zIndex="0" />
           {country}
         </Badge>
         <Box my="1rem">
@@ -64,7 +101,7 @@ export const CardDao: React.FC<ICardDao> = props => {
               rounded="full"
               px="5"
             >
-              ${price}
+              {price} usdt
             </Badge>
           </HStack>
           <HStack justify="space-between">

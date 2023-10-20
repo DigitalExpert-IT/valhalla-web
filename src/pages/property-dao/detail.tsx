@@ -98,7 +98,7 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Price</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      $50.00
+                      $100.00
                     </Text>
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>

@@ -60,6 +60,7 @@ export const SectionDao = () => {
                 value={item.value}
                 name={item.name}
                 sold={item.sold}
+                isComingSoon={item.isComingSoon}
               />
             </WrapItem>
           ))}

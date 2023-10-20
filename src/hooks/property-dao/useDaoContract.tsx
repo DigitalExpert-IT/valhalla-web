@@ -1,6 +1,5 @@
 import { useContract } from "@thirdweb-dev/react";
 import { NFT_DAO_PROPERTY } from "constant/address";
-// import nft from "valhalla-erc20/artifacts/contracts/NFT.sol/NFT.json";
 import nft from "valhalla-villa/artifacts/contracts/BaliVilla.sol/BaliVilla.json";
 
 export const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||

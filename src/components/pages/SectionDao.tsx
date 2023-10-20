@@ -10,6 +10,7 @@ import {
 import { t } from "i18next";
 import { CardDao } from "components/Card";
 import { DATA_DAO } from "constant/dao";
+import Link from "next/link";
 
 export const SectionDao = () => {
   return (
@@ -44,6 +45,7 @@ export const SectionDao = () => {
         <Wrap align="center" spacing="2rem" mt="5" justify="center">
           {DATA_DAO.map(item => (
             <WrapItem key={item.id} maxW={{ base: "100%", md: "45%" }}>
+              <Link href={'/property-dao/detail'}>
               <CardDao
                 countryImage={item.countryImage}
                 country={item.country}
@@ -53,6 +55,7 @@ export const SectionDao = () => {
                 name={item.name}
                 sold={item.sold}
               />
+              </Link>
             </WrapItem>
           ))}
         </Wrap>

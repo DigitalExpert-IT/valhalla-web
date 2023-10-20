@@ -17,13 +17,22 @@ interface ICardDao {
   value: string;
   image: string;
   countryImage: string;
+  onClick: () => void;
 }
 
 export const CardDao: React.FC<ICardDao> = props => {
-  const { country, countryImage, name, price, sold, value, image } = props;
+  const { country, countryImage, name, price, sold, value, image, onClick } =
+    props;
 
   return (
-    <Box bg="#34177B" rounded="2xl" w="100%" overflow="hidden">
+    <Box
+      bg="#34177B"
+      rounded="2xl"
+      w="100%"
+      overflow="hidden"
+      cursor="pointer"
+      onClick={onClick}
+    >
       <Box mb="1rem">
         <Image src={image} alt="villa-image" objectFit="cover" />
       </Box>

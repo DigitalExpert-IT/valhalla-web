@@ -10,8 +10,15 @@ import {
 import { t } from "i18next";
 import { CardDao } from "components/Card";
 import { DATA_DAO } from "constant/dao";
+import { useRouter } from "next/router";
 
 export const SectionDao = () => {
+  const router = useRouter();
+
+  const handleItemClick = () => {
+    router.push("/property-dao/detail");
+  };
+
   return (
     <Box justifyContent="center" overflow="hidden" w="full" pt="40" mb="50">
       <Container maxW="container.xl">
@@ -45,6 +52,7 @@ export const SectionDao = () => {
           {DATA_DAO.map(item => (
             <WrapItem key={item.id} maxW={{ base: "100%", md: "45%" }}>
               <CardDao
+                onClick={handleItemClick}
                 countryImage={item.countryImage}
                 country={item.country}
                 image={item.image}
@@ -52,6 +60,7 @@ export const SectionDao = () => {
                 value={item.value}
                 name={item.name}
                 sold={item.sold}
+                isComingSoon={item.isComingSoon}
               />
             </WrapItem>
           ))}

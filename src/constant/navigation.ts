@@ -39,7 +39,7 @@ export const NAVIGATION: Array<INavigation> = [
       },
       {
         title: "propertyDao",
-        link: "/dao",
+        link: "/property-dao",
       },
     ],
   },

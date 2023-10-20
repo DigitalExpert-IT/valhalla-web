@@ -5,10 +5,10 @@ import { SectionDao, SectionOwnedDao } from "components/pages";
 const Dao = () => {
   return (
     <LayoutMainV2>
-      {/* <ModalAnnouncement isComingSoon={true} /> */}
-      <SectionDao />
+      <ModalAnnouncement isComingSoon={true} />
+      {/* <SectionDao />
       <TableSponsorBonus />
-      <SectionOwnedDao />
+      <SectionOwnedDao /> */}
     </LayoutMainV2>
   );
 };

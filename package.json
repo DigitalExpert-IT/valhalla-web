@@ -63,6 +63,7 @@
     "telegraf": "^4.11.2",
     "three": "^0.148.0",
     "valhalla-erc20": "^1.2.1",
+    "valhalla-villa": "^0.1.0",
     "zustand": "^4.1.4"
   },
   "husky": {

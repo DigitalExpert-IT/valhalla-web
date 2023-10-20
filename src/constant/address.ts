@@ -24,7 +24,7 @@ export const GENESIS_CONTRACT = {
 
 export const NFT_DAO_PROPERTY = {
   "0x89": "",
-  "0x13881": "0xd7352362e826A5Ba2e51eA230592F596E0ca1376",
+  "0x13881": "0xdA111323CbaEEb63426B7DE3A9f969DBB5DDA9B3",
   "0x29a": "",
 };
 

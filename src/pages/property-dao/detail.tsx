@@ -11,6 +11,7 @@ import {
   Button,
   IconButton,
   Icon,
+  Spinner,
 } from "@chakra-ui/react";
 import { LayoutMainV2 } from "components";
 import { useTranslation } from "react-i18next";
@@ -18,9 +19,18 @@ import { BsBookmark } from "react-icons/bs";
 import { FaRegHandshake } from "react-icons/fa";
 import { BiHome } from "react-icons/bi";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import useDao from "hooks/property-dao/useDao";
+import { useAsyncCall } from "hooks";
 
 const Detail = () => {
   const { t } = useTranslation();
+  const { buy, isLoading: isLoadingDao } = useDao();
+  const { exec, isLoading } = useAsyncCall(buy);
+
+  const buyVilla = () => {
+    exec(0, 1);
+  };
+
   return (
     <LayoutMainV2>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
@@ -120,9 +130,11 @@ const Detail = () => {
                   _disabled={{ color: "gray.200" }}
                   size="lg"
                   w={{ base: "100%", md: "49%" }}
-                  disabled={true}
+                  isLoading={isLoading || isLoadingDao}
+                  spinner={<Spinner color="#191272" />}
+                  onClick={buyVilla}
                 >
-                  Sold Out
+                  Buy
                 </Button>
                 <IconButton
                   icon={<BsBookmark />}

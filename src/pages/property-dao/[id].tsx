@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Image,
@@ -11,16 +11,47 @@ import {
   Button,
   IconButton,
   Icon,
+  Spinner,
+  UnorderedList,
+  Link,
+  ListItem,
 } from "@chakra-ui/react";
-import { LayoutMainV2 } from "components";
+import { CopiableText, LayoutMainV2 } from "components";
+import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegHandshake } from "react-icons/fa";
 import { BiHome } from "react-icons/bi";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import useDao from "hooks/property-dao/useDao";
+import { useAsyncCall } from "hooks";
+import { useRouter } from "next/router";
+import { useContractRead } from "@thirdweb-dev/react";
+import { useDaoContract } from "hooks/property-dao";
+import { prettyBn, shortenAddress } from "utils";
 
 const Detail = () => {
   const { t } = useTranslation();
+  const [id, setId] = useState<any>(0);
+  const router = useRouter();
+  const daoContract = useDaoContract();
+  const getVilla = useContractRead(daoContract.contract, "getVilla", [id]);
+
+  console.log(getVilla);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setId(Number(router.query.id) as number);
+    }
+  }, [router.isReady]);
+
+  const { buy, isLoading: isLoadingDao } = useDao();
+  const { exec, isLoading } = useAsyncCall(buy, t("common.succesBuyNft"));
+
+  const buyVilla = () => {
+    exec(id, 1);
+  };
+
   return (
     <LayoutMainV2>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
@@ -44,7 +75,7 @@ const Detail = () => {
               >
                 <Image
                   rounded={"md"}
-                  src="/assets/property-dao/detail-nft.jpg"
+                  src={DATA_DAO[id].image}
                   alt="nft-detail"
                 />
               </AspectRatio>
@@ -56,7 +87,7 @@ const Detail = () => {
             >
               <Box>
                 <Heading size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}>
-                  Semidetached Villa in Bodrum
+                  {DATA_DAO[id].name}
                 </Heading>
               </Box>
               <Box>
@@ -70,13 +101,13 @@ const Detail = () => {
                   justifyItems="center"
                 >
                   <Avatar
-                    src="https://cdn.britannica.com/82/4782-050-8129909C/Flag-Turkey.jpg"
+                    src={DATA_DAO[id].countryImage}
                     name="country-flag"
                     size="xs"
                     mt="-1"
                     mr="2"
                   />
-                  Turkey
+                  {DATA_DAO[id].country}
                 </Badge>
               </Box>
               <Box maxW={{ base: "100%", md: "80%" }} pt="1rem">
@@ -84,9 +115,11 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Fraction sold</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      5900
+                      {getVilla?.data?.sold.toString()}
                     </Text>
-                    <Text fontWeight="bold">100% (5900)</Text>
+                    <Text fontWeight="bold">
+                      100% ({getVilla?.data?.maxLot.toString()})
+                    </Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Est.Return</Text>
@@ -98,14 +131,16 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Price</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      $100.00
+                      {prettyBn(getVilla?.data?.price, 6)} USDT
                     </Text>
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Investment has been</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      Completed
+                      {getVilla?.data?.maxLot === getVilla?.data?.sold
+                        ? t("common.Completed")
+                        : t("common.inProgress")}
                     </Text>
                   </Box>
                 </Stack>
@@ -120,9 +155,11 @@ const Detail = () => {
                   _disabled={{ color: "gray.200" }}
                   size="lg"
                   w={{ base: "100%", md: "49%" }}
-                  disabled={true}
+                  isLoading={isLoading || isLoadingDao}
+                  spinner={<Spinner color="#191272" />}
+                  onClick={buyVilla}
                 >
-                  Sold Out
+                  Buy
                 </Button>
                 <IconButton
                   icon={<BsBookmark />}
@@ -161,17 +198,17 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Total investment amount
                 </Text>
-                <Text color="gray.500">$295.000,00</Text>
+                <Text color="gray.500">$600.000,00</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
-                  Est.Return
+                  Est.Appreciation
                 </Text>
-                <Text color="gray.500">22% / year</Text>
+                <Text color="gray.500">90% / year</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
-                  Avg Return on the Platform
+                  Avg Value Appreciation
                 </Text>
                 <Text color="gray.500">-</Text>
               </Box>
@@ -192,7 +229,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Exit Date
                 </Text>
-                <Text color="gray.500">6/20/2024</Text>
+                <Text color="gray.500">30/08/2023</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
@@ -210,7 +247,34 @@ const Detail = () => {
               <Heading fontWeight="bold" mb="2rem">
                 Description
               </Heading>
-              <Text>{t("pages.dao.detailDaoDescription")} </Text>
+              <Stack rowGap={5}>
+                <Text>{t("pages.dao.detailDaoDescription1")} </Text>
+                <Text>{t("pages.dao.location")} </Text>
+                <Text>{t("pages.dao.detailDaoDescription2")} </Text>
+                <Stack>
+                  <Text>Some Specs : </Text>
+                  <UnorderedList paddingLeft={"2rem"}>
+                    <ListItem>{t("pages.dao.1")}</ListItem>
+                    <ListItem>{t("pages.dao.2")}</ListItem>
+                    <ListItem>{t("pages.dao.3")}</ListItem>
+                    <ListItem>{t("pages.dao.4")}</ListItem>
+                    <ListItem>{t("pages.dao.5")}</ListItem>
+                    <ListItem>{t("pages.dao.6")}</ListItem>
+                    <ListItem>{t("pages.dao.7")}</ListItem>
+                    <ListItem>{t("pages.dao.8")}</ListItem>
+                    <ListItem>{t("pages.dao.9")}</ListItem>
+                    <ListItem>{t("pages.dao.10")}</ListItem>
+                    <ListItem>{t("pages.dao.11")}</ListItem>
+                    <ListItem>{t("pages.dao.12")}</ListItem>
+                  </UnorderedList>
+                  <Text>
+                    Need more information? Reach us by our contact form{" "}
+                    <Link color={"#70FF75"} href="#">
+                      here.
+                    </Link>
+                  </Text>
+                </Stack>
+              </Stack>
             </Box>
             <Box flex={1}>
               <Heading fontWeight="bold" mb="2rem">
@@ -251,7 +315,9 @@ const Detail = () => {
                   <Text fontWeight="bold" fontSize="lg">
                     Contract Address
                   </Text>
-                  <Text>0xef0.....40dbb</Text>
+                  <CopiableText value={`${daoContract.contract?.getAddress()}`}>
+                    {shortenAddress(`${daoContract.contract?.getAddress()}`)}
+                  </CopiableText>
                 </Stack>
                 <Stack
                   direction="row"
@@ -262,7 +328,7 @@ const Detail = () => {
                   <Text fontWeight="bold" fontSize="lg">
                     NFT-ID
                   </Text>
-                  <Text>1</Text>
+                  <Text>{getVilla?.data?.id.toString()}</Text>
                 </Stack>
                 <Stack direction="row" justify="space-between" align="center">
                   <Text fontWeight="bold" fontSize="lg">

@@ -10,14 +10,16 @@ import {
 } from "@chakra-ui/react";
 
 interface ICardDao {
-  country: string;
-  name: string;
-  price: string;
-  sold: string;
-  value: string;
-  image: string;
-  countryImage: string;
-  isComingSoon: boolean;
+  id: string;
+  country?: string;
+  name?: string;
+  price?: string;
+  sold?: string;
+  maxLot?: string;
+  value?: string;
+  image?: string;
+  countryImage?: string;
+  isComingSoon?: boolean;
   onClick: () => void;
 }
 
@@ -28,8 +30,9 @@ export const CardDao: React.FC<ICardDao> = props => {
     name,
     price,
     sold,
-    value,
+    maxLot,
     image,
+    value,
     onClick,
     isComingSoon,
   } = props;
@@ -65,10 +68,10 @@ export const CardDao: React.FC<ICardDao> = props => {
       <Box
         sx={innerBoxStyles}
         backdropFilter="auto"
-        backdropBlur="10px"
+        backdropBrightness="48%"
         display={isComingSoon ? "flex" : "none"}
       >
-        Coming Soon
+        <Text fontSize="4xl">Coming Soon</Text>
       </Box>
       <Box mb="1rem">
         <Image src={image} alt="villa-image" objectFit="cover" />
@@ -105,9 +108,10 @@ export const CardDao: React.FC<ICardDao> = props => {
             </Badge>
           </HStack>
           <HStack justify="space-between">
-            <Text>Fraction Sold</Text>
-            <Text>{sold}%</Text>
+            <Text>Max Lot</Text>
+            <Text>{maxLot} Lot</Text>
           </HStack>
+
           <HStack justify="space-between">
             <Text>Est. Return</Text>
             <Text>{value}% / Year</Text>

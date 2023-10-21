@@ -12,23 +12,27 @@ import {
 } from "@chakra-ui/react";
 
 interface ICardDao {
-  country: string;
-  name: string;
-  price: string;
-  sold: string;
-  value: string;
-  image: string;
-  countryImage: string;
+  amount: number;
+  country?: string;
+  name?: string;
+  price?: string;
+  sold?: string;
+  value?: string;
+  image?: string;
+  countryImage?: string;
 }
 
 export const CardOwnedDao: React.FC<ICardDao> = props => {
-  const { country, countryImage, name, price, sold, value, image } = props;
+  const { country, countryImage, name, price, sold, value, image, amount } =
+    props;
 
   return (
-    <Box>
+    <Box display={amount === 0 ? "none" : "block"}>
+      {/*
       <Box textAlign="center" mb="1rem">
         <Heading>#NFT Dao 169</Heading>
       </Box>
+      */}
       <Box bg="#34177B" rounded="2xl" w="100%" overflow="hidden">
         <Box mb="1rem">
           <Image src={image} alt="villa-image" objectFit="cover" />
@@ -61,12 +65,16 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
                 rounded="full"
                 px="5"
               >
-                ${price}
+                {price} USDT
               </Badge>
             </HStack>
             <HStack justify="space-between">
               <Text>Est. Return</Text>
-              <Text>{value}% / Year</Text>
+              <Text>22% / Year</Text>
+            </HStack>
+            <HStack justify="space-between">
+              <Text>Amount</Text>
+              <Text>{amount}</Text>
             </HStack>
           </Stack>
           <Button
@@ -81,7 +89,7 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
             <Text mr="1" as="span">
               0
             </Text>
-            Gnet Claim
+            USDT Claim
           </Button>
         </Box>
       </Box>

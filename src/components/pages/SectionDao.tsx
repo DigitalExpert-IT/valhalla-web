@@ -6,17 +6,21 @@ import {
   Container,
   Wrap,
   WrapItem,
+  Spinner,
 } from "@chakra-ui/react";
 import { t } from "i18next";
 import { CardDao } from "components/Card";
 import { DATA_DAO } from "constant/dao";
 import { useRouter } from "next/router";
+import { useCardListDao } from "hooks/property-dao/useCardListDao";
+import { prettyBn } from "utils";
 
 export const SectionDao = () => {
   const router = useRouter();
+  const { data, isLoading } = useCardListDao();
 
-  const handleItemClick = () => {
-    router.push("/property-dao/detail");
+  const handleItemClick = (id: number) => {
+    router.push(`/property-dao/${id}`);
   };
 
   return (
@@ -48,19 +52,26 @@ export const SectionDao = () => {
             Our Property
           </Text>
         </Box>
+        {isLoading ? (
+          <Box display="flex" justifyContent="center">
+            <Spinner size="xl" />
+          </Box>
+        ) : null}
         <Wrap align="center" spacing="2rem" mt="5" justify="center">
-          {DATA_DAO.map(item => (
-            <WrapItem key={item.id} maxW={{ base: "100%", md: "45%" }}>
+          {data.map((item, idx) => (
+            <WrapItem key={idx} maxW={{ base: "100%", md: "45%" }}>
               <CardDao
-                onClick={handleItemClick}
-                countryImage={item.countryImage}
-                country={item.country}
-                image={item.image}
-                price={item.price}
-                value={item.value}
-                name={item.name}
-                sold={item.sold}
-                isComingSoon={item.isComingSoon}
+                id={item.id.toString()}
+                onClick={() => handleItemClick(item.id.toNumber())}
+                countryImage={DATA_DAO[idx].countryImage}
+                country={DATA_DAO[idx].country}
+                image={DATA_DAO[idx].image}
+                price={prettyBn(item.price, 6)}
+                name={DATA_DAO[idx].name}
+                sold={item.maxLot.toString()}
+                maxLot={item.maxLot.toString()}
+                value={"22"}
+                isComingSoon={DATA_DAO[idx].isComingSoon}
               />
             </WrapItem>
           ))}

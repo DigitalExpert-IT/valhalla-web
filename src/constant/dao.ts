@@ -45,24 +45,8 @@ export const DATA_DAO = [
     value: "22",
     isComingSoon: true,
     image:
-      "https://ik.imagekit.io/msxxxaegj/image_gn/image%20314_Tl3lglRsr.png?updatedAt=1697603453171",
+      "https://ik.imagekit.io/msxxxaegj/image_gn/balivilla.png?updatedAt=1697684134687",
     countryImage:
       "https://cdn.britannica.com/48/1648-004-A33B72D8/Flag-Indonesia.jpg",
-  },
-];
-
-export const DATA_DAO_OWNED = [
-  {
-    id: "0",
-    country: "turkey",
-    name: "semidethaced villa in bodrum",
-    price: "100",
-    sold: "0",
-    value: "22",
-    isComingSoon: false,
-    image:
-      "https://ik.imagekit.io/msxxxaegj/image_gn/turkey-villa.png?updatedAt=1697809212509",
-    countryImage:
-      "https://cdn.britannica.com/82/4782-050-8129909C/Flag-Turkey.jpg",
   },
 ];

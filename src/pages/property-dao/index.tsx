@@ -1,4 +1,4 @@
-import { VStack, Image, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { LayoutMainV2, ModalAnnouncement, TableSponsorBonus } from "components";
 import { SectionDao, SectionOwnedDao } from "components/pages";
 

@@ -5,17 +5,18 @@ import {
   Wrap,
   WrapItem,
   Stack,
-  Image,
   Container,
   Spinner,
 } from "@chakra-ui/react";
 import { CardOwnedDao } from "components/Card";
-import { DATA_DAO_OWNED } from "constant/dao";
+import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
+import { useOwnedNftDao } from "hooks/property-dao";
 
 export const SectionOwnedDao = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, data } = useOwnedNftDao();
   const { t } = useTranslation();
+
   return (
     <Box mt="40" pos="relative">
       <Box textAlign="center">
@@ -58,7 +59,7 @@ export const SectionOwnedDao = () => {
               <Box display="flex" justifyContent="center" minH="55vh">
                 <Spinner size="xl" />
               </Box>
-            ) : DATA_DAO_OWNED.length === 0 ? (
+            ) : data.length === 0 ? (
               <Box
                 textAlign="center"
                 display="flex"
@@ -69,9 +70,17 @@ export const SectionOwnedDao = () => {
                 <Heading>{t("error.notOwnedNft")}</Heading>
               </Box>
             ) : (
-              DATA_DAO_OWNED.map((item: any) => (
-                <WrapItem key={item.id} maxW={{ base: "100%", md: "45%" }}>
-                  <CardOwnedDao {...item} />
+              DATA_DAO.map((item, idx) => (
+                <WrapItem key={idx} maxW={{ base: "100%", md: "45%" }}>
+                  <CardOwnedDao
+                    amount={data ? Number(data[idx]) : 0}
+                    countryImage={item.countryImage}
+                    country={item.country}
+                    image={item.image}
+                    price={item.price}
+                    name={item.name}
+                    sold={item.sold}
+                  />
                 </WrapItem>
               ))
             )}

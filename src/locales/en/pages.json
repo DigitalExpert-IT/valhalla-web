@@ -15,7 +15,20 @@
     "mynftdao": "My NFT dao",
     "sponsorBonus": "Sponsor Bonus",
     "sponsor": "Sponsor",
-    "detailDaoDescription": "An amazing two-story 2+1 with sea view, private garage, and quiet area surrounded by nature. Just half a kilometer distance from the ancient city of ‘Iasos’. Kiyikislacik has known for its fisherman, olive trees, and great history. It is a rapidly growing area in terms of real estate investment. A few kilometers distances, there are many luxury development projects around."
+    "detailDaoDescription1": "An amazing two-story 2+1 with sea view, private garage, and quiet area surrounded by nature. Just half a kilometer distance from the ancient city of ‘Iasos’. Kiyikislacik has known for its fisherman, olive trees, and great history. It is a rapidly growing area in terms of real estate investment. A few kilometers distances, there are many luxury development projects around.",
+    "location": "Exact location: 37° 17' 53.4163 N 27° 35' 39.1067 E",
+    "detailDaoDescription2": "Just 15 km distance to Milas Airport, this villa is in the Serenity Bodream villa project and offers a great stable income in one of the most sought-after locations on the Aegean coast. 35-minute distance to Bodrum and 1.1 km distance to the sea.",
+    "1" : "550 m2 land",
+    "2" : "100 m2 villa area",
+    "3" : "400 m2 garden",
+    "4" : "Sea view",
+    "5" : "Very close distance to Milas airport",
+    "6" :  "Basketball and tennis courts",
+    "7" : "World cuisine restaurants & cafe’s",
+    "8" :  "Shops",
+    "9" : "Social facility area with pool",
+    "10" :  "Private car park",
+    "11" : "24/7 security all year"
   },
   "home": {
     "roadmapSection": "Roadmap",

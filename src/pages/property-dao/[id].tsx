@@ -12,6 +12,9 @@ import {
   IconButton,
   Icon,
   Spinner,
+  UnorderedList,
+  Link,
+  ListItem,
 } from "@chakra-ui/react";
 import { CopiableText, LayoutMainV2 } from "components";
 import { DATA_DAO } from "constant/dao";
@@ -238,7 +241,34 @@ const Detail = () => {
               <Heading fontWeight="bold" mb="2rem">
                 Description
               </Heading>
-              <Text>{t("pages.dao.detailDaoDescription")} </Text>
+              <Stack rowGap={5}>
+                <Text>{t("pages.dao.detailDaoDescription1")} </Text>
+                <Text>{t("pages.dao.location")} </Text>
+                <Text>{t("pages.dao.detailDaoDescription2")} </Text>
+                <Stack>
+                  <Text>Some Specs : </Text>
+                  <UnorderedList paddingLeft={"2rem"}>
+                    <ListItem>{t("pages.dao.1")}</ListItem>
+                    <ListItem>{t("pages.dao.2")}</ListItem>
+                    <ListItem>{t("pages.dao.3")}</ListItem>
+                    <ListItem>{t("pages.dao.4")}</ListItem>
+                    <ListItem>{t("pages.dao.5")}</ListItem>
+                    <ListItem>{t("pages.dao.6")}</ListItem>
+                    <ListItem>{t("pages.dao.7")}</ListItem>
+                    <ListItem>{t("pages.dao.8")}</ListItem>
+                    <ListItem>{t("pages.dao.9")}</ListItem>
+                    <ListItem>{t("pages.dao.10")}</ListItem>
+                    <ListItem>{t("pages.dao.11")}</ListItem>
+                    <ListItem>{t("pages.dao.12")}</ListItem>
+                  </UnorderedList>
+                  <Text>
+                    Need more information? Reach us by our contact form{" "}
+                    <Link color={"#70FF75"} href="#">
+                      here.
+                    </Link>
+                  </Text>
+                </Stack>
+              </Stack>
             </Box>
             <Box flex={1}>
               <Heading fontWeight="bold" mb="2rem">

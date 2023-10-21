@@ -162,8 +162,8 @@ dependencies:
     specifier: ^0.148.0
     version: 0.148.0
   valhalla-erc20:
-    specifier: ^1.2.1
-    version: 1.2.1(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.7.0
+    version: 1.7.0(@ethersproject/bignumber@5.7.0)
   valhalla-villa:
     specifier: ^0.1.0
     version: 0.1.0(@ethersproject/bignumber@5.7.0)
@@ -8272,7 +8272,7 @@ packages:
       jsonexport: 3.2.0
       sqlite: 4.2.1
       sqlite3: 5.1.6
-      valhalla-erc20: 1.6.0(@ethersproject/bignumber@5.7.0)
+      valhalla-erc20: 1.7.0(@ethersproject/bignumber@5.7.0)
     transitivePeerDependencies:
       - '@ethersproject/bignumber'
       - bluebird
@@ -12429,25 +12429,8 @@ packages:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     dev: false
 
-  /valhalla-erc20@1.2.1(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-rFNLB5gbG6gEGvvYyaTihhIHXjifUq7OPFBMkxFNVbPFyu5a9T8UjdCpGDQWt94zqQOJoStAtptL6WUmMc7EAg==}
-    dependencies:
-      '@openzeppelin/contracts': 4.9.3
-      '@openzeppelin/contracts-upgradeable': 4.9.3
-      dotenv: 16.0.3
-      evm-bn: 1.1.2(@ethersproject/bignumber@5.7.0)
-      jsonexport: 3.2.0
-      sqlite: 4.2.1
-      sqlite3: 5.1.6
-    transitivePeerDependencies:
-      - '@ethersproject/bignumber'
-      - bluebird
-      - encoding
-      - supports-color
-    dev: false
-
-  /valhalla-erc20@1.6.0(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-Qmxv0EzBRmZU0Ado3u9DoMqZjfktHeQXUo5gkpIslmxJJV5uE/IrS0DnQqiBFzXm1GuEhSY8GQfKL+HcK0Uk0Q==}
+  /valhalla-erc20@1.7.0(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-L0J+SyxV5Aj1eGQNJxNUhVR56N40FipyNo2UlWMkQ6GN02nLvA0+1ZWGgmBYL8T/U9Mbo9OXFzLgszVgnSG8BA==}
     dependencies:
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3

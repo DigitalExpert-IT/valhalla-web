@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BaliVilla } from "valhalla-villa/typechain-types";
+import { BaliVilla } from "valhalla-erc20/typechain-types";
 import { BigNumber } from "ethers";
 import { useDaoContract } from "./useDaoContract";
 import { useContractRead } from "@thirdweb-dev/react";

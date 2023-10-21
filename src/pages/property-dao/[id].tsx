@@ -37,6 +37,8 @@ const Detail = () => {
   const daoContract = useDaoContract();
   const getVilla = useContractRead(daoContract.contract, "getVilla", [id]);
 
+  console.log(getVilla);
+
   useEffect(() => {
     if (router.isReady) {
       setId(Number(router.query.id) as number);
@@ -113,9 +115,11 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Fraction sold</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      5900
+                      {getVilla?.data?.sold.toString()}
                     </Text>
-                    <Text fontWeight="bold">100% (5900)</Text>
+                    <Text fontWeight="bold">
+                      100% ({getVilla?.data?.maxLot.toString()})
+                    </Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Est.Return</Text>
@@ -134,8 +138,8 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Investment has been</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      {600 === getVilla?.data?.maxLot
-                        ? t("common.completed")
+                      {getVilla?.data?.maxLot === getVilla?.data?.sold
+                        ? t("common.Completed")
                         : t("common.inProgress")}
                     </Text>
                   </Box>
@@ -198,13 +202,13 @@ const Detail = () => {
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
-                  Est.Return
+                  Est.Appreciation
                 </Text>
-                <Text color="gray.500">22% / year</Text>
+                <Text color="gray.500">90% / year</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
-                  Avg Return on the Platform
+                  Avg Value Appreciation
                 </Text>
                 <Text color="gray.500">-</Text>
               </Box>
@@ -225,7 +229,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Exit Date
                 </Text>
-                <Text color="gray.500">6/20/2024</Text>
+                <Text color="gray.500">30/08/2023</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

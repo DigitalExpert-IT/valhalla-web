@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAddress, useContractRead } from "@thirdweb-dev/react";
 import { ZERO_ADDRESS } from "constant/address";
 import { useDaoContract } from "./useDaoContract";
-import { BaliVilla } from "valhalla-villa/typechain-types";
+import { BaliVilla } from "valhalla-erc20/typechain-types";
 
 type OwnedDao = Awaited<ReturnType<BaliVilla["getVilla"]>>;
 

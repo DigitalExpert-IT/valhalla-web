@@ -27,7 +27,7 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
     props;
 
   return (
-    <Box>
+    <Box display={amount === 0 ? "none" : "block"}>
       {/*
       <Box textAlign="center" mb="1rem">
         <Heading>#NFT Dao 169</Heading>
@@ -70,7 +70,7 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
             </HStack>
             <HStack justify="space-between">
               <Text>Est. Return</Text>
-              <Text>{value}% / Year</Text>
+              <Text>22% / Year</Text>
             </HStack>
             <HStack justify="space-between">
               <Text>Amount</Text>
@@ -89,7 +89,7 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
             <Text mr="1" as="span">
               0
             </Text>
-            Gnet Claim
+            USDT Claim
           </Button>
         </Box>
       </Box>

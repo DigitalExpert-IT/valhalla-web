@@ -12,17 +12,19 @@ import {
 } from "@chakra-ui/react";
 
 interface ICardDao {
-  country: string;
-  name: string;
-  price: string;
-  sold: string;
-  value: string;
-  image: string;
-  countryImage: string;
+  amount: number;
+  country?: string;
+  name?: string;
+  price?: string;
+  sold?: string;
+  value?: string;
+  image?: string;
+  countryImage?: string;
 }
 
 export const CardOwnedDao: React.FC<ICardDao> = props => {
-  const { country, countryImage, name, price, sold, value, image } = props;
+  const { country, countryImage, name, price, sold, value, image, amount } =
+    props;
 
   return (
     <Box>
@@ -61,12 +63,16 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
                 rounded="full"
                 px="5"
               >
-                ${price}
+                {price} USDT
               </Badge>
             </HStack>
             <HStack justify="space-between">
               <Text>Est. Return</Text>
               <Text>{value}% / Year</Text>
+            </HStack>
+            <HStack justify="space-between">
+              <Text>Amount</Text>
+              <Text>{amount}</Text>
             </HStack>
           </Stack>
           <Button

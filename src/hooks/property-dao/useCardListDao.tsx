@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { BaliVilla } from "valhalla-villa/typechain-types";
 import { BigNumber } from "ethers";
 import { useDaoContract } from "./useDaoContract";
+import { useContractRead } from "@thirdweb-dev/react";
 
 type BaseCardType = Awaited<ReturnType<BaliVilla["getVilla"]>>;
 type CardType = BaseCardType & {
   id: BigNumber;
 };
 
-const CARD_IDS = [0, 1];
-
 export const useCardListDao = () => {
   const nftVilla = useDaoContract();
+  const { data: totalList } = useContractRead(nftVilla.contract, "totalList");
   const [data, setData] = useState<CardType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!nftVilla.contract) return;
+      if (!nftVilla.contract || !totalList) return;
 
       try {
         const cardList = await Promise.all(
-          CARD_IDS.map(async cardId => {
+          new Array(Number(totalList)).fill(null).map(async (_, cardId) => {
             const card = await nftVilla.contract!.call("getVilla", [cardId]);
             return { ...card, id: BigNumber.from(cardId) };
           })
@@ -35,7 +35,7 @@ export const useCardListDao = () => {
     };
 
     fetchData();
-  }, [nftVilla.contract]);
+  }, [nftVilla.contract, totalList]);
 
   return { isLoading: isLoading || nftVilla.isLoading, data };
 };

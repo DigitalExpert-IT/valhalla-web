@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Image,
@@ -13,7 +13,8 @@ import {
   Icon,
   Spinner,
 } from "@chakra-ui/react";
-import { LayoutMainV2 } from "components";
+import { CopiableText, LayoutMainV2 } from "components";
+import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
 import { BsBookmark } from "react-icons/bs";
 import { FaRegHandshake } from "react-icons/fa";
@@ -21,14 +22,29 @@ import { BiHome } from "react-icons/bi";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import useDao from "hooks/property-dao/useDao";
 import { useAsyncCall } from "hooks";
+import { useRouter } from "next/router";
+import { useContractRead } from "@thirdweb-dev/react";
+import { useDaoContract } from "hooks/property-dao";
+import { prettyBn, shortenAddress } from "utils";
 
 const Detail = () => {
   const { t } = useTranslation();
+  const [id, setId] = useState<any>(0);
+  const router = useRouter();
+  const daoContract = useDaoContract();
+  const getVilla = useContractRead(daoContract.contract, "getVilla", [id]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setId(Number(router.query.id) as number);
+    }
+  }, [router.isReady]);
+
   const { buy, isLoading: isLoadingDao } = useDao();
-  const { exec, isLoading } = useAsyncCall(buy);
+  const { exec, isLoading } = useAsyncCall(buy, t("common.succesBuyNft"));
 
   const buyVilla = () => {
-    exec(0, 1);
+    exec(id, 1);
   };
 
   return (
@@ -54,7 +70,7 @@ const Detail = () => {
               >
                 <Image
                   rounded={"md"}
-                  src="/assets/property-dao/detail-nft.jpg"
+                  src={DATA_DAO[id].image}
                   alt="nft-detail"
                 />
               </AspectRatio>
@@ -66,7 +82,7 @@ const Detail = () => {
             >
               <Box>
                 <Heading size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}>
-                  Semidetached Villa in Bodrum
+                  {DATA_DAO[id].name}
                 </Heading>
               </Box>
               <Box>
@@ -80,13 +96,13 @@ const Detail = () => {
                   justifyItems="center"
                 >
                   <Avatar
-                    src="https://cdn.britannica.com/82/4782-050-8129909C/Flag-Turkey.jpg"
+                    src={DATA_DAO[id].countryImage}
                     name="country-flag"
                     size="xs"
                     mt="-1"
                     mr="2"
                   />
-                  Turkey
+                  {DATA_DAO[id].country}
                 </Badge>
               </Box>
               <Box maxW={{ base: "100%", md: "80%" }} pt="1rem">
@@ -108,7 +124,7 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Price</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      $100.00
+                      {prettyBn(getVilla?.data?.price, 6)} USDT
                     </Text>
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
@@ -263,7 +279,9 @@ const Detail = () => {
                   <Text fontWeight="bold" fontSize="lg">
                     Contract Address
                   </Text>
-                  <Text>0xef0.....40dbb</Text>
+                  <CopiableText value={`${daoContract.contract?.getAddress()}`}>
+                    {shortenAddress(`${daoContract.contract?.getAddress()}`)}
+                  </CopiableText>
                 </Stack>
                 <Stack
                   direction="row"
@@ -274,7 +292,7 @@ const Detail = () => {
                   <Text fontWeight="bold" fontSize="lg">
                     NFT-ID
                   </Text>
-                  <Text>1</Text>
+                  <Text>{getVilla?.data?.id.toString()}</Text>
                 </Stack>
                 <Stack direction="row" justify="space-between" align="center">
                   <Text fontWeight="bold" fontSize="lg">

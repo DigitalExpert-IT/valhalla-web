@@ -1,11 +1,8 @@
-import { VStack, Image, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { LayoutMainV2, ModalAnnouncement, TableSponsorBonus } from "components";
 import { SectionDao, SectionOwnedDao } from "components/pages";
-import { useCardListDao } from "hooks/property-dao/useCardListDao";
 
 const Dao = () => {
-  const { data } = useCardListDao();
-  console.log(data);
   return (
     <LayoutMainV2>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">

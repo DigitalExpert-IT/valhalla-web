@@ -43,7 +43,7 @@ export const DATA_DAO = [
     price: "50",
     sold: "22",
     value: "22",
-    isComingSoon: false,
+    isComingSoon: true,
     image:
       "https://ik.imagekit.io/msxxxaegj/image_gn/image%20314_Tl3lglRsr.png?updatedAt=1697603453171",
     countryImage:

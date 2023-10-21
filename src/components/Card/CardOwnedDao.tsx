@@ -28,9 +28,11 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
 
   return (
     <Box>
+      {/*
       <Box textAlign="center" mb="1rem">
         <Heading>#NFT Dao 169</Heading>
       </Box>
+      */}
       <Box bg="#34177B" rounded="2xl" w="100%" overflow="hidden">
         <Box mb="1rem">
           <Image src={image} alt="villa-image" objectFit="cover" />

@@ -134,7 +134,9 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Investment has been</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      Completed
+                      {600 === getVilla?.data?.maxLot
+                        ? t("common.completed")
+                        : t("common.inProgress")}
                     </Text>
                   </Box>
                 </Stack>
@@ -192,7 +194,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Total investment amount
                 </Text>
-                <Text color="gray.500">$295.000,00</Text>
+                <Text color="gray.500">$600.000,00</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

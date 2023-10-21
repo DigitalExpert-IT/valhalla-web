@@ -67,9 +67,10 @@ export const SectionDao = () => {
                 country={DATA_DAO[idx].country}
                 image={DATA_DAO[idx].image}
                 price={prettyBn(item.price, 6)}
-                // value={item.maxLot.toString()}
                 name={DATA_DAO[idx].name}
                 sold={item.maxLot.toString()}
+                maxLot={item.maxLot.toString()}
+                value={"22"}
                 isComingSoon={DATA_DAO[idx].isComingSoon}
               />
             </WrapItem>

@@ -15,6 +15,8 @@ interface ICardDao {
   name?: string;
   price?: string;
   sold?: string;
+  maxLot?: string;
+  value?: string;
   image?: string;
   countryImage?: string;
   isComingSoon?: boolean;
@@ -28,7 +30,9 @@ export const CardDao: React.FC<ICardDao> = props => {
     name,
     price,
     sold,
+    maxLot,
     image,
+    value,
     onClick,
     isComingSoon,
   } = props;
@@ -57,17 +61,17 @@ export const CardDao: React.FC<ICardDao> = props => {
   return (
     <Box
       sx={outerBoxStyle}
-      onClick={isComingSoon ? () => { } : onClick}
+      onClick={isComingSoon ? () => {} : onClick}
       rounded="xl"
       cursor={isComingSoon ? "not-allowed" : "pointer"}
     >
       <Box
         sx={innerBoxStyles}
         backdropFilter="auto"
-        backdropContrast="10%"
+        backdropBrightness="48%"
         display={isComingSoon ? "flex" : "none"}
       >
-        Coming Soon
+        <Text fontSize="4xl">Coming Soon</Text>
       </Box>
       <Box mb="1rem">
         <Image src={image} alt="villa-image" objectFit="cover" />
@@ -105,14 +109,13 @@ export const CardDao: React.FC<ICardDao> = props => {
           </HStack>
           <HStack justify="space-between">
             <Text>Max Lot</Text>
-            <Text>{sold} Lot</Text>
+            <Text>{maxLot} Lot</Text>
           </HStack>
-          {/*
-            <HStack justify="space-between">
+
+          <HStack justify="space-between">
             <Text>Est. Return</Text>
             <Text>{value}% / Year</Text>
           </HStack>
-          */}
         </Stack>
       </Box>
     </Box>

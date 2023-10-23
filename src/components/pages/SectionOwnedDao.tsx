@@ -59,7 +59,7 @@ export const SectionOwnedDao = () => {
               <Box display="flex" justifyContent="center" minH="55vh">
                 <Spinner size="xl" />
               </Box>
-            ) : data.length === 0 ? (
+            ) : Number(data[0]) === 0 && Number(data[1]) === 0 ? (
               <Box
                 textAlign="center"
                 display="flex"

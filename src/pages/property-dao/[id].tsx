@@ -200,9 +200,9 @@ const Detail = () => {
                   isLoading={isLoading || isLoadingDao}
                   spinner={<Spinner color="#191272" />}
                   onClick={buyVilla}
-                  disabled={data.sold === data.maxLot ?? false}
+                  disabled={data?.sold === data?.maxLot ?? false}
                 >
-                  {data.sold !== data.maxLot
+                  {data?.sold !== data?.maxLot
                     ? `Buy ${totalPrice} USDT`
                     : "Sold Out"}
                 </Button>

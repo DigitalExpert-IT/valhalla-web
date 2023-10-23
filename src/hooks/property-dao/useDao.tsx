@@ -12,7 +12,7 @@ const useDao = () => {
   const address = useAddress();
 
   const validateBalance = async (id: number, amount: number) => {
-    const villa = await contract.call("getVilla", [id]);
+    const villa = await contract!.call("getVilla", [id]);
     const usdtBalance = await usdtContract?.call("balanceOf", [address]);
     const totalPrice = villa.price * amount;
 

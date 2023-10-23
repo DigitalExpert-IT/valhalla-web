@@ -164,7 +164,11 @@ const Detail = () => {
                   </Box>
                 </Stack>
               </Box>
-              <Stack direction="row" spacing="1rem" pt="1rem">
+              <Stack
+                direction={{ base: "column", md: "row" }}
+                spacing="1rem"
+                pt="1rem"
+              >
                 <Stack
                   direction="row"
                   w={{ base: "100%", md: "20%" }}
@@ -206,6 +210,7 @@ const Detail = () => {
                     ? `Buy ${totalPrice} USDT`
                     : "Sold Out"}
                 </Button>
+                {/*
                 <IconButton
                   icon={<BsBookmark />}
                   aria-label="bookmark"
@@ -216,6 +221,7 @@ const Detail = () => {
                   color="black"
                   rounded="md"
                 />
+                */}
               </Stack>
             </Stack>
           </Stack>

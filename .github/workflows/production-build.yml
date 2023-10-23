@@ -20,6 +20,7 @@ jobs:
           images: |
             adeyahya/gn
           tags: |
+            latest
             type=schedule
             type=ref,event=branch
             type=ref,event=pr

@@ -52,7 +52,7 @@ const Detail = () => {
       step: 1,
       defaultValue: 1,
       min: 1,
-      max: 100,
+      max: data?.maxLot - data?.sold,
       precision: 0,
     });
   const inc = getIncrementButtonProps();

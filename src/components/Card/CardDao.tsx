@@ -14,8 +14,8 @@ interface ICardDao {
   country?: string;
   name?: string;
   price?: string;
-  sold?: string;
-  maxLot?: string;
+  sold: number;
+  maxLot: number;
   value?: string;
   image?: string;
   countryImage?: string;
@@ -116,6 +116,11 @@ export const CardDao: React.FC<ICardDao> = props => {
           <HStack justify="space-between">
             <Text>Max Lot</Text>
             <Text>{maxLot} Lot</Text>
+          </HStack>
+
+          <HStack justify="space-between">
+            <Text>Remaining Lot</Text>
+            <Text>{maxLot - sold} Lot</Text>
           </HStack>
 
           <HStack justify="space-between">

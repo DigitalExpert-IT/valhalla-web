@@ -68,8 +68,8 @@ export const SectionDao = () => {
                 image={DATA_DAO[idx].image}
                 price={prettyBn(item.price, 6)}
                 name={DATA_DAO[idx].name}
-                sold={item.sold.toString()}
-                maxLot={item.maxLot.toString()}
+                sold={Number(item.sold)}
+                maxLot={Number(item.maxLot)}
                 value={"22"}
                 isComingSoon={DATA_DAO[idx].isComingSoon}
               />

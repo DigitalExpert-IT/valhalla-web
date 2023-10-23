@@ -43,5 +43,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            CHAIN_ID=${{ vars.PRODUCTION_CHAIN_ID }}
+            THIRDWEB_ID=${{ vars.PRODUCTION_THIRDWEB_ID }}
+            TELEGRAM_INVITE_LINK=${{ vars.PRODUCTION_TELEGRAM_INVITE_LINK }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

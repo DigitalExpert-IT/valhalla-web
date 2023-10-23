@@ -24,6 +24,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ARG CHAIN_ID
+ARG THIRDWEB_ID
+ARG TELEGRAM_INVITE_LINK
+
+ENV NEXT_PUBLIC_CHAIN_ID=${CHAIN_ID}
+ENV NEXT_PUBLIC_THIRDWEB=${THIRDWEB_ID}
+ENV NEXT_PUBLIC_TELEGRAM_INVITE_LINK=${TELEGRAM_INVITE_LINK}
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
@@ -37,13 +45,6 @@ RUN yarn build
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
-ARG CHAIN_ID
-ARG THIRDWEB_ID
-ARG TELEGRAM_INVITE_LINK
-
-ENV NEXT_PUBLIC_CHAIN_ID=${CHAIN_ID}
-ENV NEXT_PUBLIC_THIRDWEB=${THIRDWEB_ID}
-ENV NEXT_PUBLIC_TELEGRAM_INVITE_LINK=${TELEGRAM_INVITE_LINK}
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.

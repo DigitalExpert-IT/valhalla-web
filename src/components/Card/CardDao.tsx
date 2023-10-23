@@ -107,6 +107,12 @@ export const CardDao: React.FC<ICardDao> = props => {
               {price} usdt
             </Badge>
           </HStack>
+
+          <HStack justify="space-between">
+            <Text>Fraction Sold</Text>
+            <Text>{sold}</Text>
+          </HStack>
+
           <HStack justify="space-between">
             <Text>Max Lot</Text>
             <Text>{maxLot} Lot</Text>

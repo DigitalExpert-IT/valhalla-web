@@ -15,25 +15,25 @@ export const useCardListDao = () => {
   const [data, setData] = useState<CardType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
+  const fetchData = async () => {
+    if (!nftVilla.contract || !totalList) return;
+
+    try {
+      const cardList = await Promise.all(
+        new Array(Number(totalList)).fill(null).map(async (_, cardId) => {
+          const card = await nftVilla.contract!.call("getVilla", [cardId]);
+          return { ...card, id: BigNumber.from(cardId) };
+        })
+      );
+      setData(cardList);
+    } catch (error) {
+      console.error("Error fetching card data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      if (!nftVilla.contract || !totalList) return;
-
-      try {
-        const cardList = await Promise.all(
-          new Array(Number(totalList)).fill(null).map(async (_, cardId) => {
-            const card = await nftVilla.contract!.call("getVilla", [cardId]);
-            return { ...card, id: BigNumber.from(cardId) };
-          })
-        );
-        setData(cardList);
-      } catch (error) {
-        console.error("Error fetching card data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, [nftVilla.contract, totalList]);
 

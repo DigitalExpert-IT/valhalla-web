@@ -167,42 +167,44 @@ const Detail = () => {
               <Stack direction="row" spacing="1rem" pt="1rem">
                 <Stack
                   direction="row"
-                  w={{ base: "100%", md: "50%" }}
-                  bgColor="#1F227D"
+                  w={{ base: "100%", md: "20%" }}
+                  bgColor="white"
                   border="1px"
-                  borderColor="#FF00FF"
+                  borderColor="black"
                   rounded="xl"
                   align="center"
                   justify="center"
                 >
-                  <Button variant="ghost" size="sm" {...dec}>
+                  <Button variant="ghost" size="sm" color="black" {...dec}>
                     -
                   </Button>
 
                   <Input
-                    bgColor="#1F227D"
                     textAlign="center"
                     variant="unstyled"
+                    color="black"
                     {...input}
                   />
-                  <Button variant="ghost" size="sm" {...inc}>
+                  <Button variant="ghost" size="sm" color="black" {...inc}>
                     +
                   </Button>
                 </Stack>
                 <Button
                   variant="solid"
-                  bgColor="white"
+                  bgColor="whiteAlpha.900"
                   rounded="lg"
                   color="black"
-                  _hover={{ bg: "gray.600" }}
-                  _disabled={{ color: "gray.200" }}
+                  _hover={{ bg: "whiteAlpha.700" }}
                   size="lg"
                   w={{ base: "100%", md: "49%" }}
                   isLoading={isLoading || isLoadingDao}
                   spinner={<Spinner color="#191272" />}
                   onClick={buyVilla}
+                  disabled={data.sold === data.maxLot ?? false}
                 >
-                  {`Buy ${totalPrice} USDT`}
+                  {data.sold !== data.maxLot
+                    ? `Buy ${totalPrice} USDT`
+                    : "Sold Out"}
                 </Button>
                 <IconButton
                   icon={<BsBookmark />}

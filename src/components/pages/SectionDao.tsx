@@ -24,7 +24,7 @@ export const SectionDao = () => {
   };
 
   return (
-    <Box justifyContent="center" overflow="hidden" w="full" pt="40" mb="50">
+    <Box justifyContent="center" overflow="hidden" w="full" pt="10" mb="50">
       <Container maxW="container.xl">
         <Heading
           _after={{
@@ -68,7 +68,7 @@ export const SectionDao = () => {
                 image={DATA_DAO[idx].image}
                 price={prettyBn(item.price, 6)}
                 name={DATA_DAO[idx].name}
-                sold={item.maxLot.toString()}
+                sold={item.sold.toString()}
                 maxLot={item.maxLot.toString()}
                 value={"22"}
                 isComingSoon={DATA_DAO[idx].isComingSoon}

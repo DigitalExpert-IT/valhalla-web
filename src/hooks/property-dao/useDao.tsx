@@ -11,6 +11,18 @@ const useDao = () => {
   const { isInitialize } = useGenesis();
   const address = useAddress();
 
+  const validateBalance = async (id: number, amount: number) => {
+    const villa = await contract.call("getVilla", [id]);
+    const usdtBalance = await usdtContract?.call("balanceOf", [address]);
+    const totalPrice = villa.price * amount;
+
+    if (totalPrice > usdtBalance) {
+      throw {
+        code: "NotEnoughUsdtBalance",
+      };
+    }
+  };
+
   const validateAllowance = async (id: number) => {
     const allowance = await usdtContract?.erc20.allowance(
       NFT_DAO_PROPERTY[CURRENT_CHAIN_ID]
@@ -28,6 +40,7 @@ const useDao = () => {
   };
 
   const buy = async (id: number, amount: number) => {
+    await validateBalance(id, amount);
     await validateAllowance(id);
 
     return await contract?.call("buyVilla", [id, amount]);

@@ -90,5 +90,7 @@
   "buy": "Buy",
   "isConnectingToBlockChain": "Connecting to BlockChain",
   "succesBuyNft": "Suscces Buy NFT",
-  "max": "Max"
+  "max": "Max",
+  "inProgress": "In Progress",
+  "Completed": "Completed"
 }

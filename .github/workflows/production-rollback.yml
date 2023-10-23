@@ -1,0 +1,17 @@
+name: Production Rollback
+
+on: 
+  workflow_dispatch:
+    inputs:
+      commitHash:
+        description: 'Commit Hash'     
+        required: true
+        default: 'latest'
+
+jobs:
+  rollback:
+    name: "Rollback"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4

@@ -7,3 +7,4 @@ export * from "./TableRankNetworkV2";
 export * from "./TableRankBonusV2";
 export * from "./TableNetworkStatus";
 export * from "./TableRankNFTBonusV2";
+export * from "./TableSponsorBonus";

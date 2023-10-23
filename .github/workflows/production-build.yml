@@ -57,4 +57,4 @@ jobs:
           port: 22
           script: |
             cd /var/www/valhalla-web/
-            touch koplek.sh 
+            bash deploy.sh 

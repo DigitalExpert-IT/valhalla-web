@@ -144,7 +144,7 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">Est. Appreciation</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      90%
+                      22%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
@@ -256,7 +256,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Est.Appreciation
                 </Text>
-                <Text color="gray.500">90% / year</Text>
+                <Text color="gray.500">22% / year</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

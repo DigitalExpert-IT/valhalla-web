@@ -104,10 +104,7 @@ const Detail = () => {
               justifyContent={"space-between"}
             >
               <Box>
-                <Heading
-                  size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}
-                  textTransform="capitalize"
-                >
+                <Heading size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}>
                   {DATA_DAO[id].detailName}
                 </Heading>
               </Box>
@@ -161,7 +158,7 @@ const Detail = () => {
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.maxLot === data?.sold
                         ? t("common.Completed")
-                        : t("common.inProgress")}
+                        : t("common.inProgres")}
                     </Text>
                   </Box>
                 </Stack>
@@ -308,7 +305,10 @@ const Detail = () => {
                   </UnorderedList>
                   <Text>
                     Need more information? Reach us by our contact form{" "}
-                    <Link color={"#70FF75"} href="#">
+                    <Link
+                      color={"#70FF75"}
+                      href="https://goldenrealestate.com.tr/property/serina-bodrum/"
+                    >
                       here.
                     </Link>
                   </Text>

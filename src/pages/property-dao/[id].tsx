@@ -32,15 +32,14 @@ import { useRouter } from "next/router";
 import { useContractRead } from "@thirdweb-dev/react";
 import { useDaoContract } from "hooks/property-dao";
 import { prettyBn, shortenAddress } from "utils";
+import useClickConnectWallet from "hooks/useClickConnectWallet";
 
 const Detail = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [id, setId] = useState<any>(0);
   const daoContract = useDaoContract();
-  const { data, refetch } = useContractRead(daoContract.contract, "getVilla", [
-    id,
-  ]);
+  const { data } = useContractRead(daoContract.contract, "getVilla", [id]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -62,11 +61,13 @@ const Detail = () => {
   const totalPrice = input.value * Number(prettyBn(data?.price, 6));
 
   const { buy, isLoading: isLoadingDao } = useDao();
+  const { showModalConnectWallet, loading, isAbleToTransaction } =
+    useClickConnectWallet();
   const { exec, isLoading } = useAsyncCall(buy, t("common.succesBuyNft"));
 
   const buyVilla = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
     exec(id, input.value);
-    refetch;
   };
 
   return (
@@ -133,7 +134,7 @@ const Detail = () => {
               <Box maxW={{ base: "100%", md: "80%" }} pt="1rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Fraction sold</Text>
+                    <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.sold.toString()}
                     </Text>
@@ -142,21 +143,21 @@ const Detail = () => {
                     </Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Est. Appreciation</Text>
+                    <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       22%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Price</Text>
+                    <Text fontWeight="bold">{t("pages.dao.price")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {prettyBn(data?.price, 6)} USDT
                     </Text>
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Investment</Text>
+                    <Text fontWeight="bold">{t("pages.dao.investment")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.maxLot === data?.sold
                         ? t("common.Completed")
@@ -202,7 +203,7 @@ const Detail = () => {
                   _hover={{ bg: "whiteAlpha.700" }}
                   size="lg"
                   w={{ base: "100%", md: "49%" }}
-                  isLoading={isLoading || isLoadingDao}
+                  isLoading={isLoading || isLoadingDao || loading}
                   spinner={<Spinner color="#191272" />}
                   onClick={buyVilla}
                   disabled={data?.sold === data?.maxLot ?? false}

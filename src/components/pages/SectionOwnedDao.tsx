@@ -12,10 +12,12 @@ import { CardOwnedDao } from "components/Card";
 import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
 import { useOwnedNftDao } from "hooks/property-dao";
+import { useAddress } from "@thirdweb-dev/react";
 
 export const SectionOwnedDao = () => {
   const { isLoading, data } = useOwnedNftDao();
   const { t } = useTranslation();
+  const address = useAddress();
 
   return (
     <Box mt="40" pos="relative">
@@ -58,6 +60,16 @@ export const SectionOwnedDao = () => {
             {isLoading ? (
               <Box display="flex" justifyContent="center" minH="55vh">
                 <Spinner size="xl" />
+              </Box>
+            ) : address === undefined ? (
+              <Box
+                textAlign="center"
+                display="flex"
+                alignItems="center"
+                my="10"
+                minH="55vh"
+              >
+                <Heading>{t("error.pleaseConnectWallet")}</Heading>
               </Box>
             ) : Number(data[0]) === 0 && Number(data[1]) === 0 ? (
               <Box

@@ -17,6 +17,7 @@ import {
   ListItem,
   Input,
   useNumberInput,
+  Tooltip,
 } from "@chakra-ui/react";
 import { CopiableText, LayoutMainV2 } from "components";
 import { DATA_DAO } from "constant/dao";
@@ -31,15 +32,14 @@ import { useRouter } from "next/router";
 import { useContractRead } from "@thirdweb-dev/react";
 import { useDaoContract } from "hooks/property-dao";
 import { prettyBn, shortenAddress } from "utils";
+import useClickConnectWallet from "hooks/useClickConnectWallet";
 
 const Detail = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [id, setId] = useState<any>(0);
   const daoContract = useDaoContract();
-  const { data, refetch } = useContractRead(daoContract.contract, "getVilla", [
-    id,
-  ]);
+  const { data } = useContractRead(daoContract.contract, "getVilla", [id]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -61,11 +61,13 @@ const Detail = () => {
   const totalPrice = input.value * Number(prettyBn(data?.price, 6));
 
   const { buy, isLoading: isLoadingDao } = useDao();
+  const { showModalConnectWallet, loading, isAbleToTransaction } =
+    useClickConnectWallet();
   const { exec, isLoading } = useAsyncCall(buy, t("common.succesBuyNft"));
 
   const buyVilla = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
     exec(id, input.value);
-    refetch;
   };
 
   return (
@@ -106,7 +108,7 @@ const Detail = () => {
                   size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}
                   textTransform="capitalize"
                 >
-                  {DATA_DAO[id].name}
+                  {DATA_DAO[id].detailName}
                 </Heading>
               </Box>
               <Box>
@@ -132,7 +134,7 @@ const Detail = () => {
               <Box maxW={{ base: "100%", md: "80%" }} pt="1rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Fraction sold</Text>
+                    <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.sold.toString()}
                     </Text>
@@ -141,21 +143,21 @@ const Detail = () => {
                     </Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Est.Return</Text>
+                    <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       22%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Price</Text>
+                    <Text fontWeight="bold">{t("pages.dao.price")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {prettyBn(data?.price, 6)} USDT
                     </Text>
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">Investment has been</Text>
+                    <Text fontWeight="bold">{t("pages.dao.investment")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.maxLot === data?.sold
                         ? t("common.Completed")
@@ -201,7 +203,7 @@ const Detail = () => {
                   _hover={{ bg: "whiteAlpha.700" }}
                   size="lg"
                   w={{ base: "100%", md: "49%" }}
-                  isLoading={isLoading || isLoadingDao}
+                  isLoading={isLoading || isLoadingDao || loading}
                   spinner={<Spinner color="#191272" />}
                   onClick={buyVilla}
                   disabled={data?.sold === data?.maxLot ?? false}
@@ -242,7 +244,7 @@ const Detail = () => {
             <Stack
               flex={1}
               direction={{ base: "column", md: "column", lg: "row" }}
-              justify={{ base: "center", md: "space-between" }}
+              justify={{ base: "center", md: "space-around" }}
               spacing="1rem"
             >
               <Box>
@@ -255,21 +257,8 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Est.Appreciation
                 </Text>
-                <Text color="gray.500">90% / year</Text>
+                <Text color="gray.500">22% / year</Text>
               </Box>
-              <Box>
-                <Text color="black" fontWeight="bold">
-                  Avg Value Appreciation
-                </Text>
-                <Text color="gray.500">-</Text>
-              </Box>
-            </Stack>
-            <Stack
-              flex={1}
-              direction={{ base: "column", md: "column", lg: "row" }}
-              justify={{ base: "center", md: "space-around" }}
-              spacing="1rem"
-            >
               <Box>
                 <Text color="black" fontWeight="bold">
                   Investing Period
@@ -331,34 +320,58 @@ const Detail = () => {
                 Details
               </Heading>
               <Box display="flex">
-                <Icon
-                  as={FaRegHandshake}
-                  color="black"
-                  w="62px"
-                  h="62px"
-                  bg="white"
-                  p="3"
-                  rounded="lg"
-                />
-                <Icon
-                  as={BiHome}
-                  color="black"
-                  w="62px"
-                  h="62px"
-                  bg="white"
-                  p="3"
-                  mx="1rem"
-                  rounded="lg"
-                />
-                <Icon
-                  as={AiOutlineDollarCircle}
-                  color="black"
-                  w="62px"
-                  h="62px"
-                  bg="white"
-                  p="3"
-                  rounded="lg"
-                />
+                <Tooltip
+                  fontWeight={"600"}
+                  backgroundColor={"white"}
+                  label={"Income: BuySell"}
+                  shouldWrapChildren
+                  placement="top"
+                >
+                  <Icon
+                    as={FaRegHandshake}
+                    color="black"
+                    w="62px"
+                    h="62px"
+                    bg="white"
+                    p="3"
+                    rounded="lg"
+                  />
+                </Tooltip>
+                <Tooltip
+                  fontWeight={"600"}
+                  backgroundColor={"white"}
+                  label={"State: Under Constructed"}
+                  shouldWrapChildren
+                  placement="top"
+                >
+                  <Icon
+                    as={BiHome}
+                    color="black"
+                    w="62px"
+                    h="62px"
+                    bg="white"
+                    p="3"
+                    mx="1rem"
+                    rounded="lg"
+                  />
+                </Tooltip>
+                <Tooltip
+                  fontWeight={"600"}
+                  backgroundColor={"white"}
+                  label={"Exit Term: Short"}
+                  shouldWrapChildren
+                  placement="top"
+                >
+                  <Icon
+                    as={AiOutlineDollarCircle}
+                    color="black"
+                    w="62px"
+                    h="62px"
+                    bg="white"
+                    p="3"
+                    rounded="lg"
+                  />
+                </Tooltip>
               </Box>
               <Box mt="2rem">
                 <Stack direction="row" justify="space-between" align="center">

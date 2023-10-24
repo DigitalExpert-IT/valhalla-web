@@ -124,7 +124,7 @@ export const CardDao: React.FC<ICardDao> = props => {
           </HStack>
 
           <HStack justify="space-between">
-            <Text>Est. Return</Text>
+            <Text>Est. Appreciation</Text>
             <Text>{value}% / Year</Text>
           </HStack>
         </Stack>

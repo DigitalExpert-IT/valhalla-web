@@ -4,6 +4,7 @@
   "alreadyRegistered": "{{address}} Address already registered",
   "registrationFee": "Unmatch Registration Fee",
   "notOwnedNft": "You don't own any NFT",
+  "pleaseConnectWallet": "Please Connect Wallet",
   "errorCode": {
     "ACTION_REJECTED": "User Reject Transaction!",
     "NotEnoughBalance": "Not Enough Balance",

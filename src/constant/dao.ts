@@ -26,7 +26,8 @@ export const DATA_DAO = [
   {
     id: "0",
     country: "turkey",
-    name: "semidethaced villa in bodrum",
+    name: "Semidetached Villa in Bodrum",
+    detailName: "Fix Semidetached Villa in Bodrum",
     price: "100",
     sold: "0",
     value: "22",

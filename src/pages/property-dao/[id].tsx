@@ -274,7 +274,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Exit Date
                 </Text>
-                <Text color="gray.500">30/08/2023</Text>
+                <Text color="gray.500">30/08/2024</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

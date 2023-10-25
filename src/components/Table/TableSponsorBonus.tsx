@@ -4,10 +4,21 @@ import { ISponsorDao, SPONSOR_DAO } from "constant/dao";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";
 import { TableData } from "components/TableUtils";
-import { Box, Image, Heading, Text, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Heading,
+  Text,
+  Stack,
+  Button,
+  Flex,
+  Center,
+} from "@chakra-ui/react";
 import { t } from "i18next";
+import { useScreen } from "hooks/useScreen";
 
 export const TableSponsorBonus = () => {
+  const { isMobileScreen } = useScreen();
   const columnHelper = createColumnHelper<ISponsorDao>();
 
   const columns = [
@@ -104,6 +115,43 @@ export const TableSponsorBonus = () => {
           size: "xs",
         }}
       />
+
+      <Center
+        style={{
+          border: 1,
+          backgroundColor: "rgba(19, 8, 65, 0.5)",
+          borderColor: "rgba(19, 8, 65, 0.5)",
+          width: isMobileScreen ? "20.5rem" : "39rem",
+          height: isMobileScreen ? "3rem" : "5rem",
+          borderRadius: 5,
+          marginTop: 15,
+        }}
+      >
+        <Flex flex={1} flexBasis={"row"} justifyContent={"space-between"}>
+          <Text
+            fontWeight="400"
+            fontSize={{ base: "10px", md: "sm", xl: "lg" }}
+            mx="6"
+            my="3"
+            textTransform="uppercase"
+          >
+            {t("pages.dao.sponsorLabel")}
+          </Text>
+          <Button
+            variant="gradient"
+            color={"white"}
+            colorScheme="purple:blue"
+            borderRadius={10}
+            w={{ base: "6xs" }}
+            mr="6"
+            mt={1}
+            fontFamily={"Poppins"}
+            fontSize={isMobileScreen ? 10 : 20}
+          >
+            {0 + " " + "USDT" + " " + t("common.claim")}
+          </Button>
+        </Flex>
+      </Center>
     </Stack>
   );
 };

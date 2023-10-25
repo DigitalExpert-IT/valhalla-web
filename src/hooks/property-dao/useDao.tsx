@@ -4,12 +4,15 @@ import { useUSDTContract } from "hooks/useUSDTContract";
 import { NFT_DAO_PROPERTY } from "constant/address";
 import { CURRENT_CHAIN_ID } from "lib/contractFactory";
 import { useGenesis } from "hooks/useGenesis";
+import { useEffect, useState } from "react";
+import { fromBn } from "evm-bn";
 
 const useDao = () => {
   const { contract, isInitialLoading, isLoading, isError } = useDaoContract();
   const { contract: usdtContract } = useUSDTContract();
   const { isInitialize } = useGenesis();
   const address = useAddress();
+  const [sponsorReferral, setSponsorReferral] = useState(0);
 
   const validateBalance = async (id: number, amount: number) => {
     const villa = await contract!.call("getVilla", [id]);
@@ -51,9 +54,28 @@ const useDao = () => {
     return await contract?.erc1155.balanceOf(address, id);
   };
 
+  const claimSponsorReward = async () => {
+    if (!address) return;
+    const tx = await contract?.call("claimSponsorReward");
+    setSponsorReferral(0);
+    return tx;
+  };
+
+  useEffect(() => {
+    if (address) getReferralBonus();
+  }, [address]);
+
+  const getReferralBonus = async () => {
+    if (!address) return;
+    const res = (await contract?.call("sponsorReward", [address])) ?? 0;
+    setSponsorReferral(Number(fromBn(res, 6)));
+  };
+
   return {
+    sponsorReferral,
     buy,
     getAmountMyVillaById,
+    claimSponsorReward,
     isLoading: isInitialLoading || isLoading || isInitialize,
     isError,
   };

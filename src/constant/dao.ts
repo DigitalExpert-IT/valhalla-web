@@ -31,6 +31,24 @@ export const DATA_DAO = [
     sold: "0",
     value: "90",
     isComingSoon: false,
+    imageCaraousel: [
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_12.jpg?updatedAt=1698209422693",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_11.jpg?updatedAt=1698209422463",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_7.jpg?updatedAt=1698209420122",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_5.jpg?updatedAt=1698209417147",
+      },
+    ],
     image:
       "https://ik.imagekit.io/msxxxaegj/image_gn/turkey-villa.png?updatedAt=1697809212509",
     countryImage:

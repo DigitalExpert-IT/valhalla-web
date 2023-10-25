@@ -311,7 +311,7 @@ const Detail = () => {
                     <ListItem>{t("pages.dao.10")}</ListItem>
                     <ListItem>{t("pages.dao.11")}</ListItem>
                   </UnorderedList>
-                  <Text>
+                  {/* <Text>
                     Need more information? Reach us by our contact form{" "}
                     <Link
                       color={"#70FF75"}
@@ -319,7 +319,7 @@ const Detail = () => {
                     >
                       here.
                     </Link>
-                  </Text>
+                  </Text> */}
                 </Stack>
               </Stack>
             </Box>

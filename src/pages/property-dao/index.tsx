@@ -25,46 +25,43 @@ const Dao = () => {
           {/* <ModalAnnouncement isComingSoon={true} /> */}
           <SectionDao />
           <TableSponsorBonus />
-          <Flex justify={"center"}>
-            <Center
-              style={{
-                border: 1,
-                backgroundColor: "rgba(19, 8, 65, 0.5)",
-                borderColor: "rgba(19, 8, 65, 0.5)",
-                width: isMobileScreen ? "20.5rem" : "39rem",
-                height: isMobileScreen ? "3rem" : "5rem",
-                borderRadius: 5,
-                marginTop: 15,
-              }}
+          <Box display="flex" justifyContent="center" mt="2rem">
+            <Box
+              display="flex"
+              w={{ base: "100%", md: "41.5%" }}
+              flexDir={{ base: "column", md: "column", lg: "row", xl: "row" }}
+              backgroundColor="rgba(19, 8, 65, 0.5)"
+              borderColor="rgba(19, 8, 65, 0.5)"
+              rounded="md"
+              justifyContent="space-between"
+              p={5}
+              textAlign="center"
+              alignItems="center"
             >
-              <Flex flex={1} flexBasis={"row"} justifyContent={"space-between"}>
-                <Text
-                  fontWeight="400"
-                  fontSize={{ base: "10px", md: "sm", xl: "lg" }}
-                  mx="6"
-                  my="3"
-                  textTransform="uppercase"
-                >
-                  {t("pages.dao.sponsorLabel")}
-                </Text>
-                <Button
-                  variant="gradient"
-                  color={"white"}
-                  colorScheme="purple:blue"
-                  borderRadius={10}
-                  w={{ base: "6xs" }}
-                  mr="6"
-                  mt={1}
-                  fontFamily={"Poppins"}
-                  fontSize={isMobileScreen ? 10 : 20}
-                  isLoading={isLoading}
-                  onClick={exec}
-                >
-                  {sponsorReferral + " " + "USDT" + " " + t("common.claim")}
-                </Button>
-              </Flex>
-            </Center>
-          </Flex>
+              <Text
+                fontWeight="400"
+                fontSize={{ base: "10px", md: "sm", xl: "lg" }}
+                mx="6"
+                my="3"
+                textTransform="uppercase"
+              >
+                {t("pages.dao.sponsorLabel")}
+              </Text>
+              <Button
+                variant="gradient"
+                color={"white"}
+                colorScheme="purple:blue"
+                borderRadius={10}
+                w={{ base: "6xs" }}
+                fontFamily={"Poppins"}
+                fontSize={isMobileScreen ? 10 : 20}
+                isLoading={isLoading}
+                onClick={exec}
+              >
+                {sponsorReferral + " " + "USDT" + " " + t("common.claim")}
+              </Button>
+            </Box>
+          </Box>
           <SectionOwnedDao />
         </Box>
       </Box>

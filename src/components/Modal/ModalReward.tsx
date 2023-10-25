@@ -13,12 +13,13 @@ import { useTranslation } from "react-i18next";
 type Props = {
   rewardsAmount: number;
   claimRewards: () => void;
+  isLoading: boolean;
 };
 
 export const ModalReward = NiceModal.create<Props>(props => {
   const modal = useModal();
   const { t } = useTranslation();
-  const { claimRewards, rewardsAmount } = props;
+  const { claimRewards, rewardsAmount, isLoading } = props;
 
   return (
     <Modal
@@ -45,6 +46,7 @@ export const ModalReward = NiceModal.create<Props>(props => {
           borderRadius={3}
           fontWeight={800}
           onClick={claimRewards}
+          isLoading={isLoading}
         >
           {t("modal.rewards.claimRewards")}
         </Button>

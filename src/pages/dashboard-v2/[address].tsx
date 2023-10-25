@@ -21,7 +21,6 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
-import { withConnection, withCorrectAddress, withRegistration } from "hoc";
 import {
   SummaryDashboardV2,
   IDataItem,
@@ -31,6 +30,7 @@ import { useRouter } from "next/router";
 import { toBn } from "evm-bn";
 import { BigNumber } from "ethers";
 import { useModal } from "@ebay/nice-modal-react";
+import { useProvideBonus } from "hooks/award/useAwardProvideBonus";
 
 const PAGE_SIZE = 10;
 
@@ -38,14 +38,21 @@ const Dashboard = () => {
   const router = useRouter();
   const queryAddress = router.query.address;
   const { t } = useTranslation();
+  const {
+    reward,
+    claimBonusAsync,
+    isLoading: isLoadingBonus,
+  } = useProvideBonus();
 
   const rewardModal = useModal(ModalReward, {
-    rewardsAmount: 25000,
-    claimRewards: () => {},
+    rewardsAmount: reward,
+    claimRewards: claimBonusAsync,
+    isLoading: isLoadingBonus,
   });
+
   useEffect(() => {
-    rewardModal.show();
-  }, []);
+    if (reward) rewardModal.show();
+  }, [reward]);
 
   const toast = useToast();
   const [sortByProfit, setSortByProfit] = useState("ASC");
@@ -420,4 +427,4 @@ const Dashboard = () => {
   );
 };
 
-export default withConnection(withCorrectAddress(Dashboard));
+export default Dashboard;

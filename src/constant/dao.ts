@@ -25,12 +25,11 @@ export const SPONSOR_DAO: Array<ISponsorDao> = [
 export const DATA_DAO = [
   {
     id: "0",
-    country: "turkey",
+    country: "Türkiye",
     name: "Semidetached Villa in Bodrum",
-    detailName: "Fix Semidetached Villa in Bodrum",
     price: "100",
     sold: "0",
-    value: "22",
+    value: "90",
     isComingSoon: false,
     image:
       "https://ik.imagekit.io/msxxxaegj/image_gn/turkey-villa.png?updatedAt=1697809212509",
@@ -43,7 +42,7 @@ export const DATA_DAO = [
     name: "bali villa",
     price: "50",
     sold: "22",
-    value: "22",
+    value: "90",
     isComingSoon: true,
     image:
       "https://ik.imagekit.io/msxxxaegj/image_gn/balivilla.png?updatedAt=1697684134687",

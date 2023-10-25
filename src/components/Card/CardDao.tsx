@@ -61,7 +61,7 @@ export const CardDao: React.FC<ICardDao> = props => {
   return (
     <Box
       sx={outerBoxStyle}
-      onClick={isComingSoon ? () => {} : onClick}
+      onClick={isComingSoon ? () => { } : onClick}
       rounded="xl"
       cursor={isComingSoon ? "not-allowed" : "pointer"}
     >
@@ -90,9 +90,7 @@ export const CardDao: React.FC<ICardDao> = props => {
           {country}
         </Badge>
         <Box my="1rem">
-          <Text textTransform="capitalize" fontWeight="bold">
-            {name}
-          </Text>
+          <Text fontWeight="bold">{name}</Text>
         </Box>
         <Stack spacing="2" pb="5">
           <HStack justify="space-between">

@@ -70,7 +70,7 @@ export const SectionDao = () => {
                 name={DATA_DAO[idx].name}
                 sold={Number(item.sold)}
                 maxLot={Number(item.maxLot)}
-                value={"22"}
+                value={DATA_DAO[idx].value}
                 isComingSoon={DATA_DAO[idx].isComingSoon}
               />
             </WrapItem>

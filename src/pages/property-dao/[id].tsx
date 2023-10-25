@@ -105,7 +105,7 @@ const Detail = () => {
             >
               <Box>
                 <Heading size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}>
-                  {DATA_DAO[id].detailName}
+                  {DATA_DAO[id].name}
                 </Heading>
               </Box>
               <Box>
@@ -142,7 +142,7 @@ const Detail = () => {
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      22%
+                      90%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
@@ -254,7 +254,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Est.Appreciation
                 </Text>
-                <Text color="gray.500">22% / year</Text>
+                <Text color="gray.500">90% / year</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

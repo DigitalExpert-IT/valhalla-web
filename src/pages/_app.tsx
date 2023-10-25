@@ -4,10 +4,11 @@ import ee from "ee";
 import theme from "theme";
 import axios from "axios";
 import Head from "next/head";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useSwapContract } from "hooks";
 import type { AppProps } from "next/app";
 import { getActiveChain } from "lib/chain";
-// import { trustWallet } from "wallets/Trust";
 import NiceModal from "@ebay/nice-modal-react";
 import { useTranslation } from "react-i18next";
 import { PROJECT_NAME } from "constant/siteConfig";
@@ -15,6 +16,7 @@ import { useNFTContract } from "hooks/useNFTContract";
 import { useGenesisContract } from "hooks/useGenesisContract";
 import { useValhallaContract } from "hooks/useValhallaContract";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./globals.css";
 
 import {
   Box,
@@ -23,6 +25,7 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+
 import {
   ThirdwebProvider,
   metamaskWallet,
@@ -94,7 +97,7 @@ const Main = ({ Component, pageProps }: AppProps) => {
   const handleSwitchChain = () => {
     try {
       switchChain(targetChain?.chainId);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

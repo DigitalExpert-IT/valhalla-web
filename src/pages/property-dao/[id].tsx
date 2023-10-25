@@ -39,7 +39,11 @@ const Detail = () => {
   const router = useRouter();
   const [id, setId] = useState<any>(0);
   const daoContract = useDaoContract();
-  const { data } = useContractRead(daoContract.contract, "getVilla", [id]);
+  const { data, isLoading: loadingDao } = useContractRead(
+    daoContract.contract,
+    "getVilla",
+    [id]
+  );
 
   useEffect(() => {
     if (router.isReady) {
@@ -155,11 +159,15 @@ const Detail = () => {
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.investment")}</Text>
-                    <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      {data?.maxLot === data?.sold
-                        ? t("common.Completed")
-                        : t("common.inProgres")}
-                    </Text>
+                    {loadingDao ? (
+                      <Spinner />
+                    ) : (
+                      <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
+                        {data?.maxLot === data?.sold
+                          ? t("common.Completed")
+                          : t("common.inProgres")}
+                      </Text>
+                    )}
                   </Box>
                 </Stack>
               </Box>

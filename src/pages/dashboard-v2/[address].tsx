@@ -12,16 +12,21 @@ import {
   useToast,
   Stack,
 } from "@chakra-ui/react";
-import { useListDownlines, useListLevel, useScreen, useSummary } from "hooks";
+import {
+  useAsyncCall,
+  useListDownlines,
+  useListLevel,
+  useScreen,
+  useSummary,
+} from "hooks";
 import { prettyBn, shortenAddress } from "utils";
-import { HeaderDashboard } from "components";
+import { HeaderDashboard, ModalReward } from "components";
 import { useTranslation } from "react-i18next";
 import { LayoutDashboard } from "components/Layout/LayoutDashboard";
 import { BsFillPersonFill } from "react-icons/bs";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { rankMap, RANK_SYMBOL_MAP, MAX_DOWNLINES_LEVEL } from "constant/rank";
 import _ from "lodash";
-import { withConnection, withCorrectAddress, withRegistration } from "hoc";
 import {
   SummaryDashboardV2,
   IDataItem,
@@ -30,6 +35,9 @@ import {
 import { useRouter } from "next/router";
 import { toBn } from "evm-bn";
 import { BigNumber } from "ethers";
+import NiceModal from "@ebay/nice-modal-react";
+import { useProvideBonus } from "hooks/award/useAwardProvideBonus";
+import { withConnection, withCorrectAddress } from "hoc";
 
 const PAGE_SIZE = 10;
 
@@ -37,6 +45,32 @@ const Dashboard = () => {
   const router = useRouter();
   const queryAddress = router.query.address;
   const { t } = useTranslation();
+  const {
+    reward,
+    claimBonusAsync,
+    isLoading: isLoadingBonus,
+  } = useProvideBonus();
+
+  const { exec } = useAsyncCall(claimBonusAsync);
+
+  const claimRewards = (cb?: () => void) => async () => {
+    await exec();
+    if (cb) cb();
+  };
+
+  const showRewardModal = () => {
+    NiceModal.show(ModalReward, {
+      rewardsAmount: reward,
+      claimRewards: claimRewards,
+      isLoading: isLoadingBonus,
+    });
+  };
+
+  useEffect(() => {
+    if (reward) {
+      showRewardModal();
+    }
+  }, [reward]);
 
   const toast = useToast();
   const [sortByProfit, setSortByProfit] = useState("ASC");

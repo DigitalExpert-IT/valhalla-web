@@ -46,3 +46,9 @@ export const USDT_CONTRACT = {
   "0x13881": "0xC8AF24E3F8C4f2f07bd61c633F65288204b08b82",
   "0x29a": "0x9E44c3acb0423031b97F0182360b0d7f4D41F4dA",
 };
+
+export const AWARD_OMZET = {
+  "0x89": "",
+  "0x13881": "0x2E10A3a2f388E2bd3be75cDe9844aE727A1A30F4",
+  "0x29a": "",
+};

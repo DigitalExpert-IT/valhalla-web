@@ -31,6 +31,7 @@ import { toBn } from "evm-bn";
 import { BigNumber } from "ethers";
 import { useModal } from "@ebay/nice-modal-react";
 import { useProvideBonus } from "hooks/award/useAwardProvideBonus";
+import { withConnection, withCorrectAddress } from "hoc";
 
 const PAGE_SIZE = 10;
 
@@ -427,4 +428,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withConnection(withCorrectAddress(Dashboard));

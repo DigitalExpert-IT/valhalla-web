@@ -74,20 +74,33 @@ const Detail = () => {
   };
 
   const settings = {
-    customPaging: () => {
+    customPaging: (i: any) => {
       return (
-        <Box>
-          <Image src={DATA_DAO[id].image} alt="nft-details" w="500%" />
-        </Box>
+        <div style={{ width: "80px", height: "80px" }}>
+          <Image
+            src={DATA_DAO[id].imageCaraousel![i]?.picture}
+            alt="nft-details"
+            style={{
+              width: "80px",
+              height: "80px",
+              objectFit: "cover",
+              borderRadius: "10px",
+            }}
+          />
+        </div>
       );
     },
     dots: true,
+    arrows: false,
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  const stockRemain = data?.maxLot - data?.sold;
+  const fractionPercen = ((data?.maxLot - data?.sold) / data?.maxLot) * 100;
 
   return (
     <LayoutMainV2>
@@ -104,33 +117,24 @@ const Detail = () => {
             direction={{ base: "column", md: "column", lg: "row" }}
             pt="2rem"
             spacing="3rem"
+            mb={{ base: "2rem", md: "8rem" }}
           >
-            <Box w={{ xl: "50%", md: "100%", sm: "85%" }}>
+            <Box w={{ xl: "50%", md: "100%", sm: "85%", lg: "50%" }} mb={{ base: "5rem" }}>
               <Slider {...settings}>
-                <Box>
-                  <AspectRatio
-                    maxW={{ base: "100%", md: "900px" }}
-                    ratio={{ base: 1, md: 4 / 3 }}
-                  >
-                    <Image
-                      rounded={"md"}
-                      src={DATA_DAO[id].image}
-                      alt="nft-detail"
-                    />
-                  </AspectRatio>
-                </Box>
-                <Box>
-                  <AspectRatio
-                    maxW={{ base: "100%", md: "900px" }}
-                    ratio={{ base: 1, md: 4 / 3 }}
-                  >
-                    <Image
-                      rounded={"md"}
-                      src={DATA_DAO[id].image}
-                      alt="nft-detail"
-                    />
-                  </AspectRatio>
-                </Box>
+                {DATA_DAO[id].imageCaraousel!.map((item, idx) => (
+                  <Box key={idx}>
+                    <AspectRatio
+                      maxW={{ base: "100%", md: "900px" }}
+                      ratio={{ base: 1, md: 4 / 3 }}
+                    >
+                      <Image
+                        rounded={"md"}
+                        src={item.picture}
+                        alt="nft-detail"
+                      />
+                    </AspectRatio>
+                  </Box>
+                ))}
               </Slider>
             </Box>
             <Stack
@@ -171,7 +175,7 @@ const Detail = () => {
                       {data?.sold.toString()}
                     </Text>
                     <Text fontWeight="bold">
-                      100% ({data?.maxLot.toString()})
+                      {`${fractionPercen.toFixed(1)}% (${stockRemain})`}
                     </Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
@@ -293,7 +297,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Exit Date
                 </Text>
-                <Text color="gray.500">30/08/2023</Text>
+                <Text color="gray.500">30/08/2024</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">

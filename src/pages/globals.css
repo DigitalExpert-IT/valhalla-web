@@ -1,0 +1,13 @@
+.slick-thumb {
+  bottom: -100px;
+}
+
+.slick-thumb li {
+  width: 80px;
+  height: 80px;
+  filter: grayscale(100%);
+}
+
+.slick-thumb li.slick-active {
+  filter: grayscale(0%)
+}

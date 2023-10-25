@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { LayoutMainV2, ModalAnnouncement, TableSponsorBonus } from "components";
 import { SectionDao, SectionOwnedDao } from "components/pages";
+import { withConnection } from "hoc";
 
 const Dao = () => {
   return (

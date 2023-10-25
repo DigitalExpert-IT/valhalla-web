@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useRef, useEffect, useMemo } from "react";
 import { renderToString } from "react-dom/server";
 import { Box, BoxProps, IconButton, Stack } from "@chakra-ui/react";

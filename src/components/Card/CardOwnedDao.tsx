@@ -69,8 +69,8 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
               </Badge>
             </HStack>
             <HStack justify="space-between">
-              <Text>Est. Return</Text>
-              <Text>22% / Year</Text>
+              <Text>Est. Appreciation</Text>
+              <Text>90% / Year</Text>
             </HStack>
             <HStack justify="space-between">
               <Text>Amount</Text>

@@ -14,8 +14,8 @@ interface ICardDao {
   country?: string;
   name?: string;
   price?: string;
-  sold?: string;
-  maxLot?: string;
+  sold: number;
+  maxLot: number;
   value?: string;
   image?: string;
   countryImage?: string;
@@ -61,7 +61,7 @@ export const CardDao: React.FC<ICardDao> = props => {
   return (
     <Box
       sx={outerBoxStyle}
-      onClick={isComingSoon ? () => {} : onClick}
+      onClick={isComingSoon ? () => { } : onClick}
       rounded="xl"
       cursor={isComingSoon ? "not-allowed" : "pointer"}
     >
@@ -90,9 +90,7 @@ export const CardDao: React.FC<ICardDao> = props => {
           {country}
         </Badge>
         <Box my="1rem">
-          <Text textTransform="capitalize" fontWeight="bold">
-            {name}
-          </Text>
+          <Text fontWeight="bold">{name}</Text>
         </Box>
         <Stack spacing="2" pb="5">
           <HStack justify="space-between">
@@ -107,13 +105,24 @@ export const CardDao: React.FC<ICardDao> = props => {
               {price} usdt
             </Badge>
           </HStack>
+
+          <HStack justify="space-between">
+            <Text>Fraction Sold</Text>
+            <Text>{sold}</Text>
+          </HStack>
+
           <HStack justify="space-between">
             <Text>Max Lot</Text>
             <Text>{maxLot} Lot</Text>
           </HStack>
 
           <HStack justify="space-between">
-            <Text>Est. Return</Text>
+            <Text>Remaining Lot</Text>
+            <Text>{maxLot - sold} Lot</Text>
+          </HStack>
+
+          <HStack justify="space-between">
+            <Text>Est. Appreciation</Text>
             <Text>{value}% / Year</Text>
           </HStack>
         </Stack>

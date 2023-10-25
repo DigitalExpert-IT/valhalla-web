@@ -44,6 +44,11 @@ export const useProvideBonus = () => {
     return bonusAsync;
   };
 
+  // const claimBonusAsync = async () => {
+  //   const bonusAsync = await awardContract?.call("claimBonusOmzet");
+  //   return bonusAsync;
+  // };
+
   return {
     reward,
     isLoading: isLoading || isInitialLoading || isLoadingClaimBonusOmzet,

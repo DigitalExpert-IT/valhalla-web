@@ -12,7 +12,13 @@ import {
   useToast,
   Stack,
 } from "@chakra-ui/react";
-import { useListDownlines, useListLevel, useScreen, useSummary } from "hooks";
+import {
+  useAsyncCall,
+  useListDownlines,
+  useListLevel,
+  useScreen,
+  useSummary,
+} from "hooks";
 import { prettyBn, shortenAddress } from "utils";
 import { HeaderDashboard, ModalReward } from "components";
 import { useTranslation } from "react-i18next";
@@ -29,7 +35,7 @@ import {
 import { useRouter } from "next/router";
 import { toBn } from "evm-bn";
 import { BigNumber } from "ethers";
-import { useModal } from "@ebay/nice-modal-react";
+import NiceModal from "@ebay/nice-modal-react";
 import { useProvideBonus } from "hooks/award/useAwardProvideBonus";
 import { withConnection, withCorrectAddress } from "hoc";
 
@@ -45,14 +51,25 @@ const Dashboard = () => {
     isLoading: isLoadingBonus,
   } = useProvideBonus();
 
-  const rewardModal = useModal(ModalReward, {
-    rewardsAmount: reward,
-    claimRewards: claimBonusAsync,
-    isLoading: isLoadingBonus,
-  });
+  const { exec } = useAsyncCall(claimBonusAsync);
+
+  const claimRewards = (cb?: () => void) => async () => {
+    await exec();
+    if (cb) cb();
+  };
+
+  const showRewardModal = () => {
+    NiceModal.show(ModalReward, {
+      rewardsAmount: reward,
+      claimRewards: claimRewards,
+      isLoading: isLoadingBonus,
+    });
+  };
 
   useEffect(() => {
-    if (reward) rewardModal.show();
+    if (reward) {
+      showRewardModal();
+    }
   }, [reward]);
 
   const toast = useToast();

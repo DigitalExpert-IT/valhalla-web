@@ -51,10 +51,10 @@ export const NAVIGATION: Array<INavigation> = [
     name: "profile",
     href: "/profile",
   },
-  {
-    name: "myNetwork",
-    href: "/dashboard-v2/[address]",
-  },
+  // {
+  //   name: "myNetwork",
+  //   href: "/dashboard-v2/[address]",
+  // },
 ];
 
 export const SOCIAL: Array<ISocial> = [

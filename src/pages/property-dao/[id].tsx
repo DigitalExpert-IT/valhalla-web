@@ -100,7 +100,8 @@ const Detail = () => {
   };
 
   const stockRemain = data?.maxLot - data?.sold;
-  const fractionPercen = ((data?.maxLot - data?.sold) / data?.maxLot) * 100;
+  // TODO: Takon disek jul
+  const fractionPercen = (data?.sold * 100) / data?.maxLot;
 
   return (
     <LayoutMainV2>
@@ -177,9 +178,9 @@ const Detail = () => {
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       {data?.sold.toString()}
                     </Text>
-                    <Text fontWeight="bold">
-                      {`${fractionPercen.toFixed(1)}% (${stockRemain})`}
-                    </Text>
+                    <Text fontWeight="bold">{`${fractionPercen.toFixed(
+                      2
+                    )}% (from ${data?.maxLot})`}</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>

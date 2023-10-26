@@ -42,10 +42,6 @@ export const DATA_DAO = [
       },
       {
         picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_7.jpg?updatedAt=1698209420122",
-      },
-      {
-        picture:
           "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_5.jpg?updatedAt=1698209417147",
       },
       {

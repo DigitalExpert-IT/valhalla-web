@@ -7,18 +7,18 @@ export interface ISponsorDao {
 export const SPONSOR_DAO: Array<ISponsorDao> = [
   {
     level: "1",
+    percentage: "5%",
+    value: "5 USDT",
+  },
+  {
+    level: "2",
     percentage: "3%",
     value: "3 USDT",
   },
   {
-    level: "2",
+    level: "3",
     percentage: "2%",
     value: "2 USDT",
-  },
-  {
-    level: "3",
-    percentage: "1%",
-    value: "1 USDT",
   },
 ];
 
@@ -47,6 +47,22 @@ export const DATA_DAO = [
       {
         picture:
           "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_5.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_9.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_10.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_2.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_7.jpg?updatedAt=1698209417147",
       },
     ],
     image:

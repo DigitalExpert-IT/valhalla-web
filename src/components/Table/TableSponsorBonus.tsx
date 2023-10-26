@@ -1,5 +1,4 @@
 import React from "react";
-import { IRankBonusV2, RANKBONUSV2 } from "constant/pages/home";
 import { ISponsorDao, SPONSOR_DAO } from "constant/dao";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Trans } from "react-i18next";

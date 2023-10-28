@@ -26,25 +26,26 @@ const useDao = () => {
     }
   };
 
-  const validateAllowance = async (id: number) => {
+  const validateAllowance = async (id: number, amount: number) => {
     const allowance = await usdtContract?.erc20.allowance(
       NFT_DAO_PROPERTY[CURRENT_CHAIN_ID]
     );
 
     const villa = await contract?.call("getVilla", [id]);
+    if (!allowance?.value) return;
 
     //TODO: set allowance should be seperated to another function
-    if (allowance?.value! < villa.price) {
+    if (Number(allowance?.value!) < villa.price * amount) {
       await usdtContract?.erc20.setAllowance(
         NFT_DAO_PROPERTY[CURRENT_CHAIN_ID],
-        villa.price * 5
+        villa.price * amount
       );
     }
   };
 
   const buy = async (id: number, amount: number) => {
     await validateBalance(id, amount);
-    await validateAllowance(id);
+    await validateAllowance(id, amount);
 
     return await contract?.call("buyVilla", [id, amount]);
   };

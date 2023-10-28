@@ -76,7 +76,7 @@ const Detail = () => {
   const settings = {
     customPaging: (i: any) => {
       return (
-        <div style={{ width: "80px", height: "80px" }}>
+        <Box>
           <Image
             src={DATA_DAO[id].imageCaraousel![i]?.picture}
             alt="nft-details"
@@ -87,7 +87,7 @@ const Detail = () => {
               borderRadius: "10px",
             }}
           />
-        </div>
+        </Box>
       );
     },
     dots: true,
@@ -99,8 +99,6 @@ const Detail = () => {
     slidesToScroll: 1,
   };
 
-  const stockRemain = data?.maxLot - data?.sold;
-  // TODO: Takon disek jul
   const fractionPercen = (data?.sold * 100) / data?.maxLot;
 
   return (
@@ -122,7 +120,7 @@ const Detail = () => {
           >
             <Box
               w={{ xl: "50%", md: "100%", sm: "85%", lg: "50%" }}
-              mb={{ base: "5rem" }}
+              mb={{ base: "10rem", md: "5rem" }}
             >
               <Slider {...settings}>
                 {DATA_DAO[id].imageCaraousel!.map((item, idx) => (
@@ -141,11 +139,7 @@ const Detail = () => {
                 ))}
               </Slider>
             </Box>
-            <Stack
-              spacing={{ base: "0.5rem", md: "1rem" }}
-              flex={1}
-              justifyContent={"space-between"}
-            >
+            <Stack spacing={{ base: "0.5rem" }} flex={1}>
               <Box>
                 <Heading size={{ base: "xl", md: "xl", lg: "xl", xl: "3xl" }}>
                   {DATA_DAO[id].name}
@@ -171,7 +165,7 @@ const Detail = () => {
                   {DATA_DAO[id].country}
                 </Badge>
               </Box>
-              <Box maxW={{ base: "100%", md: "80%" }} pt="1rem">
+              <Box maxW={{ base: "100%", md: "80%" }} pt="5rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>

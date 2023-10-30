@@ -120,7 +120,7 @@ const Detail = () => {
           >
             <Box
               w={{ xl: "50%", md: "100%", sm: "85%", lg: "50%" }}
-              mb={{ base: "10rem", md: "5rem" }}
+              mb={{ base: "15rem", xs: "10rem", md: "5rem" }}
             >
               <Slider {...settings}>
                 {DATA_DAO[id].imageCaraousel!.map((item, idx) => (

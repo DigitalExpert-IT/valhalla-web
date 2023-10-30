@@ -15,19 +15,17 @@
 @media (max-width: 480px) {
   .slick-thumb {
     bottom: -180px;
-  }
-  .slick-thumb li {
-    width: 80px;
-    height: 80px;
-  }
+  } 
+}
+
+@media (max-width: 375px) {
+  .slick-thumb {
+    bottom: -280px;
+  } 
 }
 
 @media (width: 1024px) {
   .slick-thumb {
     bottom: -180px;
-  }
-  .slick-thumb li {
-    width: 80px;
-    height: 80px;
-  }
+  } 
 }

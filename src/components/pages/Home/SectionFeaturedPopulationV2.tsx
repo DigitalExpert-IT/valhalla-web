@@ -84,7 +84,7 @@ export const SectionFeaturedPopulationV2 = () => {
         >
           <Heading
             mb="6"
-            size={{ base: "lg", md: "4xl" }}
+            size={{ base: "lg", md: "3xl" }}
             lineHeight="101%"
             fontWeight="extrabold"
           >

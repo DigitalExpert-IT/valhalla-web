@@ -169,12 +169,22 @@ const Detail = () => {
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
-                    <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      {data?.sold.toString()}
-                    </Text>
-                    <Text fontWeight="bold">{`${fractionPercen.toFixed(
-                      2
-                    )}% (from ${data?.maxLot})`}</Text>
+                    <LoaderSuspense
+                      component={
+                        <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
+                          {data?.sold.toString()}
+                        </Text>
+                      }
+                      data={data?.sold}
+                    />
+                    <LoaderSuspense
+                      component={
+                        <Text fontWeight="bold">{`${fractionPercen.toFixed(
+                          2
+                        )}% (from ${data?.maxLot})`}</Text>
+                      }
+                      data={data?.maxLot}
+                    />
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>
@@ -185,22 +195,28 @@ const Detail = () => {
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.price")}</Text>
-                    <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      {prettyBn(data?.price, 6)} USDT
-                    </Text>
+                    <LoaderSuspense
+                      component={
+                        <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
+                          {prettyBn(data?.price, 6)} USDT
+                        </Text>
+                      }
+                      data={data?.price}
+                    />
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.investment")}</Text>
-                    {loadingDao ? (
-                      <Spinner />
-                    ) : (
-                      <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                        {data?.maxLot === data?.sold
-                          ? t("common.Completed")
-                          : t("common.inProgres")}
-                      </Text>
-                    )}
+                    <LoaderSuspense
+                      component={
+                        <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
+                          {data?.maxLot === data?.sold
+                            ? t("common.Completed")
+                            : t("common.inProgres")}
+                        </Text>
+                      }
+                      data={loadingDao}
+                    />
                   </Box>
                 </Stack>
               </Box>
@@ -436,4 +452,16 @@ const Detail = () => {
     </LayoutMainV2>
   );
 };
+
+// move this to helper if it used widely
+interface LoaderSuspenseProps {
+  component: React.ReactElement;
+  data: any;
+}
+
+const LoaderSuspense = (props: LoaderSuspenseProps) => {
+  const { component, data } = props;
+  return data ? component : <Spinner />;
+};
+
 export default Detail;

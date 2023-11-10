@@ -15,10 +15,6 @@ import {
   SectionFeaturesV2,
   SectionPropertyNft,
   SectionNftFarming,
-  NftFarming,
-  NftGenesis,
-  NftProperty,
-  NftShareToEarn,
   SectionNftGenesis,
   SectionShareToEarn,
 } from "components";
@@ -42,6 +38,7 @@ export default function Home() {
         <SectionShareToEarn />
       </Box>
       <Box bgColor="#6D02C9">
+        <TableRankNetworkV2 />
         <TableRankBonusV2 />
       </Box>
       <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">

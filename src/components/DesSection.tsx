@@ -1,10 +1,12 @@
 import React from "react";
-import { AspectRatio, Box, Stack, Text, Image } from "@chakra-ui/react";
+import { Box, Stack, Text, Image, Button } from "@chakra-ui/react";
 
 interface IDesSection {
   description: string;
   images: string;
   reverse?: boolean;
+  withbutton?: boolean;
+  link?: string;
 }
 
 export const DesSection: React.FC<IDesSection> = props => {
@@ -21,6 +23,15 @@ export const DesSection: React.FC<IDesSection> = props => {
     >
       <Box justifyItems="stretch" flex={1} textAlign="justify">
         <Text fontSize="xl">{props.description}</Text>
+        <Button
+          display={props.withbutton ? "block" : "none"}
+          variant={"gradient"}
+          mt="2rem"
+          rounded="lg"
+          colorScheme="pink:blue"
+        >
+          Learn More
+        </Button>
       </Box>
       <Stack flex={1} align="center">
         <Image

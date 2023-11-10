@@ -17,7 +17,3 @@ export * from "./SectionPropertyNft";
 export * from "./SectionNftFarming";
 export * from "./SectionNftGenesis";
 export * from "./SectionShareToEarn";
-export * from "./NftFarming";
-export * from "./NftGenesis";
-export * from "./NftProperty";
-export * from "./NftShareToearn";

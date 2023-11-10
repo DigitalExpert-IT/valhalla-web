@@ -16,3 +16,4 @@ export * from "./pages/Home";
 export * from "./Table";
 export * from "./TableUtils";
 export * from "./LazyVideo";
+export * from "./DesSection";

@@ -86,7 +86,7 @@ export const SectionHeaderV2 = () => {
             }}
           />
         </Text>
-        <Box display={{ md: "flex" }}>
+        <Box display={{ md: "flex" }} alignSelf={isMobileScreen ? "center" : "left"}>
           <Box>
             <ChakraLink href={"https://t.me/globalnetworkweb3"} isExternal>
               <Image

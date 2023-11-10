@@ -13,10 +13,10 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
-  NftFarming,
-  NftGenesis,
-  NftProperty,
-  NftShareToEarn,
+  SectionPropertyNft,
+  SectionNftFarming,
+  SectionNftGenesis,
+  SectionShareToEarn,
 } from "components";
 
 export default function Home() {
@@ -29,22 +29,16 @@ export default function Home() {
         <SectionFeaturesV2 />
       </Container>
       <SectionFeaturedPopulationV2 />
-      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
-        <NftFarming />
+      <Box bgGradient="linear-gradient(#2C1FA7 0%, #8500b1 50%, #2C1FA7 100%)">
+        <SectionNftFarming />
+        <SectionNftGenesis />
       </Box>
-      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
-        <NftGenesis />
-      </Box>
-      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
-        <NftProperty />
-      </Box>
-      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
-        <NftShareToEarn />
-      </Box>
-      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
-        <TableRankNetworkV2 />
+      <Box bgGradient="linear-gradient(#2C1FA7 0%, #8500b1 50%, #6D02C9 100%)">
+        <SectionPropertyNft />
+        <SectionShareToEarn />
       </Box>
       <Box bgColor="#6D02C9">
+        <TableRankNetworkV2 />
         <TableRankBonusV2 />
       </Box>
       <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">

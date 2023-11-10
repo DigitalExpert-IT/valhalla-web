@@ -312,7 +312,7 @@
     },
     "feature": {
       "title": "FEATURES",
-      "subtitle": "Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications. Every application and utility will be build upon decentralized network marketing referral contract. Get royalty from referral sales up to 100 levels."
+      "subtitle": "Global Network Defi aims to revolutionize the world of community marketing by decentralizing millions of users through web3 applications. Every application and utility will be build upon decentralized community marketing referral contract. Get royalty from referral sales up to 100 levels."
     },
     "sectionFeature": {
       "fullTransparency": {
@@ -343,11 +343,11 @@
     },
     "populationSection": {
       "title": "<strong>Global Decentralized</strong> Community Marketing",
-      "content": "Only 1% of the 7.96 billion people on earth own a cryptocurrency wallet. We are still in the early stages of this market, but as most people now own smartphones, they have the potential to own a crypto wallet and cryptocurrencies.You can earn passive income by building a network marketing DeFi platform with the <strong> Global Network</strong>. All products built will be sold through the Global Network DeFi. This includes NFT farming, share-to-earn, royalty properties, crypto cafes, metaverse projects, and more.Join us to access the world's best community referral program for all things crypto, DeFi, metaverse, and blockchain related and start earning profits."
+      "content": "Global Decentralized Community Marketing Currently, only 1% of the 7.96 billion people on Earth own a cryptocurrency wallet, indicating that we are still in the early stages of this market. However, with the widespread ownership of smartphones, there's a growing potential for more people to own crypto wallets and cryptocurrencies. The Global Network Platform offers an opportunity to earn residual income by building a community. All products, including NFT farming, share-to-earn initiatives, royalty properties, crypto cafes, metaverse projects, and more, will be sold through the Global Network DeFi referral contract. Join us to access the world's premier community referral program for everything related to crypto, DeFi, the metaverse, and blockchain, and start earning income"
     },
     "project": {
       "title": "Project",
-      "description": "All applications and utilities will be built on a decentralized network platform"
+      "description": "All applications and utilities will be built on a decentralized community platform"
     }
   },
   "nftFarming": {
@@ -447,7 +447,7 @@
     "errors": {
       "invalidDate": "Invalid Date"
     },
-    "billboard": "The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications",
+    "billboard": "The Global Network aims to revolutionize the community marketing industry by decentralizing millions of users to web3 applications",
     "revenue": "Revenue"
   },
   "shareToEarn": {

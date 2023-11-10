@@ -3,7 +3,7 @@ import { Stack, Heading } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { DesSection } from "components/DesSection";
 
-export const SectionPropertyNft = () => {
+export const SectionShareToEarn = () => {
   const { t } = useTranslation();
 
   return (
@@ -15,7 +15,7 @@ export const SectionPropertyNft = () => {
         textTransform="uppercase"
         mb={{ sm: "8" }}
         _after={{
-          content: `'${t("pages.home.nftProperty.title")}'`,
+          content: `'${t("pages.home.shareToEarn.title")}'`,
           alignSelf: "center",
           display: "block",
           fontSize: { xl: "200", lg: "145", md: "110", xs: "60", base: "45" },
@@ -25,11 +25,12 @@ export const SectionPropertyNft = () => {
           textTransform: "uppercase",
         }}
       >
-        {t("pages.home.nftProperty.title")}
+        {t("pages.home.shareToEarn.title")}
       </Heading>
       <DesSection
-        description={t("pages.home.nftProperty.content")}
-        images="https://ik.imagekit.io/msxxxaegj/image_gn/property_dao.png?updatedAt=1699532522390"
+        description={t("pages.home.shareToEarn.content")}
+        images="https://ik.imagekit.io/msxxxaegj/image_gn/share_2_earn.png?updatedAt=1699532595826"
+        reverse
       />
     </Stack>
   );

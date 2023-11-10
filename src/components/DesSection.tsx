@@ -1,27 +1,34 @@
 import React from "react";
 import { AspectRatio, Box, Stack, Text, Image } from "@chakra-ui/react";
 
-export const DesSection = () => {
+interface IDesSection {
+  description: string;
+  images: string;
+  reverse?: boolean;
+}
+
+export const DesSection: React.FC<IDesSection> = props => {
   return (
-    <Stack direction="row">
-      <Box justifyItems="stretch" flex={1}>
-        <Text>
-          We leverage the power of blockchain technology to fractionize real
-          estate properties into smaller, more affordable shares, represented by
-          Non-Fungible Tokens (NFTs). This means you can own a piece of premium
-          real estate for a fraction of the traditional price, allowing you to
-          step into the real estate market and build your portfolio, regardless
-          of your budget!
-        </Text>
+    <Stack
+      direction={{
+        base: "column-reverse",
+        md: props.reverse ? "row-reverse" : "row",
+      }}
+      justify="center"
+      align="center"
+      spacing="2rem"
+      px="10"
+    >
+      <Box justifyItems="stretch" flex={1} textAlign="justify">
+        <Text fontSize="xl">{props.description}</Text>
       </Box>
-      <Box flex={1}>
-        <AspectRatio>
-          <Image
-            src="https://ik.imagekit.io/msxxxaegj/image_gn/property_dao.png?updatedAt=1699532522390"
-            alt="image-des"
-          />
-        </AspectRatio>
-      </Box>
+      <Stack flex={1} align="center">
+        <Image
+          src={props.images}
+          alt="image-des"
+          w={{ base: "100%", md: "600px" }}
+        />
+      </Stack>
     </Stack>
   );
 };

@@ -13,6 +13,7 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
+  SectionPropertyNft,
 } from "components";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
       </Container>
       <SectionFeaturedPopulationV2 />
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+        <SectionPropertyNft />
         <TableRankNetworkV2 />
       </Box>
       <Box bgColor="#6D02C9">

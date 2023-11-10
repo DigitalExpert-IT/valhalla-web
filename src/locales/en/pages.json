@@ -42,6 +42,22 @@
       "title": "Our Team Member",
       "subTitle": "TEAM"
     },
+    "nftFarming": {
+      "title": "NFT Farming",
+      "content": "NFT Farming is a unique way to earn tokens in the world of blockchain. When you buy an NFT (Non-Fungible Token) and keep it in your digital wallet, you have the power to claim tokens for yourself from a smart contract. What makes NFT Farming special is that you can also sell or transfer your rights to receive these tokens from the smart contract. This means you have control over your earnings and can choose how to manage them. It's a flexible and exciting way to participate in blockchain projects."
+    },
+    "nftGenesis": {
+      "title": "NFT Genesis",
+      "content": "Genesis NFTs represent ownership in the GLOBAL NETWORK DEFI platform. When platform users make purchases, a portion of the sales goes into the Genesis NFT Owner Pool. Genesis NFT Owners can claim dividends in realtime via smart contract."
+    },
+    "nftProperty": {
+      "title": "PROPERTY NFT",
+      "content": "Genesis NFTs represent ownership in the GLOBAL NETWORK DEFI platform. When platform users make purchases, a portion of the sales goes into the Genesis NFT Owner Pool. Genesis NFT Owners can claim dividends in realtime via smart contract."
+    },
+    "shareToEarn": {
+      "title": "SHARE TO Earn",
+      "content": " \" Share to Earn \" is a feature that allows our active community members promote brands online and get paid for it. Our community is super important, and now they can make awesome content, share it on social media, and earn rewards through smart contracts. This helps our partner projects and clients get more attention for their brands, and it gives our community a way to make money by being social media influencers. \"Share to Earn\" is more than just a feature; it's a team effort to get the word out, recognize influence, and create a future where we all make money together in the digital world."
+    },
     "partnershipSection": "Partnership",
     "rankNetwork": "Global network plan",
     "maticPlan": "Matic plan",

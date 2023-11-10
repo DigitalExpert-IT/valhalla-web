@@ -13,3 +13,7 @@ export * from "./SectionHeaderV2";
 export * from "./SectionTeamV2";
 export * from "./ProjectImage";
 export * from "./SectionTeamV3";
+export * from "./NftFarming";
+export * from "./NftGenesis";
+export * from "./NftProperty";
+export * from "./NftShareToearn";

@@ -1,6 +1,6 @@
 import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
 import { useTranslation } from "react-i18next";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Heading } from "@chakra-ui/react";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -13,6 +13,10 @@ import {
   TableRankBonusV2,
   TableRankNetworkV2,
   SectionFeaturesV2,
+  NftFarming,
+  NftGenesis,
+  NftProperty,
+  NftShareToEarn,
 } from "components";
 
 export default function Home() {
@@ -25,6 +29,18 @@ export default function Home() {
         <SectionFeaturesV2 />
       </Container>
       <SectionFeaturedPopulationV2 />
+      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+        <NftFarming />
+      </Box>
+      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
+        <NftGenesis />
+      </Box>
+      <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
+        <NftProperty />
+      </Box>
+      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
+        <NftShareToEarn />
+      </Box>
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <TableRankNetworkV2 />
       </Box>

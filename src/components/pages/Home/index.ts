@@ -14,3 +14,7 @@ export * from "./SectionTeamV2";
 export * from "./ProjectImage";
 export * from "./SectionTeamV3";
 export * from "./SectionPropertyNft";
+export * from "./NftFarming";
+export * from "./NftGenesis";
+export * from "./NftProperty";
+export * from "./NftShareToearn";

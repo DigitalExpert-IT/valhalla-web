@@ -37,10 +37,11 @@ export default function Home() {
         <SectionPropertyNft />
         <SectionShareToEarn />
       </Box>
-      <Box bgColor="#6D02C9">
+      {/* changes like the figma update*/}
+      {/* <Box bgColor="#6D02C9">
         <TableRankNetworkV2 />
         <TableRankBonusV2 />
-      </Box>
+      </Box> */}
       <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
         <SectionMatchingBonusV2 />
       </Box>
@@ -51,13 +52,14 @@ export default function Home() {
         textAlign="center"
         bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"
       >
-        <SectionTeamV3
+        {/* changes like the figma update*/}
+        {/* <SectionTeamV3
           image={OURTEAMV3.image}
           name={OURTEAMV3.name}
           occupation={OURTEAMV3.occupation}
           social={OURTEAMV3.social}
           quotes={t("pages.home.quotes")}
-        />
+        /> */}
         <SectionPartnershipV2 data={PARTNERSHIP} />
       </Box>
     </LayoutMainV2>

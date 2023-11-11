@@ -42,12 +42,12 @@ export default function Home() {
         <TableRankNetworkV2 />
         <TableRankBonusV2 />
       </Box> */}
-      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
+      {/* <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
         <SectionMatchingBonusV2 />
       </Box>
       <Box bgGradient="linear(#2C1FA7 0%, #401fa7 5%, #2C1FA7 30%)">
         <SectionRoadmapV2 />
-      </Box>
+      </Box> */}
       <Box
         textAlign="center"
         bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"

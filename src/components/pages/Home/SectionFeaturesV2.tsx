@@ -32,7 +32,7 @@ export const SectionFeaturesV2 = () => {
           textTransform: "uppercase",
           color: "whiteAlpha.100",
           transform: {
-            base: "scale(3) translateY(-9px) translateX(1px)",
+            base: "scale(2.5) translateY(-13px) translateX(1px)",
             md: "scale(3) translateY(-15px)",
             xl: "scale(4) translateY(-8px)",
           },

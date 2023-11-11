@@ -13,7 +13,7 @@ export const SectionFeaturedPopulationV2 = () => {
   return (
     <Box
       bgGradient="linear-gradient(180deg, #191272 0%, #2C1FA7 100%)"
-      h={isLargerThan2000 ? "60vh" : { base: "70vh", md: "100vh" }}
+      h={isLargerThan2000 ? "60vh" : { base: "full", md: "100vh" }}
       mt={{ base: 10, md: 40 }}
       display="flex"
       alignItems="center"

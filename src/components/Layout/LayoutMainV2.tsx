@@ -12,7 +12,7 @@ export const LayoutMainV2: React.FC<MainProps> = ({ children }) => {
       <Metadata
         language="en"
         author="Global Network"
-        description="The Global Network Defi aims to revolutionize the world of network marketing by decentralizing millions of users through web3 applications"
+        description="The Global Network aims to revolutionize the network marketing industry by decentralizing millions of users to web3 applications"
       />
       <Navbar />
       {children}

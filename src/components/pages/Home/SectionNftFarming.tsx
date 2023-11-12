@@ -8,7 +8,7 @@ export const SectionNftFarming = () => {
   const { t } = useTranslation();
 
   return (
-    <Stack pt={{ base: "0", md: "15rem" }} pos="relative">
+    <Stack pt={{ base: "2rem", md: "15rem" }} pos="relative" overflow={"hidden"}>
       <Stack pos="absolute" w="full" h="full" zIndex="1">
         <Image
           src="/assets/project/pattern2.png"
@@ -28,16 +28,19 @@ export const SectionNftFarming = () => {
           content: `'${t("pages.home.nftFarming.title")}'`,
           alignSelf: "center",
           display: "block",
-          fontSize: { xl: "200", lg: "145", md: "110", xs: "60", base: "45" },
-          mt: { xl: "-36", lg: "-32", md: "-28", xs: "-14", base: "-12" },
           color: "whiteAlpha.100",
           textAlign: "center",
           textTransform: "uppercase",
+          transform: {
+            base: "scale(1.9) translateY(-19px) translateX(1px)",
+            md: "scale(2.3) translateY(-30px)",
+            xl: "scale(3.2) translateY(-17px)",
+          },
         }}
       >
         {t("pages.home.nftFarming.title")}
       </Heading>
-      <Stack zIndex={1}>
+      <Stack zIndex={1} pt={20}>
         <DesSection
           description={t("pages.home.nftFarming.content")}
           images="https://ik.imagekit.io/msxxxaegj/image_gn/nft_farm.png?updatedAt=1699533182190"

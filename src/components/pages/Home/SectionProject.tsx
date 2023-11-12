@@ -35,7 +35,7 @@ export const SectionProject = () => {
           textTransform: "uppercase",
           color: "whiteAlpha.100",
           transform: {
-            base: "scale(3) translateY(-9px) translateX(1px)",
+            base: "scale(2.7) translateY(-12px) translateX(1px)",
             md: "scale(3) translateY(-15px)",
             xl: "scale(4) translateY(-8px)",
           },

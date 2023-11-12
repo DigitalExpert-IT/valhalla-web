@@ -17,3 +17,4 @@ export * from "./SectionPropertyNft";
 export * from "./SectionNftFarming";
 export * from "./SectionNftGenesis";
 export * from "./SectionShareToEarn";
+export * from "./SectionThirdParty";

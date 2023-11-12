@@ -1,6 +1,14 @@
 import { PARTNERSHIP, OURTEAMV3 } from "constant/pages/home";
 import { useTranslation } from "react-i18next";
-import { Box, Container, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  VStack,
+} from "@chakra-ui/react";
 import {
   SectionHeaderV2,
   SectionProject,
@@ -17,6 +25,7 @@ import {
   SectionNftFarming,
   SectionNftGenesis,
   SectionShareToEarn,
+  SectionThirdParty,
 } from "components";
 
 export default function Home() {
@@ -42,15 +51,17 @@ export default function Home() {
         <TableRankNetworkV2 />
         <TableRankBonusV2 />
       </Box> */}
-      <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
+      {/* <Box bgGradient="linear(#6D02C9 0%, #8500b1 50%, #2C1FA7 100%)">
         <SectionMatchingBonusV2 />
       </Box>
       <Box bgGradient="linear(#2C1FA7 0%, #401fa7 5%, #2C1FA7 30%)">
         <SectionRoadmapV2 />
-      </Box>
+      </Box> */}
+      <SectionThirdParty />
       <Box
         textAlign="center"
-        bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"
+        bgColor={"#6D02C9"}
+        // bgGradient="linear-gradient(180deg,#2C1FA7 0%, #6D02C9 10%, #6D02C9 100%)"
       >
         {/* changes like the figma update*/}
         {/* <SectionTeamV3

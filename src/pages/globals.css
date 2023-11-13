@@ -12,20 +12,26 @@
   filter: grayscale(0%)
 }
 
-@media (max-width: 480px) {
+@media (max-width: 378px) {
   .slick-thumb {
-    bottom: -180px;
-  } 
+    bottom: -280px; /* Adjust based on your design */
+  }
 }
 
-@media (max-width: 375px) {
+@media (min-width: 379px) and (max-width: 767px) {
   .slick-thumb {
-    bottom: -280px;
-  } 
+    bottom: -180px; /* Adjust based on your design */
+  }
 }
 
-@media (width: 1024px) {
+@media (min-width: 770px) and (max-width: 1024px) {
   .slick-thumb {
-    bottom: -180px;
-  } 
+    bottom: -180px; /* Adjust based on your design */
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1389px) {
+  .slick-thumb {
+    bottom: -180px; /* Adjust based on your design */
+  }
 }

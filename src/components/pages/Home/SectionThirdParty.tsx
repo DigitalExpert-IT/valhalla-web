@@ -41,6 +41,7 @@ export const SectionThirdParty = () => {
         href={
           "https://drive.google.com/file/d/10ubyvzXEYq-6cN1OqIuYQ34iepeVp08Z/view?usp=sharing"
         }
+        target="_blank"
       >
         <Button
           py={2}

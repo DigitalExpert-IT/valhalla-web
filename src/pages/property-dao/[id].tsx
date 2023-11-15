@@ -422,6 +422,7 @@ const Detail = () => {
                   href={
                     "https://drive.google.com/file/d/1_kKuG9H0oHDuBp68Elv4GWHWasRkRmPf/view?usp=sharing"
                   }
+                  target="_blank"
                 >
                   <Tooltip
                     fontWeight={"600"}

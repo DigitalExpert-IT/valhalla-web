@@ -44,7 +44,7 @@ export const SectionFeaturesV2 = () => {
         placeItems={"center"}
         textAlign="center"
         spacing="20"
-        mt={{ base: "0", md: "-5rem" }}
+        mt={{ base: "0", md: "-5rem", xl: "5rem" }}
       >
         <Text fontSize={{ base: "md", md: "2xl" }} fontWeight="200">
           {t("pages.home.feature.subtitle")}

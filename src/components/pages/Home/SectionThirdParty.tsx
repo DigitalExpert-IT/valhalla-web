@@ -39,7 +39,7 @@ export const SectionThirdParty = () => {
       />
       <Link
         href={
-          "https://ik.imagekit.io/msxxxaegj/image_gn/GN_Presentation.pdf?updatedAt=1700038063054"
+          "https://drive.google.com/file/d/10ubyvzXEYq-6cN1OqIuYQ34iepeVp08Z/view?usp=sharing"
         }
       >
         <Button

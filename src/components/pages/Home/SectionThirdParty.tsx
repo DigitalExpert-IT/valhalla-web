@@ -1,4 +1,5 @@
 import { Button, Heading, Image, VStack } from "@chakra-ui/react";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 export const SectionThirdParty = () => {
@@ -36,16 +37,23 @@ export const SectionThirdParty = () => {
         h={"65%"}
         alt="third-party"
       />
-      <Button
-        py={2}
-        bgGradient={"linear(to-l, #E41CD0, #21B6E4)"}
-        _hover={{
-          bgGradient: "linear(to-l, #681c60, #21B6E4)",
-        }}
-        disabled={true}
+      <Link
+        href={
+          "https://drive.google.com/file/d/10ubyvzXEYq-6cN1OqIuYQ34iepeVp08Z/view?usp=sharing"
+        }
+        target="_blank"
       >
-        {t("common.learnMore")}
-      </Button>
+        <Button
+          py={2}
+          bgGradient={"linear(to-l, #E41CD0, #21B6E4)"}
+          _hover={{
+            bgGradient: "linear(to-l, #681c60, #21B6E4)",
+          }}
+          disabled={false}
+        >
+          {t("common.learnMore")}
+        </Button>
+      </Link>
     </VStack>
   );
 };

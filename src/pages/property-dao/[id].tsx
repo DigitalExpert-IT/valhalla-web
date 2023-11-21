@@ -17,6 +17,10 @@ import {
   Input,
   useNumberInput,
   Tooltip,
+  Card,
+  CardBody,
+  VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { CopiableText, LayoutMainV2 } from "components";
 import { DATA_DAO } from "constant/dao";
@@ -36,11 +40,13 @@ import { useDaoContract } from "hooks/property-dao";
 import { prettyBn, shortenAddress } from "utils";
 import Slider from "react-slick";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
+import Countdown from "components/Countdown";
 
 const Detail = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [id, setId] = useState<any>(0);
+  const [isExpired, sertIsExpired] = useState<boolean>(false);
   const daoContract = useDaoContract();
   const { data, isLoading: loadingDao } = useContractRead(
     daoContract.contract,
@@ -169,7 +175,7 @@ const Detail = () => {
                   {DATA_DAO[id].country}
                 </Badge>
               </Box>
-              <Box maxW={{ base: "100%", md: "80%" }} pt="5rem">
+              <Box maxW={{ base: "100%", md: "80%" }} pt="2rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
@@ -264,12 +270,29 @@ const Detail = () => {
                   isLoading={isLoading || isLoadingDao || loading}
                   spinner={<Spinner color="#191272" />}
                   onClick={buyVilla}
-                  disabled={data?.sold === data?.maxLot ?? false}
+                  disabled={
+                    data?.sold === data?.maxLot ?? false
+                    
+                  }
                 >
                   {data?.sold !== data?.maxLot
                     ? `Buy ${totalPrice} USDT`
                     : "Sold Out"}
                 </Button>
+              </Stack>
+              <Stack pt={"1rem"}>
+                <HStack>
+                  <Text fontWeight="bold" fontSize={"lg"}>
+                    {t("pages.dao.deadline")}
+                  </Text>
+                  <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
+                    {t("pages.dao.deadlineDate")}
+                  </Text>
+                </HStack>
+                <Countdown
+                  showExpired={<Stack></Stack>}
+                  targetDate={new Date("March 1, 2024 23:59:00 UTC")}
+                />
               </Stack>
             </Stack>
           </Stack>

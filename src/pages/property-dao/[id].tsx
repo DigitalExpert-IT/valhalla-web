@@ -23,7 +23,11 @@ import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
 import { FaRegHandshake } from "react-icons/fa";
 import { BiHome } from "react-icons/bi";
-import { AiFillFilePdf, AiOutlineDollarCircle, AiOutlineFilePdf } from "react-icons/ai";
+import {
+  AiFillFilePdf,
+  AiOutlineDollarCircle,
+  AiOutlineFilePdf,
+} from "react-icons/ai";
 import useDao from "hooks/property-dao/useDao";
 import { useAsyncCall } from "hooks";
 import { useRouter } from "next/router";
@@ -399,25 +403,32 @@ const Detail = () => {
                     mx="1rem"
                     rounded="lg"
                   />
+                  {/*remember this must be changed while had more than 1 property*/}
                 </Tooltip>
-                <Tooltip
-                  fontWeight={"600"}
-                  backgroundColor={"white"}
-                  label={"Exit Term: Short"}
-                  shouldWrapChildren
-                  placement="top"
+                <Link
+                  href={
+                    "https://drive.google.com/file/d/1w_3KRsoqy7Mf8KhJ5BFO0aKR7YjjoH24/view?usp=sharing"
+                  }
+                  target="_blank"
                 >
-                  <Icon
-                    as={AiOutlineDollarCircle}
-                    color="black"
-                    w="62px"
-                    h="62px"
-                    bg="white"
-                    p="3"
-                    rounded="lg"
-                  />
-                </Tooltip>
-                {/*remember this must be changed while had more than 1 property*/}
+                  <Tooltip
+                    fontWeight={"600"}
+                    backgroundColor={"white"}
+                    label={"Exit Term: Short"}
+                    shouldWrapChildren
+                    placement="top"
+                  >
+                    <Icon
+                      as={AiOutlineDollarCircle}
+                      color="black"
+                      w="62px"
+                      h="62px"
+                      bg="white"
+                      p="3"
+                      rounded="lg"
+                    />
+                  </Tooltip>
+                </Link>
                 <Link
                   href={
                     "https://drive.google.com/file/d/1_kKuG9H0oHDuBp68Elv4GWHWasRkRmPf/view?usp=sharing"

@@ -35,8 +35,6 @@ const Countdown = dynamic(() => import("../../components/Countdown"), {
   ssr: false,
 });
 
-
-
 const Detail = () => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -266,7 +264,7 @@ const Detail = () => {
                       </HStack>
                     </>
                   }
-                  targetDate={new Date("March 1, 2024 23:59:00 UTC")}
+                  targetDate={new Date("March 1, 2024 00:00:00 UTC")}
                 />
               </Stack>
             </Stack>

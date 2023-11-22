@@ -219,7 +219,11 @@ const Countdown: React.FC<ICountdown> = props => {
 };
 
 const leadingZero = (number: number) => {
-  return ("0" + number).slice(-2);
+  if (number >= 100) {
+    return number;
+  } else {
+    return ("0" + number).slice(-2);
+  }
 };
 
 interface LoaderSuspenseProps {

@@ -201,6 +201,7 @@ const Detail = () => {
               </Box>
               <Stack pt={"1rem"}>
                 <Countdown
+                  targetDate={new Date("March 1, 2024 24:00:00 UTC+7")}
                   showExpired={
                     <>
                       <Stack
@@ -264,7 +265,6 @@ const Detail = () => {
                       </HStack>
                     </>
                   }
-                  targetDate={new Date("March 1, 2024 00:00:00 UTC")}
                 />
               </Stack>
             </Stack>

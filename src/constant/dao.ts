@@ -34,7 +34,7 @@ export const DATA_DAO = [
     imageCaraousel: [
       {
         picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_12.jpg?updatedAt=1698209422693",
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_10.jpg?updatedAt=1698209417147",
       },
       {
         picture:
@@ -47,10 +47,6 @@ export const DATA_DAO = [
       {
         picture:
           "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_9.jpg?updatedAt=1698209417147",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_10.jpg?updatedAt=1698209417147",
       },
       {
         picture:

@@ -8,45 +8,39 @@ import {
   Stack,
   Avatar,
   AspectRatio,
-  Button,
   Icon,
   Spinner,
   UnorderedList,
   Link,
   ListItem,
+  Button,
   Input,
-  useNumberInput,
-  Tooltip,
-  Card,
-  CardBody,
-  VStack,
   HStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import { CopiableText, LayoutMainV2 } from "components";
 import { DATA_DAO } from "constant/dao";
 import { useTranslation } from "react-i18next";
 import { FaRegHandshake } from "react-icons/fa";
 import { BiHome } from "react-icons/bi";
-import {
-  AiFillFilePdf,
-  AiOutlineDollarCircle,
-  AiOutlineFilePdf,
-} from "react-icons/ai";
-import useDao from "hooks/property-dao/useDao";
-import { useAsyncCall } from "hooks";
+import { AiOutlineDollarCircle, AiOutlineFilePdf } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useContractRead } from "@thirdweb-dev/react";
 import { useDaoContract } from "hooks/property-dao";
 import { prettyBn, shortenAddress } from "utils";
 import Slider from "react-slick";
-import useClickConnectWallet from "hooks/useClickConnectWallet";
-import Countdown from "components/Countdown";
+import dynamic from "next/dynamic";
+
+const Countdown = dynamic(() => import("../../components/Countdown"), {
+  ssr: false,
+});
+
+
 
 const Detail = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [id, setId] = useState<any>(0);
-  const [isExpired, sertIsExpired] = useState<boolean>(false);
   const daoContract = useDaoContract();
   const { data, isLoading: loadingDao } = useContractRead(
     daoContract.contract,
@@ -59,29 +53,6 @@ const Detail = () => {
       setId(Number(router.query.id) as number);
     }
   }, [router.isReady]);
-
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: data?.maxLot - data?.sold,
-      precision: 0,
-    });
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps();
-  const totalPrice = input.value * Number(prettyBn(data?.price, 6));
-
-  const { buy, isLoading: isLoadingDao } = useDao();
-  const { showModalConnectWallet, loading, isAbleToTransaction } =
-    useClickConnectWallet();
-  const { exec, isLoading } = useAsyncCall(buy, t("common.succesBuyNft"));
-
-  const buyVilla = () => {
-    if (!isAbleToTransaction) return showModalConnectWallet();
-    exec(id, input.value);
-  };
 
   const settings = {
     customPaging: (i: any) => {
@@ -175,7 +146,7 @@ const Detail = () => {
                   {DATA_DAO[id].country}
                 </Badge>
               </Box>
-              <Box maxW={{ base: "100%", md: "80%" }} pt="2rem">
+              <Box maxW={{ base: "100%", md: "80%" }} pt="4rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
                     <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
@@ -230,67 +201,71 @@ const Detail = () => {
                   </Box>
                 </Stack>
               </Box>
-              <Stack
-                direction={{ base: "column", md: "row" }}
-                spacing="1rem"
-                pt="1rem"
-              >
-                <Stack
-                  direction="row"
-                  w={{ base: "100%", md: "20%" }}
-                  bgColor="white"
-                  border="1px"
-                  borderColor="black"
-                  rounded="xl"
-                  align="center"
-                  justify="center"
-                >
-                  <Button variant="ghost" size="sm" color="black" {...dec}>
-                    -
-                  </Button>
-
-                  <Input
-                    textAlign="center"
-                    variant="unstyled"
-                    color="black"
-                    {...input}
-                  />
-                  <Button variant="ghost" size="sm" color="black" {...inc}>
-                    +
-                  </Button>
-                </Stack>
-                <Button
-                  variant="solid"
-                  bgColor="whiteAlpha.900"
-                  rounded="lg"
-                  color="black"
-                  _hover={{ bg: "whiteAlpha.700" }}
-                  size="lg"
-                  w={{ base: "100%", md: "49%" }}
-                  isLoading={isLoading || isLoadingDao || loading}
-                  spinner={<Spinner color="#191272" />}
-                  onClick={buyVilla}
-                  disabled={
-                    data?.sold === data?.maxLot ?? false
-                    
-                  }
-                >
-                  {data?.sold !== data?.maxLot
-                    ? `Buy ${totalPrice} USDT`
-                    : "Sold Out"}
-                </Button>
-              </Stack>
               <Stack pt={"1rem"}>
-                <HStack>
-                  <Text fontWeight="bold" fontSize={"lg"}>
-                    {t("pages.dao.deadline")}
-                  </Text>
-                  <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                    {t("pages.dao.deadlineDate")}
-                  </Text>
-                </HStack>
                 <Countdown
-                  showExpired={<Stack></Stack>}
+                  showExpired={
+                    <>
+                      <Stack
+                        direction={{ base: "column", md: "row" }}
+                        spacing="1rem"
+                        pt="1rem"
+                      >
+                        <Stack
+                          direction="row"
+                          w={{ base: "100%", md: "20%" }}
+                          bgColor="#8A6DD1"
+                          rounded="xl"
+                          align="center"
+                          justify="center"
+                        >
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            color="black"
+                            disabled={true}
+                          >
+                            -
+                          </Button>
+
+                          <Input
+                            textAlign="center"
+                            variant="unstyled"
+                            color="black"
+                            disabled={true}
+                            value={0}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            color="black"
+                            disabled={true}
+                          >
+                            +
+                          </Button>
+                        </Stack>
+                        <Button
+                          variant="solid"
+                          bgColor="whiteAlpha.900"
+                          rounded="lg"
+                          color="black"
+                          _hover={{ bg: "whiteAlpha.700" }}
+                          size="lg"
+                          w={{ base: "100%", md: "49%" }}
+                          disabled={true}
+                        >
+                          0
+                        </Button>
+                      </Stack>
+                      <HStack>
+                        <Text
+                          fontWeight="bold"
+                          fontSize={{ xl: "2xl", base: "sm" }}
+                        >
+                          {t("pages.dao.deadlineAnnounce")}
+                        </Text>
+                      </HStack>
+                    </>
+                  }
                   targetDate={new Date("March 1, 2024 23:59:00 UTC")}
                 />
               </Stack>

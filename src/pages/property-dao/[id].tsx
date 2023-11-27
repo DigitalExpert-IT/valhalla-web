@@ -399,35 +399,28 @@ const Detail = () => {
                     mx="1rem"
                     rounded="lg"
                   />
-                  {/*remember this must be changed while had more than 1 property*/}
                 </Tooltip>
+                <Tooltip
+                  fontWeight={"600"}
+                  backgroundColor={"white"}
+                  label={"Exit Term: Short"}
+                  shouldWrapChildren
+                  placement="top"
+                >
+                  <Icon
+                    as={AiOutlineDollarCircle}
+                    color="black"
+                    w="62px"
+                    h="62px"
+                    bg="white"
+                    p="3"
+                    rounded="lg"
+                  />
+                </Tooltip>
+                {/*remember this must be changed while had more than 1 property*/}
                 <Link
                   href={
                     "https://drive.google.com/file/d/1w_3KRsoqy7Mf8KhJ5BFO0aKR7YjjoH24/view?usp=sharing"
-                  }
-                  target="_blank"
-                >
-                  <Tooltip
-                    fontWeight={"600"}
-                    backgroundColor={"white"}
-                    label={"Exit Term: Short"}
-                    shouldWrapChildren
-                    placement="top"
-                  >
-                    <Icon
-                      as={AiOutlineDollarCircle}
-                      color="black"
-                      w="62px"
-                      h="62px"
-                      bg="white"
-                      p="3"
-                      rounded="lg"
-                    />
-                  </Tooltip>
-                </Link>
-                <Link
-                  href={
-                    "https://drive.google.com/file/d/1_kKuG9H0oHDuBp68Elv4GWHWasRkRmPf/view?usp=sharing"
                   }
                   target="_blank"
                 >

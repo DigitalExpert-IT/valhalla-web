@@ -28,7 +28,7 @@ export const CardOwnedDao: React.FC<ICardDao> = props => {
 
   return (
     <Box display={amount === 0 ? "none" : "block"}>
-      {/*
+      {/* Hide For Future Feature
       <Box textAlign="center" mb="1rem">
         <Heading>#NFT Dao 169</Heading>
       </Box>

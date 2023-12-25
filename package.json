@@ -64,7 +64,7 @@
     "react-use": "^17.4.0",
     "sharp": "^0.32.6",
     "slick-carousel": "^1.8.1",
-    "telegraf": "^4.11.2",
+    "telegraf": "^4.15.3",
     "three": "^0.148.0",
     "valhalla-erc20": "^1.7.0",
     "valhalla-villa": "^0.1.0",

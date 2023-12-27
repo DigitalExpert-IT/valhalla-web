@@ -164,11 +164,11 @@ export const SectionProfileV2 = () => {
             telegramInviteMutate.isLoading
           }
           label={"common.telegramOnlyMember"}
-          cursor={!user?.telegramUsername ? "pointer" : "default"}
+          // cursor={!user?.telegramUsername ? "pointer" : "default"}
           value={
             user?.telegramUsername ? `@${user?.telegramUsername}` : "@username"
           }
-          onClick={user?.telegramUsername ? () => null : createSignature}
+          // onClick={user?.telegramUsername ? () => null : createSignature}
         />
       </Flex>
     </Stack>

@@ -12,6 +12,7 @@
     "NotEnoughPool": "Not Enough Pool",
     "NotEnoughUsdtBalance": "Not Enough USDT Balances",
     "TokenFrozen": "Token Frozen",
+    "Expired": "Contract Expired in 01.01.2024",
     "NoReward": "No Rewards Yet",
     "RegistrationRequired": "Registration Required",
     "RankNotYetStart": "Rank Not Yet Start",

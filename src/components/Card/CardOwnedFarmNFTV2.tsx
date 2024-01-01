@@ -29,6 +29,12 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
 
   const handleFarm = async () => {
     const farm = await farmAsync.exec({ args: [id] });
+    const ownedNft = await nft.contract!.call("ownedTokenMap", [id]);
+    if (ownedNft.isBlaclisted) {
+      throw {
+        code: "Expired",
+      };
+    }
     const isSuccesFarm = farm.receipt?.status === 1;
     if (isSuccesFarm) {
       lastFarmedAtRef.current = BigNumber.from(

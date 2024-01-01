@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
-import { useAsyncCall } from "hooks";
-import { OwnedNftType } from "hooks/useOwnedNFTList";
+import { useAsyncCall, useNFT } from "hooks";
+import { OwnedNftType, useOwnedNFTList } from "hooks/useOwnedNFTList";
 import { useTranslation } from "react-i18next";
 import {
   Stack,
@@ -26,16 +26,12 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const intervalRef = useRef<NodeJS.Timer>();
   const farmTextRef = useRef<HTMLParagraphElement>(null);
   const lastFarmedAtRef = useRef<BigNumber>(lastFarmedAt);
+  const { farm: farming } = useNFT();
+  const farmer = useAsyncCall(farming);
 
   const handleFarm = async () => {
-    const farm = await farmAsync.exec({ args: [id] });
-    const ownedNft = await nft.contract!.call("ownedTokenMap", [id]);
-    if (ownedNft.isBlaclisted) {
-      throw {
-        code: "Expired",
-      };
-    }
-    const isSuccesFarm = farm.receipt?.status === 1;
+    farmer.exec(id);
+    const isSuccesFarm = (await farmer.exec(id)).status === 1;
     if (isSuccesFarm) {
       lastFarmedAtRef.current = BigNumber.from(
         Math.round(new Date().getTime() / 1000)

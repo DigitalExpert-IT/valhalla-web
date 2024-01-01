@@ -249,7 +249,7 @@ export const useNFT = () => {
     const ownedNft = await nftSigner.ownedTokenMap(tokenId);
     if (ownedNft.isBlackListed) {
       throw {
-        code: "TokenFrozen",
+        code: "Expired",
       };
     }
     const tx = await nftSigner.farm(tokenId);

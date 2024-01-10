@@ -472,6 +472,21 @@
     "totalUser": "Total User",
     "totalBuy": "Total Buy"
   },
+  "nftBullRun": {
+    "header": "NFT Bull Run",
+    "bullRunSystem": "NFT BULL RUN SYSTEM",
+    "nftAllocation": "NFT Allocation",
+    "nftBullRunMatchingRequirement": "NFT BULL RUN MATCHING REQUIREMENT",
+    "gnetProject": "<strong>Global Network</strong> Project",
+    "networkMembers": "Network member",
+    "globalBonusGnet": "Global bonus gnet",
+    "rankReward": "Rank reward gnet",
+    "farmingMatching": "Farming matching bonus",
+    "farmMathcingRequirement": "NFT farm matching requirement",
+    "globalnftbonus": "Global Rank NFT Bonus System",
+    "potentialProfit": "Potential Profit",
+    "potentialProfitSub": "In {{currency}} will be {{amount}} {{currency}} "
+  },
   "comingSoon": {
     "title": "COMING SOON",
     "description": "Our project is coming very soon!"

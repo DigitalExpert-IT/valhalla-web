@@ -6,7 +6,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { CardFarmNFTV2 } from "components/Card";
+import { CardBullRunNFT } from "components/Card";
 
 import { useCardList } from "hooks/useCardList";
 import { prettyBn } from "utils";
@@ -64,9 +64,9 @@ export const SectionNFTList = () => {
         >
           {data.map((e, idx) => (
             <WrapItem w={{ md: "25%", sm: "45%", base: "100%" }} key={idx}>
-              <CardFarmNFTV2
+              <CardBullRunNFT
                 contentTitle={e.halfingPercentage.toString()}
-                title={`Farm ${e.id.add(1)}`}
+                title={`Package ${e.id.add(1)}`}
                 price={prettyBn(e.price, 9)}
                 id={e.id.toString()}
               />

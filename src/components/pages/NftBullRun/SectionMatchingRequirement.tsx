@@ -7,7 +7,7 @@ import {
 } from "components/Tab";
 import { useTranslation } from "react-i18next";
 import { nftBullRunMatching } from "constant/pages/nftBullRun";
-import { AccordionNFTFarm } from "./SectionNFTFarmMatching";
+import { AccordionNFTFarm } from "./SectionNFTBullRunMatching";
 import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 
 export const SectionMatchingRequirment = () => {

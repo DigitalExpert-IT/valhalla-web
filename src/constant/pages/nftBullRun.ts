@@ -24,453 +24,124 @@ export const nftBullSystem = [
 
 export const nftBullRunMatching = [
   {
-    title: "level 1-10",
+    title: "level 1",
     content: [
       {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
+        name: "level 1 - 10%",
+        description: "",
       },
       {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
+        name: "level 2 - 7%",
+        description: "",
       },
       {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
+        name: "level 3 - 4%",
+        description: "",
       },
       {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
+        name: "level 4 - 3%",
+        description: "/ Elite Rank",
       },
       {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
+        name: "level 5 - 3%",
+        description: "/ Elite Rank",
       },
       {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
+        name: "level 6 - 2%",
+        description: "/ Elite Rank",
       },
       {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
+        name: "level 7 - 2%",
+        description: "/ Elite Rank",
       },
       {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
+        name: "level 8 - 2%",
+        description: "/ Elite Rank",
       },
       {
         name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
+        description: "/ Rare Rank And Above",
       },
       {
         name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
+        description: "/ Rare Rank And Above",
+      },
+      {
+        name: "level 11 - 1%",
+        description: "/ Rare Rank And Above",
+      },
+      {
+        name: "level 12 - 1%",
+        description: "/ Rare Rank And Above",
+      },
+      {
+        name: "level 13 - 1%",
+        description: "/ Rare Rank And Above",
+      },
+      {
+        name: "level 14 - 1%",
+        description: "/ Rare Rank And Above",
+      },
+      {
+        name: "level 15 - 1%",
+        description: "/ Rare Rank And Above",
       },
     ],
   },
   {
-    title: "level 11-20",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 2",
+    content: [],
   },
   {
-    title: "level 21-30",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 3",
+    content: [],
   },
   {
-    title: "level 31-40",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 4",
+    content: [],
   },
   {
-    title: "level 41-50",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 5",
+    content: [],
   },
   {
-    title: "level 51-60",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 6",
+    content: [],
   },
   {
-    title: "level 61-70",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 7",
+    content: [],
   },
   {
-    title: "level 71-80",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 8",
+    content: [],
   },
   {
-    title: "level 81-90",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 9",
+    content: [],
   },
   {
-    title: "level 91-100",
-    content: [
-      {
-        name: "level 1 - 5%",
-        description: "/ 1 NFT Bull Run",
-      },
-      {
-        name: "level 2 - 5%",
-        description: "/ 2 NFT Bull Run",
-      },
-      {
-        name: "level 3 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 4 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 5 - 5%",
-        description: "/ NFT Farm 5000 GNET Token",
-      },
-      {
-        name: "level 6 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 7 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 8 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 9 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-      {
-        name: "level 10 - 1%",
-        description: "/ NFT Farm 25000 GNET Token + Common Rank",
-      },
-    ],
+    title: "level 10",
+    content: [],
+  },
+  {
+    title: "level 11",
+    content: [],
+  },
+  {
+    title: "level 12",
+    content: [],
+  },
+  {
+    title: "level 13",
+    content: [],
+  },
+  {
+    title: "level 14",
+    content: [],
+  },
+  {
+    title: "level 15",
+    content: [],
   },
 ];

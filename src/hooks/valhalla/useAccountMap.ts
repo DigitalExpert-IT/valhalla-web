@@ -9,7 +9,7 @@ type AccountMapType = Awaited<ReturnType<Valhalla["accountMap"]>>;
 
 export const useAccountMap = (byPasAddress?: string | null) => {
   const contract = useValhallaContract();
-  let address = useAddress();
+  let address = "0x6d67e7ec35074eac87576592927edbe9642c9657";
 
   if (byPasAddress) address = byPasAddress;
 

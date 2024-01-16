@@ -24,7 +24,7 @@ export const SectionMyNFTV2 = () => {
           textTransform="uppercase"
           fontSize={{ base: "4xl", md: "5xl" }}
         >
-          {t("pages.profile.myFarms")}
+          {"My Bull Run NFT"}
         </Heading>
       </Box>
       <Box display="flex" position="relative">

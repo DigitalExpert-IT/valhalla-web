@@ -103,7 +103,7 @@ export const SectionGnetProject = () => {
           textTransform="uppercase"
           fontSize={{ md: "6xl", base: "4xl" }}
         >
-          GNET NFT PROJECT
+          BULL RUN NFT PROJECT
         </Heading>
       </Box>
 
@@ -131,119 +131,48 @@ export const SectionGnetProject = () => {
             {/* Potential profit */}
             <Box w={{ base: "full" }} textAlign="center">
               <Stack
-                rounded="xl"
-                bg="#5A009B"
-                direction={"row"}
+                direction={"column"}
                 justifyContent="space-between"
                 alignItems={"center"}
                 w={{ base: "full", md: "full", xl: "25rem" }}
-                bgImage="url('/assets/farm-art.png')"
                 bgRepeat={"no-repeat"}
                 bgPos="center"
                 objectFit="cover"
                 p="5"
               >
-                <Text fontWeight="bold" fontSize={{ base: "sm", md: "md" }}>
-                  {t("pages.nftFarming.potentialProfit")}
-                </Text>
-                <Text fontWeight="bold">
-                  {summaryData?.totalPotentialProfit ?? 0} GNET
-                </Text>
+                {/** Network Member */}
+                <Stack
+                  w={{ base: "full", md: "full", lg: "25rem" }}
+                  alignItems="center"
+                  direction="row"
+                  justifyContent="space-between"
+                >
+                  <Text>{t("pages.nftFarming.networkMembers")}</Text>
+                  <Badge variant="solid" rounded="full" bg="blueOcean.600">
+                    {account?.downlineCount.toNumber()}
+                  </Badge>
+                </Stack>
+
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent={"space-between"}
+                  w={{ base: "full", md: "full", lg: "25rem" }}
+                >
+                  <Text>{t("pages.nftFarming.rankReward")}</Text>
+                  <Button
+                    variant="swag"
+                    onClick={() => claimNftRankRewardAsync.exec()}
+                    isLoading={claimNftRankRewardAsync.isLoading}
+                  >
+                    {rankReward.data &&
+                      fromBn(rankReward?.data, 9) + " " + t("common.claim")}
+                  </Button>
+                </Stack>
               </Stack>
-              <Text textTransform="uppercase" fontSize="sm" mt="1rem">
-                {t("pages.nftFarming.potentialProfitSub", {
-                  amount: usdtRate,
-                  currency: "USDT",
-                })}
-              </Text>
             </Box>
           </Stack>
         </Flex>
-
-        <Box
-          display="flex"
-          flexDir="column"
-          alignItems={{ base: "none", md: "none", lg: "center" }}
-        >
-          <Stack
-            direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
-            spacing={{ base: "2rem", md: "2rem", lg: "4rem", xl: "4rem" }}
-            mb="2rem"
-          >
-            {/** Network Member */}
-            <Stack
-              w={{ base: "full", md: "full", lg: "25rem" }}
-              alignItems="center"
-              direction="row"
-              justifyContent="space-between"
-            >
-              <Text>{t("pages.nftFarming.networkMembers")}</Text>
-              <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {account?.downlineCount.toNumber()}
-              </Badge>
-            </Stack>
-
-            {/* Global Bonus */}
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              w={{ base: "full", md: "full", lg: "25rem" }}
-            >
-              <Text>{t("pages.nftFarming.globalBonusGnet")}</Text>
-              <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                {isRankRewardClaimable.data
-                  ? globalPool.data &&
-                    removeFloat(globalPool.data.valueLeft, 9, 1)
-                  : globalPool.data &&
-                    removeFloat(globalPool.data.claimable, 9, 1)}{" "}
-                GNET
-              </Badge>
-            </Stack>
-          </Stack>
-
-          <Stack
-            direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
-            spacing={{ base: "2rem", md: "2rem", lg: "4rem", xl: "4rem" }}
-          >
-            {/* Rank Reward */}
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent={"space-between"}
-              w={{ base: "full", md: "full", lg: "25rem" }}
-            >
-              <Text>{t("pages.nftFarming.rankReward")}</Text>
-              <Button
-                variant="swag"
-                onClick={() => claimNftRankRewardAsync.exec()}
-                isLoading={claimNftRankRewardAsync.isLoading}
-              >
-                {rankReward.data &&
-                  fromBn(rankReward?.data, 9) + " " + t("common.claim")}
-              </Button>
-            </Stack>
-
-            {/* Farming Matching Bonus */}
-            <Stack
-              direction={"row"}
-              justifyContent="space-between"
-              alignItems={"center"}
-              w={{ base: "full", md: "full", lg: "25rem" }}
-            >
-              <Text>{t("pages.nftFarming.farmingMatching")}</Text>
-              <Button
-                variant="swag"
-                color="white"
-                onClick={() => claimRewardGnetAsync.exec()}
-                isLoading={claimRewardGnetAsync.isLoading}
-              >
-                {reward.data &&
-                  fromBn(reward.data, 9) + " " + t("common.claim")}
-              </Button>
-            </Stack>
-          </Stack>
-        </Box>
       </Container>
     </Box>
   );

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { NFTMATHCING } from "constant/pages/nftFarming";
+import { nftBullRunMatching } from "constant/pages/nftBullRun";
 import { useTranslation } from "react-i18next";
 import {
   Accordion,
@@ -16,7 +16,7 @@ import {
 export const AccordionNFTFarm = () => {
   return (
     <Accordion allowToggle pb="10rem">
-      {NFTMATHCING.map((item, idx) => (
+      {nftBullRunMatching.map((item, idx) => (
         <AccordionItem border="none" key={idx}>
           <AccordionButton
             borderBottom="1px solid"
@@ -55,7 +55,7 @@ export const AccordionNFTFarm = () => {
   );
 };
 
-export const SectionNFTFarmMatching = () => {
+export const SectionBullRunMatching = () => {
   const { t } = useTranslation();
   return (
     <Box>
@@ -65,7 +65,7 @@ export const SectionNFTFarmMatching = () => {
         </Heading>
       </Box>
       <Accordion allowToggle p="2">
-        {NFTMATHCING.map((item, idx) => (
+        {nftBullRunMatching.map((item, idx) => (
           <AccordionItem
             rounded="xl"
             border="none"
@@ -95,7 +95,7 @@ export const SectionNFTFarmMatching = () => {
                   key={idx}
                   spacing={5}
                 >
-                  <Text color={idx % 2 ? "blue.400" : ""}>{obj.name}</Text>
+                  <Text color={idx % 2 ? "blue.400" : ""} >{obj.name}</Text>
                   <Text color={idx % 2 ? "blue.400" : ""}>
                     {obj.description}
                   </Text>

@@ -2,8 +2,9 @@ import React from "react";
 import { nftBullSystem, INftBUllRunSystem } from "constant/pages/nftBullRun";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TableData } from "components/TableUtils";
-import { Box, Image, Heading, Text, Stack } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, Stack, Icon } from "@chakra-ui/react";
 import { t } from "i18next";
+import { MdOutlineDoubleArrow } from "react-icons/md";
 
 export const TableBullRunSystem = () => {
   const columnHelper = createColumnHelper<INftBUllRunSystem>();
@@ -11,13 +12,22 @@ export const TableBullRunSystem = () => {
   const columns = [
     columnHelper.accessor("allocation", {
       cell: info => (
-        <Text
-          textTransform="capitalize"
-          color={info.cell.row.original.color}
-          px={8}
+        <Stack
+          direction="row"
+          align="center"
+          w={{ base: 40, md: "15em" }}
+          whiteSpace="pre-wrap"
         >
-          {info.getValue()}
-        </Text>
+          <Icon
+            as={MdOutlineDoubleArrow}
+            color="teal.400"
+            w={{ base: "3", md: "5" }}
+            h={{ base: "3", md: "7" }}
+          />
+          <Text textTransform="capitalize" color={info.cell.row.original.color}>
+            {info.getValue()}
+          </Text>
+        </Stack>
       ),
       header: t("pages.nftBullRun.nftAllocation") ?? "",
     }),

@@ -29,62 +29,77 @@ export const nftBullRunMatching = [
       {
         name: "level 1 - 10%",
         description: "",
+        minimum: "",
       },
       {
         name: "level 2 - 7%",
         description: "",
+        minimum: "",
       },
       {
         name: "level 3 - 4%",
         description: "",
+        minimum: "",
       },
       {
         name: "level 4 - 3%",
         description: "/ Elite Rank",
+        minimum: "/  1000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 5 - 3%",
         description: "/ Elite Rank",
+        minimum: "/ 1000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 6 - 2%",
         description: "/ Elite Rank",
+        minimum: "/ 1000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 7 - 2%",
         description: "/ Elite Rank",
+        minimum: "/ 1000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 8 - 2%",
         description: "/ Elite Rank",
+        minimum: "/ 1000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 9 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 10 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 11 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 12 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 13 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 14 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
         name: "level 15 - 1%",
         description: "/ Rare Rank And Above",
+        minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
     ],
   },

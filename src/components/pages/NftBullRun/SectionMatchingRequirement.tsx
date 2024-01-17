@@ -57,14 +57,14 @@ export const SectionMatchingRequirment = () => {
                   </TabClubTrigger>
                 ))}
               </TabClubList>
-              <TabClubPanelList flex={1} bg="#311769BF" p="2rem">
+              <TabClubPanelList flex={1} bg="#311769BF" px={"3rem"}>
                 {nftBullRunMatching.map((e, i) => (
                   <TabClubPanelItem whenActive={i} key={i}>
                     {e.content.map((j, ij) => (
                       <Text
                         key={ij}
-                        py="0.3rem"
-                      >{`${j.name} ${j.description}`}</Text>
+                        py="0.5rem"
+                      >{`${j.name} ${j.description} ${j.minimum}`}</Text>
                     ))}
                   </TabClubPanelItem>
                 ))}

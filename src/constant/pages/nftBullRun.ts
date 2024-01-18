@@ -22,6 +22,27 @@ export const nftBullSystem = [
   },
 ];
 
+export const dummyNFTBullPrice = [
+  {
+    price: "100",
+  },
+  {
+    price: "250",
+  },
+  {
+    price: "500",
+  },
+  {
+    price: "1000",
+  },
+  {
+    price: "5000",
+  },
+  {
+    price: "25000",
+  },
+];
+
 export const nftBullRunMatching = [
   {
     title: "level 1",

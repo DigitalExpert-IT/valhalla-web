@@ -8,7 +8,7 @@ import {
   useNumberInput,
 } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
-import { CARD_IMAGE_MAP, BULL_IMAGE_MAP } from "constant/image";
+import { BULL_IMAGE_MAP } from "constant/image";
 import { useAsyncCall } from "hooks";
 import { useCardList } from "hooks/useCardList";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
@@ -64,67 +64,17 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
           rounded="xl"
         >
           <Stack>
-            <Box rounded="xl">
-              <Image
-                src={BULL_IMAGE_MAP[props.id as "0"]}
-                alt={""}
-                loading="eager"
-              />
+            <Box>
+              <Image src={BULL_IMAGE_MAP[props.id as "0"]} alt=""/>
             </Box>
             <Box py="1rem">
-              <Stack
-                direction={{ base: "column", md: "column" }}
-                maxW="100%"
-                align="center"
-                flex={1}
-              >
-                <Stack
-                  direction="row"
-                  w={{ base: "100%", md: "100%" }}
-                  h="3rem"
-                  bgColor="#1F227D"
-                  border="1px"
-                  borderColor="#FF00FF"
-                  rounded="xl"
-                  align="center"
-                  justify="center"
-                >
-                  <Button variant="ghost" size="md" {...dec}>
-                    -
-                  </Button>
-
-                  <Input
-                    bgColor="#1F227D"
-                    textAlign="center"
-                    variant="unstyled"
-                    fontSize={"lg"}
-                    {...input}
-                  />
-                  <Button variant="ghost" size="md" {...inc}>
-                    +
-                  </Button>
-                </Stack>
-                <Box
-                  flex={1}
-                  w={{ base: "100%", md: "100%" }}
-                  border="1px"
-                  borderColor="#FF00FF"
-                  rounded="xl"
-                >
-                  <Button
-                    w="100%"
-                    h="3rem"
-                    rounded="xl"
-                    variant="ghost"
-                    fontSize={"lg"}
-                    size="sm"
-                    //isLoading={isLoading || isInitialize}
-                    bgColor="#1F227D"
-                    onClick={handleBuy}
-                  >
-                    BUY {totalBuy} USDT
-                  </Button>
-                </Box>
+              <Stack alignItems="center" py="1rem">
+                <UglyButton
+                  price={props.price}
+                  label={t("common.buy")}
+                  onClick={handleBuy}
+                  isLoading={buyAsync.isLoading || loading}
+                />
               </Stack>
             </Box>
           </Stack>

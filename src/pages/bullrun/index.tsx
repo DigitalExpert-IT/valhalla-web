@@ -3,8 +3,8 @@ import { LayoutMainV2 } from "components";
 import {
   SectionGnetProject,
   SectionNFTList,
-  SectionMatchingRequirment,
-  SectionMyNFTV2,
+  SectionMatchingRequirement,
+  SectionMyNFTBullRun,
   TableBullRunSystem,
 } from "components/pages/NftBullRun";
 import { Box } from "@chakra-ui/react";
@@ -15,12 +15,12 @@ const NftFarmingV2 = () => {
       <Box bgGradient="linear-gradient(180deg, #2C1FA7 0%, #6D02C9 100%)">
         <SectionNFTList />
         <SectionGnetProject />
-        <SectionMyNFTV2 />
+        <SectionMyNFTBullRun />
       </Box>
       <Box bgGradient="linear(to-b, #6D02C9, #2C1FA7, #6D02C9)">
         <TableBullRunSystem />
       </Box>
-      <SectionMatchingRequirment />
+      <SectionMatchingRequirement />
     </LayoutMainV2>
   );
 };

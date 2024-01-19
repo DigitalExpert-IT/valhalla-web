@@ -103,7 +103,7 @@ export const SectionGnetProject = () => {
           textTransform="uppercase"
           fontSize={{ md: "6xl", base: "4xl" }}
         >
-          BULL RUN NFT PROJECT
+          {t("pages.nftBullRun.bullrunNftProject")}
         </Heading>
       </Box>
 
@@ -147,7 +147,7 @@ export const SectionGnetProject = () => {
                   direction="row"
                   justifyContent="space-between"
                 >
-                  <Text>{t("pages.nftFarming.networkMembers")}</Text>
+                  <Text>{t("pages.nftBullRun.bullrunPool")}</Text>
                   <Badge variant="solid" rounded="full" bg="blueOcean.600">
                     {account?.downlineCount.toNumber()}
                   </Badge>
@@ -159,7 +159,24 @@ export const SectionGnetProject = () => {
                   justifyContent={"space-between"}
                   w={{ base: "full", md: "full", lg: "25rem" }}
                 >
-                  <Text>{t("pages.nftFarming.rankReward")}</Text>
+                  <Text>{t("pages.nftBullRun.bullrunRankReward")}</Text>
+                  <Button
+                    variant="swag"
+                    onClick={() => claimNftRankRewardAsync.exec()}
+                    isLoading={claimNftRankRewardAsync.isLoading}
+                  >
+                    {rankReward.data &&
+                      fromBn(rankReward?.data, 9) + " " + t("common.claim")}
+                  </Button>
+                </Stack>
+
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent={"space-between"}
+                  w={{ base: "full", md: "full", lg: "25rem" }}
+                >
+                  <Text>{t("pages.nftBullRun.referralBonus")}</Text>
                   <Button
                     variant="swag"
                     onClick={() => claimNftRankRewardAsync.exec()}

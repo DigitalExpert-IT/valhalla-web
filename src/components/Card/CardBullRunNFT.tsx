@@ -9,25 +9,31 @@ import {
 } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
 import { BULL_IMAGE_MAP } from "constant/image";
-import { useAsyncCall } from "hooks";
-import { useCardList } from "hooks/useCardList";
+import { useAsyncCall, useOwnedNFTBullRun } from "hooks";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
 import { Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useCardListBullRun } from "hooks/bullrun/useCardListBullRun";
+import { NFT } from "valhalla-erc20/typechain-types";
 
 interface CardNFTV2Props {
   title: string;
   contentTitle: string;
-  price: string;
   id: string;
+  data?: NFT["ownedTokenMap"] & { nftIdx: number };
+  price?: string;
+  claimValue?: string;
+  isOwned?: boolean;
 }
 
 export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
   const { t } = useTranslation();
-  const { buy } = useCardList();
   const { showModalConnectWallet, loading, isAbleToTransaction } =
     useClickConnectWallet();
+  const { buy } = useCardListBullRun();
+  const { claimReward } = useOwnedNFTBullRun();
   const buyAsync = useAsyncCall(buy, t("common.succesBuyNft"));
+  const claimAsync = useAsyncCall(claimReward, t("common.successClaim"));
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
@@ -36,16 +42,18 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
       max: 100,
       precision: 0,
     });
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps();
 
   const handleBuy = () => {
     if (!isAbleToTransaction) return showModalConnectWallet();
-    buyAsync.exec(props.id);
+    buyAsync.exec(Number(props.id));
   };
 
-  const totalBuy = input.value;
+  const handleClaim = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
+    if (!props.data?.nftIdx) return;
+
+    claimAsync.exec(props.data?.nftIdx);
+  };
 
   return (
     <Box textAlign="center" rounded="xl" overflow="hidden">
@@ -65,16 +73,45 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
         >
           <Stack>
             <Box>
-              <Image src={BULL_IMAGE_MAP[props.id as "0"]} alt=""/>
+              <Image src={BULL_IMAGE_MAP[props.id as "0"]} alt="" />
             </Box>
-            <Box py="1rem">
+            <Box pt="1rem">
               <Stack alignItems="center" py="1rem">
-                <UglyButton
-                  price={props.price}
-                  label={t("common.buy")}
-                  onClick={handleBuy}
-                  isLoading={buyAsync.isLoading || loading}
-                />
+                {props.isOwned ? (
+                  <Box
+                    bgGradient="linear(to-r, #FF00FF, blue.500)"
+                    rounded="lg"
+                    w="full"
+                    p="1px"
+                  >
+                    <Stack
+                      direction="row"
+                      spacing={"0"}
+                      w="full"
+                      justifyContent="space-between"
+                      rounded="lg"
+                      bg="#191272"
+                    >
+                      <Button
+                        rounded="none"
+                        flex={1}
+                        padding="0"
+                        bg="transparent"
+                        onClick={handleClaim}
+                      >
+                        {props.claimValue} USDT {t("common.claim")}
+                      </Button>
+                    </Stack>
+                  </Box>
+                ) : (
+                  <UglyButton
+                    price={props.price ?? "0"}
+                    priceCurrency="USDT"
+                    label={t("common.buy")}
+                    onClick={handleBuy}
+                    isLoading={buyAsync.isLoading || loading}
+                  />
+                )}
               </Stack>
             </Box>
           </Stack>

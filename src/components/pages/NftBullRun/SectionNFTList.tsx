@@ -7,13 +7,12 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { CardBullRunNFT } from "components/Card";
-import { dummyNFTBullPrice } from "constant/pages/nftBullRun";
-import { useCardList } from "hooks/useCardList";
+import { useCardListBullRun } from "hooks/bullrun/useCardListBullRun";
 import { prettyBn } from "utils";
 import { t } from "i18next";
 
 export const SectionNFTList = () => {
-  const { data, isLoading } = useCardList();
+  const { data, isLoading } = useCardListBullRun();
 
   return (
     <Box
@@ -62,12 +61,12 @@ export const SectionNFTList = () => {
           align="center"
           justify="center"
         >
-          {dummyNFTBullPrice.map((e, idx) => (
+          {data.map((e, idx) => (
             <WrapItem w={{ md: "25%", sm: "45%", base: "100%" }} key={idx}>
               <CardBullRunNFT
                 contentTitle={""}
-                title={`Package ${idx+1}`}
-                price={e.price}
+                title={`Package ${idx + 1}`}
+                price={prettyBn(e.price, 6)}
                 id={idx.toString()}
               />
             </WrapItem>

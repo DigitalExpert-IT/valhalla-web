@@ -9,6 +9,7 @@ import {
   Text,
   TableContainer,
   TableProps,
+  StyleProps,
 } from "@chakra-ui/react";
 import {
   useReactTable,
@@ -23,12 +24,14 @@ type TableDataProps<Data extends object> = {
   data: Data[];
   columns: ColumnDef<Data, any>[];
   tableCustom: TableProps;
+  columnCustom?: StyleProps;
 };
 
 export const TableData = <Data extends object>({
   data,
   columns,
   tableCustom,
+  columnCustom,
 }: TableDataProps<Data>) => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
@@ -59,6 +62,7 @@ export const TableData = <Data extends object>({
                     key={header.id}
                     isNumeric={meta?.isNumeric}
                     whiteSpace="break-spaces"
+                    {...columnCustom}
                   >
                     <Text
                       fontWeight="400"
@@ -84,7 +88,11 @@ export const TableData = <Data extends object>({
               {row.getVisibleCells().map(cell => {
                 const meta: any = cell.column.columnDef.meta;
                 return (
-                  <Td key={cell.id} isNumeric={meta?.isNumeric}>
+                  <Td
+                    key={cell.id}
+                    isNumeric={meta?.isNumeric}
+                    {...columnCustom}
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Td>
                 );

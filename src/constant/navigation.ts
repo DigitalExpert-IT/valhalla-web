@@ -43,7 +43,7 @@ export const NAVIGATION: Array<INavigation> = [
       },
       {
         title: "nftBullRun",
-        link: "/bull-run",
+        link: "/bullrun",
       },
     ],
   },

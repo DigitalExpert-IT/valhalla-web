@@ -473,10 +473,14 @@
     "totalBuy": "Total Buy"
   },
   "nftBullRun": {
-    "header": "NFT Bull Run",
-    "bullRunSystem": "NFT BULL RUN SYSTEM",
+    "header": "NFT Bullrun",
+    "bullRunSystem": "NFT BULLRUN SYSTEM",
     "nftAllocation": "NFT Allocation",
-    "nftBullRunMatchingRequirement": "NFT BULL RUN MATCHING REQUIREMENT",
+    "nftBullRunMarketingPlan": "NFT BULLRUN MARKETING PLAN",
+    "bullrunNftProject": "Bullrun NFT Project",
+    "bullrunPool": "Bullrun Pool",
+    "bullrunRankReward": "Bullrun Rank Reward",
+    "referralBonus": "Referral Bonus",
     "gnetProject": "<strong>Global Network</strong> Project",
     "networkMembers": "Network member",
     "globalBonusGnet": "Global bonus gnet",

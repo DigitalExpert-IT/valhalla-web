@@ -91,9 +91,11 @@ export const TableBullRunSystem = () => {
         data={nftBullSystem}
         tableCustom={{
           variant: "valhallaV2",
-          maxWidth: "50%",
           zIndex: "2",
           size: "xs",
+        }}
+        columnCustom={{
+          backgroundColor: "#0A1022",
         }}
       />
     </Stack>

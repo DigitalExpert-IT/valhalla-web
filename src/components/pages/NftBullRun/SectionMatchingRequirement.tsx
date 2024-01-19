@@ -7,10 +7,9 @@ import {
 } from "components/Tab";
 import { useTranslation } from "react-i18next";
 import { nftBullRunMatching } from "constant/pages/nftBullRun";
-import { AccordionNFTFarm } from "./SectionNFTBullRunMatching";
 import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 
-export const SectionMatchingRequirment = () => {
+export const SectionMatchingRequirement = () => {
   const { t } = useTranslation();
   return (
     <Box bgGradient="linear(to-b, #6D02C9, #2C1FA7, #6D02C9)">
@@ -38,7 +37,7 @@ export const SectionMatchingRequirment = () => {
           textTransform="uppercase"
           fontSize={{ md: "6xl", base: "4xl" }}
         >
-          {t("pages.nftBullRun.nftBullRunMatchingRequirement")}
+          {t("pages.nftBullRun.nftBullRunMarketingPlan")}
         </Heading>
       </Box>
       <Container maxW={"container.xl"}>
@@ -52,12 +51,18 @@ export const SectionMatchingRequirment = () => {
             <TabClub spacing="0">
               <TabClubList spacing="0">
                 {nftBullRunMatching.map((e, i) => (
-                  <TabClubTrigger key={i} activeId={i}>
+                  <TabClubTrigger
+                    key={i}
+                    activeId={i}
+                    _active={{ bg: "#8E59FF", opacity: 1 }}
+                    _hover={{ bg: "#8E59FF", cursor: "unset" }}
+                    onClick={e => e.preventDefault()}
+                  >
                     {e.title}
                   </TabClubTrigger>
                 ))}
               </TabClubList>
-              <TabClubPanelList flex={1} bg="#311769BF" px={"3rem"}>
+              <TabClubPanelList flex={1} bg="#311769BF" px={"1rem"} pe={8}>
                 {nftBullRunMatching.map((e, i) => (
                   <TabClubPanelItem whenActive={i} key={i}>
                     {e.content.map((j, ij) => (
@@ -71,9 +76,6 @@ export const SectionMatchingRequirment = () => {
               </TabClubPanelList>
             </TabClub>
           </Box>
-        </Stack>
-        <Stack display={{ lg: "none", base: "flex" }}>
-          <AccordionNFTFarm />
         </Stack>
       </Container>
     </Box>

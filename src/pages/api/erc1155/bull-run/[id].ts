@@ -9,7 +9,7 @@ const handler: NextApiHandler = async (req, res) => {
   const result = {
     name: nftBullRunName[idx],
     description: "NFT Bull Run",
-    external_url: "https://globalnetwork.finance/api/bullrun",
+    external_url: "https://globalnetwork.finance/api/erc1155/bull-run",
     image,
     attributes: [],
   };

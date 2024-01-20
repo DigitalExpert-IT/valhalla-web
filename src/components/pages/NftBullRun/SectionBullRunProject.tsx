@@ -19,6 +19,7 @@ import { useAccountMap } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useProfileBullRun } from "hooks/bullrun/useProfileBullRun";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
+import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
@@ -116,8 +117,7 @@ export const SectionGnetProject = () => {
                 objectFit="cover"
                 p="5"
               >
-                {/** Network Member */}
-                {/* <Stack
+                <Stack
                   w={{ base: "full", md: "full", lg: "25rem" }}
                   alignItems="center"
                   direction="row"
@@ -125,9 +125,9 @@ export const SectionGnetProject = () => {
                 >
                   <Text>{t("pages.nftBullRun.bullrunPool")}</Text>
                   <Badge variant="solid" rounded="full" bg="blueOcean.600">
-                    {account?.downlineCount.toNumber()}
+                    {prettyBn(profileData?.globalPool, 6)} USDT
                   </Badge>
-                </Stack> */}
+                </Stack>
 
                 <Stack
                   direction="row"
@@ -141,10 +141,10 @@ export const SectionGnetProject = () => {
                     onClick={handleClaimRank}
                     isLoading={isLoadingClaimRank}
                   >
-                    {profileData.rankReward &&
-                      fromBn(profileData.rankReward, 6) +
-                        " " +
-                        t("common.claim")}
+                    {(profileData.rankReward &&
+                      fromBn(profileData.rankReward, 6)) +
+                      " " +
+                      t("common.claim")}{" "}
                   </Button>
                 </Stack>
 
@@ -160,10 +160,10 @@ export const SectionGnetProject = () => {
                     onClick={handleClaimBuy}
                     isLoading={isLoadingClaimBuy}
                   >
-                    {profileData.buyReward &&
-                      fromBn(profileData.buyReward, 6) +
-                        " " +
-                        t("common.claim")}
+                    {(profileData.buyReward &&
+                      fromBn(profileData.buyReward, 6)) +
+                      " " +
+                      t("common.claim")}
                   </Button>
                 </Stack>
               </Stack>

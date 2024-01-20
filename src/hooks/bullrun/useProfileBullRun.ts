@@ -1,15 +1,16 @@
 import ee from "ee";
 import { BigNumber } from "ethers";
-import { compareAddress } from "utils";
 import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { useBullRunContract } from "./useBullRunContract";
 
 export interface IProfileData {
+  globalPool: BigNumber;
   nftValue: BigNumber;
   rankReward: BigNumber;
   buyReward: BigNumber;
+  claimedAt: BigNumber;
   selfBalance: BigNumber;
 }
 
@@ -32,12 +33,16 @@ export const useProfileBullRun = () => {
     try {
       setLoading(true);
       const selfBalance = await nft.contract.call("balanceOf", [address]);
+      const globalPool = await nft.contract.call("globalPool", []);
       const profile = await nft.contract.call("profile", [address]);
+      const rankReward = await nft.contract.call("getMyRankReward", [address]);
 
       setData({
-        nftValue: profile[0],
-        rankReward: profile[1],
-        buyReward: profile[2],
+        globalPool,
+        nftValue: profile.value,
+        buyReward: profile.buyReward,
+        rankReward,
+        claimedAt: profile.claimedAt,
         selfBalance,
       });
     } catch (error) {
@@ -71,22 +76,6 @@ export const useProfileBullRun = () => {
       };
     }
   };
-
-  useEffect(() => {
-    const refetch = (data: any) => {
-      if (
-        compareAddress(data.from, address) ||
-        compareAddress(data.to, address)
-      ) {
-        fetch();
-      }
-    };
-    ee.addListener("nft-Transfer", refetch);
-
-    return () => {
-      ee.removeListener("nft-Transfer", refetch);
-    };
-  }, [address]);
 
   useEffect(() => {
     if (!address) return;

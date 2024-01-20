@@ -48,5 +48,5 @@ export const USDT_CONTRACT = {
 };
 
 export const BULLRUN_CONTRACT = {
-  "0x29a": "0x88a073b14A29e2344569c3F13c028c120C250712",
+  "0x29a": "0x61D5c1b4cc898258a095316dc3BDc12d0717CDe3",
 };

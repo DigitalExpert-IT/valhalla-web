@@ -66,7 +66,7 @@
     "slick-carousel": "^1.8.1",
     "telegraf": "^4.15.3",
     "three": "^0.148.0",
-    "valhalla-erc20": "^1.11.1",
+    "valhalla-erc20": "^1.12.0",
     "valhalla-villa": "^0.1.0",
     "zustand": "^4.1.4"
   },

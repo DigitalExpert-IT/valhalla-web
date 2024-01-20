@@ -85,7 +85,11 @@ export const SectionMyNFTBullRun = () => {
                   <CardBullRunNFT
                     contentTitle={""}
                     data={item}
-                    title={nftBullRunName[item.uri.split("-")[1] as "0"]}
+                    title={
+                      nftBullRunName[
+                        (+item.uri.split("-")[1] - 1).toString() as "0"
+                      ]
+                    }
                     claimValue={fromBn(item.claimValue, 6)}
                     id={(item.uri.split("-")[1] - 1).toString()}
                     isOwned

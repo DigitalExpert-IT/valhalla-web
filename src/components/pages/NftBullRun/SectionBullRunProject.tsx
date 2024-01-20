@@ -140,11 +140,13 @@ export const SectionGnetProject = () => {
                     variant="swag"
                     onClick={handleClaimRank}
                     isLoading={isLoadingClaimRank}
+                    isDisabled
                   >
-                    {(profileData.rankReward &&
+                    {/* {(profileData.rankReward &&
                       fromBn(profileData.rankReward, 6)) +
                       " " +
-                      t("common.claim")}{" "}
+                      t("common.claim")}{" "} */}
+                    {0 + " " + "USDT" + " " + t("common.claim")}
                   </Button>
                 </Stack>
 
@@ -163,7 +165,10 @@ export const SectionGnetProject = () => {
                     {(profileData.buyReward &&
                       fromBn(profileData.buyReward, 6)) +
                       " " +
-                      t("common.claim")}
+                      "USDT" +
+                      " " +
+                      t("common.claim") ||
+                      0 + " " + "USDT" + " " + t("common.claim")}
                   </Button>
                 </Stack>
               </Stack>

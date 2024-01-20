@@ -31,17 +31,12 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
   const { showModalConnectWallet, loading, isAbleToTransaction } =
     useClickConnectWallet();
   const { buy } = useCardListBullRun();
-  const { claimReward } = useOwnedNFTBullRun();
+  const { claimReward, isClaimableProfit } = useOwnedNFTBullRun();
   const buyAsync = useAsyncCall(buy, t("common.succesBuyNft"));
-  const claimAsync = useAsyncCall(claimReward, t("common.successClaim"));
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 100,
-      precision: 0,
-    });
+  const { exec: claimAsync, isLoading: claimLoading } = useAsyncCall(
+    claimReward,
+    t("common.successClaim")
+  );
 
   const handleBuy = () => {
     if (!isAbleToTransaction) return showModalConnectWallet();
@@ -50,9 +45,9 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
 
   const handleClaim = () => {
     if (!isAbleToTransaction) return showModalConnectWallet();
-    if (!props.data?.nftIdx) return;
+    if (!props.data?.nftIdx && props.data?.nftIdx !== 0) return;
 
-    claimAsync.exec(props.data?.nftIdx);
+    claimAsync(props.data?.nftIdx);
   };
 
   return (
@@ -97,7 +92,9 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                         flex={1}
                         padding="0"
                         bg="transparent"
+                        disabled={!isClaimableProfit}
                         onClick={handleClaim}
+                        isLoading={claimLoading}
                       >
                         {props.claimValue} USDT {t("common.claim")}
                       </Button>

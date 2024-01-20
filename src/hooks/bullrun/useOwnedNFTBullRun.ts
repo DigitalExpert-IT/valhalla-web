@@ -1,13 +1,16 @@
-import ee from "ee";
 import { BigNumber } from "ethers";
 import { compareAddress } from "utils";
 import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
-import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 import { useBullRunContract } from "./useBullRunContract";
 import { NFT } from "valhalla-erc20/typechain-types";
-import { fromBn } from "evm-bn";
-import { useUSDTContract } from "hooks/useUSDTContract";
+import { toBn } from "evm-bn";
+import bullRunStore from "./bullrunStore";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {
@@ -15,13 +18,16 @@ export type OwnedNftType = OwnedTokenMapType & {
   tokenUri: string;
 };
 
+const NFT_MUL_PROFIT = [1, 2.5, 5, 10, 50, 250];
+
 export const useOwnedNFTBullRun = () => {
   const nft = useBullRunContract();
-  const usdt = useUSDTContract();
   const claim = useContractWrite(nft.contract, "claimProfit");
+  const isClaimableProfit = useContractRead(nft.contract, "isClaimableProfit");
   const address = useAddress() ?? ZERO_ADDRESS;
-  const [data, setData] = useState<OwnedNftType[]>([]);
   const [isLoading, setLoading] = useState(false);
+
+  const { setOwnedNftList } = bullRunStore();
 
   const fetch = async () => {
     if (!nft.contract) return;
@@ -46,7 +52,10 @@ export const useOwnedNFTBullRun = () => {
           ]);
           const cardId = ownedNft["uri"];
           const tokenUri = `/api/image/nft/${cardId}`;
-          const claimValue = totalSales.mul(totalProfit).mul(ownedNft.price);
+          const cardIdx = cardId.split("-")[1] - 1;
+          const claimValue = totalProfit
+            .div(totalSales)
+            .mul(toBn(NFT_MUL_PROFIT[cardIdx].toString(), 6));
           return {
             ...ownedNft,
             id: tokenId,
@@ -57,7 +66,7 @@ export const useOwnedNFTBullRun = () => {
         })
       );
 
-      setData(nfts);
+      setOwnedNftList(nfts);
     } catch (error) {
     } finally {
       setLoading(false);
@@ -83,18 +92,14 @@ export const useOwnedNFTBullRun = () => {
   };
 
   useEffect(() => {
-    const refetch = (data: any) => {
-      if (
-        compareAddress(data.from, address) ||
-        compareAddress(data.to, address)
-      ) {
+    nft.contract?.events.listenToAllEvents(event => {
+      if (event.eventName === "ShareToken" || event.eventName === "Transfer") {
         fetch();
       }
-    };
-    ee.addListener("nft-Transfer", refetch);
+    });
 
     return () => {
-      ee.removeListener("nft-Transfer", refetch);
+      nft.contract?.events.removeAllListeners();
     };
   }, [address]);
 
@@ -103,5 +108,9 @@ export const useOwnedNFTBullRun = () => {
     fetch();
   }, [address, nft.contract]);
 
-  return { isLoading: isLoading || nft.isLoading, data, claimReward };
+  return {
+    isLoading: isLoading || nft.isLoading,
+    isClaimableProfit: isClaimableProfit.data,
+    claimReward,
+  };
 };

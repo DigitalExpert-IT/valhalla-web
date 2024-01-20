@@ -10,12 +10,14 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { CardBullRunNFT, CardOwnedFarmNFTV2 } from "components/Card";
+import { CardBullRunNFT } from "components/Card";
 import { useOwnedNFTBullRun } from "hooks";
-import { prettyBn } from "utils";
+import { fromBn } from "evm-bn";
+import bullRunStore from "hooks/bullrun/bullrunStore";
 
 export const SectionMyNFTBullRun = () => {
-  const { data: nftList, isLoading } = useOwnedNFTBullRun();
+  const { isLoading } = useOwnedNFTBullRun();
+  const { ownedNftList } = bullRunStore();
   const { t } = useTranslation();
 
   return (
@@ -63,7 +65,7 @@ export const SectionMyNFTBullRun = () => {
               <Box display="flex" justifyContent="center" minH="55vh">
                 <Spinner size="xl" />
               </Box>
-            ) : nftList.length === 0 ? (
+            ) : ownedNftList.length === 0 ? (
               <Box
                 textAlign="center"
                 display="flex"
@@ -74,7 +76,7 @@ export const SectionMyNFTBullRun = () => {
                 <Heading>{t("error.notOwnedNft")}</Heading>
               </Box>
             ) : (
-              nftList.map((item: any, idx: number) => (
+              ownedNftList.map((item: any, idx: number) => (
                 <WrapItem
                   w={{ md: "25%", sm: "45%", base: "100%" }}
                   key={item.id.toNumber()}
@@ -83,7 +85,7 @@ export const SectionMyNFTBullRun = () => {
                     contentTitle={""}
                     data={item}
                     title={`Package ${item.uri.split("-")[1]}`}
-                    claimValue={prettyBn(item.claimValue, 6)}
+                    claimValue={fromBn(item.claimValue, 6)}
                     id={(item.uri.split("-")[1] - 1).toString()}
                     isOwned
                   />

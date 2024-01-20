@@ -10,72 +10,48 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import { useAddress, useContractWrite } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
 import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
 import { useAsyncCall } from "hooks";
-import { useGlobalPool, useRankReward, useRewardMap } from "hooks/nft";
-import { useNFTContract } from "hooks/useNFTContract";
-import { useAccountMap, useIsRankRewardClaimable } from "hooks/valhalla";
+import { useAccountMap } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
-import { useSummary } from "hooks/user/dashboard/useSummary";
-import { BigNumber } from "ethers";
-import { getGnetRate, prettyBn } from "utils";
+import { useProfileBullRun } from "hooks/bullrun/useProfileBullRun";
+import useClickConnectWallet from "hooks/useClickConnectWallet";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
+  const { showModalConnectWallet, loading, isAbleToTransaction } =
+    useClickConnectWallet();
   const address = useAddress() ?? ZERO_ADDRESS;
   const {
-    data: summaryData,
-    isLoading: summaryLoading,
-    error,
-  } = useSummary(address);
+    data: profileData,
+    claimRankReward,
+    claimBuyReward,
+  } = useProfileBullRun();
 
-  const nft = useNFTContract();
-  const reward = useRewardMap();
-  const rankReward = useRankReward();
-  const globalPool = useGlobalPool();
+  const { exec: claimRank, isLoading: isLoadingClaimRank } = useAsyncCall(
+    claimRankReward,
+    t("common.successClaim")
+  );
+  const { exec: claimBuy, isLoading: isLoadingClaimBuy } = useAsyncCall(
+    claimBuyReward,
+    t("common.successClaim")
+  );
+
+  const handleClaimRank = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
+    claimRank();
+  };
+
+  const handleClaimBuy = () => {
+    if (!isAbleToTransaction) return showModalConnectWallet();
+    claimBuy();
+  };
+
   const accountMap = useAccountMap();
   const account = accountMap.data;
-  const isRankRewardClaimable = useIsRankRewardClaimable();
-  const claimReward = useContractWrite(nft.contract, "claimReward");
-  const claimRankReward = useContractWrite(nft.contract, "claimRankReward");
-
-  const claimRankMutate = async () => {
-    if (!isRankRewardClaimable.data) {
-      throw {
-        code: "RankNotYetStart",
-      };
-    }
-    if (rankReward.data?.isZero()) {
-      throw {
-        code: "NoReward",
-      };
-    }
-    const claim = await claimRankReward.mutateAsync({ args: [] });
-    return claim;
-  };
-  const claimNftRankRewardAsync = useAsyncCall(claimRankMutate);
-
-  const claimRewardMutate = async () => {
-    if (reward.data?.isZero()) {
-      throw {
-        code: "NoReward",
-      };
-    }
-    const claim = await claimReward.mutateAsync({ args: [] });
-    return claim;
-  };
-  const claimRewardGnetAsync = useAsyncCall(claimRewardMutate);
-  const usdtRate = summaryData?.totalPotentialProfit
-    ? summaryData?.totalPotentialProfit * 0.015
-    : "0";
-
-  const removeFloat = (value: BigNumber, decimal: number, remove: number) => {
-    const toNumber = +fromBn(value, decimal);
-    return toNumber.toFixed(remove);
-  };
 
   return (
     <Box position="relative" zIndex={1}>
@@ -141,7 +117,7 @@ export const SectionGnetProject = () => {
                 p="5"
               >
                 {/** Network Member */}
-                <Stack
+                {/* <Stack
                   w={{ base: "full", md: "full", lg: "25rem" }}
                   alignItems="center"
                   direction="row"
@@ -151,7 +127,7 @@ export const SectionGnetProject = () => {
                   <Badge variant="solid" rounded="full" bg="blueOcean.600">
                     {account?.downlineCount.toNumber()}
                   </Badge>
-                </Stack>
+                </Stack> */}
 
                 <Stack
                   direction="row"
@@ -162,11 +138,13 @@ export const SectionGnetProject = () => {
                   <Text>{t("pages.nftBullRun.bullrunRankReward")}</Text>
                   <Button
                     variant="swag"
-                    onClick={() => claimNftRankRewardAsync.exec()}
-                    isLoading={claimNftRankRewardAsync.isLoading}
+                    onClick={handleClaimRank}
+                    isLoading={isLoadingClaimRank}
                   >
-                    {rankReward.data &&
-                      fromBn(rankReward?.data, 9) + " " + t("common.claim")}
+                    {profileData.rankReward &&
+                      fromBn(profileData.rankReward, 6) +
+                        " " +
+                        t("common.claim")}
                   </Button>
                 </Stack>
 
@@ -179,11 +157,13 @@ export const SectionGnetProject = () => {
                   <Text>{t("pages.nftBullRun.referralBonus")}</Text>
                   <Button
                     variant="swag"
-                    onClick={() => claimNftRankRewardAsync.exec()}
-                    isLoading={claimNftRankRewardAsync.isLoading}
+                    onClick={handleClaimBuy}
+                    isLoading={isLoadingClaimBuy}
                   >
-                    {rankReward.data &&
-                      fromBn(rankReward?.data, 9) + " " + t("common.claim")}
+                    {profileData.buyReward &&
+                      fromBn(profileData.buyReward, 6) +
+                        " " +
+                        t("common.claim")}
                   </Button>
                 </Stack>
               </Stack>

@@ -14,7 +14,6 @@ import { t } from "i18next";
 
 export const SectionNFTList = () => {
   const { data, isLoading } = useCardListBullRun();
-  const nftName = nftBullRunName.map(item => item.name);
 
   return (
     <Box
@@ -67,7 +66,7 @@ export const SectionNFTList = () => {
             <WrapItem w={{ md: "25%", sm: "45%", base: "100%" }} key={idx}>
               <CardBullRunNFT
                 contentTitle={""}
-                title={nftName[idx]}
+                title={nftBullRunName[`${idx}` as "0"]}
                 price={prettyBn(e.price, 6)}
                 id={idx.toString()}
               />

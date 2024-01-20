@@ -14,6 +14,7 @@ import { CardBullRunNFT } from "components/Card";
 import { useOwnedNFTBullRun } from "hooks";
 import { fromBn } from "evm-bn";
 import bullRunStore from "hooks/bullrun/bullRunStore";
+import { nftBullRunName } from "constant/pages/nftBullRun";
 
 export const SectionMyNFTBullRun = () => {
   const { isLoading } = useOwnedNFTBullRun();
@@ -61,11 +62,11 @@ export const SectionMyNFTBullRun = () => {
             justifyContent="space-between"
             spacing="20"
           >
-            {isLoading ? (
+            {isLoading || !ownedNftList ? (
               <Box display="flex" justifyContent="center" minH="55vh">
                 <Spinner size="xl" />
               </Box>
-            ) : ownedNftList.length === 0 ? (
+            ) : ownedNftList && ownedNftList.length === 0 ? (
               <Box
                 textAlign="center"
                 display="flex"
@@ -84,7 +85,7 @@ export const SectionMyNFTBullRun = () => {
                   <CardBullRunNFT
                     contentTitle={""}
                     data={item}
-                    title={`Package ${item.uri.split("-")[1]}`}
+                    title={nftBullRunName[item.uri.split("-")[1] as "0"]}
                     claimValue={fromBn(item.claimValue, 6)}
                     id={(item.uri.split("-")[1] - 1).toString()}
                     isOwned

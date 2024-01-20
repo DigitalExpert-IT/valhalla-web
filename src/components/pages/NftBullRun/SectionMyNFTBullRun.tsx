@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { CardBullRunNFT } from "components/Card";
 import { useOwnedNFTBullRun } from "hooks";
 import { fromBn } from "evm-bn";
-import bullRunStore from "hooks/bullrun/bullrunStore";
+import bullRunStore from "hooks/bullrun/bullRunStore";
 
 export const SectionMyNFTBullRun = () => {
   const { isLoading } = useOwnedNFTBullRun();

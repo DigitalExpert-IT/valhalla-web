@@ -10,7 +10,7 @@ import {
 import { useBullRunContract } from "./useBullRunContract";
 import { NFT } from "valhalla-erc20/typechain-types";
 import { toBn } from "evm-bn";
-import bullRunStore from "./bullrunStore";
+import bullRunStore from "hooks/bullrun/bullRunStore";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {

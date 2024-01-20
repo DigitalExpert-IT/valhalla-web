@@ -24,7 +24,7 @@ export const useProfileBullRun = () => {
     "claimBuyReward"
   );
   const address = useAddress() ?? ZERO_ADDRESS;
-  const [data, setData] = useState<IProfileData>([]);
+  const [data, setData] = useState<IProfileData>({} as IProfileData);
   const [isLoading, setLoading] = useState(false);
 
   const fetch = async () => {

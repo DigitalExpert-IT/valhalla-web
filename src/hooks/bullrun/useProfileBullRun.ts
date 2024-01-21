@@ -80,7 +80,7 @@ export const useProfileBullRun = () => {
   useEffect(() => {
     if (!address) return;
     fetch();
-  }, [address, nft.contract]);
+  }, [address, nft.contract, claimBuyReward, claimRankReward]);
 
   return {
     isLoading: isLoading || nft.isLoading,

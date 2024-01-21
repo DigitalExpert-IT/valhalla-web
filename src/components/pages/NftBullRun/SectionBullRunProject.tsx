@@ -9,12 +9,13 @@ import {
   Stack,
   Text,
   Flex,
+  Spinner,
 } from "@chakra-ui/react";
 import { useAddress } from "@thirdweb-dev/react";
 import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
-import { useAsyncCall } from "hooks";
+import { useAsyncCall, useOwnedNFTBullRun } from "hooks";
 import { useAccountMap } from "hooks/valhalla";
 import { useTranslation } from "react-i18next";
 import { useProfileBullRun } from "hooks/bullrun/useProfileBullRun";
@@ -23,6 +24,7 @@ import { prettyBn } from "utils";
 
 export const SectionGnetProject = () => {
   const { t } = useTranslation();
+  const { isLoading } = useOwnedNFTBullRun();
   const { showModalConnectWallet, loading, isAbleToTransaction } =
     useClickConnectWallet();
   const address = useAddress() ?? ZERO_ADDRESS;
@@ -140,13 +142,19 @@ export const SectionGnetProject = () => {
                     variant="swag"
                     onClick={handleClaimRank}
                     isLoading={isLoadingClaimRank}
-                    isDisabled
                   >
-                    {/* {(profileData.rankReward &&
-                      fromBn(profileData.rankReward, 6)) +
+                    {isLoading || profileData.rankReward === undefined ? (
+                      <Box display="flex" justifyContent="center" minH="55vh">
+                        <Spinner size="sm" mt={3}/>
+                      </Box>
+                    ) : (
+                      (profileData.rankReward &&
+                        fromBn(profileData.rankReward, 6)) +
                       " " +
-                      t("common.claim")}{" "} */}
-                    {0 + " " + "USDT" + " " + t("common.claim")}
+                      "USDT" +
+                      " " +
+                      t("common.claim")
+                    )}
                   </Button>
                 </Stack>
 
@@ -162,13 +170,18 @@ export const SectionGnetProject = () => {
                     onClick={handleClaimBuy}
                     isLoading={isLoadingClaimBuy}
                   >
-                    {(profileData.buyReward &&
-                      fromBn(profileData.buyReward, 6)) +
+                    {isLoading || profileData.buyReward === undefined   ? (
+                      <Box display="flex" justifyContent="center" minH="55vh">
+                        <Spinner size="sm" mt={3}/>
+                      </Box>
+                    ) : (
+                      (profileData.buyReward &&
+                        fromBn(profileData.buyReward, 6)) +
                       " " +
                       "USDT" +
                       " " +
-                      t("common.claim") ||
-                      0 + " " + "USDT" + " " + t("common.claim")}
+                      t("common.claim")
+                    )}
                   </Button>
                 </Stack>
               </Stack>

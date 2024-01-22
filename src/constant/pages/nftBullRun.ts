@@ -27,9 +27,8 @@ export const nftBullRunName = {
   "1": "Wise Elephant",
   "2": "Fortune Panda",
   "3": "Wealthy Tiger",
-  "4": "Lucky Ape",
-  "5": "Rising Phoenix",
-  "6": "Mighty Dragon",
+  "4": "Rising Phoenix",
+  "5": "Mighty Dragon",
 };
 export const dummyNFTBullPrice = [
   {

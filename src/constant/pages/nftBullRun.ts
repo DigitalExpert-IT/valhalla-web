@@ -101,7 +101,7 @@ export const nftBullRunMatching = [
         minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },
       {
-        name: "l1%",
+        name: "1%",
         description: "/ Rare Rank And Above",
         minimum: "/ 3000 USDT Minimum Purchase of Bull Run NFT",
       },

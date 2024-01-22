@@ -41,6 +41,10 @@ export const NAVIGATION: Array<INavigation> = [
         title: "propertyDao",
         link: "/property-dao",
       },
+      {
+        title: "nftBullRun",
+        link: "/bullrun",
+      },
     ],
   },
   {

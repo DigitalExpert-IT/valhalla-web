@@ -7,6 +7,15 @@ export const CARD_IMAGE_MAP = {
   "5": "https://ik.imagekit.io/msxxxaegj/video_gn/nft_6.mp4?updatedAt=1686300188144",
 };
 
+export const BULL_IMAGE_MAP = {
+  "0": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_1.png?updatedAt=1704892105091",
+  "1": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_2.png?updatedAt=1704892105091",
+  "2": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_3.png?updatedAt=1704892105091",
+  "3": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_4.png?updatedAt=1704892105091",
+  "4": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_5.png?updatedAt=1704892105091",
+  "5": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_6.png?updatedAt=1704892105091",
+};
+
 export const CARD_IMAGE_GENESIS_MAP = {
   "0": "https://ik.imagekit.io/msxxxaegj/video_gn/genesis_nft.mp4?updatedAt=1686543251611",
 };

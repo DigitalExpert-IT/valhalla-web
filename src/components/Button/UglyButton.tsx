@@ -2,10 +2,11 @@ import { Box, Button, ButtonProps, Stack } from "@chakra-ui/react";
 
 interface UglyButtonProps extends ButtonProps {
   price: string;
+  priceCurrency?: string;
   label: string;
 }
 export const UglyButton: React.FC<UglyButtonProps> = props => {
-  const { price, label, ...rest } = props;
+  const { price, priceCurrency, label, ...rest } = props;
   return (
     <Box
       bgGradient="linear(to-r, #FF00FF, blue.500)"
@@ -29,7 +30,7 @@ export const UglyButton: React.FC<UglyButtonProps> = props => {
           justifyContent="center"
           rounded="lg"
         >
-          {price}
+          {price} {priceCurrency}
         </Box>
         <Button
           rounded="none"

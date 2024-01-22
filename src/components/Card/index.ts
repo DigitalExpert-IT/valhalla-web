@@ -8,3 +8,4 @@ export * from "./CardProfileBalance";
 export * from "./CardClaimGenesisNFT";
 export * from "./CardDao";
 export * from "./CardOwnedDao";
+export * from "./CardBullRunNFT";

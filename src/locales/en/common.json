@@ -9,7 +9,8 @@
     "genesis": "Nft Genesis",
     "dashboard": "Dashboard",
     "myNetwork": "My Network",
-    "propertyDao": "Property Dao"
+    "propertyDao": "Property Dao",
+    "nftBullRun": "Nft Bull Run"
   },
   "banner": {
     "invalidChainMessage": "You are connected through Invalid chain!",
@@ -55,6 +56,7 @@
   "accept": "Accept",
   "telegram": "Telegram",
   "agreeAndAccept": "I Agree & Accept",
+  "successClaim": "Success Claim",
   "transactionSuccess": "Transaction Success",
   "networkMembers": "Network <br/>Members",
   "directReferrals": "Direct <br/>Referrals",
@@ -94,5 +96,6 @@
   "inProgres": "In Progres",
   "Completed": "Completed",
   "thirdPartyColaboration": "3rd Party Collaborations",
-  "learnMore": "LEARN MORE"
+  "learnMore": "LEARN MORE",
+  "nft": "NFT"
 }

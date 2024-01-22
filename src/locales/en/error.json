@@ -17,6 +17,8 @@
     "RegistrationRequired": "Registration Required",
     "RankNotYetStart": "Rank Not Yet Start",
     "MaxBuy": "Maximum Buy, Need More Rank To Buy NFT",
-    "RankStarted": "Can't buy at Rank Started"
+    "RankStarted": "Can't buy at Rank Started",
+    "NotEnoughUSDTBalance": "Not Enough USDT Balances",
+    "FailedToClaim": "Failed To Claim"
   }
 }

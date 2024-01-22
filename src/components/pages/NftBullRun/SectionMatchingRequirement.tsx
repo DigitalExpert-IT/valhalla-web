@@ -27,7 +27,7 @@ export const SectionMatchingRequirement = () => {
             display: "block",
             textAlign: "center",
             alignSelf: "center",
-            content: `'Matching'`,
+            content: `'Marketing'`,
             color: "whiteAlpha.100",
             transform: {
               md: "scale(3) translateY(-20px)",
@@ -44,7 +44,7 @@ export const SectionMatchingRequirement = () => {
         <Stack
           w="full"
           alignItems={"center"}
-          display={{ lg: "flex", base: "none" }}
+          display={{ lg: "flex" }}
           h="100vh"
         >
           <Box>
@@ -62,7 +62,16 @@ export const SectionMatchingRequirement = () => {
                   </TabClubTrigger>
                 ))}
               </TabClubList>
-              <TabClubPanelList flex={1} bg="#311769BF" px={"1rem"} pe={8}>
+              <TabClubPanelList
+                flex={1}
+                bg="#311769BF"
+                px={"1rem"}
+                pe={{ base: 2, md: 8 }}
+                pb={0}
+                overflowX={{ base: "scroll", md: "unset" }}
+                // @ts-ignore
+                style={{ textWrap: "noWrap" }}
+              >
                 {nftBullRunMatching.map((e, i) => (
                   <TabClubPanelItem whenActive={i} key={i}>
                     {e.content.map((j, ij) => (

@@ -58,35 +58,34 @@ export const SectionGnetProject = () => {
 
   return (
     <Box position="relative" zIndex={1}>
-      <Box
-        h={{ md: "30vh", base: "40vh" }}
-        justifyContent="center"
-        alignItems="center"
-        textAlign="center"
-        overflow="hidden"
-        display="flex"
-        w="100%"
-      >
-        <Heading
-          _after={{
-            content: `'NFT'`,
-            display: "block",
-            textAlign: "center",
-            alignSelf: "center",
-            color: "whiteAlpha.100",
-            transform: {
-              md: "scale(3) translateY(-20px)",
-              base: "scale(3) translateY(-10px)",
-            },
-          }}
-          textTransform="uppercase"
-          fontSize={{ md: "6xl", base: "4xl" }}
-        >
-          {t("pages.nftBullRun.bullrunNftProject")}
-        </Heading>
-      </Box>
-
       <Container maxW="container.xl">
+        <Box
+          h={{ md: "30vh", base: "40vh" }}
+          justifyContent="center"
+          alignItems="center"
+          textAlign="center"
+          overflow="hidden"
+          display="flex"
+          w="100%"
+        >
+          <Heading
+            _after={{
+              content: `'NFT'`,
+              display: "block",
+              textAlign: "center",
+              alignSelf: "center",
+              color: "whiteAlpha.100",
+              transform: {
+                md: "scale(3) translateY(-20px)",
+                base: "scale(3) translateY(-10px)",
+              },
+            }}
+            textTransform="uppercase"
+            fontSize={{ md: "6xl", base: "4xl" }}
+          >
+            {t("pages.nftBullRun.bullrunNftProject")}
+          </Heading>
+        </Box>
         <Flex display="flex" justifyContent="center" mb="4rem">
           <Stack
             direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
@@ -145,7 +144,7 @@ export const SectionGnetProject = () => {
                   >
                     {isLoading || profileData.rankReward === undefined ? (
                       <Box display="flex" justifyContent="center" minH="55vh">
-                        <Spinner size="sm" mt={3}/>
+                        <Spinner size="sm" mt={3} />
                       </Box>
                     ) : (
                       (profileData.rankReward &&
@@ -170,9 +169,9 @@ export const SectionGnetProject = () => {
                     onClick={handleClaimBuy}
                     isLoading={isLoadingClaimBuy}
                   >
-                    {isLoading || profileData.buyReward === undefined   ? (
+                    {isLoading || profileData.buyReward === undefined ? (
                       <Box display="flex" justifyContent="center" minH="55vh">
-                        <Spinner size="sm" mt={3}/>
+                        <Spinner size="sm" mt={3} />
                       </Box>
                     ) : (
                       (profileData.buyReward &&

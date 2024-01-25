@@ -8,12 +8,12 @@ export const CARD_IMAGE_MAP = {
 };
 
 export const BULL_IMAGE_MAP = {
-  "0": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_1.png?updatedAt=1704892105091",
-  "1": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_2.png?updatedAt=1704892105091",
-  "2": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_3.png?updatedAt=1704892105091",
-  "3": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_4.png?updatedAt=1704892105091",
-  "4": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_5.png?updatedAt=1704892105091",
-  "5": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_6.png?updatedAt=1704892105091",
+  "0": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_1.jpg?updatedAt=1704892105091",
+  "1": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_2.jpg?updatedAt=1704892105091",
+  "2": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_3.jpg?updatedAt=1704892105091",
+  "3": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_4.jpg?updatedAt=1704892105091",
+  "4": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_5.jpg?updatedAt=1704892105091",
+  "5": "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/nft_6.jpg?updatedAt=1704892105091",
 };
 
 export const CARD_IMAGE_GENESIS_MAP = {

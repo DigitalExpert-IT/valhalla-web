@@ -70,8 +70,34 @@ export const DATA_DAO = [
     sold: "22",
     value: "90",
     isComingSoon: true,
+    imageCaraousel: [
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_1.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_2.jpg?updatedAt=1698209422463",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_3.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_4.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_5.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_6.jpg?updatedAt=1698209417147",
+      },
+    ],
     image:
-      "https://ik.imagekit.io/msxxxaegj/image_gn/balivilla.png?updatedAt=1697684134687",
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bali-vila.png?updatedAt=1706237676840",
     countryImage:
       "https://cdn.britannica.com/48/1648-004-A33B72D8/Flag-Indonesia.jpg",
   },

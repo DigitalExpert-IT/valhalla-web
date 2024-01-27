@@ -61,17 +61,17 @@ export const CardDao: React.FC<ICardDao> = props => {
   return (
     <Box
       sx={outerBoxStyle}
-      onClick={isComingSoon ? () => { } : onClick}
+      onClick={isComingSoon ? onClick : () => { }}
       rounded="xl"
-      cursor={isComingSoon ? "not-allowed" : "pointer"}
+      cursor={isComingSoon ? "pointer" : "not-allowed"}
     >
       <Box
         sx={innerBoxStyles}
         backdropFilter="auto"
         backdropBrightness="48%"
-        display={isComingSoon ? "flex" : "none"}
+        display={isComingSoon ? "none" : "flex"}
       >
-        <Text fontSize="4xl">Coming Soon</Text>
+        <Text fontSize="4xl">Sold Out</Text>
       </Box>
       <Box mb="1rem">
         <Image src={image} alt="villa-image" objectFit="cover" />

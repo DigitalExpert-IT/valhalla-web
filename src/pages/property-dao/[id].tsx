@@ -147,7 +147,9 @@ const Detail = () => {
               <Box maxW={{ base: "100%", md: "80%" }} pt="4rem">
                 <Stack direction="row" flexWrap="wrap">
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">{t("pages.dao.fractionSold")}</Text>
+                    <Text fontWeight="bold">
+                      {t("pages.daoBali.fractionSold")}
+                    </Text>
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
@@ -157,114 +159,65 @@ const Detail = () => {
                       data={data?.sold}
                     />
                     <LoaderSuspense
+                      // component={
+                      //   <Text fontWeight="bold">{`${fractionPercen.toFixed(
+                      //     2
+                      //   )}% (from ${data?.maxLot})`}</Text>
+                      // } -> please use this while launching date is near
                       component={
                         <Text fontWeight="bold">{`${fractionPercen.toFixed(
                           2
-                        )}% (from ${data?.maxLot})`}</Text>
+                        )}% (from ${DATA_DAO[id].maxLot})`}</Text>
                       }
-                      data={data?.maxLot}
+                      // data={data?.maxLot}
+                      data={DATA_DAO[id].maxLot}
                     />
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">{t("pages.dao.appreciation")}</Text>
+                    <Text fontWeight="bold">
+                      {t("pages.daoBali.appreciation")}
+                    </Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
                       90%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">{t("pages.dao.price")}</Text>
+                    <Text fontWeight="bold">{t("pages.daoBali.price")}</Text>
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {prettyBn(data?.price, 6)} USDT
+                          {/* {prettyBn(data?.price, 6)} USDT -> plase use this while launching is near */}
+                          {DATA_DAO[id].price} USDT
                         </Text>
                       }
-                      data={data?.price}
+                      data={DATA_DAO[id].price}
                     />
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
-                    <Text fontWeight="bold">{t("pages.dao.investment")}</Text>
+                    <Text fontWeight="bold">
+                      {t("pages.daoBali.investment")}
+                    </Text>
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {data?.maxLot === data?.sold
+                          {/* {data?.maxLot === data?.sold
                             ? t("common.Completed")
-                            : t("common.inProgres")}
+                            : t("common.inProgres")} */}
+                          {"Coming Soon"}
                         </Text>
                       }
-                      data={loadingDao}
+                      // data={loadingDao}
+                      data={"Coming Soon"}
                     />
                   </Box>
                 </Stack>
               </Box>
               <Stack pt={"1rem"}>
                 <Countdown
-                  targetDate={new Date("2024-03-01T24:00:00.000Z")}
-                  showExpired={
-                    <>
-                      <Stack
-                        direction={{ base: "column", md: "row" }}
-                        spacing="1rem"
-                        pt="1rem"
-                      >
-                        <Stack
-                          direction="row"
-                          w={{ base: "100%", md: "20%" }}
-                          bgColor="#8A6DD1"
-                          rounded="xl"
-                          align="center"
-                          justify="center"
-                        >
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            color="black"
-                            disabled={true}
-                          >
-                            -
-                          </Button>
-
-                          <Input
-                            textAlign="center"
-                            variant="unstyled"
-                            color="black"
-                            disabled={true}
-                            value={0}
-                          />
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            color="black"
-                            disabled={true}
-                          >
-                            +
-                          </Button>
-                        </Stack>
-                        <Button
-                          variant="solid"
-                          bgColor="whiteAlpha.900"
-                          rounded="lg"
-                          color="black"
-                          _hover={{ bg: "whiteAlpha.700" }}
-                          size="lg"
-                          w={{ base: "100%", md: "49%" }}
-                          disabled={true}
-                        >
-                          0
-                        </Button>
-                      </Stack>
-                      <HStack>
-                        <Text
-                          fontWeight="bold"
-                          fontSize={{ xl: "2xl", base: "sm" }}
-                        >
-                          {t("pages.dao.deadlineAnnounce")}
-                        </Text>
-                      </HStack>
-                    </>
-                  }
+                  targetDate={new Date("2024-02-15T24:00:00.000Z")}
+                  showExpired={<></>}
                 />
               </Stack>
             </Stack>
@@ -293,7 +246,7 @@ const Detail = () => {
                 <Text color="black" fontWeight="bold">
                   Total investment amount
                 </Text>
-                <Text color="gray.500">$600.000,00</Text>
+                <Text color="gray.500">$650.000</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
@@ -330,23 +283,26 @@ const Detail = () => {
                 Description
               </Heading>
               <Stack rowGap={5}>
-                <Text>{t("pages.dao.detailDaoDescription1")} </Text>
-                <Text>{t("pages.dao.location")} </Text>
-                <Text>{t("pages.dao.detailDaoDescription2")} </Text>
+                <Text>{t("pages.daoBali.detailDaoDescription1")} </Text>
+                <Text>{t("pages.daoBali.location")} </Text>
+                <Text>{t("pages.daoBali.detailDaoDescription2")} </Text>
                 <Stack>
                   <Text>Some Specs : </Text>
                   <UnorderedList paddingLeft={"2rem"}>
-                    <ListItem>{t("pages.dao.1")}</ListItem>
-                    <ListItem>{t("pages.dao.2")}</ListItem>
-                    <ListItem>{t("pages.dao.3")}</ListItem>
-                    <ListItem>{t("pages.dao.4")}</ListItem>
-                    <ListItem>{t("pages.dao.5")}</ListItem>
-                    <ListItem>{t("pages.dao.6")}</ListItem>
-                    <ListItem>{t("pages.dao.7")}</ListItem>
-                    <ListItem>{t("pages.dao.8")}</ListItem>
-                    <ListItem>{t("pages.dao.9")}</ListItem>
-                    <ListItem>{t("pages.dao.10")}</ListItem>
-                    <ListItem>{t("pages.dao.11")}</ListItem>
+                    <ListItem>{t("pages.daoBali.1")}</ListItem>
+                    <ListItem>{t("pages.daoBali.2")}</ListItem>
+                    <ListItem>{t("pages.daoBali.3")}</ListItem>
+                    <ListItem>{t("pages.daoBali.4")}</ListItem>
+                    <ListItem>{t("pages.daoBali.5")}</ListItem>
+                    <ListItem>{t("pages.daoBali.6")}</ListItem>
+                    <ListItem>{t("pages.daoBali.7")}</ListItem>
+                    <ListItem>{t("pages.daoBali.8")}</ListItem>
+                    <ListItem>{t("pages.daoBali.9")}</ListItem>
+                    <ListItem>{t("pages.daoBali.10")}</ListItem>
+                    <ListItem>{t("pages.daoBali.11")}</ListItem>
+                    <ListItem>{t("pages.daoBali.12")}</ListItem>
+                    <ListItem>{t("pages.daoBali.13")}</ListItem>
+                    <ListItem>{t("pages.daoBali.14")}</ListItem>
                   </UnorderedList>
                   {/* <Text>
                     Need more information? Reach us by our contact form{" "}
@@ -418,7 +374,7 @@ const Detail = () => {
                   />
                 </Tooltip>
                 {/*remember this must be changed while had more than 1 property*/}
-                <Link
+                {/* <Link
                   href={
                     "https://drive.google.com/file/d/1w_3KRsoqy7Mf8KhJ5BFO0aKR7YjjoH24/view?usp=sharing"
                   }
@@ -442,7 +398,7 @@ const Detail = () => {
                       rounded="lg"
                     />
                   </Tooltip>
-                </Link>
+                </Link> */}
               </Box>
               <Box mt="2rem">
                 <Stack direction="row" justify="space-between" align="center">

@@ -66,10 +66,11 @@ export const SectionDao = () => {
                 countryImage={DATA_DAO[idx].countryImage}
                 country={DATA_DAO[idx].country}
                 image={DATA_DAO[idx].image}
-                price={prettyBn(item.price, 6)}
+                price={DATA_DAO[idx].price}
                 name={DATA_DAO[idx].name}
                 sold={Number(item.sold)}
-                maxLot={Number(item.maxLot)}
+                // maxLot={Number(item.maxLot)} change to this while the launching date is near
+                maxLot={DATA_DAO[idx].maxLot || 0}
                 value={DATA_DAO[idx].value}
                 isComingSoon={DATA_DAO[idx].isComingSoon}
               />

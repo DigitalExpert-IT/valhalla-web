@@ -59,8 +59,6 @@ const Countdown: React.FC<ICountdown> = props => {
   };
 
   if (days + hours + minutes + seconds <= 0) {
-    return showExpired;
-  } else {
     return (
       <>
         <Stack
@@ -87,6 +85,7 @@ const Countdown: React.FC<ICountdown> = props => {
               variant="unstyled"
               color="black"
               {...input}
+              disabled
             />
             <Button variant="ghost" size="sm" color="black" {...inc}>
               +
@@ -110,16 +109,71 @@ const Countdown: React.FC<ICountdown> = props => {
               : "Sold Out"}
           </Button>
         </Stack>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing="1rem"
+          pt="1rem"
+        >
+          <Stack
+            direction="row"
+            w={{ base: "100%", md: "20%" }}
+            bgColor="white"
+            border="1px"
+            borderColor="black"
+            rounded="xl"
+            align="center"
+            justify="center"
+          >
+            <Button variant="ghost" size="sm" color="black" {...dec} disabled>
+              -
+            </Button>
+
+            <Input
+              textAlign="center"
+              variant="unstyled"
+              color="black"
+              {...input}
+              disabled
+            />
+            <Button variant="ghost" size="sm" color="black" {...inc} disabled>
+              +
+            </Button>
+          </Stack>
+          <Button
+            variant="solid"
+            bgColor="whiteAlpha.900"
+            rounded="lg"
+            color="black"
+            _hover={{ bg: "whiteAlpha.700" }}
+            size="lg"
+            w={{ base: "100%", md: "49%" }}
+            // isLoading={isLoading || isLoadingDao || loading}
+            // spinner={<Spinner color="#191272" />}
+            // onClick={buyVilla}
+            // disabled={data?.sold === data?.maxLot ?? false}
+            disabled
+          >
+            {/* {data?.sold !== data?.maxLot
+              ? `Buy ${totalPrice} USDT`
+              : "Sold Out"} */}
+              Coming Soon
+          </Button>
+        </Stack>
         <HStack mb={1}>
           <Text fontWeight="bold" fontSize={{ xl: "lg", base: "sm" }}>
-            {t("pages.dao.deadline")}
+            {t("pages.daoBali.deadline")}
           </Text>
           <Text
             fontSize={{ xl: "2xl", base: "sm" }}
             fontWeight="bold"
             color="#FFC2C2"
           >
-            {t("pages.dao.deadlineDate")}
+            {t("pages.daoBali.deadlineDate")}
           </Text>
         </HStack>
         <Box zIndex={3} mb="5rem">

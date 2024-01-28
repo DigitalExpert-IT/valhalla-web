@@ -74,11 +74,11 @@ export const DATA_DAO = [
     imageCaraousel: [
       {
         picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_1.jpg?updatedAt=1698209417147",
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_2.jpg?updatedAt=1698209422463",
       },
       {
         picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_2.jpg?updatedAt=1698209422463",
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_bali_villa/detail_bali_villa_1.jpg?updatedAt=1698209417147",
       },
       {
         picture:

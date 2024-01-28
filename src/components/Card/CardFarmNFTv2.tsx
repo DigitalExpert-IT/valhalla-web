@@ -46,7 +46,7 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
             </Box>
             <Box py="1rem">
               <Text fontWeight="600">
-                Farm Level {props.title} Total Return (200 Days)
+                Farm Level {props.title} Total Return (450 Days)
               </Text>
               <Text color="#FF00FF" fontSize="md">
                 Gacha: 0,5%, 0,6%, 0,7%, 0,8%, 1%, 1,5%

@@ -65,11 +65,11 @@ export const DATA_DAO = [
   {
     id: "1",
     country: "indonesia",
-    name: "bali villa",
+    name: "Luxury Bali Villa",
     price: "100",
     maxLot: 6500,
     sold: "22",
-    value: "90",
+    value: "21",
     isComingSoon: true,
     imageCaraousel: [
       {

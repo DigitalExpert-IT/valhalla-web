@@ -178,7 +178,7 @@ const Detail = () => {
                       {t("pages.daoBali.appreciation")}
                     </Text>
                     <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                      90%
+                      21%
                     </Text>
                     <Text fontWeight="bold">/year</Text>
                   </Box>
@@ -250,21 +250,21 @@ const Detail = () => {
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
-                  Est.Appreciation
+                  Est.Return
                 </Text>
-                <Text color="gray.500">90% / year</Text>
+                <Text color="gray.500">21% / year</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
                   Investing Period
                 </Text>
-                <Text color="gray.500">10 Months</Text>
+                <Text color="gray.500">3 Months</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
                   Exit Date
                 </Text>
-                <Text color="gray.500">30/08/2024</Text>
+                <Text color="gray.500">-</Text>
               </Box>
               <Box>
                 <Text color="black" fontWeight="bold">
@@ -324,7 +324,7 @@ const Detail = () => {
                 <Tooltip
                   fontWeight={"600"}
                   backgroundColor={"white"}
-                  label={"Income: BuySell"}
+                  label={"Income: Rental"}
                   shouldWrapChildren
                   placement="top"
                 >
@@ -341,7 +341,7 @@ const Detail = () => {
                 <Tooltip
                   fontWeight={"600"}
                   backgroundColor={"white"}
-                  label={"State: Under Constructed"}
+                  label={"State: Constructed"}
                   shouldWrapChildren
                   placement="top"
                 >
@@ -359,7 +359,7 @@ const Detail = () => {
                 <Tooltip
                   fontWeight={"600"}
                   backgroundColor={"white"}
-                  label={"Exit Term: Short"}
+                  label={"Exit Term: Long"}
                   shouldWrapChildren
                   placement="top"
                 >

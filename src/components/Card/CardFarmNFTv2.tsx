@@ -41,8 +41,35 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
           rounded="xl"
         >
           <Stack>
-            <Box as="video" autoPlay loop muted rounded="xl">
-              <source src={CARD_IMAGE_MAP[props.id as "0"]} type="video/mp4" />
+            <Box pos={"relative"} overflow={"hidden"}>
+              <Box
+                pos={"absolute"}
+                width={"fit-content"}
+                height={"fit-content"}
+                borderRadius={2}
+                top={"4rem"}
+                left={"-4.5rem"}
+                px={0}
+                py={0}
+                background={"red"}
+                transform={"rotate(315deg);"}
+              >
+                <Text
+                  fontSize={"15px"}
+                  fontWeight={"bold"}
+                  color={"white"}
+                  textTransform={"uppercase"}
+                  px={"3rem"}
+                >
+                  Chinese New Year Promo
+                </Text>
+              </Box>
+              <Box as="video" autoPlay loop muted rounded="xl">
+                <source
+                  src={CARD_IMAGE_MAP[props.id as "0"]}
+                  type="video/mp4"
+                />
+              </Box>
             </Box>
             <Box py="1rem">
               <Text fontWeight="600">

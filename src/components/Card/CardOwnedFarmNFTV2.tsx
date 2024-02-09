@@ -28,6 +28,10 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
   const lastFarmedAtRef = useRef<BigNumber>(lastFarmedAt);
   const { farm: farming } = useNFT();
   const farmer = useAsyncCall(farming);
+  const daysPercentage =
+    Number(percentage) / 10 < 1
+      ? t("common.remainingFarm")
+      : t("common.remainingFarmAbove1");
 
   const handleFarm = async () => {
     farmer.exec(id);
@@ -102,7 +106,7 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
                   " " +
                   cardId.add(1).toNumber() +
                   " " +
-                  t("common.remainingFarm")}
+                  daysPercentage}
               </Text>
             </Box>
           </Stack>

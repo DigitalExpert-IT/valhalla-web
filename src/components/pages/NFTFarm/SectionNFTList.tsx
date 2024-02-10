@@ -22,7 +22,7 @@ export const SectionNFTList = () => {
       backgroundRepeat="no-repeat"
     >
        <Image
-        src="assets/illustration/cny-banner.png"
+        src="https://ik.imagekit.io/msxxxaegj/image_gn/cny-banner.png?updatedAt=1707532137917"
         pt="10"
         mb={"-7rem"}
         alt=""

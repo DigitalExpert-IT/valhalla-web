@@ -8,6 +8,7 @@ import {
   Input,
   Spinner,
   useNumberInput,
+  useToast,
 } from "@chakra-ui/react";
 import { useContractRead } from "@thirdweb-dev/react";
 import { useAsyncCall, useCountdown } from "hooks";
@@ -24,6 +25,7 @@ interface ICountdown {
 }
 
 const Countdown: React.FC<ICountdown> = props => {
+  const toast = useToast();
   const { targetDate, showExpired } = props;
   const { t } = useTranslation();
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
@@ -56,6 +58,16 @@ const Countdown: React.FC<ICountdown> = props => {
   const buyVilla = () => {
     if (!isAbleToTransaction) return showModalConnectWallet();
     exec(id, input.value);
+  };
+
+  const waitBuyVilla = () => {
+    toast({
+      title: "Account created.",
+      description: "We've created your account for you.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   if (days + hours + minutes + seconds <= 0) {
@@ -154,7 +166,16 @@ const Countdown: React.FC<ICountdown> = props => {
             w={{ base: "100%", md: "49%" }}
             isLoading={isLoading || isLoadingDao || loading}
             spinner={<Spinner color="#191272" />}
-            onClick={buyVilla}
+            //onClick={buyVilla}
+            onClick={() =>
+              toast({
+                title: "NFT creation in progress",
+                description: "We've prepared the asset for you.",
+                status: "info",
+                duration: 9000,
+                isClosable: true,
+              })
+            }
             disabled={data?.sold === data?.maxLot ?? false}
           >
             {data?.sold !== data?.maxLot

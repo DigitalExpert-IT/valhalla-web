@@ -60,16 +60,6 @@ const Countdown: React.FC<ICountdown> = props => {
     exec(id, input.value);
   };
 
-  const waitBuyVilla = () => {
-    toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-  };
-
   if (days + hours + minutes + seconds <= 0) {
     return (
       <>

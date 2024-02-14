@@ -156,16 +156,7 @@ const Countdown: React.FC<ICountdown> = props => {
             w={{ base: "100%", md: "49%" }}
             isLoading={isLoading || isLoadingDao || loading}
             spinner={<Spinner color="#191272" />}
-            //onClick={buyVilla}
-            onClick={() =>
-              toast({
-                title: "NFT creation in progress",
-                description: "We've prepared the asset for you.",
-                status: "info",
-                duration: 9000,
-                isClosable: true,
-              })
-            }
+            onClick={buyVilla}
             disabled={data?.sold === data?.maxLot ?? false}
           >
             {data?.sold !== data?.maxLot

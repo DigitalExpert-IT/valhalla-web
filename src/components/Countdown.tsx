@@ -154,14 +154,16 @@ const Countdown: React.FC<ICountdown> = props => {
             _hover={{ bg: "whiteAlpha.700" }}
             size="lg"
             w={{ base: "100%", md: "49%" }}
-            isLoading={isLoading || isLoadingDao || loading}
-            spinner={<Spinner color="#191272" />}
-            onClick={buyVilla}
-            disabled={data?.sold === data?.maxLot ?? false}
+            // isLoading={isLoading || isLoadingDao || loading}
+            // spinner={<Spinner color="#191272" />}
+            // onClick={buyVilla}
+            // disabled={data?.sold === data?.maxLot ?? false}
+            disabled
           >
-            {data?.sold !== data?.maxLot
+            {/* {data?.sold !== data?.maxLot
               ? `Buy ${totalPrice} USDT`
-              : "Sold Out"}
+              : "Sold Out"} */}
+            Coming Soon
           </Button>
         </Stack>
         <HStack mb={1}>

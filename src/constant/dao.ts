@@ -24,12 +24,12 @@ export const SPONSOR_DAO: Array<ISponsorDao> = [
 
 export const DATA_DAO = [
   {
-    id: "0",
+    id: 0,
     country: "indonesia",
     name: "Luxury Bali Villa",
     price: "100",
     maxLot: 6500,
-    sold: "22",
+    sold: 0,
     value: "21",
     isComingSoon: true,
     imageCaraousel: [
@@ -64,11 +64,12 @@ export const DATA_DAO = [
       "https://cdn.britannica.com/48/1648-004-A33B72D8/Flag-Indonesia.jpg",
   },
   {
-    id: "1",
+    id: 1,
     country: "Türkiye",
     name: "Semidetached Villa in Bodrum",
     price: "100",
-    sold: "0",
+    maxlot: 6000,
+    sold: 701,
     value: "90",
     isComingSoon: false,
     imageCaraousel: [

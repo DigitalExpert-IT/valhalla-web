@@ -58,19 +58,18 @@ export const SectionDao = () => {
           </Box>
         ) : null}
         <Wrap align="center" spacing="2rem" mt="5" justify="center">
-          {data.map((item, idx) => (
+          {DATA_DAO.map((item, idx) => (
             <WrapItem key={idx} maxW={{ base: "100%", md: "45%" }}>
               <CardDao
                 id={item.id.toString()}
-                onClick={() => handleItemClick(item.id.toNumber())}
+                onClick={() => handleItemClick(idx)}
                 countryImage={DATA_DAO[idx].countryImage}
                 country={DATA_DAO[idx].country}
                 image={DATA_DAO[idx].image}
                 price={DATA_DAO[idx].price}
                 name={DATA_DAO[idx].name}
-                sold={Number(item.sold)}
-                // maxLot={Number(item.maxLot)} change to this while the launching date is near
-                maxLot={DATA_DAO[idx].maxLot || 0}
+                sold={Number(data[idx]?.sold) || DATA_DAO[idx].sold}
+                maxLot={Number(data[idx]?.maxLot) || DATA_DAO[idx].maxlot}
                 value={DATA_DAO[idx].value}
                 isComingSoon={DATA_DAO[idx].isComingSoon}
               />

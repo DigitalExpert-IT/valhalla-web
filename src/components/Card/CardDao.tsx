@@ -118,7 +118,7 @@ export const CardDao: React.FC<ICardDao> = props => {
 
           <HStack justify="space-between">
             <Text>Remaining Lot</Text>
-            <Text>{maxLot - sold} Lot</Text>
+            <Text>{maxLot - sold || 0} Lot</Text>
           </HStack>
 
           <HStack justify="space-between">

@@ -8,6 +8,7 @@ import {
   Input,
   Spinner,
   useNumberInput,
+  useToast,
 } from "@chakra-ui/react";
 import { useContractRead } from "@thirdweb-dev/react";
 import { useAsyncCall, useCountdown } from "hooks";
@@ -24,6 +25,7 @@ interface ICountdown {
 }
 
 const Countdown: React.FC<ICountdown> = props => {
+  const toast = useToast();
   const { targetDate, showExpired } = props;
   const { t } = useTranslation();
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
@@ -152,16 +154,14 @@ const Countdown: React.FC<ICountdown> = props => {
             _hover={{ bg: "whiteAlpha.700" }}
             size="lg"
             w={{ base: "100%", md: "49%" }}
-            // isLoading={isLoading || isLoadingDao || loading}
-            // spinner={<Spinner color="#191272" />}
-            // onClick={buyVilla}
-            // disabled={data?.sold === data?.maxLot ?? false}
-            disabled
+            isLoading={isLoading || isLoadingDao || loading}
+            spinner={<Spinner color="#191272" />}
+            onClick={buyVilla}
+            disabled={data?.sold === data?.maxLot ?? false}
           >
-            {/* {data?.sold !== data?.maxLot
+            {data?.sold !== data?.maxLot
               ? `Buy ${totalPrice} USDT`
-              : "Sold Out"} */}
-              Coming Soon
+              : "Sold Out"}
           </Button>
         </Stack>
         <HStack mb={1}>

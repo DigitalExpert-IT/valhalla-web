@@ -167,10 +167,10 @@ const Detail = () => {
                       component={
                         <Text fontWeight="bold">{`${fractionPercen.toFixed(
                           2
-                        )}% (from ${DATA_DAO[id].maxLot})`}</Text>
+                        )}% (from ${DATA_DAO[id].maxlot})`}</Text>
                       }
                       // data={data?.maxLot}
-                      data={DATA_DAO[id].maxLot}
+                      data={DATA_DAO[id].maxlot}
                     />
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>

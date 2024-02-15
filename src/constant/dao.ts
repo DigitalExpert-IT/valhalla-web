@@ -28,7 +28,7 @@ export const DATA_DAO = [
     country: "indonesia",
     name: "Luxury Bali Villa",
     price: "100",
-    maxLot: 6500,
+    maxlot: 6500,
     sold: 0,
     value: "21",
     isComingSoon: true,

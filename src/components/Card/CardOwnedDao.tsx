@@ -16,7 +16,7 @@ interface ICardDao {
   country?: string;
   name?: string;
   price?: string;
-  sold?: string;
+  sold?: number;
   value?: string;
   image?: string;
   countryImage?: string;

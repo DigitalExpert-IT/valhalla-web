@@ -24,51 +24,12 @@ export const SPONSOR_DAO: Array<ISponsorDao> = [
 
 export const DATA_DAO = [
   {
-    id: "0",
-    country: "Türkiye",
-    name: "Semidetached Villa in Bodrum",
-    price: "100",
-    sold: "0",
-    value: "90",
-    isComingSoon: false,
-    imageCaraousel: [
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_10.jpg?updatedAt=1698209417147",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_11.jpg?updatedAt=1698209422463",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_5.jpg?updatedAt=1698209417147",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_9.jpg?updatedAt=1698209417147",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_2.jpg?updatedAt=1698209417147",
-      },
-      {
-        picture:
-          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_7.jpg?updatedAt=1698209417147",
-      },
-    ],
-    image:
-      "https://ik.imagekit.io/msxxxaegj/image_gn/turkey-villa.png?updatedAt=1697809212509",
-    countryImage:
-      "https://cdn.britannica.com/82/4782-050-8129909C/Flag-Turkey.jpg",
-  },
-  {
-    id: "1",
+    id: 0,
     country: "indonesia",
     name: "Luxury Bali Villa",
     price: "100",
-    maxLot: 6500,
-    sold: "22",
+    maxlot: 6500,
+    sold: 0,
     value: "21",
     isComingSoon: true,
     imageCaraousel: [
@@ -101,5 +62,45 @@ export const DATA_DAO = [
       "https://ik.imagekit.io/msxxxaegj/image_gn/bali-vila.png?updatedAt=1706237676840",
     countryImage:
       "https://cdn.britannica.com/48/1648-004-A33B72D8/Flag-Indonesia.jpg",
+  },
+  {
+    id: 1,
+    country: "Türkiye",
+    name: "Semidetached Villa in Bodrum",
+    price: "100",
+    maxlot: 6000,
+    sold: 701,
+    value: "90",
+    isComingSoon: false,
+    imageCaraousel: [
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_10.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_11.jpg?updatedAt=1698209422463",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_5.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_9.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_2.jpg?updatedAt=1698209417147",
+      },
+      {
+        picture:
+          "https://ik.imagekit.io/msxxxaegj/image_gn/detail_turkey_villa/detail_turkey_villa_7.jpg?updatedAt=1698209417147",
+      },
+    ],
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/turkey-villa.png?updatedAt=1697809212509",
+    countryImage:
+      "https://cdn.britannica.com/82/4782-050-8129909C/Flag-Turkey.jpg",
   },
 ];

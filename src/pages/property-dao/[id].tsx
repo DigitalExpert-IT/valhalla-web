@@ -159,12 +159,18 @@ const Detail = () => {
                       data={data?.sold}
                     />
                     <LoaderSuspense
+                      // component={
+                      //   <Text fontWeight="bold">{`${fractionPercen.toFixed(
+                      //     2
+                      //   )}% (from ${data?.maxLot})`}</Text>
+                      // } -> please use this while launching date is near
                       component={
                         <Text fontWeight="bold">{`${fractionPercen.toFixed(
                           2
-                        )}% (from ${data?.maxLot})`}</Text>
+                        )}% (from ${DATA_DAO[id].maxlot})`}</Text>
                       }
-                      data={data?.maxLot}
+                      // data={data?.maxLot}
+                      data={DATA_DAO[id].maxlot}
                     />
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
@@ -181,7 +187,8 @@ const Detail = () => {
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {prettyBn(data?.price, 6)} USDT
+                          {/* {prettyBn(data?.price, 6)} USDT -> plase use this while launching is near */}
+                          {DATA_DAO[id].price} USDT
                         </Text>
                       }
                       data={DATA_DAO[id].price}
@@ -195,19 +202,21 @@ const Detail = () => {
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {data?.maxLot === data?.sold
+                          {/* {data?.maxLot === data?.sold
                             ? t("common.Completed")
-                            : t("common.inProgres")}
+                            : t("common.inProgres")} */}
+                          {"Coming Soon"}
                         </Text>
                       }
-                      data={loadingDao}
+                      // data={loadingDao}
+                      data={"Coming Soon"}
                     />
                   </Box>
                 </Stack>
               </Box>
               <Stack pt={"1rem"}>
                 <Countdown
-                  targetDate={new Date("2024-02-14T24:00:00.000Z")}
+                  targetDate={new Date("2024-02-15T24:00:00.000Z")}
                   showExpired={<></>}
                 />
               </Stack>

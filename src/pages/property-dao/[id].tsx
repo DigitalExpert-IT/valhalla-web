@@ -159,18 +159,12 @@ const Detail = () => {
                       data={data?.sold}
                     />
                     <LoaderSuspense
-                      // component={
-                      //   <Text fontWeight="bold">{`${fractionPercen.toFixed(
-                      //     2
-                      //   )}% (from ${data?.maxLot})`}</Text>
-                      // } -> please use this while launching date is near
                       component={
                         <Text fontWeight="bold">{`${fractionPercen.toFixed(
                           2
-                        )}% (from ${DATA_DAO[id].maxlot})`}</Text>
+                        )}% (from ${data?.maxLot})`}</Text>
                       }
-                      // data={data?.maxLot}
-                      data={DATA_DAO[id].maxlot}
+                      data={data?.maxLot}
                     />
                   </Box>
                   <Box minW={"40%"} maxW={"40%"} mb={8}>
@@ -187,11 +181,10 @@ const Detail = () => {
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {/* {prettyBn(data?.price, 6)} USDT -> plase use this while launching is near */}
-                          {DATA_DAO[id].price} USDT
+                          {prettyBn(data?.price, 6)} USDT
                         </Text>
                       }
-                      data={DATA_DAO[id].price}
+                      data={prettyBn(data?.price, 6)}
                     />
                     <Text fontWeight="bold">/fraction</Text>
                   </Box>
@@ -202,14 +195,12 @@ const Detail = () => {
                     <LoaderSuspense
                       component={
                         <Text fontSize="2xl" fontWeight="bold" color="#FFC2C2">
-                          {/* {data?.maxLot === data?.sold
+                          {data?.maxLot === data?.sold
                             ? t("common.Completed")
-                            : t("common.inProgres")} */}
-                          {"Coming Soon"}
+                            : t("common.inProgres")}
                         </Text>
                       }
-                      // data={loadingDao}
-                      data={"Coming Soon"}
+                      data={data?.maxLot || data?.sold}
                     />
                   </Box>
                 </Stack>

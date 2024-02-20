@@ -51,6 +51,34 @@ export const dummyNFTBullPrice = [
   },
 ];
 
+export const tokenList = [
+  {
+    name: "WBTC",
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/wbtc.png?updatedAt=1708360117831",
+  },
+  {
+    name: "SAND",
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/sand.png?updatedAt=1708360117831",
+  },
+  {
+    name: "LINK",
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/link.png?updatedAt=1708360117831",
+  },
+  {
+    name: "WMATIC",
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/wmatic.png?updatedAt=1708360117831",
+  },
+  {
+    name: "BULLRUN",
+    image:
+      "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/bullrun.png?updatedAt=1708360117831",
+  },
+];
+
 export const nftBullRunMatching = [
   {
     title: "level 1",

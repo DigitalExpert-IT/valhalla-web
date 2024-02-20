@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  HStack,
   Heading,
   Input,
   Stack,
@@ -15,6 +16,7 @@ import { Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useCardListBullRun } from "hooks/bullrun/useCardListBullRun";
 import { NFT } from "valhalla-erc20/typechain-types";
+import { tokenList } from "constant/pages/nftBullRun";
 
 interface CardNFTV2Props {
   title: string;
@@ -70,36 +72,122 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
             <Box>
               <Image src={BULL_IMAGE_MAP[props.id as "0"]} alt="" />
             </Box>
-            <Box pt="1rem">
-              <Stack alignItems="center" py="1rem">
+
+            <Box>
+              <Stack py="0.5rem">
                 {props.isOwned ? (
-                  <Box
-                    bgGradient="linear(to-r, #FF00FF, blue.500)"
-                    rounded="lg"
-                    w="full"
-                    p="1px"
-                  >
-                    <Stack
-                      direction="row"
-                      spacing={"0"}
-                      w="full"
-                      justifyContent="space-between"
-                      rounded="lg"
-                      bg="#191272"
-                    >
-                      <Button
-                        rounded="none"
+                  <>
+                    {tokenList.map((item, idx) => (
+                      <HStack
+                        key={idx}
                         flex={1}
-                        padding="0"
-                        bg="transparent"
-                        disabled={!isClaimableProfit}
-                        onClick={handleClaim}
-                        isLoading={claimLoading}
+                        flexBasis={"row"}
+                        justifyContent={"space-between"}
                       >
-                        {props.claimValue} USDT {t("common.claim")}
-                      </Button>
-                    </Stack>
-                  </Box>
+                        <HStack>
+                          <Image
+                            src={item.image}
+                            alt=""
+                            maxH={"20px"}
+                            maxW={"20px"}
+                          />
+                          <Text>{item.name}</Text>
+                        </HStack>
+                        <Text>2,64 {item.name}</Text>
+                      </HStack>
+                    ))}
+                    {/* <HStack
+                      flex={1}
+                      flexBasis={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <HStack>
+                        <Image
+                          src="https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/sand.png?updatedAt=1708360117831"
+                          alt=""
+                          maxH={"20px"}
+                          maxW={"20px"}
+                        />
+                        <Text>SAND</Text>
+                      </HStack>
+                      <Text>2,64 USDT</Text>
+                    </HStack>
+                    <HStack
+                      flex={1}
+                      flexBasis={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <HStack>
+                        <Image
+                          src="https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/link.png?updatedAt=1708360117841"
+                          alt=""
+                          maxH={"20px"}
+                          maxW={"20px"}
+                        />
+                        <Text>LINK</Text>
+                      </HStack>
+                      <Text>2,64 USDT</Text>
+                    </HStack>
+                    <HStack
+                      flex={1}
+                      flexBasis={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <HStack>
+                        <Image
+                          src="https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/wmatic.png?updatedAt=1708360117831"
+                          alt=""
+                          maxH={"20px"}
+                          maxW={"20px"}
+                        />
+                        <Text>WMATIC</Text>
+                      </HStack>
+                      <Text>2,64 USDT</Text>
+                    </HStack>
+                    <HStack
+                      flex={1}
+                      flexBasis={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <HStack>
+                        <Image
+                          src="https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/bullrun.png?updatedAt=1708360117831"
+                          alt=""
+                          maxH={"20px"}
+                          maxW={"20px"}
+                        />
+                        <Text>BULLRUN</Text>
+                      </HStack>
+                      <Text>29,44 USDT</Text>
+                    </HStack> */}
+                    <Box
+                      bgGradient="linear(to-r, #FF00FF, blue.500)"
+                      rounded="lg"
+                      w="full"
+                      p="1px"
+                    >
+                      <Stack
+                        direction="row"
+                        spacing={"0"}
+                        w="full"
+                        justifyContent="space-between"
+                        rounded="lg"
+                        bg="#191272"
+                      >
+                        <Button
+                          rounded="none"
+                          flex={1}
+                          padding="0"
+                          bg="transparent"
+                          disabled={!isClaimableProfit}
+                          onClick={handleClaim}
+                          isLoading={claimLoading}
+                        >
+                          {props.claimValue} USDT {t("common.claim")}
+                        </Button>
+                      </Stack>
+                    </Box>
+                  </>
                 ) : (
                   <UglyButton
                     price={props.price ?? "0"}

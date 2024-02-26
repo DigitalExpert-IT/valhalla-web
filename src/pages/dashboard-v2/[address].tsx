@@ -57,7 +57,7 @@ const Dashboard = () => {
     []
   );
 
-  const { data: summary, isLoading } = useSummary("0x6d67e7ec35074eac87576592927edbe9642c9657");
+  const { data: summary, isLoading } = useSummary(`${queryAddress}`);
 
   const { data: levelList, isLoading: levelLoading } = useListLevel(
     `${queryAddress}`

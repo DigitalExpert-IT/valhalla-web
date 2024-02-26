@@ -21,12 +21,6 @@ export const SectionNFTList = () => {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
     >
-       <Image
-        src="https://ik.imagekit.io/msxxxaegj/image_gn/cny-banner.png?updatedAt=1707532137917"
-        pt="10"
-        mb={"-7rem"}
-        alt=""
-      />
       <Box
         justifyContent="center"
         alignItems="center"

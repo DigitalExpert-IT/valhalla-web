@@ -15,13 +15,8 @@ import {
   USDT_CONTRACT,
   GENESIS_CONTRACT,
 } from "constant/address";
-import {
-  Valhalla,
-  NFT,
-  GNET,
-  ERC20,
-  NFTGenesis,
-} from "valhalla-erc20/typechain-types";
+import { NFT, GNET, ERC20, NFTGenesis } from "valhalla-erc20/typechain-types";
+import { Valhalla } from "valhalla-erc20/typechain-types/contracts/Valhalla";
 import { GlobalExchange } from "global-swap/typechain-types";
 
 declare module globalThis {

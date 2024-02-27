@@ -9,6 +9,7 @@ import { useAccountMap } from "hooks/valhalla";
 type BaseCardType = Awaited<ReturnType<BullRunV2["nft_list"]>>;
 type CardType = BaseCardType & {
   id: BigNumber;
+  price: BigNumber;
 };
 
 const TOTAL_NFT = 6;

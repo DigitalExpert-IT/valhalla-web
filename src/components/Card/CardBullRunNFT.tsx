@@ -97,7 +97,7 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                           <Text>{item.name}</Text>
                         </HStack>
                         <Text>
-                          {props?.tokenValue[idx] ? props.tokenValue[idx] : 0} {item.name}
+                          {props.tokenValue ? props.tokenValue[idx] : 0} {item.name}
                         </Text>
                       </HStack>
                     ))}

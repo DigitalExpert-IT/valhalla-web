@@ -9,13 +9,16 @@ import {
 } from "@thirdweb-dev/react";
 import { useBullRunContract } from "./useBullRunContract";
 import { NFT } from "valhalla-erc20/typechain-types";
+import { BullRunV2 } from "valhalla-erc20/typechain-types";
 import { toBn } from "evm-bn";
+import { tokenList } from "constant/pages/nftBullRun";
 import bullRunStore from "hooks/bullrun/bullRunStore";
 
 type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
 export type OwnedNftType = OwnedTokenMapType & {
   id: BigNumber;
   tokenUri: string;
+  nftAssets: [];
 };
 
 const NFT_MUL_PROFIT = [1, 2.5, 5, 10, 50, 250];
@@ -23,10 +26,9 @@ const NFT_MUL_PROFIT = [1, 2.5, 5, 10, 50, 250];
 export const useOwnedNFTBullRun = () => {
   const nft = useBullRunContract();
   const claim = useContractWrite(nft.contract, "claimProfit");
-  const isClaimableProfit = useContractRead(nft.contract, "isClaimableProfit");
   const address = useAddress() ?? ZERO_ADDRESS;
+  // const coinList = useContractRead(nft.contract, "coin_list", [address]); use this while coin will be more
   const [isLoading, setLoading] = useState(false);
-
   const { setOwnedNftList } = bullRunStore();
 
   const fetch = async () => {
@@ -45,6 +47,12 @@ export const useOwnedNFTBullRun = () => {
           })
       );
 
+      const nftAssets = await Promise.all(
+        Array(tokenList).map((item: any, idx) => {
+          return nft.contract!.call("nft_assets", [idx, item.address]);
+        })
+      );
+
       const nfts = await Promise.all(
         tokenIds.reverse().map(async (tokenId, idx) => {
           const ownedNft = await nft.contract!.call("tokenIdToListNft", [
@@ -61,6 +69,7 @@ export const useOwnedNFTBullRun = () => {
             id: tokenId,
             tokenUri,
             claimValue,
+            nftAssets,
             nftIdx: tokenIds.length - 1 - idx,
           } as OwnedNftType;
         })
@@ -110,7 +119,6 @@ export const useOwnedNFTBullRun = () => {
 
   return {
     isLoading: isLoading || nft.isLoading,
-    isClaimableProfit: isClaimableProfit.data,
     claimReward,
   };
 };

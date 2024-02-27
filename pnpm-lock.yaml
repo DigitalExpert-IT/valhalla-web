@@ -174,8 +174,8 @@ dependencies:
     specifier: ^0.148.0
     version: 0.148.0
   valhalla-erc20:
-    specifier: ^1.13.0
-    version: 1.13.0(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.16.0
+    version: 1.16.0(@ethersproject/bignumber@5.7.0)
   valhalla-villa:
     specifier: ^0.1.0
     version: 0.1.0(@ethersproject/bignumber@5.7.0)
@@ -4770,6 +4770,24 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
+  /@uniswap/lib@1.1.1:
+    resolution: {integrity: sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==}
+    engines: {node: '>=10'}
+    dev: false
+
+  /@uniswap/v2-core@1.0.0:
+    resolution: {integrity: sha512-BJiXrBGnN8mti7saW49MXwxDBRFiWemGetE58q8zgfnPPzQKq55ADltEILqOt6VFZ22kVeVKbF8gVd8aY3l7pA==}
+    engines: {node: '>=10'}
+    dev: false
+
+  /@uniswap/v2-periphery@1.1.0-beta.0:
+    resolution: {integrity: sha512-6dkwAMKza8nzqYiXEr2D86dgW3TTavUvCR0w2Tu33bAbM8Ah43LKAzH7oKKPRT5VJQaMi1jtkGs1E8JPor1n5g==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@uniswap/lib': 1.1.1
+      '@uniswap/v2-core': 1.0.0
+    dev: false
+
   /@walletconnect/auth-client@2.1.2:
     resolution: {integrity: sha512-ubJLn+vGb8sTdBFX6xAh4kjR5idrtS3RBngQWaJJJpEPBQmxMb8pM2q0FIRs8Is4K6jKy+uEhusMV+7ZBmTzjw==}
     engines: {node: '>=16'}
@@ -8364,7 +8382,7 @@ packages:
       jsonexport: 3.2.0
       sqlite: 4.2.1
       sqlite3: 5.1.6
-      valhalla-erc20: 1.13.0(@ethersproject/bignumber@5.7.0)
+      valhalla-erc20: 1.16.0(@ethersproject/bignumber@5.7.0)
     transitivePeerDependencies:
       - '@ethersproject/bignumber'
       - bluebird
@@ -12694,11 +12712,12 @@ packages:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     dev: false
 
-  /valhalla-erc20@1.13.0(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-aWmrlx0lpXRsntWmiMKQVdpItNOJQJ4rpN/gmDj3MGv76ZD54ma95yfRIsdFYk6r87g28NEvSTZAkGlc2ElcJA==}
+  /valhalla-erc20@1.16.0(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-3UVGHJ/ghcPY+VkDR3vx3jhhfgYlUh4xuf5o+O2j0w16QAa203vQi1lVup/l6bYuEKzljld6/pY8VccdwXKmhQ==}
     dependencies:
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3
+      '@uniswap/v2-periphery': 1.1.0-beta.0
       dotenv: 16.0.3
       evm-bn: 1.1.2(@ethersproject/bignumber@5.7.0)
       jsonexport: 3.2.0

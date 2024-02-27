@@ -7,7 +7,7 @@ import { useUSDTContract } from "hooks/useUSDTContract";
 import { useAccountMap } from "hooks/valhalla";
 
 type BaseCardType = Awaited<ReturnType<BullRunV2["nft_list"]>>;
-type CardType = BaseCardType & {
+type CardType = {
   id: BigNumber;
   price: BigNumber;
 };
@@ -31,7 +31,7 @@ export const useCardListBullRun = () => {
       const cardList = await Promise.all(
         new Array(Number(TOTAL_NFT)).fill(null).map(async (_, cardId) => {
           const card = await nftBullRun.contract!.call("nft_list", [cardId]);
-          return { ...card, id: BigNumber.from(cardId) };
+          return { price: BigNumber.from(card), id: BigNumber.from(cardId) };
         })
       );
       setData(cardList);

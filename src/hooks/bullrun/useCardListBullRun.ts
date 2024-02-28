@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { BullRun } from "valhalla-erc20/typechain-types";
+import { BullRunV2 } from "valhalla-erc20/typechain-types";
 import { BigNumber } from "ethers";
 import { useBullRunContract } from "./useBullRunContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { useUSDTContract } from "hooks/useUSDTContract";
 import { useAccountMap } from "hooks/valhalla";
 
-type BaseCardType = Awaited<ReturnType<BullRun["listNft"]>>;
-type CardType = BaseCardType & {
+type BaseCardType = Awaited<ReturnType<BullRunV2["nft_list"]>>;
+type CardType = {
   id: BigNumber;
+  price: BigNumber;
 };
 
 const TOTAL_NFT = 6;
@@ -29,8 +30,8 @@ export const useCardListBullRun = () => {
     try {
       const cardList = await Promise.all(
         new Array(Number(TOTAL_NFT)).fill(null).map(async (_, cardId) => {
-          const card = await nftBullRun.contract!.call("listNft", [cardId]);
-          return { ...card, id: BigNumber.from(cardId) };
+          const card = await nftBullRun.contract!.call("nft_list", [cardId]);
+          return { price: BigNumber.from(card), id: BigNumber.from(cardId) };
         })
       );
       setData(cardList);

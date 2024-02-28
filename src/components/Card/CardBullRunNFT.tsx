@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  HStack,
   Heading,
   Input,
   Stack,
@@ -9,12 +10,14 @@ import {
 } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
 import { BULL_IMAGE_MAP } from "constant/image";
-import { useAsyncCall, useOwnedNFTBullRun } from "hooks";
+import { useAsyncCall, useBullRunContract, useOwnedNFTBullRun } from "hooks";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
 import { Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useCardListBullRun } from "hooks/bullrun/useCardListBullRun";
 import { NFT } from "valhalla-erc20/typechain-types";
+import { tokenList } from "constant/pages/nftBullRun";
+import { useContract, useContractRead } from "@thirdweb-dev/react";
 
 interface CardNFTV2Props {
   title: string;
@@ -22,16 +25,18 @@ interface CardNFTV2Props {
   id: string;
   data?: NFT["ownedTokenMap"] & { nftIdx: number };
   price?: string;
+  tokenValue?: [];
   claimValue?: string;
   isOwned?: boolean;
 }
 
 export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
+  const nft = useBullRunContract();
   const { t } = useTranslation();
   const { showModalConnectWallet, loading, isAbleToTransaction } =
     useClickConnectWallet();
   const { buy } = useCardListBullRun();
-  const { claimReward, isClaimableProfit } = useOwnedNFTBullRun();
+  const { claimReward } = useOwnedNFTBullRun();
   const buyAsync = useAsyncCall(buy, t("common.succesBuyNft"));
   const { exec: claimAsync, isLoading: claimLoading } = useAsyncCall(
     claimReward,
@@ -70,36 +75,60 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
             <Box>
               <Image src={BULL_IMAGE_MAP[props.id as "0"]} alt="" />
             </Box>
-            <Box pt="1rem">
-              <Stack alignItems="center" py="1rem">
+
+            <Box>
+              <Stack py="0.5rem">
                 {props.isOwned ? (
-                  <Box
-                    bgGradient="linear(to-r, #FF00FF, blue.500)"
-                    rounded="lg"
-                    w="full"
-                    p="1px"
-                  >
-                    <Stack
-                      direction="row"
-                      spacing={"0"}
-                      w="full"
-                      justifyContent="space-between"
-                      rounded="lg"
-                      bg="#191272"
-                    >
-                      <Button
-                        rounded="none"
+                  <>
+                    {tokenList.map((item, idx) => (
+                      <HStack
+                        key={idx}
                         flex={1}
-                        padding="0"
-                        bg="transparent"
-                        disabled={!isClaimableProfit}
-                        onClick={handleClaim}
-                        isLoading={claimLoading}
+                        flexBasis={"row"}
+                        justifyContent={"space-between"}
                       >
-                        {props.claimValue} USDT {t("common.claim")}
-                      </Button>
-                    </Stack>
-                  </Box>
+                        <HStack>
+                          <Image
+                            src={item.image}
+                            alt=""
+                            maxH={"20px"}
+                            maxW={"20px"}
+                          />
+                          <Text>{item.name}</Text>
+                        </HStack>
+                        <Text>
+                          {props.tokenValue ? props.tokenValue[idx] : 0} {item.name}
+                        </Text>
+                      </HStack>
+                    ))}
+                    <Box
+                      bgGradient="linear(to-r, #FF00FF, blue.500)"
+                      rounded="lg"
+                      w="full"
+                      p="1px"
+                    >
+                      <Stack
+                        direction="row"
+                        spacing={"0"}
+                        w="full"
+                        justifyContent="space-between"
+                        rounded="lg"
+                        bg="#191272"
+                      >
+                        <Button
+                          rounded="none"
+                          flex={1}
+                          padding="0"
+                          bg="transparent"
+                          disabled={!props.tokenValue}
+                          onClick={handleClaim}
+                          isLoading={claimLoading}
+                        >
+                          {t("common.claim")}
+                        </Button>
+                      </Stack>
+                    </Box>
+                  </>
                 ) : (
                   <UglyButton
                     price={props.price ?? "0"}

@@ -90,6 +90,7 @@ export const SectionMyNFTBullRun = () => {
                         (+item.uri.split("-")[1] - 1).toString() as "0"
                       ]
                     }
+                    tokenValue={item.nftAssets}
                     claimValue={fromBn(item.claimValue, 6)}
                     id={(item.uri.split("-")[1] - 1).toString()}
                     isOwned

@@ -14,7 +14,6 @@ import { t } from "i18next";
 
 export const SectionNFTList = () => {
   const { data, isLoading } = useCardListBullRun();
-
   return (
     <Box
       bgImage="url('assets/pattern-2.png')"

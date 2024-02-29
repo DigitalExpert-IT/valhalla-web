@@ -22,7 +22,7 @@ export type TCoin = {
 export type OwnedNftType = NFT & {
   id: BigNumber;
   nftIdx: number;
-  cardId: number;
+  cardId: string;
   coinAssets: TCoin[];
 };
 
@@ -69,7 +69,8 @@ export const useOwnedNFTBullRun = () => {
 
       const nfts = await Promise.all(
         tokenIds.reverse().map(async (tokenId, idx) => {
-          const cardId = ownedNft?.data?.[idx]["metadata"]["id"] ?? 0;
+          const uri = ownedNft?.data?.[idx]["metadata"]["uri"] ?? "";
+          const cardId = uri.charAt(uri.length - 1);
 
           return {
             ...ownedNft?.data?.[idx],

@@ -135,7 +135,8 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                           onClick={handleClaim}
                           isLoading={claimLoading}
                         >
-                          {t("common.claim")}
+                          {/* Need to change after isClaimableProfit flag ready */}
+                          {t("pages.nftBullRun.claimBullRun")}
                         </Button>
                       </Stack>
                     </Box>

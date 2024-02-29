@@ -521,7 +521,8 @@
     "farmMathcingRequirement": "NFT farm matching requirement",
     "globalnftbonus": "Global Rank NFT Bonus System",
     "potentialProfit": "Potential Profit",
-    "potentialProfitSub": "In {{currency}} will be {{amount}} {{currency}} "
+    "potentialProfitSub": "In {{currency}} will be {{amount}} {{currency}} ",
+    "claimBullRun": "Get Your Reward! When BTC Hits $100k!"
   },
   "comingSoon": {
     "title": "COMING SOON",

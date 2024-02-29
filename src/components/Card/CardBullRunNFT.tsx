@@ -145,6 +145,7 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                     price={props.price ?? "0"}
                     priceCurrency="USDT"
                     label={t("common.buy")}
+                    disabled={true}
                     onClick={handleBuy}
                     isLoading={buyAsync.isLoading || loading}
                   />

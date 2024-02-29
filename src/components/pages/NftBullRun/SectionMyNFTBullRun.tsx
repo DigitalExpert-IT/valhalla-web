@@ -12,7 +12,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { CardBullRunNFT } from "components/Card";
 import { useOwnedNFTBullRun } from "hooks";
-import { fromBn } from "evm-bn";
 import bullRunStore from "hooks/bullrun/bullRunStore";
 import { nftBullRunName } from "constant/pages/nftBullRun";
 
@@ -79,20 +78,15 @@ export const SectionMyNFTBullRun = () => {
             ) : (
               ownedNftList.map((item: any, idx: number) => (
                 <WrapItem
-                  w={{ md: "25%", sm: "45%", base: "100%" }}
+                  w={{ md: "33%", sm: "45%", base: "100%" }}
                   key={item.id.toNumber()}
                 >
                   <CardBullRunNFT
                     contentTitle={""}
                     data={item}
-                    title={
-                      nftBullRunName[
-                        (+item.uri.split("-")[1] - 1).toString() as "0"
-                      ]
-                    }
-                    tokenValue={item.nftAssets}
-                    claimValue={fromBn(item.claimValue, 6)}
-                    id={(item.uri.split("-")[1] - 1).toString()}
+                    title={nftBullRunName[item.cardId as "0"]}
+                    coinAssets={item.coinAssets}
+                    id={item.cardId as "0"}
                     isOwned
                   />
                 </WrapItem>

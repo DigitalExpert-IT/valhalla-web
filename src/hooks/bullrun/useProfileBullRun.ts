@@ -33,14 +33,14 @@ export const useProfileBullRun = () => {
     try {
       setLoading(true);
       const selfBalance = await nft.contract.call("balanceOf", [address]);
-      const globalPool = await nft.contract.call("globalPool", []);
+      const globalPool = await nft.contract.call("global_pool", []);
       const profile = await nft.contract.call("profile", [address]);
       const rankReward = await nft.contract.call("getMyRankReward", [address]);
 
       setData({
         globalPool,
         nftValue: profile.value,
-        buyReward: profile.buyReward,
+        buyReward: profile.value,
         rankReward,
         claimedAt: profile.claimedAt,
         selfBalance,

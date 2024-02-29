@@ -1,33 +1,36 @@
 import { BigNumber } from "ethers";
-import { compareAddress } from "utils";
 import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
 import {
   useAddress,
-  useContractRead,
   useContractWrite,
+  useOwnedNFTs,
 } from "@thirdweb-dev/react";
 import { useBullRunContract } from "./useBullRunContract";
-import { NFT } from "valhalla-erc20/typechain-types";
-import { BullRunV2 } from "valhalla-erc20/typechain-types";
-import { toBn } from "evm-bn";
+import { NFT } from "@thirdweb-dev/sdk";
 import { tokenList } from "constant/pages/nftBullRun";
 import bullRunStore from "hooks/bullrun/bullRunStore";
 
-type OwnedTokenMapType = Awaited<ReturnType<NFT["ownedTokenMap"]>>;
-export type OwnedNftType = OwnedTokenMapType & {
-  id: BigNumber;
-  tokenUri: string;
-  nftAssets: [];
+export type TCoin = {
+  name: string;
+  image: string;
+  address: string;
+  decimal: number;
+  value: BigNumber;
 };
 
-const NFT_MUL_PROFIT = [1, 2.5, 5, 10, 50, 250];
+export type OwnedNftType = NFT & {
+  id: BigNumber;
+  nftIdx: number;
+  cardId: number;
+  coinAssets: TCoin[];
+};
 
-export const useOwnedNFTBullRun = () => {
+export const useOwnedNFTBullRun = (byPassAddress?: string) => {
   const nft = useBullRunContract();
   const claim = useContractWrite(nft.contract, "claimProfit");
-  const address = useAddress() ?? ZERO_ADDRESS;
-  // const coinList = useContractRead(nft.contract, "coin_list", [address]); use this while coin will be more
+  const address = useAddress() ?? byPassAddress ? byPassAddress : ZERO_ADDRESS;
+  const ownedNft = useOwnedNFTs(nft.contract, address);
   const [isLoading, setLoading] = useState(false);
   const { setOwnedNftList } = bullRunStore();
 
@@ -36,8 +39,15 @@ export const useOwnedNFTBullRun = () => {
     try {
       setLoading(true);
       const balance = await nft.contract.call("balanceOf", [address]);
-      const totalProfit = await nft.contract.call("totalProfit");
-      const totalSales = await nft.contract.call("totalSales");
+      const totalCoin = await nft.contract.call("total_coin");
+
+      const coinList = await Promise.all(
+        Array(totalCoin.toNumber())
+          .fill(null)
+          .map((_, idx) => nft.contract!.call("coin_list", [idx]))
+      );
+
+      coinList.push(tokenList.find(item => item.name == "BULLRUN")?.address);
 
       const tokenIds = await Promise.all(
         Array(balance.toNumber())
@@ -47,30 +57,29 @@ export const useOwnedNFTBullRun = () => {
           })
       );
 
-      const nftAssets = await Promise.all(
-        Array(tokenList).map((item: any, idx) => {
-          return nft.contract!.call("nft_assets", [idx, item.address]);
+      const nftAssets: BigNumber[][] = await Promise.all(
+        tokenIds.map(async tokenId => {
+          return await Promise.all(
+            coinList.map(coin => {
+              return nft.contract!.call("nft_assets", [tokenId, coin]);
+            })
+          );
         })
       );
 
       const nfts = await Promise.all(
         tokenIds.reverse().map(async (tokenId, idx) => {
-          const ownedNft = await nft.contract!.call("tokenIdToListNft", [
-            tokenId,
-          ]);
-          const cardId = ownedNft["uri"];
-          const tokenUri = `/api/image/nft/${cardId}`;
-          const cardIdx = cardId.split("-")[1] - 1;
-          const claimValue = totalProfit
-            .div(totalSales)
-            .mul(toBn(NFT_MUL_PROFIT[cardIdx].toString(), 6));
+          const cardId = ownedNft?.data?.[idx]["metadata"]["id"] ?? 0;
+
           return {
-            ...ownedNft,
+            ...ownedNft?.data?.[idx],
             id: tokenId,
-            tokenUri,
-            claimValue,
-            nftAssets,
-            nftIdx: tokenIds.length - 1 - idx,
+            cardId,
+            coinAssets: tokenList.map((token, i) => ({
+              ...token,
+              value: nftAssets[idx][i],
+            })),
+            nftIdx: tokenIds.length - (1 - idx),
           } as OwnedNftType;
         })
       );

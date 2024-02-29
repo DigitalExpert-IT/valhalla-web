@@ -10,14 +10,19 @@ import {
 } from "@chakra-ui/react";
 import { UglyButton } from "components/Button";
 import { BULL_IMAGE_MAP } from "constant/image";
-import { useAsyncCall, useBullRunContract, useOwnedNFTBullRun } from "hooks";
+import {
+  TCoin,
+  useAsyncCall,
+  useBullRunContract,
+  useOwnedNFTBullRun,
+} from "hooks";
 import useClickConnectWallet from "hooks/useClickConnectWallet";
 import { Image } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useCardListBullRun } from "hooks/bullrun/useCardListBullRun";
 import { NFT } from "valhalla-erc20/typechain-types";
 import { tokenList } from "constant/pages/nftBullRun";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import { prettyBn } from "utils";
 
 interface CardNFTV2Props {
   title: string;
@@ -25,7 +30,7 @@ interface CardNFTV2Props {
   id: string;
   data?: NFT["ownedTokenMap"] & { nftIdx: number };
   price?: string;
-  tokenValue?: [];
+  coinAssets?: TCoin[];
   claimValue?: string;
   isOwned?: boolean;
 }
@@ -97,7 +102,13 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                           <Text>{item.name}</Text>
                         </HStack>
                         <Text>
-                          {props.tokenValue ? props.tokenValue[idx] : 0} {item.name}
+                          {props.coinAssets
+                            ? prettyBn(
+                                props.coinAssets?.[idx]?.value || 0,
+                                item.decimal
+                              )
+                            : 0}{" "}
+                          {item.name}
                         </Text>
                       </HStack>
                     ))}
@@ -120,7 +131,7 @@ export const CardBullRunNFT: React.FC<CardNFTV2Props> = props => {
                           flex={1}
                           padding="0"
                           bg="transparent"
-                          disabled={!props.tokenValue}
+                          disabled={true}
                           onClick={handleClaim}
                           isLoading={claimLoading}
                         >

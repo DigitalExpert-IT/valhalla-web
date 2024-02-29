@@ -26,10 +26,10 @@ export type OwnedNftType = NFT & {
   coinAssets: TCoin[];
 };
 
-export const useOwnedNFTBullRun = (byPassAddress?: string) => {
+export const useOwnedNFTBullRun = () => {
   const nft = useBullRunContract();
   const claim = useContractWrite(nft.contract, "claimProfit");
-  const address = useAddress() ?? byPassAddress ? byPassAddress : ZERO_ADDRESS;
+  const address = useAddress() ?? ZERO_ADDRESS;
   const ownedNft = useOwnedNFTs(nft.contract, address);
   const [isLoading, setLoading] = useState(false);
   const { setOwnedNftList } = bullRunStore();

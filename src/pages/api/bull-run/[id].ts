@@ -3,11 +3,10 @@ import { nftBullRunName } from "constant/pages/nftBullRun";
 import { NextApiHandler } from "next";
 
 const handler: NextApiHandler = async (req, res) => {
-  const id = req.query.id as string;
-  const idx = (+id.split("-")?.[1] - 1).toString() as "0";
-  const image = BULL_IMAGE_MAP[idx];
+  const id = req.query.id as "0";
+  const image = BULL_IMAGE_MAP[id];
   const result = {
-    name: nftBullRunName[idx],
+    name: nftBullRunName[id],
     description: "NFT Bull Run",
     external_url: "https://globalnetwork.finance/api/erc1155/bull-run",
     image,

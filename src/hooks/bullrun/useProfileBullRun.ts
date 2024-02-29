@@ -1,4 +1,3 @@
-import ee from "ee";
 import { BigNumber } from "ethers";
 import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
@@ -40,7 +39,7 @@ export const useProfileBullRun = () => {
       setData({
         globalPool,
         nftValue: profile.value,
-        buyReward: profile.value,
+        buyReward: profile.buy_reward,
         rankReward,
         claimedAt: profile.claimedAt,
         selfBalance,
@@ -80,7 +79,7 @@ export const useProfileBullRun = () => {
   useEffect(() => {
     if (!address) return;
     fetch();
-  }, [address, nft.contract, claimBuyReward, claimRankReward]);
+  }, [address, nft.contract]);
 
   return {
     isLoading: isLoading || nft.isLoading,

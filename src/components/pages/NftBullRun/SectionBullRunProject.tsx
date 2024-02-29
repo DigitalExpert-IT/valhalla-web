@@ -11,8 +11,6 @@ import {
   Flex,
   Spinner,
 } from "@chakra-ui/react";
-import { useAddress } from "@thirdweb-dev/react";
-import { ZERO_ADDRESS } from "constant/address";
 import { rankMap, RANK_SYMBOL_MAP } from "constant/rank";
 import { fromBn } from "evm-bn";
 import { useAsyncCall, useOwnedNFTBullRun } from "hooks";
@@ -27,7 +25,6 @@ export const SectionGnetProject = () => {
   const { isLoading } = useOwnedNFTBullRun();
   const { showModalConnectWallet, loading, isAbleToTransaction } =
     useClickConnectWallet();
-  const address = useAddress() ?? ZERO_ADDRESS;
   const {
     data: profileData,
     claimRankReward,

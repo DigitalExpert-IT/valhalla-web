@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ZERO_ADDRESS } from "constant/address";
 import {
   useAddress,
+  useContractRead,
   useContractWrite,
   useOwnedNFTs,
 } from "@thirdweb-dev/react";
@@ -31,6 +32,7 @@ export const useOwnedNFTBullRun = () => {
   const claim = useContractWrite(nft.contract, "claimProfit");
   const address = useAddress() ?? ZERO_ADDRESS;
   const ownedNft = useOwnedNFTs(nft.contract, address);
+  const isClaimableProfit = useContractRead(nft.contract, "isClaimableProfit");
   const [isLoading, setLoading] = useState(false);
   const { setOwnedNftList } = bullRunStore();
 
@@ -129,6 +131,7 @@ export const useOwnedNFTBullRun = () => {
 
   return {
     isLoading: isLoading || nft.isLoading,
+    isClaimableProfit,
     claimReward,
   };
 };

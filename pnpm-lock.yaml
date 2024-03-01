@@ -174,8 +174,8 @@ dependencies:
     specifier: ^0.148.0
     version: 0.148.0
   valhalla-erc20:
-    specifier: ^1.16.2
-    version: 1.16.2(@ethersproject/bignumber@5.7.0)
+    specifier: ^1.19.1
+    version: 1.19.1(@ethersproject/bignumber@5.7.0)
   valhalla-villa:
     specifier: ^0.1.0
     version: 0.1.0(@ethersproject/bignumber@5.7.0)
@@ -8382,7 +8382,7 @@ packages:
       jsonexport: 3.2.0
       sqlite: 4.2.1
       sqlite3: 5.1.6
-      valhalla-erc20: 1.16.2(@ethersproject/bignumber@5.7.0)
+      valhalla-erc20: 1.19.1(@ethersproject/bignumber@5.7.0)
     transitivePeerDependencies:
       - '@ethersproject/bignumber'
       - bluebird
@@ -12712,8 +12712,8 @@ packages:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     dev: false
 
-  /valhalla-erc20@1.16.2(@ethersproject/bignumber@5.7.0):
-    resolution: {integrity: sha512-AKZb9JvZlyvVriS0L+sHFqDjKkD+i+z5GoRBI6ow0kQCc/IZOuwVZDUJPR8ZQ1+CbTtdPfOsKZXeM5bld6NSDQ==}
+  /valhalla-erc20@1.19.1(@ethersproject/bignumber@5.7.0):
+    resolution: {integrity: sha512-HwXQpCa+HOFd+BCTZazGt6GbiKbTz5kuKe49ViXE9pCUCYoaa84UzdvemVfH+ifYhv+xBesVwQkshtJlfO0igQ==}
     dependencies:
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3

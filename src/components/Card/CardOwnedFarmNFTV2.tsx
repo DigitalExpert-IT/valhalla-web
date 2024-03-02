@@ -111,29 +111,28 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
               </Text>
             </Box>
           </Stack>
-          <Tooltip
+          {/* <Tooltip
             hasArrow
             label="Claim Again In May. Your reward will still be counted during the waiting period."
             bg="gray.300"
             color="black"
+          > */}
+          <Button
+            w="full"
+            rounded="lg"
+            size="sm"
+            variant="gradient"
+            colorScheme="purple:blue"
+            color="white"
+            onClick={handleFarm}
+            isLoading={farmAsync.isLoading}
           >
-            <Button
-              w="full"
-              rounded="lg"
-              size="sm"
-              variant="gradient"
-              colorScheme="purple:blue"
-              color="white"
-              onClick={handleFarm}
-              disabled
-              isLoading={farmAsync.isLoading}
-            >
-              <Text ref={farmTextRef} mr="1" as="span">
-                0
-              </Text>
-              Gnet Claim
-            </Button>
-          </Tooltip>
+            <Text ref={farmTextRef} mr="1" as="span">
+              0
+            </Text>
+            Gnet Claim
+          </Button>
+          {/* </Tooltip> */}
         </Box>
       </Stack>
     </Box>

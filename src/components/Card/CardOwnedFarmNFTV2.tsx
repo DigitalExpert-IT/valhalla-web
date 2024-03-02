@@ -9,6 +9,7 @@ import {
   Text,
   Button,
   Heading,
+  Tooltip,
 } from "@chakra-ui/react";
 import { differenceInSeconds } from "date-fns";
 import { useContractWrite } from "@thirdweb-dev/react";
@@ -110,21 +111,29 @@ export const CardOwnedFarmNFTV2 = (props: OwnedNftType) => {
               </Text>
             </Box>
           </Stack>
-          <Button
-            w="full"
-            rounded="lg"
-            size="sm"
-            variant="gradient"
-            colorScheme="purple:blue"
-            color="white"
-            onClick={handleFarm}
-            isLoading={farmAsync.isLoading}
+          <Tooltip
+            hasArrow
+            label="Claim Again In May. Your reward will still be counted during the waiting period."
+            bg="gray.300"
+            color="black"
           >
-            <Text ref={farmTextRef} mr="1" as="span">
-              0
-            </Text>
-            Gnet Claim
-          </Button>
+            <Button
+              w="full"
+              rounded="lg"
+              size="sm"
+              variant="gradient"
+              colorScheme="purple:blue"
+              color="white"
+              onClick={handleFarm}
+              disabled
+              isLoading={farmAsync.isLoading}
+            >
+              <Text ref={farmTextRef} mr="1" as="span">
+                0
+              </Text>
+              Gnet Claim
+            </Button>
+          </Tooltip>
         </Box>
       </Stack>
     </Box>

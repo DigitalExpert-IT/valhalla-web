@@ -8,7 +8,11 @@ export const SectionNftFarming = () => {
   const { t } = useTranslation();
 
   return (
-    <Stack pt={{ base: "2rem", md: "15rem" }} pos="relative" overflow={"hidden"}>
+    <Stack
+      pt={{ base: "2rem", md: "15rem" }}
+      pos="relative"
+      overflow={"hidden"}
+    >
       <Stack pos="absolute" w="full" h="full" zIndex="1">
         <Image
           src="/assets/project/pattern2.png"

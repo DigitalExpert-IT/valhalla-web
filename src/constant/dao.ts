@@ -31,7 +31,7 @@ export const DATA_DAO = [
     maxlot: 6500,
     sold: 0,
     value: "21",
-    isComingSoon: true,
+    isComingSoon: false,
     imageCaraousel: [
       {
         picture:

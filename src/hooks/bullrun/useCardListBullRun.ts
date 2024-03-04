@@ -5,6 +5,7 @@ import { useBullRunContract } from "./useBullRunContract";
 import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { useUSDTContract } from "hooks/useUSDTContract";
 import { useAccountMap } from "hooks/valhalla";
+import { BULLRUN_CONTRACT } from "constant/address";
 
 type BaseCardType = Awaited<ReturnType<BullRunV2["nft_list"]>>;
 type CardType = {
@@ -13,6 +14,11 @@ type CardType = {
 };
 
 const TOTAL_NFT = 6;
+
+const CURRENT_CHAIN_ID = (process.env.NEXT_PUBLIC_CHAIN_ID ||
+  "0x29a") as "0x29a";
+
+const contractAddress = BULLRUN_CONTRACT[CURRENT_CHAIN_ID];
 
 export const useCardListBullRun = () => {
   const address = useAddress();
@@ -49,7 +55,7 @@ export const useCardListBullRun = () => {
     const usdtBalance = await usdt.contract.call("balanceOf", [address]);
     const allowance = await usdt.contract.call("allowance", [
       address,
-      usdt.contract.getAddress(),
+      contractAddress,
     ]);
 
     if (cardPrice.gt(usdtBalance)) {
@@ -58,16 +64,18 @@ export const useCardListBullRun = () => {
       };
     }
 
-    if (cardPrice.gt(allowance)) {
-      await approveUSDT.mutateAsync({
-        args: [nftBullRun.contract.getAddress(), cardPrice.mul(10)],
-      });
-    }
     if (!account?.isRegistered) {
       throw {
         code: "RegistrationRequired",
       };
     }
+
+    if (cardPrice.gte(allowance)) {
+      await approveUSDT.mutateAsync({
+        args: [contractAddress, cardPrice.mul(10)],
+      });
+    }
+
     const receipt = await buyNft.mutateAsync({ args: [_listId] });
     return receipt;
   };

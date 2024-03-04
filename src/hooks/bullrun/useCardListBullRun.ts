@@ -49,7 +49,7 @@ export const useCardListBullRun = () => {
     const usdtBalance = await usdt.contract.call("balanceOf", [address]);
     const allowance = await usdt.contract.call("allowance", [
       address,
-      usdt.contract.getAddress(),
+      nftBullRun.contract.getAddress(),
     ]);
 
     if (cardPrice.gt(usdtBalance)) {
@@ -63,11 +63,13 @@ export const useCardListBullRun = () => {
         args: [nftBullRun.contract.getAddress(), cardPrice.mul(10)],
       });
     }
+
     if (!account?.isRegistered) {
       throw {
         code: "RegistrationRequired",
       };
     }
+
     const receipt = await buyNft.mutateAsync({ args: [_listId] });
     return receipt;
   };

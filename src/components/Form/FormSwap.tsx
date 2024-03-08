@@ -436,6 +436,7 @@ export const FormSwap = () => {
               w="100%"
               isLoading={isSwapLoading}
               // loadingText={t("common.isConnectingToBlockChain")!}
+              disabled
               color={"purple.900"}
               bg={"white"}
               _hover={{

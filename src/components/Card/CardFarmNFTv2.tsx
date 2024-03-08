@@ -51,21 +51,22 @@ export const CardFarmNFTV2: React.FC<CardNFTV2Props> = props => {
               <Text color="#FF00FF" fontSize="md">
                 Gacha: 0,5%, 0,6%, 0,7%, 0,8%, 1%, 1,5%
               </Text>
-              {/* <Tooltip
+              <Tooltip
                 hasArrow
-                label="Open Again In May"
+                label="Open Again In 15 May Due To Bullrun Event"
                 bg="gray.300"
                 color="black"
-              > */}
-              <Stack alignItems="center" py="1rem">
-                <UglyButton
-                  price={props.price}
-                  label={t("common.buy")}
-                  onClick={handleBuy}
-                  isLoading={buyAsync.isLoading || loading}
-                />
-              </Stack>
-              {/* </Tooltip> */}
+              >
+                <Stack alignItems="center" py="1rem">
+                  <UglyButton
+                    price={props.price}
+                    disabled
+                    label={t("common.buy")}
+                    onClick={handleBuy}
+                    isLoading={buyAsync.isLoading || loading}
+                  />
+                </Stack>
+              </Tooltip>
             </Box>
           </Stack>
         </Stack>

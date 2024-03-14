@@ -23,7 +23,7 @@ const SwapV2 = () => {
         bgGradient="linear(#2C1FA7 0%, #6D02C9 100%)"
         overflow="hidden"
       >
-        <Heading
+        {/* <Heading
           fontWeight="black"
           fontSize={{ base: "3xl", md: "7xl" }}
           textAlign="center"
@@ -46,7 +46,16 @@ const SwapV2 = () => {
           mb={{ md: "2rem", base: "1rem" }}
         >
           {t("common.swap").toUpperCase()}
-        </Heading>
+        </Heading> */}
+        <Image
+          src="https://ik.imagekit.io/msxxxaegj/image_gn/bullusdgn.png?updatedAt=1710409674093"
+          w={{ base: "100%", xs: "70%" }}
+          alignSelf={"center"}
+          mt={"5rem"}
+          mb={"2rem"}
+          borderRadius={{ base: "0.5rem", xs: "2rem" }}
+          alt=""
+        />
         <Card
           bg={"#6d02c9eb"}
           mx="auto"
@@ -68,7 +77,7 @@ const SwapV2 = () => {
                 opacity="0.8"
               />
               <Text fontWeight="bold" fontSize={{ base: "sm", md: "lg" }}>
-                1 GNET = 0.015 USDT
+                1 GNET = 0.02 USDGN
               </Text>
             </Stack>
 

@@ -319,7 +319,8 @@ export const FormSwap = () => {
                   name="amountTop"
                   placeholder={"0.0"}
                   type="number"
-                  isDisabled={swap.isLoading}
+                  //isDisabled={swap.isLoading}
+                  isDisabled={true}
                 />
               </Box>
               <Button
@@ -329,6 +330,7 @@ export const FormSwap = () => {
                   opacity: 0.6,
                 }}
                 onClick={inputMax}
+                disabled
               >
                 {t("common.max")}
               </Button>
@@ -377,11 +379,12 @@ export const FormSwap = () => {
                 name="currency"
                 // option={normalizeCurrencies}
                 option={[
-                  { value: "USDT", label: "USDT" },
+                  { value: "USDGN", label: "USDGN" },
                   { value: "GNET", label: "GNET" },
                 ]}
-                isDisabled={swap.isLoading}
-                defaultValue="USDT"
+                //isDisabled={swap.isLoading}
+                isDisabled={true}
+                defaultValue="USDGN"
               />
             </SimpleGrid>
           </Stack>
@@ -425,7 +428,8 @@ export const FormSwap = () => {
                 name="amountBottom"
                 placeholder={"0.0"}
                 type="number"
-                isDisabled={swap.isLoading}
+                //isDisabled={swap.isLoading}
+                isDisabled={true}
               />
             </Box>
           </Stack>
@@ -436,6 +440,7 @@ export const FormSwap = () => {
               w="100%"
               isLoading={isSwapLoading}
               // loadingText={t("common.isConnectingToBlockChain")!}
+              disabled
               color={"purple.900"}
               bg={"white"}
               _hover={{
@@ -546,7 +551,7 @@ export const FormSwap = () => {
                 color={"whiteAlpha.700"}
                 textAlign={"center"}
               >
-                {fromBn(balanceUSDT ?? 0, 6)} USDT
+                {fromBn(balanceUSDT ?? 0, 6)} USDGN
               </Text>
             </Stack>
             <HStack
@@ -556,7 +561,7 @@ export const FormSwap = () => {
               p="3"
               justifyContent="space-between"
             >
-              <Text fontSize="sm">Import USDT</Text>
+              <Text fontSize="sm">Import USDGN</Text>
               <Box display="flex" alignItems="center">
                 <CopiableText
                   value={addressUsdt}

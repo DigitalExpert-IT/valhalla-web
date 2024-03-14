@@ -48,12 +48,12 @@ const SwapV2 = () => {
           {t("common.swap").toUpperCase()}
         </Heading> */}
         <Image
-          src="https://ik.imagekit.io/msxxxaegj/image_gn/bullrunning.jpg?updatedAt=1709966713058"
+          src="https://ik.imagekit.io/msxxxaegj/image_gn/bullusdgn.png?updatedAt=1710409674093"
           w={{ base: "100%", xs: "70%" }}
           alignSelf={"center"}
           mt={"5rem"}
           mb={"2rem"}
-          borderRadius={{base: "0.5rem", xs: "2rem"}}
+          borderRadius={{ base: "0.5rem", xs: "2rem" }}
           alt=""
         />
         <Card
@@ -77,7 +77,7 @@ const SwapV2 = () => {
                 opacity="0.8"
               />
               <Text fontWeight="bold" fontSize={{ base: "sm", md: "lg" }}>
-                1 GNET = 0.015 USDT
+                1 GNET = 0.02 USDGN
               </Text>
             </Stack>
 

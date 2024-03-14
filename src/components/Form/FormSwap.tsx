@@ -379,12 +379,12 @@ export const FormSwap = () => {
                 name="currency"
                 // option={normalizeCurrencies}
                 option={[
-                  { value: "USDT", label: "USDT" },
+                  { value: "USDGN", label: "USDGN" },
                   { value: "GNET", label: "GNET" },
                 ]}
                 //isDisabled={swap.isLoading}
                 isDisabled={true}
-                defaultValue="USDT"
+                defaultValue="USDGN"
               />
             </SimpleGrid>
           </Stack>
@@ -551,7 +551,7 @@ export const FormSwap = () => {
                 color={"whiteAlpha.700"}
                 textAlign={"center"}
               >
-                {fromBn(balanceUSDT ?? 0, 6)} USDT
+                {fromBn(balanceUSDT ?? 0, 6)} USDGN
               </Text>
             </Stack>
             <HStack
@@ -561,7 +561,7 @@ export const FormSwap = () => {
               p="3"
               justifyContent="space-between"
             >
-              <Text fontSize="sm">Import USDT</Text>
+              <Text fontSize="sm">Import USDGN</Text>
               <Box display="flex" alignItems="center">
                 <CopiableText
                   value={addressUsdt}

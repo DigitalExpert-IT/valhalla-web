@@ -1,7 +1,7 @@
 import { toBn } from "evm-bn";
 
 export const getUsdtRate = (usdtAmount: string) => {
-  const ratePerGnet = toBn("0.015", 9);
+  const ratePerGnet = toBn("0.020", 9);
   const formatAmount = toBn(usdtAmount, 9);
   const unit = toBn("1", 9);
   const gnetAmount = formatAmount.mul(unit).div(ratePerGnet);

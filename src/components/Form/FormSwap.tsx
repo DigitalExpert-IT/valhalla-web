@@ -329,8 +329,7 @@ export const FormSwap = () => {
                   name="amountTop"
                   placeholder={"0.0"}
                   type="number"
-                  //isDisabled={swap.isLoading}
-                  isDisabled={true}
+                  isDisabled={swap.isLoading}
                 />
               </Box>
               <Button
@@ -340,7 +339,6 @@ export const FormSwap = () => {
                   opacity: 0.6,
                 }}
                 onClick={inputMax}
-                disabled
               >
                 {t("common.max")}
               </Button>
@@ -392,8 +390,7 @@ export const FormSwap = () => {
                   { value: "USDGN", label: "USDGN" },
                   { value: "GNET", label: "GNET" },
                 ]}
-                //isDisabled={swap.isLoading}
-                isDisabled={true}
+                isDisabled={swap.isLoading}
                 defaultValue="USDGN"
               />
             </SimpleGrid>
@@ -438,8 +435,7 @@ export const FormSwap = () => {
                 name="amountBottom"
                 placeholder={"0.0"}
                 type="number"
-                //isDisabled={swap.isLoading}
-                isDisabled={true}
+                isDisabled={swap.isLoading}
               />
             </Box>
           </Stack>
@@ -450,7 +446,6 @@ export const FormSwap = () => {
               w="100%"
               isLoading={isSwapLoading}
               // loadingText={t("common.isConnectingToBlockChain")!}
-              disabled
               color={"purple.900"}
               bg={"white"}
               _hover={{

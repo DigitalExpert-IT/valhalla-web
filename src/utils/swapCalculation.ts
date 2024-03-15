@@ -10,7 +10,7 @@ export const getUsdtRate = (usdtAmount: string) => {
 };
 
 export const getGnetRate = (gnetAmount: string) => {
-  const ratePerUsdt = toBn("66.666666666", 9);
+  const ratePerUsdt = toBn("50", 9);
   const unit = toBn("1", 6);
   const ratePerUnit = ratePerUsdt.div(unit);
   const usdtAmount = toBn(gnetAmount, 9).div(ratePerUnit);

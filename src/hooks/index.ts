@@ -6,6 +6,7 @@ export * from "./useSwap";
 export * from "./useMe";
 export * from "./useSwapContract";
 export * from "./useUSDTContract";
+export * from "./useUSDGNContract";
 export * from "./useGNETContract";
 export * from "./swap";
 export * from "./useGenesis";

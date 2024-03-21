@@ -19,15 +19,22 @@ import { useAddress, useContractWrite } from "@thirdweb-dev/react";
 import { FormInput, FormSelect } from "components/FormUtils";
 import { ButtonConnectWrapper } from "components/Button";
 import { getGnetRate, getUsdtRate, prettyBn, shortenAddress } from "utils";
-import { GNET_CONTRACT, SWAP_CONTRACT, USDT_CONTRACT } from "constant/address";
+import {
+  GNET_CONTRACT,
+  SWAP_CONTRACT,
+  USDT_CONTRACT,
+  USDGN_CONTRACT,
+} from "constant/address";
 import { BigNumber } from "ethers";
 import { IoCopyOutline } from "react-icons/io5";
 import {
   useSwapContract,
   CURRENT_CHAIN_ID,
   useUSDTBalance,
+  useUSDGNBalance,
   useGNETBalance,
   useUSDTContract,
+  useUSDGNContract,
   useAsyncCall,
   useGNETContract,
 } from "hooks";
@@ -48,6 +55,7 @@ export const FormSwap = () => {
   const addressSwap = SWAP_CONTRACT[CURRENT_CHAIN_ID];
   const addressGnet = GNET_CONTRACT[CURRENT_CHAIN_ID];
   const addressUsdt = USDT_CONTRACT[CURRENT_CHAIN_ID];
+  const addressUsdgn = USDGN_CONTRACT[CURRENT_CHAIN_ID];
   const { t } = useTranslation();
   const [symbol, setSymbol] = useState(false);
   const {
@@ -64,17 +72,19 @@ export const FormSwap = () => {
 
   const swap = useSwapContract();
   const gnet = useGNETContract();
-  const usdt = useUSDTContract();
+  const usdt = useUSDGNContract();
+  const usdgn = useUSDGNContract();
   const address = useAddress();
 
-  const swapToUSDT = useContractWrite(swap.contract, "swapGnet");
-  const approveUSDT = useContractWrite(usdt.contract, "approve");
+  const swapToUSDGN = useContractWrite(swap.contract, "swapGnet");
+  const approveUSDGN = useContractWrite(usdgn.contract, "approve");
 
   const swapToGNET = useContractWrite(swap.contract, "swapUsdt");
   const approveGNET = useContractWrite(gnet.contract, "approve");
 
   const { data: balanceGNET } = useGNETBalance();
-  const { data: balanceUSDT } = useUSDTBalance();
+  const { data: balanceUSDT } = useUSDGNBalance();
+  const { data: balanceUSDGN } = useUSDGNBalance();
 
   const approveGNETMutate = async (value: BigNumber) => {
     const allowance: BigNumber = await gnet.contract?.call("allowance", [
@@ -86,7 +96,7 @@ export const FormSwap = () => {
     const getRatio: BigNumber = await swap.contract?.call("getGnetRate", [
       value,
     ]);
-    const poolBalance = await usdt.contract?.call("balanceOf", [addressSwap]);
+    const poolBalance = await usdgn.contract?.call("balanceOf", [addressSwap]);
 
     if (balanceGNET.lt(value)) {
       throw {
@@ -108,18 +118,18 @@ export const FormSwap = () => {
     }
   };
 
-  const approveUSDTMutate = async (value: BigNumber) => {
-    const allowance: BigNumber = await usdt.contract?.call("allowance", [
+  const approveUSDGNMutate = async (value: BigNumber) => {
+    const allowance: BigNumber = await usdgn.contract?.call("allowance", [
       address,
       addressSwap,
     ]);
-    // getUsdtRate to check how much gnet exchange with USDT
+    // getUsdtRate to check how much gnet exchange with USDGN
     const getRatio: BigNumber = await swap.contract?.call("getUsdtRate", [
       value,
     ]);
     const poolBalance = await gnet.contract?.call("balanceOf", [addressSwap]);
 
-    if (balanceUSDT.lt(value)) {
+    if (balanceUSDGN.lt(value)) {
       throw {
         code: "NotEnoughBalance",
       };
@@ -132,7 +142,7 @@ export const FormSwap = () => {
     }
 
     if (allowance.lt(value)) {
-      const approve = await approveUSDT.mutateAsync({
+      const approve = await approveUSDGN.mutateAsync({
         args: [addressSwap, value],
       });
       return approve.receipt;
@@ -144,7 +154,7 @@ export const FormSwap = () => {
 
     if (swapToGnet) {
       const USDValue = toBn(data.amount, 6);
-      await approveUSDTMutate(USDValue);
+      await approveUSDGNMutate(USDValue);
 
       const swap = await swapToGNET.mutateAsync({
         args: [USDValue],
@@ -152,10 +162,10 @@ export const FormSwap = () => {
       const receipt = swap.receipt;
       return receipt;
     }
-    // default swap to USDT
+    // default swap to USDGN
     const GNETValue = toBn(data.amount, 9);
     await approveGNETMutate(GNETValue);
-    const swap = await swapToUSDT.mutateAsync({
+    const swap = await approveUSDGN.mutateAsync({
       args: [GNETValue],
     });
     const receipt = swap.receipt;
@@ -185,11 +195,11 @@ export const FormSwap = () => {
     let result;
 
     if (currency === "GNET") {
-      if (!balanceUSDT || balanceUSDT.isZero())
+      if (!balanceUSDGN || balanceUSDGN.isZero())
         return setValue("amountTop", "0");
 
-      const tax = getTax(balanceUSDT);
-      result = balanceUSDT.sub(tax);
+      const tax = getTax(balanceUSDGN);
+      result = balanceUSDGN.sub(tax);
     } else {
       if (!balanceGNET || balanceGNET.isZero())
         return setValue("amountTop", "0");
@@ -220,8 +230,8 @@ export const FormSwap = () => {
 
       // define what the top and bottom fields are
       const fieldCurrency: IFieldCurrency = {
-        amountTop: currency === "GNET" ? "USDT" : "GNET",
-        amountBottom: currency === "GNET" ? "GNET" : "USDT",
+        amountTop: currency === "GNET" ? "USDGN" : "GNET",
+        amountBottom: currency === "GNET" ? "GNET" : "USDGN",
       };
       const fieldTarget = field === "amountTop" ? "amountBottom" : "amountTop";
       const currencyTarget = fieldCurrency[fieldTarget];
@@ -231,7 +241,7 @@ export const FormSwap = () => {
       if (currencyTarget === "GNET") {
         swapResult = fromBn(getUsdtRate(value ? value : "0"), 9);
       }
-      if (currencyTarget === "USDT") {
+      if (currencyTarget === "USDGN") {
         swapResult = fromBn(getGnetRate(value ? value : "0"), 6);
       }
 
@@ -261,7 +271,7 @@ export const FormSwap = () => {
     if (swap.status === 1) {
       reset();
       gnet.refetch();
-      usdt.refetch();
+      usdgn.refetch();
     }
   });
 
@@ -319,8 +329,7 @@ export const FormSwap = () => {
                   name="amountTop"
                   placeholder={"0.0"}
                   type="number"
-                  //isDisabled={swap.isLoading}
-                  isDisabled={true}
+                  isDisabled={swap.isLoading}
                 />
               </Box>
               <Button
@@ -330,7 +339,6 @@ export const FormSwap = () => {
                   opacity: 0.6,
                 }}
                 onClick={inputMax}
-                disabled
               >
                 {t("common.max")}
               </Button>
@@ -343,7 +351,7 @@ export const FormSwap = () => {
             >
               {t("form.helperText.afterFee", {
                 value: fromBn(amountAfterFee, 9),
-                symbol: symbol ? "USDT" : "GNET",
+                symbol: symbol ? "USDGN" : "GNET",
               })}
             </Text>
           </Stack>
@@ -382,8 +390,7 @@ export const FormSwap = () => {
                   { value: "USDGN", label: "USDGN" },
                   { value: "GNET", label: "GNET" },
                 ]}
-                //isDisabled={swap.isLoading}
-                isDisabled={true}
+                isDisabled={swap.isLoading}
                 defaultValue="USDGN"
               />
             </SimpleGrid>
@@ -428,8 +435,7 @@ export const FormSwap = () => {
                 name="amountBottom"
                 placeholder={"0.0"}
                 type="number"
-                //isDisabled={swap.isLoading}
-                isDisabled={true}
+                isDisabled={swap.isLoading}
               />
             </Box>
           </Stack>
@@ -440,7 +446,6 @@ export const FormSwap = () => {
               w="100%"
               isLoading={isSwapLoading}
               // loadingText={t("common.isConnectingToBlockChain")!}
-              disabled
               color={"purple.900"}
               bg={"white"}
               _hover={{
@@ -551,7 +556,7 @@ export const FormSwap = () => {
                 color={"whiteAlpha.700"}
                 textAlign={"center"}
               >
-                {fromBn(balanceUSDT ?? 0, 6)} USDGN
+                {fromBn(balanceUSDGN ?? 0, 6)} USDGN
               </Text>
             </Stack>
             <HStack
@@ -564,12 +569,12 @@ export const FormSwap = () => {
               <Text fontSize="sm">Import USDGN</Text>
               <Box display="flex" alignItems="center">
                 <CopiableText
-                  value={addressUsdt}
+                  value={addressUsdgn}
                   display="flex"
                   alignItems="center"
                   gap="2"
                 >
-                  {shortenAddress(addressUsdt)}
+                  {shortenAddress(addressUsdgn)}
                   <IoCopyOutline />
                 </CopiableText>
               </Box>

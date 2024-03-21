@@ -48,6 +48,12 @@ export const USDT_CONTRACT = {
   "0x29a": "0x15194b9691d8ef36441F8e81e4B8F5208dE7238c",
 };
 
+export const USDGN_CONTRACT = {
+  "0x89": "0xf5d178039920Bb056e6e9E59d09482a2F46a8C7b",
+  "0x13881": "",
+  "0x29a": "",
+};
+
 export const BULLRUN_CONTRACT = {
   //"0x89": "0x37e87C2DF66F97FE573C42D57E575FC9De310721", manual bullrun
   // "0x89": "0x3295142A9b47f8f1ec86c31dC62910778199b361", old bullrun

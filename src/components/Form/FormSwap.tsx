@@ -165,7 +165,7 @@ export const FormSwap = () => {
     // default swap to USDGN
     const GNETValue = toBn(data.amount, 9);
     await approveGNETMutate(GNETValue);
-    const swap = await approveUSDGN.mutateAsync({
+    const swap = await swapToUSDGN.mutateAsync({
       args: [GNETValue],
     });
     const receipt = swap.receipt;

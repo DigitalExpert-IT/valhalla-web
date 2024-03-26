@@ -29,10 +29,10 @@ export const NAVIGATION: Array<INavigation> = [
         title: "nftFarming",
         link: "/nft-farming",
       },
-      // {
-      //   title: "genesis",
-      //   link: "/genesis",
-      // },
+      {
+        title: "founder",
+        link: "/founder",
+      },
       {
         title: "sharetoearn",
         link: "/share",

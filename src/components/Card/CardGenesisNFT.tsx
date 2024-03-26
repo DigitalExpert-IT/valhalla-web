@@ -116,6 +116,7 @@ export const CardGenesisNFT = () => {
                     isLoading={isLoading || isInitialize}
                     bgColor="#1F227D"
                     onClick={handleBuy}
+                    disabled
                   >
                     BUY {totalBuy} USDT
                   </Button>

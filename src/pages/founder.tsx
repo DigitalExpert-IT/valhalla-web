@@ -1,26 +1,10 @@
 import React from "react";
-import {
-  CardClaimGenesisNFT,
-  CardGenesisNFT,
-  LayoutMainV2,
-  ModalAnnouncement,
-} from "components";
-import {
-  Box,
-  Heading,
-  Flex,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Text,
-  Stack,
-  Image,
-} from "@chakra-ui/react";
+import { LayoutMainV2 } from "components";
+import { Box, Heading, Flex, Stack, Image } from "@chakra-ui/react";
 import { t } from "i18next";
+import { CardFounderNFT } from "components/Card/CardFounderNFT";
 
-const Genesis = () => {
+const nftFounder = () => {
   return (
     <LayoutMainV2>
       {/* <ModalAnnouncement isComingSoon={true} /> */}
@@ -38,13 +22,13 @@ const Genesis = () => {
         <Box zIndex="1">
           <Heading
             fontWeight="black"
-            fontSize={{ base: "3xl", md: "7xl" }}
+            fontSize={{ base: "2xl", md: "7xl" }}
             textAlign="center"
             textTransform="uppercase"
             mt={"40"}
             zIndex={"1"}
             _after={{
-              content: `'${t("common.genesis").toUpperCase()}'`,
+              content: `'${t("common.founder").toUpperCase()}'`,
               alignSelf: "center",
               display: "block",
               fontWeight: "black",
@@ -58,47 +42,16 @@ const Genesis = () => {
             }}
             mb={{ md: "2rem", base: "1rem" }}
           >
-            {t("common.genesis").toUpperCase()}
+            {t("common.founder").toUpperCase()}
           </Heading>
 
           <Box w={{ base: "100%", md: "85vw" }}>
             <Box textAlign="center" my="5rem">
               <Heading textTransform={"capitalize"}>
-                {t("pages.genesis.getYourGenesis")}
+                {t("pages.founder.comingSoon")}
               </Heading>
-              <Text>{t("pages.genesis.getYourGenesisSubs")}</Text>
+              <CardFounderNFT />
             </Box>
-            <Tabs isFitted variant="globalNetwork" mt="2rem" isLazy>
-              <TabList>
-                <Tab>
-                  <Text
-                    textTransform="uppercase"
-                    fontSize="xl"
-                    color="valhallaPink.300"
-                  >
-                    Buy Genesis
-                  </Text>
-                </Tab>
-                <Tab>
-                  <Text
-                    textTransform="uppercase"
-                    fontSize="xl"
-                    color="valhallaPink.300"
-                  >
-                    Claim Genesis
-                  </Text>
-                </Tab>
-              </TabList>
-
-              <TabPanels>
-                <TabPanel>
-                  <CardGenesisNFT />
-                </TabPanel>
-                <TabPanel>
-                  <CardClaimGenesisNFT />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
           </Box>
         </Box>
         <Stack
@@ -124,4 +77,4 @@ const Genesis = () => {
     </LayoutMainV2>
   );
 };
-export default Genesis;
+export default nftFounder;

@@ -30,8 +30,8 @@ export const NAVIGATION: Array<INavigation> = [
         link: "/nft-farming",
       },
       {
-        title: "genesis",
-        link: "/genesis",
+        title: "founder",
+        link: "/founder",
       },
       {
         title: "sharetoearn",

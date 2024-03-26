@@ -1,23 +1,6 @@
 import React from "react";
-import {
-  CardClaimGenesisNFT,
-  CardGenesisNFT,
-  LayoutMainV2,
-  ModalAnnouncement,
-} from "components";
-import {
-  Box,
-  Heading,
-  Flex,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Text,
-  Stack,
-  Image,
-} from "@chakra-ui/react";
+import { LayoutMainV2 } from "components";
+import { Box, Heading, Flex, Stack, Image } from "@chakra-ui/react";
 import { t } from "i18next";
 
 const nftFounder = () => {

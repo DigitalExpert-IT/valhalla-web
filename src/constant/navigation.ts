@@ -29,6 +29,10 @@ export const NAVIGATION: Array<INavigation> = [
         title: "nftFarming",
         link: "/nft-farming",
       },
+      // {
+      //   title: "genesis",
+      //   link: "/genesis",
+      // },
       {
         title: "sharetoearn",
         link: "/share",
@@ -41,10 +45,6 @@ export const NAVIGATION: Array<INavigation> = [
         title: "nftBullRun",
         link: "/bullrun",
       },
-      // {
-      //   title: "genesis",
-      //   link: "/genesis",
-      // },
     ],
   },
   {

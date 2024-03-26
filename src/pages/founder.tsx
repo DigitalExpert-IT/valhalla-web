@@ -2,6 +2,7 @@ import React from "react";
 import { LayoutMainV2 } from "components";
 import { Box, Heading, Flex, Stack, Image } from "@chakra-ui/react";
 import { t } from "i18next";
+import { CardFounderNFT } from "components/Card/CardFounderNFT";
 
 const nftFounder = () => {
   return (
@@ -21,7 +22,7 @@ const nftFounder = () => {
         <Box zIndex="1">
           <Heading
             fontWeight="black"
-            fontSize={{ base: "3xl", md: "7xl" }}
+            fontSize={{ base: "2xl", md: "7xl" }}
             textAlign="center"
             textTransform="uppercase"
             mt={"40"}
@@ -49,22 +50,7 @@ const nftFounder = () => {
               <Heading textTransform={"capitalize"}>
                 {t("pages.founder.comingSoon")}
               </Heading>
-              <Box
-                as="video"
-                pt={5}
-                autoPlay
-                loop
-                muted
-                rounded="xl"
-                alignContent={"center"}
-                display={"block"}
-                margin={"auto"}
-              >
-                <source
-                  src="https://ik.imagekit.io/msxxxaegj/video_gn/nft_founder.mp4?updatedAt=1711451793007"
-                  type="video/mp4"
-                />
-              </Box>
+              <CardFounderNFT />
             </Box>
           </Box>
         </Box>

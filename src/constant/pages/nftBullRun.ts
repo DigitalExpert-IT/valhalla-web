@@ -84,7 +84,7 @@ export const tokenList = [
     name: "BULLRUN",
     image:
       "https://ik.imagekit.io/msxxxaegj/image_gn/bull_run_project/bullrun.png?updatedAt=1708360117831",
-    address: "0x0B2706ecC4b49F1356BCAE519b0a2AB727Ab695d",
+    address: "0x95040d7c6096D30b703123e969718f1000FEE76C",
     decimal: 9,
   },
 ];
